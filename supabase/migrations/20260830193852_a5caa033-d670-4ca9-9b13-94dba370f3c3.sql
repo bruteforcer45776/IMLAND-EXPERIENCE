@@ -1,0 +1,1 @@
+REVOKE ALL ON FUNCTION public.track_alert_state() FROM PUBLIC, anon, authenticated;
