@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# AI search crawlers (AI Overviews, ChatGPT, Perplexity, Claude)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/sitemap.xml

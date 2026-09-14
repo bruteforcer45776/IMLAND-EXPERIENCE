@@ -1,0 +1,9 @@
+[
+  { "name": "home", "path": "/" },
+  { "name": "radio", "path": "/radio" },
+  { "name": "podcast", "path": "/podcast" },
+  { "name": "eventi", "path": "/eventi" },
+  { "name": "member", "path": "/member" },
+  { "name": "news", "path": "/news" },
+  { "name": "chi-siamo", "path": "/chi-siamo" }
+]

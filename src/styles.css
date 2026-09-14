@@ -1,0 +1,2235 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* IMLAND shape scale (DESIGN.md §4.3) */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-2xl: 32px;
+  --radius-full: 999px;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-serif: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-keyword: "Instrument Serif", "Playfair Display", Georgia, serif;
+
+  /* IMLAND brand palette */
+  --color-im-blue: #0b66c3;
+  --color-im-cyan: #08b8d2;
+  --color-im-green: #22c96b;
+  --color-im-yellow: #ffd000;
+  --color-im-purple: #7c3aed;
+  --color-ink: #101114;
+  --color-ink-950: #0b0c0f;
+  --color-ink-800: #292b31;
+  --color-ink-600: #5f6368;
+  --color-ink-400: #9aa0a6;
+  --color-alert: #f2b8b5;
+
+  /* Official IMLAND icon tones (icon kit) */
+  --color-icon-radio: #16bff2;
+  --color-icon-podcast: #1646d8;
+  --color-icon-member: #ffc400;
+  --color-icon-eventi: #19c83a;
+  --color-icon-news: #7c3aed;
+  --color-icon-aziende: #f59e0b;
+  --color-icon-terrain: #A0522D;
+  --color-icon-jobs: #6B7280;
+  --color-icon-alert: #FF0000;
+  /* varianti AA-safe per superfici piene con testo bianco */
+  --color-surface-radio: #077ea1;
+  --color-surface-podcast: #1646d8;
+  --color-surface-member: #8a6700;
+  --color-surface-eventi: #0e8728;
+  --color-surface-news: #6d1cce;
+  --color-surface-aziende: #9a6000;
+  --color-surface-terrain: #7A3E22;
+  --color-surface-jobs: #4B5563;
+  --color-surface-alert: #CC0000;
+
+
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-horizon: var(--horizon);
+  --color-sunken: var(--sunken);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-signal-glow: var(--signal-glow);
+  --color-citrus: var(--citrus);
+  --color-meadow: var(--meadow);
+  --color-orange: var(--orange);
+  --color-orange-foreground: var(--orange-foreground);
+  --color-lime: var(--lime);
+  --color-aqua: var(--aqua);
+
+  /* Surface containers as first-class color tokens */
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  /* Spacing scale (drives p-*, gap-*, m-*, space-y-*) */
+  --spacing-gutter: var(--space-gutter);
+  --spacing-block: var(--space-block);
+  --spacing-section: var(--space-section);
+  --spacing-section-lg: var(--space-section-lg);
+  --spacing-control-x: var(--space-control-x);
+
+  /* Component sizing (drives h-*, w-*, size-*) */
+  --spacing-control-sm: var(--control-h-sm);
+  --spacing-control-md: var(--control-h-md);
+  --spacing-control-lg: var(--control-h-lg);
+  --spacing-icon-sm: var(--icon-sm);
+  --spacing-icon-md: var(--icon-md);
+  --spacing-icon-lg: var(--icon-lg);
+  --spacing-header: var(--header-h);
+  --spacing-header-lg: var(--header-h-lg);
+
+  /* Elevation */
+  --shadow-level-1: var(--elevation-1);
+  --shadow-level-2: var(--elevation-2);
+  --shadow-level-3: var(--elevation-3);
+}
+
+
+/* ============================================================
+   IMLAND EXPERIENCE — LIGHT THEME TOKENS (DESIGN.md §3)
+   ============================================================ */
+:root {
+  /* brand */
+  --im-blue: #0b66c3;
+  --im-cyan: #08b8d2;
+  --im-green: #22c96b;
+  --im-yellow: #ffd000;
+  --im-purple: #7c3aed;
+  --im-gradient: linear-gradient(110deg, #087cf0 0%, #08b8d2 32%, #22c96b 66%, #ffd000 100%);
+  --im-gradient-soft: linear-gradient(110deg, rgba(8, 124, 240, 0.12), rgba(8, 184, 210, 0.12), rgba(34, 201, 107, 0.12), rgba(255, 208, 0, 0.14));
+
+  --background: #ffffff;
+  --foreground: #101114;
+  --card: #ffffff;
+  --card-foreground: #101114;
+  --popover: #ffffff;
+  --popover-foreground: #101114;
+  --primary: #087cf0;
+  --primary-foreground: #ffffff;
+  --secondary: #eef6ff;
+  --secondary-foreground: #006CFB;
+  --muted: #f7f9fc;
+  --muted-foreground: #5f6368;
+  --accent: #eef6ff;
+  --accent-foreground: #006CFB;
+  --destructive: #c5221f;
+  --destructive-foreground: #ffffff;
+  --border: #e2e6ec;
+  --input: #e2e6ec;
+  --ring: #006CFB;
+  --chart-1: #087cf0;
+  --chart-2: #22c96b;
+  --chart-3: #ffd000;
+  --chart-4: #c5221f;
+  --chart-5: #5f6368;
+  --radius: 1rem;
+  --sidebar: #f7f9fc;
+  --sidebar-foreground: #101114;
+  --sidebar-primary: #087cf0;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef6ff;
+  --sidebar-accent-foreground: #006CFB;
+  --sidebar-border: #e2e6ec;
+  --sidebar-ring: #006CFB;
+
+  /* surfaces */
+  --surface-1: #f7f9fc;
+  --surface-2: #f1f4f9;
+  --surface-3: #eef6ff;
+
+  /* accenti IMLAND */
+  --horizon: #a8c7fa;
+  --sunken: #f7f9fc;
+  --signal: #087cf0;
+  --signal-strong: #0b66c3;
+  --signal-ink: #0b66c3;
+  --signal-foreground: #ffffff;
+  --signal-glow: #a8dcff;
+  --citrus: #ffd000;
+  --meadow: #22c96b;
+
+  /* IMLAND SVG decoration kit palette */
+  --imland-navy: #07184F;
+  --imland-blue: #154BE8;
+  --imland-cyan: #16C7E8;
+  --imland-green: #2AC75A;
+  --imland-yellow: #FFCB16;
+  --imland-orange: #FF4A12;
+  --imland-pink: #FF4F91;
+  --imland-purple: #6B31C9;
+  --imland-white: #FFFFFF;
+
+  --orange: #087cf0;
+  --orange-foreground: #ffffff;
+  --orange-glow: 8, 124, 240;
+  --lime: #22c96b;
+  --aqua: #08b8d2;
+  --gradient-orange: linear-gradient(135deg, #087cf0, #08b8d2);
+
+  --success: #18864b;
+  --warning: #b06000;
+  --error: #c5221f;
+  --focus: #006CFB;
+
+  /* Outline tokens */
+  --outline: #e2e6ec;
+  --outline-variant: #cbd1da;
+
+  /* Spacing scale */
+  --space-gutter: 1.5rem;
+  --space-block: 2rem;
+  --space-section: 3.5rem;
+  --space-section-lg: 5rem;
+  --space-control-x: 1.5rem;
+
+  /* Component sizing */
+  --control-h-sm: 2.25rem;
+  --control-h-md: 3rem;
+  --control-h-lg: 3.5rem;
+  --icon-sm: 1.25rem;
+  --icon-md: 1.5rem;
+  --icon-lg: 1.75rem;
+  --header-h: 4rem;
+  --header-h-lg: 4.5rem;
+  --header-h-mobile: 4rem;
+  --header-h-desktop: 4.5rem;
+
+  /* Elevation scale (DESIGN.md §4.3) */
+  --elevation-1: 0 1px 2px rgba(16, 17, 20, 0.06), 0 2px 8px rgba(16, 17, 20, 0.04);
+  --elevation-2: 0 8px 24px rgba(16, 17, 20, 0.08);
+  --elevation-3: 0 18px 48px rgba(16, 17, 20, 0.12);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 0.16s;
+  --duration-medium: 0.28s;
+}
+
+
+
+.dark {
+  --background: #131314;
+  --foreground: #e3e3e3;
+  --card: #1e1f20;
+  --card-foreground: #e3e3e3;
+  --popover: #1e1f20;
+  --popover-foreground: #e3e3e3;
+  --primary: #a8c7fa;
+  --primary-foreground: #062e6f;
+  --secondary: #282a2c;
+  --secondary-foreground: #e3e3e3;
+  --muted: #1e1f20;
+  --muted-foreground: #9aa0a6;
+  --accent: #282a2c;
+  --accent-foreground: #e3e3e3;
+  --destructive: #f2b8b5;
+  --destructive-foreground: #601410;
+  --border: #444746;
+  --input: #444746;
+  --ring: #a8c7fa;
+  --sidebar: #1e1f20;
+  --sidebar-foreground: #e3e3e3;
+  --sidebar-primary: #a8c7fa;
+  --sidebar-primary-foreground: #062e6f;
+  --sidebar-accent: #282a2c;
+  --sidebar-accent-foreground: #e3e3e3;
+  --sidebar-border: #444746;
+  --sidebar-ring: #a8c7fa;
+  --surface-1: #1b1c1d;
+  --surface-2: #282a2c;
+  --surface-3: #303134;
+  --sunken: #282a2c;
+  --outline: #444746;
+  --outline-variant: #303134;
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 3px 1px rgba(0, 0, 0, 0.25);
+  --elevation-2: 0 1px 3px rgba(0, 0, 0, 0.45), 0 4px 8px 3px rgba(0, 0, 0, 0.3);
+  --elevation-3: 0 4px 8px rgba(0, 0, 0, 0.5), 0 8px 24px 6px rgba(0, 0, 0, 0.35);
+}
+
+
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html {
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--background);
+    color-scheme: light;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  p, li, a, button, input, textarea, select, label, span {
+    font-family: var(--font-sans);
+  }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+  ::selection { background: var(--secondary); color: var(--secondary-foreground); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+
+}
+
+
+@layer utilities {
+  .scrollbar-imland {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+  .scrollbar-imland::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-imland::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-imland::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+  }
+  .scrollbar-imland::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted-foreground);
+  }
+
+  .navbar-glass {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .sticky-glass {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 2px 8px -2px color-mix(in oklab, var(--primary) 18%, transparent),
+                0 1px 2px color-mix(in oklab, var(--primary) 10%, transparent);
+  }
+  .shadow-cta {
+    box-shadow: 0 6px 18px -6px color-mix(in oklab, var(--primary) 45%, transparent),
+                0 2px 6px -2px color-mix(in oklab, var(--primary) 25%, transparent);
+  }
+  .shadow-cta-lg {
+    box-shadow: 0 14px 32px -10px color-mix(in oklab, var(--primary) 55%, transparent),
+                0 4px 10px -2px color-mix(in oklab, var(--primary) 30%, transparent);
+  }
+  .shadow-panel {
+    box-shadow: 0 10px 30px -12px color-mix(in oklab, var(--primary) 30%, transparent),
+                0 4px 12px -4px color-mix(in oklab, var(--primary) 18%, transparent),
+                0 1px 2px color-mix(in oklab, var(--primary) 10%, transparent);
+  }
+  .shadow-banner {
+    box-shadow: 0 24px 60px -20px color-mix(in oklab, var(--primary) 45%, transparent),
+                0 8px 20px -6px color-mix(in oklab, var(--primary) 25%, transparent);
+  }
+}
+
+@utility side-blue {
+  position: relative;
+  isolation: isolate;
+}
+
+@utility glow-orange {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+@utility glow-orange-hover {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+@utility reduce-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@utility high-contrast {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0 0 0);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(1 0 0);
+  --secondary-foreground: oklch(0 0 0);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.2 0 0);
+  --accent: oklch(0.8 0 0);
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0.5 0.2 0);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0 0 0);
+  --input: oklch(0 0 0);
+  --ring: oklch(0 0 0);
+}
+
+@utility dot-star-bg {
+  background-color: #050d24;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.9) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 70% 65%, rgba(255, 255, 255, 0.8) 0.6px, transparent 1.4px),
+    radial-gradient(circle at 45% 80%, rgba(180, 210, 255, 0.7) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.85) 0.7px, transparent 1.4px),
+    radial-gradient(circle at 10% 70%, rgba(200, 220, 255, 0.75) 0.5px, transparent 1.2px),
+    radial-gradient(ellipse at 50% 0%, rgba(30, 60, 140, 0.55), transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(10, 20, 60, 0.6), transparent 60%);
+  background-size: 180px 180px, 220px 220px, 260px 260px, 200px 200px, 240px 240px, 100% 100%, 100% 100%;
+  animation: dot-star-twinkle 6s ease-in-out infinite;
+}
+
+@keyframes dot-star-twinkle {
+  0%, 100% {
+    background-position:
+      0 0, 40px 60px, 80px 20px, 120px 100px, 30px 140px, 0 0, 0 0;
+    opacity: 1;
+  }
+  50% {
+    background-position:
+      10px 10px, 50px 70px, 90px 30px, 130px 110px, 40px 150px, 0 0, 0 0;
+    opacity: 0.85;
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee var(--duration, 30s) linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.im-hero-slide {
+  opacity: 0;
+  animation: im-hero-carousel 20s infinite;
+}
+
+.im-hero-slide:first-child {
+  opacity: 1;
+}
+
+.im-hero-slide img {
+  transform: scale(1.02);
+}
+
+@keyframes im-hero-carousel {
+  0%,
+  20% {
+    opacity: 1;
+  }
+
+  25%,
+  95% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .im-hero-slide {
+    animation: none;
+  }
+
+  .im-hero-slide:not(:first-child) {
+    display: none;
+  }
+}
+
+@utility dot-bg-static {
+  background-color: #030307;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 1) 0.5px, transparent 1.5px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.95) 0.6px, transparent 1.6px),
+    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.9) 0.5px, transparent 1.4px),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.95) 0.7px, transparent 1.6px),
+    radial-gradient(circle at 15% 70%, rgba(255, 255, 255, 0.9) 0.5px, transparent 1.4px),
+    radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.85) 0.5px, transparent 1.4px),
+    radial-gradient(circle at 35% 55%, rgba(255, 255, 255, 0.8) 0.6px, transparent 1.5px);
+  background-size: 180px 180px, 220px 220px, 260px 260px, 200px 200px, 240px 240px, 160px 160px, 300px 300px;
+}
+
+/* ============================================================
+   SITE BACKGROUND — gradient mesh scuro (CDN asset) + varianti
+   ============================================================ */
+/* Host for brand decor: keeps decorative shapes behind the content
+   of the same container while staying above the page background. */
+@utility decor-host {
+  position: relative;
+  isolation: isolate;
+
+  & > *:not([data-decor]):not([class*="absolute"]):not([class*="fixed"]):not([class*="sticky"]) {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@utility site-bg {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: #ffffff;
+    pointer-events: none;
+  }
+}
+
+/* ============================================================
+   SECTION HIERARCHY — atmosphere / canvas / focus / editorial
+   Every surface paints a full-bleed layer even when the section
+   itself is a constrained content container.
+   ============================================================ */
+@utility section-surface {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+}
+
+/* Page opening: pulita, con un solo velo del colore di sezione. */
+@utility section-atmosphere {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--signal, #006CFB) 7%, var(--background)) 0%,
+        var(--background) 100%
+      );
+    pointer-events: none;
+  }
+}
+
+/* Long-form grids and information-dense sections. */
+@utility section-canvas {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: var(--background);
+    pointer-events: none;
+  }
+}
+
+/* Sezioni più importanti: superficie nel colore della sezione. */
+@utility section-focus {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: color-mix(in oklab, var(--signal, #006CFB) 12%, var(--background));
+    border-block: 1px solid color-mix(in oklab, var(--signal, #006CFB) 22%, transparent);
+    pointer-events: none;
+  }
+}
+
+/* One high-value editorial pause per page. */
+@utility section-editorial {
+  position: relative;
+  isolation: isolate;
+  color: #1f1f1f;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background: #f1f3f4;
+    pointer-events: none;
+  }
+
+  --background: var(--card);
+  --foreground: #1f1f1f;
+  --card: #ffffff;
+  --card-foreground: #1f1f1f;
+  --muted: #f1f3f4;
+  --muted-foreground: #5f6368;
+  --accent: #e8f0fe;
+  --accent-foreground: #041e49;
+  --border: #dadce0;
+  --input: #dadce0;
+  --sunken: #f1f3f4;
+  color-scheme: light;
+
+  & [class*="bg-white/"] {
+    background-color: #ffffff;
+  }
+  & [class*="border-white/"] {
+    border-color: var(--outline);
+  }
+  & .soft-noise::before,
+  & .soft-noise::after,
+  & .ambient-orb {
+    display: none;
+  }
+}
+
+/* Compact final action before newsletter/footer. */
+@utility section-closing {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: color-mix(in oklab, var(--signal, #006CFB) 8%, var(--surface-1));
+    border-top: 1px solid var(--outline);
+    pointer-events: none;
+  }
+}
+
+
+/* Backwards-compatible aliases while secondary content is migrated. */
+@utility band-mesh { background-color: var(--background); }
+@utility band-ink { background-color: var(--surface-1); }
+@utility band-light { background: var(--surface-2); }
+
+
+
+
+
+
+/* ============================================================
+   IMLAND NIGHT — dark premium scope (token override)
+   Applied on a wrapper element; every semantic token inside
+   flips to the cinematic dark palette.
+   ============================================================ */
+/* Legacy wrapper kept as an alias: it now paints the Material 3 light scheme. */
+@utility imland-night {
+  --background: var(--card);
+  --foreground: #1f1f1f;
+  --card: #ffffff;
+  --card-foreground: #1f1f1f;
+  --popover: #ffffff;
+  --popover-foreground: #1f1f1f;
+  --primary: #006CFB;
+  --primary-foreground: #ffffff;
+  --secondary: #d3e3fd;
+  --secondary-foreground: #041e49;
+  --muted: #f1f3f4;
+  --muted-foreground: #5f6368;
+  --accent: #e8f0fe;
+  --accent-foreground: #041e49;
+  --destructive: #b3261e;
+  --destructive-foreground: #ffffff;
+  --border: #dadce0;
+  --input: #dadce0;
+  --ring: #006CFB;
+
+  --sidebar: #f8fafd;
+  --sidebar-foreground: #1f1f1f;
+  --sidebar-primary: #006CFB;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e8f0fe;
+  --sidebar-accent-foreground: #041e49;
+  --sidebar-border: #dadce0;
+  --sidebar-ring: #006CFB;
+
+  --horizon: #a8c7fa;
+  --sunken: #f1f3f4;
+  --signal: #006CFB;
+  --signal-strong: #0057cc;
+  --signal-ink: #0057cc;
+  --signal-foreground: #ffffff;
+  --signal-glow: #a8c7fa;
+  --citrus: #f9ab00;
+  --meadow: #188038;
+  --orange: #006CFB;
+  --orange-foreground: #ffffff;
+  --orange-glow: 11, 87, 208;
+  --lime: #188038;
+  --aqua: #1a73e8;
+  --gradient-orange: linear-gradient(135deg, #1a73e8, #006CFB);
+
+  color-scheme: light;
+}
+
+
+/* Material 3 filled card (replaces the old glass panel). */
+@utility glass-panel {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--outline);
+  box-shadow: var(--elevation-1);
+  color: var(--foreground);
+}
+
+/* Campo form monocromatico (nessuna trasparenza). */
+@utility field-im {
+  width: 100%;
+  background: var(--surface-1);
+  border: 1px solid var(--outline);
+  color: var(--foreground);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  &::placeholder { color: var(--muted-foreground); }
+  &:focus {
+    border-color: var(--signal);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--signal) 22%, transparent);
+  }
+}
+
+/* Chip di selezione monocromatico. */
+@utility chip-im {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 999px;
+  border: 1px solid var(--outline);
+  background: var(--surface-1);
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  &:hover { background: var(--surface-2); }
+  @media (max-width: 767px) { min-height: 2.5rem; }
+}
+
+@utility chip-im-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--signal-strong, var(--signal));
+  color: var(--signal-foreground);
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  @media (max-width: 767px) { min-height: 2.5rem; }
+}
+
+@utility glass-lift {
+
+  transition: box-shadow 0.2s var(--ease-standard), background 0.2s ease, border-color 0.2s ease;
+  &:hover {
+    border-color: var(--outline);
+    background: var(--surface-1);
+    box-shadow: var(--elevation-2);
+  }
+}
+
+/* Material 3 filled button */
+@utility btn-blue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--signal-strong, var(--signal));
+  color: var(--signal-foreground);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  box-shadow: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  &:hover {
+    background: color-mix(in oklab, var(--signal-strong, var(--signal)) 86%, black);
+    box-shadow: var(--elevation-2);
+  }
+  &:active { background: color-mix(in oklab, var(--signal) 70%, black); }
+
+  & .btn-arrow {
+    transition: transform 0.2s var(--ease-standard);
+  }
+  &:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+}
+
+/* CTA primaria IMLAND (stessa gerarchia di btn-blue, con padding proprio) */
+@utility btn-liquid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-full);
+  background: var(--signal-strong, var(--signal));
+  color: var(--signal-foreground);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  &:hover {
+    background: color-mix(in oklab, var(--signal-strong, var(--signal)) 88%, black);
+    box-shadow: var(--elevation-2);
+  }
+  &:active { background: color-mix(in oklab, var(--signal) 72%, black); }
+}
+
+
+
+/* Material 3 outlined / tonal button */
+@utility btn-ghost-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--outline);
+  background: var(--card);
+  color: var(--signal-ink, var(--signal));
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  &:hover {
+    background: #f0f5ff;
+    border-color: var(--horizon);
+  }
+  &:active { background: #e0eaff; }
+  & .btn-arrow {
+    transition: transform 0.2s var(--ease-standard);
+  }
+  &:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+}
+
+/* CTA hero standardizzate: colori fissi, non toccati dal tema notte */
+@utility cta-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  color: #0b0c0f;
+  font-family: var(--font-display);
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  &:hover { background: #f1f3f7; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22); }
+  &:active { background: #e6eaf1; }
+}
+@utility cta-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-full);
+  background: #0b0c0f;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  &:hover { background: #1a1c22; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28); }
+  &:active { background: #000; }
+}
+
+
+/* Material surfaces are flat: no noise, no ambient glow. */
+@utility soft-noise {
+  position: relative;
+}
+
+@utility ambient-orb {
+  display: none;
+}
+
+@keyframes orb-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(6%, -8%, 0) scale(1.18);
+  }
+}
+
+@utility animate-float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@utility eq-bar {
+  width: 3px;
+  border-radius: var(--radius-full);
+  background: var(--signal);
+  animation: eq-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes eq-pulse {
+  0%,
+  100% {
+    height: 25%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+
+/* ============================================================
+   PREMIUM SAAS — shared primitives
+   ============================================================ */
+@utility eyebrow {
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+
+/* Material 3 elevated card */
+@utility surface-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--outline);
+  box-shadow: var(--elevation-1);
+  color: var(--foreground);
+  transition: box-shadow 0.2s var(--ease-standard), background 0.2s ease;
+  &:hover {
+    background: var(--surface-1);
+    box-shadow: var(--elevation-2);
+  }
+}
+
+@utility glow-warm {
+  position: relative;
+}
+
+/* ============================================================
+   MATERIAL COMPAT — neutralizza le classi ereditate dal tema notte
+   ============================================================ */
+@layer utilities {
+  /* Le superfici dichiarate scure (data-surface="dark") mantengono i colori
+     originali: bianco su fondo scuro. Tutto il resto viene normalizzato. */
+  .imland-night [class*="bg-white/"]:not([data-surface="dark"]):not([data-surface="dark"] *) {
+    background-color: var(--surface-1);
+  }
+  .imland-night [class*="border-white/"]:not([data-surface="dark"]):not([data-surface="dark"] *) {
+    border-color: var(--outline);
+  }
+  .imland-night [class*="text-white"]:not([data-surface="dark"]):not([data-surface="dark"] *) {
+    color: #1f1f1f;
+  }
+  .imland-night [class*="bg-signal"][class*="text-white"],
+  .imland-night [class*="bg-primary"][class*="text-white"],
+  .imland-night [class*="bg-orange"][class*="text-white"],
+  .imland-night [class*="bg-ink-9"][class*="text-white"],
+  .imland-night [class*="bg-ink-8"][class*="text-white"],
+  .imland-night .btn-blue[class*="text-white"],
+  .imland-night .btn-orange[class*="text-white"] {
+    color: #ffffff;
+  }
+  .imland-night [class*="backdrop-blur"] {
+    backdrop-filter: none;
+  }
+  .imland-night [class*="bg-card"],
+  .imland-night [class*="bg-sunken"],
+  .imland-night [class*="bg-popover"] {
+    box-shadow: var(--elevation-1);
+  }
+}
+
+/* ============================================================
+   DESIGN SYSTEM — layout & component primitives (token-driven)
+   Usa queste utility invece di valori arbitrari, così spaziature
+   e dimensioni restano identiche su tutto il sito.
+   ============================================================ */
+
+/* Ritmo verticale delle sezioni */
+@utility section-pad {
+  padding-block: var(--space-section);
+  @media (min-width: 768px) {
+    padding-block: var(--space-section-lg);
+  }
+}
+
+/* Hero di pagina: attaccata all'header, respiro solo sotto */
+@utility hero-pad {
+  padding-top: 0.75rem;
+  padding-bottom: var(--space-section);
+  @media (min-width: 768px) {
+    padding-top: 1rem;
+    padding-bottom: var(--space-section-lg);
+  }
+}
+
+@utility section-pad-sm {
+  padding-block: var(--space-block);
+  @media (min-width: 768px) {
+    padding-block: var(--space-section);
+  }
+}
+
+/* Contenitore standard di pagina */
+@utility container-page {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-gutter);
+}
+
+@utility container-narrow {
+  width: 100%;
+  max-width: 768px;
+  margin-inline: auto;
+  padding-inline: var(--space-gutter);
+}
+
+/* Stack verticale coerente tra blocchi */
+@utility stack-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-block);
+}
+
+/* Header di sezione (eyebrow + titolo + testo) */
+@utility section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: var(--space-block);
+}
+
+/* Dimensioni standard dei controlli */
+@utility control-sm {
+  height: var(--control-h-sm);
+  padding-inline: 1rem;
+  font-size: 0.8125rem;
+}
+
+@utility control-md {
+  height: var(--control-h-md);
+  padding-inline: var(--space-control-x);
+  font-size: 0.875rem;
+}
+
+@utility control-lg {
+  height: var(--control-h-lg);
+  padding-inline: calc(var(--space-control-x) + 0.25rem);
+  font-size: 1rem;
+}
+
+/* Icone standard */
+@utility icon-sm { width: var(--icon-sm); height: var(--icon-sm); }
+@utility icon-md { width: var(--icon-md); height: var(--icon-md); }
+@utility icon-lg { width: var(--icon-lg); height: var(--icon-lg); }
+
+/* Elevazione semantica */
+@utility elevation-1 { box-shadow: var(--elevation-1); }
+@utility elevation-2 { box-shadow: var(--elevation-2); }
+@utility elevation-3 { box-shadow: var(--elevation-3); }
+
+/* Transizione standard Material */
+@utility transition-standard {
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+/* ============================================================
+   IMLAND — FIRMA VISIVA CONTROLLATA (DESIGN.md §3.3)
+   ============================================================ */
+@utility im-gradient-bg {
+  background-image: var(--im-gradient);
+}
+
+@utility im-gradient-soft-bg {
+  background-image: var(--im-gradient-soft);
+}
+
+/* Parole chiave: gradiente animato stile GradientText (React Bits),
+   colori presi dal --signal della sezione di appartenenza. */
+@utility im-gradient-text {
+  /* Keyword: corsivo editoriale moderno, colore PIENO della sezione
+     (--signal cambia per pagina: radio, podcast, member, eventi, news). */
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-synthesis: inherit;
+  letter-spacing: inherit;
+  color: var(--signal-ink, var(--signal, #006cfb));
+}
+
+/* Sottile linea/firma gradiente per divisori istituzionali */
+@utility im-gradient-rule {
+  height: 4px;
+  border-radius: 999px;
+  background-image: var(--im-gradient);
+}
+
+/* ------------------------------------------------------------
+   BRAND SECTION BACKGROUNDS
+   Coerenti con le icone: stessa palette spettro, tratti morbidi.
+   Da usare sul <section> insieme a `decor-host`.
+   ------------------------------------------------------------ */
+
+/* Superfici pulite: nessuna trama, solo gerarchia di tono. */
+@utility brand-dots {
+  background-color: var(--surface-1);
+}
+
+@utility brand-grid {
+  background-color: var(--background);
+}
+
+/* Apertura sezione: velo tenue del colore di sezione. */
+@utility brand-glow-top {
+  background-color: color-mix(in oklab, var(--signal, #006CFB) 6%, var(--background));
+}
+
+/* Chiusura sezione verso il blocco successivo. */
+@utility brand-glow-bottom {
+  background-color: color-mix(in oklab, var(--signal, #006CFB) 8%, var(--surface-1));
+}
+
+
+/* Bordo superiore a spettro: firma discreta tra due blocchi. */
+@utility brand-edge-top {
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, #087cf0, #08b8d2, #22c96b, #ffd000, transparent) 1;
+}
+
+
+
+
+/* Tipografia display (DESIGN.md §3.4) */
+@utility text-display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5.25rem);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+@utility text-display-l {
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 5vw, 4rem);
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+@utility text-display-m {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+}
+
+@utility text-display-s {
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility text-title-l {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+@utility text-title-m {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  line-height: 1.3;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+
+@utility text-h1-im {
+  font-family: var(--font-display);
+  font-size: clamp(2.375rem, 4vw, 3rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h2-im {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.14;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h3-im {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+
+@utility text-body-l {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+@utility text-label-im {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+/* Contenitori standard (DESIGN.md §4.1) */
+@utility container-im {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (width >= 768px) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (width >= 1280px) {
+    padding-inline: 4rem;
+  }
+}
+
+@utility prose-im {
+  max-width: 760px;
+}
+
+/* Card modulare standard */
+@utility card-im {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-1);
+  transition: box-shadow var(--duration-medium) var(--ease-standard),
+              transform var(--duration-medium) var(--ease-standard),
+              border-color var(--duration-medium) var(--ease-standard);
+
+  &:hover {
+    border-color: var(--outline-variant);
+    box-shadow: var(--elevation-2);
+    transform: translateY(-3px);
+  }
+}
+
+/* Skip link accessibile */
+@utility skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  border-radius: 999px;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: top var(--duration-fast) var(--ease-standard);
+
+  &:focus-visible {
+    top: 1rem;
+  }
+}
+
+/* ============================================================
+   Tema per sezione: loghi e colori sono definiti in un unico
+   file, src/config/sections.ts, e iniettati come variabili CSS
+   (--signal, --signal-foreground, --signal-glow, --horizon, --ring)
+   sul contenitore radice. Non duplicare i valori qui.
+   ============================================================ */
+
+/* ============================================================
+   Neo-Bauhaus pattern motion — movimento lento, professionale,
+   disattivato per chi preferisce ridurre le animazioni.
+   ============================================================ */
+@keyframes bauhaus-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 240px 120px;
+  }
+}
+
+@keyframes bauhaus-tile-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.bauhaus-pan {
+  animation: bauhaus-pan 36s linear infinite;
+}
+
+.bauhaus-tile {
+  animation: bauhaus-tile-float 5.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bauhaus-pan,
+  .bauhaus-tile {
+    animation: none !important;
+  }
+}
+
+
+/* ============================================================
+   BENTO GRID — griglia modulare + card con bordo animato
+   Colori pieni presi dai token di sezione (--bento-tone).
+   ============================================================ */
+@property --bento-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes bento-border-spin {
+  to {
+    --bento-angle: 360deg;
+  }
+}
+
+@utility bento-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@utility bento-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  /* Le schede di servizi e funzioni restano bianche in ogni verticale. */
+  background: var(--card);
+  border: 1px solid var(--outline);
+  box-shadow: var(--elevation-1);
+  color: var(--card-foreground);
+  overflow: hidden;
+  transition:
+    box-shadow 0.25s var(--ease-standard),
+    transform 0.25s var(--ease-standard),
+    background 0.25s ease;
+
+  /* bordo animato: segmento a colore pieno che ruota sul perimetro */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(
+      from var(--bento-angle),
+      transparent 0deg 268deg,
+      var(--bento-tone, var(--primary)) 268deg 300deg,
+      transparent 300deg 360deg
+    );
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* barra piena di sezione, sempre visibile */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--bento-tone, var(--primary));
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &:hover,
+  &:focus-visible,
+  &:focus-within {
+    box-shadow: var(--elevation-3);
+    transform: translateY(-2px);
+  }
+
+  &:hover::before,
+  &:focus-visible::before,
+  &:focus-within::before {
+    opacity: 1;
+    animation: bento-border-spin 3.5s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-card::before {
+    animation: none !important;
+  }
+  .bento-card:hover {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Pagine verticali invertite: sfondo = colore pieno della grafica hero,
+ * schede bianche, headline nere, testi leggibili.
+ * ------------------------------------------------------------------ */
+.page-inverted {
+  --foreground: #101114;
+  --card: #ffffff;
+  --card-foreground: #101114;
+  --popover: #ffffff;
+  --popover-foreground: #101114;
+  --muted: #ffffff;
+  --muted-foreground: #5f6368;
+  --accent: #ffffff;
+  --accent-foreground: #101114;
+  --border: color-mix(in oklab, #ffffff 28%, transparent);
+  --input: color-mix(in oklab, #ffffff 60%, transparent);
+  --outline: color-mix(in oklab, #101114 12%, transparent);
+  --outline-variant: color-mix(in oklab, #101114 8%, transparent);
+  --sunken: color-mix(in oklab, #ffffff 12%, transparent);
+  --signal: #ffd000;
+  --signal-strong: #ffd000;
+  --signal-ink: var(--on-color);
+  --signal-foreground: #101114;
+  /* Le sezioni sotto la hero sono bianche: il testo è sempre ink scuro. */
+  --on-color: #101114;
+  --on-color-muted: #5f6368;
+  color: var(--on-color);
+  background-color: #ffffff;
+}
+
+/* Colore di fondo verticale per pagina, campionato dalla grafica hero. */
+.radio-inverted { --background: #049bce; background-color: #049bce; }
+.podcast-inverted {
+  --background: #023ed0;
+  background-color: #023ed0;
+  --on-color: #ffffff;
+  --on-color-muted: color-mix(in oklab, #ffffff 88%, #023ed0);
+}
+.news-inverted {
+  --background: #731eda;
+  background-color: #731eda;
+  --on-color: #ffffff;
+  --on-color-muted: color-mix(in oklab, #ffffff 88%, #731eda);
+}
+.eventi-inverted { --background: #0fa036; background-color: #0fa036; }
+.member-inverted { --background: #f2ab01; background-color: #f2ab01; }
+.terrain-inverted {
+  --background: #A0522D;
+  background-color: #A0522D;
+  --on-color: #ffffff;
+  --on-color-muted: color-mix(in oklab, #ffffff 88%, #A0522D);
+}
+.jobs-inverted {
+  --background: #6B7280;
+  background-color: #6B7280;
+  --on-color: #ffffff;
+  --on-color-muted: color-mix(in oklab, #ffffff 88%, #6B7280);
+}
+.alert-inverted {
+  --background: #FF0000;
+  background-color: #FF0000;
+  --on-color: #ffffff;
+  --on-color-muted: color-mix(in oklab, #ffffff 88%, #FF0000);
+}
+
+/* Override globale: sotto la hero tutte le pagine verticali sono bianche. */
+.page-inverted,
+.radio-inverted,
+.podcast-inverted,
+.news-inverted,
+.eventi-inverted,
+.member-inverted,
+.terrain-inverted,
+.jobs-inverted,
+.alert-inverted {
+  background-color: #ffffff;
+  --on-color: #101114;
+  --on-color-muted: #5f6368;
+  color: #101114;
+}
+
+
+
+
+/* La prima sezione segue subito la hero, senza fascia bianca intermedia. */
+.page-inverted > section:first-child.section-pad,
+.page-inverted > section:first-child > .section-pad,
+.page-inverted > section:first-child.container-im {
+  padding-top: clamp(1.5rem, 3vw, 3rem);
+}
+
+/* Tutte le fasce della pagina sono bianche: solo la hero resta colorata. */
+.page-inverted .section-canvas::before,
+.page-inverted .section-focus::before,
+.page-inverted .section-editorial::before,
+.page-inverted .section-atmosphere::before {
+  background: #ffffff !important;
+  border-block: 0 !important;
+}
+
+.page-inverted .section-editorial {
+  --background: #ffffff;
+  --foreground: #101114;
+  --card: #ffffff;
+  --card-foreground: #101114;
+  --muted: #ffffff;
+  --muted-foreground: #5f6368;
+  --border: color-mix(in oklab, #101114 10%, transparent);
+}
+
+/* Schede: bianco pieno con testo nero. */
+.page-inverted .glass-panel,
+.page-inverted .surface-card,
+.page-inverted .bento-card {
+  background: #ffffff;
+  color: #101114;
+  border-color: color-mix(in oklab, #101114 10%, transparent);
+}
+
+.page-inverted .glass-panel .text-muted-foreground,
+.page-inverted .surface-card .text-muted-foreground,
+.page-inverted .bento-card .text-muted-foreground {
+  color: #5f6368;
+}
+
+/* Testo secondario direttamente sul colore. */
+.page-inverted .text-muted-foreground {
+  color: var(--on-color-muted);
+}
+
+.page-inverted .glass-panel .text-muted-foreground,
+.page-inverted .surface-card .text-muted-foreground,
+.page-inverted .bento-card .text-muted-foreground {
+  color: #5f6368;
+}
+
+/* Headline sul colore hero: massimo contrasto per pagina. */
+.page-inverted h1,
+.page-inverted h2,
+.page-inverted h3,
+.page-inverted .text-h1-im,
+.page-inverted .text-h2-im,
+.page-inverted .text-h3-im,
+.page-inverted .text-display-m,
+.page-inverted .text-display-s,
+.page-inverted .text-title-l,
+.page-inverted .im-gradient-text {
+  color: var(--on-color);
+  -webkit-text-fill-color: var(--on-color);
+}
+
+/* Link ed etichette di sezione allineati al testo su colore. */
+.page-inverted .text-signal {
+  color: var(--on-color);
+}
+
+/* Dentro le schede bianche il testo torna sempre ink scuro. */
+.page-inverted .glass-panel,
+.page-inverted .surface-card,
+.page-inverted .bento-card,
+.page-inverted [class*="bg-card"],
+.page-inverted [class*="bg-white"] {
+  --on-color: #101114;
+  --on-color-muted: #5f6368;
+}
+
+
+/* CTA: gialle, mai scure. */
+.page-inverted .cta-dark,
+.page-inverted .btn-liquid {
+  background: #ffd000;
+  color: #101114;
+}
+.page-inverted .cta-dark:hover,
+.page-inverted .btn-liquid:hover {
+  background: #ffdd45;
+}
+
+/* Chip contestuali in pagine invertite: bianche con testo scuro. */
+.page-inverted .eventi-context-chip {
+  background-color: #ffffff !important;
+  color: #101114 !important;
+  border-color: color-mix(in oklab, #101114 12%, transparent) !important;
+}
+
+/* ============================================================
+   TAP TARGET — su mobile ogni controllo pillola resta cliccabile
+   (min 40px di altezza, linea guida touch)
+   ============================================================ */
+@media (max-width: 767px) {
+  a[class*="rounded-full"],
+  button[class*="rounded-full"],
+  a.chip-im,
+  button.chip-im {
+    min-height: 2.5rem;
+  }
+}
+
+/* ============================================================
+   PAGINE COLORATE — qualsiasi superficie bianca costruita con
+   utility (bg-card / bg-white) torna a testo scuro leggibile
+   ============================================================ */
+.page-inverted [class*="bg-card"],
+.page-inverted [class*="bg-white"] {
+  color: #202124;
+}
+.page-inverted [class*="bg-card"] .text-muted-foreground,
+.page-inverted [class*="bg-white"] .text-muted-foreground {
+  color: #5f6368;
+}
+
+
+/* ============================================================
+   CONTRASTO — regole centralizzate WCAG AA
+   ============================================================ */
+/* Testo del colore di sezione su fondo chiaro: sempre variante ink. */
+.text-signal {
+  color: var(--signal-ink, var(--signal)) !important;
+}
+
+/* Il testo bianco dichiarato resta bianco anche nelle pagine colorate. */
+.page-inverted .text-white {
+  color: #ffffff;
+}
+
+/* Superfici piene del colore di sezione: usa la variante AA-safe. */
+.bg-signal {
+  background-color: var(--signal-strong, var(--signal)) !important;
+}
+
+/* Testo secondario: nessuna opacità che scende sotto AA. */
+.text-muted-foreground\/80,
+.text-muted-foreground\/70,
+.text-muted-foreground\/60 {
+  color: var(--muted-foreground);
+}
+
+/* Link dentro paragrafi: sottolineati, non solo colorati. */
+p a:not([class*="btn-"]):not([class*="chip"]):not(.no-underline) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Pagine colorate: corpo sempre leggibile sul colore pieno. */
+.page-inverted .text-foreground\/70,
+.page-inverted .text-foreground\/60,
+.page-inverted .text-ink-600 {
+  color: var(--on-color-muted);
+}
+.page-inverted .glass-panel .text-foreground\/70,
+.page-inverted .surface-card .text-foreground\/70,
+.page-inverted .bento-card .text-foreground\/70,
+.page-inverted [class*="bg-white"] .text-foreground\/70,
+.page-inverted [class*="bg-card"] .text-foreground\/70 {
+  color: #5f6368;
+}
+
+/* ============================================================
+   STATI INTERATTIVI — hover / focus / active uniformi su
+   bottoni, chip e link in tutto il sito (navigazione da tastiera)
+   ============================================================ */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--signal-ink, var(--signal));
+  outline-offset: 2px;
+  border-radius: var(--radius-sm, 0.5rem);
+}
+
+.page-inverted a:focus-visible,
+.page-inverted button:focus-visible,
+.page-inverted [tabindex]:focus-visible {
+  outline-color: var(--on-color);
+}
+
+/* Bottoni: feedback tattile coerente. */
+.btn-liquid,
+.btn-blue,
+.btn-ghost-glass,
+.cta-dark,
+.cta-light {
+  transition:
+    background-color 0.18s var(--ease-standard),
+    color 0.18s var(--ease-standard),
+    box-shadow 0.18s var(--ease-standard),
+    transform 0.12s var(--ease-standard);
+}
+.btn-liquid:hover,
+.btn-blue:hover,
+.cta-dark:hover,
+.cta-light:hover {
+  box-shadow: var(--elevation-2);
+}
+.btn-liquid:active,
+.btn-blue:active,
+.btn-ghost-glass:active,
+.cta-dark:active,
+.cta-light:active {
+  transform: translateY(1px);
+}
+
+/* Chip: hover e stato attivo sempre percepibili. */
+.chip-im:hover {
+  border-color: var(--signal-ink, var(--signal));
+  background: color-mix(in oklab, var(--signal, #1a73e8) 8%, var(--card));
+}
+.chip-im:active,
+.chip-im-active:active {
+  transform: translateY(1px);
+}
+
+/* Link testuali: sottolineatura al passaggio, mai solo colore. */
+a:not([class*="btn-"]):not([class*="chip"]):not([class*="bento"]):not([class*="card"]):hover {
+  text-decoration-line: underline;
+  text-underline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-liquid:active,
+  .btn-blue:active,
+  .cta-dark:active,
+  .cta-light:active,
+  .chip-im:active {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   RITMO VERTICALE E SPAZIATURE — schede e CTA identiche in
+   tutte le sezioni, proporzioni mobile-first
+   ============================================================ */
+.glass-panel,
+.surface-card,
+.bento-card {
+  --card-pad: 1.125rem;
+}
+@media (min-width: 768px) {
+  .glass-panel,
+  .surface-card,
+  .bento-card {
+    --card-pad: 1.5rem;
+  }
+}
+
+/* Scala tipografica: interlinea e margini coerenti. */
+h1, .text-h1-im, .text-display-m {
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+h2, .text-h2-im, .text-display-s, .text-title-l {
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+h3, .text-h3-im, .text-title-m {
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+p {
+  line-height: 1.6;
+}
+.text-xs,
+[class*="tracking-["][class*="uppercase"] {
+  line-height: 1.4;
+}
+
+
+/* ============================================================
+   PROPORZIONI STANDARD — scala compatta tipo web moderno:
+   il font di base e le spaziature scalano insieme, così il
+   layout resta proporzionato su ogni dispositivo.
+   ============================================================ */
+html { font-size: 81.25%; } /* 13px base: interfaccia globale più compatta */
+@media (min-width: 1280px) {
+  html { font-size: 82.5%; } /* ~13.2px anche sui desktop grandi */
+}
+@media (max-width: 767px) {
+  html { font-size: 78.125%; } /* 12.5px su mobile */
+}
+
+/* Spaziature e forme allineate alla nuova scala tipografica:
+   valori in rem così crescono/diminuiscono col font di base. */
+:root {
+  --space-gutter: 1rem;
+  --space-block: 1.5rem;
+  --space-section: 2.5rem;
+  --space-section-lg: 3.25rem;
+  --space-control-x: 1rem;
+
+  --control-h-sm: 2rem;
+  --control-h-md: 2.375rem;
+  --control-h-lg: 2.75rem;
+  --icon-sm: 1rem;
+  --icon-md: 1.25rem;
+  --icon-lg: 1.5rem;
+  --header-h: 3.25rem;
+  --header-h-lg: 3.5rem;
+  --header-h-mobile: 3.25rem;
+  --header-h-desktop: 3.5rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius: 0.75rem;
+}
+@media (min-width: 768px) {
+  :root {
+    --space-gutter: 1.25rem;
+    --space-block: 1.75rem;
+    --space-section: 3rem;
+    --space-section-lg: 4rem;
+    --space-control-x: 1.125rem;
+  }
+}
+
+/* Margini verticali tipografici proporzionati al testo. */
+h1, h2, h3, h4, h5, h6 { margin-block: 0; }
+.section-pad { padding-block: var(--space-section); }
+@media (min-width: 768px) {
+  .section-pad { padding-block: var(--space-section-lg); }
+}
+
+
+/* CTA: altezze standard (40px mobile, 44px desktop). */
+.btn-liquid,
+.btn-blue,
+.btn-ghost-glass,
+.cta-dark,
+.cta-light {
+  min-height: 2.25rem;
+  padding-inline: 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  .btn-liquid,
+  .btn-blue,
+  .btn-ghost-glass,
+  .cta-dark,
+  .cta-light {
+    min-height: 2.5rem;
+    padding-inline: 1.125rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Schede: padding contenuto, non gigante. */
+.glass-panel,
+.surface-card,
+.bento-card {
+  padding: var(--card-pad);
+}
+.glass-panel[class*="p-1"],
+.surface-card[class*="p-1"],
+.bento-card[class*="p-1"] {
+  padding: var(--card-pad);
+}
+
+/* Raggi più sobri: niente bolle enormi su mobile. */
+@media (max-width: 767px) {
+  [class*="rounded-[36px]"],
+  [class*="rounded-[32px]"],
+  [class*="rounded-[28px]"] {
+    border-radius: 16px;
+  }
+  .section-pad { padding-block: 1.75rem; }
+  .section-pad-sm { padding-block: 1.25rem; }
+}
+
+/* Dialog e pop-up: larghezza e padding standard. */
+[role="dialog"] {
+  --card-pad: 1.125rem;
+}
+@media (min-width: 768px) {
+  [role="dialog"] { --card-pad: 1.5rem; }
+}
+
+/* Compattezza complessiva: card, finestre e controlli mantengono la stessa
+   gerarchia ma occupano meno spazio su ogni viewport. */
+.glass-panel,
+.surface-card,
+.bento-card {
+  --card-pad: 0.875rem;
+  border-radius: var(--radius-md);
+}
+@media (min-width: 768px) {
+  .glass-panel,
+  .surface-card,
+  .bento-card {
+    --card-pad: 1.125rem;
+  }
+}
+
+.field-im {
+  min-height: 2.375rem;
+  padding: 0.55rem 0.8rem;
+}
+.chip-im,
+.chip-im-active {
+  min-height: 2.125rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+}
+
+[role="dialog"] {
+  --card-pad: 0.875rem;
+  max-height: min(86vh, 42rem);
+}
+@media (min-width: 768px) {
+  [role="dialog"] { --card-pad: 1.125rem; }
+}
+
+.bento-grid {
+  gap: 0.75rem;
+}
+@media (min-width: 1024px) {
+  .bento-grid { gap: 1rem; }
+}
+
+/* Pannello menu a tutta altezza: non deve ereditare il limite dei pop-up. */
+[role="dialog"][data-full-panel] {
+  max-height: none;
+  height: 100%;
+}
+
+/* Sezioni colorate: testo bianco globale fuori dalle schede bianche. */
+.page-inverted,
+.page-inverted p,
+.page-inverted li,
+.page-inverted span,
+.page-inverted dt,
+.page-inverted dd,
+.page-inverted .text-foreground,
+.page-inverted .text-ink-950,
+.page-inverted .text-ink-800 {
+  color: var(--on-color);
+}
+.page-inverted .glass-panel,
+.page-inverted .surface-card,
+.page-inverted .bento-card,
+.page-inverted [class*="bg-white"],
+.page-inverted [class*="bg-card"] {
+  color: #101114;
+}
+.page-inverted .glass-panel p,
+.page-inverted .glass-panel li,
+.page-inverted .glass-panel span,
+.page-inverted .surface-card p,
+.page-inverted .surface-card li,
+.page-inverted .surface-card span,
+.page-inverted .bento-card p,
+.page-inverted .bento-card li,
+.page-inverted .bento-card span,
+.page-inverted [class*="bg-white"] p,
+.page-inverted [class*="bg-white"] li,
+.page-inverted [class*="bg-card"] p,
+.page-inverted [class*="bg-card"] li {
+  color: inherit;
+}
+
+/* ============================================================
+   LEGGIBILITÀ — contrasti AA sui casi residui
+   ============================================================ */
+/* Colori brand chiari: come testo usano varianti scure AA-safe. */
+.text-im-green { color: #12813d; }
+.text-im-cyan { color: #0a7285; }
+
+/* Etichette piccole sui fondi colorati chiari: ink scuro per leggibilità. */
+.radio-inverted .text-signal,
+.member-inverted .text-signal,
+.eventi-inverted .text-signal,
+.radio-inverted .text-xs,
+.member-inverted .text-xs,
+.eventi-inverted .text-xs {
+  color: #0b0c0f;
+}
+.radio-inverted .glass-panel .text-signal,
+.radio-inverted .surface-card .text-signal,
+.radio-inverted .bento-card .text-signal,
+.member-inverted .glass-panel .text-signal,
+.member-inverted .surface-card .text-signal,
+.member-inverted .bento-card .text-signal,
+.eventi-inverted .glass-panel .text-signal,
+.eventi-inverted .surface-card .text-signal,
+.eventi-inverted .bento-card .text-signal {
+  color: #101114;
+}
+
+/* Pulsante play sulle copertine: icona sempre bianca sul colore pieno. */
+.bg-signal.text-white,
+.bg-signal.text-white * {
+  color: #ffffff !important;
+  fill: currentColor;
+}
+
+/* Etichette di sezione sui fondi chiari: ink scuro (batte il !important globale). */
+.radio-inverted,
+.member-inverted,
+.eventi-inverted {
+  --signal-ink: #0b0c0f;
+}
+
+/* ============================================================
+   FASE 2 — DESIGN SYSTEM PER SERVIZIO (M3 Expressive IMLAND)
+   Token esposti come colori Tailwind: bg-service, text-service-ink…
+   ============================================================ */
+@theme inline {
+  --color-service: var(--service-base);
+  --color-service-soft: var(--service-soft);
+  --color-service-light: var(--service-light);
+  --color-service-dark: var(--service-dark);
+  --color-service-accent: var(--service-accent);
+  --color-service-on: var(--service-on-color);
+  --color-service-border: var(--service-border);
+  --color-service-ink: var(--service-ink);
+}
+
+:root {
+  /* fallback quando nessuna verticale è attiva */
+  --service-base: var(--signal, #1a73e8);
+  --service-dark: var(--signal-strong, #1668d4);
+  --service-ink: var(--signal-ink, #1668d4);
+  --service-accent: var(--horizon, #8ab4f8);
+  --service-light: var(--signal-glow, #d2e3fc);
+  --service-on-color: #ffffff;
+  --service-soft: color-mix(in oklab, var(--service-base) 10%, var(--background));
+  --service-border: color-mix(in oklab, var(--service-base) 28%, var(--background));
+  --service-hover: color-mix(in oklab, var(--service-dark) 88%, black);
+  --service-focus: var(--service-base);
+
+  /* Scala tipografica fluida M3 Expressive */
+  --type-display-xl: clamp(2.75rem, 7vw, 5rem);
+  --type-display: clamp(2.25rem, 5.2vw, 3.75rem);
+  --type-h1: clamp(2rem, 4.2vw, 3rem);
+  --type-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --type-h3: clamp(1.25rem, 2.2vw, 1.625rem);
+  --type-title: clamp(1.0625rem, 1.4vw, 1.25rem);
+  --type-body-lg: clamp(1.0625rem, 1.2vw, 1.1875rem);
+  --type-body: 1rem;
+  --type-label: 0.875rem;
+  --type-caption: 0.8125rem;
+}
+
+/* Ambiente cromatico della verticale */
+@utility service-env {
+  background:
+    radial-gradient(120% 70% at 12% -10%, color-mix(in oklab, var(--service-base) 16%, transparent), transparent 70%),
+    var(--service-soft);
+}
+@utility service-hero {
+  background: var(--service-base);
+  color: var(--service-on-color);
+}
+@utility service-panel {
+  background: var(--card);
+  border: 1px solid var(--service-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-1);
+}
+
+/* Tipografia */
+@utility text-display-xl { font-size: var(--type-display-xl); line-height: 1.02; font-weight: 800; letter-spacing: -0.03em; }
+@utility text-display-im { font-size: var(--type-display); line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
+@utility text-h3-im { font-size: var(--type-h3); line-height: 1.25; font-weight: 700; }
+@utility text-title-im { font-size: var(--type-title); line-height: 1.35; font-weight: 700; }
+@utility text-body-lg { font-size: var(--type-body-lg); line-height: 1.65; }
+@utility text-label-im { font-size: var(--type-label); line-height: 1.3; font-weight: 600; }
+@utility text-caption-im { font-size: var(--type-caption); line-height: 1.4; }
+@utility measure-prose { max-width: 68ch; }
+
+/* Chip / pill globali */
+@utility pill-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  min-height: 44px;
+  padding-inline: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  transition: background var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+  white-space: nowrap;
+}
+@media (min-width: 768px) {
+  .pill-base { min-height: 40px; }
+}
+@utility pill-selected {
+  background: var(--service-base);
+  border-color: var(--service-base);
+  color: var(--service-on-color);
+}
+@utility pill-soft {
+  background: var(--service-soft);
+  border-color: var(--service-border);
+  color: var(--service-ink);
+}
+
+/* Scroller orizzontale per chip su mobile */
+@utility chip-row {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+}
+@utility chip-row-hide {
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Safe area per bottom navigation + player su mobile */
+@utility pb-app-nav {
+  padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
+}

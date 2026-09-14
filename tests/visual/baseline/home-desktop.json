@@ -1,0 +1,114 @@
+[
+  {
+    "role": "section-atmosphere",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "image",
+    "fullBleed": true
+  },
+  {
+    "role": "section-closing",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "oklch(0.075 0.01 265 / 0.98)",
+    "fullBleed": true
+  },
+  {
+    "role": "section-atmosphere",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "image",
+    "fullBleed": true
+  },
+  {
+    "role": "section-focus",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "image",
+    "fullBleed": true
+  },
+  {
+    "role": "section-canvas",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "oklch(0.105 0.008 265 / 0.96)",
+    "fullBleed": true
+  },
+  {
+    "role": "section-focus",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "image",
+    "fullBleed": true
+  },
+  {
+    "role": "section-canvas",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "oklch(0.105 0.008 265 / 0.96)",
+    "fullBleed": true
+  },
+  {
+    "role": "section-editorial",
+    "color": "oklch(0.216 0.006 56.043)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "image",
+    "fullBleed": true
+  },
+  {
+    "role": "section-focus",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "image",
+    "fullBleed": true
+  },
+  {
+    "role": "section-canvas",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "oklch(0.105 0.008 265 / 0.96)",
+    "fullBleed": true
+  },
+  {
+    "role": "section-atmosphere",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "image",
+    "fullBleed": true
+  },
+  {
+    "role": "section-canvas",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "oklch(0.105 0.008 265 / 0.96)",
+    "fullBleed": true
+  },
+  {
+    "role": "section-atmosphere",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "image",
+    "fullBleed": true
+  },
+  {
+    "role": "section-canvas",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "oklch(0.105 0.008 265 / 0.96)",
+    "fullBleed": true
+  },
+  {
+    "role": "section-closing",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "oklch(0.075 0.01 265 / 0.98)",
+    "fullBleed": true
+  },
+  {
+    "role": "section-closing",
+    "color": "oklch(0.988 0.003 106.5)",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "beforeBackground": "oklch(0.075 0.01 265 / 0.98)",
+    "fullBleed": true
+  }
+]

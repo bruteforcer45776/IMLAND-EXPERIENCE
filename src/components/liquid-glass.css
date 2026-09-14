@@ -1,0 +1,17 @@
+/* Ancora inline per liquid-glass-react: la libreria applica
+   translate(-50%, -50%) assumendo un posizionamento centrato.
+   Il wrapper riporta l'elemento nel flusso normale del layout. */
+.lg-anchor {
+  display: inline-grid;
+  width: fit-content;
+  height: fit-content;
+  align-self: center;
+  justify-self: start;
+}
+
+.lg-anchor > * {
+  grid-area: 1 / 1;
+  position: relative;
+  left: 50%;
+  top: 50%;
+}

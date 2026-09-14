@@ -1,0 +1,66 @@
+.dock-outer {
+  margin: 0 0.5rem;
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  position: relative;
+  pointer-events: none;
+}
+
+.dock-panel {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  width: fit-content;
+  gap: 0.75rem;
+  border-radius: 1.25rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.35);
+  padding: 0 0.6rem 0.6rem;
+  pointer-events: auto;
+}
+
+.dock-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dock-item:hover,
+.dock-item:focus-visible {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dock-label {
+  position: absolute;
+  top: -1.75rem;
+  left: 50%;
+  width: fit-content;
+  white-space: pre;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: var(--foreground);
+  padding: 0.15rem 0.55rem;
+  font-size: 0.75rem;
+  color: var(--background);
+  transform: translateX(-50%);
+}
