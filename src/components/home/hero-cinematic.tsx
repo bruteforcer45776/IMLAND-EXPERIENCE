@@ -57,7 +57,7 @@ export function HeroCinematic() {
       />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 flex-col items-center justify-center px-4 pb-24 pt-8 text-center md:px-10 md:pb-28 md:pt-8">
-        <div className="w-full max-w-3xl rounded-[28px] border border-white/20 bg-black/20 px-5 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl backdrop-saturate-[1.2] md:px-10 md:py-9">
+        <div className="w-full max-w-3xl rounded-[28px] border border-white/20 bg-black/40 px-5 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl backdrop-saturate-[1.2] md:px-10 md:py-9">
         <h1 className="text-display-l max-w-4xl text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.7)]">
           Dai voce al tuo <span>territorio</span>
         </h1>
@@ -79,14 +79,14 @@ export function HeroCinematic() {
           </Link>
           <Link
             to="/scarica-app"
-            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/25 bg-black/20 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-black/35"
+            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/25 bg-black/40 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-black/50"
           >
             Scarica l'app
             <Download size={18} className="text-white/75" />
           </Link>
           <Link
             to="/chi-siamo"
-            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/25 bg-black/20 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-black/35"
+            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/25 bg-black/40 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-black/50"
           >
             Scopri IMLAND
             <ArrowRight size={18} className="text-ink-500" />
