@@ -46,6 +46,49 @@
   border-color: rgba(255, 255, 255, 0.18) !important;
 }
 
+/* Il colore identifica il contenuto senza perdere la trasparenza del vetro. */
+.home-glass-stack > section:is(.theme-radio, .theme-podcast, .theme-news, .theme-eventi, .theme-member) {
+  background: color-mix(in srgb, var(--signal) 13%, rgba(0, 0, 0, 0.28)) !important;
+  border-color: color-mix(in srgb, var(--signal) 48%, rgba(255, 255, 255, 0.16)) !important;
+  box-shadow:
+    inset 0 2px 0 color-mix(in srgb, var(--signal) 72%, white 10%),
+    0 18px 46px rgba(0, 0, 0, 0.18);
+}
+
+.home-glass-stack > section :is(.theme-radio, .theme-podcast, .theme-news, .theme-eventi, .theme-member).card-im,
+.home-glass-stack > section :is(.theme-radio, .theme-podcast, .theme-news, .theme-eventi, .theme-member) > .card-im {
+  background: color-mix(in srgb, var(--signal) 12%, rgba(0, 0, 0, 0.36)) !important;
+  border-color: color-mix(in srgb, var(--signal) 52%, rgba(255, 255, 255, 0.14)) !important;
+  box-shadow: inset 0 2px 0 color-mix(in srgb, var(--signal) 80%, white 8%);
+}
+
+.home-glass-stack > section .bento-card {
+  background: color-mix(in srgb, var(--bento-tone) 11%, rgba(0, 0, 0, 0.38)) !important;
+  border-color: color-mix(in srgb, var(--bento-tone) 50%, rgba(255, 255, 255, 0.14)) !important;
+  box-shadow: inset 0 2px 0 color-mix(in srgb, var(--bento-tone) 75%, white 8%);
+}
+
+.home-glass-stack > section .text-signal,
+.home-glass-stack > section .text-im-blue,
+.home-glass-stack > section .text-im-green {
+  filter: saturate(1.12) brightness(1.18);
+}
+
+.home-glass-stack > section a.border-signal {
+  border-color: color-mix(in srgb, var(--signal) 72%, white 18%) !important;
+  background: color-mix(in srgb, var(--signal) 14%, rgba(0, 0, 0, 0.34)) !important;
+  color: color-mix(in srgb, var(--signal) 55%, white 45%) !important;
+}
+
+.home-glass-stack > section details.card-im[open] {
+  background: rgba(0, 0, 0, 0.38) !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+}
+
+.home-glass-stack > section .text-black\/70 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
 .home-glass-stack > section:first-of-type {
   min-height: 680px;
 }

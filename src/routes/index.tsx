@@ -504,7 +504,7 @@ function Home() {
       </section>
 
       {/* COMMUNITY BANNER */}
-      <section className="bg-white section-pad">
+      <section className="theme-member bg-white section-pad">
         <div className={shell}>
           <Reveal>
             <div className="theme-member relative overflow-hidden rounded-[32px] bg-signal p-8 text-signal-foreground md:p-12">
@@ -644,7 +644,7 @@ function Home() {
       </section>
 
       {/* CTA FINALE — Member */}
-      <section className="bg-white section-pad">
+      <section className="theme-member bg-white section-pad">
         <div className={shell}>
           <Reveal>
             <div className="relative overflow-hidden rounded-[32px] bg-[#e0a800] p-10 text-[#0b0c0f] md:p-16">
