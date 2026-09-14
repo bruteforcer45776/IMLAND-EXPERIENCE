@@ -103,13 +103,19 @@ export async function scoreAndDeduplicateCandidates(
         duplicates++;
         await admin
           .from("news_candidates")
-          .update({ processing_status: "duplicate", duplicate_group_id: duplicateGroupId, rejection_reason: "similar title" })
+          .update({
+            processing_status: "duplicate",
+            duplicate_group_id: duplicateGroupId,
+            rejection_reason: "similar title",
+          })
           .eq("id", c.id);
         continue;
       }
 
       let relevance = 30;
-      let credibility = (c.source_id ? 50 : 30) + ((c as unknown as { reliability_score?: number }).reliability_score ?? 3) * 5;
+      let credibility =
+        (c.source_id ? 50 : 30) +
+        ((c as unknown as { reliability_score?: number }).reliability_score ?? 3) * 5;
 
       if (c.geographic_scope === "piemonte") relevance += 20;
       else if (c.geographic_scope === "italia") relevance += 10;
@@ -183,6 +189,11 @@ export async function scoreAndDeduplicateCandidates(
 
     return { scored: scored?.length ?? 0, duplicates, selected };
   } catch (err) {
-    return { scored: 0, duplicates: 0, selected: 0, error: err instanceof Error ? err.message : String(err) };
+    return {
+      scored: 0,
+      duplicates: 0,
+      selected: 0,
+      error: err instanceof Error ? err.message : String(err),
+    };
   }
 }

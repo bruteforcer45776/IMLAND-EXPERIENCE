@@ -41,10 +41,7 @@ export function LiquidGlass({
 
   if (!hydrated) {
     return (
-      <div
-        className={`glass-panel ${className}`}
-        style={{ padding, borderRadius: cornerRadius }}
-      >
+      <div className={`glass-panel ${className}`} style={{ padding, borderRadius: cornerRadius }}>
         {children}
       </div>
     );
@@ -81,6 +78,5 @@ export function LiquidGlass({
     </span>
   );
 }
-
 
 export default LiquidGlass;

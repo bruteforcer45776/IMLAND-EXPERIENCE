@@ -1,10 +1,36 @@
 import { cn } from "@/lib/utils";
 
 export const streamingPlatforms = [
-  { name: "Spotify", icon: "https://cdn.simpleicons.org/spotify/1DB954", url: "https://open.spotify.com/search?q=IMLAND" },
-  { name: "Apple Podcasts", icon: "https://cdn.simpleicons.org/applepodcasts/9933FF", url: "https://podcasts.apple.com/search?term=IMLAND" },
-  { name: "YouTube Music", icon: "https://cdn.simpleicons.org/youtubemusic/FF0000", url: "https://music.youtube.com/search?q=IMLAND" },
-  { name: "Amazon Music", icon: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/amazonmusic.svg", url: "https://music.amazon.it/search/IMLAND" },
+  {
+    name: "Spotify",
+    icon: "https://cdn.simpleicons.org/spotify/1DB954",
+    url: "https://open.spotify.com/search?q=IMLAND",
+  },
+  {
+    name: "Apple Podcasts",
+    icon: "https://cdn.simpleicons.org/applepodcasts/9933FF",
+    url: "https://podcasts.apple.com/search?term=IMLAND",
+  },
+  {
+    name: "YouTube Music",
+    icon: "https://cdn.simpleicons.org/youtubemusic/FF0000",
+    url: "https://music.youtube.com/search?q=IMLAND",
+  },
+  {
+    name: "Amazon Music",
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/amazonmusic.svg",
+    url: "https://music.amazon.it/search/IMLAND",
+  },
+  {
+    name: "TuneIn",
+    icon: "https://cdn.simpleicons.org/tunein/14D8CC",
+    url: "https://tunein.com/radio/Imland-Radio-s357176/",
+  },
+  {
+    name: "myTuner Radio",
+    icon: "https://mytuner-radio.com/favicon.ico",
+    url: "https://mytuner-radio.com/it/radio/imland-radio-508202/",
+  },
 ];
 
 export function StreamingBanner({
@@ -17,12 +43,7 @@ export function StreamingBanner({
   iconClassName?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "flex flex-wrap items-center justify-center gap-4",
-        className
-      )}
-    >
+    <div className={cn("flex flex-wrap items-center justify-center gap-4", className)}>
       {label && (
         <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           {label}
@@ -41,7 +62,7 @@ export function StreamingBanner({
             <img
               src={p.icon}
               alt={p.name}
-              className={cn("opacity-85 hover:opacity-100", iconClassName)}
+              className={cn("object-contain opacity-85 hover:opacity-100", iconClassName)}
               loading="lazy"
             />
           </a>

@@ -6,7 +6,10 @@ import DOMPurify from "isomorphic-dompurify";
 import { useMemo } from "react";
 import type { Database } from "@/integrations/supabase/types";
 import { canonical, newsArticleLd } from "@/lib/seo";
-import { getPublishedArticleBySlug, getNewsCategories } from "@/lib/news-automation/public.functions";
+import {
+  getPublishedArticleBySlug,
+  getNewsCategories,
+} from "@/lib/news-automation/public.functions";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -38,8 +41,27 @@ function SanitizedBody({ html }: { html: string | null }) {
           .join("");
     return DOMPurify.sanitize(source, {
       ALLOWED_TAGS: [
-        "p", "br", "strong", "b", "em", "i", "u", "h2", "h3", "h4", "h5", "h6",
-        "ul", "ol", "li", "a", "blockquote", "span", "img", "figure", "figcaption",
+        "p",
+        "br",
+        "strong",
+        "b",
+        "em",
+        "i",
+        "u",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "ul",
+        "ol",
+        "li",
+        "a",
+        "blockquote",
+        "span",
+        "img",
+        "figure",
+        "figcaption",
       ],
       ALLOWED_ATTR: ["href", "title", "alt", "src", "class", "target", "rel"],
       FORBID_ATTR: ["style"],
@@ -58,8 +80,13 @@ export const Route = createFileRoute("/news/$slug")({
     const data = loaderData as ArticlePageData | undefined;
     const article = data?.article;
     const title = article?.seo_title || article?.title || "News — IMLAND EXPERIENCE";
-    const description = article?.seo_description || article?.summary || "Notizie dal territorio piemontese — IMLAND Experience.";
-    const url = article ? `https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/news/${article.slug}` : "https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/news";
+    const description =
+      article?.seo_description ||
+      article?.summary ||
+      "Notizie dal territorio piemontese — IMLAND Experience.";
+    const url = article
+      ? `https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/news/${article.slug}`
+      : "https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/news";
     const image = article?.cover_image_url || undefined;
     return {
       meta: [
@@ -72,8 +99,12 @@ export const Route = createFileRoute("/news/$slug")({
         ...(image ? [{ property: "og:image", content: image }] : []),
         { name: "twitter:card", content: "summary_large_image" },
         ...(image ? [{ name: "twitter:image", content: image }] : []),
-        ...(article?.published_at ? [{ property: "article:published_time", content: article.published_at }] : []),
-        ...(article?.updated_at ? [{ property: "article:modified_time", content: article.updated_at }] : []),
+        ...(article?.published_at
+          ? [{ property: "article:published_time", content: article.published_at }]
+          : []),
+        ...(article?.updated_at
+          ? [{ property: "article:modified_time", content: article.updated_at }]
+          : []),
       ],
       links: [canonical(`/news/${article?.slug ?? ""}`)],
     };
@@ -95,7 +126,10 @@ function ArticleNotFound() {
       <p className="mt-3 text-muted-foreground">
         La notizia che cerchi non è disponibile o non è più pubblicata.
       </p>
-      <Link to="/news" className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary">
+      <Link
+        to="/news"
+        className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary"
+      >
         <ArrowLeft className="h-4 w-4" /> Torna alle news
       </Link>
     </div>
@@ -108,7 +142,10 @@ function ArticleErrorState({ error }: { error: Error }) {
     <div className="mx-auto max-w-2xl px-4 py-24 text-center">
       <h1 className="text-h2-im">Contenuto non disponibile</h1>
       <p className="mt-3 text-muted-foreground">Riprova tra qualche istante.</p>
-      <Link to="/news" className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary">
+      <Link
+        to="/news"
+        className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary"
+      >
         <ArrowLeft className="h-4 w-4" /> Torna alle news
       </Link>
     </div>
@@ -136,10 +173,25 @@ function ArticlePage() {
 
   if (!data) return null;
   const { article, sources, related } = data;
-  const categoryLabel = categories?.find((c) => c.slug === article.category_slug)?.label ?? article.category_slug ?? "News";
+  const categoryLabel =
+    categories?.find((c) => c.slug === article.category_slug)?.label ??
+    article.category_slug ??
+    "News";
   const inUpdate = (article.structured_data as { in_update?: boolean })?.in_update === true;
-  const publishedAt = article.published_at ? new Date(article.published_at).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" }) : null;
-  const updatedAt = article.updated_at ? new Date(article.updated_at).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" }) : null;
+  const publishedAt = article.published_at
+    ? new Date(article.published_at).toLocaleDateString("it-IT", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : null;
+  const updatedAt = article.updated_at
+    ? new Date(article.updated_at).toLocaleDateString("it-IT", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : null;
 
   const shareUrl = `https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/news/${article.slug}`;
   const shareText = encodeURIComponent(article.title);
@@ -187,7 +239,10 @@ function ArticlePage() {
       </nav>
 
       <article className="mx-auto max-w-4xl px-4 py-10 md:px-8 md:py-14">
-        <Link to="/news" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+        <Link
+          to="/news"
+          className="inline-flex items-center gap-1 text-sm font-medium text-primary"
+        >
           <ArrowLeft className="h-4 w-4" /> Torna alle news
         </Link>
 
@@ -199,19 +254,27 @@ function ArticlePage() {
             {article.geographic_scope && (
               <span className="inline-flex items-center gap-1 rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground">
                 <MapPin className="h-3 w-3" />
-                {article.geographic_scope === "piemonte" ? "Piemonte" : article.geographic_scope === "italia" ? "Italia" : article.province ?? article.geographic_scope}
+                {article.geographic_scope === "piemonte"
+                  ? "Piemonte"
+                  : article.geographic_scope === "italia"
+                    ? "Italia"
+                    : (article.province ?? article.geographic_scope)}
               </span>
             )}
           </div>
           <h1 className="mt-4 text-h1-im">{article.title}</h1>
-          {article.subtitle && <p className="mt-3 text-xl text-muted-foreground">{article.subtitle}</p>}
+          {article.subtitle && (
+            <p className="mt-3 text-xl text-muted-foreground">{article.subtitle}</p>
+          )}
           <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             {publishedAt && (
               <span className="inline-flex items-center gap-1">
                 <Calendar className="h-4 w-4" /> Pubblicato il {publishedAt}
               </span>
             )}
-            {updatedAt && updatedAt !== publishedAt && <span>Ultimo aggiornamento: {updatedAt}</span>}
+            {updatedAt && updatedAt !== publishedAt && (
+              <span>Ultimo aggiornamento: {updatedAt}</span>
+            )}
           </div>
         </header>
 
@@ -224,7 +287,10 @@ function ArticlePage() {
         {inUpdate && (
           <div className="mt-6 flex items-start gap-3 rounded-2xl border border-warning/30 bg-warning/10 p-4 text-sm text-warning-foreground">
             <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
-            <p>Notizia in aggiornamento. I dettagli potrebbero variare man mano che nuove fonti confermano l'informazione.</p>
+            <p>
+              Notizia in aggiornamento. I dettagli potrebbero variare man mano che nuove fonti
+              confermano l'informazione.
+            </p>
           </div>
         )}
 
@@ -251,18 +317,27 @@ function ArticlePage() {
           <section className="mt-10 rounded-2xl border border-border bg-muted/30 p-6">
             <h2 className="text-h3-im">Fonti e approfondimenti</h2>
             <ul className="mt-4 space-y-3">
-            {sources.map((s: SourceRow) => (
+              {sources.map((s: SourceRow) => (
                 <li key={s.id} className="text-sm">
-                  <a href={s.original_url} target="_blank" rel="noreferrer" className="font-medium text-primary hover:underline">
+                  <a
+                    href={s.original_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium text-primary hover:underline"
+                  >
                     {s.source_name}
                   </a>
-                  {s.original_title && <span className="block text-muted-foreground">{s.original_title}</span>}
+                  {s.original_title && (
+                    <span className="block text-muted-foreground">{s.original_title}</span>
+                  )}
                   {s.published_at && (
                     <span className="block text-xs text-muted-foreground/70">
                       {new Date(s.published_at).toLocaleDateString("it-IT")}
                     </span>
                   )}
-                  {s.author && <span className="block text-xs text-muted-foreground/70">di {s.author}</span>}
+                  {s.author && (
+                    <span className="block text-xs text-muted-foreground/70">di {s.author}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -309,7 +384,9 @@ function ArticlePage() {
                   className="group flex flex-col rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-1 hover:border-signal/50"
                 >
                   <span className="inline-flex w-fit items-center rounded-full bg-signal/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-signal">
-                    {categories?.find((c) => c.slug === r.category_slug)?.label ?? r.category_slug ?? "News"}
+                    {categories?.find((c) => c.slug === r.category_slug)?.label ??
+                      r.category_slug ??
+                      "News"}
                   </span>
                   <h3 className="mt-3 text-base font-semibold leading-snug">{r.title}</h3>
                   <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium text-signal transition group-hover:translate-x-1">

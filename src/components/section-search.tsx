@@ -28,7 +28,9 @@ export function SectionSearch({
       className="flex w-full max-w-xl items-center gap-2 rounded-full border border-outline bg-card px-4 py-2"
     >
       <Search size={18} className="shrink-0 text-muted-foreground" aria-hidden />
-      <label htmlFor={`search-${label}`} className="sr-only">{label}</label>
+      <label htmlFor={`search-${label}`} className="sr-only">
+        {label}
+      </label>
       <input
         id={`search-${label}`}
         value={query}

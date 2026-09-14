@@ -9,7 +9,10 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/condivisioni")
   head: () => ({
     meta: [
       { title: "Condivisioni — Area Persona IMLAND" },
-      { name: "description", content: "Le puntate che hai condiviso con amici, clienti e la tua rete." },
+      {
+        name: "description",
+        content: "Le puntate che hai condiviso con amici, clienti e la tua rete.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -46,7 +49,8 @@ function CondivisioniPage() {
               <h2 className="mt-2 text-title-m">{share.title}</h2>
               <p className="mt-1 text-[13px] text-muted-foreground">
                 Creato il {new Date(share.created_at).toLocaleDateString("it-IT")}
-                {share.last_click_at && ` · ultima apertura ${new Date(share.last_click_at).toLocaleDateString("it-IT")}`}
+                {share.last_click_at &&
+                  ` · ultima apertura ${new Date(share.last_click_at).toLocaleDateString("it-IT")}`}
               </p>
               <p className="mt-3 truncate rounded-full border border-border bg-muted px-4 py-2 text-xs">
                 {shareUrl(share.token)}

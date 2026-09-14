@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 
-import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { ALERT_STATUS_LABEL, formatHubDate } from "@/lib/hub";
 import { BadgeIcon } from "@/components/badge-icon";
 import { Reveal } from "@/components/reveal";
@@ -20,7 +20,6 @@ type AlertRow = {
 function useLatestAlerts() {
   return useQuery({
     queryKey: ["home", "alerts", "latest"],
-    enabled: isSupabaseConfigured(),
     staleTime: 60_000,
     queryFn: async (): Promise<AlertRow[]> => {
       const { data, error } = await supabase
@@ -99,7 +98,8 @@ export function LatestAlerts() {
                 {a.comune}
               </p>
               <p className="mt-1 text-xs text-ink-600">
-                {a.category ?? "Segnalazione"} · {ALERT_STATUS_LABEL[a.status ?? ""] ?? "Pubblicata"}
+                {a.category ?? "Segnalazione"} ·{" "}
+                {ALERT_STATUS_LABEL[a.status ?? ""] ?? "Pubblicata"}
               </p>
               <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-[var(--color-surface-alert)]">
                 {formatHubDate(a.created_at)}

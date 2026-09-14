@@ -6,7 +6,11 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/segnalazioni")
   head: () => ({
     meta: [
       { title: "Le mie segnalazioni — Area personale IMLAND" },
-      { name: "description", content: "Le segnalazioni che hai inviato al territorio, il loro percorso e le bozze da completare." },
+      {
+        name: "description",
+        content:
+          "Le segnalazioni che hai inviato al territorio, il loro percorso e le bozze da completare.",
+      },
       { property: "og:title", content: "Le mie segnalazioni — Area personale IMLAND" },
       { property: "og:description", content: "Segui il percorso di ciò che hai segnalato." },
       { property: "og:type", content: "website" },

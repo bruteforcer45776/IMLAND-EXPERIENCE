@@ -10,7 +10,10 @@ export const Route = createFileRoute("/_authenticated/admin/feedback")({
   head: () => ({
     meta: [
       { title: "Feedback del sito — IMLAND EXPERIENCE" },
-      { name: "description", content: "Raccolta dei feedback e delle valutazioni lasciate dai visitatori." },
+      {
+        name: "description",
+        content: "Raccolta dei feedback e delle valutazioni lasciate dai visitatori.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -133,7 +136,9 @@ function FeedbackAdminPage() {
                     {new Date(f.created_at).toLocaleString("it-IT")}
                   </span>
                   {f.page_path && (
-                    <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium">{f.page_path}</span>
+                    <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium">
+                      {f.page_path}
+                    </span>
                   )}
                   <span className="text-xs text-muted-foreground">
                     {f.user_id ? "Utente registrato" : "Visitatore"}

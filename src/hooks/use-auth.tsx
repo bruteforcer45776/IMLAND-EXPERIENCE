@@ -41,10 +41,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const resetAuthState = () => {
+    setSession(null);
+    setProfile(null);
+    setIsAdmin(false);
+  };
+
   const load = async (uid: string | undefined) => {
+    if (!isSupabaseConfigured) {
+      resetAuthState();
+      return;
+    }
     if (!uid) {
-      setProfile(null);
-      setIsAdmin(false);
+      resetAuthState();
       return;
     }
     const [{ data: p }, { data: roles }] = await Promise.all([
@@ -58,12 +67,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true;
 
-    // The editorial/public site must remain available even when the optional
-    // Supabase integration has not been configured on the hosting environment.
-    if (!isSupabaseConfigured()) {
-      setSession(null);
-      setProfile(null);
-      setIsAdmin(false);
+    if (!isSupabaseConfigured) {
+      resetAuthState();
       setLoading(false);
       return () => {
         active = false;
@@ -71,20 +76,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     // getUser() valida il JWT lato server; getSession() restituisce solo il token locale
-    supabase.auth.getUser().then(async ({ data: userData, error }) => {
-      if (!active) return;
-      if (error || !userData.user) {
-        setSession(null);
-        setProfile(null);
-        setIsAdmin(false);
+    supabase.auth
+      .getUser()
+      .then(async ({ data: userData, error }) => {
+        if (!active) return;
+        if (error || !userData.user) {
+          resetAuthState();
+          setLoading(false);
+          return;
+        }
+        const { data: sessionData } = await supabase.auth.getSession();
+        setSession(sessionData.session);
+        await load(sessionData.session?.user.id ?? userData.user.id);
         setLoading(false);
-        return;
-      }
-      const { data: sessionData } = await supabase.auth.getSession();
-      setSession(sessionData.session);
-      await load(sessionData.session?.user.id ?? userData.user.id);
-      setLoading(false);
-    });
+      })
+      .catch(() => {
+        if (!active) return;
+        resetAuthState();
+        setLoading(false);
+      });
 
     const { data: sub } = supabase.auth.onAuthStateChange((event, next) => {
       setSession(next);
@@ -114,7 +124,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     signOut: async () => {
       await queryClient.cancelQueries();
       queryClient.clear();
-      if (isSupabaseConfigured()) await supabase.auth.signOut();
+      if (!isSupabaseConfigured) {
+        resetAuthState();
+        return;
+      }
+      await supabase.auth.signOut();
     },
   };
 

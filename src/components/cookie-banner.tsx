@@ -38,8 +38,7 @@ export function CookieBanner() {
     save({ necessary: true, analytics: true, marketing: true, ts: Date.now() });
   const rejectAll = () =>
     save({ necessary: true, analytics: false, marketing: false, ts: Date.now() });
-  const saveChoices = () =>
-    save({ necessary: true, analytics, marketing, ts: Date.now() });
+  const saveChoices = () => save({ necessary: true, analytics, marketing, ts: Date.now() });
 
   if (!open) return null;
 
@@ -52,12 +51,14 @@ export function CookieBanner() {
     >
       <div className="relative flex flex-col gap-3 md:flex-row md:items-start">
         <div className="flex-1">
-          <h2 className="flex items-center gap-2 text-title-m"><BrandIcon name="verificato" className="h-5 w-5" aria-hidden />Rispettiamo la tua privacy</h2>
+          <h2 className="flex items-center gap-2 text-title-m">
+            <BrandIcon name="verificato" className="h-5 w-5" aria-hidden />
+            Rispettiamo la tua privacy
+          </h2>
           <p className="mt-1.5 text-xs text-muted-foreground">
-            Utilizziamo cookie tecnici necessari al funzionamento del sito e,
-            previo consenso, cookie di analisi e marketing come previsto dal
-            GDPR. Puoi accettare, rifiutare o personalizzare la tua scelta.
-            Maggiori informazioni nella{" "}
+            Utilizziamo cookie tecnici necessari al funzionamento del sito e, previo consenso,
+            cookie di analisi e marketing come previsto dal GDPR. Puoi accettare, rifiutare o
+            personalizzare la tua scelta. Maggiori informazioni nella{" "}
             <Link to="/cookie" className="underline hover:text-signal">
               Cookie Policy
             </Link>{" "}
@@ -73,8 +74,8 @@ export function CookieBanner() {
               <label className="flex items-start gap-2 rounded-lg border border-border p-2">
                 <input type="checkbox" checked disabled className="mt-1" />
                 <span>
-                  <span className="font-medium">Necessari</span> — sempre attivi.
-                  Garantiscono il funzionamento del sito.
+                  <span className="font-medium">Necessari</span> — sempre attivi. Garantiscono il
+                  funzionamento del sito.
                 </span>
               </label>
               <label className="flex items-start gap-2 rounded-lg border border-border p-2">
@@ -85,8 +86,8 @@ export function CookieBanner() {
                   className="mt-1"
                 />
                 <span>
-                  <span className="font-medium">Analisi</span> — statistiche
-                  aggregate d&apos;uso per migliorare il sito.
+                  <span className="font-medium">Analisi</span> — statistiche aggregate d&apos;uso
+                  per migliorare il sito.
                 </span>
               </label>
               <label className="flex items-start gap-2 rounded-lg border border-border p-2">
@@ -97,8 +98,8 @@ export function CookieBanner() {
                   className="mt-1"
                 />
                 <span>
-                  <span className="font-medium">Marketing</span> — contenuti e
-                  comunicazioni personalizzate.
+                  <span className="font-medium">Marketing</span> — contenuti e comunicazioni
+                  personalizzate.
                 </span>
               </label>
             </div>

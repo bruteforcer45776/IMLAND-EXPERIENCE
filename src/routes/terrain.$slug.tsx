@@ -142,7 +142,12 @@ function PlaceDetail() {
             {place.website && (
               <li className="flex items-center gap-2">
                 <Globe size={15} />
-                <a href={place.website} target="_blank" rel="noopener noreferrer" className="underline">
+                <a
+                  href={place.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
                   Sito web
                 </a>
               </li>
@@ -178,10 +183,16 @@ function PlaceDetail() {
             Ultima verifica: {formatHubDate(place.verified_at)}.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm">
-            <Link to="/alert/segnala" className="rounded-full border border-border px-4 py-2 font-medium">
+            <Link
+              to="/alert/segnala"
+              className="rounded-full border border-border px-4 py-2 font-medium"
+            >
               Segnala un errore
             </Link>
-            <Link to="/jobs/offerte" className="rounded-full border border-border px-4 py-2 font-medium">
+            <Link
+              to="/jobs/offerte"
+              className="rounded-full border border-border px-4 py-2 font-medium"
+            >
               Opportunità in zona
             </Link>
             <Link to="/eventi" className="rounded-full border border-border px-4 py-2 font-medium">

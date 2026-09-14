@@ -8,7 +8,11 @@ export default defineTool({
   title: "Elenca i canali podcast",
   description: "Elenca i canali podcast di IMLAND Experience con categoria e numero di puntate.",
   inputSchema: {
-    category: z.string().trim().optional().describe("Filtra per categoria, es. Cibo, Cultura, Business."),
+    category: z
+      .string()
+      .trim()
+      .optional()
+      .describe("Filtra per categoria, es. Cibo, Cultura, Business."),
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ category }) => {

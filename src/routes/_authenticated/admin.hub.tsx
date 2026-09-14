@@ -11,7 +11,8 @@ export const Route = createFileRoute("/_authenticated/admin/hub")({
       { title: "Moderazione TERRAIN, JOBS e ALERT — Amministrazione" },
       {
         name: "description",
-        content: "Verifica e pubblica schede del territorio, annunci di lavoro e segnalazioni dei cittadini.",
+        content:
+          "Verifica e pubblica schede del territorio, annunci di lavoro e segnalazioni dei cittadini.",
       },
       { property: "og:title", content: "Moderazione TERRAIN, JOBS e ALERT" },
       { property: "og:description", content: "Area riservata alla redazione IMLAND." },
@@ -26,7 +27,14 @@ export const Route = createFileRoute("/_authenticated/admin/hub")({
 type Tab = "places" | "jobs" | "alerts";
 
 const PLACE_STATES = ["pending", "published", "rejected", "suspended", "archived"] as const;
-const ALERT_STATES = ["received", "in_review", "verified", "published", "rejected", "closed"] as const;
+const ALERT_STATES = [
+  "received",
+  "in_review",
+  "verified",
+  "published",
+  "rejected",
+  "closed",
+] as const;
 
 function AdminHub() {
   const mod = useHubModeration();

@@ -85,7 +85,13 @@ function PublishJob() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.companyName.trim() || !form.title.trim() || !form.sector || !form.contractType || !form.comune) {
+    if (
+      !form.companyName.trim() ||
+      !form.title.trim() ||
+      !form.sector ||
+      !form.contractType ||
+      !form.comune
+    ) {
       toast.error("Compila attività, ruolo, settore, contratto e Comune.");
       return;
     }
@@ -120,10 +126,13 @@ function PublishJob() {
 
   return (
     <div className="container-im section-pad-sm">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">JOBS</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        JOBS
+      </p>
       <h1 className="mt-2 text-h1-im">Pubblica un'opportunità.</h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
-        Racconta il ruolo che cerchi: i dati della tua attività arrivano dalla scheda del territorio.
+        Racconta il ruolo che cerchi: i dati della tua attività arrivano dalla scheda del
+        territorio.
         <br />
         Ogni annuncio ha una data di scadenza e resta collegato alla tua realtà.
       </p>
@@ -149,15 +158,32 @@ function PublishJob() {
       <form onSubmit={onSubmit} className="mt-8 grid gap-4 md:grid-cols-2">
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Attività *</span>
-          <input value={form.companyName} onChange={set("companyName")} maxLength={120} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            value={form.companyName}
+            onChange={set("companyName")}
+            maxLength={120}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Ruolo cercato *</span>
-          <input value={form.title} onChange={set("title")} maxLength={140} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            value={form.title}
+            onChange={set("title")}
+            maxLength={140}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Settore *</span>
-          <select value={form.sector} onChange={set("sector")} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm">
+          <select
+            value={form.sector}
+            onChange={set("sector")}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          >
             <option value="">Scegli il settore</option>
             {JOB_SECTORS.map((s) => (
               <option key={s} value={s}>
@@ -168,7 +194,12 @@ function PublishJob() {
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Tipo di contratto *</span>
-          <select value={form.contractType} onChange={set("contractType")} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm">
+          <select
+            value={form.contractType}
+            onChange={set("contractType")}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          >
             <option value="">Scegli il contratto</option>
             {JOB_CONTRACTS.map((c) => (
               <option key={c} value={c}>
@@ -179,7 +210,12 @@ function PublishJob() {
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Comune *</span>
-          <select value={form.comune} onChange={set("comune")} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm">
+          <select
+            value={form.comune}
+            onChange={set("comune")}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          >
             <option value="">Scegli il Comune</option>
             {HUB_COMUNI.map((c) => (
               <option key={c} value={c}>
@@ -190,7 +226,11 @@ function PublishJob() {
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Provincia</span>
-          <select value={form.province} onChange={set("province")} className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm">
+          <select
+            value={form.province}
+            onChange={set("province")}
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          >
             <option value="">—</option>
             {HUB_PROVINCES.map((p) => (
               <option key={p} value={p}>
@@ -201,30 +241,72 @@ function PublishJob() {
         </label>
         <label className="space-y-1.5 md:col-span-2">
           <span className="text-sm font-medium">Descrizione *</span>
-          <textarea value={form.description} onChange={set("description")} rows={6} maxLength={5000} required className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm" />
+          <textarea
+            value={form.description}
+            onChange={set("description")}
+            rows={6}
+            maxLength={5000}
+            required
+            className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm"
+          />
         </label>
         <label className="space-y-1.5 md:col-span-2">
           <span className="text-sm font-medium">Requisiti</span>
-          <textarea value={form.requirements} onChange={set("requirements")} rows={4} maxLength={3000} className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm" />
+          <textarea
+            value={form.requirements}
+            onChange={set("requirements")}
+            rows={4}
+            maxLength={3000}
+            className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm"
+          />
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Retribuzione indicativa</span>
-          <input value={form.salaryRange} onChange={set("salaryRange")} maxLength={120} className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            value={form.salaryRange}
+            onChange={set("salaryRange")}
+            maxLength={120}
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Email per le candidature</span>
-          <input type="email" value={form.applyEmail} onChange={set("applyEmail")} maxLength={255} className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            type="email"
+            value={form.applyEmail}
+            onChange={set("applyEmail")}
+            maxLength={255}
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Scadenza *</span>
-          <input type="date" value={form.expiresAt} onChange={set("expiresAt")} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            type="date"
+            value={form.expiresAt}
+            onChange={set("expiresAt")}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
 
         <div className="md:col-span-2 flex flex-wrap items-center gap-3">
-          <button type="button" onClick={geo.request} className="rounded-full border border-border px-4 py-2 text-sm font-medium">
-            {geo.coords ? "Posizione registrata" : geo.loading ? "Cerco la posizione…" : "Usa la posizione della sede"}
+          <button
+            type="button"
+            onClick={geo.request}
+            className="rounded-full border border-border px-4 py-2 text-sm font-medium"
+          >
+            {geo.coords
+              ? "Posizione registrata"
+              : geo.loading
+                ? "Cerco la posizione…"
+                : "Usa la posizione della sede"}
           </button>
-          <button type="submit" disabled={create.isPending} className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground disabled:opacity-60">
+          <button
+            type="submit"
+            disabled={create.isPending}
+            className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground disabled:opacity-60"
+          >
             {create.isPending ? "Invio…" : "Invia l'annuncio"}
           </button>
         </div>
@@ -251,13 +333,20 @@ function PublishJob() {
                 </p>
                 <h3 className="mt-1 text-lg font-semibold">{job.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  {expired ? "Scaduto" : HUB_STATUS_LABEL[job.status] ?? job.status} · scadenza {formatHubDate(job.expires_at)}
+                  {expired ? "Scaduto" : (HUB_STATUS_LABEL[job.status] ?? job.status)} · scadenza{" "}
+                  {formatHubDate(job.expires_at)}
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {apps.length === 0 ? "Nessuna candidatura ricevuta" : `${apps.length} candidature ricevute`}
+                  {apps.length === 0
+                    ? "Nessuna candidatura ricevuta"
+                    : `${apps.length} candidature ricevute`}
                 </p>
                 {job.status === "published" && (
-                  <Link to="/jobs/$slug" params={{ slug: job.slug }} className="mt-3 inline-flex text-sm underline">
+                  <Link
+                    to="/jobs/$slug"
+                    params={{ slug: job.slug }}
+                    className="mt-3 inline-flex text-sm underline"
+                  >
                     Vedi l'annuncio pubblico
                   </Link>
                 )}
@@ -265,7 +354,10 @@ function PublishJob() {
                   <ul className="mt-3 space-y-1 text-sm">
                     {apps.map((a) => (
                       <li key={a.id}>
-                        {a.full_name} · <a href={`mailto:${a.email}`} className="underline">{a.email}</a>
+                        {a.full_name} ·{" "}
+                        <a href={`mailto:${a.email}`} className="underline">
+                          {a.email}
+                        </a>
                       </li>
                     ))}
                   </ul>

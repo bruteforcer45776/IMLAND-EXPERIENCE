@@ -8,17 +8,9 @@
  */
 import type { CSSProperties } from "react";
 
-import logoDefault from "@/assets/imland-logo-home.webp.asset.json";
-import logoRadio from "@/assets/imland-logo-radio-v2-opt.webp.asset.json";
-import logoPodcast from "@/assets/imland-logo-podcast-v2-opt.webp.asset.json";
-import logoMember from "@/assets/imland-logo-member-v2-opt.webp.asset.json";
-import logoEventi from "@/assets/imland-logo-eventi-v2-opt.webp.asset.json";
-import logoNews from "@/assets/imland-logo-news.png.asset.json";
-import logoTerrain from "@/assets/imland-logo-terrain.png.asset.json";
-import logoJobs from "@/assets/imland-logo-jobs.png.asset.json";
-import logoAlert from "@/assets/imland-logo-alert.png.asset.json";
+import logoExperience from "@/assets/imland-logo-google-trimmed-opt.webp";
 
-export type SectionKey = "default" | "radio" | "podcast" | "member" | "eventi" | "news" | "terrain" | "jobs" | "alert";
+export type SectionKey = "default" | "radio" | "podcast" | "member" | "eventi" | "news";
 
 export type SectionTheme = {
   /** colore dominante: CTA, link, accenti */
@@ -49,7 +41,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "radio",
     label: "Radio",
     prefix: "/radio",
-    logo: { url: logoRadio.url, alt: "IMLAND RADIO" },
+    logo: { url: logoExperience, alt: "IMLAND RADIO" },
     theme: {
       signal: "#0aa2cf",
       signalStrong: "#077ea1",
@@ -63,7 +55,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "podcast",
     label: "Podcast",
     prefix: "/podcast",
-    logo: { url: logoPodcast.url, alt: "IMLAND PODCAST" },
+    logo: { url: logoExperience, alt: "IMLAND PODCAST" },
     theme: {
       signal: "#1646d8",
       signalStrong: "#1646d8",
@@ -77,7 +69,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "member",
     label: "Member",
     prefix: "/member",
-    logo: { url: logoMember.url, alt: "IMLAND MEMBER" },
+    logo: { url: logoExperience, alt: "IMLAND MEMBER" },
     theme: {
       signal: "#e0a800",
       signalStrong: "#e0a800",
@@ -91,7 +83,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "news",
     label: "News",
     prefix: "/news",
-    logo: { url: logoNews.url, alt: "IMLAND NEWS" },
+    logo: { url: logoExperience, alt: "IMLAND NEWS" },
     theme: {
       signal: "#e21d2f",
       signalStrong: "#c91627",
@@ -105,7 +97,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "eventi",
     label: "Eventi",
     prefix: "/eventi",
-    logo: { url: logoEventi.url, alt: "IMLAND EVENTI" },
+    logo: { url: logoExperience, alt: "IMLAND EVENTI" },
     theme: {
       signal: "#12a531",
       signalStrong: "#0e8728",
@@ -115,56 +107,13 @@ export const SECTIONS: SectionConfig[] = [
       horizon: "#7de094",
     },
   },
-  {
-    key: "terrain",
-    label: "Terrain",
-    prefix: "/terrain",
-    logo: { url: logoTerrain.url, alt: "IMLAND TERRAIN" },
-    theme: {
-      signal: "#A0522D",
-      signalStrong: "#7A3E22",
-      signalInk: "#7A3E22",
-      signalForeground: "#ffffff",
-      signalGlow: "#E6C4AD",
-      horizon: "#C47A52",
-    },
-  },
-  {
-    key: "jobs",
-    label: "Jobs",
-    prefix: "/jobs",
-    logo: { url: logoJobs.url, alt: "IMLAND JOBS" },
-    theme: {
-      signal: "#6B7280",
-      signalStrong: "#4B5563",
-      signalInk: "#374151",
-      signalForeground: "#ffffff",
-      signalGlow: "#D1D5DB",
-      horizon: "#9CA3AF",
-    },
-  },
-  {
-    key: "alert",
-    label: "Alert",
-    prefix: "/alert",
-    logo: { url: logoAlert.url, alt: "IMLAND ALERT" },
-    theme: {
-      signal: "#FF0000",
-      signalStrong: "#CC0000",
-      signalInk: "#B30000",
-      signalForeground: "#ffffff",
-      signalGlow: "#FFCCCC",
-      horizon: "#FF4D4D",
-    },
-  },
 ];
-
 
 export const DEFAULT_SECTION: SectionConfig = {
   key: "default",
   label: "IMLAND Experience",
   prefix: null,
-  logo: { url: logoDefault.url, alt: "IMLAND EXPERIENCE" },
+  logo: { url: logoExperience, alt: "IMLAND EXPERIENCE" },
   theme: {
     signal: "#1a73e8",
     signalStrong: "#1668d4",

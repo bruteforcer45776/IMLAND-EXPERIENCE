@@ -18,7 +18,6 @@ import { useNowPlaying } from "@/hooks/use-now-playing";
 import { usePlayer } from "./player-context";
 import { podcastAudio, registerRadioStop } from "./podcast-audio";
 
-
 const RADIO_STREAM_URL = "https://stream.aiir.com/ylpompusqpatv";
 
 type StreamStatus = "idle" | "loading" | "playing" | "error";
@@ -66,10 +65,9 @@ export function RadioPlayer() {
       setPlaying(false);
     };
     const onError = () => {
-      const msg =
-        !navigator.onLine
-          ? "Sei offline. Controlla la connessione e riprova."
-          : "Trasmissione non disponibile al momento. Riprova più tardi.";
+      const msg = !navigator.onLine
+        ? "Sei offline. Controlla la connessione e riprova."
+        : "Trasmissione non disponibile al momento. Riprova più tardi.";
       setStatus("error");
       setErrorMsg(msg);
       setPlaying(false);
@@ -138,7 +136,6 @@ export function RadioPlayer() {
     if (playing) podcastAudio.pause();
   }, [playing]);
 
-
   // Watch offline transitions
   useEffect(() => {
     const onOffline = () => {
@@ -193,8 +190,12 @@ export function RadioPlayer() {
           <div className="absolute bottom-[4.5rem] left-0 w-[min(92vw,380px)] origin-bottom-left animate-enter rounded-[28px] border border-white/10 bg-ink/95 p-5 text-white shadow-2xl backdrop-blur-xl md:bottom-0 md:left-[4.5rem] md:origin-bottom-left">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-center gap-2">
-                <span className={`inline-flex h-2 w-2 rounded-full ${status === "error" ? "bg-[#c5221f]" : "bg-citrus"}`} />
-                <span className={`text-xs font-semibold uppercase tracking-wider ${status === "error" ? "text-alert" : "text-citrus"}`}>
+                <span
+                  className={`inline-flex h-2 w-2 rounded-full ${status === "error" ? "bg-[#c5221f]" : "bg-citrus"}`}
+                />
+                <span
+                  className={`text-xs font-semibold uppercase tracking-wider ${status === "error" ? "text-alert" : "text-citrus"}`}
+                >
                   {status === "error" ? "Offline" : "On air"}
                 </span>
               </div>
@@ -312,7 +313,9 @@ export function RadioPlayer() {
                   className="w-[3px] rounded-full bg-white/60"
                   style={{
                     height: `${h * 2}px`,
-                    animation: playing ? `imland-bar 900ms ease-in-out ${i * 90}ms infinite alternate` : "none",
+                    animation: playing
+                      ? `imland-bar 900ms ease-in-out ${i * 90}ms infinite alternate`
+                      : "none",
                   }}
                 />
               ))}

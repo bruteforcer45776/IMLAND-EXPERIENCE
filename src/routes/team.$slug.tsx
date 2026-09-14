@@ -18,16 +18,16 @@ export const Route = createFileRoute("/team/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [
-          { title: "Profilo non trovato — IMLAND" },
-          { name: "robots", content: "noindex" },
-        ],
+        meta: [{ title: "Profilo non trovato — IMLAND" }, { name: "robots", content: "noindex" }],
       };
     }
     const { member } = loaderData;
     const fullName = [member.firstName, member.lastName].filter(Boolean).join(" ") || "Membro Team";
     const title = `${fullName}${member.role ? ` — ${member.role}` : ""} | IMLAND`;
-    const description = member.description || member.bio.split("\n")[0] || `Profilo di ${fullName} nel team IMLAND EXPERIENCE.`;
+    const description =
+      member.description ||
+      member.bio.split("\n")[0] ||
+      `Profilo di ${fullName} nel team IMLAND EXPERIENCE.`;
     return {
       meta: [
         { title },
@@ -67,7 +67,11 @@ function TeamMemberNotFound() {
 }
 
 /** Normalizza per confronto: minuscole, senza apostrofi/punteggiatura. */
-const normalize = (s: string) => s.toLowerCase().replace(/[’'`.]/g, "").replace(/\s+/g, " ");
+const normalize = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[’'`.]/g, "")
+    .replace(/\s+/g, " ");
 
 /** Deriva i programmi condotti dal membro, solo se il nome del programma compare nella sua bio/descrizione. */
 function programsFor(member: TeamMember): PodcastProgram[] {
@@ -108,11 +112,11 @@ function TeamMemberPage() {
                 </Badge>
               ) : null}
             </div>
-            <h1 className="mt-4 text-display-l">
-              {fullName}
-            </h1>
+            <h1 className="mt-4 text-display-l">{fullName}</h1>
             {member.nickname ? (
-              <p className="mt-2 font-display text-xl font-semibold text-signal">"{member.nickname}"</p>
+              <p className="mt-2 font-display text-xl font-semibold text-signal">
+                "{member.nickname}"
+              </p>
             ) : null}
             {member.description ? (
               <p className="mt-6 max-w-2xl text-lg text-muted-foreground">{member.description}</p>
@@ -158,7 +162,9 @@ function TeamMemberPage() {
               </p>
             ))}
             <div className="glass-panel rounded-2xl p-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">Background</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                Background
+              </p>
               <p className="mt-2 text-foreground">{member.background}</p>
             </div>
             <div className="glass-panel rounded-2xl p-6">
@@ -188,7 +194,9 @@ function TeamMemberPage() {
           <BentoGrid className="mt-10">
             {member.timeline.map((t, i) => (
               <BentoCard key={i} tone="member" span={2}>
-                <p className="text-xs font-semibold uppercase tracking-wider text-signal">{t.year}</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                  {t.year}
+                </p>
                 <p className="mt-2 font-display text-lg font-semibold">{t.title}</p>
                 {t.detail ? <p className="mt-2 text-sm text-muted-foreground">{t.detail}</p> : null}
               </BentoCard>
@@ -218,7 +226,9 @@ function TeamMemberPage() {
                 </ul>
               </div>
               <div className="glass-panel rounded-2xl p-6">
-                <p className="text-xs font-semibold uppercase tracking-wider text-signal">Progetti</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                  Progetti
+                </p>
                 <ul className="mt-3 space-y-1 text-sm text-foreground">
                   {member.homelandRole.projects.map((p) => (
                     <li key={p}>• {p}</li>
@@ -259,7 +269,9 @@ function TeamMemberPage() {
                       <Badge variant="outline" className="uppercase tracking-wider text-xs">
                         {p.cat}
                       </Badge>
-                      <p className="mt-3 font-display text-lg font-semibold group-hover:text-signal">{p.name}</p>
+                      <p className="mt-3 font-display text-lg font-semibold group-hover:text-signal">
+                        {p.name}
+                      </p>
                       <p className="mt-2 text-sm text-muted-foreground">{p.tagline}</p>
                       <p className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-signal">
                         {p.episodes.length} episodi <ArrowRight className="h-4 w-4" aria-hidden />
@@ -297,7 +309,9 @@ function TeamMemberPage() {
       {/* CTA FINALE */}
       <section className="container-im section-closing section-pad">
         <div className="glass-panel rounded-3xl p-10 text-center md:p-16">
-          <p className="text-xs font-semibold uppercase tracking-wider text-signal">Prossimo passo</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+            Prossimo passo
+          </p>
           <h2 className="mt-2 text-h2-im">
             Parliamone <span className="im-gradient-text">insieme</span>.
           </h2>
@@ -309,7 +323,9 @@ function TeamMemberPage() {
               <a href={`mailto:${member.contactEmail || "hello@imland.it"}`}>Contattami</a>
             </Button>
             <Button asChild variant="secondary">
-              <a href={member.bookingUrl || "mailto:hello@imland.it?subject=Prenota%20un%20incontro"}>
+              <a
+                href={member.bookingUrl || "mailto:hello@imland.it?subject=Prenota%20un%20incontro"}
+              >
                 Prenota un incontro
               </a>
             </Button>
@@ -347,10 +363,10 @@ function TeamMemberPage() {
                       />
                     </div>
                     <div className="px-4 py-3">
-                      <p className="font-display text-sm font-semibold group-hover:text-signal">{name}</p>
-                      {m.role ? (
-                        <p className="text-xs text-orange">{m.role}</p>
-                      ) : null}
+                      <p className="font-display text-sm font-semibold group-hover:text-signal">
+                        {name}
+                      </p>
+                      {m.role ? <p className="text-xs text-orange">{m.role}</p> : null}
                     </div>
                   </Link>
                 );

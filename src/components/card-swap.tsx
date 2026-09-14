@@ -17,12 +17,8 @@ type CardProps = React.HTMLAttributes<HTMLDivElement> & { customClass?: string }
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ customClass, className, ...rest }, ref) => (
-    <div
-      ref={ref}
-      className={`card-swap-card ${customClass ?? ""} ${className ?? ""}`}
-      {...rest}
-    />
-  )
+    <div ref={ref} className={`card-swap-card ${customClass ?? ""} ${className ?? ""}`} {...rest} />
+  ),
 );
 Card.displayName = "Card";
 
@@ -33,11 +29,7 @@ const makeSlot = (i: number, distX: number, distY: number, total: number) => ({
   zIndex: total - i,
 });
 
-const placeNow = (
-  el: HTMLDivElement,
-  slot: ReturnType<typeof makeSlot>,
-  skew: number
-) =>
+const placeNow = (el: HTMLDivElement, slot: ReturnType<typeof makeSlot>, skew: number) =>
   gsap.set(el, {
     x: slot.x,
     y: slot.y,
@@ -98,12 +90,10 @@ const CardSwap = ({
   const refs = useMemo(
     () => childArr.map(() => React.createRef<HTMLDivElement>()),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [childArr.length]
+    [childArr.length],
   );
 
-  const order = useRef<number[]>(
-    Array.from({ length: childArr.length }, (_, i) => i)
-  );
+  const order = useRef<number[]>(Array.from({ length: childArr.length }, (_, i) => i));
 
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
@@ -113,11 +103,7 @@ const CardSwap = ({
     const total = refs.length;
     refs.forEach((r, i) => {
       if (r.current)
-        placeNow(
-          r.current,
-          makeSlot(i, cardDistance, verticalDistance, total),
-          skewAmount
-        );
+        placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount);
     });
 
     const swap = () => {
@@ -150,23 +136,18 @@ const CardSwap = ({
             duration: config.durMove,
             ease: config.ease,
           },
-          `promote+=${i * 0.15}`
+          `promote+=${i * 0.15}`,
         );
       });
 
-      const backSlot = makeSlot(
-        refs.length - 1,
-        cardDistance,
-        verticalDistance,
-        refs.length
-      );
+      const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
       tl.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
       tl.call(
         () => {
           gsap.set(elFront, { zIndex: backSlot.zIndex });
         },
         undefined,
-        "return"
+        "return",
       );
       tl.to(
         elFront,
@@ -177,7 +158,7 @@ const CardSwap = ({
           duration: config.durReturn,
           ease: config.ease,
         },
-        "return"
+        "return",
       );
 
       tl.call(() => {
@@ -231,11 +212,7 @@ const CardSwap = ({
   });
 
   return (
-    <div
-      ref={container}
-      className="card-swap-container"
-      style={{ width, height }}
-    >
+    <div ref={container} className="card-swap-container" style={{ width, height }}>
       {rendered}
     </div>
   );

@@ -1,7 +1,6 @@
 import { Children, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-
 type HeroBannerProps = {
   /** URL della grafica hero (1600x900) */
   src: string;
@@ -48,8 +47,9 @@ export function HeroBanner({
   const mobileCtas = Children.toArray(children).filter(Boolean).slice(0, 2);
 
   return (
-
-    <section className={cn("relative isolate w-full bg-white pb-6 md:pb-10", flush && "!pb-0", className)}>
+    <section
+      className={cn("relative isolate w-full bg-white pb-6 md:pb-10", flush && "!pb-0", className)}
+    >
       {/* La headline è parte della grafica: la esponiamo come H1 accessibile */}
       <h1 className="sr-only">{heading ?? alt}</h1>
 
@@ -80,8 +80,6 @@ export function HeroBanner({
           </div>
         </div>
       </div>
-
-
 
       {/* Desktop: grafica 16:9 full-bleed, CTA sovrapposte sotto il testo */}
       <div className="relative mx-auto hidden w-full md:block">

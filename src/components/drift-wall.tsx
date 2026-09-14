@@ -1,11 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import "./drift-wall.css";
 
 export type DriftWallItem = {
@@ -45,11 +38,10 @@ type DriftWallProps = {
 };
 
 const prefersReducedMotion = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const columnFactor = (index: number, variance: number) => {
-  const pseudo = (((index * 0.6180339887 + 0.35) % 1) * 2 - 1);
+  const pseudo = ((index * 0.6180339887 + 0.35) % 1) * 2 - 1;
   return 1 + variance * pseudo;
 };
 
@@ -155,7 +147,7 @@ export default function DriftWall({
         `rotateX(${tilt + py}deg) rotateY(${turn + px}deg) rotateZ(${roll}deg) ` +
         `translateZ(${-depth}px)`;
     },
-    [tilt, turn, roll, depth, scale]
+    [tilt, turn, roll, depth, scale],
   );
 
   useEffect(() => {
@@ -193,7 +185,8 @@ export default function DriftWall({
         for (let c = 0; c < trackRefs.current.length; c++) {
           const el = trackRefs.current[c];
           const meta = columnMeta[c];
-          if (el && meta) el.style.transform = `translate3d(0, ${-(offsetsRef.current[c] ?? 0)}px, 0)`;
+          if (el && meta)
+            el.style.transform = `translate3d(0, ${-(offsetsRef.current[c] ?? 0)}px, 0)`;
         }
       }
 
@@ -239,7 +232,7 @@ export default function DriftWall({
       hoveredColRef.current = Number(tile.getAttribute("data-col"));
       setActiveId(id);
     },
-    [parallax, reduced]
+    [parallax, reduced],
   );
 
   const handlePointerLeaveWall = useCallback(() => {
@@ -249,22 +242,36 @@ export default function DriftWall({
   }, [release]);
 
   const cssVars = useMemo(
-    () => ({
-      "--dw-tile-w": `${tileWidth}px`,
-      "--dw-tile-h": `${tileHeight}px`,
-      "--dw-gap": `${gap}px`,
-      "--dw-radius": `${radius}px`,
-      "--dw-perspective": `${perspective}px`,
-      "--dw-lift": `${lift}px`,
-      "--dw-dim": dim,
-      "--dw-gray": grayscale ? 1 : 0,
-      "--dw-overlay": overlayColor,
-      "--dw-edge": `${Math.max(0, (1 - fade) * 100)}%`,
-      "--dw-fit": fit,
-      "--dw-pad": fit === "contain" ? "14px" : "0px",
-      ...style,
-    } as React.CSSProperties),
-    [tileWidth, tileHeight, gap, radius, perspective, lift, dim, grayscale, overlayColor, fade, fit, style]
+    () =>
+      ({
+        "--dw-tile-w": `${tileWidth}px`,
+        "--dw-tile-h": `${tileHeight}px`,
+        "--dw-gap": `${gap}px`,
+        "--dw-radius": `${radius}px`,
+        "--dw-perspective": `${perspective}px`,
+        "--dw-lift": `${lift}px`,
+        "--dw-dim": dim,
+        "--dw-gray": grayscale ? 1 : 0,
+        "--dw-overlay": overlayColor,
+        "--dw-edge": `${Math.max(0, (1 - fade) * 100)}%`,
+        "--dw-fit": fit,
+        "--dw-pad": fit === "contain" ? "14px" : "0px",
+        ...style,
+      }) as React.CSSProperties,
+    [
+      tileWidth,
+      tileHeight,
+      gap,
+      radius,
+      perspective,
+      lift,
+      dim,
+      grayscale,
+      overlayColor,
+      fade,
+      fit,
+      style,
+    ],
   );
 
   const handleTileClick = useCallback(
@@ -274,7 +281,7 @@ export default function DriftWall({
       }
       onItemClick?.(item);
     },
-    [onItemClick]
+    [onItemClick],
   );
 
   const renderTile = (item: DriftWallItem, id: string, colIndex: number) => {
@@ -368,8 +375,8 @@ export default function DriftWall({
               >
                 {copies.map((_, copyIndex) =>
                   col.map((item, itemIndex) =>
-                    renderTile(item, `${c}-${copyIndex}-${itemIndex}`, c)
-                  )
+                    renderTile(item, `${c}-${copyIndex}-${itemIndex}`, c),
+                  ),
                 )}
               </div>
             </div>

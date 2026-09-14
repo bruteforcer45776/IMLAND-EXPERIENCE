@@ -169,7 +169,8 @@ export function useDeleteAlertDraft() {
       if (error) throw error;
     },
     onSuccess: () => void qc.invalidateQueries({ queryKey: ["alert", "mine"] }),
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile eliminare la bozza." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile eliminare la bozza." }),
   });
 }
 

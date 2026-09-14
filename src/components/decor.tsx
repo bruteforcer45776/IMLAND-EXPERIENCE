@@ -8,8 +8,6 @@
  * Purely presentational: no pointer events, hidden from assistive tech.
  */
 
-
-
 /* ------------------------------------------------------------------ *
  * Divisori di sezione — libreria brand
  *
@@ -53,12 +51,10 @@ export function VerticalDivider(_props: {
   return null;
 }
 
-
 /** Thin spectrum rule: removed — clean separators only. */
 export function SpectrumRule(_props: { className?: string }) {
   return null;
 }
-
 
 /**
  * Sfondi puliti: i riempitivi di sezione (icone sfumate, bolle, glow) sono
@@ -142,21 +138,50 @@ function BauhausTileView({ shape, color }: BauhausTile) {
   const base = "h-full w-full";
   switch (shape) {
     case "circle":
-      return <div className="grid h-full w-full place-items-center"><span className={`block aspect-square w-3/4 rounded-full ${base}`} style={{ background: bg }} /></div>;
+      return (
+        <div className="grid h-full w-full place-items-center">
+          <span
+            className={`block aspect-square w-3/4 rounded-full ${base}`}
+            style={{ background: bg }}
+          />
+        </div>
+      );
     case "semicircle-up":
-      return <div className="flex h-full w-full items-end justify-center"><span className="block aspect-[2/1] w-3/4 rounded-t-full" style={{ background: bg }} /></div>;
+      return (
+        <div className="flex h-full w-full items-end justify-center">
+          <span className="block aspect-[2/1] w-3/4 rounded-t-full" style={{ background: bg }} />
+        </div>
+      );
     case "semicircle-down":
-      return <div className="flex h-full w-full items-start justify-center"><span className="block aspect-[2/1] w-3/4 rounded-b-full" style={{ background: bg }} /></div>;
+      return (
+        <div className="flex h-full w-full items-start justify-center">
+          <span className="block aspect-[2/1] w-3/4 rounded-b-full" style={{ background: bg }} />
+        </div>
+      );
     case "quarter-tl":
       return <span className={`block rounded-tl-full ${base}`} style={{ background: bg }} />;
     case "quarter-br":
       return <span className={`block rounded-br-full ${base}`} style={{ background: bg }} />;
     case "arch":
-      return <div className="flex h-full w-full items-end justify-center"><span className="block h-full w-1/2 rounded-t-full" style={{ background: bg }} /></div>;
+      return (
+        <div className="flex h-full w-full items-end justify-center">
+          <span className="block h-full w-1/2 rounded-t-full" style={{ background: bg }} />
+        </div>
+      );
     case "triangle-up":
-      return <span className={`block ${base}`} style={{ background: bg, clipPath: "polygon(50% 12%, 94% 100%, 6% 100%)" }} />;
+      return (
+        <span
+          className={`block ${base}`}
+          style={{ background: bg, clipPath: "polygon(50% 12%, 94% 100%, 6% 100%)" }}
+        />
+      );
     case "triangle-down":
-      return <span className={`block ${base}`} style={{ background: bg, clipPath: "polygon(6% 0, 94% 0, 50% 88%)" }} />;
+      return (
+        <span
+          className={`block ${base}`}
+          style={{ background: bg, clipPath: "polygon(6% 0, 94% 0, 50% 88%)" }}
+        />
+      );
     case "rect":
       return <span className={`block ${base}`} style={{ background: bg }} />;
     default:
@@ -223,10 +248,7 @@ export function ColorBlocks(_props: {
 }
 
 /** Accento d'angolo Neo-Bauhaus: rimosso per mantenere i background puliti. */
-export function BauhausCorner(_props: {
-  className?: string;
-  colors?: (keyof typeof BAUHAUS)[];
-}) {
+export function BauhausCorner(_props: { className?: string; colors?: (keyof typeof BAUHAUS)[] }) {
   return null;
 }
 

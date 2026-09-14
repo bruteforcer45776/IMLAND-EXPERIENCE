@@ -12,7 +12,10 @@ export const Route = createFileRoute("/_authenticated/area/notifiche")({
   head: () => ({
     meta: [
       { title: "Notifiche Member — IMLAND EXPERIENCE" },
-      { name: "description", content: "Aggiornamenti su vantaggi, eventi e contenuti riservati ai Member IMLAND." },
+      {
+        name: "description",
+        content: "Aggiornamenti su vantaggi, eventi e contenuti riservati ai Member IMLAND.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -89,7 +92,9 @@ function NotifichePage() {
                       <AlertCircle size={13} /> Importante
                     </span>
                   )}
-                  <span className="text-xs text-muted-foreground">{formatDateTime(n.created_at)}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {formatDateTime(n.created_at)}
+                  </span>
                   {read && <Check size={14} className="text-muted-foreground" />}
                 </div>
                 <p className="mt-2 font-medium">{n.title}</p>

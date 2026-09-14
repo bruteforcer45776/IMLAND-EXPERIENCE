@@ -12,7 +12,10 @@ export const Route = createFileRoute("/_authenticated/area/card")({
   head: () => ({
     meta: [
       { title: "Member Card — IMLAND EXPERIENCE" },
-      { name: "description", content: "La tua Member Card digitale IMLAND con QR Code di verifica." },
+      {
+        name: "description",
+        content: "La tua Member Card digitale IMLAND con QR Code di verifica.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -27,12 +30,21 @@ function CardPage() {
       : "";
 
   return (
-    <AreaShell title="Member Card." lead="Mostrala nelle attività convenzionate e agli ingressi eventi.">
+    <AreaShell
+      title="Member Card."
+      lead="Mostrala nelle attività convenzionate e agli ingressi eventi."
+    >
       <div className="grid gap-8 lg:grid-cols-[minmax(0,420px)_1fr]">
         <div className="rounded-[28px] bg-primary p-1 shadow-lg">
           <div className="flex h-full flex-col justify-between rounded-[24px] bg-card p-6">
             <div className="flex items-start justify-between gap-4">
-              <img loading="lazy" decoding="async" src={logoMember.url} alt="IMLAND MEMBER" className="h-10 w-auto" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src={logoMember.url}
+                alt="IMLAND MEMBER"
+                className="h-10 w-auto"
+              />
               <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
                 {profile?.membership_status ?? "attivo"}
               </span>
@@ -42,14 +54,17 @@ function CardPage() {
               <p className="text-xs uppercase tracking-wider text-muted-foreground">Member</p>
               <p className="font-display text-2xl font-semibold">{fullName(profile)}</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                {[profile?.city, profile?.province].filter(Boolean).join(", ") || "Territorio IMLAND"}
+                {[profile?.city, profile?.province].filter(Boolean).join(", ") ||
+                  "Territorio IMLAND"}
               </p>
             </div>
 
             <div className="mt-8 flex items-end justify-between gap-4">
               <div>
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">ID Member</p>
-                <p className="font-display text-lg font-semibold tracking-wider">{profile?.member_id ?? "—"}</p>
+                <p className="font-display text-lg font-semibold tracking-wider">
+                  {profile?.member_id ?? "—"}
+                </p>
                 <p className="mt-2 text-xs text-muted-foreground">
                   Member dal {formatDate(profile?.member_since)}
                 </p>

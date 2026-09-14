@@ -34,7 +34,9 @@ export function NowPlaying({ compact = false }: { compact?: boolean }) {
       ) : (
         <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-signal text-signal-foreground">
           <span className="absolute inset-0 animate-ping rounded-full bg-signal/40" />
-          <svg viewBox="0 0 24 24" className="relative h-5 w-5 fill-current"><path d="M8 5v14l11-7z"/></svg>
+          <svg viewBox="0 0 24 24" className="relative h-5 w-5 fill-current">
+            <path d="M8 5v14l11-7z" />
+          </svg>
         </div>
       )}
       <div className="min-w-0 flex-1">
@@ -47,7 +49,11 @@ export function NowPlaying({ compact = false }: { compact?: boolean }) {
       </div>
       <div className="hidden items-center gap-1 sm:flex">
         {[3, 6, 4, 7, 5, 8, 4].map((h, i) => (
-          <span key={i} className="w-[3px] rounded-full bg-foreground/70" style={{ height: `${h * 2}px` }} />
+          <span
+            key={i}
+            className="w-[3px] rounded-full bg-foreground/70"
+            style={{ height: `${h * 2}px` }}
+          />
         ))}
       </div>
     </SpotlightCard>

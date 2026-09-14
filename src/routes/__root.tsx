@@ -20,7 +20,6 @@ import { PlayerProvider } from "../components/player-context";
 import { StickyActions } from "../components/sticky-actions";
 import { MobileBottomNav } from "../components/system/mobile-bottom-nav";
 
-
 import { CookieBanner } from "../components/cookie-banner";
 import { FeedbackPopup } from "../components/feedback-popup";
 import { Toaster } from "sonner";
@@ -32,9 +31,7 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-display-l text-foreground">404</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Questa pagina si è persa nel cielo.
-        </p>
+        <p className="mt-4 text-lg text-muted-foreground">Questa pagina si è persa nel cielo.</p>
         <Link
           to="/"
           className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90"
@@ -56,20 +53,22 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-h1-im text-foreground">
-          Qualcosa è andato storto
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Riprova o torna alla home.
-        </p>
+        <h1 className="text-h1-im text-foreground">Qualcosa è andato storto</h1>
+        <p className="mt-2 text-sm text-muted-foreground">Riprova o torna alla home.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
           >
             Riprova
           </button>
-          <a href="/" className="rounded-full border border-border bg-background px-5 py-2 text-sm font-medium hover:bg-muted">
+          <a
+            href="/"
+            className="rounded-full border border-border bg-background px-5 py-2 text-sm font-medium hover:bg-muted"
+          >
             Home
           </a>
         </div>
@@ -84,16 +83,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "IMLAND EXPERIENCE — Dai voce al tuo territorio" },
-      { name: "description", content: "Hub territoriale che raccoglie radio, podcast, eventi e community locale. Dai voce al tuo territorio." },
+      {
+        name: "description",
+        content:
+          "Hub territoriale che raccoglie radio, podcast, eventi e community locale. Dai voce al tuo territorio.",
+      },
       { property: "og:title", content: "IMLAND EXPERIENCE — Dai voce al tuo territorio" },
-      { property: "og:description", content: "Hub territoriale che raccoglie radio, podcast, eventi e community locale. Dai voce al tuo territorio." },
+      {
+        property: "og:description",
+        content:
+          "Hub territoriale che raccoglie radio, podcast, eventi e community locale. Dai voce al tuo territorio.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "IMLAND EXPERIENCE" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "IMLAND EXPERIENCE — Dai voce al tuo territorio" },
-      { name: "twitter:description", content: "Hub territoriale che raccoglie radio, podcast, eventi e community locale. Dai voce al tuo territorio." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/P0C1ClGWD4YD0lkRvi88JtyEBWr2/social-images/social-1783652683370-Gemini_Generated_Image_7lk1k17lk1k17lk1-removebg-preview.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/P0C1ClGWD4YD0lkRvi88JtyEBWr2/social-images/social-1783652683370-Gemini_Generated_Image_7lk1k17lk1k17lk1-removebg-preview.webp" },
+      {
+        name: "twitter:description",
+        content:
+          "Hub territoriale che raccoglie radio, podcast, eventi e community locale. Dai voce al tuo territorio.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/P0C1ClGWD4YD0lkRvi88JtyEBWr2/social-images/social-1783652683370-Gemini_Generated_Image_7lk1k17lk1k17lk1-removebg-preview.webp",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/P0C1ClGWD4YD0lkRvi88JtyEBWr2/social-images/social-1783652683370-Gemini_Generated_Image_7lk1k17lk1k17lk1-removebg-preview.webp",
+      },
       { name: "theme-color", content: "#ffffff" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "mobile-web-app-capable", content: "yes" },
@@ -125,7 +144,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,500;1,600&family=Instrument+Serif:ital@1&display=swap",
       },
-
     ],
   }),
   shellComponent: RootShell,
@@ -137,7 +155,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="it">
-      <head><HeadContent /></head>
+      <head>
+        <HeadContent />
+      </head>
       <body>
         {children}
         <Scripts />
@@ -175,14 +195,12 @@ function RootComponent() {
             <div className="editorial-frame-backdrop" aria-hidden="true">
               <img src={editorialFrame.src} alt="" />
             </div>
-
             <div className="editorial-frame-canvas">
               <a href="#main-content" className="skip-link">Salta al contenuto</a>
               <SiteHeader />
               <main id="main-content" className="relative flex-1 pt-[66px] pb-app-nav md:pt-[74px] md:pb-0">
                 <Outlet />
               </main>
-
               <SiteFooter />
               <RadioPlayer />
               <MobileBottomNav />

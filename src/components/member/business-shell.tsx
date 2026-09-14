@@ -47,7 +47,9 @@ export function BusinessShell({
       <aside className="md:w-64 md:shrink-0">
         <div className="rounded-3xl border border-border bg-card p-4">
           <div className="px-2 pb-3">
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">Area Aziende</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+              Area Aziende
+            </p>
             <p className="mt-1 truncate text-sm font-semibold">{fullName(profile)}</p>
           </div>
 

@@ -99,7 +99,8 @@ export const ALERT_STATUS_DESC: Record<string, string> = {
   in_review: "La redazione sta verificando le informazioni che ci hai inviato.",
   verified: "Le informazioni sono state verificate: stiamo decidendo dove pubblicarle.",
   published: "La segnalazione è diventata un contenuto pubblico del territorio.",
-  rejected: "Non abbiamo potuto pubblicare la segnalazione. Puoi inviarne una nuova con più dettagli.",
+  rejected:
+    "Non abbiamo potuto pubblicare la segnalazione. Puoi inviarne una nuova con più dettagli.",
   closed: "La segnalazione è stata chiusa: non sono previsti altri aggiornamenti.",
 };
 
@@ -128,8 +129,7 @@ export function distanceKm(
   const dLon = ((b.lon - a.lon) * Math.PI) / 180;
   const lat1 = (a.lat * Math.PI) / 180;
   const lat2 = (b.lat * Math.PI) / 180;
-  const h =
-    Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(h));
 }
 

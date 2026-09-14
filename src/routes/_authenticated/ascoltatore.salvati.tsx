@@ -10,9 +10,15 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/salvati")({
   head: () => ({
     meta: [
       { title: "Luoghi e opportunità salvate — Area personale IMLAND" },
-      { name: "description", content: "I luoghi del territorio e le opportunità di lavoro che hai messo da parte." },
+      {
+        name: "description",
+        content: "I luoghi del territorio e le opportunità di lavoro che hai messo da parte.",
+      },
       { property: "og:title", content: "Luoghi e opportunità salvate — Area personale IMLAND" },
-      { property: "og:description", content: "Tutto quello che hai messo da parte, in un posto solo." },
+      {
+        property: "og:description",
+        content: "Tutto quello che hai messo da parte, in un posto solo.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
@@ -30,7 +36,9 @@ function SavedPage() {
 
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal">Area personale</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal">
+        Area personale
+      </p>
       <h1 className="mt-2 text-h1-im">Quello che hai salvato.</h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
         I luoghi da visitare e le opportunità da valutare restano qui.
@@ -74,7 +82,9 @@ function SavedPage() {
               if (!place) return null;
               return (
                 <BentoCard key={row.place_id} tone="terrain" span={4}>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{place.category}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    {place.category}
+                  </p>
                   <h2 className="mt-1 text-lg font-semibold">{place.name}</h2>
                   <p className="mt-1 inline-flex items-center gap-1 text-sm text-muted-foreground">
                     <MapPin size={14} /> {place.comune}
@@ -124,7 +134,9 @@ function SavedPage() {
                 <p className="mt-1 text-sm text-muted-foreground">
                   {job.company_name} · {job.comune}
                 </p>
-                <p className="mt-1 text-sm text-muted-foreground">Salvata il {formatHubDate(row.created_at)}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Salvata il {formatHubDate(row.created_at)}
+                </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Link
                     to="/jobs/$slug"

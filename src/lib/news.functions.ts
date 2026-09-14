@@ -30,12 +30,34 @@ export const NEWS_TOPICS = {
 
 export type NewsTopic = keyof typeof NEWS_TOPICS;
 
+const NEWS_CACHE_TTL = 10 * 60 * 1000;
+const newsFeedCache = new Map<NewsTopic, { expires: number; xml: string }>();
+
 function feedUrl(topic: NewsTopic) {
   return (
     "https://news.google.com/rss/search?q=" +
     encodeURIComponent(NEWS_TOPICS[topic]) +
     "&hl=it&gl=IT&ceid=IT:it"
   );
+}
+
+async function getNewsFeedXml(topic: NewsTopic) {
+  const now = Date.now();
+  const cached = newsFeedCache.get(topic);
+  if (cached && cached.expires > now) return cached.xml;
+
+  const res = await fetch(feedUrl(topic), {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (compatible; IMLANDExperience/1.0; +https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site)",
+      Accept: "application/rss+xml, application/xml, text/xml",
+    },
+  });
+  if (!res.ok) throw new Error(`News feed ${res.status}`);
+
+  const xml = await res.text();
+  newsFeedCache.set(topic, { xml, expires: now + NEWS_CACHE_TTL });
+  return xml;
 }
 
 function decodeOnce(input: string): string {
@@ -64,10 +86,55 @@ function pick(block: string, tag: string): string | null {
 }
 
 const STOPWORDS = new Set([
-  "della","dello","delle","degli","dell","nella","nello","sulla","sullo","sono","come","dopo",
-  "anche","tutti","tutte","tutto","oggi","anni","anno","primo","prima","contro","verso","senza",
-  "ancora","nuovo","nuova","nuove","nuovi","quando","perche","perché","essere","questa","questo",
-  "gran","grande","piu","più","sarà","sara","stato","stata","ecco","ora","con","per","dal","dai",
+  "della",
+  "dello",
+  "delle",
+  "degli",
+  "dell",
+  "nella",
+  "nello",
+  "sulla",
+  "sullo",
+  "sono",
+  "come",
+  "dopo",
+  "anche",
+  "tutti",
+  "tutte",
+  "tutto",
+  "oggi",
+  "anni",
+  "anno",
+  "primo",
+  "prima",
+  "contro",
+  "verso",
+  "senza",
+  "ancora",
+  "nuovo",
+  "nuova",
+  "nuove",
+  "nuovi",
+  "quando",
+  "perche",
+  "perché",
+  "essere",
+  "questa",
+  "questo",
+  "gran",
+  "grande",
+  "piu",
+  "più",
+  "sarà",
+  "sara",
+  "stato",
+  "stata",
+  "ecco",
+  "ora",
+  "con",
+  "per",
+  "dal",
+  "dai",
 ]);
 
 function keywords(text: string): string[] {
@@ -79,25 +146,13 @@ function keywords(text: string): string[] {
 }
 
 export const getTerritoryNews = createServerFn({ method: "GET" })
-  .inputValidator(
-    (input: { limit?: number; offset?: number; topic?: string } | undefined) => ({
-      limit: Math.min(24, Math.max(1, Math.trunc(input?.limit ?? 4))),
-      offset: Math.max(0, Math.trunc(input?.offset ?? 0)),
-      topic: (input?.topic && input.topic in NEWS_TOPICS
-        ? input.topic
-        : "territorio") as NewsTopic,
-    }),
-  )
+  .inputValidator((input: { limit?: number; offset?: number; topic?: string } | undefined) => ({
+    limit: Math.min(24, Math.max(1, Math.trunc(input?.limit ?? 4))),
+    offset: Math.max(0, Math.trunc(input?.offset ?? 0)),
+    topic: (input?.topic && input.topic in NEWS_TOPICS ? input.topic : "territorio") as NewsTopic,
+  }))
   .handler(async ({ data }): Promise<TerritoryNewsPage> => {
-    const res = await fetch(feedUrl(data.topic), {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (compatible; IMLANDExperience/1.0; +https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site)",
-        Accept: "application/rss+xml, application/xml, text/xml",
-      },
-    });
-    if (!res.ok) throw new Error(`News feed ${res.status}`);
-    const xml = await res.text();
+    const xml = await getNewsFeedXml(data.topic);
 
     const blocks = xml.match(/<item>[\s\S]*?<\/item>/g) ?? [];
     const all: TerritoryNewsItem[] = [];
@@ -109,8 +164,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
 
       const source = pick(block, "source");
       const sepIndex = rawTitle.lastIndexOf(" - ");
-      const title =
-        sepIndex > 20 ? rawTitle.slice(0, sepIndex).trim() : rawTitle;
+      const title = sepIndex > 20 ? rawTitle.slice(0, sepIndex).trim() : rawTitle;
       const rawDescription = pick(block, "description") ?? "";
       const pubDate = pick(block, "pubDate");
 
@@ -120,9 +174,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
         description = description.slice(title.length).replace(/^[\s\-–—|]+/, "");
       }
       if (source) {
-        description = description
-          .replace(new RegExp(`${source}\\s*$`, "i"), "")
-          .trim();
+        description = description.replace(new RegExp(`${source}\\s*$`, "i"), "").trim();
       }
 
       all.push({
@@ -130,9 +182,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
         tag: source ?? "Territorio",
         title: title.endsWith(".") ? title : `${title}.`,
         abstract:
-          description.length > 160
-            ? `${description.slice(0, 157).trimEnd()}...`
-            : description,
+          description.length > 160 ? `${description.slice(0, 157).trimEnd()}...` : description,
         link,
         publishedAt: pubDate,
         related: 1,
@@ -152,9 +202,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
       item.related = best;
     }
 
-    const trending = [...all]
-      .sort((a, b) => b.related - a.related)
-      .slice(0, 5);
+    const trending = [...all].sort((a, b) => b.related - a.related).slice(0, 5);
 
     const items = all.slice(data.offset, data.offset + data.limit);
     return {

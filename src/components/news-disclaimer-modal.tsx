@@ -27,7 +27,9 @@ export function NewsDisclaimerModal() {
         <p className="text-xs font-semibold uppercase tracking-wider text-signal">Informazione</p>
         <h2 className="mt-3 text-h3-im">IMLAND News è un hub territoriale.</h2>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-          Ricorda: IMLAND News non è una testata giornalistica, ma un hub territoriale indipendente che riunisce le notizie delle maggiori testate giornalistiche del territorio in un'unica piattaforma.
+          Ricorda: IMLAND News non è una testata giornalistica, ma un hub territoriale indipendente
+          che riunisce le notizie delle maggiori testate giornalistiche del territorio in un'unica
+          piattaforma.
         </p>
         <button
           onClick={() => {

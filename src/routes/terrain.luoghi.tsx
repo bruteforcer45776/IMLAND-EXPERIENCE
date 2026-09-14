@@ -99,7 +99,11 @@ function TerrainSearch() {
               className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium"
             >
               <LocateFixed size={15} />
-              {geo.loading ? "Cerco la posizione…" : geo.coords ? "Non usare la posizione" : "Vicino a me"}
+              {geo.loading
+                ? "Cerco la posizione…"
+                : geo.coords
+                  ? "Non usare la posizione"
+                  : "Vicino a me"}
             </button>
             {geo.coords && (
               <select
@@ -167,11 +171,18 @@ function TerrainSearch() {
                     {user && (
                       <button
                         type="button"
-                        aria-label={favorites.ids.has(place.id) ? "Togli dai preferiti" : "Salva nei preferiti"}
+                        aria-label={
+                          favorites.ids.has(place.id)
+                            ? "Togli dai preferiti"
+                            : "Salva nei preferiti"
+                        }
                         onClick={() => favorites.toggle.mutate(place.id)}
                         className="rounded-full p-2 text-muted-foreground hover:text-foreground"
                       >
-                        <Heart size={18} fill={favorites.ids.has(place.id) ? "currentColor" : "none"} />
+                        <Heart
+                          size={18}
+                          fill={favorites.ids.has(place.id) ? "currentColor" : "none"}
+                        />
                       </button>
                     )}
                   </div>
@@ -180,7 +191,9 @@ function TerrainSearch() {
                     {place.distance != null ? ` · ${place.distance.toFixed(1)} km` : ""}
                   </p>
                   {place.description && (
-                    <p className="mt-3 line-clamp-3 text-sm text-muted-foreground">{place.description}</p>
+                    <p className="mt-3 line-clamp-3 text-sm text-muted-foreground">
+                      {place.description}
+                    </p>
                   )}
                   <Link
                     to="/terrain/$slug"

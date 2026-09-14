@@ -11,7 +11,10 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/canali")({
   head: () => ({
     meta: [
       { title: "Canali e notifiche — Area Persona IMLAND" },
-      { name: "description", content: "Segui i canali e ricevi le nuove puntate appena pubblicate." },
+      {
+        name: "description",
+        content: "Segui i canali e ricevi le nuove puntate appena pubblicate.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -83,7 +86,8 @@ function CanaliPage() {
 
       {notifications.length > 0 && (
         <p className="mt-8 inline-flex items-center gap-2 text-xs text-muted-foreground">
-          <BellRing className="h-3.5 w-3.5" /> Le notifiche si aggiornano ad ogni nuova pubblicazione.
+          <BellRing className="h-3.5 w-3.5" /> Le notifiche si aggiornano ad ogni nuova
+          pubblicazione.
         </p>
       )}
     </div>

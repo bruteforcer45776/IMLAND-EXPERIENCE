@@ -77,7 +77,10 @@ export const adminSetAlertState = createServerFn({ method: "POST" })
     if (data.state === "archived") patch["archived_at"] = new Date().toISOString();
     if (data.assignToMe) patch["assigned_to"] = context.userId;
 
-    const { error } = await supabaseAdmin.from("territory_alerts").update(patch as never).eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("territory_alerts")
+      .update(patch as never)
+      .eq("id", data.id);
     if (error) throw new Error("Non è stato possibile aggiornare la segnalazione.");
 
     await supabaseAdmin.from("audit_logs").insert({
@@ -184,7 +187,10 @@ export const adminTransformAlert = createServerFn({ method: "POST" })
         .insert({
           title: data.title,
           description: data.body,
-          starts_at: (starts && !Number.isNaN(starts.getTime()) ? starts : new Date()).toISOString(),
+          starts_at: (starts && !Number.isNaN(starts.getTime())
+            ? starts
+            : new Date()
+          ).toISOString(),
           venue: data.venue ?? null,
           city: data.comune,
           province: data.province ?? null,

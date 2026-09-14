@@ -39,7 +39,10 @@ const useMedia = (queries: string[], values: number[], defaultValue: number) => 
   return value;
 };
 
-const useMeasure = (): [React.RefObject<HTMLDivElement | null>, { width: number; height: number }] => {
+const useMeasure = (): [
+  React.RefObject<HTMLDivElement | null>,
+  { width: number; height: number },
+] => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
 
@@ -95,7 +98,12 @@ export default function Masonry({
 
     let direction = animateFrom;
     if (animateFrom === "random") {
-      const directions: Array<"top" | "bottom" | "left" | "right"> = ["top", "bottom", "left", "right"];
+      const directions: Array<"top" | "bottom" | "left" | "right"> = [
+        "top",
+        "bottom",
+        "left",
+        "right",
+      ];
       direction = directions[Math.floor(Math.random() * directions.length)];
     }
 
@@ -181,7 +189,10 @@ export default function Masonry({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>, item: MasonryItem & { w: number; h: number }) => {
+  const handleMouseEnter = (
+    e: React.MouseEvent<HTMLDivElement>,
+    item: MasonryItem & { w: number; h: number },
+  ) => {
     const element = e.currentTarget;
     const selector = `[data-key="${item.id}"]`;
     if (scaleOnHover) {
@@ -193,7 +204,10 @@ export default function Masonry({
     }
   };
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>, item: MasonryItem & { w: number; h: number }) => {
+  const handleMouseLeave = (
+    e: React.MouseEvent<HTMLDivElement>,
+    item: MasonryItem & { w: number; h: number },
+  ) => {
     const element = e.currentTarget;
     const selector = `[data-key="${item.id}"]`;
     if (scaleOnHover) {
@@ -227,7 +241,9 @@ export default function Masonry({
           key={item.id}
           data-key={item.id}
           className="masonry-item"
-          onClick={() => (onItemClick ? onItemClick(item) : window.open(item.url, "_blank", "noopener"))}
+          onClick={() =>
+            onItemClick ? onItemClick(item) : window.open(item.url, "_blank", "noopener")
+          }
           onMouseEnter={(e) => handleMouseEnter(e, item)}
           onMouseLeave={(e) => handleMouseLeave(e, item)}
         >

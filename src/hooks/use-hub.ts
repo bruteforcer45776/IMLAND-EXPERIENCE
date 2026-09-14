@@ -57,7 +57,9 @@ function withDistance<T extends { latitude: number | null; longitude: number | n
         : null,
   }));
   const filtered =
-    coords && radiusKm ? mapped.filter((r) => r.distance == null || r.distance <= radiusKm) : mapped;
+    coords && radiusKm
+      ? mapped.filter((r) => r.distance == null || r.distance <= radiusKm)
+      : mapped;
   if (!coords) return filtered;
   return filtered.sort((a, b) => (a.distance ?? 9999) - (b.distance ?? 9999));
 }
@@ -200,7 +202,8 @@ export function useCreatePlace() {
       return data;
     },
     onSuccess: () => void qc.invalidateQueries({ queryKey: ["terrain"] }),
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile inviare la scheda." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile inviare la scheda." }),
   });
 }
 
@@ -236,7 +239,9 @@ export function useJobs(filters: JobFilters, coords: Coords | null) {
       if (filters.contract) q = q.eq("contract_type", filters.contract);
       if (filters.comune) q = q.ilike("comune", filters.comune);
       if (filters.q)
-        q = q.or(`title.ilike.%${filters.q}%,company_name.ilike.%${filters.q}%,description.ilike.%${filters.q}%`);
+        q = q.or(
+          `title.ilike.%${filters.q}%,company_name.ilike.%${filters.q}%,description.ilike.%${filters.q}%`,
+        );
       const { data, error } = await q;
       if (error) throw error;
       return data;
@@ -251,7 +256,11 @@ export function useJob(slug: string) {
   return useQuery({
     queryKey: ["jobs", "detail", slug],
     queryFn: async () => {
-      const { data, error } = await supabase.from("job_posts").select("*").eq("slug", slug).maybeSingle();
+      const { data, error } = await supabase
+        .from("job_posts")
+        .select("*")
+        .eq("slug", slug)
+        .maybeSingle();
       if (error) throw error;
       return data;
     },
@@ -289,12 +298,15 @@ export function useJobSaves() {
         if (error) throw error;
         return "removed" as const;
       }
-      const { error } = await supabase.from("job_saves").insert({ job_id: jobId, user_id: user.id });
+      const { error } = await supabase
+        .from("job_saves")
+        .insert({ job_id: jobId, user_id: user.id });
       if (error) throw error;
       return "added" as const;
     },
     onSuccess: () => void qc.invalidateQueries({ queryKey: ["jobs", "saved"] }),
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile salvare l'opportunità." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile salvare l'opportunità." }),
   });
 
   return { list, ids, toggle };
@@ -356,7 +368,8 @@ export function useApplyToJob() {
       if (error) throw error;
     },
     onSuccess: () => void qc.invalidateQueries({ queryKey: ["jobs"] }),
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile inviare la candidatura." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile inviare la candidatura." }),
   });
 }
 
@@ -441,7 +454,8 @@ export function useCreateJob() {
       return data;
     },
     onSuccess: () => void qc.invalidateQueries({ queryKey: ["jobs"] }),
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile inviare l'annuncio." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile inviare l'annuncio." }),
   });
 }
 

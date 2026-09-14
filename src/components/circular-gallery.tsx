@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from "ogl";
 import { useEffect, useRef } from "react";
 
@@ -61,7 +60,7 @@ async function loadFontFromStylesheet(url) {
     fontFaces.map(async (face) => {
       await face.load();
       document.fonts.add(face);
-    })
+    }),
   );
   return family;
 }
@@ -75,8 +74,7 @@ async function loadFontFromFile(url) {
 }
 
 async function loadCustomFont(fontUrl) {
-  const isStylesheet =
-    fontUrl.includes("fonts.googleapis.com") || /\.css(\?.*)?$/i.test(fontUrl);
+  const isStylesheet = fontUrl.includes("fonts.googleapis.com") || /\.css(\?.*)?$/i.test(fontUrl);
   return isStylesheet ? loadFontFromStylesheet(fontUrl) : loadFontFromFile(fontUrl);
 }
 
@@ -87,7 +85,9 @@ async function resolveFont(font, fontUrl) {
       try {
         await document.fonts.load(font);
         await document.fonts.ready;
-      } catch {}
+      } catch {
+        // Font loading is best-effort; fall back to the configured font.
+      }
     }
     return font;
   }
@@ -99,7 +99,9 @@ async function resolveFont(font, fontUrl) {
     if (document.fonts && document.fonts.load) {
       try {
         await document.fonts.load(resolved);
-      } catch {}
+      } catch {
+        // Font loading is best-effort; fall back to the configured font.
+      }
     }
     return resolved;
   } catch (error) {
@@ -145,7 +147,12 @@ class Title {
     this.createMesh();
   }
   createMesh() {
-    const { texture, width, height } = createTextTexture(this.gl, this.text, this.font, this.textColor);
+    const { texture, width, height } = createTextTexture(
+      this.gl,
+      this.text,
+      this.font,
+      this.textColor,
+    );
     const geometry = new Plane(this.gl);
     const program = new Program(this.gl, {
       vertex: `
@@ -342,7 +349,10 @@ class Media {
     if (viewport) {
       this.viewport = viewport;
       if (this.plane.program.uniforms.uViewportSizes) {
-        this.plane.program.uniforms.uViewportSizes.value = [this.viewport.width, this.viewport.height];
+        this.plane.program.uniforms.uViewportSizes.value = [
+          this.viewport.width,
+          this.viewport.height,
+        ];
       }
     }
     this.scale = this.screen.height / 1500;
@@ -367,7 +377,7 @@ class App {
       font = "bold 30px Figtree",
       scrollSpeed = 2,
       scrollEase = 0.05,
-    } = {}
+    } = {},
   ) {
     document.documentElement.classList.remove("no-js");
     this.container = container;
@@ -405,9 +415,7 @@ class App {
     this.planeGeometry = new Plane(this.gl, { heightSegments: 50, widthSegments: 100 });
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
-    const defaultItems = [
-      { image: `https://picsum.photos/seed/1/800/600`, text: "Reel" },
-    ];
+    const defaultItems = [{ image: `https://picsum.photos/seed/1/800/600`, text: "Reel" }];
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
     this.medias = this.mediasImages.map((data, index) => {
@@ -489,7 +497,9 @@ class App {
     const width = height * this.camera.aspect;
     this.viewport = { width, height };
     if (this.medias) {
-      this.medias.forEach((media) => media.onResize({ screen: this.screen, viewport: this.viewport }));
+      this.medias.forEach((media) =>
+        media.onResize({ screen: this.screen, viewport: this.viewport }),
+      );
     }
   }
   update() {

@@ -8,7 +8,12 @@ import { z } from "zod";
 import { canonical } from "../lib/seo";
 import { checkAlertStatus } from "@/lib/hub.functions";
 import { formatHubDate } from "@/lib/hub";
-import { ALERT_STATE_DESC, ALERT_STATE_FLOW, ALERT_STATE_LABEL, type AlertState } from "@/lib/alert";
+import {
+  ALERT_STATE_DESC,
+  ALERT_STATE_FLOW,
+  ALERT_STATE_LABEL,
+  type AlertState,
+} from "@/lib/alert";
 
 const searchSchema = z.object({ code: z.string().optional() });
 
@@ -137,9 +142,7 @@ function AlertStatus() {
             Inviata il {formatHubDate(alert.submitted_at ?? alert.created_at)}.
             {alert.published_at ? ` Pubblicata il ${formatHubDate(alert.published_at)}.` : ""}
           </p>
-
         </div>
-
       )}
     </div>
   );

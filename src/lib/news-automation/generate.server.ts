@@ -128,7 +128,9 @@ export async function generateArticles(
         const slug = uniqueSlug(baseSlug, usedSlugs);
         usedSlugs.push(slug);
 
-        const category = parsed.category_slug || pickCategory(candidate.title_original, candidate.excerpt_original || "");
+        const category =
+          parsed.category_slug ||
+          pickCategory(candidate.title_original, candidate.excerpt_original || "");
 
         const { data: article, error: articleErr } = await admin
           .from("news_articles")
@@ -177,7 +179,10 @@ export async function generateArticles(
         const message = err instanceof Error ? err.message : String(err);
         await admin
           .from("news_candidates")
-          .update({ processing_status: "rejected", rejection_reason: `generation error: ${message}` })
+          .update({
+            processing_status: "rejected",
+            rejection_reason: `generation error: ${message}`,
+          })
           .eq("id", candidate.id);
       }
     }

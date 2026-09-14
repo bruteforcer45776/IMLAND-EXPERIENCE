@@ -25,7 +25,13 @@ type PhotoBadgeProps = {
   className?: string;
 };
 
-export function PhotoBadge({ icon: Icon, tone = "member", label, inset = false, className = "" }: PhotoBadgeProps) {
+export function PhotoBadge({
+  icon: Icon,
+  tone = "member",
+  label,
+  inset = false,
+  className = "",
+}: PhotoBadgeProps) {
   const t = TONES[tone];
   return (
     <div

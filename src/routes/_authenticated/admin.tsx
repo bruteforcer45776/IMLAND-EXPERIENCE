@@ -6,10 +6,7 @@ import { describeError } from "@/lib/errors";
 export const Route = createFileRoute("/_authenticated/admin")({
   beforeLoad: () => requireAdmin(),
   head: () => ({
-    meta: [
-      { title: "Pannello admin — IMLAND EXPERIENCE" },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: "Pannello admin — IMLAND EXPERIENCE" }, { name: "robots", content: "noindex" }],
   }),
   errorComponent: AdminError,
   component: () => <Outlet />,
@@ -28,7 +25,10 @@ function AdminError({ error, reset }: { error: Error; reset: () => void }) {
         >
           Riprova
         </button>
-        <Link to="/" className="inline-flex rounded-full border border-border px-6 py-3 text-sm font-medium">
+        <Link
+          to="/"
+          className="inline-flex rounded-full border border-border px-6 py-3 text-sm font-medium"
+        >
           Torna alla home
         </Link>
       </div>

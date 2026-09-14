@@ -62,7 +62,7 @@
     "gl-matrix": "^3.4.4",
     "gsap": "^3.15.0",
     "input-otp": "^1.4.2",
-    "isomorphic-dompurify": "^3.23.0",
+    "isomorphic-dompurify": "3.19.0",
     "leaflet": "^1.9.4",
     "liquid-glass-react": "^1.1.1",
     "lucide-react": "^0.575.0",

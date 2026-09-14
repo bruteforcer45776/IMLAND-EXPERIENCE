@@ -21,7 +21,12 @@ export const Route = createFileRoute("/accedi")({
   ): { motivo?: string; ref?: string; tipo?: "ascoltatore" | "azienda" } => ({
     motivo: typeof search.motivo === "string" ? search.motivo : undefined,
     ref: typeof search.ref === "string" ? search.ref : undefined,
-    tipo: search.tipo === "azienda" ? "azienda" : search.tipo === "ascoltatore" ? "ascoltatore" : undefined,
+    tipo:
+      search.tipo === "azienda"
+        ? "azienda"
+        : search.tipo === "ascoltatore"
+          ? "ascoltatore"
+          : undefined,
   }),
   head: () => ({
     meta: [
@@ -33,7 +38,10 @@ export const Route = createFileRoute("/accedi")({
       },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Accedi all'Area Membri — IMLAND EXPERIENCE" },
-      { property: "og:description", content: "Vantaggi, anticipazioni ed eventi riservati ai Member IMLAND." },
+      {
+        property: "og:description",
+        content: "Vantaggi, anticipazioni ed eventi riservati ai Member IMLAND.",
+      },
     ],
     links: [{ rel: "canonical", href: "/accedi" }],
   }),
@@ -236,7 +244,6 @@ function AccediPage() {
                     desc: "Ascolta, salva e riprendi le puntate",
                     badge: "account" as const,
                     badgeAlt: "Bollino persona",
-
                   },
                   {
                     value: "azienda",
@@ -258,12 +265,7 @@ function AccediPage() {
                       : "border-border hover:bg-muted"
                   }`}
                 >
-                  <BadgeIcon
-                    name={opt.badge}
-                    alt={opt.badgeAlt}
-                    className="h-10 w-10"
-                    eager
-                  />
+                  <BadgeIcon name={opt.badge} alt={opt.badgeAlt} className="h-10 w-10" eager />
                   <div className="min-w-0">
                     <span className="block text-sm font-semibold">{opt.label}</span>
                     <span className="block text-xs text-muted-foreground">{opt.desc}</span>
@@ -304,17 +306,33 @@ function AccediPage() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-1.5">
                   <Label htmlFor="first_name">Nome</Label>
-                  <Input id="first_name" maxLength={60} value={form.first_name} onChange={update("first_name")} />
+                  <Input
+                    id="first_name"
+                    maxLength={60}
+                    value={form.first_name}
+                    onChange={update("first_name")}
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="last_name">Cognome</Label>
-                  <Input id="last_name" maxLength={60} value={form.last_name} onChange={update("last_name")} />
+                  <Input
+                    id="last_name"
+                    maxLength={60}
+                    value={form.last_name}
+                    onChange={update("last_name")}
+                  />
                 </div>
               </div>
             )}
             <div className="space-y-1.5">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" maxLength={255} value={form.email} onChange={update("email")} />
+              <Input
+                id="email"
+                type="email"
+                maxLength={255}
+                value={form.email}
+                onChange={update("email")}
+              />
             </div>
             {mode !== "reset" && (
               <div className="space-y-1.5">
@@ -361,7 +379,10 @@ function AccediPage() {
                   onCheckedChange={(c) => setPrivacyAccepted(Boolean(c))}
                   className="mt-0.5"
                 />
-                <Label htmlFor="privacy" className="text-xs font-normal leading-relaxed text-muted-foreground">
+                <Label
+                  htmlFor="privacy"
+                  className="text-xs font-normal leading-relaxed text-muted-foreground"
+                >
                   Accetto i{" "}
                   <Link to="/termini" className="underline">
                     Termini di servizio
@@ -383,8 +404,8 @@ function AccediPage() {
               {mode === "login"
                 ? "Accedi"
                 : mode === "reset"
-                ? "Invia email di reset"
-                : "Crea il mio account Member"}
+                  ? "Invia email di reset"
+                  : "Crea il mio account Member"}
             </Button>
             {mode === "reset" && (
               <button

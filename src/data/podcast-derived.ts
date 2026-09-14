@@ -7,19 +7,24 @@ export type ProgramCard = {
   tagline: string;
   episodes: string;
   slug: string;
+  sourceUrl: string;
+  rssUrl: string;
+  publishedEpisodes: number;
 };
 
-/** Canali con almeno un episodio, dal più ricco al più leggero. */
+/** Canali ufficiali IMLAND Radio con feed RSS diretto, dal più ricco al più leggero. */
 export const programs: ProgramCard[] = podcastProgramList
-  .filter((p) => p.episodes.length > 0)
-  .sort((a, b) => b.episodes.length - a.episodes.length)
+  .sort((a, b) => b.publishedEpisodes - a.publishedEpisodes)
   .map((p) => ({
     name: p.name,
     cover: p.cover,
     cat: p.cat,
     tagline: p.tagline,
-    episodes: `${p.episodes.length} episod${p.episodes.length === 1 ? "io" : "i"}`,
+    episodes: `${p.publishedEpisodes} episod${p.publishedEpisodes === 1 ? "io" : "i"}`,
     slug: p.slug,
+    sourceUrl: p.sourceUrl,
+    rssUrl: p.rssUrl,
+    publishedEpisodes: p.publishedEpisodes,
   }));
 
 const dateKey = (d: string | null) => (d ? d.split("-").reverse().join("") : "");
@@ -32,15 +37,14 @@ export const allEpisodes = podcastProgramList
 /** Ultimi episodi pubblicati su tutti i canali. */
 export const latestEpisodes = allEpisodes.slice(0, 8);
 
-export const totalEpisodes = podcastProgramList.reduce((n, p) => n + p.episodes.length, 0);
+export const totalEpisodes = podcastProgramList.reduce((n, p) => n + p.publishedEpisodes, 0);
 
 /** Conteggio canali ed episodi per categoria, calcolato sui dati reali. */
 export const categoryStats: Record<string, { programs: number; episodes: number }> = {};
 for (const p of podcastProgramList) {
-  if (p.episodes.length === 0) continue;
   const s = categoryStats[p.cat] ?? { programs: 0, episodes: 0 };
   s.programs += 1;
-  s.episodes += p.episodes.length;
+  s.episodes += p.publishedEpisodes;
   categoryStats[p.cat] = s;
 }
 

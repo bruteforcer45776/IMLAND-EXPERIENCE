@@ -21,6 +21,7 @@ import { Route as CookieRouteImport } from './routes/cookie'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MemberRouteImport } from './routes/member'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PerLeAziendeRouteImport } from './routes/per-le-aziende'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RadioRouteImport } from './routes/radio'
@@ -145,6 +146,11 @@ const MemberRoute = MemberRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PerLeAziendeRoute = PerLeAziendeRouteImport.update({
@@ -521,6 +527,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/member': typeof MemberRoute
   '/news': typeof NewsRouteWithChildren
+  '/partners': typeof PartnersRoute
   '/per-le-aziende': typeof PerLeAziendeRoute
   '/privacy': typeof PrivacyRoute
   '/radio': typeof RadioRoute
@@ -600,6 +607,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/member': typeof MemberRoute
   '/news': typeof NewsRouteWithChildren
+  '/partners': typeof PartnersRoute
   '/per-le-aziende': typeof PerLeAziendeRoute
   '/privacy': typeof PrivacyRoute
   '/radio': typeof RadioRoute
@@ -677,6 +685,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/member': typeof MemberRoute
   '/news': typeof NewsRouteWithChildren
+  '/partners': typeof PartnersRoute
   '/per-le-aziende': typeof PerLeAziendeRoute
   '/privacy': typeof PrivacyRoute
   '/radio': typeof RadioRoute
@@ -758,6 +767,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/member'
     | '/news'
+    | '/partners'
     | '/per-le-aziende'
     | '/privacy'
     | '/radio'
@@ -837,6 +847,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/member'
     | '/news'
+    | '/partners'
     | '/per-le-aziende'
     | '/privacy'
     | '/radio'
@@ -913,6 +924,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/member'
     | '/news'
+    | '/partners'
     | '/per-le-aziende'
     | '/privacy'
     | '/radio'
@@ -994,6 +1006,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   MemberRoute: typeof MemberRoute
   NewsRoute: typeof NewsRouteWithChildren
+  PartnersRoute: typeof PartnersRoute
   PerLeAziendeRoute: typeof PerLeAziendeRoute
   PrivacyRoute: typeof PrivacyRoute
   RadioRoute: typeof RadioRoute
@@ -1102,6 +1115,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/per-le-aziende': {
@@ -1749,6 +1769,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   MemberRoute: MemberRoute,
   NewsRoute: NewsRouteWithChildren,
+  PartnersRoute: PartnersRoute,
   PerLeAziendeRoute: PerLeAziendeRoute,
   PrivacyRoute: PrivacyRoute,
   RadioRoute: RadioRoute,

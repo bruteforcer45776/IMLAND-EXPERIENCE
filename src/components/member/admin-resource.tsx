@@ -41,7 +41,11 @@ function toDbValue(field: Field, raw: string | boolean) {
   const value = String(raw).trim();
   if (value === "") return field.required ? "" : null;
   if (field.kind === "number") return Number(value);
-  if (field.kind === "list") return value.split(",").map((s) => s.trim()).filter(Boolean);
+  if (field.kind === "list")
+    return value
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
   if (field.kind === "datetime") return new Date(value).toISOString();
   return value;
 }
@@ -79,7 +83,10 @@ export function AdminResource({
   const { data = [], isLoading } = useQuery({
     queryKey: ["admin", table],
     queryFn: async () => {
-      const { data, error } = await supabase.from(table).select("*").order(orderBy, { ascending: false });
+      const { data, error } = await supabase
+        .from(table)
+        .select("*")
+        .order(orderBy, { ascending: false });
       if (error) throw error;
       return data as unknown as Row[];
     },
@@ -111,7 +118,10 @@ export function AdminResource({
         const { error } = await supabase.from(table).insert(payload as never);
         if (error) throw error;
       } else if (editing) {
-        const { error } = await supabase.from(table).update(payload as never).eq("id", editing.id);
+        const { error } = await supabase
+          .from(table)
+          .update(payload as never)
+          .eq("id", editing.id);
         if (error) throw error;
       }
     },
@@ -152,7 +162,9 @@ export function AdminResource({
         <ul className="mt-4 divide-y divide-border">
           {data.map((row) => (
             <li key={row.id} className="flex items-center justify-between gap-3 py-3">
-              <span className="min-w-0 flex-1 truncate text-sm font-medium">{String(row[titleField] ?? "—")}</span>
+              <span className="min-w-0 flex-1 truncate text-sm font-medium">
+                {String(row[titleField] ?? "—")}
+              </span>
               <div className="flex shrink-0 gap-1">
                 <button
                   onClick={() => openEdit(row)}
@@ -177,14 +189,23 @@ export function AdminResource({
       {editing && (
         <div className="mt-6 rounded-2xl border border-border bg-muted/40 p-5">
           <div className="mb-4 flex items-center justify-between">
-            <h3 className="font-medium">{editing === "new" ? "Nuovo elemento" : "Modifica elemento"}</h3>
-            <button onClick={() => setEditing(null)} aria-label="Chiudi" className="text-muted-foreground">
+            <h3 className="font-medium">
+              {editing === "new" ? "Nuovo elemento" : "Modifica elemento"}
+            </h3>
+            <button
+              onClick={() => setEditing(null)}
+              aria-label="Chiudi"
+              className="text-muted-foreground"
+            >
               <X size={18} />
             </button>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {fields.map((f) => (
-              <div key={f.name} className={`space-y-1.5 ${f.kind === "textarea" ? "md:col-span-2" : ""}`}>
+              <div
+                key={f.name}
+                className={`space-y-1.5 ${f.kind === "textarea" ? "md:col-span-2" : ""}`}
+              >
                 <Label htmlFor={`${table}-${f.name}`}>
                   {f.label}
                   {f.required ? " *" : ""}
@@ -221,7 +242,13 @@ export function AdminResource({
                 ) : (
                   <Input
                     id={`${table}-${f.name}`}
-                    type={f.kind === "number" ? "number" : f.kind === "datetime" ? "datetime-local" : "text"}
+                    type={
+                      f.kind === "number"
+                        ? "number"
+                        : f.kind === "datetime"
+                          ? "datetime-local"
+                          : "text"
+                    }
                     maxLength={f.kind === "text" ? 500 : undefined}
                     value={String(values[f.name] ?? "")}
                     onChange={(e) => setValues((v) => ({ ...v, [f.name]: e.target.value }))}
@@ -231,7 +258,11 @@ export function AdminResource({
             ))}
           </div>
           <div className="mt-5 flex gap-2">
-            <Button className="rounded-full" disabled={save.isPending} onClick={() => save.mutate()}>
+            <Button
+              className="rounded-full"
+              disabled={save.isPending}
+              onClick={() => save.mutate()}
+            >
               Salva
             </Button>
             <Button variant="outline" className="rounded-full" onClick={() => setEditing(null)}>

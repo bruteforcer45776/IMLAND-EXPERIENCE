@@ -39,17 +39,13 @@ function BusinessDashboard() {
         <BentoLinkCard tone="aziende" span={2} to="/area-aziende/luoghi">
           <BadgeIcon name="luogo" className="h-12 w-12" />
           <h2 className="mt-4 text-h3-im">Schede TERRAIN</h2>
-          <p className="mt-2 text-muted-foreground">
-            La tua presenza sulla mappa del territorio.
-          </p>
+          <p className="mt-2 text-muted-foreground">La tua presenza sulla mappa del territorio.</p>
         </BentoLinkCard>
 
         <BentoLinkCard tone="aziende" span={2} to="/area-aziende/opportunita">
           <BadgeIcon name="annuncio" className="h-12 w-12" />
           <h2 className="mt-4 text-h3-im">Opportunità JOBS</h2>
-          <p className="mt-2 text-muted-foreground">
-            Posizioni aperte e candidature ricevute.
-          </p>
+          <p className="mt-2 text-muted-foreground">Posizioni aperte e candidature ricevute.</p>
         </BentoLinkCard>
 
         <BentoLinkCard tone="aziende" span={3} to="/area-aziende/recensioni">
@@ -63,9 +59,7 @@ function BusinessDashboard() {
         <BentoLinkCard tone="aziende" span={3} to="/area-aziende/collaboratori">
           <BadgeIcon name="referente" className="h-12 w-12" />
           <h2 className="mt-4 text-h3-im">Collaboratori</h2>
-          <p className="mt-2 text-muted-foreground">
-            Inviti e permessi per chi lavora con te.
-          </p>
+          <p className="mt-2 text-muted-foreground">Inviti e permessi per chi lavora con te.</p>
         </BentoLinkCard>
 
         <BentoLinkCard tone="aziende" span={3} to="/area-aziende/materiali">
@@ -108,7 +102,9 @@ function BusinessDashboard() {
         >
           <BadgeIcon name="aziende" className="h-12 w-12" />
           <h2 className="mt-4 text-h3-im">Richiedi una modifica</h2>
-          <p className="mt-2 text-muted-foreground">Scrivici su WhatsApp: rispondiamo in giornata.</p>
+          <p className="mt-2 text-muted-foreground">
+            Scrivici su WhatsApp: rispondiamo in giornata.
+          </p>
         </BentoAnchorCard>
       </BentoGrid>
     </BusinessShell>

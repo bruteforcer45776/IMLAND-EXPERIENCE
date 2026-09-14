@@ -14,7 +14,10 @@ export const Route = createFileRoute("/_authenticated/area/")({
   head: () => ({
     meta: [
       { title: "Dashboard Member — IMLAND EXPERIENCE" },
-      { name: "description", content: "La tua dashboard Member IMLAND: anticipazioni, vantaggi ed eventi." },
+      {
+        name: "description",
+        content: "La tua dashboard Member IMLAND: anticipazioni, vantaggi ed eventi.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -71,10 +74,30 @@ function DashboardPage() {
   });
 
   const stats = [
-    { label: "Anticipazioni disponibili", value: data?.previews.length ?? 0, icon: Sparkles, to: "/area/anticipazioni" },
-    { label: "Vantaggi attivi", value: data?.benefits.length ?? 0, icon: Gift, to: "/area/vantaggi" },
-    { label: "Eventi in arrivo", value: data?.events.length ?? 0, icon: CalendarDays, to: "/area/eventi" },
-    { label: "Le tue prenotazioni", value: data?.bookings.length ?? 0, icon: BadgeCheck, to: "/area/eventi" },
+    {
+      label: "Anticipazioni disponibili",
+      value: data?.previews.length ?? 0,
+      icon: Sparkles,
+      to: "/area/anticipazioni",
+    },
+    {
+      label: "Vantaggi attivi",
+      value: data?.benefits.length ?? 0,
+      icon: Gift,
+      to: "/area/vantaggi",
+    },
+    {
+      label: "Eventi in arrivo",
+      value: data?.events.length ?? 0,
+      icon: CalendarDays,
+      to: "/area/eventi",
+    },
+    {
+      label: "Le tue prenotazioni",
+      value: data?.bookings.length ?? 0,
+      icon: BadgeCheck,
+      to: "/area/eventi",
+    },
   ] as const;
 
   return (
@@ -84,12 +107,7 @@ function DashboardPage() {
     >
       <BentoGrid>
         {stats.map((s, i) => (
-          <BentoLinkCard
-            key={s.label}
-            to={s.to}
-            tone={AREA_TONES[i % AREA_TONES.length]}
-            span={3}
-          >
+          <BentoLinkCard key={s.label} to={s.to} tone={AREA_TONES[i % AREA_TONES.length]} span={3}>
             <s.icon size={20} className="text-primary" />
             <p className="mt-3 font-display text-3xl font-semibold">{s.value}</p>
             <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
@@ -119,7 +137,9 @@ function DashboardPage() {
             <ul className="space-y-3">
               {data.events.map((e) => (
                 <li key={e.id} className="rounded-2xl bg-muted/50 p-4">
-                  <p className="text-xs uppercase tracking-wide text-primary">{formatDateTime(e.starts_at)}</p>
+                  <p className="text-xs uppercase tracking-wide text-primary">
+                    {formatDateTime(e.starts_at)}
+                  </p>
                   <p className="mt-1 font-medium">{e.title}</p>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {[e.venue, e.city].filter(Boolean).join(" · ") || "Luogo da definire"}

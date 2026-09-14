@@ -12,7 +12,10 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/raccolte")({
   head: () => ({
     meta: [
       { title: "Raccolte — Area Persona IMLAND" },
-      { name: "description", content: "Organizza le puntate preferite in raccolte ordinabili e filtrabili per canale." },
+      {
+        name: "description",
+        content: "Organizza le puntate preferite in raccolte ordinabili e filtrabili per canale.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -20,7 +23,8 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/raccolte")({
 });
 
 function RaccoltePage() {
-  const { collections, items, createCollection, deleteCollection, removeItem, moveItem } = useCollections();
+  const { collections, items, createCollection, deleteCollection, removeItem, moveItem } =
+    useCollections();
   const [name, setName] = useState("");
   const [channel, setChannel] = useState("tutti");
 
@@ -99,7 +103,9 @@ function RaccoltePage() {
 
                 <ul className="mt-4 space-y-2">
                   {list.length === 0 && (
-                    <li className="text-[13px] text-muted-foreground">Nessuna puntata con questo filtro.</li>
+                    <li className="text-[13px] text-muted-foreground">
+                      Nessuna puntata con questo filtro.
+                    </li>
                   )}
                   {list.map((item) => {
                     const ref_ = episodeBySlug(item.episode_slug);
@@ -128,7 +134,11 @@ function RaccoltePage() {
                             type="button"
                             aria-label="Sposta su"
                             onClick={() =>
-                              moveItem.mutate({ id: item.id, collectionId: collection.id, direction: -1 })
+                              moveItem.mutate({
+                                id: item.id,
+                                collectionId: collection.id,
+                                direction: -1,
+                              })
                             }
                             className="rounded-full border border-border p-2 hover:bg-muted"
                           >
@@ -138,7 +148,11 @@ function RaccoltePage() {
                             type="button"
                             aria-label="Sposta giù"
                             onClick={() =>
-                              moveItem.mutate({ id: item.id, collectionId: collection.id, direction: 1 })
+                              moveItem.mutate({
+                                id: item.id,
+                                collectionId: collection.id,
+                                direction: 1,
+                              })
                             }
                             className="rounded-full border border-border p-2 hover:bg-muted"
                           >

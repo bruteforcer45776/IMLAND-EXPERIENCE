@@ -109,10 +109,15 @@ type Props = {
   tone?: SectionTone | "auto" | "none";
 };
 
-export function BadgeIcon({ name, alt, className = "h-12 w-12", eager = false, tone = "auto" }: Props) {
+export function BadgeIcon({
+  name,
+  alt,
+  className = "h-12 w-12",
+  eager = false,
+  tone = "auto",
+}: Props) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const resolved =
-    tone === "none" ? null : tone === "auto" ? toneForPath(pathname) : tone;
+  const resolved = tone === "none" ? null : tone === "auto" ? toneForPath(pathname) : tone;
   return (
     <img
       src={resolved ? `/assets/badges/${resolved}/${name}.webp` : `/assets/badges/${name}.webp`}

@@ -15,7 +15,10 @@ export const Route = createFileRoute("/_authenticated/area/eventi")({
   head: () => ({
     meta: [
       { title: "Eventi Member — IMLAND EXPERIENCE" },
-      { name: "description", content: "Eventi riservati, prenotazioni anticipate e posti VIP per i Member IMLAND." },
+      {
+        name: "description",
+        content: "Eventi riservati, prenotazioni anticipate e posti VIP per i Member IMLAND.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -78,12 +81,19 @@ function EventiMemberPage() {
         <BentoGrid>
           {events.map((e) => {
             const booking = (data?.bookings ?? []).find((b) => b.event_id === e.id);
-            const opensAt = e.member_booking_opens_at ? new Date(e.member_booking_opens_at).getTime() : 0;
+            const opensAt = e.member_booking_opens_at
+              ? new Date(e.member_booking_opens_at).getTime()
+              : 0;
             const open = opensAt <= Date.now();
             return (
               <BentoCard key={e.id} tone="eventi" span={3} className="!p-0 overflow-hidden block">
                 {e.cover_url && (
-                  <img src={e.cover_url} alt={e.title} className="h-44 w-full object-cover" loading="lazy" />
+                  <img
+                    src={e.cover_url}
+                    alt={e.title}
+                    className="h-44 w-full object-cover"
+                    loading="lazy"
+                  />
                 )}
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-3">
@@ -94,19 +104,27 @@ function EventiMemberPage() {
                       <h2 className="mt-2 text-h3-im">{e.title}</h2>
                     </div>
                     <button
-                      onClick={() => toggle.mutate({ item_id: e.id, item_type: "evento", label: e.title })}
+                      onClick={() =>
+                        toggle.mutate({ item_id: e.id, item_type: "evento", label: e.title })
+                      }
                       aria-label="Salva"
                       className="text-muted-foreground transition-colors hover:text-primary"
                     >
-                      <Heart size={18} fill={isFavorite(e.id, "evento") ? "currentColor" : "none"} />
+                      <Heart
+                        size={18}
+                        fill={isFavorite(e.id, "evento") ? "currentColor" : "none"}
+                      />
                     </button>
                   </div>
 
                   <p className="mt-2 flex items-center gap-1 text-sm text-muted-foreground">
                     <MapPin size={13} />
-                    {[e.venue, e.city, e.province].filter(Boolean).join(" · ") || "Luogo da definire"}
+                    {[e.venue, e.city, e.province].filter(Boolean).join(" · ") ||
+                      "Luogo da definire"}
                   </p>
-                  {e.description && <p className="mt-3 text-sm text-muted-foreground">{e.description}</p>}
+                  {e.description && (
+                    <p className="mt-3 text-sm text-muted-foreground">{e.description}</p>
+                  )}
 
                   <div className="mt-4 flex flex-wrap gap-2 text-xs">
                     {e.member_only && (
@@ -115,7 +133,9 @@ function EventiMemberPage() {
                       </span>
                     )}
                     {e.member_price !== null && (
-                      <span className="rounded-full bg-muted px-2.5 py-1">Member € {e.member_price}</span>
+                      <span className="rounded-full bg-muted px-2.5 py-1">
+                        Member € {e.member_price}
+                      </span>
                     )}
                     {e.public_price !== null && (
                       <span className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground line-through">
@@ -123,7 +143,9 @@ function EventiMemberPage() {
                       </span>
                     )}
                     {e.member_seats !== null && (
-                      <span className="rounded-full bg-muted px-2.5 py-1">{e.member_seats} posti Member</span>
+                      <span className="rounded-full bg-muted px-2.5 py-1">
+                        {e.member_seats} posti Member
+                      </span>
                     )}
                   </div>
 

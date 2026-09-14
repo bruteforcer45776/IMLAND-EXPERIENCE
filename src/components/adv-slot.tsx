@@ -12,19 +12,73 @@ type Slide = { bg: string; fg: string; title: string; body: string; cta: string 
 
 const SLIDES: Record<AdvPosition, Slide[]> = {
   alto: [
-    { bg: "var(--color-surface-radio)", fg: "#ffffff", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Il tuo brand in apertura della home, davanti a tutta la community del territorio.", cta: "Diventa Partner" },
-    { bg: "var(--im-yellow)", fg: "#111111", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Spot in radio, presenza online e visibilità negli eventi IMLAND.", cta: "Scopri i pacchetti" },
-    { bg: "var(--color-surface-podcast)", fg: "#ffffff", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Racconta la tua attività a chi vive e ascolta il Piemonte ogni giorno.", cta: "Parliamone" },
+    {
+      bg: "var(--color-surface-radio)",
+      fg: "#ffffff",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Il tuo brand in apertura della home, davanti a tutta la community del territorio.",
+      cta: "Diventa Partner",
+    },
+    {
+      bg: "var(--im-yellow)",
+      fg: "#111111",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Spot in radio, presenza online e visibilità negli eventi IMLAND.",
+      cta: "Scopri i pacchetti",
+    },
+    {
+      bg: "var(--color-surface-podcast)",
+      fg: "#ffffff",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Racconta la tua attività a chi vive e ascolta il Piemonte ogni giorno.",
+      cta: "Parliamone",
+    },
   ],
   medio: [
-    { bg: "var(--color-surface-eventi)", fg: "#ffffff", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Il tuo messaggio tra le sezioni più lette della home.", cta: "Diventa Partner" },
-    { bg: "var(--color-surface-news)", fg: "#ffffff", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Uno spazio dedicato alla tua azienda, dentro un hub territoriale indipendente.", cta: "Scopri i pacchetti" },
-    { bg: "var(--color-surface-radio)", fg: "#ffffff", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Comunica con chi ama il territorio: radio, podcast, eventi e news.", cta: "Parliamone" },
+    {
+      bg: "var(--color-surface-eventi)",
+      fg: "#ffffff",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Il tuo messaggio tra le sezioni più lette della home.",
+      cta: "Diventa Partner",
+    },
+    {
+      bg: "var(--color-surface-news)",
+      fg: "#ffffff",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Uno spazio dedicato alla tua azienda, dentro un hub territoriale indipendente.",
+      cta: "Scopri i pacchetti",
+    },
+    {
+      bg: "var(--color-surface-radio)",
+      fg: "#ffffff",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Comunica con chi ama il territorio: radio, podcast, eventi e news.",
+      cta: "Parliamone",
+    },
   ],
   basso: [
-    { bg: "var(--color-surface-podcast)", fg: "#ffffff", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Chiudi la visita del lettore con il tuo brand in evidenza.", cta: "Diventa Partner" },
-    { bg: "var(--im-yellow)", fg: "#111111", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Entra nella rete Member IMLAND e fatti conoscere sul territorio.", cta: "Scopri i pacchetti" },
-    { bg: "var(--color-surface-eventi)", fg: "#ffffff", title: "QUESTO SPAZIO PUÒ ESSERE TUO", body: "Un unico spazio, tutte le voci del Piemonte nord-orientale.", cta: "Parliamone" },
+    {
+      bg: "var(--color-surface-podcast)",
+      fg: "#ffffff",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Chiudi la visita del lettore con il tuo brand in evidenza.",
+      cta: "Diventa Partner",
+    },
+    {
+      bg: "var(--im-yellow)",
+      fg: "#111111",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Entra nella rete Member IMLAND e fatti conoscere sul territorio.",
+      cta: "Scopri i pacchetti",
+    },
+    {
+      bg: "var(--color-surface-eventi)",
+      fg: "#ffffff",
+      title: "QUESTO SPAZIO PUÒ ESSERE TUO",
+      body: "Un unico spazio, tutte le voci del Piemonte nord-orientale.",
+      cta: "Parliamone",
+    },
   ],
 };
 
@@ -49,7 +103,9 @@ export function AdvSlot({ position }: { position: AdvPosition }) {
           <div>
             <span
               className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]"
-              style={{ background: slide.fg === "#111111" ? "rgba(0,0,0,0.12)" : "rgba(0,0,0,0.28)" }}
+              style={{
+                background: slide.fg === "#111111" ? "rgba(0,0,0,0.12)" : "rgba(0,0,0,0.28)",
+              }}
             >
               <Megaphone className="h-3 w-3" />
               Spazio pubblicitario

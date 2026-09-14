@@ -52,11 +52,19 @@ export const getNewsSettings = createServerFn({ method: "GET" })
 
 export const updateNewsSettings = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { id: string; patch: Partial<Database["public"]["Tables"]["news_settings"]["Update"]> }) => data)
+  .inputValidator(
+    (data: {
+      id: string;
+      patch: Partial<Database["public"]["Tables"]["news_settings"]["Update"]>;
+    }) => data,
+  )
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { error } = await supabaseAdmin.from("news_settings").update(data.patch).eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("news_settings")
+      .update(data.patch)
+      .eq("id", data.id);
     if (error) throw error;
     return { ok: true };
   });
@@ -110,8 +118,15 @@ export const listNewsCandidates = createServerFn({ method: "GET" })
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    let q = supabaseAdmin.from("news_candidates").select("*").order("collected_at", { ascending: false });
-    if (data.status) q = q.eq("processing_status", data.status as Database["public"]["Enums"]["news_candidate_status"]);
+    let q = supabaseAdmin
+      .from("news_candidates")
+      .select("*")
+      .order("collected_at", { ascending: false });
+    if (data.status)
+      q = q.eq(
+        "processing_status",
+        data.status as Database["public"]["Enums"]["news_candidate_status"],
+      );
     if (data.limit) q = q.limit(data.limit);
     const { data: rows, error } = await q;
     if (error) throw error;
@@ -124,8 +139,12 @@ export const listNewsArticles = createServerFn({ method: "GET" })
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    let q = supabaseAdmin.from("news_articles").select("*").order("created_at", { ascending: false });
-    if (data.status) q = q.eq("status", data.status as Database["public"]["Enums"]["news_article_status"]);
+    let q = supabaseAdmin
+      .from("news_articles")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (data.status)
+      q = q.eq("status", data.status as Database["public"]["Enums"]["news_article_status"]);
     if (data.limit) q = q.limit(data.limit);
     const { data: rows, error } = await q;
     if (error) throw error;
@@ -149,11 +168,20 @@ export const getNewsArticleWithSources = createServerFn({ method: "GET" })
 
 export const updateNewsArticle = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { id: string; patch: Partial<Database["public"]["Tables"]["news_articles"]["Update"]> }) => data)
+  .inputValidator(
+    (data: {
+      id: string;
+      patch: Partial<Database["public"]["Tables"]["news_articles"]["Update"]>;
+    }) => data,
+  )
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const patch = { ...data.patch, updated_at: new Date().toISOString(), reviewed_by: context.userId };
+    const patch = {
+      ...data.patch,
+      updated_at: new Date().toISOString(),
+      reviewed_by: context.userId,
+    };
     const { error } = await supabaseAdmin.from("news_articles").update(patch).eq("id", data.id);
     if (error) throw error;
     return { ok: true };

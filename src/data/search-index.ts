@@ -19,16 +19,61 @@ export type SearchItem = {
 };
 
 const pages: SearchItem[] = [
-  { kind: "pagina", title: "Radio", subtitle: "La diretta 24 ore su 24, palinsesto e conduttori.", to: "/radio" },
-  { kind: "pagina", title: "Podcast", subtitle: "Tutti i canali e gli episodi on demand.", to: "/podcast" },
-  { kind: "pagina", title: "Eventi", subtitle: "Calendario, format e radio in piazza.", to: "/eventi" },
-  { kind: "pagina", title: "News", subtitle: "Le notizie del territorio, aggiornate ogni giorno.", to: "/news" },
-  { kind: "pagina", title: "Membri ufficiali", subtitle: "Vantaggi, pacchetti e aziende partner.", to: "/member" },
-  { kind: "pagina", title: "Chi siamo", subtitle: "Manifesto, storia e team di IMLAND Experience.", to: "/chi-siamo" },
-  { kind: "pagina", title: "Contatti", subtitle: "Scrivici, chiamaci o proponi una collaborazione.", to: "/contatti" },
+  {
+    kind: "pagina",
+    title: "Radio",
+    subtitle: "La diretta 24 ore su 24, palinsesto e conduttori.",
+    to: "/radio",
+  },
+  {
+    kind: "pagina",
+    title: "Podcast",
+    subtitle: "Tutti i canali e gli episodi on demand.",
+    to: "/podcast",
+  },
+  {
+    kind: "pagina",
+    title: "Eventi",
+    subtitle: "Calendario, format e radio in piazza.",
+    to: "/eventi",
+  },
+  {
+    kind: "pagina",
+    title: "News",
+    subtitle: "Le notizie del territorio, aggiornate ogni giorno.",
+    to: "/news",
+  },
+  {
+    kind: "pagina",
+    title: "Membri ufficiali",
+    subtitle: "Vantaggi, pacchetti e aziende partner.",
+    to: "/member",
+  },
+  {
+    kind: "pagina",
+    title: "Chi siamo",
+    subtitle: "Manifesto, storia e team di IMLAND Experience.",
+    to: "/chi-siamo",
+  },
+  {
+    kind: "pagina",
+    title: "Contatti",
+    subtitle: "Scrivici, chiamaci o proponi una collaborazione.",
+    to: "/contatti",
+  },
   { kind: "pagina", title: "FAQ", subtitle: "Le risposte alle domande più frequenti.", to: "/faq" },
-  { kind: "pagina", title: "Scarica l'app", subtitle: "Ascolta IMLAND Radio da smartphone e smart speaker.", to: "/scarica-app" },
-  { kind: "pagina", title: "Brand e loghi", subtitle: "Linee guida, colori e asset ufficiali.", to: "/brand" },
+  {
+    kind: "pagina",
+    title: "Scarica l'app",
+    subtitle: "Ascolta IMLAND Radio da smartphone e smart speaker.",
+    to: "/scarica-app",
+  },
+  {
+    kind: "pagina",
+    title: "Brand e loghi",
+    subtitle: "Linee guida, colori e asset ufficiali.",
+    to: "/brand",
+  },
 ];
 
 /** Indice unico di ricerca: podcast, episodi, eventi, partner e pagine. */

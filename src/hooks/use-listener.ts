@@ -6,7 +6,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { notifyError } from "@/lib/errors";
 import { podcastAudio, primeSavedPositions } from "@/components/podcast-audio";
-import { allEpisodes, episodeLink, parseEpisodeDate, type EpisodeRef } from "@/lib/listener-catalog";
+import {
+  allEpisodes,
+  episodeLink,
+  parseEpisodeDate,
+  type EpisodeRef,
+} from "@/lib/listener-catalog";
 
 /* ------------------------------------------------------------------ *
  * Progressi di ascolto
@@ -194,7 +199,8 @@ export function useCollections() {
       invalidate();
       toast.success("Raccolta creata.");
     },
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile creare la raccolta." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile creare la raccolta." }),
   });
 
   const renameCollection = useMutation({
@@ -246,7 +252,8 @@ export function useCollections() {
       invalidate();
       toast.success("Puntata aggiunta alla raccolta.");
     },
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile aggiornare la raccolta." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile aggiornare la raccolta." }),
   });
 
   const removeItem = useMutation({
@@ -274,7 +281,8 @@ export function useCollections() {
       if (error) throw error;
     },
     onSuccess: invalidate,
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile riordinare la raccolta." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile riordinare la raccolta." }),
   });
 
   return {
@@ -334,7 +342,8 @@ export function useFollows() {
       void qc.invalidateQueries({ queryKey: ["listener-follows"] });
       toast.success(result === "added" ? "Canale seguito." : "Canale non più seguito.");
     },
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile aggiornare i canali seguiti." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile aggiornare i canali seguiti." }),
   });
 
   const markSeen = useMutation({
@@ -362,7 +371,11 @@ export function useFollows() {
   return { follows: query.data ?? [], isFollowing, toggle, markSeen, isLoading: query.isLoading };
 }
 
-export type EpisodeNotification = EpisodeRef & { publishedAt: Date; followedSince: Date; isNew: boolean };
+export type EpisodeNotification = EpisodeRef & {
+  publishedAt: Date;
+  followedSince: Date;
+  isNew: boolean;
+};
 
 /**
  * Notifiche derivate: nuove puntate dei canali seguiti pubblicate dopo
@@ -417,7 +430,10 @@ export type ShareRow = {
 function randomToken() {
   const bytes = new Uint8Array(8);
   crypto.getRandomValues(bytes);
-  return [...bytes].map((b) => b.toString(36).padStart(2, "0")).join("").slice(0, 12);
+  return [...bytes]
+    .map((b) => b.toString(36).padStart(2, "0"))
+    .join("")
+    .slice(0, 12);
 }
 
 export function useShares() {

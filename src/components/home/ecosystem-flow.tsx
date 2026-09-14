@@ -27,8 +27,7 @@ const STEPS: Step[] = [
     badge: "alert",
     service: "Alert",
     title: "Tutto parte da una segnalazione.",
-    desc:
-      "Una persona o un'azienda segnala ciò che accade: un evento, una promozione, una novità, un problema sul territorio.",
+    desc: "Una persona o un'azienda segnala ciò che accade: un evento, una promozione, una novità, un problema sul territorio.",
     to: "/alert",
   },
   {
@@ -36,8 +35,7 @@ const STEPS: Step[] = [
     badge: "mappa",
     service: "Terrain",
     title: "La segnalazione trova il suo luogo.",
-    desc:
-      "Attività, negozi e punti di interesse diventano schede sulla mappa del territorio, con promozioni e informazioni sempre aggiornate.",
+    desc: "Attività, negozi e punti di interesse diventano schede sulla mappa del territorio, con promozioni e informazioni sempre aggiornate.",
     to: "/terrain",
   },
   {
@@ -45,8 +43,7 @@ const STEPS: Step[] = [
     badge: "calendario",
     service: "Eventi",
     title: "Se è un evento, entra in calendario.",
-    desc:
-      "Date, luoghi e appuntamenti finiscono nel calendario condiviso e raggiungono chi vive quella zona.",
+    desc: "Date, luoghi e appuntamenti finiscono nel calendario condiviso e raggiungono chi vive quella zona.",
     to: "/eventi",
   },
   {
@@ -54,8 +51,7 @@ const STEPS: Step[] = [
     badge: "jobs",
     service: "Jobs",
     title: "Se è un'opportunità, diventa lavoro.",
-    desc:
-      "Le aziende raccontano chi cercano e le persone del territorio trovano occasioni vere, vicino a casa.",
+    desc: "Le aziende raccontano chi cercano e le persone del territorio trovano occasioni vere, vicino a casa.",
     to: "/jobs",
   },
   {
@@ -63,8 +59,7 @@ const STEPS: Step[] = [
     badge: "news",
     service: "News",
     title: "Se fa notizia, diventa racconto.",
-    desc:
-      "La redazione verifica e trasforma le informazioni in articoli chiari, con le fonti sempre in evidenza.",
+    desc: "La redazione verifica e trasforma le informazioni in articoli chiari, con le fonti sempre in evidenza.",
     to: "/news",
   },
   {
@@ -72,8 +67,7 @@ const STEPS: Step[] = [
     badge: "radio",
     service: "Radio",
     title: "La voce arriva in diretta.",
-    desc:
-      "Quello che accade sul territorio entra nella programmazione radiofonica e raggiunge chi ascolta ogni giorno.",
+    desc: "Quello che accade sul territorio entra nella programmazione radiofonica e raggiunge chi ascolta ogni giorno.",
     to: "/radio",
   },
   {
@@ -81,8 +75,7 @@ const STEPS: Step[] = [
     badge: "podcast",
     service: "Podcast",
     title: "Le storie restano nel tempo.",
-    desc:
-      "Interviste e approfondimenti diventano puntate da ascoltare quando si vuole e da far scoprire ad altri.",
+    desc: "Interviste e approfondimenti diventano puntate da ascoltare quando si vuole e da far scoprire ad altri.",
     to: "/podcast",
   },
   {
@@ -90,8 +83,7 @@ const STEPS: Step[] = [
     badge: "community",
     service: "Member",
     title: "La community chiude il cerchio.",
-    desc:
-      "Membri e aziende partner vivono l'ecosistema dall'interno: vantaggi, visibilità e relazioni sul territorio.",
+    desc: "Membri e aziende partner vivono l'ecosistema dall'interno: vantaggi, visibilità e relazioni sul territorio.",
     to: "/member",
   },
 ];
@@ -211,7 +203,11 @@ export function EcosystemFlow() {
                       style={{ "--bento-tone": ICON_TONES[step.tone] } as CSSProperties}
                     >
                       <div className="flex items-center gap-4">
-                        <BadgeIcon name={step.badge} tone={step.tone as never} className="h-14 w-14" />
+                        <BadgeIcon
+                          name={step.badge}
+                          tone={step.tone as never}
+                          className="h-14 w-14"
+                        />
                         <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--bento-tone)]">
                           {step.service}
                         </span>

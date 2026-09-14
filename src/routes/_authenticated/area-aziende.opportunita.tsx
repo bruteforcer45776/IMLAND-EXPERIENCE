@@ -67,7 +67,11 @@ function BusinessJobs() {
                   {j.comune} · {j.contract_type}
                 </p>
                 <p className="mt-2 text-sm">
-                  {count === 0 ? "Nessuna candidatura" : count === 1 ? "1 candidatura" : `${count} candidature`}
+                  {count === 0
+                    ? "Nessuna candidatura"
+                    : count === 1
+                      ? "1 candidatura"
+                      : `${count} candidature`}
                 </p>
                 {j.status === "approved" && (
                   <Link
@@ -103,7 +107,10 @@ function BusinessJobs() {
                       {a.job_posts?.title ?? "Opportunità"} · {formatHubDate(a.created_at)}
                     </span>
                   </div>
-                  <p className="mt-1 text-muted-foreground">{a.email}{a.phone ? ` · ${a.phone}` : ""}</p>
+                  <p className="mt-1 text-muted-foreground">
+                    {a.email}
+                    {a.phone ? ` · ${a.phone}` : ""}
+                  </p>
                   {a.message && <p className="mt-2">{a.message}</p>}
                 </li>
               ))}

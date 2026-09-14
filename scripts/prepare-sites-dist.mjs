@@ -1,18 +1,24 @@
-import { cp, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
+import { cpSync, existsSync, mkdirSync, rmSync, copyFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const root = process.cwd();
-const output = resolve(root, ".output");
-const dist = resolve(root, "dist");
+const root = resolve(import.meta.dirname, "..");
+const outputDir = resolve(root, ".output");
+const distDir = resolve(root, "dist");
+const serverSource = resolve(outputDir, "server");
+const publicSource = resolve(outputDir, "public");
+const hostingSource = resolve(root, ".openai", "hosting.json");
 
-await rm(dist, { recursive: true, force: true });
-await mkdir(resolve(dist, "server"), { recursive: true });
-await mkdir(resolve(dist, "client"), { recursive: true });
-await mkdir(resolve(dist, ".openai"), { recursive: true });
+for (const path of [serverSource, publicSource, hostingSource]) {
+  if (!existsSync(path)) {
+    throw new Error(`Missing required Sites build input: ${path}`);
+  }
+}
 
-await cp(resolve(output, "server"), resolve(dist, "server"), { recursive: true });
-await rename(resolve(dist, "server", "index.mjs"), resolve(dist, "server", "index.js"));
-await cp(resolve(output, "public"), resolve(dist, "client"), { recursive: true });
+rmSync(distDir, { recursive: true, force: true });
+mkdirSync(resolve(distDir, ".openai"), { recursive: true });
+cpSync(serverSource, resolve(distDir, "server"), { recursive: true });
+cpSync(publicSource, resolve(distDir, "client"), { recursive: true });
+copyFileSync(resolve(distDir, "server", "index.mjs"), resolve(distDir, "server", "index.js"));
+copyFileSync(hostingSource, resolve(distDir, ".openai", "hosting.json"));
 
-const hosting = await readFile(resolve(root, ".openai", "hosting.json"), "utf8");
-await writeFile(resolve(dist, ".openai", "hosting.json"), hosting);
+console.log("Prepared Sites artifact in dist/");
