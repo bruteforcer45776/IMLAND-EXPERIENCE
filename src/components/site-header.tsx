@@ -20,22 +20,15 @@ type NavItem = {
 };
 
 const nav: NavItem[] = [
+  { to: "/", label: "Home" },
   { to: "/radio", label: "Radio" },
   { to: "/podcast", label: "Podcast" },
   { to: "/eventi", label: "Eventi" },
-  { to: "/member", label: "Membri" },
-  {
-    to: "/chi-siamo",
-    label: "Il progetto",
-    children: [
-      { to: "/chi-siamo", label: "Chi siamo", desc: "Manifesto, storia e team" },
-      { to: "/news", label: "News", desc: "Le ultime voci dal territorio" },
-      { to: "/contatti", label: "Contatti", desc: "Scrivici o collabora con noi" },
-      { to: "/faq", label: "FAQ", desc: "Risposte alle domande frequenti" },
-      { to: "/brand", label: "Brand & loghi", desc: "Loghi e linee guida ufficiali" },
-      { to: "/scarica-app", label: "Scarica l'app", desc: "IMLAND sempre con te" },
-    ],
-  },
+  { to: "/news", label: "News" },
+  { to: "/member", label: "Partners" },
+  { to: "/chi-siamo", label: "Il Progetto" },
+  { to: "/contatti", label: "Contatti" },
+  { to: "/faq", label: "FAQ" },
 ];
 
 const mobileLinks = [
@@ -44,8 +37,8 @@ const mobileLinks = [
   { to: "/podcast", label: "Podcast" },
   { to: "/eventi", label: "Eventi" },
   { to: "/news", label: "News" },
-  { to: "/member", label: "Membri" },
-  { to: "/chi-siamo", label: "Il progetto" },
+  { to: "/member", label: "Partners" },
+  { to: "/chi-siamo", label: "Il Progetto" },
   { to: "/contatti", label: "Contatti" },
   { to: "/faq", label: "FAQ" },
 ];
@@ -422,10 +415,14 @@ export function SiteHeader() {
                     onClick={() => setOpen(false)}
                     className="flex w-full items-center justify-center rounded-full border border-border bg-white px-5 py-3 text-[14px] font-semibold text-ink-950 md:py-3.5 md:text-[15px]"
                   >
-                    Diventa membro
+                    Sei un'azienda? Diventa Member
                   </a>
                 </div>
               )}
+              <div className="flex justify-center gap-4 text-[13px] text-ink-600">
+                <Link to="/brand" onClick={() => setOpen(false)}>Brand &amp; loghi</Link>
+                <Link to="/scarica-app" onClick={() => setOpen(false)}>Scarica l'app</Link>
+              </div>
               <div className="flex justify-center gap-4 pt-1 text-[13px] text-ink-600">
                 <Link to="/privacy" onClick={() => setOpen(false)}>
                   Privacy

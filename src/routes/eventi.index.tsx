@@ -202,6 +202,16 @@ const clientTypes = [
     title: "Commercianti e consorzi",
     desc: "Vetrine, notti bianche e shopping night animate dal vivo.",
   },
+  {
+    icon: "profilo" as const,
+    title: "Professionisti",
+    desc: "Incontri, presentazioni e appuntamenti professionali con conduzione e contenuti.",
+  },
+  {
+    icon: "microfono" as const,
+    title: "Artisti",
+    desc: "Showcase, live e momenti creativi raccontati e animati insieme al pubblico.",
+  },
 ];
 
 const activityExamples = [
@@ -311,6 +321,9 @@ function EventiPage() {
           </div>
         </section>
 
+        {/* Prossimo evento e calendario subito in apertura */}
+        <EventsCalendar />
+
         {/* Formati */}
         <section className="section-focus">
           <div className="container-im section-pad">
@@ -342,7 +355,7 @@ function EventiPage() {
         </section>
 
         {/* Pacchetti / format dettagliati */}
-        <section className="section-canvas">
+        <section className="hidden">
           <div className="container-im section-pad">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
@@ -388,7 +401,7 @@ function EventiPage() {
         </section>
 
         {/* Timeline di una serata tipo */}
-        <section className="section-editorial">
+        <section className="hidden">
           <div className="container-im section-pad">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
@@ -531,8 +544,9 @@ function EventiPage() {
                     "Conduzione e animazione live",
                     "Talk, interviste e micro-rubriche",
                     "Musica, DJ set e momenti di ascolto",
-                    "Collegamenti radio e podcast dal luogo",
-                    "Laboratori e workshop partecipativi",
+                    "Collegamenti radio e contenuti dal luogo",
+                    "Laboratori e workshop quando previsti",
+                    "Service tecnico audio per produrre e diffondere il suono quando previsto",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <BrandIcon name="check" className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
@@ -550,10 +564,11 @@ function EventiPage() {
                 </h2>
                 <ul className="mt-6 space-y-3">
                   {[
-                    "Buffet, banqueting e servizio ristorazione",
-                    "Allestimenti di tavoli, sedie e tensostrutture",
-                    "Service audio, luci o video in affitto",
-                    "Organizzazione logistica completa dell’evento",
+                    "Catering, buffet, banqueting o ristorazione",
+                    "Organizzazione complessiva dell’evento",
+                    "Gestione delle pratiche e autorizzazioni dell’organizzatore",
+                    "Fornitura del palco",
+                    "Allestimento generale di tavoli, sedie e tensostrutture",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground/40" />
@@ -597,11 +612,8 @@ function EventiPage() {
           </div>
         </section>
 
-        {/* Calendario eventi: evidenza + countdown, filtri, passati */}
-        <EventsCalendar />
-
         {/* Cross-link verso radio e podcast */}
-        <section className="section-canvas relative overflow-hidden">
+        <section className="hidden">
           <div className="container-im section-pad-sm">
             <div className="flex flex-col gap-6 rounded-3xl border border-outline bg-card p-6 md:flex-row md:items-center md:justify-between md:p-8">
               <div>
@@ -661,7 +673,7 @@ function EventiPage() {
         </section>
 
         {/* CTA finale forte */}
-        <section className="section-atmosphere">
+        <section className="hidden">
           <div className="container-im section-pad-sm">
             <div className="glass-panel flex flex-col items-start gap-6 rounded-3xl p-8 md:flex-row md:items-center md:justify-between md:p-10">
               <div>

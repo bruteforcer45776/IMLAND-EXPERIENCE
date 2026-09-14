@@ -33,25 +33,6 @@ export const Route = createFileRoute("/chi-siamo")({
   component: ChiSiamoPage,
 });
 
-const values = [
-  {
-    title: "Prossimità",
-    desc: "Raccontiamo quello che possiamo toccare. Le storie iniziano dove viviamo.",
-  },
-  {
-    title: "Ascolto",
-    desc: "Prima di parlare, ascoltiamo. Le voci del territorio guidano l'agenda.",
-  },
-  {
-    title: "Apertura",
-    desc: "Il palinsesto è aperto: chiunque abbia qualcosa da dire, può proporlo.",
-  },
-  {
-    title: "Cura",
-    desc: "Produzione lenta, precisa, sostenibile. Nessuna storia consumata in fretta.",
-  },
-];
-
 const timeline = [
   {
     y: "2022",
@@ -98,11 +79,11 @@ const whatWeDo = [
     tone: "eventi" as const,
   },
   {
-    icon: "tessera_member" as const,
-    title: "Member",
-    desc: "Aziende e professionisti diventano parte della community con visibilità e vantaggi dedicati.",
-    href: "/member",
-    tone: "member" as const,
+    icon: "news" as const,
+    title: "News del territorio",
+    desc: "Notizie, persone e iniziative che raccontano ciò che accade nelle nostre province.",
+    href: "/news",
+    tone: "news" as const,
   },
 ];
 
@@ -157,7 +138,7 @@ function ChiSiamoPage() {
             <span className="im-gradient-text">radicato</span>, indipendente.
           </>
         }
-        subtitle="IMLAND EXPERIENCE nasce da un'idea semplice: il territorio non ha bisogno di essere spiegato da fuori. Ha bisogno di strumenti per raccontarsi. Siamo redazione, radio, community e piazza."
+        subtitle="IMLAND Experience nasce per dare voce alle realtà dei nostri territori. Viviamo in territori ricchi di imprese, persone, competenze ed eccellenze che spesso, proprio perché lontani dai grandi centri, non hanno gli stessi strumenti e le stesse occasioni per raccontarsi, farsi conoscere e creare relazioni. Per questo abbiamo costruito un luogo in cui il territorio possa avere voce: attraverso la radio, i contenuti, gli incontri e una community che mette in relazione aziende, professionisti e persone. Raccontiamo ciò che di valore esiste qui, perché possa essere conosciuto dentro e fuori dal territorio."
         aside={
           <div className="relative h-[520px] w-full">
             <Suspense fallback={null}>
@@ -165,42 +146,7 @@ function ChiSiamoPage() {
             </Suspense>
           </div>
         }
-      >
-        <Link to="/radio" className="rounded-full btn-blue px-6 py-3 text-sm">
-          Ascolta la radio
-        </Link>
-        <Link to="/contatti" className="rounded-full btn-ghost-glass px-6 py-3 text-sm">
-          Lavora con noi
-        </Link>
-      </PageHero>
-
-      {/* Manifesto */}
-      <section className="section-focus">
-        <div className="container-im section-pad">
-          <SectionHeader
-            eyebrow="Il manifesto"
-            badge="membri"
-            title={
-              <>
-                Quattro parole, un <span className="im-gradient-text">metodo</span>.
-              </>
-            }
-            description="I principi che guidano ogni programma, ogni episodio e ogni evento IMLAND."
-          />
-          <BentoGrid className="mt-10">
-            {values.map((v, i) => (
-              <BentoCard
-                key={v.title}
-                tone={(["radio", "podcast", "eventi", "member"] as const)[i % 4]}
-                span={3}
-              >
-                <h3 className="text-h3-im">{v.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{v.desc}</p>
-              </BentoCard>
-            ))}
-          </BentoGrid>
-        </div>
-      </section>
+      />
 
       {/* Missione */}
       <section className="section-canvas">
@@ -442,30 +388,6 @@ function ChiSiamoPage() {
               </p>
             </BentoCard>
           </BentoGrid>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="container-im section-closing section-pad">
-        <div className="rounded-[28px] border border-border bg-signal p-10 text-center text-signal-foreground md:p-14">
-          <h2 className="text-h2-im">Vuoi collaborare con noi?</h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm text-signal-foreground/85 md:text-base">
-            Proponi una storia, uno spazio, un progetto. Scriviamo insieme il prossimo capitolo.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/contatti"
-              className="rounded-full bg-surface-1 px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-surface-2"
-            >
-              Scrivici
-            </Link>
-            <Link
-              to="/member"
-              className="rounded-full bg-surface-1 px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-surface-2"
-            >
-              Diventa member
-            </Link>
-          </div>
         </div>
       </section>
 

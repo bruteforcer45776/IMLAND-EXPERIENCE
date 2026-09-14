@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Mail, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import logoBlack from "@/assets/imland-logo-experience.png.asset.json";
 
 const provinces = ["Vercelli", "Novara", "Biella", "Verbania (VCO)"];
@@ -12,7 +12,7 @@ const columns = [
       { to: "/podcast", label: "Podcast" },
       { to: "/eventi", label: "Eventi" },
       { to: "/news", label: "News" },
-      { to: "/member", label: "Membri" },
+      { to: "/member", label: "Partners" },
     ],
   },
   {
@@ -126,6 +126,26 @@ export function SiteFooter() {
             Seguici
           </h2>
           <ul className="mt-4 space-y-2.5 text-[15px]">
+            <li>
+              <a
+                href="https://www.facebook.com/imlandradio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-ink-600 transition-colors hover:text-im-blue"
+              >
+                <Facebook size={18} /> Facebook
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/company/imland-experience/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-ink-600 transition-colors hover:text-im-blue"
+              >
+                <Linkedin size={18} /> LinkedIn
+              </a>
+            </li>
             <li>
               <a
                 href="https://www.instagram.com/imland_radio/"

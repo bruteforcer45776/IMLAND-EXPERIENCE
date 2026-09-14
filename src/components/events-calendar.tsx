@@ -207,7 +207,7 @@ export function EventsCalendar() {
             </ul>
           ) : (
             <div className="mt-8 rounded-3xl border border-outline bg-card p-8">
-              <h3 className="text-h3-im">Nessuna data in questo filtro.</h3>
+              <h3 className="text-h3-im">Il calendario sarà aggiornato presto.</h3>
               <p className="mt-2 max-w-xl text-sm text-muted-foreground">
                 Le prossime date arrivano prima in newsletter.
                 <br />

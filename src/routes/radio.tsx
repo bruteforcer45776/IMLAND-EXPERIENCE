@@ -1,13 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { canonical, jsonLd, radioStationLd } from "../lib/seo";
 import { useState } from "react";
 import { usePlayer } from "../components/player-context";
 import { ProposalForm } from "../components/proposal-form";
 import { NewsletterBanner } from "../components/newsletter-banner";
 import { SpotlightCard } from "../components/spotlight-card";
-import { PackagesSection } from "../components/packages-section";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
-import { ArrowRight, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { HeroBanner } from "../components/hero-banner";
 
 import heroRadio from "@/assets/hero-radio-v3.webp";
@@ -20,8 +19,6 @@ import {
   AccordionTrigger,
 } from "../components/ui/accordion";
 import { Reveal } from "../components/reveal";
-import { teamMembers } from "../data/team-members";
-import { totalEpisodes, programs } from "../data/podcast-derived";
 import { BadgeIcon, badgeForIcon, toneForBadge } from "../components/badge-icon";
 import { BentoGrid, BentoCard } from "../components/bento";
 
@@ -67,7 +64,7 @@ type Entry = { time: string; show: string; music?: boolean };
 const schedule: Entry[][] = [
   // Lunedì
   [
-    { time: "07:00 – 08:00", show: "Se ci sei batti un colpo" },
+    { time: "07:00 – 08:00", show: "Se Ci Sei Batti un Colpo" },
     { time: "08:00 – 18:00", show: "Imland Music Selection", music: true },
     { time: "18:00 – 19:00", show: "Barinonda" },
     { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
@@ -134,7 +131,7 @@ const shows = [
     cover: "",
   },
   {
-    name: "Se ci sei batti un colpo",
+    name: "Se Ci Sei Batti un Colpo",
     desc: "Il risveglio in radio: musica, umore e territorio per iniziare la giornata.",
     tag: "Morning",
     cover: "",
@@ -152,19 +149,6 @@ const shows = [
     cover: "",
   },
 ];
-
-// Voci selezionate per la radio: chi conduce le rubriche live in palinsesto
-const radioHostSlugs = [
-  "davide-de-lisa",
-  "massimo-biasini",
-  "matteo-sella",
-  "davide-maiorano",
-  "celeste-miolo",
-  "mattia-tassar",
-];
-const radioHosts = radioHostSlugs
-  .map((slug) => teamMembers.find((m) => m.slug === slug))
-  .filter((m): m is (typeof teamMembers)[number] => Boolean(m));
 
 const faqs = [
   {
@@ -218,6 +202,9 @@ function RadioPage() {
       </HeroBanner>
 
       <div className="page-inverted radio-inverted">
+        <section className="container-im pt-8 md:pt-12">
+          <h1 className="text-h1-im">Ascolta i nostri programmi</h1>
+        </section>
         {/* Palinsesto settimanale */}
         <Palinsesto />
 
@@ -270,60 +257,6 @@ function RadioPage() {
                 </BentoCard>
               ))}
             </BentoGrid>
-          </div>
-        </section>
-
-        {/* Le nostre voci */}
-        <section className="section-canvas">
-          <div className="container-im section-pad-sm">
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-              La redazione
-            </p>
-            <h2 className="mt-3 text-h2-im">
-              Le nostre voci.
-              <br />
-              Persone del <span className="im-gradient-text">territorio</span>.
-            </h2>
-            <p className="mt-4 max-w-xl text-base text-muted-foreground">
-              Dietro ogni rubrica ci sono volti conosciuti: chi lavora in vigna, chi insegna, chi fa
-              impresa. Scopri chi conduce cosa.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {radioHosts.map((m) => {
-                const fullName = [m.firstName, m.lastName].filter(Boolean).join(" ");
-                return (
-                  <Link
-                    key={m.slug}
-                    to="/team/$slug"
-                    params={{ slug: m.slug }}
-                    className="group glass-panel flex items-center gap-4 rounded-3xl p-4 transition hover:bg-white/5"
-                  >
-                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-muted ring-1 ring-inset ring-border">
-                      <img
-                        src={m.photo}
-                        alt={fullName}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-display text-base font-semibold text-foreground group-hover:text-signal">
-                        {fullName}
-                      </p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{m.role}</p>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="mt-6">
-              <Link
-                to="/chi-siamo"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-signal hover:underline"
-              >
-                Scopri tutto il team <ArrowRight className="inline h-4 w-4" />
-              </Link>
-            </div>
           </div>
         </section>
 
@@ -403,63 +336,6 @@ function RadioPage() {
           </DialogContent>
         </Dialog>
 
-        {/* Dietro le quinte / dati narrativi */}
-        <section className="section-focus">
-          <div className="container-im section-pad-sm">
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                  Dietro le quinte
-                </p>
-                <h2 className="mt-3 text-h2-im">
-                  La nostra redazione.
-                  <br />
-                  Un lavoro che non si <span className="im-gradient-text">ferma</span>.
-                </h2>
-                <p className="mt-4 text-base text-foreground/70">
-                  Dietro ogni diretta c'è una squadra che scrive scalette, monta interviste, sceglie
-                  la musica e risponde ai messaggi di chi ascolta. Non siamo un'emittente di
-                  passaggio: viviamo Vercelli, Novara, Biella e Verbania, e li raccontiamo ogni
-                  giorno da dentro.
-                </p>
-                <p className="mt-4 text-base text-foreground/70">
-                  Direzione artistica, regia, tecnica di messa in onda, amministrazione, grafica e
-                  ufficio commerciale: ogni ruolo è coperto da persone che hanno scelto di restare
-                  sul territorio invece di lasciarlo, e che mettono la loro professione al servizio
-                  della radio.
-                </p>
-              </div>
-              <div className="flex flex-col justify-center gap-6">
-                <div className="glass-panel rounded-3xl p-6">
-                  <p className="font-display text-3xl font-semibold text-signal">24/7</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    In onda ogni ora del giorno e della notte, senza interruzioni, con la Imland
-                    Music Selection a colmare gli spazi tra una diretta e l'altra.
-                  </p>
-                </div>
-                <div className="glass-panel rounded-3xl p-6">
-                  <p className="font-display text-3xl font-semibold text-signal">
-                    {totalEpisodes}+
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Episodi già pubblicati tra i podcast delle nostre rubriche, disponibili on
-                    demand per chi si perde una diretta.
-                  </p>
-                </div>
-                <div className="glass-panel rounded-3xl p-6">
-                  <p className="font-display text-3xl font-semibold text-signal">
-                    {programs.length}
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Programmi attivi tra talk, musica, cibo e attualità, raccontati da conduttrici e
-                    conduttori del territorio.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* FAQ */}
         <section className="section-canvas">
           <div className="container-im section-pad-sm">
@@ -519,8 +395,6 @@ function RadioPage() {
         </section>
 
         <ProposalForm kind="spot" />
-
-        <PackagesSection kind="radio" />
 
         <NewsletterBanner
           eyebrow="Newsletter radio"

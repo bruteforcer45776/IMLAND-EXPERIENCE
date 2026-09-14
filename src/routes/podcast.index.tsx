@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { ProposalForm } from "../components/proposal-form";
 import { NewsletterBanner } from "../components/newsletter-banner";
 import { SpotlightCard } from "../components/spotlight-card";
-import { PackagesSection } from "../components/packages-section";
 import { StreamingBanner } from "../components/streaming-banner";
 import { BadgeIcon, type BadgeName } from "../components/badge-icon";
 import { Mic } from "lucide-react";
@@ -79,7 +78,7 @@ export const Route = createFileRoute("/podcast/")({
   component: PodcastPage,
 });
 
-const categories = ["Tutti", "Business", "Cultura", "Cibo", "Tecnologia", "Lifestyle", "Weekend"];
+const categories = ["Tutti", "Business", "Cultura", "Cibo", "Tecnologia", "Weekend"];
 
 type Program = ProgramCard;
 
@@ -95,7 +94,15 @@ const catColor: Record<string, string> = {
 function PodcastPage() {
   const [active, setActive] = useState("Tutti");
   const gridRef = useRef<HTMLDivElement>(null);
-  const list = programs.filter((p) => active === "Tutti" || p.cat === active);
+  const normalizedPrograms = programs.map((p) => ({
+    ...p,
+    cat: p.name.toLowerCase().includes("istruzioni per l'uso")
+      ? "Business"
+      : p.name.toLowerCase().includes("casual nerd")
+        ? "Tecnologia"
+        : p.cat,
+  }));
+  const list = normalizedPrograms.filter((p) => active === "Tutti" || p.cat === active);
 
   const selectCategory = (c: string) => {
     setActive(c);
@@ -122,9 +129,6 @@ function PodcastPage() {
         <a href="#programmi" className="cta-light px-6 py-3.5 text-sm">
           Esplora i programmi
         </a>
-        <Link to="/radio" className="cta-dark px-6 py-3.5 text-sm">
-          Ascolta la radio
-        </Link>
       </HeroBanner>
 
       <div className="page-inverted podcast-inverted">
@@ -165,8 +169,46 @@ function PodcastPage() {
           </div>
         </section>
 
+        <section className="container-im section-focus section-pad-sm">
+          <div className="grid gap-5 lg:grid-cols-2">
+            <Link
+              to="/podcast"
+              className="group rounded-[32px] border border-border bg-card p-7 transition hover:-translate-y-1 hover:shadow-xl md:p-10"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">Podcast</p>
+              <h2 className="mt-3 text-h2-im">I podcast di IMLAND</h2>
+              <p className="mt-4 text-base text-muted-foreground">
+                I nostri podcast fanno parte della programmazione editoriale di IMLAND Experience.
+                Sono format ideati e prodotti dalla nostra redazione per raccontare aziende,
+                persone, territori, cultura, tecnologia, enogastronomia e storie che meritano di
+                essere conosciute.
+              </p>
+              <p className="mt-6 text-sm font-semibold text-signal">
+                StuzzicAziende · Istruzioni per l’Uso · Carta Canta · Assaggi · Grigliata Mista ·
+                Terra di Diamanti · Casual Nerd · IMWeekend
+              </p>
+            </Link>
+            <a
+              href="#proponi-podcast"
+              className="group rounded-[32px] border border-signal/30 bg-signal p-7 text-white transition hover:-translate-y-1 hover:shadow-xl md:p-10"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wider text-white/75">My Podcast</p>
+              <h2 className="mt-3 text-h2-im">Un progetto completamente tuo</h2>
+              <p className="mt-4 text-base text-white/85">
+                Se un’azienda o un’organizzazione vuole raccontarsi attraverso un progetto
+                completamente proprio, IMLAND mette a disposizione microfoni, studio, competenze e
+                produzione. Costruiamo un podcast su misura: dall’idea alla registrazione, fino alla
+                produzione e pubblicazione.
+              </p>
+              <p className="mt-6 text-sm font-semibold text-white">
+                TEDx Biella · Biella Città Creativa
+              </p>
+            </a>
+          </div>
+        </section>
+
         {/* Filters + programs grid */}
-        <section id="programmi" ref={gridRef} className="container-im section-focus section-pad-sm">
+        <section id="programmi" ref={gridRef} className="hidden">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
@@ -368,7 +410,7 @@ function PodcastPage() {
         )}
 
         {/* Consigliati dalla redazione */}
-        <section className="container-im section-focus pb-14">
+        <section className="hidden">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-signal">Redazione</p>
             <h2 className="mt-2 text-h2-im">Consigliati dalla redazione.</h2>
@@ -410,7 +452,7 @@ function PodcastPage() {
         </section>
 
         {/* MY PODCAST — episodio TEDx Biella */}
-        <section className="container-im section-focus pb-14">
+        <section className="hidden">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
@@ -478,7 +520,9 @@ function PodcastPage() {
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
                 Ascolta ovunque
               </p>
-              <h2 className="mt-2 text-h2-im">Segui i nostri podcast sulla tua app preferita</h2>
+              <h2 className="mt-3 text-4xl font-bold md:text-6xl">
+                Segui i nostri podcast sulla tua app preferita
+              </h2>
             </div>
             <div className="mt-8 flex justify-center">
               <StreamingBanner className="w-full max-w-3xl" />
@@ -545,7 +589,7 @@ function PodcastPage() {
 
         {/* Pitch CTA */}
 
-        <section className="container-im section-closing section-pad">
+        <section className="hidden">
           <SpotlightCard className="relative grid gap-8 glass-panel rounded-[36px] p-10 md:grid-cols-[1.2fr_1fr] md:p-14">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
@@ -583,8 +627,6 @@ function PodcastPage() {
         </section>
 
         <ProposalForm kind="podcast" />
-
-        <PackagesSection kind="podcast" />
 
         <NewsletterBanner
           eyebrow="Newsletter podcast"

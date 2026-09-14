@@ -98,7 +98,7 @@ const usefulLinks = [
 const miniFaqs = [
   {
     q: "In quanto tempo ricevo una risposta?",
-    a: "Rispondiamo entro 48 ore lavorative per la maggior parte delle richieste; per eventi e partnership possono servire fino a 5 giorni.",
+    a: "Leggiamo ogni richiesta e la indirizziamo alla persona più adatta del team.",
   },
   {
     q: "Posso proporre una storia da raccontare in radio o podcast?",
@@ -136,7 +136,7 @@ function ContattiPage() {
             Mettiamoci in <span className="im-gradient-text">contatto</span>.
           </>
         }
-        subtitle="Scrivici per proporre una storia, un progetto o semplicemente per dirci cosa ne pensi: rispondiamo entro 48 ore lavorative."
+        subtitle="Scrivici per proporre una storia, un progetto o semplicemente per dirci cosa ne pensi."
       >
         <a href="#scrivici" className="rounded-full btn-blue px-6 py-3 text-sm">
           Compila il form
@@ -201,7 +201,7 @@ function ContattiPage() {
               Scrivici
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Rispondiamo entro 48 ore lavorative.
+              Raccontaci la tua richiesta.
             </p>
 
             <div className="mt-6 space-y-4">
@@ -471,7 +471,7 @@ function ContattiPage() {
       </section>
 
       {/* Mini FAQ */}
-      <section className="section-canvas">
+      <section className="hidden">
         <div className="container-im section-pad">
           <SectionHeader
             eyebrow="Domande frequenti"

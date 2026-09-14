@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
 import { SpotlightCard } from "./spotlight-card";
 import { BrandIcon } from "./brand-icons";
 
@@ -21,10 +20,10 @@ const config: Record<
   }
 > = {
   spot: {
-    tag: "IMLAND Member · Spot Radio",
+    tag: "Spot Radio",
     title: "Proponi il tuo",
     highlight: "spot radio",
-    lead: "Sei un IMLAND Member? Raccontaci il tuo progetto radiofonico: rubrica, spot, ospitata o format. Ti ricontattiamo per pianificarlo insieme.",
+    lead: "Raccontaci la tua azienda o attività e il progetto radiofonico che immagini: rubrica, spot, ospitata o format. Lo costruiamo insieme.",
     placeholder: "Descrivi l'idea, il format, la durata e la periodicità che immagini…",
     fieldLabel: "Titolo dello spot / rubrica",
     email: "onair@imlandradio.com",
@@ -37,10 +36,10 @@ const config: Record<
     ],
   },
   podcast: {
-    tag: "IMLAND Member · Podcast",
+    tag: "Proponi il podcast",
     title: "Proponi il tuo",
     highlight: "podcast",
-    lead: "Hai un'idea di podcast, una serie o una puntata pilota? Come IMLAND Member puoi produrla con noi: attrezzatura, studio e distribuzione.",
+    lead: "Hai qualcosa da raccontare? Costruiamo insieme il tuo podcast. Dall'idea alla registrazione, fino alla produzione e pubblicazione: realizziamo podcast su misura per aziende e organizzazioni che vogliono raccontare la propria identità, il proprio lavoro e le proprie competenze attraverso un contenuto originale.",
     placeholder: "Descrivi il tema, il tono, gli ospiti previsti e la durata media delle puntate…",
     fieldLabel: "Titolo del podcast",
     email: "info@imlandradio.com",
@@ -53,10 +52,10 @@ const config: Record<
     ],
   },
   evento: {
-    tag: "IMLAND Member · Eventi",
+    tag: "Eventi",
     title: "Porta il tuo",
     highlight: "evento",
-    lead: "Sei un IMLAND Member e vuoi organizzare un evento con noi? Facciamo animazione, live, talk e radio in diretta — non catering. Scrivici i dettagli.",
+    lead: "Vuoi portare IMLAND al tuo evento? Raccontaci cosa stai preparando e quale esperienza vorresti creare per il tuo pubblico. Possiamo costruire insieme conduzione, animazione, contenuti, radio e supporto audio.",
     placeholder: "Data, luogo, pubblico atteso, tipo di animazione che immagini…",
     fieldLabel: "Titolo dell'evento",
     email: "info@imlandradio.com",
@@ -85,7 +84,7 @@ export function ProposalForm({ kind }: { kind: Kind }) {
       `Tipo: ${type}\n` +
       `${c.fieldLabel}: ${form.titolo}\n\n` +
       `${form.messaggio}`;
-    const href = `mailto:${c.email}?subject=${encodeURIComponent(`[Member] ${c.subject}: ${form.titolo || "senza titolo"}`)}&body=${encodeURIComponent(body)}`;
+    const href = `mailto:${c.email}?subject=${encodeURIComponent(`${c.subject}: ${form.titolo || "senza titolo"}`)}&body=${encodeURIComponent(body)}`;
     window.location.href = href;
     setSent(true);
     setTimeout(() => setSent(false), 5000);
@@ -108,15 +107,6 @@ export function ProposalForm({ kind }: { kind: Kind }) {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-xs text-muted-foreground">
-            Non sei ancora Member?{" "}
-            <a
-              href="/member"
-              className="inline-flex items-center gap-1 font-semibold text-foreground underline-offset-4 hover:underline"
-            >
-              Scopri come diventarlo <ArrowRight className="inline h-3.5 w-3.5" />
-            </a>
-          </p>
         </div>
 
         <SpotlightCard className="glass-panel rounded-3xl p-6 md:p-8">

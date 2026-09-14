@@ -8,7 +8,6 @@ import todaroPhoto from "../assets/andrea-todaro.jpg.asset.json";
 import motorhouseWhite from "../assets/motorhouse-white.png.asset.json";
 import { NewsletterBanner } from "../components/newsletter-banner";
 import { SpotlightCard } from "../components/spotlight-card";
-import { PackagesSection } from "../components/packages-section";
 import { PhotoBadge } from "../components/photo-badge";
 import { HeroBanner } from "../components/hero-banner";
 
@@ -483,6 +482,29 @@ function MemberPage() {
       </HeroBanner>
 
       <div className="page-inverted member-inverted">
+        <section className="container-im section-editorial section-pad">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+              I Partner ufficiali di IMLAND Experience
+            </p>
+            <h1 className="mt-3 text-h1-im">Perché diventare Member</h1>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+              Diventare Member significa entrare nel cuore di una rete di imprenditori e
+              professionisti del territorio, creare nuove relazioni, partecipare a eventi esclusivi
+              e accedere a vantaggi dedicati. Una presenza continua nell’ecosistema IMLAND, con più
+              occasioni per farsi conoscere, raccontare la propria realtà e dare visibilità a
+              progetti, novità e iniziative attraverso radio, news e contenuti sul sito.
+            </p>
+            <a
+              href={WHATSAPP_MEMBER_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-7 inline-flex rounded-full btn-blue px-6 py-3.5 text-sm"
+            >
+              Sei un’azienda o un professionista? Diventa Member
+            </a>
+          </div>
+        </section>
         {/* RETE MEMBER — DriftWall */}
         <section className="section-focus">
           <div className="container-im section-pad">
@@ -549,14 +571,6 @@ function MemberPage() {
                   Clicca una copertina per scoprire la loro storia e i loro contatti.
                 </p>
               </div>
-              <a
-                href="https://imlandradio.it/members-wall/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-medium text-foreground hover:bg-white/20"
-              >
-                Vedi il muro originale <ArrowRight className="inline h-4 w-4" />
-              </a>
             </div>
 
             <p className="mt-4 text-xs text-foreground/60">
@@ -728,7 +742,7 @@ function MemberPage() {
                                     onClick={(e) => e.stopPropagation()}
                                     className="inline-flex items-center justify-center gap-0.5 truncate rounded-full bg-signal px-2.5 py-1 text-center text-[11px] font-semibold text-white hover:opacity-90"
                                   >
-                                    Contatti <ArrowRight className="inline h-3 w-3" />
+                                    Visita il sito <ArrowRight className="inline h-3 w-3" />
                                   </a>
                                 ) : (
                                   <span className="block rounded-full border border-white/30 px-2.5 py-1 text-center text-[11px] text-foreground/70">
@@ -821,7 +835,7 @@ function MemberPage() {
         </section>
 
         {/* COSA RICEVI */}
-        <section className="section-focus">
+        <section className="hidden">
           <div className="container-im section-pad">
             <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
               <div>
@@ -852,7 +866,7 @@ function MemberPage() {
         </section>
 
         {/* PACCHETTI MEMBER */}
-        <section id="pacchetti" className="container-im section-canvas section-pad">
+        <section id="pacchetti" className="hidden">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-wider text-signal">
               Pacchetti Member
@@ -1030,7 +1044,7 @@ function MemberPage() {
         </section>
 
         {/* EVENTI DEDICATI AI MEMBER */}
-        <section className="container-im section-atmosphere section-pad">
+        <section className="hidden">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
@@ -1146,17 +1160,17 @@ function MemberPage() {
               {
                 n: "01",
                 t: "Richiesta",
-                d: "Ci scrivi chi sei e cosa vuoi raccontare. Rispondiamo entro due giorni lavorativi.",
+                d: "L’azienda o il professionista prende contatto con IMLAND e racconta la propria realtà e gli obiettivi.",
               },
               {
                 n: "02",
-                t: "Colloquio e onboarding",
-                d: "Una call per scegliere il pacchetto giusto e costruire il piano di visibilità.",
+                t: "Confronto",
+                d: "Ci si sente direttamente per spiegare il funzionamento della Membership, i vantaggi e le opportunità più pertinenti.",
               },
               {
                 n: "03",
                 t: "Attivazione",
-                d: "Vai in onda: spot, rubrica, podcast o presenza agli eventi del territorio.",
+                d: "Ingresso nella rete Member e attivazione delle opportunità concordate.",
               },
             ].map((s) => (
               <li key={s.n} className="rounded-3xl border border-outline bg-card p-6">
@@ -1168,20 +1182,14 @@ function MemberPage() {
           </ol>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/contatti" className="rounded-full btn-blue px-6 py-3.5 text-sm">
-              Richiedi informazioni
-            </Link>
-            <Link
-              to="/accedi"
-              className="rounded-full border border-outline bg-card px-6 py-3.5 text-sm font-semibold"
-            >
-              Accedi all'area riservata
+              Diventa Member
             </Link>
           </div>
         </section>
 
         {/* CTA FINALE */}
 
-        <section className="container-im section-closing section-pad">
+        <section className="hidden">
           <div className="glass-panel relative overflow-hidden rounded-[36px] p-10 md:p-14">
             <div className="relative z-10 max-w-2xl">
               <h2 className="text-h2-im">
@@ -1208,8 +1216,6 @@ function MemberPage() {
             </div>
           </div>
         </section>
-
-        <PackagesSection kind="member" />
 
         <NewsletterBanner
           eyebrow="Newsletter Member"

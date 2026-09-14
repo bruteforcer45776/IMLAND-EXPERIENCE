@@ -49,7 +49,7 @@ function GeneratedArticlesSection() {
   const [scope, setScope] = useState<"all" | "piemonte" | "italia">("all");
   const { data: articlesData } = useQuery({
     queryKey: ["generated-articles", scope],
-    queryFn: () => fetchArticles({ data: { scope, limit: 6 } }),
+    queryFn: () => fetchArticles({ data: { scope, limit: 9 } }),
     staleTime: 5 * 60_000,
   });
   const { data: categories } = useQuery({
@@ -158,7 +158,7 @@ export const Route = createFileRoute("/news")({
   component: NewsPage,
 });
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 9;
 
 function NewsPage() {
   const fetchNews = useServerFn(getTerritoryNews);
@@ -231,7 +231,7 @@ function NewsPage() {
                   Aggiornamento non disponibile in questo momento.
                 </p>
               )}
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="hidden">
                 <Link
                   to="/contatti"
                   className="inline-flex items-center justify-center rounded-full btn-blue px-6 py-3 text-sm"
@@ -298,7 +298,7 @@ function NewsPage() {
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                  Ultime notizie
+                  Le notizie dei protagonisti del nostro territorio
                 </p>
                 <h2 className="mt-4 text-h2-im">
                   Tutto quello che <span className="im-gradient-text">accade</span>.
