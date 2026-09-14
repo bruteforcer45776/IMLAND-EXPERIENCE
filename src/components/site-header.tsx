@@ -118,7 +118,7 @@ export function SiteHeader() {
               decoding="async"
               src={logo.url}
               alt={logo.alt}
-              className="h-10 w-auto md:h-11"
+              className="h-9 w-auto max-w-[150px] object-contain md:h-10 md:max-w-[190px]"
               width={1000}
               height={500}
             />
@@ -137,7 +137,7 @@ export function SiteHeader() {
                     onMouseEnter={() => setDropdown(item.to)}
                     aria-expanded={dropdown === item.to}
                     aria-haspopup="true"
-                    className="inline-flex items-center gap-1 rounded-full px-4 py-2 text-[15px] font-semibold text-ink-600 transition-colors hover:bg-muted hover:text-ink-800"
+                    className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-[15px] font-semibold text-ink-600 transition-colors hover:bg-muted hover:text-ink-800"
                   >
                     {item.label}
                     <ChevronDown
@@ -148,7 +148,7 @@ export function SiteHeader() {
                 ) : (
                   <Link
                     to={item.to}
-                    className="relative inline-flex items-center rounded-full px-4 py-2 text-[15px] font-semibold text-ink-600 transition-colors hover:bg-muted hover:text-ink-800"
+                    className="relative inline-flex items-center rounded-full px-3 py-2 text-[15px] font-semibold text-ink-600 transition-colors hover:bg-muted hover:text-ink-800"
                     activeProps={{ className: "text-ink-950" }}
                   >
                     {item.label}
@@ -187,7 +187,7 @@ export function SiteHeader() {
             <form
               onSubmit={submitSearch}
               role="search"
-              className="hidden items-center gap-2 rounded-full border border-border bg-muted px-4 py-1.5 lg:flex"
+              className="hidden items-center gap-2 rounded-full border border-border bg-muted px-4 py-1.5 2xl:flex"
             >
               <Search size={18} className="shrink-0 text-ink-400" aria-hidden />
               <label htmlFor="header-search" className="sr-only">
@@ -198,7 +198,7 @@ export function SiteHeader() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Cerca podcast, eventi, news…"
-                className="h-8 w-[210px] bg-transparent text-[14px] outline-none placeholder:text-ink-400"
+                className="h-8 w-[180px] bg-transparent text-[14px] outline-none placeholder:text-ink-400"
                 autoComplete="off"
               />
             </form>
@@ -206,7 +206,7 @@ export function SiteHeader() {
             <Link
               to="/cerca"
               aria-label="Cerca"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-600 transition-colors hover:bg-muted md:h-11 md:w-11 lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-600 transition-colors hover:bg-muted md:h-11 md:w-11 2xl:hidden"
             >
               <Search size={22} />
             </Link>
@@ -293,7 +293,7 @@ export function SiteHeader() {
                   decoding="async"
                   src={logo.url}
                   alt={logo.alt}
-                  className="h-10 w-auto"
+                  className="h-9 w-auto max-w-[170px] object-contain"
                   width={1000}
                   height={500}
                 />

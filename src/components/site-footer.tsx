@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
-import logoBlack from "@/assets/imland-logo-experience.png.asset.json";
+import logoBlack from "@/assets/imland-logo-experience-cropped.png.asset.json";
 
 const provinces = ["Vercelli", "Novara", "Biella", "Verbania (VCO)"];
 
@@ -87,7 +87,7 @@ export function SiteFooter() {
             decoding="async"
             src={logoBlack.url}
             alt="IMLAND EXPERIENCE"
-            className="h-10 w-auto"
+            className="h-12 w-auto max-w-[210px] object-contain"
             width={1248}
             height={1248}
           />

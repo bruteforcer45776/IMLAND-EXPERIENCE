@@ -1995,17 +1995,17 @@ p {
    layout resta proporzionato su ogni dispositivo.
    ============================================================ */
 html {
-  font-size: 81.25%;
-} /* 13px base: interfaccia globale più compatta */
+  font-size: 100%;
+} /* 16px base: scala leggibile e coerente in tutto il sito */
 @media (min-width: 1280px) {
   html {
-    font-size: 82.5%;
-  } /* ~13.2px anche sui desktop grandi */
+    font-size: 100%;
+  }
 }
 @media (max-width: 767px) {
   html {
-    font-size: 78.125%;
-  } /* 12.5px su mobile */
+    font-size: 100%;
+  }
 }
 
 /* Spaziature e forme allineate alla nuova scala tipografica:

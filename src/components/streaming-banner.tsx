@@ -21,6 +21,16 @@ export const streamingPlatforms = [
     icon: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/amazonmusic.svg",
     url: "https://music.amazon.it/search/IMLAND",
   },
+  {
+    name: "TuneIn",
+    icon: "https://cdn.simpleicons.org/tunein/14D8CC",
+    url: "https://tunein.com/radio/Imland-Radio-s357176/",
+  },
+  {
+    name: "myTuner Radio",
+    icon: "https://mytuner-radio.com/favicon.ico",
+    url: "https://mytuner-radio.com/it/radio/imland-radio-508202/",
+  },
 ];
 
 export function StreamingBanner({
@@ -52,7 +62,7 @@ export function StreamingBanner({
             <img
               src={p.icon}
               alt={p.name}
-              className={cn("opacity-85 hover:opacity-100", iconClassName)}
+              className={cn("object-contain opacity-85 hover:opacity-100", iconClassName)}
               loading="lazy"
             />
           </a>

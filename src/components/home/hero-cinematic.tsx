@@ -57,15 +57,7 @@ export function HeroCinematic() {
       />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 flex-col items-center justify-center px-4 pb-16 pt-4 text-center md:px-10 md:pb-24 md:pt-6">
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/85 px-4 py-1.5 text-[13px] font-semibold text-ink-700 shadow-sm backdrop-blur">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-im-green opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-im-green" />
-          </span>
-          Radio, podcast ed eventi del territorio
-        </span>
-
-        <h1 className="text-display-l mt-6 max-w-4xl text-ink-950">
+        <h1 className="text-display-l max-w-4xl text-ink-950">
           Dai voce al tuo <span>territorio</span>
         </h1>
 
@@ -100,14 +92,11 @@ export function HeroCinematic() {
           </Link>
         </div>
 
-        <p className="mt-8 text-[13px] font-medium text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]">
-          Diretta radio 24/7 · Podcast on demand · Eventi dal vivo
-        </p>
       </div>
 
-      <div className="absolute bottom-6 right-6 z-20 hidden items-center gap-3 rounded-full border border-white/45 bg-white/90 px-4 py-2 shadow-sm backdrop-blur-sm md:flex">
+      <div className="absolute bottom-6 right-6 z-20 hidden items-center gap-3 rounded-2xl border border-white/45 bg-white/92 px-4 py-3 shadow-lg backdrop-blur-sm md:flex">
         <span className="text-xs font-semibold uppercase tracking-wider text-ink-600">
-          Ascoltaci su:
+          Ascoltaci anche su
         </span>
         <div className="flex items-center gap-2">
           {streamingPlatforms.map((p) => (
@@ -117,9 +106,9 @@ export function HeroCinematic() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={p.name}
-              className="h-6 w-6 transition-transform hover:scale-110"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-white p-1 transition-transform hover:scale-110"
             >
-              <img src={p.icon} alt={p.name} className="h-full w-full" loading="lazy" />
+              <img src={p.icon} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
             </a>
           ))}
         </div>
