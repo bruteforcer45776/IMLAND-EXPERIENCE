@@ -20,6 +20,14 @@ export type PodcastProgram = {
   episodes: PodcastEpisode[];
 };
 
+import coverAssaggi from "../assets/cover-assaggi.webp.asset.json";
+import coverCartaCanta from "../assets/cover-carta-canta.webp.asset.json";
+import coverGrigliataMista from "../assets/cover-grigliata-mista.webp.asset.json";
+import coverImWeekend from "../assets/cover-imweekend.webp.asset.json";
+import coverIstruzioni from "../assets/cover-istruzioni-per-luso.webp.asset.json";
+import coverStuzzicaziende from "../assets/cover-stuzzicaziende.webp.asset.json";
+import coverTerraDiamanti from "../assets/cover-terra-di-diamanti.webp.asset.json";
+
 const feed = (slug: string) => `https://imlandradio.it/podcastfilter/${slug}/feed/`;
 const source = (slug: string) => `https://imlandradio.it/podcastfilter/${slug}/`;
 
@@ -29,7 +37,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Carta Canta Import",
     tagline: "Libri, autori e storie culturali dal territorio IMLAND.",
     cat: "Cultura",
-    cover: "",
+    cover: coverCartaCanta.url,
     sourceUrl: source("carta-canta-import"),
     rssUrl: feed("carta-canta-import"),
     publishedEpisodes: 22,
@@ -40,7 +48,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Istruzioni per l'uso import",
     tagline: "Conversazioni pratiche con professionisti, imprese e voci del territorio.",
     cat: "Business",
-    cover: "",
+    cover: coverIstruzioni.url,
     sourceUrl: source("istruzioni-per-l-uso-import"),
     rssUrl: feed("istruzioni-per-l-uso-import"),
     publishedEpisodes: 18,
@@ -51,7 +59,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Stuzzicaziende Import",
     tagline: "Aziende locali raccontate attraverso persone, filiere e scelte d'impresa.",
     cat: "Business",
-    cover: "",
+    cover: coverStuzzicaziende.url,
     sourceUrl: source("stuzzicaziende-import"),
     rssUrl: feed("stuzzicaziende-import"),
     publishedEpisodes: 15,
@@ -62,7 +70,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Terra di Diamanti Import",
     tagline: "Storie e luoghi del territorio, tra cultura locale e identita piemontese.",
     cat: "Cultura",
-    cover: "",
+    cover: coverTerraDiamanti.url,
     sourceUrl: source("terra-di-diamaanti-import"),
     rssUrl: feed("terra-di-diamaanti-import"),
     publishedEpisodes: 13,
@@ -73,7 +81,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Stuzzicaziende",
     tagline: "Imprese, artigiani e attivita del territorio in formato intervista.",
     cat: "Business",
-    cover: "",
+    cover: coverStuzzicaziende.url,
     sourceUrl: source("stuzzicaziende"),
     rssUrl: feed("stuzzicaziende"),
     publishedEpisodes: 12,
@@ -95,7 +103,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Terra di Diamanti",
     tagline: "Racconti, territorio e identita locale dal Piemonte nord-orientale.",
     cat: "Cultura",
-    cover: "",
+    cover: coverTerraDiamanti.url,
     sourceUrl: source("terra-di-diamanti"),
     rssUrl: feed("terra-di-diamanti"),
     publishedEpisodes: 8,
@@ -128,7 +136,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Assaggi Import",
     tagline: "Sapori, produttori e cultura dell'assaggio raccontati da IMLAND.",
     cat: "Cibo",
-    cover: "",
+    cover: coverAssaggi.url,
     sourceUrl: source("assaggi-import"),
     rssUrl: feed("assaggi-import"),
     publishedEpisodes: 5,
@@ -139,7 +147,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Grigliata Mista Import",
     tagline: "Voci, storie e attualita del territorio in forma diretta.",
     cat: "Lifestyle",
-    cover: "",
+    cover: coverGrigliataMista.url,
     sourceUrl: source("grigliata-mista-import"),
     rssUrl: feed("grigliata-mista-import"),
     publishedEpisodes: 5,
@@ -161,7 +169,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Grigliata Mista",
     tagline: "Attualita, associazioni e storie locali raccontate senza filtri.",
     cat: "Lifestyle",
-    cover: "",
+    cover: coverGrigliataMista.url,
     sourceUrl: source("grigliata-mista"),
     rssUrl: feed("grigliata-mista"),
     publishedEpisodes: 3,
@@ -172,7 +180,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "IM WEEKEND import",
     tagline: "Eventi, serate e idee per vivere il weekend nel territorio.",
     cat: "Weekend",
-    cover: "",
+    cover: coverImWeekend.url,
     sourceUrl: source("im-weekend-import"),
     rssUrl: feed("im-weekend-import"),
     publishedEpisodes: 3,
@@ -183,7 +191,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Assaggi",
     tagline: "Cibo, vino, produttori e percorsi del gusto.",
     cat: "Cibo",
-    cover: "",
+    cover: coverAssaggi.url,
     sourceUrl: source("assaggi"),
     rssUrl: feed("assaggi"),
     publishedEpisodes: 2,
@@ -205,7 +213,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "IMWEEKEND",
     tagline: "Agenda e racconti per il fine settimana IMLAND.",
     cat: "Weekend",
-    cover: "",
+    cover: coverImWeekend.url,
     sourceUrl: source("imweekend"),
     rssUrl: feed("imweekend"),
     publishedEpisodes: 1,

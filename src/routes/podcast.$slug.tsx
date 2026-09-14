@@ -1,10 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SpotlightCard } from "../components/spotlight-card";
 import { EpisodePlayButton, PodcastMiniPlayer } from "../components/podcast-audio";
 import { PodcastFeedPlayer } from "../components/podcast-feed-player";
 import { programs as allPrograms } from "../data/podcast-derived";
+import {
+  getPodcastFeedEpisodes,
+  type PodcastFeedEpisode,
+} from "../lib/podcast-feed.functions";
 
 export const Route = createFileRoute("/podcast/$slug")({
   loader: async ({ params }) => {
@@ -53,8 +57,36 @@ const PAGE_SIZE = 6;
 function ProgramPage() {
   const { program } = Route.useLoaderData();
   const [visible, setVisible] = useState(PAGE_SIZE);
+  const [feedEpisodes, setFeedEpisodes] = useState<PodcastFeedEpisode[]>([]);
+  const [loadingEpisodes, setLoadingEpisodes] = useState(program.episodes.length === 0);
 
-  const dates = program.episodes
+  useEffect(() => {
+    let active = true;
+    if (program.episodes.length > 0) {
+      setFeedEpisodes([]);
+      setLoadingEpisodes(false);
+      return () => {
+        active = false;
+      };
+    }
+
+    setLoadingEpisodes(true);
+    getPodcastFeedEpisodes({ data: { slug: program.slug, limit: program.publishedEpisodes } })
+      .then((episodes) => active && setFeedEpisodes(episodes))
+      .catch(() => active && setFeedEpisodes([]))
+      .finally(() => active && setLoadingEpisodes(false));
+
+    return () => {
+      active = false;
+    };
+  }, [program.episodes.length, program.publishedEpisodes, program.slug]);
+
+  const episodes = program.episodes.length > 0 ? program.episodes : feedEpisodes;
+  const hasLocalEpisodes = program.episodes.length > 0;
+  const episodeCover = (ep: (typeof episodes)[number]) =>
+    "image" in ep && ep.image ? ep.image : "cover" in ep && ep.cover ? ep.cover : program.cover;
+
+  const dates = episodes
     .map((e: (typeof program.episodes)[number]) => e.date)
     .filter(Boolean) as string[];
   const toTime = (d: string) => {
@@ -124,23 +156,21 @@ function ProgramPage() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 className="text-h2-im">Episodi</h2>
           <span className="text-xs text-muted-foreground">
-            {Math.min(visible, program.episodes.length)} di {program.episodes.length} mostrati
+            {loadingEpisodes
+              ? "Caricamento episodi"
+              : `${Math.min(visible, episodes.length)} di ${episodes.length} mostrati`}
           </span>
         </div>
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {program.episodes
+          {episodes
             .slice(0, visible)
-            .map((ep: (typeof program.episodes)[number], i: number) => (
+            .map((ep: (typeof episodes)[number], i: number) => (
               <div key={ep.slug} className="relative">
-                <Link
-                  to="/podcast/$slug/$episode"
-                  params={{ slug: program.slug, episode: ep.slug }}
-                  className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 rounded-3xl"
-                >
+                <div className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 rounded-3xl">
                   <SpotlightCard className="flex h-full flex-col overflow-hidden glass-panel rounded-3xl transition-all hover:-translate-y-0.5 hover:shadow-lg">
                     <div className="relative aspect-square w-full overflow-hidden bg-signal flex items-center justify-center">
                       <img
-                        src={program.cover}
+                        src={episodeCover(ep)}
                         alt={ep.title}
                         loading="lazy"
                         className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
@@ -165,14 +195,24 @@ function ProgramPage() {
                         </p>
                       )}
                       <div className="mt-auto flex items-center justify-between pt-5">
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-signal">
-                          Apri episodio <ArrowRight className="inline h-4 w-4" />
-                        </span>
+                        {hasLocalEpisodes ? (
+                          <Link
+                            to="/podcast/$slug/$episode"
+                            params={{ slug: program.slug, episode: ep.slug }}
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-signal"
+                          >
+                            Apri episodio <ArrowRight className="inline h-4 w-4" />
+                          </Link>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-signal">
+                            Ascolta episodio
+                          </span>
+                        )}
                         <span className="text-xs text-muted-foreground">{ep.duration ?? ""}</span>
                       </div>
                     </div>
                   </SpotlightCard>
-                </Link>
+                </div>
                 <div className="absolute bottom-4 right-4">
                   <EpisodePlayButton
                     track={{
@@ -181,20 +221,25 @@ function ProgramPage() {
                       program: program.name,
                       programSlug: program.slug,
                       episodeSlug: ep.slug,
-                      cover: program.cover,
+                      cover: episodeCover(ep),
                     }}
                   />
                 </div>
               </div>
             ))}
-          {program.episodes.length === 0 && (
+          {!loadingEpisodes && episodes.length === 0 && (
             <p className="col-span-full rounded-3xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">
               Le puntate complete saranno disponibili qui a breve. Puoi già ascoltare l’ultima
               uscita dal player in alto.
             </p>
           )}
+          {loadingEpisodes && (
+            <p className="col-span-full rounded-3xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">
+              Caricamento degli episodi del canale…
+            </p>
+          )}
         </div>
-        {visible < program.episodes.length && (
+        {visible < episodes.length && (
           <div className="mt-8 text-center">
             <button
               onClick={() => setVisible((v) => v + PAGE_SIZE)}
