@@ -120,7 +120,7 @@ export function SiteHeader() {
       const currentY = window.scrollY;
       setScrolled(currentY > 16);
 
-      if (window.matchMedia("(max-width: 767px)").matches && !open) {
+      if (!open && !launcher) {
         if (currentY <= 48) {
           setHeaderHidden(false);
         } else if (currentY > lastScrollY.current + 4) {
@@ -137,12 +137,12 @@ export function SiteHeader() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [open]);
+  }, [launcher, open]);
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-40 transition-all duration-medium ${headerHidden ? "mobile-header-hidden" : ""} ${
+        className={`fixed inset-x-0 top-0 z-40 transition-all duration-medium ${headerHidden ? "site-header-hidden" : ""} ${
           scrolled
             ? "bg-white/92 shadow-[0_1px_3px_rgba(16,17,20,0.06)] backdrop-blur-xl"
             : "bg-white/80 backdrop-blur-md"
