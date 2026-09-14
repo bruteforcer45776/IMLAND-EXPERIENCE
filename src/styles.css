@@ -2,6 +2,12 @@
 @source "../src";
 @import "tw-animate-css";
 
+.site-glass-header {
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  backdrop-filter: blur(20px) saturate(120%);
+}
+
 /* Cornice editoriale IMLAND: la pagina scorre, la grafica resta ferma. */
 .editorial-frame-page { position: relative; min-height: 100vh; isolation: isolate; }
 .editorial-frame-backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #22a9f2; pointer-events: none; }

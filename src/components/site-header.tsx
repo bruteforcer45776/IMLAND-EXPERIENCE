@@ -100,10 +100,8 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-40 transition-all duration-medium ${
-          scrolled
-            ? "bg-white/92 shadow-[0_1px_3px_rgba(16,17,20,0.06)] backdrop-blur-xl"
-            : "bg-white/80 backdrop-blur-md"
+        className={`site-glass-header fixed inset-x-0 top-0 z-40 transition-all duration-medium ${
+          scrolled ? "shadow-[0_12px_36px_rgba(0,0,0,0.22)]" : "shadow-[0_6px_24px_rgba(0,0,0,0.12)]"
         }`}
         style={{
           // banda contestuale: assume il colore della verticale corrente
@@ -118,7 +116,7 @@ export function SiteHeader() {
               decoding="async"
               src={logo.url}
               alt={logo.alt}
-              className="h-9 w-auto max-w-[150px] object-contain md:h-10 md:max-w-[190px]"
+              className="h-9 w-auto max-w-[150px] object-contain drop-shadow-[0_1px_2px_rgba(255,255,255,0.45)] md:h-10 md:max-w-[190px]"
               width={1000}
               height={500}
             />
@@ -137,7 +135,7 @@ export function SiteHeader() {
                     onMouseEnter={() => setDropdown(item.to)}
                     aria-expanded={dropdown === item.to}
                     aria-haspopup="true"
-                    className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-[15px] font-semibold text-ink-600 transition-colors hover:bg-muted hover:text-ink-800"
+                    className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-[15px] font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
                   >
                     {item.label}
                     <ChevronDown
@@ -148,8 +146,8 @@ export function SiteHeader() {
                 ) : (
                   <Link
                     to={item.to}
-                    className="relative inline-flex items-center rounded-full px-3 py-2 text-[15px] font-semibold text-ink-600 transition-colors hover:bg-muted hover:text-ink-800"
-                    activeProps={{ className: "text-ink-950" }}
+                    className="relative inline-flex items-center rounded-full px-3 py-2 text-[15px] font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                    activeProps={{ className: "text-white" }}
                   >
                     {item.label}
                   </Link>
@@ -187,9 +185,9 @@ export function SiteHeader() {
             <form
               onSubmit={submitSearch}
               role="search"
-              className="hidden items-center gap-2 rounded-full border border-border bg-muted px-4 py-1.5 2xl:flex"
+              className="hidden items-center gap-2 rounded-full border border-white/20 bg-black/20 px-4 py-1.5 2xl:flex"
             >
-              <Search size={18} className="shrink-0 text-ink-400" aria-hidden />
+              <Search size={18} className="shrink-0 text-white/70" aria-hidden />
               <label htmlFor="header-search" className="sr-only">
                 Cerca su IMLAND
               </label>
@@ -198,7 +196,7 @@ export function SiteHeader() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Cerca podcast, eventi, news…"
-                className="h-8 w-[180px] bg-transparent text-[14px] outline-none placeholder:text-ink-400"
+                className="h-8 w-[180px] bg-transparent text-[14px] text-white outline-none placeholder:text-white/60"
                 autoComplete="off"
               />
             </form>
@@ -206,7 +204,7 @@ export function SiteHeader() {
             <Link
               to="/cerca"
               aria-label="Cerca"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-600 transition-colors hover:bg-muted md:h-11 md:w-11 2xl:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white/85 transition-colors hover:bg-white/10 hover:text-white md:h-11 md:w-11 2xl:hidden"
             >
               <Search size={22} />
             </Link>
@@ -232,7 +230,7 @@ export function SiteHeader() {
                 aria-label="Tutti i servizi IMLAND"
                 aria-expanded={launcher}
                 aria-haspopup="true"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink-700 transition-colors hover:bg-muted"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-white/85 transition-colors hover:bg-white/10 hover:text-white"
               >
                 <LayoutGrid size={22} />
               </button>
@@ -257,7 +255,7 @@ export function SiteHeader() {
               onClick={() => setOpen((v) => !v)}
               aria-label="Menu"
               aria-expanded={open}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-950 transition-colors hover:bg-muted md:h-11 md:w-11"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 md:h-11 md:w-11"
             >
               <svg
                 viewBox="0 0 24 24"
