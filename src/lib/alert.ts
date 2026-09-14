@@ -131,7 +131,12 @@ export const ALERT_TYPE_FIELDS: Record<string, AlertField[]> = {
   ],
   "informazione-errata": [
     { name: "riferimento", label: "Link del contenuto da correggere", kind: "url", required: true },
-    { name: "correzione", label: "Qual è l'informazione corretta", kind: "textarea", required: true },
+    {
+      name: "correzione",
+      label: "Qual è l'informazione corretta",
+      kind: "textarea",
+      required: true,
+    },
   ],
   storia: [
     { name: "protagonista", label: "Chi è il protagonista", kind: "text", required: true },
@@ -242,9 +247,12 @@ export function runAlertChecks(draft: AlertDraftInput): AlertCheck[] {
   const body = draft.body.trim();
 
   if (!draft.alertType) checks.push({ level: "error", message: "Scegli di cosa si tratta." });
-  if (title.length < 5) checks.push({ level: "error", message: "Il titolo deve avere almeno 5 caratteri." });
-  if (body.length < 20) checks.push({ level: "error", message: "Racconta cosa accade con almeno 20 caratteri." });
-  if (!draft.comune) checks.push({ level: "error", message: "Indica il Comune a cui si riferisce." });
+  if (title.length < 5)
+    checks.push({ level: "error", message: "Il titolo deve avere almeno 5 caratteri." });
+  if (body.length < 20)
+    checks.push({ level: "error", message: "Racconta cosa accade con almeno 20 caratteri." });
+  if (!draft.comune)
+    checks.push({ level: "error", message: "Indica il Comune a cui si riferisce." });
 
   for (const field of fieldsForType(draft.alertType)) {
     if (field.required && !(draft.payload?.[field.name] ?? "").trim()) {
@@ -254,7 +262,10 @@ export function runAlertChecks(draft: AlertDraftInput): AlertCheck[] {
 
   const letters = title.replace(/[^A-Za-zÀ-ÿ]/g, "");
   if (letters.length > 6 && letters === letters.toUpperCase()) {
-    checks.push({ level: "warning", message: "Il titolo è tutto in maiuscolo: scrivilo in forma normale." });
+    checks.push({
+      level: "warning",
+      message: "Il titolo è tutto in maiuscolo: scrivilo in forma normale.",
+    });
   }
   if (/!{2,}|\?{2,}/.test(title)) {
     checks.push({ level: "warning", message: "Togli i punti esclamativi ripetuti dal titolo." });
@@ -263,13 +274,17 @@ export function runAlertChecks(draft: AlertDraftInput): AlertCheck[] {
     checks.push({ level: "warning", message: "Più dettagli rendono la verifica più rapida." });
   }
   if (!draft.contactEmail) {
-    checks.push({ level: "warning", message: "Senza un'email non possiamo ricontattarti per un chiarimento." });
+    checks.push({
+      level: "warning",
+      message: "Senza un'email non possiamo ricontattarti per un chiarimento.",
+    });
   }
   const lower = `${title} ${body}`.toLowerCase();
   if (SENSITIVE_WORDS.some((w) => lower.includes(w))) {
     checks.push({
       level: "warning",
-      message: "Il tema è delicato: verrà valutato da una persona della redazione prima di ogni pubblicazione.",
+      message:
+        "Il tema è delicato: verrà valutato da una persona della redazione prima di ogni pubblicazione.",
     });
   }
   return checks;

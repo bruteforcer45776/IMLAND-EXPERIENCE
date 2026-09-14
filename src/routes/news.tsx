@@ -18,8 +18,6 @@ import heroNewsMobile from "@/assets/hero-news-mobile.webp";
 import { PageRails } from "../components/decor";
 import { BentoGrid, BentoLinkCard, BentoAnchorCard } from "../components/bento";
 
-
-
 const TOPICS = [
   { key: "territorio", label: "Territorio" },
   { key: "eventi", label: "Eventi" },
@@ -71,7 +69,9 @@ function GeneratedArticlesSection() {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">Dalla redazione IMLAND</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+              Dalla redazione IMLAND
+            </p>
             <h2 className="mt-4 text-h2-im">
               Notizie <span className="im-gradient-text">elaborate</span> per il territorio.
             </h2>
@@ -109,7 +109,10 @@ function GeneratedArticlesSection() {
                 </span>
                 {a.published_at && (
                   <span className="text-xs text-muted-foreground/70">
-                    {new Date(a.published_at).toLocaleDateString("it-IT", { day: "numeric", month: "short" })}
+                    {new Date(a.published_at).toLocaleDateString("it-IT", {
+                      day: "numeric",
+                      month: "short",
+                    })}
                   </span>
                 )}
               </div>
@@ -135,7 +138,11 @@ export const Route = createFileRoute("/news")({
         content:
           "Ultime notizie da Vercelli, Novara, Biella e Verbania: territorio, musica, eventi, cultura ed economia, aggiornate dalle testate locali.",
       },
-      { name: "keywords", content: "news Vercelli, news Novara, news Biella, news Verbania, notizie Piemonte, eventi, musica" },
+      {
+        name: "keywords",
+        content:
+          "news Vercelli, news Novara, news Biella, news Verbania, notizie Piemonte, eventi, musica",
+      },
       { name: "geo.region", content: "IT-PIE" },
       { property: "og:title", content: "News dal territorio: Vercelli, Novara, Biella e Verbania" },
       {
@@ -178,7 +185,14 @@ function NewsPage() {
     <>
       <NewsDisclaimerModal />
       <PageRails variant="news" />
-      <HeroBanner src={heroNews} srcMobile={heroNewsMobile} alt="Le notizie che danno voce al territorio — IMLAND News" ctaTop="64%" flush mobileBg="#7C3AED">
+      <HeroBanner
+        src={heroNews}
+        srcMobile={heroNewsMobile}
+        alt="Le notizie che danno voce al territorio — IMLAND News"
+        ctaTop="64%"
+        flush
+        mobileBg="#7C3AED"
+      >
         {TOPICS.map((t) => (
           <button
             key={t.key}
@@ -186,9 +200,7 @@ function NewsPage() {
             onClick={() => changeTopic(t.key)}
             aria-pressed={topic === t.key}
             className={`rounded-full px-5 py-2.5 text-sm font-semibold shadow-lg transition ${
-              topic === t.key
-                ? "bg-signal text-white"
-                : "bg-white text-ink-950 hover:bg-white/90"
+              topic === t.key ? "bg-signal text-white" : "bg-white text-ink-950 hover:bg-white/90"
             }`}
           >
             {t.label}
@@ -196,225 +208,214 @@ function NewsPage() {
         ))}
       </HeroBanner>
 
-      
-
       <div className="page-inverted news-inverted">
-
-      {/* In evidenza */}
-      <section className="section-focus px-4 pt-6 pb-[var(--space-section)] md:px-8 md:pt-10 md:pb-[var(--space-section-lg)]">
-        <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">In evidenza</p>
-            <h2 className="mt-4 text-h2-im">
-              Le storie che{" "}
-              <span className="im-gradient-text">contano</span>.
-            </h2>
-            <p className="mt-6 whitespace-pre-line text-base text-muted-foreground md:text-lg">
-              Una selezione dai titoli più recenti.
-              {"\n"}Aggiornata ogni volta che il territorio si muove.
-            </p>
-            <div className="mt-6">
-              <SectionSearch label="news" placeholder="Cerca una news, un podcast, un evento…" />
-            </div>
-            {isError && (
-              <p className="mt-3 text-sm text-muted-foreground/70">
-                Aggiornamento non disponibile in questo momento.
+        {/* In evidenza */}
+        <section className="section-focus px-4 pt-6 pb-[var(--space-section)] md:px-8 md:pt-10 md:pb-[var(--space-section-lg)]">
+          <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-2">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                In evidenza
               </p>
-            )}
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/contatti"
-                className="inline-flex items-center justify-center rounded-full btn-blue px-6 py-3 text-sm"
-              >
-                Proponi una news
-              </Link>
-              <Link
-                to="/radio"
-                className="inline-flex items-center justify-center rounded-full btn-ghost-glass px-6 py-3 text-sm"
-              >
-                Ascolta la radio
-              </Link>
+              <h2 className="mt-4 text-h2-im">
+                Le storie che <span className="im-gradient-text">contano</span>.
+              </h2>
+              <p className="mt-6 whitespace-pre-line text-base text-muted-foreground md:text-lg">
+                Una selezione dai titoli più recenti.
+                {"\n"}Aggiornata ogni volta che il territorio si muove.
+              </p>
+              <div className="mt-6">
+                <SectionSearch label="news" placeholder="Cerca una news, un podcast, un evento…" />
+              </div>
+              {isError && (
+                <p className="mt-3 text-sm text-muted-foreground/70">
+                  Aggiornamento non disponibile in questo momento.
+                </p>
+              )}
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="/contatti"
+                  className="inline-flex items-center justify-center rounded-full btn-blue px-6 py-3 text-sm"
+                >
+                  Proponi una news
+                </Link>
+                <Link
+                  to="/radio"
+                  className="inline-flex items-center justify-center rounded-full btn-ghost-glass px-6 py-3 text-sm"
+                >
+                  Ascolta la radio
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative h-[420px] md:h-[460px]">
+              {isPending || featured.length === 0 ? (
+                <div className="absolute inset-0" />
+              ) : (
+                <CardSwap
+                  key={`${topic}-${featured.length}`}
+                  width={420}
+                  height={300}
+                  cardDistance={50}
+                  verticalDistance={58}
+                  delay={3500}
+                  pauseOnHover
+                  easing="elastic"
+                >
+                  {featured.map((n) => (
+                    <Card key={n.id} className="p-6">
+                      <a
+                        href={n.link || "#"}
+                        target={n.link ? "_blank" : undefined}
+                        rel="noreferrer"
+                        className="flex h-full flex-col"
+                      >
+                        <span className="inline-flex w-fit items-center rounded-full bg-signal/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-signal">
+                          {n.tag}
+                        </span>
+                        <h3 className="mt-5 text-h3-im">{n.title}</h3>
+                        <p className="mt-3 line-clamp-3 text-sm text-muted-foreground">
+                          {n.abstract}
+                        </p>
+                        {formatDate(n.publishedAt) && (
+                          <span className="mt-auto pt-4 text-xs text-muted-foreground/70">
+                            {formatDate(n.publishedAt)}
+                          </span>
+                        )}
+                      </a>
+                    </Card>
+                  ))}
+                </CardSwap>
+              )}
             </div>
           </div>
+        </section>
 
-          <div className="relative h-[420px] md:h-[460px]">
-            {isPending || featured.length === 0 ? (
-              <div className="absolute inset-0" />
+        <GeneratedArticlesSection />
 
-            ) : (
-              <CardSwap
-                key={`${topic}-${featured.length}`}
-                width={420}
-                height={300}
-                cardDistance={50}
-                verticalDistance={58}
-                delay={3500}
-                pauseOnHover
-                easing="elastic"
-              >
-                {featured.map((n) => (
-                  <Card key={n.id} className="p-6">
-                    <a
+        {/* Ultime notizie */}
+        <section className="section-canvas px-4 section-pad md:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                  Ultime notizie
+                </p>
+                <h2 className="mt-4 text-h2-im">
+                  Tutto quello che <span className="im-gradient-text">accade</span>.
+                </h2>
+              </div>
+              {data && (
+                <p className="text-xs text-muted-foreground/70">
+                  {items.length} news su {data.total} disponibili.
+                </p>
+              )}
+            </div>
+
+            {isPending ? <div className="mt-10" /> : null}
+
+            <BentoGrid className="mt-10">
+              {isPending
+                ? null
+                : items.map((n) => (
+                    <BentoAnchorCard
+                      key={n.id}
                       href={n.link || "#"}
                       target={n.link ? "_blank" : undefined}
                       rel="noreferrer"
-                      className="flex h-full flex-col"
+                      tone="news"
+                      span={2}
+                      className="group flex flex-col"
                     >
-                      <span className="inline-flex w-fit items-center rounded-full bg-signal/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-signal">
-                        {n.tag}
-                      </span>
-                      <h3 className="mt-5 text-h3-im">
-                        {n.title}
-                      </h3>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="inline-flex w-fit items-center rounded-full bg-signal/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-signal">
+                          {n.tag}
+                        </span>
+                        {relativeTime(n.publishedAt) && (
+                          <span className="text-xs text-muted-foreground/70">
+                            {relativeTime(n.publishedAt)}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="mt-5 text-h3-im leading-snug">{n.title}</h3>
                       <p className="mt-3 line-clamp-3 text-sm text-muted-foreground">
                         {n.abstract}
                       </p>
-                      {formatDate(n.publishedAt) && (
-                        <span className="mt-auto pt-4 text-xs text-muted-foreground/70">
-                          {formatDate(n.publishedAt)}
-                        </span>
-                      )}
-                    </a>
-                  </Card>
-                ))}
-              </CardSwap>
+                      <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-medium text-signal transition group-hover:translate-x-1">
+                        Leggi <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </BentoAnchorCard>
+                  ))}
+            </BentoGrid>
+
+            {canLoadMore && (
+              <div className="mt-10 flex justify-center">
+                <button
+                  type="button"
+                  disabled={isFetching}
+                  onClick={() => setLimit((l) => Math.min(24, l + PAGE_SIZE))}
+                  className="inline-flex items-center justify-center rounded-full btn-ghost-glass px-6 py-3 text-sm disabled:opacity-60"
+                >
+                  {isFetching ? "Carico…" : "Mostra altre news"}
+                </button>
+              </div>
             )}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <GeneratedArticlesSection />
+        {/* Le più discusse */}
 
-      {/* Ultime notizie */}
-      <section className="section-canvas px-4 section-pad md:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+        <section className="section-editorial relative isolate overflow-hidden px-4 section-pad md:px-8">
+          <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.3fr]">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                Ultime notizie
+                Le più condivise
               </p>
               <h2 className="mt-4 text-h2-im">
-                Tutto quello che{" "}
-                <span className="im-gradient-text">accade</span>.
+                I temi più <span className="im-gradient-text">discussi</span>.
               </h2>
-            </div>
-            {data && (
-              <p className="text-xs text-muted-foreground/70">
-                {items.length} news su {data.total} disponibili.
+              <p className="mt-6 whitespace-pre-line text-base text-muted-foreground md:text-lg">
+                Le notizie riprese dal maggior numero di testate.
+                {"\n"}Il termometro di ciò di cui si parla davvero.
               </p>
-            )}
-          </div>
+            </div>
 
-          {isPending ? (
-            <div className="mt-10" />
-          ) : null}
-
-          <BentoGrid className="mt-10">
-            {isPending
-              ? null
-              : items.map((n) => (
-                  <BentoAnchorCard
-                    key={n.id}
+            <ol className="divide-y divide-border/60 overflow-hidden glass-panel rounded-3xl">
+              {trending.map((n, i) => (
+                <li key={n.id}>
+                  <a
                     href={n.link || "#"}
                     target={n.link ? "_blank" : undefined}
                     rel="noreferrer"
-                    tone="news"
-                    span={2}
-                    className="group flex flex-col"
+                    className="group flex items-start gap-4 p-5 transition hover:bg-muted/40"
                   >
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="inline-flex w-fit items-center rounded-full bg-signal/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-signal">
-                        {n.tag}
+                    <span className="mt-0.5 font-display text-2xl font-bold text-signal">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-display text-base font-semibold leading-snug">
+                        {n.title}
                       </span>
-                      {relativeTime(n.publishedAt) && (
-                        <span className="text-xs text-muted-foreground/70">
-                          {relativeTime(n.publishedAt)}
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="mt-5 text-h3-im leading-snug">
-                      {n.title}
-                    </h3>
-                    <p className="mt-3 line-clamp-3 text-sm text-muted-foreground">
-                      {n.abstract}
-                    </p>
-                    <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-medium text-signal transition group-hover:translate-x-1">
-                      Leggi <ArrowRight className="h-4 w-4" />
+                      <span className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                        <span>{n.tag}</span>
+                        {n.related > 1 && <span>{n.related} testate ne parlano</span>}
+                        {relativeTime(n.publishedAt) && <span>{relativeTime(n.publishedAt)}</span>}
+                      </span>
                     </span>
-                  </BentoAnchorCard>
-                ))}
-          </BentoGrid>
-
-          {canLoadMore && (
-            <div className="mt-10 flex justify-center">
-              <button
-                type="button"
-                disabled={isFetching}
-                onClick={() => setLimit((l) => Math.min(24, l + PAGE_SIZE))}
-                className="inline-flex items-center justify-center rounded-full btn-ghost-glass px-6 py-3 text-sm disabled:opacity-60"
-              >
-                {isFetching ? "Carico…" : "Mostra altre news"}
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Le più discusse */}
-
-      <section className="section-editorial relative isolate overflow-hidden px-4 section-pad md:px-8">
-        <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.3fr]">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-              Le più condivise
-            </p>
-            <h2 className="mt-4 text-h2-im">
-              I temi più{" "}
-              <span className="im-gradient-text">discussi</span>.
-            </h2>
-            <p className="mt-6 whitespace-pre-line text-base text-muted-foreground md:text-lg">
-              Le notizie riprese dal maggior numero di testate.
-              {"\n"}Il termometro di ciò di cui si parla davvero.
-            </p>
+                    <span className="pt-1 text-signal transition group-hover:translate-x-1">
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
           </div>
+        </section>
 
-          <ol className="divide-y divide-border/60 overflow-hidden glass-panel rounded-3xl">
-            {trending.map((n, i) => (
-              <li key={n.id}>
-                <a
-                  href={n.link || "#"}
-                  target={n.link ? "_blank" : undefined}
-                  rel="noreferrer"
-                  className="group flex items-start gap-4 p-5 transition hover:bg-muted/40"
-                >
-                  <span className="mt-0.5 font-display text-2xl font-bold text-signal">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-display text-base font-semibold leading-snug">
-                      {n.title}
-                    </span>
-                    <span className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                      <span>{n.tag}</span>
-                      {n.related > 1 && <span>{n.related} testate ne parlano</span>}
-                      {relativeTime(n.publishedAt) && (
-                        <span>{relativeTime(n.publishedAt)}</span>
-                      )}
-                    </span>
-                  </span>
-                  <span className="pt-1 text-signal transition group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
-                </a>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <NewsletterBanner
-        eyebrow="Newsletter"
-        title="Il territorio, ogni settimana."
-        lead="Iscriviti: ti mandiamo le notizie e gli appuntamenti che contano."
-      />
+        <NewsletterBanner
+          eyebrow="Newsletter"
+          title="Il territorio, ogni settimana."
+          lead="Iscriviti: ti mandiamo le notizie e gli appuntamenti che contano."
+        />
       </div>
     </>
   );

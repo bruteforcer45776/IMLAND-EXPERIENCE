@@ -99,7 +99,8 @@
 }
 
 .icon-btn.is-active .icon-btn__front {
-  box-shadow: 0 0 0 0.15em rgba(255, 160, 60, 0.9) inset,
+  box-shadow:
+    0 0 0 0.15em rgba(255, 160, 60, 0.9) inset,
     0 0 1.5em rgba(255, 160, 60, 0.6);
 }
 

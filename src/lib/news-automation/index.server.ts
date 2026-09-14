@@ -30,7 +30,9 @@ export function sha256(input: string): string {
 }
 
 export function contentHash(title: string, excerpt: string, url: string): string {
-  return sha256(`${normalizeUrl(url)}::${title.trim().toLowerCase()}::${excerpt.trim().toLowerCase()}`);
+  return sha256(
+    `${normalizeUrl(url)}::${title.trim().toLowerCase()}::${excerpt.trim().toLowerCase()}`,
+  );
 }
 
 export function urlHash(url: string): string {
@@ -75,7 +77,10 @@ export function parseRssItems(xml: string): Array<{
     const title = sepIndex > 20 ? rawTitle.slice(0, sepIndex).trim() : rawTitle;
     let description = pick(block, "description") ?? "";
     if (description.toLowerCase().startsWith(title.toLowerCase())) {
-      description = description.slice(title.length).replace(/^[\s\-–—|]+/, "").trim();
+      description = description
+        .slice(title.length)
+        .replace(/^[\s\-–—|]+/, "")
+        .trim();
     }
     items.push({
       title,

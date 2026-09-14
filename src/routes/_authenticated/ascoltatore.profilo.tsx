@@ -25,7 +25,8 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/profilo")({
       { title: "Profilo — Area Persona IMLAND" },
       {
         name: "description",
-        content: "Gestisci i tuoi dati, gli interessi, le notifiche e la privacy della tua area personale.",
+        content:
+          "Gestisci i tuoi dati, gli interessi, le notifiche e la privacy della tua area personale.",
       },
       { name: "robots", content: "noindex" },
     ],
@@ -46,7 +47,10 @@ const passwordSchema = z
     password: z.string().min(8, "La password deve avere almeno 8 caratteri").max(72),
     confirm: z.string().min(1, "Conferma la password"),
   })
-  .refine((d) => d.password === d.confirm, { message: "Le password non coincidono", path: ["confirm"] });
+  .refine((d) => d.password === d.confirm, {
+    message: "Le password non coincidono",
+    path: ["confirm"],
+  });
 
 function ProfiloPersonaPage() {
   const { profile, user, refresh, signOut } = useAuth();
@@ -57,7 +61,13 @@ function ProfiloPersonaPage() {
   const { shares, totalClicks } = useShares();
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({ first_name: "", last_name: "", city: "", province: "", avatar_url: "" });
+  const [form, setForm] = useState({
+    first_name: "",
+    last_name: "",
+    city: "",
+    province: "",
+    avatar_url: "",
+  });
   const [interests, setInterests] = useState<string[]>([]);
   const [notifyInApp, setNotifyInApp] = useState(true);
   const [notifyEmail, setNotifyEmail] = useState(true);
@@ -82,7 +92,8 @@ function ProfiloPersonaPage() {
   useEffect(() => {
     if (!preferences) return;
     setNotifyEpisodes(preferences.notify_new_episodes);
-    if (preferences.topics?.length) setInterests((prev) => (prev.length ? prev : preferences.topics));
+    if (preferences.topics?.length)
+      setInterests((prev) => (prev.length ? prev : preferences.topics));
   }, [preferences]);
 
   const save = useMutation({
@@ -108,7 +119,8 @@ function ProfiloPersonaPage() {
       await refresh();
     },
     onSuccess: () => toast.success("Profilo aggiornato."),
-    onError: (err) => notifyError(err, { fallback: "Salvataggio non riuscito", retry: () => save.mutate() }),
+    onError: (err) =>
+      notifyError(err, { fallback: "Salvataggio non riuscito", retry: () => save.mutate() }),
   });
 
   const changePassword = useMutation({
@@ -185,7 +197,9 @@ function ProfiloPersonaPage() {
               <h2 className="truncate text-title-m">
                 {[form.first_name, form.last_name].filter(Boolean).join(" ") || "Persona IMLAND"}
               </h2>
-              <p className="truncate text-[13px] text-muted-foreground">{profile?.email ?? user?.email ?? "—"}</p>
+              <p className="truncate text-[13px] text-muted-foreground">
+                {profile?.email ?? user?.email ?? "—"}
+              </p>
             </div>
           </div>
           <dl className="mt-5 grid grid-cols-2 gap-3 text-[13px] sm:grid-cols-4">
@@ -210,11 +224,21 @@ function ProfiloPersonaPage() {
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
               <Label htmlFor="first_name">Nome</Label>
-              <Input id="first_name" maxLength={60} value={form.first_name} onChange={update("first_name")} />
+              <Input
+                id="first_name"
+                maxLength={60}
+                value={form.first_name}
+                onChange={update("first_name")}
+              />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="last_name">Cognome</Label>
-              <Input id="last_name" maxLength={60} value={form.last_name} onChange={update("last_name")} />
+              <Input
+                id="last_name"
+                maxLength={60}
+                value={form.last_name}
+                onChange={update("last_name")}
+              />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="city">Città</Label>
@@ -242,7 +266,12 @@ function ProfiloPersonaPage() {
             </div>
             <div className="space-y-1.5 sm:col-span-2">
               <Label htmlFor="avatar_url">Foto profilo (URL)</Label>
-              <Input id="avatar_url" maxLength={500} value={form.avatar_url} onChange={update("avatar_url")} />
+              <Input
+                id="avatar_url"
+                maxLength={500}
+                value={form.avatar_url}
+                onChange={update("avatar_url")}
+              />
             </div>
           </div>
 
@@ -255,7 +284,9 @@ function ProfiloPersonaPage() {
                   type="button"
                   aria-pressed={interests.includes(i)}
                   onClick={() =>
-                    setInterests((prev) => (prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]))
+                    setInterests((prev) =>
+                      prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i],
+                    )
                   }
                   className={`rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
                     interests.includes(i)
@@ -303,7 +334,11 @@ function ProfiloPersonaPage() {
             ))}
           </div>
 
-          <Button className="mt-6 rounded-full" disabled={save.isPending} onClick={() => save.mutate()}>
+          <Button
+            className="mt-6 rounded-full"
+            disabled={save.isPending}
+            onClick={() => save.mutate()}
+          >
             {save.isPending ? "Salvataggio…" : "Salva modifiche"}
           </Button>
         </section>

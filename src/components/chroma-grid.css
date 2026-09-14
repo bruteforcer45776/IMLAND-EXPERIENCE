@@ -38,7 +38,9 @@
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid hsl(var(--border));
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease;
   background: var(--card-gradient);
 
   --mouse-x: 50%;

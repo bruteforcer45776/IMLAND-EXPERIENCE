@@ -6,7 +6,12 @@ import { PageRails } from "../components/decor";
 import { BadgeIcon, toneForBadge, type BadgeName } from "../components/badge-icon";
 import { BentoGrid, BentoCard } from "../components/bento";
 import { NewsletterBanner } from "../components/newsletter-banner";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../components/ui/accordion";
 import { Search, Briefcase, Building2, FileCheck, Clock, Bell, ArrowRight } from "lucide-react";
 import heroJobs from "@/assets/hero-jobs.webp";
 import heroJobsMobile from "@/assets/hero-jobs-mobile.webp";
@@ -15,8 +20,16 @@ export const Route = createFileRoute("/jobs/")({
   head: () => ({
     meta: [
       { title: "JOBS — Lavoro, formazione e opportunità nel territorio" },
-      { name: "description", content: "JOBS è la piattaforma territoriale di IMLAND Experience per offerte di lavoro, tirocini, formazione e collaborazioni a Vercelli, Novara, Biella e Verbania." },
-      { name: "keywords", content: "lavoro, offerte lavoro, tirocinio, formazione, Vercelli, Novara, Biella, Verbania, opportunità" },
+      {
+        name: "description",
+        content:
+          "JOBS è la piattaforma territoriale di IMLAND Experience per offerte di lavoro, tirocini, formazione e collaborazioni a Vercelli, Novara, Biella e Verbania.",
+      },
+      {
+        name: "keywords",
+        content:
+          "lavoro, offerte lavoro, tirocinio, formazione, Vercelli, Novara, Biella, Verbania, opportunità",
+      },
       { name: "geo.region", content: "IT-PIE" },
       { name: "geo.placename", content: "Vercelli, Novara, Biella, Verbania" },
       { property: "og:title", content: "JOBS — Lavoro, formazione e opportunità nel territorio" },
@@ -29,21 +42,69 @@ export const Route = createFileRoute("/jobs/")({
 });
 
 const jobTypes = [
-  { badge: "jobs" as BadgeName, title: "Offerte di lavoro", desc: "Dipendenti, part-time e full-time nel territorio." },
-  { badge: "cerca-profilo" as BadgeName, title: "Tirocini e apprendistato", desc: "Percorsi di inserimento per giovani e studenti." },
-  { badge: "stretta-mano" as BadgeName, title: "Collaborazioni", desc: "Progetti a termine, freelance e partnership." },
-  { badge: "community" as BadgeName, title: "Volontariato", desc: "Opportunità nel terzo settore e nelle associazioni." },
-  { badge: "calendario" as BadgeName, title: "Casting e eventi", desc: "Selezione per rassegne, spot, live e produzioni." },
-  { badge: "cv" as BadgeName, title: "Corsi e bandi", desc: "Formazione, concorsi e avvisi pubblici utili." },
+  {
+    badge: "jobs" as BadgeName,
+    title: "Offerte di lavoro",
+    desc: "Dipendenti, part-time e full-time nel territorio.",
+  },
+  {
+    badge: "cerca-profilo" as BadgeName,
+    title: "Tirocini e apprendistato",
+    desc: "Percorsi di inserimento per giovani e studenti.",
+  },
+  {
+    badge: "stretta-mano" as BadgeName,
+    title: "Collaborazioni",
+    desc: "Progetti a termine, freelance e partnership.",
+  },
+  {
+    badge: "community" as BadgeName,
+    title: "Volontariato",
+    desc: "Opportunità nel terzo settore e nelle associazioni.",
+  },
+  {
+    badge: "calendario" as BadgeName,
+    title: "Casting e eventi",
+    desc: "Selezione per rassegne, spot, live e produzioni.",
+  },
+  {
+    badge: "cv" as BadgeName,
+    title: "Corsi e bandi",
+    desc: "Formazione, concorsi e avvisi pubblici utili.",
+  },
 ];
 
 const seekerFeatures = [
-  { badge: "cerca-profilo" as BadgeName, title: "Ricerca territoriale", desc: "Cerca per Comune, provincia o distanza dal tuo luogo." },
-  { badge: "cv" as BadgeName, title: "Filtri avanzati", desc: "Settore, tipo di contratto, modalità di lavoro e annunci attivi." },
-  { badge: "jobs" as BadgeName, title: "Salva opportunità", desc: "Tieni traccia delle offerte che ti interessano." },
-  { badge: "cv" as BadgeName, title: "Candidatura con CV", desc: "Allega il curriculum e candidati direttamente dalla piattaforma." },
-  { badge: "stretta-mano" as BadgeName, title: "Segui aziende", desc: "Ricevi aggiornamenti dalle realtà che ti interessano." },
-  { badge: "crescita" as BadgeName, title: "Notifiche personalizzate", desc: "Avvisami quando esce un'offerta nel marketing entro 25 km da Gattinara." },
+  {
+    badge: "cerca-profilo" as BadgeName,
+    title: "Ricerca territoriale",
+    desc: "Cerca per Comune, provincia o distanza dal tuo luogo.",
+  },
+  {
+    badge: "cv" as BadgeName,
+    title: "Filtri avanzati",
+    desc: "Settore, tipo di contratto, modalità di lavoro e annunci attivi.",
+  },
+  {
+    badge: "jobs" as BadgeName,
+    title: "Salva opportunità",
+    desc: "Tieni traccia delle offerte che ti interessano.",
+  },
+  {
+    badge: "cv" as BadgeName,
+    title: "Candidatura con CV",
+    desc: "Allega il curriculum e candidati direttamente dalla piattaforma.",
+  },
+  {
+    badge: "stretta-mano" as BadgeName,
+    title: "Segui aziende",
+    desc: "Ricevi aggiornamenti dalle realtà che ti interessano.",
+  },
+  {
+    badge: "crescita" as BadgeName,
+    title: "Notifiche personalizzate",
+    desc: "Avvisami quando esce un'offerta nel marketing entro 25 km da Gattinara.",
+  },
 ];
 
 const companyChecks = [
@@ -67,10 +128,26 @@ const durations = [
 ];
 
 const automations = [
-  { badge: "articolo" as BadgeName, title: "Newsletter settimanale", desc: "Raccolta automatica delle opportunità del territorio." },
-  { badge: "microfono" as BadgeName, title: "Rubrica radiofonica", desc: "JOBS entra in diretta su IMLAND Radio e Podcast." },
-  { badge: "annuncio" as BadgeName, title: "Post social", desc: "Contenuti generati dalle offerte pubblicate." },
-  { badge: "alert" as BadgeName, title: "Notifiche territoriali", desc: "Alert per gli utenti interessati nella zona." },
+  {
+    badge: "articolo" as BadgeName,
+    title: "Newsletter settimanale",
+    desc: "Raccolta automatica delle opportunità del territorio.",
+  },
+  {
+    badge: "microfono" as BadgeName,
+    title: "Rubrica radiofonica",
+    desc: "JOBS entra in diretta su IMLAND Radio e Podcast.",
+  },
+  {
+    badge: "annuncio" as BadgeName,
+    title: "Post social",
+    desc: "Contenuti generati dalle offerte pubblicate.",
+  },
+  {
+    badge: "alert" as BadgeName,
+    title: "Notifiche territoriali",
+    desc: "Alert per gli utenti interessati nella zona.",
+  },
 ];
 
 const faqs = [
@@ -96,7 +173,14 @@ function JobsPage() {
   return (
     <>
       <PageRails variant="jobs" />
-      <HeroBanner src={heroJobs} srcMobile={heroJobsMobile} alt="JOBS — Opportunità di lavoro nel territorio" ctaTop="64%" flush mobileBg="#6B7280">
+      <HeroBanner
+        src={heroJobs}
+        srcMobile={heroJobsMobile}
+        alt="JOBS — Opportunità di lavoro nel territorio"
+        ctaTop="64%"
+        flush
+        mobileBg="#6B7280"
+      >
         <Link to="/jobs/offerte" className="cta-light px-6 py-3.5 text-sm">
           <Search className="h-4 w-4" />
           Cerca un'opportunità
@@ -106,14 +190,14 @@ function JobsPage() {
         </Link>
       </HeroBanner>
 
-      
-
       <div className="page-inverted jobs-inverted">
         {/* Tipologie */}
         <section className="section-focus" id="opportunita">
           <div className="container-im section-pad">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">Altri prodotti IMLAND</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                Altri prodotti IMLAND
+              </p>
               <h2 className="mt-3 text-h2-im">
                 Non solo <span className="im-gradient-text">offerte</span>.
               </h2>
@@ -137,7 +221,9 @@ function JobsPage() {
         <section className="section-canvas">
           <div className="container-im section-pad">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">Per chi cerca</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                Per chi cerca
+              </p>
               <h2 className="mt-3 text-h2-im">
                 Trova la tua prossima <span className="im-gradient-text">opportunità</span>.
               </h2>
@@ -164,14 +250,19 @@ function JobsPage() {
                   Pubblica in modo <span className="im-gradient-text">sicuro</span>.
                 </h2>
                 <p className="mt-4 text-base text-foreground/70">
-                  I Member possono pubblicare autonomamente un annuncio indicando titolo, descrizione, sede, categoria, contratto, modalità di lavoro, requisiti e modalità di candidatura.
+                  I Member possono pubblicare autonomamente un annuncio indicando titolo,
+                  descrizione, sede, categoria, contratto, modalità di lavoro, requisiti e modalità
+                  di candidatura.
                 </p>
                 <p className="mt-4 text-base text-foreground/70">
-                  Prima della pubblicazione il sistema esegue controlli automatici; i Member verificati pubblicano più rapidamente.
+                  Prima della pubblicazione il sistema esegue controlli automatici; i Member
+                  verificati pubblicano più rapidamente.
                 </p>
               </div>
               <div className="rounded-3xl border border-outline bg-surface-1 p-6 md:p-8">
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Controlli automatici</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Controlli automatici
+                </p>
                 <h3 className="mt-3 text-h3-im">Cosa verifichiamo</h3>
                 <ul className="mt-6 space-y-3">
                   {companyChecks.map((item) => (
@@ -190,12 +281,15 @@ function JobsPage() {
         <section className="section-canvas">
           <div className="container-im section-pad">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">Scadenza automatica</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                Scadenza automatica
+              </p>
               <h2 className="mt-3 text-h2-im">
                 Ogni annuncio ha una <span className="im-gradient-text">data</span>.
               </h2>
               <p className="mt-4 text-muted-foreground">
-                Il sistema avvisa l'azienda 7 e 3 giorni prima della scadenza, poi archivia l'annuncio conservando statistiche e storico.
+                Il sistema avvisa l'azienda 7 e 3 giorni prima della scadenza, poi archivia
+                l'annuncio conservando statistiche e storico.
               </p>
             </div>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -214,12 +308,15 @@ function JobsPage() {
         <section className="section-focus">
           <div className="container-im section-pad">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">Automazioni editoriali</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                Automazioni editoriali
+              </p>
               <h2 className="mt-3 text-h2-im">
                 JOBS alimenta <span className="im-gradient-text">tutto l'hub</span>.
               </h2>
               <p className="mt-4 text-muted-foreground">
-                Gli annunci vengono recuperati direttamente dal database per newsletter, social, rubriche radiofoniche e notifiche territoriali.
+                Gli annunci vengono recuperati direttamente dal database per newsletter, social,
+                rubriche radiofoniche e notifiche territoriali.
               </p>
             </div>
             <BentoGrid className="mt-10">
@@ -238,7 +335,9 @@ function JobsPage() {
         <section className="section-editorial">
           <div className="container-im section-pad">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">Monetizzazione</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                Monetizzazione
+              </p>
               <h2 className="mt-3 text-h2-im">
                 Soluzioni per ogni <span className="im-gradient-text">esigenza</span>.
               </h2>
@@ -248,7 +347,10 @@ function JobsPage() {
                 { title: "Annuncio base", desc: "Gratuito e visibile nella ricerca territoriale." },
                 { title: "In evidenza", desc: "Maggiore visibilità in cima ai risultati." },
                 { title: "Pacchetti multipli", desc: "Sconti per chi pubblica più annunci." },
-                { title: "Recruiting territoriale", desc: "Supporto dedicato per selezioni locali." },
+                {
+                  title: "Recruiting territoriale",
+                  desc: "Supporto dedicato per selezioni locali.",
+                },
               ].map((m) => (
                 <div key={m.title} className="glass-panel rounded-3xl p-6">
                   <h3 className="text-h3-im leading-snug">{m.title}</h3>
@@ -272,14 +374,20 @@ function JobsPage() {
         <section className="section-canvas">
           <div className="container-im section-pad">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">Domande frequenti</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+                Domande frequenti
+              </p>
               <h2 className="mt-3 text-h2-im">
                 Tutto su <span className="im-gradient-text">JOBS</span>.
               </h2>
             </div>
             <Accordion type="single" collapsible className="mt-10 space-y-3">
               {faqs.map((item) => (
-                <AccordionItem key={item.q} value={item.q} className="glass-panel rounded-3xl border-0 px-6">
+                <AccordionItem
+                  key={item.q}
+                  value={item.q}
+                  className="glass-panel rounded-3xl border-0 px-6"
+                >
                   <AccordionTrigger className="text-left text-base font-semibold hover:no-underline">
                     {item.q}
                   </AccordionTrigger>

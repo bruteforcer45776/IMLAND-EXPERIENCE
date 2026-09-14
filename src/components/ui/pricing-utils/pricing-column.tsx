@@ -5,8 +5,7 @@ import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-export interface PricingColumnProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface PricingColumnProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
   icon?: React.ReactNode;
   description?: string;
@@ -48,7 +47,6 @@ export function PricingColumn({
       )}
       {...props}
     >
-
       <div className="flex items-center justify-between gap-3">
         <h3 className="flex items-center gap-2 font-display text-xl font-semibold">
           {icon ? <span className="text-signal">{icon}</span> : null}
@@ -58,9 +56,7 @@ export function PricingColumn({
           <span
             className={cn(
               "rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider",
-              brand
-                ? "bg-signal/10 text-signal"
-                : "bg-foreground/5 text-foreground/70",
+              brand ? "bg-signal/10 text-signal" : "bg-foreground/5 text-foreground/70",
             )}
           >
             {badge}
@@ -68,9 +64,7 @@ export function PricingColumn({
         ) : null}
       </div>
 
-      {description ? (
-        <p className="mt-3 text-sm text-muted-foreground">{description}</p>
-      ) : null}
+      {description ? <p className="mt-3 text-sm text-muted-foreground">{description}</p> : null}
 
       {price !== undefined ? (
         <div className="mt-6 flex items-end gap-1">
@@ -79,9 +73,7 @@ export function PricingColumn({
           </span>
         </div>
       ) : null}
-      {priceNote ? (
-        <p className="mt-2 text-xs text-muted-foreground">{priceNote}</p>
-      ) : null}
+      {priceNote ? <p className="mt-2 text-xs text-muted-foreground">{priceNote}</p> : null}
 
       <ul className="mt-6 space-y-2.5 text-sm">
         {features.map((f) => (

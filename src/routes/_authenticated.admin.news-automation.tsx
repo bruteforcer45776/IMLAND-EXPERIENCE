@@ -34,7 +34,10 @@ export const Route = createFileRoute("/_authenticated/admin/news-automation")({
   head: () => ({
     meta: [
       { title: "News Automation — IMLAND EXPERIENCE" },
-      { name: "description", content: "Pannello di controllo per l'automazione delle notizie IMLAND." },
+      {
+        name: "description",
+        content: "Pannello di controllo per l'automazione delle notizie IMLAND.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -54,14 +57,23 @@ function NewsAutomationAdminPage() {
   const [tab, setTab] = useState<(typeof tabs)[number]["key"]>("settings");
 
   if (loading) {
-    return <div className="mx-auto max-w-3xl px-4 section-pad text-center text-muted-foreground">Caricamento…</div>;
+    return (
+      <div className="mx-auto max-w-3xl px-4 section-pad text-center text-muted-foreground">
+        Caricamento…
+      </div>
+    );
   }
   if (!isAdmin) {
     return (
       <div className="mx-auto max-w-xl px-4 section-pad text-center">
         <h1 className="text-h1-im">Accesso riservato.</h1>
-        <p className="mt-3 text-muted-foreground">Questa area è disponibile solo allo staff IMLAND.</p>
-        <Link to="/area" className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground">
+        <p className="mt-3 text-muted-foreground">
+          Questa area è disponibile solo allo staff IMLAND.
+        </p>
+        <Link
+          to="/area"
+          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground"
+        >
           Torna all'Area Membri
         </Link>
       </div>
@@ -72,7 +84,9 @@ function NewsAutomationAdminPage() {
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-14">
       <header className="mb-6">
         <h1 className="text-h1-im">News Automation.</h1>
-        <p className="mt-2 text-muted-foreground">Gestisci raccolta, selezione, generazione e pubblicazione delle notizie.</p>
+        <p className="mt-2 text-muted-foreground">
+          Gestisci raccolta, selezione, generazione e pubblicazione delle notizie.
+        </p>
         <Link to="/admin" className="mt-3 inline-flex text-sm font-medium text-primary">
           Torna al pannello admin
         </Link>
@@ -84,7 +98,9 @@ function NewsAutomationAdminPage() {
             key={t.key}
             onClick={() => setTab(t.key)}
             className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-              tab === t.key ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground hover:bg-muted"
+              tab === t.key
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border text-muted-foreground hover:bg-muted"
             }`}
           >
             {t.label}
@@ -106,7 +122,10 @@ function SettingsTab() {
   const fetchSettings = useServerFn(getNewsSettings);
   const saveSettings = useServerFn(updateNewsSettings);
   const runNow = useServerFn(runNewsAutomation);
-  const { data: settings } = useQuery({ queryKey: ["news-settings"], queryFn: () => fetchSettings() });
+  const { data: settings } = useQuery({
+    queryKey: ["news-settings"],
+    queryFn: () => fetchSettings(),
+  });
   const [running, setRunning] = useState(false);
   const [lastResult, setLastResult] = useState<string | null>(null);
 
@@ -123,7 +142,8 @@ function SettingsTab() {
     { key: "emergency_stop", label: "Stop di emergenza", warn: true },
   ];
 
-  const update = (patch: Record<string, unknown>) => mutation.mutate({ data: { id: settings.id, patch } });
+  const update = (patch: Record<string, unknown>) =>
+    mutation.mutate({ data: { id: settings.id, patch } });
 
   return (
     <div className="space-y-6">
@@ -138,25 +158,54 @@ function SettingsTab() {
               onClick={() => update({ [f.key]: !settings[f.key] })}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${settings[f.key] ? (f.warn ? "bg-error" : "bg-primary") : "bg-muted"}`}
             >
-              <span className={`inline-block h-4 w-4 rounded-full bg-white transition-transform ${settings[f.key] ? "translate-x-6" : "translate-x-1"}`} />
+              <span
+                className={`inline-block h-4 w-4 rounded-full bg-white transition-transform ${settings[f.key] ? "translate-x-6" : "translate-x-1"}`}
+              />
             </button>
           </label>
         ))}
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Field label="Schedule cron" value={settings.cron_schedule} onSave={(v) => update({ cron_schedule: v })} />
-        <Field label="Fuso orario" value={settings.cron_timezone} onSave={(v) => update({ cron_timezone: v })} />
-        <Field label="Max articoli Piemonte" value={String(settings.max_piemonte_articles)} onSave={(v) => update({ max_piemonte_articles: Number(v) })} />
-        <Field label="Max articoli Italia" value={String(settings.max_italia_articles)} onSave={(v) => update({ max_italia_articles: Number(v) })} />
-        <Field label="Soglia rilevanza" value={String(settings.min_relevance_score)} onSave={(v) => update({ min_relevance_score: Number(v) })} />
-        <Field label="Soglia affidabilità" value={String(settings.min_credibility_score)} onSave={(v) => update({ min_credibility_score: Number(v) })} />
+        <Field
+          label="Schedule cron"
+          value={settings.cron_schedule}
+          onSave={(v) => update({ cron_schedule: v })}
+        />
+        <Field
+          label="Fuso orario"
+          value={settings.cron_timezone}
+          onSave={(v) => update({ cron_timezone: v })}
+        />
+        <Field
+          label="Max articoli Piemonte"
+          value={String(settings.max_piemonte_articles)}
+          onSave={(v) => update({ max_piemonte_articles: Number(v) })}
+        />
+        <Field
+          label="Max articoli Italia"
+          value={String(settings.max_italia_articles)}
+          onSave={(v) => update({ max_italia_articles: Number(v) })}
+        />
+        <Field
+          label="Soglia rilevanza"
+          value={String(settings.min_relevance_score)}
+          onSave={(v) => update({ min_relevance_score: Number(v) })}
+        />
+        <Field
+          label="Soglia affidabilità"
+          value={String(settings.min_credibility_score)}
+          onSave={(v) => update({ min_credibility_score: Number(v) })}
+        />
       </div>
 
       <div className="rounded-2xl border border-border bg-card p-4">
         <h3 className="font-semibold">Stato revisione iniziale</h3>
         <p className="mt-1 text-sm text-muted-foreground">
-          Giorni di revisione manuale obbligatoria: {settings.review_period_days}. Iniziato: {settings.review_period_started_at ? new Date(settings.review_period_started_at).toLocaleDateString("it-IT") : "—"}
+          Giorni di revisione manuale obbligatoria: {settings.review_period_days}. Iniziato:{" "}
+          {settings.review_period_started_at
+            ? new Date(settings.review_period_started_at).toLocaleDateString("it-IT")
+            : "—"}
         </p>
       </div>
 
@@ -191,20 +240,37 @@ function SettingsTab() {
       </div>
 
       {lastResult && (
-        <pre className="max-h-64 overflow-auto rounded-2xl border border-border bg-muted p-4 text-xs">{lastResult}</pre>
+        <pre className="max-h-64 overflow-auto rounded-2xl border border-border bg-muted p-4 text-xs">
+          {lastResult}
+        </pre>
       )}
     </div>
   );
 }
 
-function Field({ label, value, onSave }: { label: string; value: string; onSave: (v: string) => void }) {
+function Field({
+  label,
+  value,
+  onSave,
+}: {
+  label: string;
+  value: string;
+  onSave: (v: string) => void;
+}) {
   const [v, setV] = useState(value);
   return (
     <div className="rounded-2xl border border-border bg-card p-4">
       <label className="block text-sm font-medium text-muted-foreground">{label}</label>
       <div className="mt-2 flex gap-2">
-        <input value={v} onChange={(e) => setV(e.target.value)} className="flex-1 rounded-xl border border-input bg-background px-3 py-2 text-sm" />
-        <button onClick={() => onSave(v)} className="rounded-xl bg-primary px-3 py-2 text-sm font-medium text-primary-foreground">
+        <input
+          value={v}
+          onChange={(e) => setV(e.target.value)}
+          className="flex-1 rounded-xl border border-input bg-background px-3 py-2 text-sm"
+        />
+        <button
+          onClick={() => onSave(v)}
+          className="rounded-xl bg-primary px-3 py-2 text-sm font-medium text-primary-foreground"
+        >
           <Save className="h-4 w-4" />
         </button>
       </div>
@@ -243,7 +309,10 @@ function SourcesTab() {
 
   return (
     <div className="space-y-4">
-      <button onClick={() => setEditing(blank)} className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
+      <button
+        onClick={() => setEditing(blank)}
+        className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+      >
         Aggiungi fonte
       </button>
       <div className="overflow-x-auto rounded-2xl border border-border">
@@ -265,9 +334,18 @@ function SourcesTab() {
                 <td className="p-3">{s.source_type}</td>
                 <td className="p-3">{s.coverage_scope}</td>
                 <td className="p-3">{s.reliability_score}</td>
-                <td className="p-3">{s.is_active ? <Check className="h-4 w-4 text-success" /> : <X className="h-4 w-4 text-error" />}</td>
                 <td className="p-3">
-                  <button onClick={() => setEditing(s as unknown as Record<string, string>)} className="text-sm text-primary">
+                  {s.is_active ? (
+                    <Check className="h-4 w-4 text-success" />
+                  ) : (
+                    <X className="h-4 w-4 text-error" />
+                  )}
+                </td>
+                <td className="p-3">
+                  <button
+                    onClick={() => setEditing(s as unknown as Record<string, string>)}
+                    className="text-sm text-primary"
+                  >
                     Modifica
                   </button>
                 </td>
@@ -280,7 +358,11 @@ function SourcesTab() {
       {editing && (
         <SourceEditor
           source={editing}
-          onSave={(payload) => mutation.mutate({ data: payload as unknown as Parameters<typeof upsertNewsSource>[0]["data"] })}
+          onSave={(payload) =>
+            mutation.mutate({
+              data: payload as unknown as Parameters<typeof upsertNewsSource>[0]["data"],
+            })
+          }
           onClose={() => setEditing(null)}
           saving={mutation.isPending}
         />
@@ -315,15 +397,48 @@ function SourceEditor({
           <Input label="Nome" value={s.name} onChange={(v) => update("name", v)} />
           <Input label="Dominio" value={s.domain} onChange={(v) => update("domain", v)} />
           <Input label="Feed URL" value={s.feed_url} onChange={(v) => update("feed_url", v)} />
-          <Input label="Endpoint URL" value={s.endpoint_url} onChange={(v) => update("endpoint_url", v)} />
-          <Select label="Tipo" value={s.source_type} options={["rss", "api", "institutional", "html"]} onChange={(v) => update("source_type", v)} />
-          <Select label="Copertura" value={s.coverage_scope} options={["piemonte", "italia", "provincia", "comune"]} onChange={(v) => update("coverage_scope", v)} />
+          <Input
+            label="Endpoint URL"
+            value={s.endpoint_url}
+            onChange={(v) => update("endpoint_url", v)}
+          />
+          <Select
+            label="Tipo"
+            value={s.source_type}
+            options={["rss", "api", "institutional", "html"]}
+            onChange={(v) => update("source_type", v)}
+          />
+          <Select
+            label="Copertura"
+            value={s.coverage_scope}
+            options={["piemonte", "italia", "provincia", "comune"]}
+            onChange={(v) => update("coverage_scope", v)}
+          />
           <Input label="Provincia" value={s.province} onChange={(v) => update("province", v)} />
           <Input label="Città" value={s.city} onChange={(v) => update("city", v)} />
-          <Input label="Affidabilità 1-5" value={s.reliability_score} onChange={(v) => update("reliability_score", v)} />
-          <Select label="Attiva" value={s.is_active} options={["true", "false"]} onChange={(v) => update("is_active", v)} />
-          <Select label="Scraping" value={s.allows_scraping} options={["true", "false"]} onChange={(v) => update("allows_scraping", v)} />
-          <Select label="Riutilizzo immagini" value={s.allows_image_reuse} options={["true", "false"]} onChange={(v) => update("allows_image_reuse", v)} />
+          <Input
+            label="Affidabilità 1-5"
+            value={s.reliability_score}
+            onChange={(v) => update("reliability_score", v)}
+          />
+          <Select
+            label="Attiva"
+            value={s.is_active}
+            options={["true", "false"]}
+            onChange={(v) => update("is_active", v)}
+          />
+          <Select
+            label="Scraping"
+            value={s.allows_scraping}
+            options={["true", "false"]}
+            onChange={(v) => update("allows_scraping", v)}
+          />
+          <Select
+            label="Riutilizzo immagini"
+            value={s.allows_image_reuse}
+            options={["true", "false"]}
+            onChange={(v) => update("allows_image_reuse", v)}
+          />
         </div>
         <div className="mt-6 flex justify-end gap-3">
           <button onClick={onClose} className="rounded-full border border-border px-4 py-2 text-sm">
@@ -350,20 +465,46 @@ function SourceEditor({
   );
 }
 
-function Input({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+function Input({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <div>
       <label className="block text-sm font-medium text-muted-foreground">{label}</label>
-      <input value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm" />
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="mt-1 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm"
+      />
     </div>
   );
 }
 
-function Select({ label, value, options, onChange }: { label: string; value: string; options: string[]; onChange: (v: string) => void }) {
+function Select({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (v: string) => void;
+}) {
   return (
     <div>
       <label className="block text-sm font-medium text-muted-foreground">{label}</label>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm">
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="mt-1 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm"
+      >
         {options.map((o) => (
           <option key={o} value={o}>
             {o}
@@ -400,19 +541,28 @@ function CandidatesTab() {
           <div key={c.id} className="rounded-2xl border border-border bg-card p-4">
             <div className="flex items-start justify-between gap-3">
               <h4 className="font-medium">{c.title_original}</h4>
-              <span className="shrink-0 rounded-full bg-muted px-2 py-1 text-xs">{c.processing_status}</span>
+              <span className="shrink-0 rounded-full bg-muted px-2 py-1 text-xs">
+                {c.processing_status}
+              </span>
             </div>
             <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{c.excerpt_original}</p>
             <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
               <span className="rounded-md bg-muted px-2 py-1">{c.source_name}</span>
               <span className="rounded-md bg-muted px-2 py-1">{c.geographic_scope}</span>
               <span className="rounded-md bg-muted px-2 py-1">rel: {c.relevance_score ?? "—"}</span>
-              <span className="rounded-md bg-muted px-2 py-1">cred: {c.credibility_score ?? "—"}</span>
+              <span className="rounded-md bg-muted px-2 py-1">
+                cred: {c.credibility_score ?? "—"}
+              </span>
             </div>
             {c.rejection_reason && (
               <p className="mt-2 text-xs text-error">Motivo: {c.rejection_reason}</p>
             )}
-            <a href={c.canonical_url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-primary">
+            <a
+              href={c.canonical_url}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-block text-xs text-primary"
+            >
               Apri fonte
             </a>
           </div>
@@ -490,16 +640,35 @@ function ArticlesTab() {
               <span className="rounded-md bg-muted px-2 py-1">cred: {a.credibility_score}</span>
             </div>
             <div className="mt-3 flex gap-2">
-              <button onClick={() => { setEditingId(a.id); setEditing({ title: a.title, subtitle: a.subtitle ?? "", summary: a.summary ?? "", body: a.body ?? "", seo_title: a.seo_title ?? "", seo_description: a.seo_description ?? "" }); }} className="text-sm text-primary">
+              <button
+                onClick={() => {
+                  setEditingId(a.id);
+                  setEditing({
+                    title: a.title,
+                    subtitle: a.subtitle ?? "",
+                    summary: a.summary ?? "",
+                    body: a.body ?? "",
+                    seo_title: a.seo_title ?? "",
+                    seo_description: a.seo_description ?? "",
+                  });
+                }}
+                className="text-sm text-primary"
+              >
                 Modifica
               </button>
               {a.status !== "published" && (
-                <button onClick={() => approveMutation.mutate({ data: { id: a.id } })} className="text-sm text-success">
+                <button
+                  onClick={() => approveMutation.mutate({ data: { id: a.id } })}
+                  className="text-sm text-success"
+                >
                   Pubblica
                 </button>
               )}
               {a.status !== "rejected" && (
-                <button onClick={() => rejectMutation.mutate({ data: { id: a.id } })} className="text-sm text-error">
+                <button
+                  onClick={() => rejectMutation.mutate({ data: { id: a.id } })}
+                  className="text-sm text-error"
+                >
                   Rifiuta
                 </button>
               )}
@@ -518,30 +687,59 @@ function ArticlesTab() {
               </button>
             </div>
             <div className="space-y-3">
-              <Input label="Titolo" value={editing.title} onChange={(v) => setEditing((p) => ({ ...p, title: v }))} />
-              <Input label="Sottotitolo" value={editing.subtitle} onChange={(v) => setEditing((p) => ({ ...p, subtitle: v }))} />
-              <Textarea label="Sommario" value={editing.summary} onChange={(v) => setEditing((p) => ({ ...p, summary: v }))} />
-              <Textarea label="Corpo (HTML)" value={editing.body} onChange={(v) => setEditing((p) => ({ ...p, body: v }))} />
-              <Input label="SEO title" value={editing.seo_title} onChange={(v) => setEditing((p) => ({ ...p, seo_title: v }))} />
-              <Input label="SEO description" value={editing.seo_description} onChange={(v) => setEditing((p) => ({ ...p, seo_description: v }))} />
+              <Input
+                label="Titolo"
+                value={editing.title}
+                onChange={(v) => setEditing((p) => ({ ...p, title: v }))}
+              />
+              <Input
+                label="Sottotitolo"
+                value={editing.subtitle}
+                onChange={(v) => setEditing((p) => ({ ...p, subtitle: v }))}
+              />
+              <Textarea
+                label="Sommario"
+                value={editing.summary}
+                onChange={(v) => setEditing((p) => ({ ...p, summary: v }))}
+              />
+              <Textarea
+                label="Corpo (HTML)"
+                value={editing.body}
+                onChange={(v) => setEditing((p) => ({ ...p, body: v }))}
+              />
+              <Input
+                label="SEO title"
+                value={editing.seo_title}
+                onChange={(v) => setEditing((p) => ({ ...p, seo_title: v }))}
+              />
+              <Input
+                label="SEO description"
+                value={editing.seo_description}
+                onChange={(v) => setEditing((p) => ({ ...p, seo_description: v }))}
+              />
             </div>
             <div className="mt-6 flex justify-end gap-3">
-              <button onClick={() => setEditingId(null)} className="rounded-full border border-border px-4 py-2 text-sm">
+              <button
+                onClick={() => setEditingId(null)}
+                className="rounded-full border border-border px-4 py-2 text-sm"
+              >
                 Annulla
               </button>
               <button
                 onClick={() =>
-                  saveMutation.mutate({ data: {
-                    id: editingId,
-                    patch: {
-                      title: editing.title,
-                      subtitle: editing.subtitle,
-                      summary: editing.summary,
-                      body: editing.body,
-                      seo_title: editing.seo_title,
-                      seo_description: editing.seo_description,
+                  saveMutation.mutate({
+                    data: {
+                      id: editingId,
+                      patch: {
+                        title: editing.title,
+                        subtitle: editing.subtitle,
+                        summary: editing.summary,
+                        body: editing.body,
+                        seo_title: editing.seo_title,
+                        seo_description: editing.seo_description,
+                      },
                     },
-                  } })
+                  })
                 }
                 disabled={saveMutation.isPending}
                 className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
@@ -556,7 +754,15 @@ function ArticlesTab() {
   );
 }
 
-function Textarea({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+function Textarea({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <div>
       <label className="block text-sm font-medium text-muted-foreground">{label}</label>
@@ -572,7 +778,10 @@ function Textarea({ label, value, onChange }: { label: string; value: string; on
 
 function RunsTab() {
   const fetchRuns = useServerFn(listAutomationRuns);
-  const { data } = useQuery({ queryKey: ["news-runs"], queryFn: () => fetchRuns({ data: { limit: 20 } }) });
+  const { data } = useQuery({
+    queryKey: ["news-runs"],
+    queryFn: () => fetchRuns({ data: { limit: 20 } }),
+  });
 
   return (
     <div className="space-y-3">
@@ -582,7 +791,11 @@ function RunsTab() {
             <span className="font-medium">{new Date(r.started_at).toLocaleString("it-IT")}</span>
             <span
               className={`rounded-full px-2 py-1 text-xs ${
-                r.status === "completed" ? "bg-success/10 text-success" : r.status === "failed" ? "bg-error/10 text-error" : "bg-primary/10 text-primary"
+                r.status === "completed"
+                  ? "bg-success/10 text-success"
+                  : r.status === "failed"
+                    ? "bg-error/10 text-error"
+                    : "bg-primary/10 text-primary"
               }`}
             >
               {r.status}

@@ -22,18 +22,30 @@ export const Route = createFileRoute("/api/public/collect-daily-news")({
 
         const collect = await collectDailyNews(supabaseAdmin, "cron");
         if (!collect.ok) {
-          return Response.json({ ok: false, error: collect.error, runId: collect.runId }, { status: 500 });
+          return Response.json(
+            { ok: false, error: collect.error, runId: collect.runId },
+            { status: 500 },
+          );
         }
 
         const score = await scoreAndDeduplicateCandidates(supabaseAdmin, collect.runId);
         if (score.error) {
-          return Response.json({ ok: false, stage: "score", error: score.error, runId: collect.runId }, { status: 500 });
+          return Response.json(
+            { ok: false, stage: "score", error: score.error, runId: collect.runId },
+            { status: 500 },
+          );
         }
 
         const gen = await generateArticles(supabaseAdmin, collect.runId, key);
         if (gen.error) {
           return Response.json(
-            { ok: false, stage: "generate", error: gen.error, runId: collect.runId, generated: gen.generated },
+            {
+              ok: false,
+              stage: "generate",
+              error: gen.error,
+              runId: collect.runId,
+              generated: gen.generated,
+            },
             { status: 500 },
           );
         }

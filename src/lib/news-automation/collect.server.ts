@@ -22,7 +22,8 @@ async function fetchWithTimeout(url: string, timeoutMs: number): Promise<Respons
     const res = await fetch(url, {
       signal: controller.signal,
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; IMLANDExperience/1.0; +https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site)",
+        "User-Agent":
+          "Mozilla/5.0 (compatible; IMLANDExperience/1.0; +https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site)",
         Accept: "application/rss+xml, application/xml, text/xml",
       },
     });

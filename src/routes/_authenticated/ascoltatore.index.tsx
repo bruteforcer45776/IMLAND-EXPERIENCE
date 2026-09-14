@@ -35,7 +35,8 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/")({
       { title: "Area Persona — IMLAND EXPERIENCE" },
       {
         name: "description",
-        content: "Riprendi le puntate lasciate in pausa, ritrova i contenuti che ti piacciono e condividili.",
+        content:
+          "Riprendi le puntate lasciate in pausa, ritrova i contenuti che ti piacciono e condividili.",
       },
       { name: "robots", content: "noindex" },
     ],
@@ -122,8 +123,13 @@ function AscoltatorePage() {
       const ref = episodeBySlug(row.episode_slug);
       return ref ? { ref, row } : null;
     })
-    .filter((entry): entry is { ref: NonNullable<ReturnType<typeof episodeBySlug>>; row: typeof rows[number] } =>
-      Boolean(entry),
+    .filter(
+      (
+        entry,
+      ): entry is {
+        ref: NonNullable<ReturnType<typeof episodeBySlug>>;
+        row: (typeof rows)[number];
+      } => Boolean(entry),
     )
     .slice(0, 3);
 
@@ -148,11 +154,36 @@ function AscoltatorePage() {
       </header>
 
       <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
-        <StatCard icon={Play} value={inProgress.length} label="In ascolto" to="/ascoltatore/puntate" />
-        <StatCard icon={Heart} value={favorites.length} label="Preferiti" to="/ascoltatore/raccolte" />
-        <StatCard icon={ListMusic} value={collections.length} label="Raccolte" to="/ascoltatore/raccolte" />
-        <StatCard icon={Bell} value={follows.length} label="Canali seguiti" to="/ascoltatore/canali" />
-        <StatCard icon={Share2} value={shares.length} label="Condivisioni" to="/ascoltatore/condivisioni" />
+        <StatCard
+          icon={Play}
+          value={inProgress.length}
+          label="In ascolto"
+          to="/ascoltatore/puntate"
+        />
+        <StatCard
+          icon={Heart}
+          value={favorites.length}
+          label="Preferiti"
+          to="/ascoltatore/raccolte"
+        />
+        <StatCard
+          icon={ListMusic}
+          value={collections.length}
+          label="Raccolte"
+          to="/ascoltatore/raccolte"
+        />
+        <StatCard
+          icon={Bell}
+          value={follows.length}
+          label="Canali seguiti"
+          to="/ascoltatore/canali"
+        />
+        <StatCard
+          icon={Share2}
+          value={shares.length}
+          label="Condivisioni"
+          to="/ascoltatore/condivisioni"
+        />
       </div>
 
       <section className="mt-12">
@@ -252,7 +283,10 @@ function AscoltatorePage() {
         ) : (
           <ul className="mt-4 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
             {recentFavorites.map((fav) => (
-              <li key={fav.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+              <li
+                key={fav.id}
+                className="flex flex-wrap items-center justify-between gap-3 px-4 py-3"
+              >
                 <div className="min-w-0">
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {fav.item_type.replace("_", " ")}
@@ -281,7 +315,9 @@ function AscoltatorePage() {
           cta="Apri raccolte"
         />
         {collections.length === 0 ? (
-          <Empty>Non hai ancora creato raccolte. Puoi crearne una direttamente da una puntata.</Empty>
+          <Empty>
+            Non hai ancora creato raccolte. Puoi crearne una direttamente da una puntata.
+          </Empty>
         ) : (
           <BentoGrid className="mt-4">
             {collections.slice(0, 3).map((c) => {
@@ -312,7 +348,10 @@ function AscoltatorePage() {
         ) : (
           <ul className="mt-4 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
             {shares.slice(0, 3).map((s) => (
-              <li key={s.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+              <li
+                key={s.id}
+                className="flex flex-wrap items-center justify-between gap-3 px-4 py-3"
+              >
                 <div className="min-w-0">
                   <p className="truncate text-[15px] font-semibold">{s.title}</p>
                   <p className="text-xs text-muted-foreground">
@@ -334,7 +373,9 @@ function AscoltatorePage() {
           <BentoLinkCard to="/podcast" tone="podcast" span={2}>
             <Headphones className="h-6 w-6 text-[var(--color-icon-podcast)]" />
             <h3 className="mt-3 text-title-m">Podcast</h3>
-            <p className="mt-1 text-[15px] text-muted-foreground">Programmi e puntate del territorio.</p>
+            <p className="mt-1 text-[15px] text-muted-foreground">
+              Programmi e puntate del territorio.
+            </p>
           </BentoLinkCard>
           <BentoLinkCard to="/radio" tone="radio" span={2}>
             <Play className="h-6 w-6 text-[var(--color-icon-radio)]" />

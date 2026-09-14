@@ -88,8 +88,7 @@ const BRANDS: Brand[] = [
     key: "podcast",
     name: "IMLAND PODCAST",
     role: "Sezione podcast",
-    usage:
-      "Canali, episodi, copertine e distribuzione on demand su piattaforme esterne.",
+    usage: "Canali, episodi, copertine e distribuzione on demand su piattaforme esterne.",
     color: SECTIONS.find((s) => s.key === "podcast")!.theme.signal,
     fg: "#ffffff",
     slug: "podcast",
@@ -189,7 +188,11 @@ function ColorSwatch({ name, value }: { name: string; value: string }) {
         <span className="block truncate text-sm font-semibold text-foreground">{name}</span>
         <span className="flex items-center gap-1 text-xs text-muted-foreground">
           {value.toUpperCase()}
-          {copied ? <Check size={13} /> : <Copy size={13} className="opacity-0 transition-opacity group-hover:opacity-100" />}
+          {copied ? (
+            <Check size={13} />
+          ) : (
+            <Copy size={13} className="opacity-0 transition-opacity group-hover:opacity-100" />
+          )}
         </span>
       </span>
     </button>
@@ -210,8 +213,8 @@ function BrandPage() {
           Regole semplici per usarlo bene.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
-          Qui trovi i loghi ufficiali IMLAND, le dimensioni minime, le
-          spaziature, i colori e le icone per app e browser.
+          Qui trovi i loghi ufficiali IMLAND, le dimensioni minime, le spaziature, i colori e le
+          icone per app e browser.
           <br />
           Tutto pronto da scaricare e usare senza rifare nulla a mano.
         </p>
@@ -236,8 +239,7 @@ function BrandPage() {
       <section className="container-im section-pad-sm">
         <h2 className="text-h2-im">I cinque loghi.</h2>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Ogni sezione del sito ha il proprio lockup: simbolo a fumetto colorato
-          più wordmark.
+          Ogni sezione del sito ha il proprio lockup: simbolo a fumetto colorato più wordmark.
           <br />
           Il colore identifica la sezione, la struttura resta sempre identica.
         </p>
@@ -275,11 +277,15 @@ function BrandPage() {
                 <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
                   <div className="rounded-xl bg-surface-1 p-3">
                     <dt className="text-muted-foreground">Colore dominante</dt>
-                    <dd className="mt-0.5 font-semibold text-foreground">{b.color.toUpperCase()}</dd>
+                    <dd className="mt-0.5 font-semibold text-foreground">
+                      {b.color.toUpperCase()}
+                    </dd>
                   </div>
                   <div className="rounded-xl bg-surface-1 p-3">
                     <dt className="text-muted-foreground">Altezza in header</dt>
-                    <dd className="mt-0.5 font-semibold text-foreground">36 px mobile · 40 px desktop</dd>
+                    <dd className="mt-0.5 font-semibold text-foreground">
+                      36 px mobile · 40 px desktop
+                    </dd>
                   </div>
                 </dl>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -324,11 +330,10 @@ function BrandPage() {
         <div className="container-im">
           <h2 className="text-h2-im">Dimensioni e area di rispetto.</h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
-            La regola è una sola: intorno al logo lascia sempre uno spazio pari a
-            metà dell&apos;altezza del simbolo.
+            La regola è una sola: intorno al logo lascia sempre uno spazio pari a metà
+            dell&apos;altezza del simbolo.
             <br />
-            Sotto le dimensioni minime il microfono dentro il simbolo non è più
-            leggibile.
+            Sotto le dimensioni minime il microfono dentro il simbolo non è più leggibile.
           </p>
 
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
@@ -347,8 +352,8 @@ function BrandPage() {
                   />
                 </div>
                 <p className="mt-4 text-center text-xs text-muted-foreground">
-                  Margine = 0,5 × altezza del simbolo (x). Nessun testo, bordo o
-                  immagine dentro l&apos;area tratteggiata.
+                  Margine = 0,5 × altezza del simbolo (x). Nessun testo, bordo o immagine dentro
+                  l&apos;area tratteggiata.
                 </p>
               </div>
             </div>
@@ -439,8 +444,7 @@ function BrandPage() {
                 Testo · Inter 400/600
               </p>
               <p className="mt-3 text-base text-foreground/85">
-                Corpo testo a 16 px, interlinea generosa, massimo 70 caratteri
-                per riga.
+                Corpo testo a 16 px, interlinea generosa, massimo 70 caratteri per riga.
                 <br />
                 La parola chiave nei titoli è una sola ed è evidenziata:{" "}
                 <span className="im-gradient-text">radio</span>.
@@ -454,8 +458,7 @@ function BrandPage() {
       <section className="container-im section-pad-sm">
         <h2 className="text-h2-im">Favicon e icone app.</h2>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Il set completo è generato dal simbolo, su fondo bianco, con margine
-          del 6%.
+          Il set completo è generato dal simbolo, su fondo bianco, con margine del 6%.
           <br />
           Le versioni maskable hanno il 20% di area di sicurezza per Android.
         </p>
@@ -486,7 +489,12 @@ function BrandPage() {
           </div>
         </div>
 
-        <div className="mt-6 overflow-x-auto rounded-3xl border border-border" tabIndex={0} role="region" aria-label="Tabella colori del brand">
+        <div
+          className="mt-6 overflow-x-auto rounded-3xl border border-border"
+          tabIndex={0}
+          role="region"
+          aria-label="Tabella colori del brand"
+        >
           <table className="w-full min-w-[560px] text-left text-sm">
             <thead className="bg-surface-1 text-xs uppercase tracking-wide text-muted-foreground">
               <tr>
@@ -526,9 +534,7 @@ function BrandPage() {
                 decoding="async"
               />
               <span className="mt-3 block text-xs font-semibold text-foreground">{b.name}</span>
-              <span className="mt-1 block text-xs text-muted-foreground">
-                192 · 512 · maskable
-              </span>
+              <span className="mt-1 block text-xs text-muted-foreground">192 · 512 · maskable</span>
             </a>
           ))}
         </div>
@@ -573,8 +579,8 @@ function BrandPage() {
                 ))}
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
-                Header alto 56 px, logo ritagliato senza margini interni, CTA nel
-                colore della sezione.
+                Header alto 56 px, logo ritagliato senza margini interni, CTA nel colore della
+                sezione.
               </p>
             </div>
 
@@ -605,8 +611,7 @@ function BrandPage() {
                 </div>
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
-                Icona sempre su fondo bianco: resta leggibile sia su wallpaper
-                chiari sia scuri.
+                Icona sempre su fondo bianco: resta leggibile sia su wallpaper chiari sia scuri.
               </p>
             </div>
 
@@ -626,7 +631,11 @@ function BrandPage() {
                       src={`/brand/mark-${b.slug}.png`}
                       alt={`Copertina ${b.name}`}
                       className="h-9 w-auto"
-                      style={b.fg === "#ffffff" ? { filter: "brightness(0) invert(1)" } : { filter: "brightness(0)" }}
+                      style={
+                        b.fg === "#ffffff"
+                          ? { filter: "brightness(0) invert(1)" }
+                          : { filter: "brightness(0)" }
+                      }
                       loading="lazy"
                       decoding="async"
                     />
@@ -640,8 +649,8 @@ function BrandPage() {
                 ))}
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
-                Copertine 1:1, fondo pieno nel colore di sezione, simbolo in
-                bianco e titolo su banda chiara.
+                Copertine 1:1, fondo pieno nel colore di sezione, simbolo in bianco e titolo su
+                banda chiara.
               </p>
             </div>
           </div>
@@ -686,8 +695,8 @@ function BrandPage() {
         <div className="rounded-3xl border border-border bg-surface-1 p-8 text-center md:p-12">
           <h2 className="text-h2-im">Ti serve un asset che qui non trovi?</h2>
           <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            Scrivici e prepariamo il file nel formato che ti serve, dal vettoriale
-            per la stampa ai template social.
+            Scrivici e prepariamo il file nel formato che ti serve, dal vettoriale per la stampa ai
+            template social.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link

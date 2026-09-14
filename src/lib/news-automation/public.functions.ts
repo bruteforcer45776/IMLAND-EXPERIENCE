@@ -11,7 +11,8 @@ function createPublicClient() {
     global: {
       fetch: (input, init) => {
         const h = new Headers(init?.headers);
-        if (key.startsWith("sb_") && h.get("Authorization") === `Bearer ${key}`) h.delete("Authorization");
+        if (key.startsWith("sb_") && h.get("Authorization") === `Bearer ${key}`)
+          h.delete("Authorization");
         h.set("apikey", key);
         return fetch(input, { ...init, headers: h });
       },
@@ -67,7 +68,13 @@ export const getPublishedArticleBySlug = createServerFn({ method: "GET" })
       .eq("article_id", article.id);
     if (sErr) throw sErr;
 
-    let related: { id: string; title: string; slug: string; category_slug: string | null; published_at: string | null }[] = [];
+    let related: {
+      id: string;
+      title: string;
+      slug: string;
+      category_slug: string | null;
+      published_at: string | null;
+    }[] = [];
     if (article.category_slug) {
       const { data: relatedRows, error: rErr } = await supabase
         .from("news_articles")
@@ -86,7 +93,11 @@ export const getPublishedArticleBySlug = createServerFn({ method: "GET" })
 
 export const getNewsCategories = createServerFn({ method: "GET" }).handler(async () => {
   const supabase = createPublicClient();
-  const { data, error } = await supabase.from("news_categories").select("*").eq("is_active", true).order("sort_order");
+  const { data, error } = await supabase
+    .from("news_categories")
+    .select("*")
+    .eq("is_active", true)
+    .order("sort_order");
   if (error) throw error;
   return data ?? [];
 });

@@ -1,28 +1,13 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { WHATSAPP_MEMBER_URL } from "@/lib/whatsapp";
-import {
-  Accessibility,
-  X,
-  Type,
-  Minus,
-  Plus,
-  Contrast,
-  ZapOff,
-} from "lucide-react";
+import { Accessibility, X, Type, Minus, Plus, Contrast, ZapOff } from "lucide-react";
 
 // WhatsApp icon (replace number below with the real business number)
 
-
 function WhatsAppIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="currentColor"
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
       <path d="M12 2C6.48 2 2 6.48 2 12c0 2.17.7 4.18 1.89 5.83L2 22l4.29-1.89A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a7.96 7.96 0 0 1-4.07-1.12l-.29-.17-2.54 1.12.56-2.47-.18-.29A7.96 7.96 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.29-5.79c-.23-.12-1.37-.68-1.58-.75-.21-.08-.36-.12-.51.12-.15.23-.58.75-.71.9-.13.15-.27.17-.5.08-.23-.12-.98-.36-1.86-1.13-.69-.61-1.15-1.37-1.29-1.61-.13-.23-.01-.36.1-.47.1-.1.23-.27.34-.41.12-.14.15-.23.23-.38.08-.15.04-.28-.02-.39-.06-.11-.52-1.17-.71-1.61-.19-.42-.38-.36-.51-.37-.12 0-.27-.01-.42-.01-.15 0-.38.06-.58.27-.2.22-.77.74-.77 1.8 0 1.06.77 2.09.88 2.24.11.15 1.53 2.33 3.71 3.27.52.22.92.36 1.24.45.52.17 1 .14 1.37.09.42-.06 1.28-.5 1.46-.98.18-.48.18-.89.13-.98-.05-.09-.19-.14-.42-.25z" />
     </svg>
   );
@@ -58,10 +43,7 @@ export function StickyActions() {
     document.documentElement.classList.toggle("reduce-motion", reduceMotion);
     document.documentElement.classList.toggle("high-contrast", highContrast);
     try {
-      localStorage.setItem(
-        "imland-a11y",
-        JSON.stringify({ fontSize, reduceMotion, highContrast })
-      );
+      localStorage.setItem("imland-a11y", JSON.stringify({ fontSize, reduceMotion, highContrast }));
     } catch {
       // ignore storage errors
     }
@@ -85,7 +67,10 @@ export function StickyActions() {
   }, [open]);
 
   return (
-    <aside aria-label="Azioni rapide" className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-3 z-[60] flex flex-col gap-2 md:bottom-24 md:right-4 md:gap-3">
+    <aside
+      aria-label="Azioni rapide"
+      className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-3 z-[60] flex flex-col gap-2 md:bottom-24 md:right-4 md:gap-3"
+    >
       <a
         href={WHATSAPP_MEMBER_URL}
         target="_blank"

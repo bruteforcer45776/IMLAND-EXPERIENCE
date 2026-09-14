@@ -70,8 +70,8 @@ export function HeroCinematic() {
         </h1>
 
         <p className="mt-6 max-w-xl text-body-l text-ink-700">
-          Radio, podcast, eventi e persone che raccontano Vercelli, Novara,
-          Biella e il Verbano-Cusio-Ossola.
+          Radio, podcast, eventi e persone che raccontano Vercelli, Novara, Biella e il
+          Verbano-Cusio-Ossola.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">

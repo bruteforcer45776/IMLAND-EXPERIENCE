@@ -92,7 +92,10 @@ export function ErrorState({
   onRetry?: () => void;
 }) {
   return (
-    <div className="service-panel flex flex-col items-center gap-3 px-6 py-10 text-center" role="alert">
+    <div
+      className="service-panel flex flex-col items-center gap-3 px-6 py-10 text-center"
+      role="alert"
+    >
       <h3 className="text-title-im">{title}</h3>
       <p className="measure-prose text-sm text-muted-foreground">{description}</p>
       {onRetry ? (

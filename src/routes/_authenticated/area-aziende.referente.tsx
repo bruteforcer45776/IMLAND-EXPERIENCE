@@ -10,7 +10,10 @@ export const Route = createFileRoute("/_authenticated/area-aziende/referente")({
   head: () => ({
     meta: [
       { title: "Il tuo referente — Area Aziende IMLAND" },
-      { name: "description", content: "Contatti del referente commerciale IMLAND per le aziende partner." },
+      {
+        name: "description",
+        content: "Contatti del referente commerciale IMLAND per le aziende partner.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -32,12 +35,18 @@ function ReferentePage() {
           </p>
           <ul className="mt-5 space-y-3 text-[15px]">
             <li>
-              <a href="mailto:info@imlandradio.com" className="inline-flex items-center gap-2 hover:underline">
+              <a
+                href="mailto:info@imlandradio.com"
+                className="inline-flex items-center gap-2 hover:underline"
+              >
                 <Mail size={18} className="text-signal" /> info@imlandradio.com
               </a>
             </li>
             <li>
-              <a href="tel:+393514323003" className="inline-flex items-center gap-2 hover:underline">
+              <a
+                href="tel:+393514323003"
+                className="inline-flex items-center gap-2 hover:underline"
+              >
                 <Phone size={18} className="text-signal" /> +39 351 432 3003
               </a>
             </li>

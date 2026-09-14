@@ -98,7 +98,8 @@ export function LatestAlerts() {
                 {a.comune}
               </p>
               <p className="mt-1 text-xs text-ink-600">
-                {a.category ?? "Segnalazione"} · {ALERT_STATUS_LABEL[a.status ?? ""] ?? "Pubblicata"}
+                {a.category ?? "Segnalazione"} ·{" "}
+                {ALERT_STATUS_LABEL[a.status ?? ""] ?? "Pubblicata"}
               </p>
               <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-[var(--color-surface-alert)]">
                 {formatHubDate(a.created_at)}

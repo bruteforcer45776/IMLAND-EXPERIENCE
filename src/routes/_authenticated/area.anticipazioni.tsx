@@ -70,7 +70,12 @@ function AnticipazioniPage() {
           {filtered.map((p) => (
             <BentoCard key={p.id} tone="member" span={3} className="!p-0 overflow-hidden block">
               {p.cover_url && (
-                <img src={p.cover_url} alt={p.title} className="h-44 w-full object-cover" loading="lazy" />
+                <img
+                  src={p.cover_url}
+                  alt={p.title}
+                  className="h-44 w-full object-cover"
+                  loading="lazy"
+                />
               )}
               <div className="p-5">
                 <div className="flex items-center justify-between gap-3">
@@ -103,7 +108,9 @@ function AnticipazioniPage() {
                 <p className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
                   <Clock size={13} />
                   Member dal {formatDateTime(p.member_publish_at)}
-                  {p.public_publish_at ? ` · pubblico dal ${formatDate(p.public_publish_at)}` : " · esclusiva Member"}
+                  {p.public_publish_at
+                    ? ` · pubblico dal ${formatDate(p.public_publish_at)}`
+                    : " · esclusiva Member"}
                 </p>
               </div>
             </BentoCard>

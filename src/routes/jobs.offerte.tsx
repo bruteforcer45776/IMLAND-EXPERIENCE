@@ -113,7 +113,11 @@ function JobsSearch() {
               className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium"
             >
               <LocateFixed size={15} />
-              {geo.loading ? "Cerco la posizione…" : geo.coords ? "Non usare la posizione" : "Vicino a me"}
+              {geo.loading
+                ? "Cerco la posizione…"
+                : geo.coords
+                  ? "Non usare la posizione"
+                  : "Vicino a me"}
             </button>
             {geo.coords && (
               <select
@@ -182,11 +186,16 @@ function JobsSearch() {
                     {user && (
                       <button
                         type="button"
-                        aria-label={saves.ids.has(job.id) ? "Togli dai salvati" : "Salva l'opportunità"}
+                        aria-label={
+                          saves.ids.has(job.id) ? "Togli dai salvati" : "Salva l'opportunità"
+                        }
                         onClick={() => saves.toggle.mutate(job.id)}
                         className="rounded-full p-2 text-muted-foreground hover:text-foreground"
                       >
-                        <Bookmark size={18} fill={saves.ids.has(job.id) ? "currentColor" : "none"} />
+                        <Bookmark
+                          size={18}
+                          fill={saves.ids.has(job.id) ? "currentColor" : "none"}
+                        />
                       </button>
                     )}
                   </div>

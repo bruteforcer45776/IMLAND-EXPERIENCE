@@ -90,12 +90,18 @@ export async function verifyAndPublishArticles(
         reason = "below thresholds or insufficient sources";
       } else {
         status = "review";
-        reason = sensitive ? "sensitive content" : settings.manual_review_mode ? "manual review mode" : "verification";
+        reason = sensitive
+          ? "sensitive content"
+          : settings.manual_review_mode
+            ? "manual review mode"
+            : "verification";
       }
 
       const update: Partial<Database["public"]["Tables"]["news_articles"]["Update"]> = {
         status: status as Database["public"]["Enums"]["news_article_status"],
-        verification_status: (status === "published" ? "verified" : "pending") as Database["public"]["Enums"]["news_verification_status"],
+        verification_status: (status === "published"
+          ? "verified"
+          : "pending") as Database["public"]["Enums"]["news_verification_status"],
       };
       if (status === "published") {
         update.published_at = new Date().toISOString();
@@ -122,6 +128,11 @@ export async function verifyAndPublishArticles(
 
     return { published, review, rejected };
   } catch (err) {
-    return { published: 0, review: 0, rejected: 0, error: err instanceof Error ? err.message : String(err) };
+    return {
+      published: 0,
+      review: 0,
+      rejected: 0,
+      error: err instanceof Error ? err.message : String(err),
+    };
   }
 }

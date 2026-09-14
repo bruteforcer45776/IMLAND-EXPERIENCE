@@ -4,7 +4,10 @@ import { toast } from "sonner";
  * Traduce gli errori tecnici (Supabase, rete, permessi) in messaggi chiari
  * in italiano, così l'interfaccia non mostra mai stringhe di debug.
  */
-export function describeError(error: unknown, fallback = "Qualcosa è andato storto. Riprova."): string {
+export function describeError(
+  error: unknown,
+  fallback = "Qualcosa è andato storto. Riprova.",
+): string {
   if (!error) return fallback;
 
   const raw = error as { message?: string; code?: string; status?: number; details?: string };

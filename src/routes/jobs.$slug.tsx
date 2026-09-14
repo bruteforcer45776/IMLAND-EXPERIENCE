@@ -233,7 +233,8 @@ function JobDetail() {
             </>
           ) : alreadyApplied ? (
             <p className="mt-2 text-sm text-muted-foreground">
-              Ti sei già candidato a questa opportunità il {formatHubDate(application.data?.created_at)}.
+              Ti sei già candidato a questa opportunità il{" "}
+              {formatHubDate(application.data?.created_at)}.
               <br />
               L'azienda ti contatterà con i riferimenti che hai lasciato.
             </p>

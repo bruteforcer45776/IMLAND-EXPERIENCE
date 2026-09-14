@@ -26,11 +26,7 @@ const SPAN_CLASS: Record<BentoSpan, string> = {
   6: "sm:col-span-2 lg:col-span-6",
 };
 
-export function BentoGrid({
-  className = "",
-  children,
-  ...props
-}: HTMLAttributes<HTMLDivElement>) {
+export function BentoGrid({ className = "", children, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={`bento-grid ${className}`} {...props}>
       {children}
@@ -117,4 +113,3 @@ export function BentoAnchorCard({
     </a>
   );
 }
-

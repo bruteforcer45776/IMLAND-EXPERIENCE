@@ -284,7 +284,13 @@ export const LogoLoop = memo(function LogoLoop({
           {item.node}
         </span>
       ) : (
-        <img src={item.src} alt={item.alt ?? ""} title={item.title} loading="lazy" draggable={false} />
+        <img
+          src={item.src}
+          alt={item.alt ?? ""}
+          title={item.title}
+          loading="lazy"
+          draggable={false}
+        />
       );
       const itemAriaLabel = isNodeItem
         ? (item.ariaLabel ?? item.title)

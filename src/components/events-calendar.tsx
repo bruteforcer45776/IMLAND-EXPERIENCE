@@ -75,7 +75,9 @@ export function EventsCalendar() {
       {/* Evento in evidenza */}
       <section className="section-focus">
         <div className="container-im section-pad-sm">
-          <p className="text-xs font-semibold uppercase tracking-wider text-signal">Prossimo evento</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+            Prossimo evento
+          </p>
 
           {nextEvent && countdown ? (
             <div className="mt-4 rounded-3xl border border-outline bg-card p-6 md:p-8">
@@ -87,7 +89,8 @@ export function EventsCalendar() {
                   <h2 className="mt-3 text-h2-im">{nextEvent.title}</h2>
                   <p className="mt-3 max-w-xl text-sm text-muted-foreground">{nextEvent.summary}</p>
                   <p className="mt-4 text-sm font-semibold">
-                    {formatEventDate(nextEvent.start)} · {formatEventTime(nextEvent.start)} · {nextEvent.place}
+                    {formatEventDate(nextEvent.start)} · {formatEventTime(nextEvent.start)} ·{" "}
+                    {nextEvent.place}
                   </p>
                 </div>
                 <dl className="grid grid-cols-4 gap-3 text-center">
@@ -96,7 +99,9 @@ export function EventsCalendar() {
                       <dt className="sr-only">{label}</dt>
                       <dd>
                         <span className="block font-display text-2xl font-bold">{value}</span>
-                        <span className="text-xs uppercase tracking-wider text-muted-foreground">{label}</span>
+                        <span className="text-xs uppercase tracking-wider text-muted-foreground">
+                          {label}
+                        </span>
                       </dd>
                     </div>
                   ))}
@@ -133,7 +138,10 @@ export function EventsCalendar() {
                   </p>
                 </div>
               </div>
-              <a href="#newsletter-eventi" className="inline-flex shrink-0 items-center gap-2 rounded-full btn-blue px-6 py-3.5 text-sm">
+              <a
+                href="#newsletter-eventi"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full btn-blue px-6 py-3.5 text-sm"
+              >
                 Avvisami
               </a>
             </div>
@@ -163,7 +171,9 @@ export function EventsCalendar() {
                 onClick={() => setTerritory(t)}
                 aria-pressed={territory === t}
                 className={`rounded-full border px-4 py-2 min-h-10 text-sm font-semibold transition-colors ${
-                  territory === t ? "border-transparent btn-blue" : "border-outline bg-card text-muted-foreground hover:text-foreground"
+                  territory === t
+                    ? "border-transparent btn-blue"
+                    : "border-outline bg-card text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {t}
@@ -177,7 +187,9 @@ export function EventsCalendar() {
                 onClick={() => setCategory(c)}
                 aria-pressed={category === c}
                 className={`rounded-full border px-4 py-2 min-h-10 text-sm transition-colors ${
-                  category === c ? "border-signal text-signal" : "border-outline text-muted-foreground hover:text-foreground"
+                  category === c
+                    ? "border-signal text-signal"
+                    : "border-outline text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {c}
@@ -202,8 +214,13 @@ export function EventsCalendar() {
                 Nel frattempo puoi ascoltare la radio o proporci il tuo evento.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                <Link to="/radio" className="rounded-full btn-blue px-5 py-3 text-sm">Ascolta la radio</Link>
-                <a href="#proponi-evento" className="rounded-full border border-outline px-5 py-3 text-sm font-semibold">
+                <Link to="/radio" className="rounded-full btn-blue px-5 py-3 text-sm">
+                  Ascolta la radio
+                </Link>
+                <a
+                  href="#proponi-evento"
+                  className="rounded-full border border-outline px-5 py-3 text-sm font-semibold"
+                >
                   Proponi il tuo evento
                 </a>
               </div>
@@ -216,7 +233,9 @@ export function EventsCalendar() {
       {pastEvents.length > 0 && (
         <section className="section-focus">
           <div className="container-im section-pad-sm">
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">Eventi passati</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+              Eventi passati
+            </p>
             <h2 className="mt-3 text-h2-im">
               Com'è andata, <span className="im-gradient-text">racconto</span> per racconto.
             </h2>

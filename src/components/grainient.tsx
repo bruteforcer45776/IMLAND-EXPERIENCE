@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { Renderer, Program, Mesh, Triangle } from 'ogl';
-import './grainient.css';
+import { useEffect, useRef } from "react";
+import { Renderer, Program, Mesh, Triangle } from "ogl";
+import "./grainient.css";
 
 const hexToRgb = (hex: string): [number, number, number] => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -145,16 +145,16 @@ const Grainient = ({
   centerX = 0.0,
   centerY = 0.0,
   zoom = 0.9,
-  color1 = '#FF9FFC',
-  color2 = '#5227FF',
-  color3 = '#B497CF',
-  className = '',
+  color1 = "#FF9FFC",
+  color2 = "#5227FF",
+  color3 = "#B497CF",
+  className = "",
 }: GrainientProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || typeof window === 'undefined') return;
+    if (!container || typeof window === "undefined") return;
 
     const renderer = new Renderer({
       webgl: 2,
@@ -164,9 +164,9 @@ const Grainient = ({
     });
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.display = 'block';
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.style.display = "block";
     container.appendChild(canvas);
 
     const geometry = new Triangle(gl);
@@ -237,23 +237,25 @@ const Grainient = ({
     const io = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
-        isVisible ? tryStart() : tryStop();
+        if (isVisible) tryStart();
+        else tryStop();
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
     io.observe(container);
     const onVisibility = () => {
       isPageVisible = !document.hidden;
-      isPageVisible ? tryStart() : tryStop();
+      if (isPageVisible) tryStart();
+      else tryStop();
     };
-    document.addEventListener('visibilitychange', onVisibility);
+    document.addEventListener("visibilitychange", onVisibility);
     tryStart();
 
     return () => {
       tryStop();
       ro.disconnect();
       io.disconnect();
-      document.removeEventListener('visibilitychange', onVisibility);
+      document.removeEventListener("visibilitychange", onVisibility);
       ctxMap.delete(container);
       try {
         container.removeChild(canvas);
@@ -291,10 +293,28 @@ const Grainient = ({
     u.uColor2.value = new Float32Array(hexToRgb(color2));
     u.uColor3.value = new Float32Array(hexToRgb(color3));
   }, [
-    timeSpeed, colorBalance, warpStrength, warpFrequency, warpSpeed,
-    warpAmplitude, blendAngle, blendSoftness, rotationAmount, noiseScale,
-    grainAmount, grainScale, grainAnimated, contrast, gamma, saturation,
-    centerX, centerY, zoom, color1, color2, color3,
+    timeSpeed,
+    colorBalance,
+    warpStrength,
+    warpFrequency,
+    warpSpeed,
+    warpAmplitude,
+    blendAngle,
+    blendSoftness,
+    rotationAmount,
+    noiseScale,
+    grainAmount,
+    grainScale,
+    grainAnimated,
+    contrast,
+    gamma,
+    saturation,
+    centerX,
+    centerY,
+    zoom,
+    color1,
+    color2,
+    color3,
   ]);
 
   return <div ref={containerRef} className={`grainient-container ${className}`.trim()} />;

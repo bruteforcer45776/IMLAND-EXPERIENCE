@@ -13,7 +13,11 @@ export const Route = createFileRoute("/_authenticated/area/scopri")({
   head: () => ({
     meta: [
       { title: "Scopri il territorio — IMLAND EXPERIENCE" },
-      { name: "description", content: "Eventi, locali ed esperienze selezionate tra Vercelli, Novara, Biella e Verbania." },
+      {
+        name: "description",
+        content:
+          "Eventi, locali ed esperienze selezionate tra Vercelli, Novara, Biella e Verbania.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -51,7 +55,9 @@ function ScopriPage() {
             key={p}
             onClick={() => setProvince(p)}
             className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-              province === p ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground hover:bg-muted"
+              province === p
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border text-muted-foreground hover:bg-muted"
             }`}
           >
             {p}
@@ -64,7 +70,9 @@ function ScopriPage() {
             key={c}
             onClick={() => setCategory(c)}
             className={`rounded-full border px-3.5 py-1 text-xs transition-colors ${
-              category === c ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground hover:bg-muted"
+              category === c
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border text-muted-foreground hover:bg-muted"
             }`}
           >
             {c}
@@ -81,7 +89,12 @@ function ScopriPage() {
           {filtered.map((d) => (
             <BentoCard key={d.id} tone="member" span={2} className="!p-0 overflow-hidden block">
               {d.image_url && (
-                <img src={d.image_url} alt={d.title} className="h-40 w-full object-cover" loading="lazy" />
+                <img
+                  src={d.image_url}
+                  alt={d.title}
+                  className="h-40 w-full object-cover"
+                  loading="lazy"
+                />
               )}
               <div className="p-5">
                 <div className="flex items-start justify-between gap-2">
@@ -89,15 +102,27 @@ function ScopriPage() {
                     {d.category}
                   </span>
                   <button
-                    onClick={() => toggle.mutate({ item_id: d.id, item_type: "esperienza", label: d.title, link_url: d.link_url })}
+                    onClick={() =>
+                      toggle.mutate({
+                        item_id: d.id,
+                        item_type: "esperienza",
+                        label: d.title,
+                        link_url: d.link_url,
+                      })
+                    }
                     aria-label="Salva"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
-                    <Heart size={18} fill={isFavorite(d.id, "esperienza") ? "currentColor" : "none"} />
+                    <Heart
+                      size={18}
+                      fill={isFavorite(d.id, "esperienza") ? "currentColor" : "none"}
+                    />
                   </button>
                 </div>
                 <h2 className="mt-3 text-h3-im">{d.title}</h2>
-                {d.description && <p className="mt-2 text-sm text-muted-foreground">{d.description}</p>}
+                {d.description && (
+                  <p className="mt-2 text-sm text-muted-foreground">{d.description}</p>
+                )}
                 <p className="mt-3 flex items-center gap-1 text-xs text-muted-foreground">
                   <MapPin size={12} />
                   {[d.city, d.province].filter(Boolean).join(", ") || "Territorio IMLAND"}

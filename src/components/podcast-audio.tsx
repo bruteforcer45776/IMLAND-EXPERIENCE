@@ -90,8 +90,6 @@ export function primeSavedPositions(remote: Record<string, number>) {
   if (changed) savePersisted();
 }
 
-
-
 function rememberPosition(t: number) {
   const src = state.track?.audio;
   if (!src || !isFinite(t)) return;
@@ -137,7 +135,6 @@ function audio() {
   return el;
 }
 
-
 /** Registry used by the radio player so radio and podcast never play together. */
 let stopRadio: (() => void) | null = null;
 export function registerRadioStop(fn: () => void) {
@@ -167,7 +164,8 @@ export const podcastAudio = {
     }
     stopRadio?.();
     // salva il punto della puntata che stiamo lasciando
-    if (state.track && isFinite(a.currentTime) && a.currentTime > 0) rememberPosition(a.currentTime);
+    if (state.track && isFinite(a.currentTime) && a.currentTime > 0)
+      rememberPosition(a.currentTime);
     // annulla un eventuale resume ancora pendente della puntata precedente
     if (pendingResume) {
       a.removeEventListener("loadedmetadata", pendingResume);
@@ -219,9 +217,7 @@ export const podcastAudio = {
     }
     set({ track: null, playing: false, time: 0, duration: 0 });
   },
-
 };
-
 
 const serverSnapshot: State = { track: null, playing: false, time: 0, duration: 0 };
 
@@ -236,7 +232,13 @@ export function fmtTime(t: number) {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-export function PlayIcon({ playing, className = "h-4 w-4" }: { playing: boolean; className?: string }) {
+export function PlayIcon({
+  playing,
+  className = "h-4 w-4",
+}: {
+  playing: boolean;
+  className?: string;
+}) {
   return playing ? (
     <svg viewBox="0 0 24 24" className={`${className} fill-current`} aria-hidden="true">
       <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
@@ -264,7 +266,13 @@ export function PodcastMiniPlayer() {
       {expanded && (
         <div className="absolute bottom-[4.25rem] left-0 w-[min(92vw,360px)] origin-bottom-left animate-enter rounded-[24px] border border-white/10 bg-ink/95 p-4 text-white shadow-2xl backdrop-blur-xl md:bottom-0 md:left-[4.25rem]">
           <div className="flex items-center gap-3">
-            <img loading="lazy" decoding="async" src={track.cover} alt="" className="h-14 w-14 shrink-0 rounded-2xl object-cover" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src={track.cover}
+              alt=""
+              className="h-14 w-14 shrink-0 rounded-2xl object-cover"
+            />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-bold leading-tight">{track.title}</p>
               <p className="mt-0.5 truncate text-xs text-white/60">{track.program}</p>
@@ -293,7 +301,9 @@ export function PodcastMiniPlayer() {
               <PlayIcon playing={playing} className="h-5 w-5" />
             </button>
             <div className="flex flex-1 items-center gap-2.5">
-              <span className="w-9 text-right text-xs tabular-nums text-white/60">{fmtTime(time)}</span>
+              <span className="w-9 text-right text-xs tabular-nums text-white/60">
+                {fmtTime(time)}
+              </span>
               <input
                 type="range"
                 min={0}
@@ -317,7 +327,13 @@ export function PodcastMiniPlayer() {
         aria-label={expanded ? "Chiudi i controlli podcast" : `Apri i controlli di ${track.title}`}
         className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border-2 border-white/20 shadow-xl transition hover:scale-105 md:h-16 md:w-16"
       >
-        <img loading="lazy" decoding="async" src={track.cover} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src={track.cover}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <span className="absolute inset-0 bg-black/40" />
         <PlayIcon playing={playing} className="relative h-6 w-6 text-white" />
       </button>

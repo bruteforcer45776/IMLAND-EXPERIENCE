@@ -59,11 +59,10 @@ export function SiteFooter() {
               Un riepilogo di radio, podcast ed eventi una volta al mese. Niente spam.
             </p>
           </div>
-          <form
-            className="flex w-full max-w-md gap-2"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <label htmlFor="footer-email" className="sr-only">La tua email</label>
+          <form className="flex w-full max-w-md gap-2" onSubmit={(e) => e.preventDefault()}>
+            <label htmlFor="footer-email" className="sr-only">
+              La tua email
+            </label>
             <input
               id="footer-email"
               type="email"
@@ -83,19 +82,19 @@ export function SiteFooter() {
       {/* Main columns */}
       <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-10 md:grid-cols-3 md:px-10 lg:grid-cols-6">
         <div className="md:col-span-3 lg:col-span-2">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={logoBlack.url}
             alt="IMLAND EXPERIENCE"
             className="h-10 w-auto"
             width={1248}
             height={1248}
           />
-          <p className="mt-5 max-w-xs text-[15px] text-ink-700">
-            Dai voce al tuo territorio.
-          </p>
+          <p className="mt-5 max-w-xs text-[15px] text-ink-700">Dai voce al tuo territorio.</p>
           <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-ink-600">
-            Radio, podcast, eventi e community delle province di Vercelli, Novara,
-            Biella e Verbania.
+            Radio, podcast, eventi e community delle province di Vercelli, Novara, Biella e
+            Verbania.
           </p>
           <Link
             to="/member"
@@ -104,7 +103,6 @@ export function SiteFooter() {
             Diventa Partner
           </Link>
         </div>
-
 
         {columns.map((col) => (
           <div key={col.title}>
@@ -190,10 +188,18 @@ export function SiteFooter() {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <Link to="/privacy" className="transition-colors hover:text-im-blue">Privacy</Link>
-            <Link to="/cookie" className="transition-colors hover:text-im-blue">Cookie</Link>
-            <Link to="/termini" className="transition-colors hover:text-im-blue">Termini</Link>
-            <Link to="/cookie" className="transition-colors hover:text-im-blue">Preferenze cookie</Link>
+            <Link to="/privacy" className="transition-colors hover:text-im-blue">
+              Privacy
+            </Link>
+            <Link to="/cookie" className="transition-colors hover:text-im-blue">
+              Cookie
+            </Link>
+            <Link to="/termini" className="transition-colors hover:text-im-blue">
+              Termini
+            </Link>
+            <Link to="/cookie" className="transition-colors hover:text-im-blue">
+              Preferenze cookie
+            </Link>
           </div>
         </div>
       </div>

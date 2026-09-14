@@ -13,7 +13,17 @@ type Tier = {
   highlight?: boolean;
 };
 
-const CONTENT: Record<PackageKind, { eyebrow: string; title: string; titleAccent: string; lead: string; note?: string; tiers: Tier[] }> = {
+const CONTENT: Record<
+  PackageKind,
+  {
+    eyebrow: string;
+    title: string;
+    titleAccent: string;
+    lead: string;
+    note?: string;
+    tiers: Tier[];
+  }
+> = {
   member: {
     eyebrow: "Pacchetti Member",
     title: "Entra nella rete",
@@ -155,10 +165,7 @@ export function PackagesSection({ kind }: { kind: PackageKind }) {
         eyebrow={c.eyebrow}
         title={
           <>
-            {c.title}{" "}
-            <span className="im-gradient-text">
-              {c.titleAccent}
-            </span>
+            {c.title} <span className="im-gradient-text">{c.titleAccent}</span>
           </>
         }
         description={c.lead}
@@ -189,13 +196,11 @@ export function PackagesSection({ kind }: { kind: PackageKind }) {
 
   return (
     <section className="section-focus">
-
       <div className="container-im section-pad">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-wider text-signal">{c.eyebrow}</p>
           <h2 className="mt-2 text-h2-im">
-            {c.title}{" "}
-            <span className="im-gradient-text">{c.titleAccent}</span>
+            {c.title} <span className="im-gradient-text">{c.titleAccent}</span>
           </h2>
           <p className="mt-4 whitespace-pre-line text-muted-foreground">{c.lead}</p>
           {c.note ? (
@@ -211,11 +216,7 @@ export function PackagesSection({ kind }: { kind: PackageKind }) {
               key={t.name}
               className={`flex h-full flex-col rounded-3xl border p-6 ${
                 i === 1 ? "md:-translate-y-6 md:py-10 md:shadow-2xl md:z-10" : ""
-              } ${
-                t.highlight
-                  ? "border-transparent bg-signal text-white"
-                  : "glass-panel"
-              }`}
+              } ${t.highlight ? "border-transparent bg-signal text-white" : "glass-panel"}`}
             >
               <div className="flex items-center justify-between">
                 <span
@@ -227,14 +228,18 @@ export function PackagesSection({ kind }: { kind: PackageKind }) {
                 </span>
               </div>
               <h3 className="mt-6 text-h3-im">{t.name}</h3>
-              <p className={`mt-2 text-sm ${t.highlight ? "text-white/75" : "text-muted-foreground"}`}>
+              <p
+                className={`mt-2 text-sm ${t.highlight ? "text-white/75" : "text-muted-foreground"}`}
+              >
                 {t.desc}
               </p>
               <ul className="mt-6 space-y-2 text-sm">
                 {t.features.map((f) => (
                   <li key={f} className="flex gap-2">
                     <span className={t.highlight ? "text-horizon" : "text-signal"}>—</span>
-                    <span className={t.highlight ? "text-white/85" : "text-foreground/80"}>{f}</span>
+                    <span className={t.highlight ? "text-white/85" : "text-foreground/80"}>
+                      {f}
+                    </span>
                   </li>
                 ))}
               </ul>

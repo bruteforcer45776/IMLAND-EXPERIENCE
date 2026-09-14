@@ -8,7 +8,10 @@ export const Route = createFileRoute("/_authenticated/area-aziende/materiali")({
   head: () => ({
     meta: [
       { title: "Materiali e loghi — Area Aziende IMLAND" },
-      { name: "description", content: "Loghi e materiali ufficiali IMLAND per le aziende partner." },
+      {
+        name: "description",
+        content: "Loghi e materiali ufficiali IMLAND per le aziende partner.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),

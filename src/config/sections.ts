@@ -114,7 +114,6 @@ export const SECTIONS: SectionConfig[] = [
   },
 ];
 
-
 export const DEFAULT_SECTION: SectionConfig = {
   key: "default",
   label: "IMLAND Experience",

@@ -16,7 +16,10 @@ export const Route = createFileRoute("/_authenticated/area/invita")({
   head: () => ({
     meta: [
       { title: "Invita un amico — IMLAND EXPERIENCE" },
-      { name: "description", content: "Invita amici nella community IMLAND e monitora le registrazioni." },
+      {
+        name: "description",
+        content: "Invita amici nella community IMLAND e monitora le registrazioni.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -74,7 +77,8 @@ function InvitaPage() {
         <div className="rounded-3xl border border-border bg-card p-6">
           <h2 className="text-h3-im">Il tuo link personale.</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Codice invito: <span className="font-medium text-foreground">{profile?.referral_code ?? "—"}</span>
+            Codice invito:{" "}
+            <span className="font-medium text-foreground">{profile?.referral_code ?? "—"}</span>
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Input readOnly value={link} className="flex-1" />
@@ -125,7 +129,11 @@ function InvitaPage() {
               onChange={(e) => setEmail(e.target.value)}
               className="flex-1"
             />
-            <Button className="rounded-full" disabled={invite.isPending} onClick={() => invite.mutate()}>
+            <Button
+              className="rounded-full"
+              disabled={invite.isPending}
+              onClick={() => invite.mutate()}
+            >
               Registra invito
             </Button>
           </div>
@@ -142,7 +150,10 @@ function InvitaPage() {
           ) : (
             <ul className="mt-3 space-y-2">
               {data.map((r) => (
-                <li key={r.id} className="flex items-center justify-between gap-3 rounded-2xl bg-muted/50 p-3 text-sm">
+                <li
+                  key={r.id}
+                  className="flex items-center justify-between gap-3 rounded-2xl bg-muted/50 p-3 text-sm"
+                >
                   <span className="truncate">{r.invited_email ?? "Invito da link"}</span>
                   <span className="shrink-0 text-xs text-muted-foreground">
                     {r.registered_at ? `Iscritto il ${formatDate(r.registered_at)}` : r.status}

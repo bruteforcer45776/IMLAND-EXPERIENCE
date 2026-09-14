@@ -4,7 +4,6 @@ import { canonical } from "../lib/seo";
 import { BentoGrid, BentoCard } from "../components/bento";
 import {
   findEvent,
-
   formatEventDate,
   formatEventTime,
   googleCalendarUrl,
@@ -68,9 +67,13 @@ function EventDetail() {
   return (
     <div className="container-im hero-pad">
       <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
-        <Link to="/" className="hover:text-foreground">Home</Link>
+        <Link to="/" className="hover:text-foreground">
+          Home
+        </Link>
         <span className="mx-2">›</span>
-        <Link to="/eventi" className="hover:text-foreground">Eventi</Link>
+        <Link to="/eventi" className="hover:text-foreground">
+          Eventi
+        </Link>
         <span className="mx-2">›</span>
         <span className="text-foreground">{event.title}</span>
       </nav>
@@ -83,15 +86,21 @@ function EventDetail() {
 
       <BentoGrid className="mt-8">
         <BentoCard tone="eventi" span={2}>
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Data</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Data
+          </p>
           <p className="mt-2 text-[15px] font-semibold">{formatEventDate(event.start)}</p>
         </BentoCard>
         <BentoCard tone="eventi" span={2}>
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Orario</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Orario
+          </p>
           <p className="mt-2 text-[15px] font-semibold">{formatEventTime(event.start)}</p>
         </BentoCard>
         <BentoCard tone="eventi" span={2}>
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Luogo</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Luogo
+          </p>
           <p className="mt-2 text-[15px] font-semibold">{event.place}</p>
         </BentoCard>
       </BentoGrid>
@@ -108,7 +117,10 @@ function EventDetail() {
         >
           Aggiungi al calendario
         </a>
-        <Link to="/member" className="rounded-full border border-outline bg-card px-6 py-3.5 text-sm font-semibold">
+        <Link
+          to="/member"
+          className="rounded-full border border-outline bg-card px-6 py-3.5 text-sm font-semibold"
+        >
           Diventa sponsor dell'evento
         </Link>
       </div>
@@ -150,14 +162,24 @@ function EventDetail() {
         <h2 className="text-h2-im">Continua ad ascoltare.</h2>
         <div className="mt-4 flex flex-wrap gap-3">
           {(event.related ?? []).map((r) => (
-            <Link key={r.to} to={r.to} className="rounded-full border border-outline bg-card px-5 py-3 text-sm font-semibold">
+            <Link
+              key={r.to}
+              to={r.to}
+              className="rounded-full border border-outline bg-card px-5 py-3 text-sm font-semibold"
+            >
               {r.label}
             </Link>
           ))}
-          <Link to="/podcast" className="rounded-full border border-outline bg-card px-5 py-3 text-sm font-semibold">
+          <Link
+            to="/podcast"
+            className="rounded-full border border-outline bg-card px-5 py-3 text-sm font-semibold"
+          >
             Il racconto in podcast
           </Link>
-          <Link to="/news" className="rounded-full border border-outline bg-card px-5 py-3 text-sm font-semibold">
+          <Link
+            to="/news"
+            className="rounded-full border border-outline bg-card px-5 py-3 text-sm font-semibold"
+          >
             Le news del territorio
           </Link>
         </div>

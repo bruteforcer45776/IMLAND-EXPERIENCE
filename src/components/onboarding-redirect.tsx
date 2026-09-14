@@ -32,7 +32,10 @@ export function OnboardingRedirect() {
   return (
     <OnboardingWizard
       onDone={(accountType) =>
-        void navigate({ to: accountType === "azienda" ? "/area-aziende" : "/ascoltatore", replace: true })
+        void navigate({
+          to: accountType === "azienda" ? "/area-aziende" : "/ascoltatore",
+          replace: true,
+        })
       }
     />
   );

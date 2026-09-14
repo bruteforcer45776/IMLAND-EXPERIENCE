@@ -23,7 +23,5 @@ export const getRouter = () => {
     defaultPreloadStaleTime: 60 * 1000,
   });
 
-
   return router;
 };
-

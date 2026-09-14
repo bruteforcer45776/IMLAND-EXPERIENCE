@@ -68,8 +68,7 @@ function AlertSubmit() {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  const categoryLabel =
-    (categories.data ?? []).find((c) => c.slug === form.alertType)?.label ?? "";
+  const categoryLabel = (categories.data ?? []).find((c) => c.slug === form.alertType)?.label ?? "";
   const dynamicFields = useMemo(() => fieldsForType(form.alertType), [form.alertType]);
 
   // La sequenza di domande si adatta alla tipologia scelta.
@@ -188,7 +187,15 @@ function AlertSubmit() {
     setCode(null);
     setDraftId(null);
     setStep(0);
-    setForm({ alertType: "", title: "", body: "", comune: "", province: "", contactEmail: "", trap: "" });
+    setForm({
+      alertType: "",
+      title: "",
+      body: "",
+      comune: "",
+      province: "",
+      contactEmail: "",
+      trap: "",
+    });
     setExtra({});
   };
 
@@ -240,7 +247,10 @@ function AlertSubmit() {
             Segui la segnalazione
           </Link>
           {user ? (
-            <Link to="/alert/mie" className="rounded-full border-2 border-[var(--service-border)] bg-white px-6 py-3 text-sm font-semibold">
+            <Link
+              to="/alert/mie"
+              className="rounded-full border-2 border-[var(--service-border)] bg-white px-6 py-3 text-sm font-semibold"
+            >
               Le mie segnalazioni
             </Link>
           ) : null}
@@ -459,7 +469,11 @@ function AlertSubmit() {
                 className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-[var(--service-border)] bg-white px-5 py-3 text-sm font-semibold"
               >
                 <LocateFixed size={16} />
-                {geo.coords ? "Posizione allegata" : geo.loading ? "Cerco la posizione…" : "Allega la posizione"}
+                {geo.coords
+                  ? "Posizione allegata"
+                  : geo.loading
+                    ? "Cerco la posizione…"
+                    : "Allega la posizione"}
               </button>
               {geo.error ? <p className="mt-2 text-sm text-muted-foreground">{geo.error}</p> : null}
             </div>
@@ -492,7 +506,14 @@ function AlertSubmit() {
               </p>
             )}
             {/* campo esca anti-spam: invisibile alle persone */}
-            <input value={form.trap} onChange={set("trap")} tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
+            <input
+              value={form.trap}
+              onChange={set("trap")}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+              className="hidden"
+            />
           </div>
         )}
 
@@ -508,7 +529,9 @@ function AlertSubmit() {
                 <dl className="mt-4 grid gap-3 sm:grid-cols-2">
                   {dynamicFields.map((f) => (
                     <div key={f.name}>
-                      <dt className="text-caption-im uppercase tracking-wide text-muted-foreground">{f.label}</dt>
+                      <dt className="text-caption-im uppercase tracking-wide text-muted-foreground">
+                        {f.label}
+                      </dt>
                       <dd className="text-sm">{extra[f.name] || "—"}</dd>
                     </div>
                   ))}
@@ -522,10 +545,16 @@ function AlertSubmit() {
                   <li
                     key={`${c.level}-${c.message}`}
                     className={`flex items-start gap-2 rounded-2xl border-2 bg-white px-4 py-3 text-sm ${
-                      c.level === "error" ? "border-destructive text-destructive" : "border-border text-muted-foreground"
+                      c.level === "error"
+                        ? "border-destructive text-destructive"
+                        : "border-border text-muted-foreground"
                     }`}
                   >
-                    {c.level === "error" ? <AlertTriangle size={16} className="mt-0.5" /> : <Check size={16} className="mt-0.5" />}
+                    {c.level === "error" ? (
+                      <AlertTriangle size={16} className="mt-0.5" />
+                    ) : (
+                      <Check size={16} className="mt-0.5" />
+                    )}
                     <span>{c.message}</span>
                   </li>
                 ))}
@@ -567,7 +596,12 @@ function AlertSubmit() {
         {user && step > 0 && (
           <button
             type="button"
-            disabled={saveAlert.isPending || form.title.trim().length < 5 || form.body.trim().length < 20 || !form.comune}
+            disabled={
+              saveAlert.isPending ||
+              form.title.trim().length < 5 ||
+              form.body.trim().length < 20 ||
+              !form.comune
+            }
             onClick={() => persist("draft")}
             className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-[var(--service-border)] bg-white px-5 py-3 text-sm font-semibold disabled:opacity-50"
           >

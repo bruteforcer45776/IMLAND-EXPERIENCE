@@ -24,18 +24,16 @@ function PrivacyPage() {
   return (
     <section className="decor-host overflow-hidden mx-auto max-w-3xl px-4 section-pad md:px-8">
       <SectionDecor variant="bubbles" />
-      <h1 className="text-display-l">
-        Privacy Policy
-      </h1>
+      <h1 className="text-display-l">Privacy Policy</h1>
       <p className="mt-3 text-sm text-muted-foreground">
         Ultimo aggiornamento: {new Date().toLocaleDateString("it-IT")}
       </p>
 
       <div className="prose prose-invert mt-10 max-w-none space-y-6 text-foreground/85">
         <p>
-          La presente informativa è resa ai sensi degli artt. 13 e 14 del
-          Regolamento UE 2016/679 (GDPR) a chi consulta il sito e utilizza i
-          servizi offerti da <strong>IMLAND EXPERIENCE SRL</strong>.
+          La presente informativa è resa ai sensi degli artt. 13 e 14 del Regolamento UE 2016/679
+          (GDPR) a chi consulta il sito e utilizza i servizi offerti da{" "}
+          <strong>IMLAND EXPERIENCE SRL</strong>.
         </p>
 
         <h2 className="text-h2-im">1. Titolare del trattamento</h2>
@@ -52,10 +50,9 @@ function PrivacyPage() {
 
         <h2 className="text-h2-im">2. Dati raccolti</h2>
         <p>
-          Raccogliamo i dati che ci fornisci volontariamente (nome, email,
-          città) tramite i moduli di iscrizione, contatto e membership, oltre
-          ai dati di navigazione (indirizzo IP, browser, pagine visitate)
-          raccolti in forma aggregata.
+          Raccogliamo i dati che ci fornisci volontariamente (nome, email, città) tramite i moduli
+          di iscrizione, contatto e membership, oltre ai dati di navigazione (indirizzo IP, browser,
+          pagine visitate) raccolti in forma aggregata.
         </p>
 
         <h2 className="text-h2-im">3. Finalità</h2>
@@ -68,33 +65,30 @@ function PrivacyPage() {
 
         <h2 className="text-h2-im">4. Base giuridica</h2>
         <p>
-          Il trattamento si fonda sul consenso dell&apos;interessato, sulla
-          necessità di eseguire un contratto e sull&apos;adempimento di
-          obblighi di legge (art. 6 GDPR).
+          Il trattamento si fonda sul consenso dell&apos;interessato, sulla necessità di eseguire un
+          contratto e sull&apos;adempimento di obblighi di legge (art. 6 GDPR).
         </p>
 
         <h2 className="text-h2-im">5. Conservazione</h2>
         <p>
-          I dati sono conservati per il tempo strettamente necessario alle
-          finalità per cui sono raccolti e nel rispetto dei termini di legge.
+          I dati sono conservati per il tempo strettamente necessario alle finalità per cui sono
+          raccolti e nel rispetto dei termini di legge.
         </p>
 
         <h2 className="text-h2-im">6. Diritti dell&apos;interessato</h2>
         <p>
-          Puoi esercitare in qualsiasi momento i diritti di accesso, rettifica,
-          cancellazione, limitazione, portabilità e opposizione scrivendo a{" "}
+          Puoi esercitare in qualsiasi momento i diritti di accesso, rettifica, cancellazione,
+          limitazione, portabilità e opposizione scrivendo a{" "}
           <a href="mailto:info@imlandradio.com" className="text-signal">
             info@imlandradio.com
           </a>
-          . Hai inoltre diritto di proporre reclamo al Garante per la
-          protezione dei dati personali.
+          . Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.
         </p>
 
         <h2 className="text-h2-im">7. Cookie</h2>
         <p>
-          Il sito utilizza cookie tecnici e, previo consenso, cookie di
-          analisi e marketing. Consulta la nostra Cookie Policy per il
-          dettaglio e per modificare le preferenze.
+          Il sito utilizza cookie tecnici e, previo consenso, cookie di analisi e marketing.
+          Consulta la nostra Cookie Policy per il dettaglio e per modificare le preferenze.
         </p>
       </div>
     </section>

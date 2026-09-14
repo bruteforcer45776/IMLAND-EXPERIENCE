@@ -14,7 +14,10 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/puntate")({
   head: () => ({
     meta: [
       { title: "Puntate — Area Persona IMLAND" },
-      { name: "description", content: "Cerca e filtra le puntate per canale, data e stato di ascolto." },
+      {
+        name: "description",
+        content: "Cerca e filtra le puntate per canale, data e stato di ascolto.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -126,16 +129,27 @@ function PuntatePage() {
         </select>
         <label className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm">
           <span className="text-muted-foreground">Dal</span>
-          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className="bg-transparent" />
+          <input
+            type="date"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            className="bg-transparent"
+          />
         </label>
         <label className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm">
           <span className="text-muted-foreground">Al</span>
-          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className="bg-transparent" />
+          <input
+            type="date"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            className="bg-transparent"
+          />
         </label>
       </div>
 
       <p className="mt-4 text-xs text-muted-foreground">
-        {rows.length} puntate trovate{rows.length > visible.length ? ` · mostrate le prime ${visible.length}` : ""}
+        {rows.length} puntate trovate
+        {rows.length > visible.length ? ` · mostrate le prime ${visible.length}` : ""}
       </p>
 
       {visible.length === 0 ? (
@@ -153,7 +167,9 @@ function PuntatePage() {
                 ref_={ref_}
                 position={position}
                 duration={remote?.duration_seconds ?? null}
-                badge={remote?.completed ? "Completata" : position > 5 ? "Da riprendere" : undefined}
+                badge={
+                  remote?.completed ? "Completata" : position > 5 ? "Da riprendere" : undefined
+                }
               />
             );
           })}

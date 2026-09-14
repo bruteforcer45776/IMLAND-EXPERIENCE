@@ -1,9 +1,7 @@
 import { lazy, Suspense } from "react";
 import { canonical, jsonLd, organizationLd, websiteLd, SITE_URL } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowRight, MapPin,
-} from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
 import { EcosystemFlow } from "../components/home/ecosystem-flow";
@@ -24,7 +22,13 @@ const DownloadAppBanner = lazy(() =>
   import("../components/download-app-banner").then((m) => ({ default: m.DownloadAppBanner })),
 );
 import { seoFaq } from "../data/seo-faq";
-import { eventTerritories, formatEventDate, formatEventTime, nextEvent, upcomingEvents } from "../data/events";
+import {
+  eventTerritories,
+  formatEventDate,
+  formatEventTime,
+  nextEvent,
+  upcomingEvents,
+} from "../data/events";
 import { latestEpisodes, programs, totalEpisodes } from "../data/podcast-derived";
 import { partnerLogos } from "../data/partner-logos";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
@@ -32,15 +36,12 @@ import { WHATSAPP_MEMBER_URL } from "@/lib/whatsapp";
 
 const featuredEpisode = latestEpisodes[0];
 
-
-
-
-
 const newsPreviews = [
   {
     tag: "Territorio",
     title: "Le Langhe si raccontano.",
-    abstract: "Cantine, borghi e strade panoramiche.\nUn itinerario per scoprire il cuore del Piemonte.",
+    abstract:
+      "Cantine, borghi e strade panoramiche.\nUn itinerario per scoprire il cuore del Piemonte.",
   },
   {
     tag: "Eventi",
@@ -61,8 +62,6 @@ const memberBenefits = [
   { k: "Community", v: "Entra tra le voci che raccontano il territorio." },
 ];
 
-
-
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
@@ -73,8 +72,15 @@ export const Route = createFileRoute("/")({
         content:
           "IMLAND EXPERIENCE: radio locale in diretta 24/7, musica, podcast ed eventi tra Vercelli, Novara, Biella e Verbania. Ascolta ora e scopri il territorio.",
       },
-      { name: "keywords", content: "musica, radio, radio Vercelli, radio Novara, radio Biella, radio Verbania, podcast Piemonte, eventi Piemonte" },
-      { property: "og:title", content: "Musica, radio e podcast a Vercelli, Novara, Biella e Verbania" },
+      {
+        name: "keywords",
+        content:
+          "musica, radio, radio Vercelli, radio Novara, radio Biella, radio Verbania, podcast Piemonte, eventi Piemonte",
+      },
+      {
+        property: "og:title",
+        content: "Musica, radio e podcast a Vercelli, Novara, Biella e Verbania",
+      },
       {
         property: "og:description",
         content:
@@ -83,8 +89,14 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/` },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Musica, radio e podcast a Vercelli, Novara, Biella e Verbania" },
-      { name: "twitter:description", content: "Radio in diretta 24/7, musica, podcast ed eventi del territorio piemontese." },
+      {
+        name: "twitter:title",
+        content: "Musica, radio e podcast a Vercelli, Novara, Biella e Verbania",
+      },
+      {
+        name: "twitter:description",
+        content: "Radio in diretta 24/7, musica, podcast ed eventi del territorio piemontese.",
+      },
       { name: "geo.region", content: "IT-PIE" },
       { name: "geo.placename", content: "Vercelli, Novara, Biella, Verbania" },
     ],
@@ -97,12 +109,10 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const eyebrow =
-  "text-[13px] font-semibold uppercase tracking-[0.16em] text-im-blue";
+const eyebrow = "text-[13px] font-semibold uppercase tracking-[0.16em] text-im-blue";
 const h2 =
   "mt-4 font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[1.06] tracking-[-0.03em] text-ink-950";
-const keyword =
-  "im-gradient-text";
+const keyword = "im-gradient-text";
 const shell = "mx-auto w-full max-w-[1200px] px-4 md:px-8";
 
 function Home() {
@@ -118,7 +128,9 @@ function Home() {
             Membri e realtà del territorio:
           </p>
         </div>
-        <Suspense fallback={<div className="h-16" />}><PartnerLoop fadeOutColor="#ffffff" /></Suspense>
+        <Suspense fallback={<div className="h-16" />}>
+          <PartnerLoop fadeOutColor="#ffffff" />
+        </Suspense>
       </section>
 
       {/* QUICK LINKS — i nostri servizi */}
@@ -132,7 +144,10 @@ function Home() {
           <BentoGrid className="mt-10">
             {quickLinks.map((q) => (
               <BentoLinkCard key={q.label} to={q.to} tone={q.tone} span={q.span} className="group">
-                <BadgeIcon name={q.badge} className="h-14 w-14 transition-transform duration-300 group-hover:scale-105" />
+                <BadgeIcon
+                  name={q.badge}
+                  className="h-14 w-14 transition-transform duration-300 group-hover:scale-105"
+                />
 
                 <p className="mt-5 font-display text-lg font-bold text-ink-950">{q.label}</p>
                 <p className="mt-0.5 text-sm text-ink-600">{q.desc}</p>
@@ -140,7 +155,6 @@ function Home() {
               </BentoLinkCard>
             ))}
           </BentoGrid>
-
         </div>
       </section>
 
@@ -149,8 +163,6 @@ function Home() {
 
       {/* ADV — banner pubblicitario alto */}
       <AdvSlot position="alto" />
-
-
 
       {/* IN EVIDENZA ORA — podcast + evento + news */}
       <section className="bg-white section-pad-sm">
@@ -169,11 +181,15 @@ function Home() {
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-blue">
                   Ultimo podcast · {featuredEpisode.program.name}
                 </p>
-                <h3 className="mt-3 text-h3-im leading-snug text-ink-950">{featuredEpisode.ep.title}</h3>
+                <h3 className="mt-3 text-h3-im leading-snug text-ink-950">
+                  {featuredEpisode.ep.title}
+                </h3>
                 <p className="mt-2 line-clamp-3 text-sm text-ink-600">
                   {featuredEpisode.ep.subtitle ?? featuredEpisode.program.tagline}
                 </p>
-                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-blue">Ascolta l'episodio <ArrowRight className="inline h-4 w-4" /></span>
+                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-blue">
+                  Ascolta l'episodio <ArrowRight className="inline h-4 w-4" />
+                </span>
               </Link>
             )}
 
@@ -188,30 +204,47 @@ function Home() {
                 </p>
                 <h3 className="mt-3 text-h3-im leading-snug text-ink-950">{nextEvent.title}</h3>
                 <p className="mt-2 text-sm text-ink-600">{formatEventDate(nextEvent.start)}</p>
-                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-green">Scopri l'evento <ArrowRight className="inline h-4 w-4" /></span>
+                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-green">
+                  Scopri l'evento <ArrowRight className="inline h-4 w-4" />
+                </span>
               </Link>
             ) : (
-              <Link to="/eventi" className="card-im flex h-full flex-col rounded-[28px] bg-white p-7">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-green">Eventi</p>
-                <h3 className="mt-3 text-h3-im leading-snug text-ink-950">Le prossime date stanno arrivando.</h3>
+              <Link
+                to="/eventi"
+                className="card-im flex h-full flex-col rounded-[28px] bg-white p-7"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-green">
+                  Eventi
+                </p>
+                <h3 className="mt-3 text-h3-im leading-snug text-ink-950">
+                  Le prossime date stanno arrivando.
+                </h3>
                 <p className="mt-2 text-sm text-ink-600">
                   Stiamo chiudendo il calendario con i territori.
                   <br />
                   Guarda i format e proponi il tuo evento.
                 </p>
-                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-green">Vai agli eventi <ArrowRight className="inline h-4 w-4" /></span>
+                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-green">
+                  Vai agli eventi <ArrowRight className="inline h-4 w-4" />
+                </span>
               </Link>
             )}
 
             <Link to="/news" className="card-im flex h-full flex-col rounded-[28px] bg-white p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-cyan">Ultime news</p>
-              <h3 className="mt-3 text-h3-im leading-snug text-ink-950">Le notizie del territorio, aggiornate ogni giorno.</h3>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-cyan">
+                Ultime news
+              </p>
+              <h3 className="mt-3 text-h3-im leading-snug text-ink-950">
+                Le notizie del territorio, aggiornate ogni giorno.
+              </h3>
               <p className="mt-2 text-sm text-ink-600">
                 Vercelli, Novara, Biella e Verbania.
                 <br />
                 Selezionate dalla redazione IMLAND.
               </p>
-              <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-cyan">Leggi le news <ArrowRight className="inline h-4 w-4" /></span>
+              <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-cyan">
+                Leggi le news <ArrowRight className="inline h-4 w-4" />
+              </span>
             </Link>
           </div>
         </div>
@@ -251,7 +284,10 @@ function Home() {
               { v: `${totalEpisodes}`, k: "Episodi pubblicati" },
               { v: `${partnerLogos.length}`, k: "Aziende partner" },
             ].map((s) => (
-              <div key={s.k} className="rounded-[24px] border border-border bg-white p-6 text-center">
+              <div
+                key={s.k}
+                className="rounded-[24px] border border-border bg-white p-6 text-center"
+              >
                 <dt className="sr-only">{s.k}</dt>
                 <dd>
                   <span className="block font-display text-3xl font-bold text-ink-950">{s.v}</span>
@@ -262,7 +298,6 @@ function Home() {
           </dl>
         </div>
       </section>
-
 
       {/* ADV — banner pubblicitario medio */}
       <AdvSlot position="medio" />
@@ -283,11 +318,17 @@ function Home() {
                   Un flusso di notizie per chi vive il Piemonte.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Link to="/news" className="group inline-flex h-12 items-center gap-2 rounded-full btn-blue px-7 text-[15px]">
+                  <Link
+                    to="/news"
+                    className="group inline-flex h-12 items-center gap-2 rounded-full btn-blue px-7 text-[15px]"
+                  >
                     Vai alle news
                     <span className="btn-arrow">→</span>
                   </Link>
-                  <Link to="/contatti" className="inline-flex h-12 items-center rounded-full border border-border bg-white px-6 text-[15px] font-semibold text-ink-800 transition-colors hover:bg-muted">
+                  <Link
+                    to="/contatti"
+                    className="inline-flex h-12 items-center rounded-full border border-border bg-white px-6 text-[15px] font-semibold text-ink-800 transition-colors hover:bg-muted"
+                  >
                     Proponi una news
                   </Link>
                 </div>
@@ -297,17 +338,16 @@ function Home() {
             <div className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:mt-0 md:flex-col md:overflow-visible md:pb-0">
               {newsPreviews.map((n, i) => (
                 <Reveal key={n.tag} delay={i * 120}>
-                  <Link to="/news" className="group block min-w-[82vw] snap-center sm:min-w-[320px] md:min-w-0">
+                  <Link
+                    to="/news"
+                    className="group block min-w-[82vw] snap-center sm:min-w-[320px] md:min-w-0"
+                  >
                     <div className="card-im relative flex h-full flex-col rounded-[24px] bg-white p-6">
                       <span className="inline-flex w-fit items-center rounded-full bg-im-blue/10 px-3 py-1 text-[12px] font-semibold uppercase tracking-wider text-im-blue">
                         {n.tag}
                       </span>
-                      <h3 className="mt-4 text-h3-im text-ink-950">
-                        {n.title}
-                      </h3>
-                      <p className="mt-2 whitespace-pre-line text-sm text-ink-600">
-                        {n.abstract}
-                      </p>
+                      <h3 className="mt-4 text-h3-im text-ink-950">{n.title}</h3>
+                      <p className="mt-2 whitespace-pre-line text-sm text-ink-600">{n.abstract}</p>
                       <span className="mt-6 ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-im-blue/10 text-im-blue transition-transform duration-300 group-hover:translate-x-1">
                         <ArrowRight className="h-4 w-4" />
                       </span>
@@ -336,7 +376,10 @@ function Home() {
                   Le voci del territorio, quando vuoi tu.
                 </p>
               </div>
-              <Link to="/podcast" className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted">
+              <Link
+                to="/podcast"
+                className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted"
+              >
                 Tutte le serie
                 <span className="btn-arrow">→</span>
               </Link>
@@ -358,9 +401,7 @@ function Home() {
                 <h3 className="mt-4 font-display text-xl font-bold leading-tight text-ink-950">
                   {program.name}
                 </h3>
-                <p className="mt-3 line-clamp-3 text-sm text-ink-600">
-                  {program.tagline}
-                </p>
+                <p className="mt-3 line-clamp-3 text-sm text-ink-600">{program.tagline}</p>
                 <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-blue">
                   Ascolta la serie <ArrowRight className="h-4 w-4" />
                 </span>
@@ -381,7 +422,10 @@ function Home() {
                   Prossimi <span className={keyword}>eventi</span>.
                 </h2>
               </div>
-              <Link to="/eventi" className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted">
+              <Link
+                to="/eventi"
+                className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted"
+              >
                 Vedi tutti
                 <span className="btn-arrow">→</span>
               </Link>
@@ -415,7 +459,11 @@ function Home() {
                       Inizio ore {formatEventTime(e.start)}
                     </p>
                     <div className="mt-auto pt-7">
-                      <Link to="/eventi/$slug" params={{ slug: e.slug }} className="inline-flex h-10 items-center rounded-full btn-blue px-4 text-xs">
+                      <Link
+                        to="/eventi/$slug"
+                        params={{ slug: e.slug }}
+                        className="inline-flex h-10 items-center rounded-full btn-blue px-4 text-xs"
+                      >
                         Dettagli
                         <span className="btn-arrow">→</span>
                       </Link>
@@ -434,11 +482,17 @@ function Home() {
                   Intanto scopri i format e proponi il tuo evento.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link to="/eventi" className="inline-flex h-11 items-center rounded-full btn-blue px-5 text-sm">
+                  <Link
+                    to="/eventi"
+                    className="inline-flex h-11 items-center rounded-full btn-blue px-5 text-sm"
+                  >
                     Scopri gli eventi
                     <span className="btn-arrow">→</span>
                   </Link>
-                  <Link to="/contatti" className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800">
+                  <Link
+                    to="/contatti"
+                    className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800"
+                  >
                     Proponi un evento
                   </Link>
                 </div>
@@ -447,7 +501,6 @@ function Home() {
           )}
         </div>
       </section>
-
 
       {/* COMMUNITY BANNER */}
       <section className="bg-white section-pad">
@@ -459,15 +512,16 @@ function Home() {
                   <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-white/70">
                     La community
                   </p>
-                  <h2 className="mt-4 text-h2-im text-white">
-                    Un posto per chi ama raccontare.
-                  </h2>
+                  <h2 className="mt-4 text-h2-im text-white">Un posto per chi ama raccontare.</h2>
                   <p className="mt-4 max-w-md text-lg text-white/85">
                     Entra nel network di voci che danno vita al territorio.
                     <br />
                     Radio, podcast, eventi e persone.
                   </p>
-                  <Link to="/member" className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-im-blue transition-all duration-fast hover:bg-white/90 active:scale-[0.98]">
+                  <Link
+                    to="/member"
+                    className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-im-blue transition-all duration-fast hover:bg-white/90 active:scale-[0.98]"
+                  >
                     Unisciti alla community
                     <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -484,7 +538,9 @@ function Home() {
           <div className="grid gap-5 md:grid-cols-2">
             <Reveal>
               <div className="flex h-full flex-col rounded-[28px] border border-border bg-white p-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-blue">Sei una persona</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-blue">
+                  Sei una persona
+                </p>
                 <h3 className="mt-3 text-h3-im text-ink-950">Ascolta, partecipa, racconta.</h3>
                 <p className="mt-3 text-sm text-ink-600">
                   Radio in diretta, podcast on demand ed eventi vicino a te.
@@ -492,7 +548,10 @@ function Home() {
                   Tutto gratuito, tutto del territorio.
                 </p>
                 <div className="mt-auto pt-7">
-                  <Link to="/radio" className="inline-flex h-12 items-center rounded-full btn-blue px-6 text-[15px]">
+                  <Link
+                    to="/radio"
+                    className="inline-flex h-12 items-center rounded-full btn-blue px-6 text-[15px]"
+                  >
                     Ascolta la radio
                     <span className="btn-arrow">→</span>
                   </Link>
@@ -501,7 +560,9 @@ function Home() {
             </Reveal>
             <Reveal delay={90}>
               <div className="flex h-full flex-col rounded-[28px] border border-border bg-white p-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-800">Sei un'azienda</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-800">
+                  Sei un'azienda
+                </p>
                 <h3 className="mt-3 text-h3-im text-ink-950">Dai voce alla tua attività.</h3>
                 <p className="mt-3 text-sm text-ink-600">
                   Visibilità in radio, podcast e eventi con pacchetti chiari.
@@ -509,7 +570,10 @@ function Home() {
                   Diventa Membro ufficiale di IMLAND Experience.
                 </p>
                 <div className="mt-auto pt-7">
-                  <Link to="/member" className="inline-flex h-12 items-center gap-2 rounded-full bg-citrus px-6 text-[15px] font-semibold text-ink-950">
+                  <Link
+                    to="/member"
+                    className="inline-flex h-12 items-center gap-2 rounded-full bg-citrus px-6 text-[15px] font-semibold text-ink-950"
+                  >
                     Diventa Partner
                     <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -519,10 +583,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-
-
-
 
       {/* FAQ */}
       <section className="relative overflow-hidden bg-white section-pad">
@@ -534,7 +594,10 @@ function Home() {
                 <h2 className={h2}>
                   Tutto quello che ti serve <span className={keyword}>sapere</span>.
                 </h2>
-                <Link to="/faq" className="mt-8 inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted">
+                <Link
+                  to="/faq"
+                  className="mt-8 inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted"
+                >
                   Vai alle FAQ
                   <span className="btn-arrow">→</span>
                 </Link>
@@ -563,7 +626,9 @@ function Home() {
       <section className="relative isolate overflow-hidden bg-white section-pad">
         <div className={shell}>
           <Reveal>
-            <Suspense fallback={<div className="h-48" />}><NewsletterBanner /></Suspense>
+            <Suspense fallback={<div className="h-48" />}>
+              <NewsletterBanner />
+            </Suspense>
           </Reveal>
         </div>
       </section>
@@ -571,10 +636,11 @@ function Home() {
       {/* APP */}
       <section className="section-focus pt-20">
         <Reveal>
-          <Suspense fallback={<div className="h-64" />}><DownloadAppBanner /></Suspense>
+          <Suspense fallback={<div className="h-64" />}>
+            <DownloadAppBanner />
+          </Suspense>
         </Reveal>
       </section>
-
 
       {/* CTA FINALE — Member */}
       <section className="bg-white section-pad">
@@ -582,15 +648,16 @@ function Home() {
           <Reveal>
             <div className="relative overflow-hidden rounded-[32px] bg-[#e0a800] p-10 text-[#0b0c0f] md:p-16">
               <div className="relative z-10 max-w-3xl">
-                <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-[#0b0c0f]/70">IMLAND Member</p>
+                <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-[#0b0c0f]/70">
+                  IMLAND Member
+                </p>
                 <h2 className="mt-4 text-h2-im text-[#0b0c0f]">
                   Non ascoltare <span className="text-[#0b0c0f]">soltanto</span>.
                 </h2>
                 <p className="mt-5 text-lg text-[#0b0c0f]/70">
                   Diventa Member.
                   <br />
-                  Sblocchi radio, podcast ed eventi come creatore, non solo come
-                  pubblico.
+                  Sblocchi radio, podcast ed eventi come creatore, non solo come pubblico.
                 </p>
 
                 <ul className="mt-10 grid gap-3 sm:grid-cols-2">
@@ -617,7 +684,10 @@ function Home() {
                     Diventa Member
                     <span className="btn-arrow">→</span>
                   </a>
-                  <Link to="/chi-siamo" className="inline-flex h-12 items-center rounded-full border border-[#0b0c0f]/20 px-7 text-[15px] font-semibold text-[#0b0c0f] transition-colors hover:bg-[#0b0c0f]/10">
+                  <Link
+                    to="/chi-siamo"
+                    className="inline-flex h-12 items-center rounded-full border border-[#0b0c0f]/20 px-7 text-[15px] font-semibold text-[#0b0c0f] transition-colors hover:bg-[#0b0c0f]/10"
+                  >
                     Chi siamo
                   </Link>
                 </div>
@@ -626,7 +696,6 @@ function Home() {
           </Reveal>
         </div>
       </section>
-
     </div>
   );
 }

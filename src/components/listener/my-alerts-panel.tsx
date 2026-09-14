@@ -29,10 +29,16 @@ export function MyAlertsPanel() {
   return (
     <div>
       <div className="flex flex-wrap gap-3">
-        <Link to="/alert/segnala" className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground">
+        <Link
+          to="/alert/segnala"
+          className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground"
+        >
           Nuova segnalazione
         </Link>
-        <Link to="/alert/stato" className="rounded-full border border-border px-6 py-3 text-sm font-medium">
+        <Link
+          to="/alert/stato"
+          className="rounded-full border border-border px-6 py-3 text-sm font-medium"
+        >
           Cerca con il codice
         </Link>
       </div>
@@ -57,12 +63,18 @@ export function MyAlertsPanel() {
                       {a.category} · {a.comune}
                     </p>
                     <h3 className="mt-1 text-lg font-semibold">{a.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground">Salvata il {formatHubDate(a.created_at)}</p>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Salvata il {formatHubDate(a.created_at)}
+                    </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       <button
                         type="button"
                         disabled={remove.isPending}
-                        onClick={() => remove.mutate(a.id, { onSuccess: () => toast.success("Bozza eliminata.") })}
+                        onClick={() =>
+                          remove.mutate(a.id, {
+                            onSuccess: () => toast.success("Bozza eliminata."),
+                          })
+                        }
                         className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium"
                       >
                         <Trash2 size={15} /> Elimina
@@ -78,9 +90,18 @@ export function MyAlertsPanel() {
             <h2 className="text-h3-im">Segnalazioni inviate</h2>
             <div className="mt-4 space-y-4">
               {sent.map((a) => (
-                <AlertRow key={a.id} alert={a} open={open === a.id} onToggle={() => setOpen(open === a.id ? null : a.id)} />
+                <AlertRow
+                  key={a.id}
+                  alert={a}
+                  open={open === a.id}
+                  onToggle={() => setOpen(open === a.id ? null : a.id)}
+                />
               ))}
-              {sent.length === 0 && <p className="text-sm text-muted-foreground">Nessuna segnalazione inviata per ora.</p>}
+              {sent.length === 0 && (
+                <p className="text-sm text-muted-foreground">
+                  Nessuna segnalazione inviata per ora.
+                </p>
+              )}
             </div>
           </section>
         </>
@@ -89,7 +110,15 @@ export function MyAlertsPanel() {
   );
 }
 
-function AlertRow({ alert, open, onToggle }: { alert: Alert; open: boolean; onToggle: () => void }) {
+function AlertRow({
+  alert,
+  open,
+  onToggle,
+}: {
+  alert: Alert;
+  open: boolean;
+  onToggle: () => void;
+}) {
   const state = alert.state as AlertState;
   const history = useAlertHistory(open ? alert.id : null);
   const attachments = useAlertAttachments(open ? alert.id : null);
@@ -148,7 +177,9 @@ function AlertRow({ alert, open, onToggle }: { alert: Alert; open: boolean; onTo
                   {f.storage_path.split("/").pop()} · {Math.round((f.size_bytes ?? 0) / 1024)} KB
                 </li>
               ))}
-              {(attachments.data ?? []).length === 0 && <li className="text-sm text-muted-foreground">Nessun allegato.</li>}
+              {(attachments.data ?? []).length === 0 && (
+                <li className="text-sm text-muted-foreground">Nessun allegato.</li>
+              )}
             </ul>
             <label className="mt-3 inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium">
               <Paperclip size={15} />
@@ -160,7 +191,10 @@ function AlertRow({ alert, open, onToggle }: { alert: Alert; open: boolean; onTo
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (!file) return;
-                  upload.mutate({ alertId: alert.id, file }, { onSuccess: () => toast.success("Allegato aggiunto.") });
+                  upload.mutate(
+                    { alertId: alert.id, file },
+                    { onSuccess: () => toast.success("Allegato aggiunto.") },
+                  );
                   e.target.value = "";
                 }}
               />

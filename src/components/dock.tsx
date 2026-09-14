@@ -18,7 +18,13 @@ export type DockItemData = {
   className?: string;
 };
 
-function DockLabel({ children, isHovered }: { children: ReactNode; isHovered: MotionValue<number> }) {
+function DockLabel({
+  children,
+  isHovered,
+}: {
+  children: ReactNode;
+  isHovered: MotionValue<number>;
+}) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

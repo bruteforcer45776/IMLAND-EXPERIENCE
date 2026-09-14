@@ -48,12 +48,24 @@ export function NewsletterBanner({
   const isCompact = variant === "compact";
 
   return (
-    <section className={isCompact ? "section-closing container-im bg-white section-pad-sm" : "section-closing container-im bg-white section-pad"}>
+    <section
+      className={
+        isCompact
+          ? "section-closing container-im bg-white section-pad-sm"
+          : "section-closing container-im bg-white section-pad"
+      }
+    >
       <div className="relative overflow-hidden rounded-[32px] border border-border bg-white px-6 section-pad-sm sm:py-20 lg:px-8">
-        <ColorBlocks className="!absolute bottom-0 left-0 top-auto h-32 w-full sm:h-44" opacity={0.12} />
+        <ColorBlocks
+          className="!absolute bottom-0 left-0 top-auto h-32 w-full sm:h-44"
+          opacity={0.12}
+        />
         <MemphisConfetti opacity={0.1} />
         <div className="relative z-10 mx-auto max-w-2xl text-center">
-          <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-signal"><BrandIcon name="email" className="h-4 w-4" aria-hidden />{eyebrow}</p>
+          <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-signal">
+            <BrandIcon name="email" className="h-4 w-4" aria-hidden />
+            {eyebrow}
+          </p>
           <h2
             className={`mt-3 font-display font-semibold tracking-tight text-foreground ${
               isCompact ? "text-3xl sm:text-4xl" : "text-3xl sm:text-4xl md:text-5xl"
@@ -117,12 +129,14 @@ export function NewsletterBanner({
                 </div>
               ))}
             </div>
-            <p className="text-sm font-medium text-muted-foreground" aria-label="Più di 3.000 iscritti">
+            <p
+              className="text-sm font-medium text-muted-foreground"
+              aria-label="Più di 3.000 iscritti"
+            >
               3.000+ già iscritti
             </p>
           </div>
         </div>
-
       </div>
     </section>
   );

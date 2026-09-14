@@ -13,7 +13,10 @@ export const Route = createFileRoute("/_authenticated/area/esclusivi")({
   head: () => ({
     meta: [
       { title: "Contenuti esclusivi — IMLAND EXPERIENCE" },
-      { name: "description", content: "Podcast, backstage e materiali riservati alla community Member IMLAND." },
+      {
+        name: "description",
+        content: "Podcast, backstage e materiali riservati alla community Member IMLAND.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -40,14 +43,19 @@ function EsclusiviPage() {
   const filtered = type === "Tutti" ? visible : visible.filter((c) => c.content_type === type);
 
   return (
-    <AreaShell title="Contenuti esclusivi." lead="Materiali riservati: solo per chi è dentro la community.">
+    <AreaShell
+      title="Contenuti esclusivi."
+      lead="Materiali riservati: solo per chi è dentro la community."
+    >
       <div className="mb-6 flex flex-wrap gap-2">
         {["Tutti", ...EXCLUSIVE_TYPES].map((t) => (
           <button
             key={t}
             onClick={() => setType(t)}
             className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-              type === t ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground hover:bg-muted"
+              type === t
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border text-muted-foreground hover:bg-muted"
             }`}
           >
             {t}
@@ -64,7 +72,12 @@ function EsclusiviPage() {
           {filtered.map((c) => (
             <BentoCard key={c.id} tone="member" span={3} className="!p-0 overflow-hidden block">
               {c.cover_url && (
-                <img src={c.cover_url} alt={c.title} className="h-44 w-full object-cover" loading="lazy" />
+                <img
+                  src={c.cover_url}
+                  alt={c.title}
+                  className="h-44 w-full object-cover"
+                  loading="lazy"
+                />
               )}
               <div className="p-5">
                 <div className="flex items-start justify-between gap-3">
@@ -72,15 +85,22 @@ function EsclusiviPage() {
                     <Lock size={12} /> {c.content_type}
                   </span>
                   <button
-                    onClick={() => toggle.mutate({ item_id: c.id, item_type: "contenuto", label: c.title })}
+                    onClick={() =>
+                      toggle.mutate({ item_id: c.id, item_type: "contenuto", label: c.title })
+                    }
                     aria-label="Salva"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
-                    <Heart size={18} fill={isFavorite(c.id, "contenuto") ? "currentColor" : "none"} />
+                    <Heart
+                      size={18}
+                      fill={isFavorite(c.id, "contenuto") ? "currentColor" : "none"}
+                    />
                   </button>
                 </div>
                 <h2 className="mt-3 text-h3-im">{c.title}</h2>
-                {c.description && <p className="mt-2 text-sm text-muted-foreground">{c.description}</p>}
+                {c.description && (
+                  <p className="mt-2 text-sm text-muted-foreground">{c.description}</p>
+                )}
                 {c.body && <p className="mt-3 whitespace-pre-line text-sm">{c.body}</p>}
                 <div className="mt-4 flex flex-wrap gap-3">
                   {c.media_url && (
@@ -104,7 +124,9 @@ function EsclusiviPage() {
                     </a>
                   )}
                 </div>
-                <p className="mt-4 text-xs text-muted-foreground">Pubblicato {formatDateTime(c.publish_at)}</p>
+                <p className="mt-4 text-xs text-muted-foreground">
+                  Pubblicato {formatDateTime(c.publish_at)}
+                </p>
               </div>
             </BentoCard>
           ))}

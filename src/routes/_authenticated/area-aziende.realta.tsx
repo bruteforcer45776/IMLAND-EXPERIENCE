@@ -10,13 +10,7 @@ import {
   useRequestVerification,
   useUpdateOrganization,
 } from "@/hooks/use-organizations";
-import {
-  ORG_KINDS,
-  ORG_ROLE_LABEL,
-  ORG_STATUS_LABEL,
-  canPublish,
-  type OrgKind,
-} from "@/lib/org";
+import { ORG_KINDS, ORG_ROLE_LABEL, ORG_STATUS_LABEL, canPublish, type OrgKind } from "@/lib/org";
 import { HUB_PROVINCES } from "@/lib/hub";
 
 export const Route = createFileRoute("/_authenticated/area-aziende/realta")({
@@ -257,7 +251,15 @@ function OrgDetail({
           <ul className="mt-5 space-y-2 text-sm">
             {requests.map((r) => (
               <li key={r.id} className="rounded-2xl border border-border p-3">
-                <p className="font-semibold">{r.outcome === "pending" ? "In valutazione" : r.outcome === "approved" ? "Approvata" : r.outcome === "rejected" ? "Non approvata" : "Servono altre informazioni"}</p>
+                <p className="font-semibold">
+                  {r.outcome === "pending"
+                    ? "In valutazione"
+                    : r.outcome === "approved"
+                      ? "Approvata"
+                      : r.outcome === "rejected"
+                        ? "Non approvata"
+                        : "Servono altre informazioni"}
+                </p>
                 {r.review_note && <p className="mt-1 text-muted-foreground">{r.review_note}</p>}
               </li>
             ))}

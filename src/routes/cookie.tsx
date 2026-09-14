@@ -33,45 +33,41 @@ function CookiePage() {
   return (
     <section className="decor-host overflow-hidden mx-auto max-w-3xl px-4 section-pad md:px-8">
       <SectionDecor variant="bubbles" />
-      <h1 className="text-display-l">
-        Cookie Policy
-      </h1>
+      <h1 className="text-display-l">Cookie Policy</h1>
       <p className="mt-3 text-sm text-muted-foreground">
         Ultimo aggiornamento: {new Date().toLocaleDateString("it-IT")}
       </p>
 
       <div className="mt-10 space-y-6 text-foreground/85">
         <p>
-          Questo sito utilizza cookie e tecnologie simili per garantire il
-          corretto funzionamento delle pagine, migliorare l&apos;esperienza
-          utente e — previo consenso — per finalità di analisi e marketing,
-          in conformità al GDPR (Reg. UE 2016/679) e alle linee guida del
+          Questo sito utilizza cookie e tecnologie simili per garantire il corretto funzionamento
+          delle pagine, migliorare l&apos;esperienza utente e — previo consenso — per finalità di
+          analisi e marketing, in conformità al GDPR (Reg. UE 2016/679) e alle linee guida del
           Garante per la protezione dei dati personali.
         </p>
 
         <h2 className="text-h2-im">1. Cookie tecnici</h2>
         <p>
-          Necessari al funzionamento del sito e alla memorizzazione delle
-          preferenze. Non richiedono consenso.
+          Necessari al funzionamento del sito e alla memorizzazione delle preferenze. Non richiedono
+          consenso.
         </p>
 
         <h2 className="text-h2-im">2. Cookie di analisi</h2>
         <p>
-          Utilizzati in forma aggregata per misurare l&apos;uso del sito e
-          migliorare i contenuti. Vengono attivati solo dopo il tuo consenso.
+          Utilizzati in forma aggregata per misurare l&apos;uso del sito e migliorare i contenuti.
+          Vengono attivati solo dopo il tuo consenso.
         </p>
 
         <h2 className="text-h2-im">3. Cookie di marketing</h2>
         <p>
-          Utilizzati per proporre contenuti e comunicazioni personalizzate.
-          Vengono attivati solo dopo il tuo consenso.
+          Utilizzati per proporre contenuti e comunicazioni personalizzate. Vengono attivati solo
+          dopo il tuo consenso.
         </p>
 
         <h2 className="text-h2-im">4. Gestione delle preferenze</h2>
         <p>
-          Puoi modificare in qualsiasi momento il tuo consenso rimuovendolo
-          dal browser oppure cliccando il pulsante qui sotto per far
-          ricomparire il banner dei cookie.
+          Puoi modificare in qualsiasi momento il tuo consenso rimuovendolo dal browser oppure
+          cliccando il pulsante qui sotto per far ricomparire il banner dei cookie.
         </p>
 
         <button
@@ -84,8 +80,11 @@ function CookiePage() {
 
         <h2 className="text-h2-im">5. Contatti</h2>
         <p>
-          Titolare del trattamento: IMLAND EXPERIENCE SRL — P.IVA 02802650024
-          — <a href="mailto:info@imlandradio.com" className="text-signal">info@imlandradio.com</a>.
+          Titolare del trattamento: IMLAND EXPERIENCE SRL — P.IVA 02802650024 —{" "}
+          <a href="mailto:info@imlandradio.com" className="text-signal">
+            info@imlandradio.com
+          </a>
+          .
         </p>
       </div>
     </section>

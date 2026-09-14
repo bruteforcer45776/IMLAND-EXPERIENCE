@@ -49,23 +49,17 @@ export function CollectionPicker({ programSlug, episodeSlug, label }: Props) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-56">
         <DropdownMenuLabel>Aggiungi a…</DropdownMenuLabel>
-        {collections.length === 0 && (
-          <DropdownMenuItem disabled>Nessuna raccolta</DropdownMenuItem>
-        )}
+        {collections.length === 0 && <DropdownMenuItem disabled>Nessuna raccolta</DropdownMenuItem>}
         {collections.map((c) => (
           <DropdownMenuItem
             key={c.id}
-            onSelect={() =>
-              addItem.mutate({ collectionId: c.id, programSlug, episodeSlug, label })
-            }
+            onSelect={() => addItem.mutate({ collectionId: c.id, programSlug, episodeSlug, label })}
           >
             {c.name}
           </DropdownMenuItem>
         ))}
         <DropdownMenuSeparator />
-        <DropdownMenuItem onSelect={() => void createAndAdd()}>
-          Nuova raccolta…
-        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => void createAndAdd()}>Nuova raccolta…</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

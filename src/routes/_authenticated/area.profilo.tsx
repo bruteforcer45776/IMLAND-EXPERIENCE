@@ -15,12 +15,14 @@ import { useAuth } from "@/hooks/use-auth";
 import { exportMyData, deleteMyAccount } from "@/lib/account.functions";
 import { INTERESTS, PROVINCES, formatDate } from "@/lib/member-area";
 
-
 export const Route = createFileRoute("/_authenticated/area/profilo")({
   head: () => ({
     meta: [
       { title: "Profilo Member — IMLAND EXPERIENCE" },
-      { name: "description", content: "Gestisci dati, città, interessi e preferenze di notifica del tuo profilo Member." },
+      {
+        name: "description",
+        content: "Gestisci dati, città, interessi e preferenze di notifica del tuo profilo Member.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -112,7 +114,8 @@ function ProfiloPage() {
       setPwdForm({ password: "", confirm: "" });
       toast.success("Password aggiornata.");
     },
-    onError: (err) => toast.error(err instanceof Error ? err.message : "Aggiornamento non riuscito"),
+    onError: (err) =>
+      toast.error(err instanceof Error ? err.message : "Aggiornamento non riuscito"),
   });
 
   const runExport = useServerFn(exportMyData);
@@ -143,8 +146,6 @@ function ProfiloPage() {
     onError: (err) => toast.error(err instanceof Error ? err.message : "Eliminazione non riuscita"),
   });
 
-
-
   const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
@@ -155,11 +156,21 @@ function ProfiloPage() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
               <Label htmlFor="first_name">Nome</Label>
-              <Input id="first_name" maxLength={60} value={form.first_name} onChange={update("first_name")} />
+              <Input
+                id="first_name"
+                maxLength={60}
+                value={form.first_name}
+                onChange={update("first_name")}
+              />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="last_name">Cognome</Label>
-              <Input id="last_name" maxLength={60} value={form.last_name} onChange={update("last_name")} />
+              <Input
+                id="last_name"
+                maxLength={60}
+                value={form.last_name}
+                onChange={update("last_name")}
+              />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="city">Città</Label>
@@ -186,7 +197,12 @@ function ProfiloPage() {
             </div>
             <div className="space-y-1.5 sm:col-span-2">
               <Label htmlFor="avatar_url">Foto profilo (URL)</Label>
-              <Input id="avatar_url" maxLength={500} value={form.avatar_url} onChange={update("avatar_url")} />
+              <Input
+                id="avatar_url"
+                maxLength={500}
+                value={form.avatar_url}
+                onChange={update("avatar_url")}
+              />
             </div>
           </div>
 
@@ -198,7 +214,9 @@ function ProfiloPage() {
                   key={i}
                   type="button"
                   onClick={() =>
-                    setInterests((prev) => (prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]))
+                    setInterests((prev) =>
+                      prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i],
+                    )
                   }
                   className={`rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
                     interests.includes(i)
@@ -216,20 +234,28 @@ function ProfiloPage() {
             <div className="flex items-center justify-between gap-4 rounded-2xl bg-muted/50 p-4">
               <div>
                 <p className="text-sm font-medium">Notifiche nell'area</p>
-                <p className="text-xs text-muted-foreground">Novità su vantaggi, eventi e contenuti.</p>
+                <p className="text-xs text-muted-foreground">
+                  Novità su vantaggi, eventi e contenuti.
+                </p>
               </div>
               <Switch checked={notifyInApp} onCheckedChange={setNotifyInApp} />
             </div>
             <div className="flex items-center justify-between gap-4 rounded-2xl bg-muted/50 p-4">
               <div>
                 <p className="text-sm font-medium">Notifiche email</p>
-                <p className="text-xs text-muted-foreground">Riepiloghi e comunicazioni importanti.</p>
+                <p className="text-xs text-muted-foreground">
+                  Riepiloghi e comunicazioni importanti.
+                </p>
               </div>
               <Switch checked={notifyEmail} onCheckedChange={setNotifyEmail} />
             </div>
           </div>
 
-          <Button className="mt-6 rounded-full" disabled={save.isPending} onClick={() => save.mutate()}>
+          <Button
+            className="mt-6 rounded-full"
+            disabled={save.isPending}
+            onClick={() => save.mutate()}
+          >
             Salva modifiche
           </Button>
         </div>
@@ -297,7 +323,8 @@ function ProfiloPage() {
           <div className="rounded-3xl border border-border bg-card p-6">
             <h2 className="text-h3-im">Privacy e dati.</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Scarica una copia dei tuoi dati oppure richiedi l'eliminazione definitiva dell'account.
+              Scarica una copia dei tuoi dati oppure richiedi l'eliminazione definitiva
+              dell'account.
             </p>
             <div className="mt-4 space-y-4">
               <Button
@@ -312,8 +339,8 @@ function ProfiloPage() {
               <div className="space-y-2 rounded-2xl border border-destructive/20 bg-destructive/5 p-4">
                 <p className="text-sm font-medium text-destructive">Elimina account</p>
                 <p className="text-xs text-muted-foreground">
-                  Operazione irreversibile: profilo, prenotazioni, preferiti e codici verranno rimossi.
-                  Scrivi <strong>ELIMINA</strong> per confermare.
+                  Operazione irreversibile: profilo, prenotazioni, preferiti e codici verranno
+                  rimossi. Scrivi <strong>ELIMINA</strong> per confermare.
                 </p>
                 <Input
                   aria-label="Conferma eliminazione"
@@ -333,7 +360,6 @@ function ProfiloPage() {
             </div>
           </div>
         </aside>
-
       </div>
     </AreaShell>
   );

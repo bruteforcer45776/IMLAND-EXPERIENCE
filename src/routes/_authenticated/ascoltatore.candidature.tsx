@@ -10,7 +10,10 @@ export const Route = createFileRoute("/_authenticated/ascoltatore/candidature")(
   head: () => ({
     meta: [
       { title: "Le mie candidature — Area personale IMLAND" },
-      { name: "description", content: "Le candidature che hai inviato alle aziende del territorio e il loro stato." },
+      {
+        name: "description",
+        content: "Le candidature che hai inviato alle aziende del territorio e il loro stato.",
+      },
       { property: "og:title", content: "Le mie candidature — Area personale IMLAND" },
       { property: "og:description", content: "Segui le tue candidature nel territorio." },
       { property: "og:type", content: "website" },
@@ -52,7 +55,9 @@ function MyApplications() {
 
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal">Area personale</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal">
+        Area personale
+      </p>
       <h1 className="mt-2 text-h1-im">Le mie candidature.</h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
         Qui trovi le opportunità per cui ti sei proposto.
@@ -79,8 +84,16 @@ function MyApplications() {
       ) : (
         <BentoGrid className="mt-8">
           {rows.map((a) => {
-            const job = (a as { job_posts?: { title: string; slug: string; company_name: string; comune: string } | null })
-              .job_posts;
+            const job = (
+              a as {
+                job_posts?: {
+                  title: string;
+                  slug: string;
+                  company_name: string;
+                  comune: string;
+                } | null;
+              }
+            ).job_posts;
             return (
               <BentoCard key={a.id} tone="jobs" span={6}>
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

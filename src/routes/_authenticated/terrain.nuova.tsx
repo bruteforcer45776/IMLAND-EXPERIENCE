@@ -4,7 +4,13 @@ import { toast } from "sonner";
 
 import { BentoGrid, BentoCard } from "../../components/bento";
 import { useCreatePlace, useGeolocation, useMyPlaces } from "@/hooks/use-hub";
-import { HUB_COMUNI, HUB_PROVINCES, HUB_STATUS_LABEL, TERRAIN_CATEGORIES, formatHubDate } from "@/lib/hub";
+import {
+  HUB_COMUNI,
+  HUB_PROVINCES,
+  HUB_STATUS_LABEL,
+  TERRAIN_CATEGORIES,
+  formatHubDate,
+} from "@/lib/hub";
 
 export const Route = createFileRoute("/_authenticated/terrain/nuova")({
   head: () => ({
@@ -42,8 +48,10 @@ function NewPlace() {
     website: "",
   });
 
-  const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm((f) => ({ ...f, [key]: e.target.value }));
+  const set =
+    (key: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+      setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,7 +95,9 @@ function NewPlace() {
 
   return (
     <div className="container-im section-pad-sm">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">TERRAIN</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        TERRAIN
+      </p>
       <h1 className="mt-2 text-h1-im">Proponi una scheda.</h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
         Racconta un'attività, un'associazione o un luogo che merita di essere trovato.
@@ -98,11 +108,22 @@ function NewPlace() {
       <form onSubmit={onSubmit} className="mt-8 grid gap-4 md:grid-cols-2">
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Nome *</span>
-          <input value={form.name} onChange={set("name")} maxLength={120} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            value={form.name}
+            onChange={set("name")}
+            maxLength={120}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Categoria *</span>
-          <select value={form.category} onChange={set("category")} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm">
+          <select
+            value={form.category}
+            onChange={set("category")}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          >
             <option value="">Scegli una categoria</option>
             {TERRAIN_CATEGORIES.map((c) => (
               <option key={c} value={c}>
@@ -113,7 +134,12 @@ function NewPlace() {
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Comune *</span>
-          <select value={form.comune} onChange={set("comune")} required className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm">
+          <select
+            value={form.comune}
+            onChange={set("comune")}
+            required
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          >
             <option value="">Scegli il Comune</option>
             {HUB_COMUNI.map((c) => (
               <option key={c} value={c}>
@@ -124,7 +150,11 @@ function NewPlace() {
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Provincia</span>
-          <select value={form.province} onChange={set("province")} className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm">
+          <select
+            value={form.province}
+            onChange={set("province")}
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          >
             <option value="">—</option>
             {HUB_PROVINCES.map((p) => (
               <option key={p} value={p}>
@@ -135,30 +165,70 @@ function NewPlace() {
         </label>
         <label className="space-y-1.5 md:col-span-2">
           <span className="text-sm font-medium">Indirizzo</span>
-          <input value={form.address} onChange={set("address")} maxLength={200} className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            value={form.address}
+            onChange={set("address")}
+            maxLength={200}
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
         <label className="space-y-1.5 md:col-span-2">
           <span className="text-sm font-medium">Descrizione</span>
-          <textarea value={form.description} onChange={set("description")} rows={5} maxLength={3000} className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm" />
+          <textarea
+            value={form.description}
+            onChange={set("description")}
+            rows={5}
+            maxLength={3000}
+            className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm"
+          />
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Telefono</span>
-          <input value={form.phone} onChange={set("phone")} maxLength={40} className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            value={form.phone}
+            onChange={set("phone")}
+            maxLength={40}
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
         <label className="space-y-1.5">
           <span className="text-sm font-medium">Email</span>
-          <input type="email" value={form.email} onChange={set("email")} maxLength={255} className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            type="email"
+            value={form.email}
+            onChange={set("email")}
+            maxLength={255}
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
         <label className="space-y-1.5 md:col-span-2">
           <span className="text-sm font-medium">Sito web</span>
-          <input value={form.website} onChange={set("website")} maxLength={300} placeholder="https://" className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm" />
+          <input
+            value={form.website}
+            onChange={set("website")}
+            maxLength={300}
+            placeholder="https://"
+            className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm"
+          />
         </label>
 
         <div className="md:col-span-2 flex flex-wrap items-center gap-3">
-          <button type="button" onClick={geo.request} className="rounded-full border border-border px-4 py-2 text-sm font-medium">
-            {geo.coords ? "Posizione registrata" : geo.loading ? "Cerco la posizione…" : "Usa la posizione attuale"}
+          <button
+            type="button"
+            onClick={geo.request}
+            className="rounded-full border border-border px-4 py-2 text-sm font-medium"
+          >
+            {geo.coords
+              ? "Posizione registrata"
+              : geo.loading
+                ? "Cerco la posizione…"
+                : "Usa la posizione attuale"}
           </button>
-          <button type="submit" disabled={create.isPending} className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground disabled:opacity-60">
+          <button
+            type="submit"
+            disabled={create.isPending}
+            className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground disabled:opacity-60"
+          >
             {create.isPending ? "Invio…" : "Invia la scheda"}
           </button>
         </div>
@@ -177,18 +247,27 @@ function NewPlace() {
         <BentoGrid className="mt-6">
           {(mine.data ?? []).map((place) => (
             <BentoCard key={place.id} tone="terrain" span={2}>
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{place.category}</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                {place.category}
+              </p>
               <h3 className="mt-1 text-lg font-semibold">{place.name}</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                {HUB_STATUS_LABEL[place.status] ?? place.status} · inviata il {formatHubDate(place.created_at)}
+                {HUB_STATUS_LABEL[place.status] ?? place.status} · inviata il{" "}
+                {formatHubDate(place.created_at)}
               </p>
               {place.status === "published" && (
-                <Link to="/terrain/$slug" params={{ slug: place.slug }} className="mt-3 inline-flex text-sm underline">
+                <Link
+                  to="/terrain/$slug"
+                  params={{ slug: place.slug }}
+                  className="mt-3 inline-flex text-sm underline"
+                >
                   Vedi la scheda pubblica
                 </Link>
               )}
               {place.moderation_note && (
-                <p className="mt-3 text-sm text-muted-foreground">Nota della redazione: {place.moderation_note}</p>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Nota della redazione: {place.moderation_note}
+                </p>
               )}
             </BentoCard>
           ))}

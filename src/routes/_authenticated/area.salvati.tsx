@@ -9,7 +9,10 @@ export const Route = createFileRoute("/_authenticated/area/salvati")({
   head: () => ({
     meta: [
       { title: "Salvati — IMLAND EXPERIENCE" },
-      { name: "description", content: "Eventi, vantaggi e contenuti che hai salvato nell'Area Membri IMLAND." },
+      {
+        name: "description",
+        content: "Eventi, vantaggi e contenuti che hai salvato nell'Area Membri IMLAND.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -37,9 +40,16 @@ function SalvatiPage() {
                   {f.item_type}
                 </span>
                 <p className="mt-2 truncate font-medium">{f.label ?? "Elemento salvato"}</p>
-                <p className="text-xs text-muted-foreground">Salvato il {formatDate(f.created_at)}</p>
+                <p className="text-xs text-muted-foreground">
+                  Salvato il {formatDate(f.created_at)}
+                </p>
                 {f.link_url && (
-                  <a href={f.link_url} target="_blank" rel="noreferrer" className="text-sm text-primary">
+                  <a
+                    href={f.link_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm text-primary"
+                  >
                     Apri
                   </a>
                 )}

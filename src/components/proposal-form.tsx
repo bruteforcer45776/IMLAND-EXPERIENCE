@@ -110,7 +110,10 @@ export function ProposalForm({ kind }: { kind: Kind }) {
           </ul>
           <p className="mt-6 text-xs text-muted-foreground">
             Non sei ancora Member?{" "}
-            <a href="/member" className="inline-flex items-center gap-1 font-semibold text-foreground underline-offset-4 hover:underline">
+            <a
+              href="/member"
+              className="inline-flex items-center gap-1 font-semibold text-foreground underline-offset-4 hover:underline"
+            >
               Scopri come diventarlo <ArrowRight className="inline h-3.5 w-3.5" />
             </a>
           </p>
@@ -120,7 +123,10 @@ export function ProposalForm({ kind }: { kind: Kind }) {
           <form onSubmit={submit}>
             <div className="grid gap-4 md:grid-cols-2">
               <label className="block">
-                <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground"><BrandIcon name="profilo" className="h-4 w-4" aria-hidden />Nome</span>
+                <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <BrandIcon name="profilo" className="h-4 w-4" aria-hidden />
+                  Nome
+                </span>
                 <input
                   required
                   maxLength={100}
@@ -131,7 +137,10 @@ export function ProposalForm({ kind }: { kind: Kind }) {
                 />
               </label>
               <label className="block">
-                <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground"><BrandIcon name="email" className="h-4 w-4" aria-hidden />Email</span>
+                <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <BrandIcon name="email" className="h-4 w-4" aria-hidden />
+                  Email
+                </span>
                 <input
                   required
                   type="email"
@@ -145,18 +154,16 @@ export function ProposalForm({ kind }: { kind: Kind }) {
             </div>
 
             <div className="mt-4">
-              <span className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Tipologia</span>
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Tipologia
+              </span>
               <div className="flex flex-wrap gap-2">
                 {c.types.map((t) => (
                   <button
                     type="button"
                     key={t}
                     onClick={() => setType(t)}
-                    className={`${
-                      type === t
-                        ? "chip-im-active"
-                        : "chip-im"
-                    }`}
+                    className={`${type === t ? "chip-im-active" : "chip-im"}`}
                   >
                     {t}
                   </button>
@@ -165,7 +172,9 @@ export function ProposalForm({ kind }: { kind: Kind }) {
             </div>
 
             <label className="mt-4 block">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.fieldLabel}</span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {c.fieldLabel}
+              </span>
               <input
                 required
                 maxLength={120}
@@ -177,7 +186,10 @@ export function ProposalForm({ kind }: { kind: Kind }) {
             </label>
 
             <label className="mt-4 block">
-              <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground"><BrandIcon name="messaggio" className="h-4 w-4" aria-hidden />Descrizione</span>
+              <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <BrandIcon name="messaggio" className="h-4 w-4" aria-hidden />
+                Descrizione
+              </span>
               <textarea
                 required
                 rows={5}

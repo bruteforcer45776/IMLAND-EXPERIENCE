@@ -12,7 +12,10 @@ const NOTE_MAX = 1000;
 
 const feedbackSchema = z.object({
   rating: z.number().int().min(1, { message: "Seleziona una valutazione" }).max(5),
-  note: z.string().trim().max(NOTE_MAX, { message: `La nota deve stare entro ${NOTE_MAX} caratteri` }),
+  note: z
+    .string()
+    .trim()
+    .max(NOTE_MAX, { message: `La nota deve stare entro ${NOTE_MAX} caratteri` }),
 });
 
 /** Sondaggio di soddisfazione mostrato dopo due minuti di navigazione. */
@@ -142,7 +145,11 @@ export function FeedbackPopup() {
               Come valuti la tua esperienza su questo sito?
             </p>
 
-            <div className="mt-5 flex items-center gap-2" role="radiogroup" aria-label="Valutazione da 1 a 5 stelle">
+            <div
+              className="mt-5 flex items-center gap-2"
+              role="radiogroup"
+              aria-label="Valutazione da 1 a 5 stelle"
+            >
               {[1, 2, 3, 4, 5].map((value) => (
                 <button
                   key={value}

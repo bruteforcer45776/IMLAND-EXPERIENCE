@@ -72,9 +72,7 @@ export function DownloadAppPopup() {
             <Smartphone className="h-3.5 w-3.5" aria-hidden />
             App IMLAND
           </div>
-          <h2 className="mt-3 text-h3-im pr-10">
-            Scarica IMLAND sul tuo dispositivo
-          </h2>
+          <h2 className="mt-3 text-h3-im pr-10">Scarica IMLAND sul tuo dispositivo</h2>
           <p className="mt-2 text-sm leading-relaxed text-signal-foreground/85">
             Installala su iPhone, Android o desktop.
             <br />

@@ -15,14 +15,23 @@ import {
   type AlertState,
   type TransformTarget,
 } from "@/lib/alert";
-import { HUB_PROVINCES, JOB_CONTRACTS, JOB_SECTORS, TERRAIN_CATEGORIES, formatHubDate } from "@/lib/hub";
+import {
+  HUB_PROVINCES,
+  JOB_CONTRACTS,
+  JOB_SECTORS,
+  TERRAIN_CATEGORIES,
+  formatHubDate,
+} from "@/lib/hub";
 import type { Alert } from "@/hooks/use-alerts";
 
 export const Route = createFileRoute("/_authenticated/admin/alert")({
   head: () => ({
     meta: [
       { title: "Segnalazioni ALERT — Amministrazione" },
-      { name: "description", content: "Verifica le segnalazioni del territorio e trasformale in contenuti." },
+      {
+        name: "description",
+        content: "Verifica le segnalazioni del territorio e trasformale in contenuti.",
+      },
       { property: "og:title", content: "Segnalazioni ALERT — Amministrazione" },
       { property: "og:description", content: "Area riservata alla redazione IMLAND." },
       { property: "og:type", content: "website" },
@@ -58,7 +67,12 @@ function AdminAlert() {
   });
 
   const changeState = useMutation({
-    mutationFn: async (input: { id: string; state: AlertState; note?: string; assignToMe?: boolean }) =>
+    mutationFn: async (input: {
+      id: string;
+      state: AlertState;
+      note?: string;
+      assignToMe?: boolean;
+    }) =>
       setState({
         data: {
           id: input.id,
@@ -71,7 +85,8 @@ function AdminAlert() {
       toast.success("Segnalazione aggiornata.");
       void qc.invalidateQueries({ queryKey: ["admin", "alerts"] });
     },
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile aggiornare la segnalazione." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile aggiornare la segnalazione." }),
   });
 
   const rows = useMemo(
@@ -85,7 +100,8 @@ function AdminAlert() {
       <p className="mt-3 max-w-2xl text-muted-foreground">
         Ogni segnalazione attraversa analisi, verifica e smistamento.
         <br />
-        Nulla viene cancellato: da qui una segnalazione diventa un luogo, un'opportunità, un evento o una notizia.
+        Nulla viene cancellato: da qui una segnalazione diventa un luogo, un'opportunità, un evento
+        o una notizia.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
@@ -116,7 +132,8 @@ function AdminAlert() {
               </p>
               <h2 className="mt-1 text-lg font-semibold">{a.title}</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                {ALERT_STATE_LABEL[a.state as AlertState]} · {formatHubDate(a.submitted_at ?? a.created_at)}
+                {ALERT_STATE_LABEL[a.state as AlertState]} ·{" "}
+                {formatHubDate(a.submitted_at ?? a.created_at)}
                 {a.contact_email ? ` · ${a.contact_email}` : ""}
               </p>
               <p className="mt-3 whitespace-pre-line text-sm">{a.body}</p>
@@ -125,7 +142,9 @@ function AdminAlert() {
                 <dl className="mt-3 grid gap-2 sm:grid-cols-2">
                   {Object.entries(a.payload as Record<string, string>).map(([key, value]) => (
                     <div key={key}>
-                      <dt className="text-xs uppercase tracking-wide text-muted-foreground">{key.replace(/_/g, " ")}</dt>
+                      <dt className="text-xs uppercase tracking-wide text-muted-foreground">
+                        {key.replace(/_/g, " ")}
+                      </dt>
                       <dd className="text-sm">{value || "—"}</dd>
                     </div>
                   ))}
@@ -147,7 +166,12 @@ function AdminAlert() {
                     type="button"
                     disabled={changeState.isPending}
                     onClick={() =>
-                      changeState.mutate({ id: a.id, state: s, note: note[a.id], assignToMe: s === "analyzing" })
+                      changeState.mutate({
+                        id: a.id,
+                        state: s,
+                        note: note[a.id],
+                        assignToMe: s === "analyzing",
+                      })
                     }
                     className="rounded-full border border-border px-4 py-1.5 text-sm"
                   >
@@ -164,7 +188,9 @@ function AdminAlert() {
                 {transforming === a.id ? "Chiudi la trasformazione" : "Trasforma in contenuto"}
               </button>
 
-              {transforming === a.id && <TransformPanel alert={a} onDone={() => setTransforming(null)} />}
+              {transforming === a.id && (
+                <TransformPanel alert={a} onDone={() => setTransforming(null)} />
+              )}
             </article>
           ))
         )}
@@ -218,7 +244,8 @@ function TransformPanel({ alert, onDone }: { alert: Alert; onDone: () => void })
       void qc.invalidateQueries({ queryKey: ["admin", "alerts"] });
       onDone();
     },
-    onError: (error) => notifyError(error, { fallback: "Non è stato possibile creare il contenuto." }),
+    onError: (error) =>
+      notifyError(error, { fallback: "Non è stato possibile creare il contenuto." }),
   });
 
   return (
@@ -241,7 +268,11 @@ function TransformPanel({ alert, onDone }: { alert: Alert; onDone: () => void })
 
       <label className="block space-y-1">
         <span className="text-sm font-medium">Titolo</span>
-        <input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} className={inputClass} />
+        <input
+          value={form.title}
+          onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+          className={inputClass}
+        />
       </label>
       <label className="block space-y-1">
         <span className="text-sm font-medium">Testo</span>
@@ -256,7 +287,11 @@ function TransformPanel({ alert, onDone }: { alert: Alert; onDone: () => void })
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="space-y-1">
           <span className="text-sm font-medium">Comune</span>
-          <input value={form.comune} onChange={(e) => setForm((f) => ({ ...f, comune: e.target.value }))} className={inputClass} />
+          <input
+            value={form.comune}
+            onChange={(e) => setForm((f) => ({ ...f, comune: e.target.value }))}
+            className={inputClass}
+          />
         </label>
         <label className="space-y-1">
           <span className="text-sm font-medium">Provincia</span>
@@ -292,7 +327,11 @@ function TransformPanel({ alert, onDone }: { alert: Alert; onDone: () => void })
             </label>
             <label className="space-y-1">
               <span className="text-sm font-medium">Indirizzo</span>
-              <input value={form.address} onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))} className={inputClass} />
+              <input
+                value={form.address}
+                onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
+                className={inputClass}
+              />
             </label>
           </>
         )}
@@ -309,7 +348,11 @@ function TransformPanel({ alert, onDone }: { alert: Alert; onDone: () => void })
             </label>
             <label className="space-y-1">
               <span className="text-sm font-medium">Settore</span>
-              <select value={form.sector} onChange={(e) => setForm((f) => ({ ...f, sector: e.target.value }))} className={inputClass}>
+              <select
+                value={form.sector}
+                onChange={(e) => setForm((f) => ({ ...f, sector: e.target.value }))}
+                className={inputClass}
+              >
                 {JOB_SECTORS.map((s) => (
                   <option key={s} value={s}>
                     {s}
@@ -347,7 +390,11 @@ function TransformPanel({ alert, onDone }: { alert: Alert; onDone: () => void })
             </label>
             <label className="space-y-1">
               <span className="text-sm font-medium">Luogo</span>
-              <input value={form.venue} onChange={(e) => setForm((f) => ({ ...f, venue: e.target.value }))} className={inputClass} />
+              <input
+                value={form.venue}
+                onChange={(e) => setForm((f) => ({ ...f, venue: e.target.value }))}
+                className={inputClass}
+              />
             </label>
           </>
         )}

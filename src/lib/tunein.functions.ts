@@ -33,16 +33,12 @@ function toHttps(url: string | null | undefined): string | null {
 
 export const getNowPlaying = createServerFn({ method: "GET" }).handler(
   async (): Promise<NowPlayingData> => {
-    const res = await fetch(
-      "https://feed.tunein.com/profiles/s357176/nowPlaying",
-      {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (compatible; IMLANDRadio/1.0; +https://imlandradio.it)",
-          Accept: "application/json",
-        },
+    const res = await fetch("https://feed.tunein.com/profiles/s357176/nowPlaying", {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; IMLANDRadio/1.0; +https://imlandradio.it)",
+        Accept: "application/json",
       },
-    );
+    });
     if (!res.ok) {
       throw new Error(`TuneIn ${res.status}`);
     }

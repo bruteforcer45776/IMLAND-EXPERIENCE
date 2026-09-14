@@ -20,7 +20,10 @@ export const Route = createFileRoute("/_authenticated/admin/")({
   head: () => ({
     meta: [
       { title: "Pannello admin — IMLAND EXPERIENCE" },
-      { name: "description", content: "Gestione contenuti, vantaggi, eventi e notifiche dell'Area Membri IMLAND." },
+      {
+        name: "description",
+        content: "Gestione contenuti, vantaggi, eventi e notifiche dell'Area Membri IMLAND.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -41,7 +44,13 @@ const previewFields: Field[] = [
 
 const benefitFields: Field[] = [
   { name: "business_name", label: "Attività", kind: "text", required: true },
-  { name: "benefit_type", label: "Tipo vantaggio", kind: "select", options: BENEFIT_TYPES, required: true },
+  {
+    name: "benefit_type",
+    label: "Tipo vantaggio",
+    kind: "select",
+    options: BENEFIT_TYPES,
+    required: true,
+  },
   { name: "discount_percent", label: "Sconto %", kind: "number" },
   { name: "description", label: "Descrizione", kind: "textarea" },
   { name: "logo_url", label: "Logo (URL)", kind: "text" },
@@ -87,7 +96,13 @@ const exclusiveFields: Field[] = [
 
 const discoveryFields: Field[] = [
   { name: "title", label: "Titolo", kind: "text", required: true },
-  { name: "category", label: "Categoria", kind: "select", options: DISCOVERY_CATEGORIES, required: true },
+  {
+    name: "category",
+    label: "Categoria",
+    kind: "select",
+    options: DISCOVERY_CATEGORIES,
+    required: true,
+  },
   { name: "description", label: "Descrizione", kind: "textarea" },
   { name: "image_url", label: "Immagine (URL)", kind: "text" },
   { name: "link_url", label: "Link", kind: "text" },
@@ -121,7 +136,11 @@ function AdminPage() {
   const [tab, setTab] = useState<(typeof tabs)[number]["key"]>("previews");
 
   if (loading) {
-    return <div className="mx-auto max-w-3xl px-4 section-pad text-center text-muted-foreground">Caricamento…</div>;
+    return (
+      <div className="mx-auto max-w-3xl px-4 section-pad text-center text-muted-foreground">
+        Caricamento…
+      </div>
+    );
   }
 
   if (!isAdmin) {
@@ -152,7 +171,10 @@ function AdminPage() {
           <Link to="/area" className="inline-flex text-sm font-medium text-primary">
             Vai all'Area Membri
           </Link>
-          <Link to="/admin/news-automation" className="inline-flex text-sm font-medium text-primary">
+          <Link
+            to="/admin/news-automation"
+            className="inline-flex text-sm font-medium text-primary"
+          >
             Automazione News
           </Link>
           <Link to="/admin/feedback" className="inline-flex text-sm font-medium text-primary">
@@ -164,7 +186,6 @@ function AdminPage() {
           <Link to="/admin/hub" className="inline-flex text-sm font-medium text-primary">
             Moderazione Hub
           </Link>
-
         </div>
       </header>
 
@@ -249,7 +270,9 @@ function MembersTable() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("profiles")
-        .select("id,member_id,first_name,last_name,email,city,province,membership_status,member_since")
+        .select(
+          "id,member_id,first_name,last_name,email,city,province,membership_status,member_since",
+        )
         .order("member_since", { ascending: false });
       if (error) throw error;
       return data;
@@ -280,9 +303,13 @@ function MembersTable() {
               {data.map((m) => (
                 <tr key={m.id} className="border-t border-border">
                   <td className="py-2 pr-4 font-medium">{m.member_id}</td>
-                  <td className="py-2 pr-4">{`${m.first_name ?? ""} ${m.last_name ?? ""}`.trim() || "—"}</td>
+                  <td className="py-2 pr-4">
+                    {`${m.first_name ?? ""} ${m.last_name ?? ""}`.trim() || "—"}
+                  </td>
                   <td className="py-2 pr-4">{m.email ?? "—"}</td>
-                  <td className="py-2 pr-4">{[m.city, m.province].filter(Boolean).join(", ") || "—"}</td>
+                  <td className="py-2 pr-4">
+                    {[m.city, m.province].filter(Boolean).join(", ") || "—"}
+                  </td>
                   <td className="py-2 pr-4 capitalize">{m.membership_status}</td>
                   <td className="py-2">{formatDate(m.member_since)}</td>
                 </tr>

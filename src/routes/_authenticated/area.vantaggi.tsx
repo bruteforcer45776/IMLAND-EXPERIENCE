@@ -17,7 +17,10 @@ export const Route = createFileRoute("/_authenticated/area/vantaggi")({
   head: () => ({
     meta: [
       { title: "Vantaggi Member — IMLAND EXPERIENCE" },
-      { name: "description", content: "Convenzioni e sconti riservati ai Member nelle attività del territorio." },
+      {
+        name: "description",
+        content: "Convenzioni e sconti riservati ai Member nelle attività del territorio.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -68,14 +71,19 @@ function VantaggiPage() {
   );
 
   return (
-    <AreaShell title="Vantaggi." lead="Convenzioni e sconti attivi nelle attività convenzionate IMLAND.">
+    <AreaShell
+      title="Vantaggi."
+      lead="Convenzioni e sconti attivi nelle attività convenzionate IMLAND."
+    >
       <div className="mb-6 flex flex-wrap gap-2">
         {["Tutte", ...PROVINCES].map((p) => (
           <button
             key={p}
             onClick={() => setProvince(p)}
             className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-              province === p ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground hover:bg-muted"
+              province === p
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border text-muted-foreground hover:bg-muted"
             }`}
           >
             {p}
@@ -88,7 +96,9 @@ function VantaggiPage() {
             key={t}
             onClick={() => setType(t)}
             className={`rounded-full border px-3.5 py-1 text-xs transition-colors ${
-              type === t ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground hover:bg-muted"
+              type === t
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border text-muted-foreground hover:bg-muted"
             }`}
           >
             {t}
@@ -110,7 +120,12 @@ function VantaggiPage() {
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     {b.logo_url && (
-                      <img src={b.logo_url} alt="" className="h-11 w-11 rounded-xl object-cover" loading="lazy" />
+                      <img
+                        src={b.logo_url}
+                        alt=""
+                        className="h-11 w-11 rounded-xl object-cover"
+                        loading="lazy"
+                      />
                     )}
                     <div>
                       <h2 className="text-h3-im">{b.business_name}</h2>
@@ -121,11 +136,20 @@ function VantaggiPage() {
                     </div>
                   </div>
                   <button
-                    onClick={() => toggle.mutate({ item_id: b.id, item_type: "vantaggio", label: b.business_name })}
+                    onClick={() =>
+                      toggle.mutate({
+                        item_id: b.id,
+                        item_type: "vantaggio",
+                        label: b.business_name,
+                      })
+                    }
                     aria-label="Salva"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
-                    <Heart size={18} fill={isFavorite(b.id, "vantaggio") ? "currentColor" : "none"} />
+                    <Heart
+                      size={18}
+                      fill={isFavorite(b.id, "vantaggio") ? "currentColor" : "none"}
+                    />
                   </button>
                 </div>
 
@@ -133,9 +157,13 @@ function VantaggiPage() {
                   {b.benefit_type}
                   {b.discount_percent ? ` · -${b.discount_percent}%` : ""}
                 </p>
-                {b.description && <p className="mt-3 text-sm text-muted-foreground">{b.description}</p>}
+                {b.description && (
+                  <p className="mt-3 text-sm text-muted-foreground">{b.description}</p>
+                )}
                 {b.address && <p className="mt-2 text-xs text-muted-foreground">{b.address}</p>}
-                {b.conditions && <p className="mt-2 text-xs text-muted-foreground">Condizioni: {b.conditions}</p>}
+                {b.conditions && (
+                  <p className="mt-2 text-xs text-muted-foreground">Condizioni: {b.conditions}</p>
+                )}
                 <p className="mt-2 text-xs text-muted-foreground">
                   {b.expires_at ? `Valido fino al ${formatDate(b.expires_at)}` : "Senza scadenza"}
                 </p>
@@ -144,8 +172,12 @@ function VantaggiPage() {
                   <div className="mt-4 flex items-center gap-4 rounded-2xl bg-muted/60 p-4">
                     <QRCodeSVG value={redemption.code} size={72} />
                     <div>
-                      <p className="text-xs uppercase tracking-wide text-muted-foreground">Codice</p>
-                      <p className="font-display text-xl font-semibold tracking-widest">{redemption.code}</p>
+                      <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                        Codice
+                      </p>
+                      <p className="font-display text-xl font-semibold tracking-widest">
+                        {redemption.code}
+                      </p>
                       <p className="text-xs text-muted-foreground">Stato: {redemption.status}</p>
                     </div>
                   </div>

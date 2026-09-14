@@ -25,9 +25,7 @@ function PartnerMark({ partner }: { partner: PartnerLogo }) {
       />
     </span>
   );
-
 }
-
 
 export function PartnerLoop({
   partners = partnerLogos,

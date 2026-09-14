@@ -79,9 +79,7 @@ function BusinessReviews() {
               body={r.body}
               createdAt={r.created_at}
               place={placeName.get(r.place_id ?? "") ?? "Luogo"}
-              response={
-                (r.organization_responses as { body: string }[] | null)?.[0]?.body ?? null
-              }
+              response={(r.organization_responses as { body: string }[] | null)?.[0]?.body ?? null}
               organizationId={org?.id}
               canAnswer={canAnswer}
             />

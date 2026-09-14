@@ -37,14 +37,47 @@ const DotField = memo(function DotField({
 }: DotFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const glowRef = useRef<SVGCircleElement | null>(null);
-  const dotsRef = useRef<Array<{ ax: number; ay: number; sx: number; sy: number; vx: number; vy: number; x: number; y: number }>>([]);
+  const dotsRef = useRef<
+    Array<{
+      ax: number;
+      ay: number;
+      sx: number;
+      sy: number;
+      vx: number;
+      vy: number;
+      x: number;
+      y: number;
+    }>
+  >([]);
   const mouseRef = useRef({ x: -9999, y: -9999, prevX: -9999, prevY: -9999, speed: 0 });
   const rafRef = useRef<number | null>(null);
   const sizeRef = useRef({ w: 0, h: 0, offsetX: 0, offsetY: 0 });
   const glowOpacity = useRef(0);
   const engagement = useRef(0);
-  const propsRef = useRef({ dotRadius, dotSpacing, cursorRadius, cursorForce, bulgeOnly, bulgeStrength, sparkle, waveAmplitude, gradientFrom, gradientTo });
-  propsRef.current = { dotRadius, dotSpacing, cursorRadius, cursorForce, bulgeOnly, bulgeStrength, sparkle, waveAmplitude, gradientFrom, gradientTo };
+  const propsRef = useRef({
+    dotRadius,
+    dotSpacing,
+    cursorRadius,
+    cursorForce,
+    bulgeOnly,
+    bulgeStrength,
+    sparkle,
+    waveAmplitude,
+    gradientFrom,
+    gradientTo,
+  });
+  propsRef.current = {
+    dotRadius,
+    dotSpacing,
+    cursorRadius,
+    cursorForce,
+    bulgeOnly,
+    bulgeStrength,
+    sparkle,
+    waveAmplitude,
+    gradientFrom,
+    gradientTo,
+  };
   const rebuildRef = useRef<(() => void) | null>(null);
   // useId è stabile tra server e client: evita mismatch di idratazione.
   const glowIdRef = useRef(`dot-field-glow-${useId().replace(/:/g, "")}`);
@@ -70,7 +103,12 @@ const DotField = memo(function DotField({
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      sizeRef.current = { w, h, offsetX: rect.left + window.scrollX, offsetY: rect.top + window.scrollY };
+      sizeRef.current = {
+        w,
+        h,
+        offsetX: rect.left + window.scrollX,
+        offsetY: rect.top + window.scrollY,
+      };
       buildDots(w, h);
     }
 
@@ -237,13 +275,22 @@ const DotField = memo(function DotField({
   }, [dotRadius, dotSpacing]);
 
   return (
-    <div className={className} style={{ position: "relative", width: "100%", height: "100%", ...style }}>
+    <div
+      className={className}
+      style={{ position: "relative", width: "100%", height: "100%", ...style }}
+    >
       <canvas
         ref={canvasRef}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       />
       <svg
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+        }}
       >
         <defs>
           <radialGradient id={glowIdRef.current}>

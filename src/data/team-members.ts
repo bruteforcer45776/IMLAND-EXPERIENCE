@@ -71,19 +71,31 @@ const defaultProfile = (
   firstName: string,
   lastName: string,
   role: string,
-): Pick<TeamMember, "bio" | "background" | "mission" | "keySkills" | "timeline" | "homelandRole" | "skills"> => ({
+): Pick<
+  TeamMember,
+  "bio" | "background" | "mission" | "keySkills" | "timeline" | "homelandRole" | "skills"
+> => ({
   bio: `${firstName} ${lastName} è parte del team IMLAND.\nRacconta il territorio con curiosità e ascolto.`,
   background: "Un percorso costruito tra progetti locali, produzione culturale e comunicazione.",
-  mission: "Dare voce alle comunità e trasformare le storie del territorio in racconto sonoro condiviso.",
+  mission:
+    "Dare voce alle comunità e trasformare le storie del territorio in racconto sonoro condiviso.",
   keySkills: ["Storytelling", "Community", "Produzione"],
   timeline: [
-    { year: "Oggi", title: `${role || "Team"} — IMLAND EXPERIENCE`, detail: "Progetti, produzione e community." },
+    {
+      year: "Oggi",
+      title: `${role || "Team"} — IMLAND EXPERIENCE`,
+      detail: "Progetti, produzione e community.",
+    },
     {
       year: "Prima",
       title: "Esperienze sul territorio",
       detail: "Collaborazioni con realtà locali e progetti culturali.",
     },
-    { year: "Formazione", title: "Percorso multidisciplinare", detail: "Comunicazione, media e cultura." },
+    {
+      year: "Formazione",
+      title: "Percorso multidisciplinare",
+      detail: "Comunicazione, media e cultura.",
+    },
   ],
   homelandRole: {
     responsibilities:
@@ -98,8 +110,17 @@ const defaultProfile = (
   ],
 });
 
-const build = (photo: string, firstName: string, lastName: string, nickname: string, role: string): TeamMember => ({
-  slug: slugify(`${firstName}-${lastName}`) || slugify(nickname) || slugify(`membro-${photo.slice(-8)}`),
+const build = (
+  photo: string,
+  firstName: string,
+  lastName: string,
+  nickname: string,
+  role: string,
+): TeamMember => ({
+  slug:
+    slugify(`${firstName}-${lastName}`) ||
+    slugify(nickname) ||
+    slugify(`membro-${photo.slice(-8)}`),
   photo,
   firstName,
   lastName,
@@ -129,7 +150,7 @@ const descriptions: Record<string, string> = {
   "alessandra-campaci":
     "Ciao, sono Alessandra.\nHo 24 anni e sono Responsabile Member e Assistente Direzione: mi occupo della gestione dei member della radio a 360 gradi, seguendo l'organizzazione, il coordinamento e la cura delle relazioni all'interno della community e della rete d'impresa.\nSono laureata in Arti, Musica e Spettacolo e sto concludendo una laurea magistrale in Comunicazione.\nDopo aver studiato a Torino ho scelto di tornare a vivere nel paese in cui sono cresciuta, spinta dal forte legame con il territorio e dalla volontà di valorizzarne le potenzialità.",
   "andrea-libero":
-    "Ciao, io sono Andrea, Andrea chi? Il Pibe, quello che faceva il portiere.\nMa soprattutto quello che ci prova ad alleggerirvi oggi, sorridere di ieri e proiettarci verso il futuro con il gioco della musica e delle parole.\nIl mio motto è \"sii il cambiamento che vuoi vedere negli altri\", perché dobbiamo essere noi il primo passo verso ciò che vogliamo vedere nel mondo.\nCompagna inseparabile? La musica, perché la musica non ci compra. Ci emoziona!",
+    'Ciao, io sono Andrea, Andrea chi? Il Pibe, quello che faceva il portiere.\nMa soprattutto quello che ci prova ad alleggerirvi oggi, sorridere di ieri e proiettarci verso il futuro con il gioco della musica e delle parole.\nIl mio motto è "sii il cambiamento che vuoi vedere negli altri", perché dobbiamo essere noi il primo passo verso ciò che vogliamo vedere nel mondo.\nCompagna inseparabile? La musica, perché la musica non ci compra. Ci emoziona!',
   "simone-abondio":
     "Mi chiamo Simone, ho trent'anni e vivo la mia quotidianità sospesa tra famiglia, passioni e lavoro.\nHo frequentato l'alberghiero di Gattinara e, subito dopo la scuola, ho avuto la fortuna di lanciarmi in un'esperienza lavorativa unica in una cucina di Kilkenny, in Irlanda.\nPer anni ho lavorato come cuoco, imparando il valore della precisione, della creatività e del lavoro di squadra.\nNel 2018 ho ampliato il mio percorso diventando sommelier.\nOra insegno e lavoro ogni giorno a stretto contatto con ragazzi con disabilità, un compito che richiede empatia, ascolto e dedizione.",
   "sonia-ferraiuolo":
@@ -187,7 +208,6 @@ export const teamMembers: TeamMember[] = [
   build(teamM18.url, "Luca", "Golzio", "", "Commerciale"),
 
   build(teamM13.url, "Matteo", "Pedrina", "", "Commerciale"),
-
 
   build(teamM1.url, "Alessia", "Pezzimenti", "", "Grafica"),
 

@@ -1,4 +1,8 @@
-import { podcastProgramList, type PodcastEpisode, type PodcastProgram } from "@/data/podcast-programs";
+import {
+  podcastProgramList,
+  type PodcastEpisode,
+  type PodcastProgram,
+} from "@/data/podcast-programs";
 
 export type EpisodeRef = { program: PodcastProgram; episode: PodcastEpisode };
 

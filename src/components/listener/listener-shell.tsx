@@ -42,7 +42,8 @@ export function ListenerShell({ children }: { children: ReactNode }) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <nav aria-label="Area Persona" className="flex flex-wrap gap-2">
           {NAV.map((item) => {
-            const active = pathname === item.to || (item.to !== "/ascoltatore" && pathname.startsWith(item.to));
+            const active =
+              pathname === item.to || (item.to !== "/ascoltatore" && pathname.startsWith(item.to));
             const Icon = item.icon;
             return (
               <Link

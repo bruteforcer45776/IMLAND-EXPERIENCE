@@ -16,7 +16,6 @@ import {
   AccordionTrigger,
 } from "../components/ui/accordion";
 
-
 type Category = {
   id: string;
   title: string;
@@ -52,7 +51,14 @@ const categories: Category[] = [
       },
       {
         q: "Come installo l'app della radio?",
-        a: <>IMLAND è una web app: si installa direttamente dal browser senza passare da App Store o Play Store. Su iPhone usa Condividi <ArrowRight className="inline h-4 w-4" /> "Aggiungi alla schermata Home" da Safari; su Android il menu di Chrome <ArrowRight className="inline h-4 w-4" /> "Installa app".</>,
+        a: (
+          <>
+            IMLAND è una web app: si installa direttamente dal browser senza passare da App Store o
+            Play Store. Su iPhone usa Condividi <ArrowRight className="inline h-4 w-4" /> "Aggiungi
+            alla schermata Home" da Safari; su Android il menu di Chrome{" "}
+            <ArrowRight className="inline h-4 w-4" /> "Installa app".
+          </>
+        ),
       },
       {
         q: "IMLAND è gratuita da ascoltare?",
@@ -172,8 +178,7 @@ export const Route = createFileRoute("/faq")({
       { property: "og:title", content: "FAQ · IMLAND EXPERIENCE" },
       {
         property: "og:description",
-        content:
-          "Tutte le risposte su radio, podcast, eventi e membership IMLAND.",
+        content: "Tutte le risposte su radio, podcast, eventi e membership IMLAND.",
       },
     ],
     links: [canonical("/faq")],
@@ -219,7 +224,11 @@ function FaqPage() {
 
           <div className="mt-8 flex flex-wrap gap-2">
             {categories.map((cat) => (
-              <a key={cat.id} href={`#${cat.id}`} className="chip-im inline-flex items-center gap-1.5">
+              <a
+                key={cat.id}
+                href={`#${cat.id}`}
+                className="chip-im inline-flex items-center gap-1.5"
+              >
                 <BrandIcon name={cat.icon} className="h-4 w-4" tone={cat.tone} />
                 {cat.title}
               </a>
@@ -228,7 +237,13 @@ function FaqPage() {
 
           <BentoGrid className="mt-10">
             {categories.map((cat) => (
-              <BentoCard key={cat.id} tone={cat.tone ?? toneForBadge(badgeForIcon(cat.icon))} span={6} className="scroll-mt-24" id={cat.id}>
+              <BentoCard
+                key={cat.id}
+                tone={cat.tone ?? toneForBadge(badgeForIcon(cat.icon))}
+                span={6}
+                className="scroll-mt-24"
+                id={cat.id}
+              >
                 <div className="flex items-start gap-4">
                   <BadgeIcon name={badgeForIcon(cat.icon)} className="h-14 w-14" />
                   <div>
@@ -280,4 +295,3 @@ function FaqPage() {
     </>
   );
 }
-

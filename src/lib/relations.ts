@@ -29,16 +29,8 @@ export const CONTENT_KIND_LABEL: Record<ContentKind, string> = {
 /** Contenuti collegati a un contenuto, in entrambe le direzioni. */
 export async function fetchRelations(kind: ContentKind, id: string) {
   const [outgoing, incoming] = await Promise.all([
-    supabase
-      .from("content_relations")
-      .select("*")
-      .eq("source_kind", kind)
-      .eq("source_id", id),
-    supabase
-      .from("content_relations")
-      .select("*")
-      .eq("target_kind", kind)
-      .eq("target_id", id),
+    supabase.from("content_relations").select("*").eq("source_kind", kind).eq("source_id", id),
+    supabase.from("content_relations").select("*").eq("target_kind", kind).eq("target_id", id),
   ]);
   if (outgoing.error) throw outgoing.error;
   if (incoming.error) throw incoming.error;
@@ -134,9 +126,12 @@ export async function resolveRelated(raw: RawRelation[]): Promise<RelatedItem[]>
   ]);
 
   const map = new Map<string, { title: string; href: string | null }>();
-  for (const p of places.data ?? []) map.set(`place:${p.id}`, { title: p.name, href: `/terrain/${p.slug}` });
-  for (const j of jobs.data ?? []) map.set(`job:${j.id}`, { title: j.title, href: `/jobs/${j.slug}` });
-  for (const n of news.data ?? []) map.set(`news:${n.id}`, { title: n.title, href: `/news/${n.slug}` });
+  for (const p of places.data ?? [])
+    map.set(`place:${p.id}`, { title: p.name, href: `/terrain/${p.slug}` });
+  for (const j of jobs.data ?? [])
+    map.set(`job:${j.id}`, { title: j.title, href: `/jobs/${j.slug}` });
+  for (const n of news.data ?? [])
+    map.set(`news:${n.id}`, { title: n.title, href: `/news/${n.slug}` });
   for (const e of events.data ?? []) map.set(`event:${e.id}`, { title: e.title, href: "/eventi" });
 
   const seen = new Set<string>();
@@ -147,7 +142,13 @@ export async function resolveRelated(raw: RawRelation[]): Promise<RelatedItem[]>
     const found = map.get(key);
     if (!found) continue;
     seen.add(key);
-    out.push({ kind: r.kind, id: r.id, relation: r.relation, title: found.title, href: found.href });
+    out.push({
+      kind: r.kind,
+      id: r.id,
+      relation: r.relation,
+      title: found.title,
+      href: found.href,
+    });
   }
   return out;
 }

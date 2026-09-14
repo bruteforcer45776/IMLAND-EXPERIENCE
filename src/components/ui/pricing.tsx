@@ -29,19 +29,13 @@ export default function Pricing({
       <div className="container-im section-pad">
         <div className="max-w-2xl">
           {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-              {eyebrow}
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-signal">{eyebrow}</p>
           ) : null}
           {title ? (
-            <h2 className="mt-2 font-display text-3xl font-semibold md:text-4xl">
-              {title}
-            </h2>
+            <h2 className="mt-2 font-display text-3xl font-semibold md:text-4xl">{title}</h2>
           ) : null}
           {description ? (
-            <p className="mt-4 whitespace-pre-line text-muted-foreground">
-              {description}
-            </p>
+            <p className="mt-4 whitespace-pre-line text-muted-foreground">{description}</p>
           ) : null}
           {note ? (
             <p className="mt-3 block w-full max-w-xl rounded-2xl border border-border bg-card px-4 py-2 text-xs font-semibold uppercase tracking-wide text-card-foreground">

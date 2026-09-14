@@ -20,7 +20,10 @@ export const Route = createFileRoute("/cerca")({
       },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Cerca su IMLAND Experience" },
-      { property: "og:description", content: "Podcast, episodi, eventi, aziende partner e sezioni: tutto in un'unica ricerca." },
+      {
+        property: "og:description",
+        content: "Podcast, episodi, eventi, aziende partner e sezioni: tutto in un'unica ricerca.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -97,7 +100,9 @@ function SearchPage() {
   return (
     <div className="container-im section-pad-sm">
       <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
-        <Link to="/" className="hover:text-foreground">Home</Link>
+        <Link to="/" className="hover:text-foreground">
+          Home
+        </Link>
         <span className="mx-2">›</span>
         <span className="text-foreground">Cerca</span>
       </nav>
@@ -120,7 +125,9 @@ function SearchPage() {
         }}
       >
         <Search size={20} className="shrink-0 text-muted-foreground" aria-hidden />
-        <label htmlFor="global-search" className="sr-only">Cerca su IMLAND</label>
+        <label htmlFor="global-search" className="sr-only">
+          Cerca su IMLAND
+        </label>
         <input
           id="global-search"
           value={value}
@@ -161,10 +168,27 @@ function SearchPage() {
               Prova con un altro termine oppure parti dalle sezioni principali.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link to="/podcast" className="rounded-full btn-blue px-5 py-2.5 text-sm">Podcast</Link>
-              <Link to="/radio" className="rounded-full border border-outline px-5 py-2.5 text-sm font-semibold">Radio</Link>
-              <Link to="/eventi" className="rounded-full border border-outline px-5 py-2.5 text-sm font-semibold">Eventi</Link>
-              <Link to="/news" className="rounded-full border border-outline px-5 py-2.5 text-sm font-semibold">News</Link>
+              <Link to="/podcast" className="rounded-full btn-blue px-5 py-2.5 text-sm">
+                Podcast
+              </Link>
+              <Link
+                to="/radio"
+                className="rounded-full border border-outline px-5 py-2.5 text-sm font-semibold"
+              >
+                Radio
+              </Link>
+              <Link
+                to="/eventi"
+                className="rounded-full border border-outline px-5 py-2.5 text-sm font-semibold"
+              >
+                Eventi
+              </Link>
+              <Link
+                to="/news"
+                className="rounded-full border border-outline px-5 py-2.5 text-sm font-semibold"
+              >
+                News
+              </Link>
             </div>
           </div>
         ) : (
@@ -181,7 +205,9 @@ function SearchPage() {
                       {item.meta ? ` · ${item.meta}` : ""}
                     </p>
                     <h2 className="mt-2 text-h3-im leading-snug">{item.title}</h2>
-                    <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{item.subtitle}</p>
+                    <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                      {item.subtitle}
+                    </p>
                   </ResultLink>
                 </li>
               ))}

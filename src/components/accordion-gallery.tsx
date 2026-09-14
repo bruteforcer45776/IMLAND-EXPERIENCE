@@ -112,7 +112,7 @@ const AccordionGallery = ({
               duration: dur,
               ease,
             },
-            0
+            0,
           );
         }
 
@@ -121,7 +121,7 @@ const AccordionGallery = ({
             tl.to(
               [bar, text],
               { opacity: 1, x: 0, duration: dur, ease, stagger: prefersReduced ? 0 : stagger },
-              0
+              0,
             );
           } else {
             tl.to([bar, text], { opacity: 0, x: -14, duration: dur * 0.6, ease }, 0);
@@ -131,7 +131,20 @@ const AccordionGallery = ({
 
       tlRef.current = tl;
     },
-    [active, count, expandRatio, duration, ease, vertical, tilt, parallax, grayscale, showLabels, stagger, prefersReduced]
+    [
+      active,
+      count,
+      expandRatio,
+      duration,
+      ease,
+      vertical,
+      tilt,
+      parallax,
+      grayscale,
+      showLabels,
+      stagger,
+      prefersReduced,
+    ],
   );
 
   useEffect(() => {
@@ -163,7 +176,7 @@ const AccordionGallery = ({
     () => () => {
       tlRef.current?.kill();
     },
-    []
+    [],
   );
 
   const handleEnter = (i: number) => {
@@ -229,7 +242,12 @@ const AccordionGallery = ({
                   mediaRefs.current[i] = el;
                 }}
               >
-                <img src={item.image} alt={item.alt ?? item.label ?? ""} loading="lazy" draggable={false} />
+                <img
+                  src={item.image}
+                  alt={item.alt ?? item.label ?? ""}
+                  loading="lazy"
+                  draggable={false}
+                />
               </div>
               <div className="ag-panel__overlay" />
             </div>

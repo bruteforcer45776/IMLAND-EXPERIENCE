@@ -48,14 +48,7 @@ export function ServiceChip({
   ...props
 }: Props) {
   return (
-    <span
-      className={cn(
-        "pill-base",
-        VARIANT[variant],
-        disabled && "opacity-50",
-        className,
-      )}
-    >
+    <span className={cn("pill-base", VARIANT[variant], disabled && "opacity-50", className)}>
       <button
         type={type}
         disabled={disabled}
@@ -64,12 +57,23 @@ export function ServiceChip({
         {...props}
       >
         {logoSrc ? (
-          <img src={logoSrc} alt={logoAlt} width={24} height={24} className="h-6 w-6 shrink-0 object-contain" loading="lazy" />
+          <img
+            src={logoSrc}
+            alt={logoAlt}
+            width={24}
+            height={24}
+            className="h-6 w-6 shrink-0 object-contain"
+            loading="lazy"
+          />
         ) : null}
-        {icon ? <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center">{icon}</span> : null}
+        {icon ? (
+          <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center">{icon}</span>
+        ) : null}
         <span className="truncate">{children}</span>
         {typeof count === "number" ? (
-          <span className="ml-1 rounded-full bg-black/10 px-2 py-0.5 text-xs font-bold">{count}</span>
+          <span className="ml-1 rounded-full bg-black/10 px-2 py-0.5 text-xs font-bold">
+            {count}
+          </span>
         ) : null}
       </button>
       {onRemove ? (
@@ -89,7 +93,10 @@ export function ServiceChip({
 /** Riga di chip scorrevole: su mobile scorre in orizzontale, su desktop va a capo. */
 export function ChipRow({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("chip-row chip-row-hide md:flex-wrap md:overflow-visible", className)} role="group">
+    <div
+      className={cn("chip-row chip-row-hide md:flex-wrap md:overflow-visible", className)}
+      role="group"
+    >
       {children}
     </div>
   );

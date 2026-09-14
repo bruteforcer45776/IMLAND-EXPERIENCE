@@ -64,10 +64,55 @@ function pick(block: string, tag: string): string | null {
 }
 
 const STOPWORDS = new Set([
-  "della","dello","delle","degli","dell","nella","nello","sulla","sullo","sono","come","dopo",
-  "anche","tutti","tutte","tutto","oggi","anni","anno","primo","prima","contro","verso","senza",
-  "ancora","nuovo","nuova","nuove","nuovi","quando","perche","perché","essere","questa","questo",
-  "gran","grande","piu","più","sarà","sara","stato","stata","ecco","ora","con","per","dal","dai",
+  "della",
+  "dello",
+  "delle",
+  "degli",
+  "dell",
+  "nella",
+  "nello",
+  "sulla",
+  "sullo",
+  "sono",
+  "come",
+  "dopo",
+  "anche",
+  "tutti",
+  "tutte",
+  "tutto",
+  "oggi",
+  "anni",
+  "anno",
+  "primo",
+  "prima",
+  "contro",
+  "verso",
+  "senza",
+  "ancora",
+  "nuovo",
+  "nuova",
+  "nuove",
+  "nuovi",
+  "quando",
+  "perche",
+  "perché",
+  "essere",
+  "questa",
+  "questo",
+  "gran",
+  "grande",
+  "piu",
+  "più",
+  "sarà",
+  "sara",
+  "stato",
+  "stata",
+  "ecco",
+  "ora",
+  "con",
+  "per",
+  "dal",
+  "dai",
 ]);
 
 function keywords(text: string): string[] {
@@ -79,15 +124,11 @@ function keywords(text: string): string[] {
 }
 
 export const getTerritoryNews = createServerFn({ method: "GET" })
-  .inputValidator(
-    (input: { limit?: number; offset?: number; topic?: string } | undefined) => ({
-      limit: Math.min(24, Math.max(1, Math.trunc(input?.limit ?? 4))),
-      offset: Math.max(0, Math.trunc(input?.offset ?? 0)),
-      topic: (input?.topic && input.topic in NEWS_TOPICS
-        ? input.topic
-        : "territorio") as NewsTopic,
-    }),
-  )
+  .inputValidator((input: { limit?: number; offset?: number; topic?: string } | undefined) => ({
+    limit: Math.min(24, Math.max(1, Math.trunc(input?.limit ?? 4))),
+    offset: Math.max(0, Math.trunc(input?.offset ?? 0)),
+    topic: (input?.topic && input.topic in NEWS_TOPICS ? input.topic : "territorio") as NewsTopic,
+  }))
   .handler(async ({ data }): Promise<TerritoryNewsPage> => {
     const res = await fetch(feedUrl(data.topic), {
       headers: {
@@ -109,8 +150,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
 
       const source = pick(block, "source");
       const sepIndex = rawTitle.lastIndexOf(" - ");
-      const title =
-        sepIndex > 20 ? rawTitle.slice(0, sepIndex).trim() : rawTitle;
+      const title = sepIndex > 20 ? rawTitle.slice(0, sepIndex).trim() : rawTitle;
       const rawDescription = pick(block, "description") ?? "";
       const pubDate = pick(block, "pubDate");
 
@@ -120,9 +160,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
         description = description.slice(title.length).replace(/^[\s\-–—|]+/, "");
       }
       if (source) {
-        description = description
-          .replace(new RegExp(`${source}\\s*$`, "i"), "")
-          .trim();
+        description = description.replace(new RegExp(`${source}\\s*$`, "i"), "").trim();
       }
 
       all.push({
@@ -130,9 +168,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
         tag: source ?? "Territorio",
         title: title.endsWith(".") ? title : `${title}.`,
         abstract:
-          description.length > 160
-            ? `${description.slice(0, 157).trimEnd()}...`
-            : description,
+          description.length > 160 ? `${description.slice(0, 157).trimEnd()}...` : description,
         link,
         publishedAt: pubDate,
         related: 1,
@@ -152,9 +188,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
       item.related = best;
     }
 
-    const trending = [...all]
-      .sort((a, b) => b.related - a.related)
-      .slice(0, 5);
+    const trending = [...all].sort((a, b) => b.related - a.related).slice(0, 5);
 
     const items = all.slice(data.offset, data.offset + data.limit);
     return {

@@ -95,10 +95,14 @@ export function TerrainLiveMap() {
         scrollWheelZoom: false,
         zoomControl: false,
       });
-      L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
-        attribution: '&copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, DeLorme, NAVTEQ',
-        maxZoom: 16,
-      }).addTo(map);
+      L.tileLayer(
+        "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+        {
+          attribution:
+            '&copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, DeLorme, NAVTEQ',
+          maxZoom: 16,
+        },
+      ).addTo(map);
       L.control.zoom({ position: "bottomright" }).addTo(map);
       layerRef.current = L.layerGroup().addTo(map);
       mapRef.current = map;
@@ -136,7 +140,9 @@ export function TerrainLiveMap() {
             ${p.href ? `<br/><a href="${p.href}" style="font-size:12px;font-weight:600;color:${color};text-decoration:none">Apri la scheda &rarr;</a>` : ""}
           </div>
         `;
-        L.marker([p.lat, p.lon], { icon }).addTo(layer).bindPopup(popup, { maxWidth: 240, closeButton: false });
+        L.marker([p.lat, p.lon], { icon })
+          .addTo(layer)
+          .bindPopup(popup, { maxWidth: 240, closeButton: false });
       });
 
       if (points.length > 0) {
@@ -183,8 +189,8 @@ export function TerrainLiveMap() {
         <div ref={containerRef} className="h-[420px] w-full md:h-[520px]" />
         {!isLoading && points.length === 0 ? (
           <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-2xl bg-background/90 p-4 text-sm text-muted-foreground shadow-lg">
-            Ancora nessun punto pubblicato in questa vista.
-            Le prime segnalazioni e le prime schede verificate compariranno qui.
+            Ancora nessun punto pubblicato in questa vista. Le prime segnalazioni e le prime schede
+            verificate compariranno qui.
           </div>
         ) : null}
       </div>
