@@ -120,6 +120,35 @@
   .home-glass-stack > section { border-radius: 1.25rem; }
 }
 
+/* Tutte le pagine seguono il ritmo a pannelli separati introdotto nella Home. */
+#main-content > section,
+#main-content > div:not(.home-glass-stack) > section {
+  margin-block: clamp(0.75rem, 1.5vw, 1.25rem);
+  overflow: clip;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  border-radius: clamp(1.25rem, 2.5vw, 2rem);
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+#main-content > section:first-child,
+#main-content > div:not(.home-glass-stack) > section:first-child {
+  margin-top: 0.75rem;
+}
+
+#main-content > section:last-child,
+#main-content > div:not(.home-glass-stack) > section:last-child {
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 47.999rem) {
+  #main-content > section,
+  #main-content > div:not(.home-glass-stack) > section {
+    margin-block: 0.75rem;
+    border-radius: 1.25rem;
+  }
+}
+
 /* Cornice editoriale IMLAND: la pagina scorre, la grafica resta ferma. */
 .editorial-frame-page { position: relative; min-height: 100vh; isolation: isolate; }
 .editorial-frame-backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #22a9f2; pointer-events: none; }
