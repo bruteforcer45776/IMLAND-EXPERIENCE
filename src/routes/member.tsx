@@ -35,9 +35,6 @@ export const Route = createFileRoute("/member")({
       rel: "preload" as const,
       as: "image" as const,
       href: m.cover,
-      crossOrigin: m.cover.startsWith("https://imlandradio.it")
-        ? ("anonymous" as const)
-        : undefined,
     }));
     return {
       meta: [
