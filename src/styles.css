@@ -683,6 +683,8 @@
 @utility section-canvas {
   position: relative;
   isolation: isolate;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
 
   &::before {
     content: "";
@@ -701,6 +703,8 @@
 @utility section-focus {
   position: relative;
   isolation: isolate;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
 
   &::before {
     content: "";
@@ -720,6 +724,8 @@
 @utility section-editorial {
   position: relative;
   isolation: isolate;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
   color: #1f1f1f;
 
   &::before {
@@ -1606,13 +1612,13 @@
     z-index: 2;
   }
 
-  /* barra piena di sezione, sempre visibile */
+  /* linea di sezione sottile, sempre visibile */
   &::after {
     content: "";
     position: absolute;
     inset: 0 auto 0 0;
-    width: 4px;
-    background: var(--bento-tone, var(--primary));
+    width: 1px;
+    background: color-mix(in oklab, var(--bento-tone, var(--primary)) 70%, transparent);
     z-index: 1;
     pointer-events: none;
   }

@@ -15,6 +15,24 @@ export type PodcastFeedEpisode = LatestPodcastTrack & {
   duration?: string;
 };
 
+const FEED_CACHE_TTL = 10 * 60 * 1000;
+const feedCache = new Map<string, { expires: number; xml: string }>();
+
+async function getPodcastFeedXml(slug: string, rssUrl: string) {
+  const now = Date.now();
+  const cached = feedCache.get(slug);
+  if (cached && cached.expires > now) return cached.xml;
+
+  const response = await fetch(rssUrl, {
+    headers: { Accept: "application/rss+xml, application/xml, text/xml" },
+  });
+  if (!response.ok) return null;
+
+  const xml = await response.text();
+  feedCache.set(slug, { xml, expires: now + FEED_CACHE_TTL });
+  return xml;
+}
+
 const decodeXml = (value: string) =>
   value
     .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
@@ -82,12 +100,8 @@ export const getLatestPodcastTrack = createServerFn({ method: "GET" })
     const program = podcastPrograms[data.slug];
     if (!program) return null;
 
-    const response = await fetch(program.rssUrl, {
-      headers: { Accept: "application/rss+xml, application/xml, text/xml" },
-    });
-    if (!response.ok) return null;
-
-    const xml = await response.text();
+    const xml = await getPodcastFeedXml(program.slug, program.rssUrl);
+    if (!xml) return null;
     const item = xml.match(/<item\b[\s\S]*?<\/item>/i)?.[0];
     if (!item) return null;
 
@@ -116,12 +130,8 @@ export const getPodcastFeedEpisodes = createServerFn({ method: "GET" })
     const program = podcastPrograms[data.slug];
     if (!program) return [];
 
-    const response = await fetch(program.rssUrl, {
-      headers: { Accept: "application/rss+xml, application/xml, text/xml" },
-    });
-    if (!response.ok) return [];
-
-    const xml = await response.text();
+    const xml = await getPodcastFeedXml(program.slug, program.rssUrl);
+    if (!xml) return [];
     const items = xml.match(/<item\b[\s\S]*?<\/item>/gi) ?? [];
     return items
       .map((item, index) => parseFeedItem(item, program.name, index))

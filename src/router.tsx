@@ -7,9 +7,10 @@ export const getRouter = () => {
     defaultOptions: {
       queries: {
         // cache aggressiva: meno richieste, navigazione istantanea
-        staleTime: 5 * 60 * 1000,
-        gcTime: 30 * 60 * 1000,
+        staleTime: 15 * 60 * 1000,
+        gcTime: 60 * 60 * 1000,
         refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
         retry: 1,
       },
     },
@@ -20,7 +21,7 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreload: "intent",
-    defaultPreloadStaleTime: 60 * 1000,
+    defaultPreloadStaleTime: 10 * 60 * 1000,
   });
 
   return router;

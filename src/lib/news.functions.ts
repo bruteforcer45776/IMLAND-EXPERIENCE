@@ -30,12 +30,34 @@ export const NEWS_TOPICS = {
 
 export type NewsTopic = keyof typeof NEWS_TOPICS;
 
+const NEWS_CACHE_TTL = 10 * 60 * 1000;
+const newsFeedCache = new Map<NewsTopic, { expires: number; xml: string }>();
+
 function feedUrl(topic: NewsTopic) {
   return (
     "https://news.google.com/rss/search?q=" +
     encodeURIComponent(NEWS_TOPICS[topic]) +
     "&hl=it&gl=IT&ceid=IT:it"
   );
+}
+
+async function getNewsFeedXml(topic: NewsTopic) {
+  const now = Date.now();
+  const cached = newsFeedCache.get(topic);
+  if (cached && cached.expires > now) return cached.xml;
+
+  const res = await fetch(feedUrl(topic), {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (compatible; IMLANDExperience/1.0; +https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site)",
+      Accept: "application/rss+xml, application/xml, text/xml",
+    },
+  });
+  if (!res.ok) throw new Error(`News feed ${res.status}`);
+
+  const xml = await res.text();
+  newsFeedCache.set(topic, { xml, expires: now + NEWS_CACHE_TTL });
+  return xml;
 }
 
 function decodeOnce(input: string): string {
@@ -130,15 +152,7 @@ export const getTerritoryNews = createServerFn({ method: "GET" })
     topic: (input?.topic && input.topic in NEWS_TOPICS ? input.topic : "territorio") as NewsTopic,
   }))
   .handler(async ({ data }): Promise<TerritoryNewsPage> => {
-    const res = await fetch(feedUrl(data.topic), {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (compatible; IMLANDExperience/1.0; +https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site)",
-        Accept: "application/rss+xml, application/xml, text/xml",
-      },
-    });
-    if (!res.ok) throw new Error(`News feed ${res.status}`);
-    const xml = await res.text();
+    const xml = await getNewsFeedXml(data.topic);
 
     const blocks = xml.match(/<item>[\s\S]*?<\/item>/g) ?? [];
     const all: TerritoryNewsItem[] = [];
