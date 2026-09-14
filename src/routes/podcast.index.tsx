@@ -7,6 +7,7 @@ import { SpotlightCard } from "../components/spotlight-card";
 import { StreamingBanner } from "../components/streaming-banner";
 import { BadgeIcon, type BadgeName } from "../components/badge-icon";
 import { HeroBanner } from "../components/hero-banner";
+import { PodcastFeedPlayer } from "../components/podcast-feed-player";
 
 import { SectionSearch } from "../components/section-search";
 import { BentoGrid, BentoCard, BentoLinkCard } from "../components/bento";
@@ -315,17 +316,17 @@ function PodcastPage() {
           </BentoGrid>
         </section>
 
-        {/* Feed RSS ufficiali */}
+        {/* Player dei canali */}
         <section className="container-im section-canvas pb-14">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                RSS diretti
+                Ascolta ora
               </p>
-              <h2 className="mt-2 text-h2-im">Tutti i feed ufficiali.</h2>
+              <h2 className="mt-2 text-h2-im">I podcast, direttamente qui.</h2>
               <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                I contenuti demo sono stati rimossi: da qui si accede ai feed RSS pubblici di
-                IMLAND Radio, pronti per essere collegati al player o a un'app podcast.
+                Avvia l’ultima puntata senza lasciare il sito. Apri il canale per vedere tutti gli
+                episodi disponibili.
               </p>
             </div>
             <span className="text-xs text-muted-foreground">
@@ -335,7 +336,7 @@ function PodcastPage() {
           <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {programs.map((program) => (
               <li key={`feed-${program.slug}`}>
-                <SpotlightCard className="flex h-full flex-col justify-between glass-panel rounded-3xl p-5">
+                <SpotlightCard className="flex h-full flex-col justify-between overflow-hidden glass-panel rounded-3xl p-5">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                       {program.cat} · {program.episodes}
@@ -345,23 +346,20 @@ function PodcastPage() {
                       {program.tagline}
                     </p>
                   </div>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    <a
-                      href={program.rssUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full btn-blue px-4 py-2 text-xs font-semibold"
+                  <div className="mt-5 space-y-4">
+                    <PodcastFeedPlayer
+                      slug={program.slug}
+                      name={program.name}
+                      cover={program.cover}
+                      showArtwork
+                    />
+                    <Link
+                      to="/podcast/$slug"
+                      params={{ slug: program.slug }}
+                      className="inline-flex rounded-full btn-blue px-4 py-2 text-xs font-semibold"
                     >
-                      RSS diretto
-                    </a>
-                    <a
-                      href={program.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full glass-panel px-4 py-2 text-xs font-semibold hover:bg-muted"
-                    >
-                      Pagina IMLAND Radio
-                    </a>
+                      Apri il canale
+                    </Link>
                   </div>
                 </SpotlightCard>
               </li>

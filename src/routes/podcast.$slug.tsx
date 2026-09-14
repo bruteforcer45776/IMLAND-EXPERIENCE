@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SpotlightCard } from "../components/spotlight-card";
 import { EpisodePlayButton, PodcastMiniPlayer } from "../components/podcast-audio";
+import { PodcastFeedPlayer } from "../components/podcast-feed-player";
 import { programs as allPrograms } from "../data/podcast-derived";
 
 export const Route = createFileRoute("/podcast/$slug")({
@@ -74,17 +75,21 @@ function ProgramPage() {
     <>
       <section className="section-atmosphere">
         <div className="container-im grid gap-8 hero-pad md:grid-cols-[280px_1fr]">
-          <div className="relative flex aspect-square w-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-signal p-6 text-white">
-            <span className="self-start rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
-              {program.cat}
-            </span>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
-                IMLAND Radio
+          {program.cover ? (
+            <img
+              src={program.cover}
+              alt={`Copertina di ${program.name}`}
+              className="aspect-square w-full rounded-3xl border border-border object-cover"
+            />
+          ) : (
+            <div className="flex aspect-square w-full items-center justify-center rounded-3xl border border-dashed border-signal/50 bg-signal/5 p-8 text-center">
+              <p className="text-lg font-semibold text-signal">
+                {program.name.toLowerCase().includes("carta canta")
+                  ? "Copertina in arrivo"
+                  : "Immagine in arrivo"}
               </p>
-              <p className="mt-2 text-3xl font-bold leading-tight">{program.name}</p>
             </div>
-          </div>
+          )}
           <div className="flex flex-col justify-center">
             <p className="text-xs font-semibold uppercase tracking-wider text-signal">
               Podcast · {program.cat}
@@ -93,36 +98,23 @@ function ProgramPage() {
             <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{program.tagline}</p>
             <p className="mt-6 text-sm text-muted-foreground">
               {program.publishedEpisodes} episod{program.publishedEpisodes === 1 ? "io" : "i"}{" "}
-              disponibil{program.publishedEpisodes === 1 ? "e" : "i"} nel feed RSS
+              disponibil{program.publishedEpisodes === 1 ? "e" : "i"}
               {firstDate && lastDate && firstDate !== lastDate
                 ? ` · pubblicati tra il ${firstDate} e il ${lastDate}`
                 : firstDate
                   ? ` · dal ${firstDate}`
                   : ""}
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href={program.rssUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-blue rounded-full px-5 py-2.5 text-sm font-semibold"
-              >
-                RSS diretto
-              </a>
-              <a
-                href={program.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-panel rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-muted"
-              >
-                Pagina IMLAND Radio
-              </a>
+            <div className="mt-6 max-w-xl">
+              <PodcastFeedPlayer slug={program.slug} />
+              <div className="mt-4">
               <Link
                 to="/podcast"
                 className="inline-flex items-center gap-1 text-sm font-semibold text-signal hover:underline"
               >
                 <ArrowLeft className="inline h-4 w-4" /> Tutti i podcast
               </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -197,8 +189,8 @@ function ProgramPage() {
             ))}
           {program.episodes.length === 0 && (
             <p className="col-span-full rounded-3xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">
-              Gli episodi non sono caricati come dati statici nel sito: usa il feed RSS diretto
-              ufficiale per consultare e aggiornare le puntate.
+              Le puntate complete saranno disponibili qui a breve. Puoi già ascoltare l’ultima
+              uscita dal player in alto.
             </p>
           )}
         </div>

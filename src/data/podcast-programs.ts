@@ -84,7 +84,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
     name: "Andrea Todaro",
     tagline: "Educazione finanziaria e temi pratici affrontati con Andrea Todaro.",
     cat: "Business",
-    cover: "",
+    cover: "/logos/andrea-todaro-consulente.png",
     sourceUrl: source("andrea-todaro"),
     rssUrl: feed("andrea-todaro"),
     publishedEpisodes: 8,
