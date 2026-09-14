@@ -4,7 +4,7 @@
  * verticale attiva. Nasconde se stessa su desktop.
  */
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Bookmark, Compass, Home, Plus, UserRound } from "lucide-react";
+import { CalendarDays, Headphones, Home, Mic2, UserRound } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { cn } from "@/lib/utils";
 
@@ -14,17 +14,17 @@ export function MobileBottomNav() {
 
   const items = [
     { to: "/", label: "Home", icon: Home },
-    { to: "/cerca", label: "Esplora", icon: Compass },
-    { to: "/alert/segnala", label: "Segnala", icon: Plus, primary: true },
-    { to: user ? "/ascoltatore/salvati" : "/accedi", label: "Salvati", icon: Bookmark },
+    { to: "/radio", label: "Radio", icon: Mic2 },
+    { to: "/podcast", label: "Podcast", icon: Headphones, primary: true },
+    { to: "/eventi", label: "Eventi", icon: CalendarDays },
     { to: user ? "/ascoltatore/profilo" : "/accedi", label: "Profilo", icon: UserRound },
   ] as const;
 
   return (
     <nav
       aria-label="Navigazione rapida"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 backdrop-blur md:hidden"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      className="fixed inset-x-3 bottom-3 z-40 rounded-[24px] border border-border bg-card/95 shadow-[var(--elevation-2)] backdrop-blur md:hidden"
+      style={{ paddingBottom: "max(0.25rem, env(safe-area-inset-bottom))" }}
     >
       <ul className="mx-auto flex max-w-md items-end justify-between px-2 py-1.5">
         {items.map((item) => {
@@ -36,7 +36,7 @@ export function MobileBottomNav() {
                 <Link
                   to={item.to}
                   className="mx-auto flex min-h-11 w-16 flex-col items-center gap-1 no-underline"
-                  aria-label="Fai una segnalazione"
+                  aria-label="Apri i podcast"
                 >
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-service text-service-on shadow-[var(--elevation-2)]">
                     <Icon className="h-6 w-6" />

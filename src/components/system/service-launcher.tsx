@@ -6,7 +6,7 @@
 import { Link } from "@tanstack/react-router";
 import { SECTIONS, type SectionConfig } from "@/config/sections";
 
-export const SERVICE_ORDER = ["radio", "podcast", "eventi", "member", "news", "alert", "jobs", "terrain"] as const;
+export const SERVICE_ORDER = ["radio", "podcast", "eventi", "member", "news"] as const;
 
 const DESCRIPTIONS: Record<string, string> = {
   radio: "La diretta del territorio",
@@ -14,9 +14,6 @@ const DESCRIPTIONS: Record<string, string> = {
   eventi: "Cosa succede vicino a te",
   member: "Le aziende della rete",
   news: "Notizie verificate",
-  alert: "Segnala e resta aggiornato",
-  jobs: "Opportunità di lavoro",
-  terrain: "Luoghi e attività",
 };
 
 export function orderedServices(): SectionConfig[] {

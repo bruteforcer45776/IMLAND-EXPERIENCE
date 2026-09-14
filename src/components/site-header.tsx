@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Search, ChevronDown, Radio, ArrowRight, LogOut, LayoutGrid, Megaphone } from "lucide-react";
+import { Search, Radio, ArrowRight, LogOut, LayoutGrid } from "lucide-react";
 import { usePlayer } from "@/components/player-context";
 
 
@@ -21,31 +21,15 @@ type NavItem = {
 };
 
 const nav: NavItem[] = [
+  { to: "/", label: "Home" },
   { to: "/radio", label: "Radio" },
   { to: "/podcast", label: "Podcast" },
   { to: "/eventi", label: "Eventi" },
-  { to: "/member", label: "Membri" },
-  {
-    to: "/terrain",
-    label: "Altri prodotti",
-    children: [
-      { to: "/terrain", label: "Terrain", desc: "Mappa e scoperta del territorio" },
-      { to: "/jobs", label: "Jobs", desc: "Lavoro, formazione e opportunità" },
-      { to: "/alert", label: "Alert", desc: "Segnalazioni dal territorio" },
-    ],
-  },
-  {
-    to: "/chi-siamo",
-    label: "Il progetto",
-    children: [
-      { to: "/chi-siamo", label: "Chi siamo", desc: "Manifesto, storia e team" },
-      { to: "/news", label: "News", desc: "Le ultime voci dal territorio" },
-      { to: "/contatti", label: "Contatti", desc: "Scrivici o collabora con noi" },
-      { to: "/faq", label: "FAQ", desc: "Risposte alle domande frequenti" },
-      { to: "/brand", label: "Brand & loghi", desc: "Loghi e linee guida ufficiali" },
-      { to: "/scarica-app", label: "Scarica l'app", desc: "IMLAND sempre con te" },
-    ],
-  },
+  { to: "/news", label: "News" },
+  { to: "/member", label: "Partners" },
+  { to: "/chi-siamo", label: "Il Progetto" },
+  { to: "/contatti", label: "Contatti" },
+  { to: "/faq", label: "FAQ" },
 ];
 
 const mobileLinks = [
@@ -54,11 +38,8 @@ const mobileLinks = [
   { to: "/podcast", label: "Podcast" },
   { to: "/eventi", label: "Eventi" },
   { to: "/news", label: "News" },
-  { to: "/member", label: "Membri" },
-  { to: "/terrain", label: "Terrain" },
-  { to: "/jobs", label: "Jobs" },
-  { to: "/alert", label: "Alert" },
-  { to: "/chi-siamo", label: "Il progetto" },
+  { to: "/member", label: "Partners" },
+  { to: "/chi-siamo", label: "Il Progetto" },
   { to: "/contatti", label: "Contatti" },
   { to: "/faq", label: "FAQ" },
 ];
@@ -256,18 +237,6 @@ export function SiteHeader() {
               {playing ? "ON AIR" : "Ascolta live"}
             </Link>
 
-            <Link
-              to="/alert/segnala"
-              className="hidden items-center gap-2 rounded-full border-2 px-5 py-2 text-[14px] font-semibold transition-colors md:inline-flex"
-              style={{
-                borderColor: "var(--im-alert, #c5221f)",
-                color: "var(--im-alert, #c5221f)",
-              }}
-            >
-              <Megaphone size={17} aria-hidden />
-              Segnala
-            </Link>
-
             {/* Launcher dei servizi (stile Google Apps) */}
             <div className="relative hidden md:block">
               <button
@@ -429,7 +398,7 @@ export function SiteHeader() {
                 onClick={() => setOpen(false)}
                 className="flex w-full items-center justify-center rounded-full border border-border bg-white px-5 py-3 text-[14px] font-semibold text-ink-950 md:py-3.5 md:text-[15px]"
               >
-                Diventa membro
+                Sei un’azienda? Diventa Member
               </a>
             </div>
             )}

@@ -1,15 +1,14 @@
 import { lazy, Suspense } from "react";
 import { canonical, jsonLd, organizationLd, websiteLd, SITE_URL } from "../lib/seo";
-import { ClientOnly, createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowRight, MapPin, Users,
 } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
-import { EcosystemFlow } from "../components/home/ecosystem-flow";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
-import { quickLinks, otherProducts } from "../data/home-quick-links";
+import { quickLinks } from "../data/home-quick-links";
 import { PhotoBadge } from "../components/photo-badge";
 import { BadgeIcon } from "../components/badge-icon";
 import { AdvSlot } from "../components/adv-slot";
@@ -21,15 +20,6 @@ const PartnerLoop = lazy(() =>
 );
 const NewsletterBanner = lazy(() =>
   import("../components/newsletter-banner").then((m) => ({ default: m.NewsletterBanner })),
-);
-const DownloadAppBanner = lazy(() =>
-  import("../components/download-app-banner").then((m) => ({ default: m.DownloadAppBanner })),
-);
-const LatestAlerts = lazy(() =>
-  import("../components/home/latest-alerts").then((m) => ({ default: m.LatestAlerts })),
-);
-const TerrainLiveMap = lazy(() =>
-  import("../components/terrain-live-map").then((m) => ({ default: m.TerrainLiveMap })),
 );
 import { seoFaq } from "../data/seo-faq";
 import { eventTerritories, formatEventDate, formatEventTime, nextEvent, upcomingEvents } from "../data/events";
@@ -155,52 +145,6 @@ function Home() {
             ))}
           </BentoGrid>
 
-          <p className={`${eyebrow} mt-16`}>Altri prodotti IMLAND</p>
-          <h2 className={`${h2} mt-3`}>
-            Le piattaforme del nostro <span className={keyword}>ecosistema</span>.
-          </h2>
-          <BentoGrid className="mt-10">
-            {otherProducts.map((q) => (
-              <BentoLinkCard key={q.label} to={q.to} tone={q.tone} span={q.span} className="group">
-                <BadgeIcon name={q.badge} className="h-14 w-14 transition-transform duration-300 group-hover:scale-105" />
-
-                <p className="mt-5 font-display text-lg font-bold text-ink-950">{q.label}</p>
-                <p className="mt-0.5 text-sm text-ink-600">{q.desc}</p>
-                <ArrowRight className="mt-5 h-4 w-4 text-[var(--bento-tone)] transition-transform duration-300 group-hover:translate-x-1" />
-              </BentoLinkCard>
-            ))}
-          </BentoGrid>
-
-        </div>
-      </section>
-
-      {/* ECOSISTEMA — filo rouge tra i servizi */}
-      <EcosystemFlow />
-
-      {/* ALERT — ultime segnalazioni del territorio */}
-      <Suspense fallback={<div className="h-64" />}>
-        <LatestAlerts />
-      </Suspense>
-
-      {/* MAPPA — il territorio in tempo reale */}
-      <section className="section-focus section-pad-sm">
-        <div className={shell}>
-          <p className={eyebrow}>Il territorio in tempo reale</p>
-          <h2 className={`${h2} mt-3`}>
-            Tutto quello che accade sulla <span className={keyword}>mappa</span>.
-          </h2>
-          <p className="mt-5 max-w-2xl text-lg text-ink-600">
-            Segnalazioni e luoghi del territorio, aggiornati dalla community.
-            <br />
-            Esplora la mappa e scopri cosa c'è vicino a te.
-          </p>
-          <div className="mt-10">
-            <ClientOnly fallback={<div className="h-[420px] w-full animate-pulse rounded-3xl bg-black/5" />}>
-              <Suspense fallback={<div className="h-[420px] w-full animate-pulse rounded-3xl bg-black/5" />}>
-                <TerrainLiveMap />
-              </Suspense>
-            </ClientOnly>
-          </div>
         </div>
       </section>
 
@@ -261,14 +205,14 @@ function Home() {
             )}
 
             <Link to="/news" className="card-im flex h-full flex-col rounded-[28px] bg-white p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-cyan">Ultime news</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-icon-news)]">Ultime news</p>
               <h3 className="mt-3 text-h3-im leading-snug text-ink-950">Le notizie del territorio, aggiornate ogni giorno.</h3>
               <p className="mt-2 text-sm text-ink-600">
                 Vercelli, Novara, Biella e Verbania.
                 <br />
                 Selezionate dalla redazione IMLAND.
               </p>
-              <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-cyan">Leggi le news <ArrowRight className="inline h-4 w-4" /></span>
+              <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-[var(--color-icon-news)]">Leggi le news <ArrowRight className="inline h-4 w-4" /></span>
             </Link>
           </div>
         </div>
@@ -340,7 +284,7 @@ function Home() {
                   Un flusso di notizie per chi vive il Piemonte.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Link to="/news" className="group inline-flex h-12 items-center gap-2 rounded-full btn-blue px-7 text-[15px]">
+                  <Link to="/news" className="group inline-flex h-12 items-center gap-2 rounded-full bg-[var(--color-surface-news)] px-7 text-[15px] font-semibold text-white">
                     Vai alle news
                     <span className="btn-arrow">→</span>
                   </Link>
@@ -464,7 +408,7 @@ function Home() {
                       Inizio ore {formatEventTime(e.start)}
                     </p>
                     <div className="mt-auto pt-7">
-                      <Link to="/eventi/$slug" params={{ slug: e.slug }} className="inline-flex h-10 items-center rounded-full btn-blue px-4 text-xs">
+                      <Link to="/eventi/$slug" params={{ slug: e.slug }} className="inline-flex h-10 items-center rounded-full bg-[var(--color-surface-eventi)] px-4 text-xs font-semibold text-white">
                         Dettagli
                         <span className="btn-arrow">→</span>
                       </Link>
@@ -483,7 +427,7 @@ function Home() {
                   Intanto scopri i format e proponi il tuo evento.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link to="/eventi" className="inline-flex h-11 items-center rounded-full btn-blue px-5 text-sm">
+                  <Link to="/eventi" className="inline-flex h-11 items-center rounded-full bg-[var(--color-surface-eventi)] px-5 text-sm font-semibold text-white">
                     Scopri gli eventi
                     <span className="btn-arrow">→</span>
                   </Link>
@@ -548,7 +492,7 @@ function Home() {
                   Tutto gratuito, tutto del territorio.
                 </p>
                 <div className="mt-auto pt-7">
-                  <Link to="/radio" className="inline-flex h-12 items-center rounded-full btn-blue px-6 text-[15px]">
+                  <Link to="/radio" className="inline-flex h-12 items-center rounded-full bg-[var(--color-surface-radio)] px-6 text-[15px] font-semibold text-white">
                     Ascolta la radio
                     <span className="btn-arrow">→</span>
                   </Link>
@@ -627,7 +571,6 @@ function Home() {
       {/* APP */}
       <section className="section-focus pt-20">
         <Reveal>
-          <Suspense fallback={<div className="h-64" />}><DownloadAppBanner /></Suspense>
         </Reveal>
       </section>
 

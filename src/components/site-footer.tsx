@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Mail, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import logoWhite from "@/assets/imland-logo-white.png.asset.json";
 
 const provinces = ["Vercelli", "Novara", "Biella", "Verbania (VCO)"];
@@ -12,15 +12,7 @@ const columns = [
       { to: "/podcast", label: "Podcast" },
       { to: "/eventi", label: "Eventi" },
       { to: "/news", label: "News" },
-      { to: "/member", label: "Membri" },
-    ],
-  },
-  {
-    title: "Altri prodotti IMLAND",
-    links: [
-      { to: "/terrain", label: "Terrain" },
-      { to: "/jobs", label: "Jobs" },
-      { to: "/alert", label: "Alert" },
+      { to: "/member", label: "Partners" },
     ],
   },
   {
@@ -29,7 +21,7 @@ const columns = [
       { to: "/contatti", label: "Proponi una storia" },
       { to: "/contatti", label: "Proponi un podcast" },
       { to: "/contatti", label: "Organizza un evento" },
-      { to: "/member", label: "Member" },
+      { to: "/member", label: "Diventa Partner" },
       { to: "/contatti", label: "Assistenza ascolto" },
     ],
   },
@@ -89,7 +81,7 @@ export function SiteFooter() {
       </div>
 
       {/* Main columns */}
-      <div className="mx-auto grid max-w-[1280px] gap-10 px-4 section-pad-sm md:grid-cols-3 lg:grid-cols-6 md:px-10">
+      <div className="mx-auto grid max-w-[1280px] gap-10 px-4 section-pad-sm md:grid-cols-3 lg:grid-cols-5 md:px-10">
         <div className="md:col-span-3 lg:col-span-2">
           <img loading="lazy" decoding="async"
             src={logoWhite.url}
@@ -136,6 +128,16 @@ export function SiteFooter() {
             Seguici
           </h2>
           <ul className="mt-4 space-y-2.5 text-[15px]">
+            <li>
+              <a href="https://www.facebook.com/imlandradio" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white/70 transition-colors hover:text-white">
+                <Facebook size={18} /> Facebook
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/company/imland-experience" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white/70 transition-colors hover:text-white">
+                <Linkedin size={18} /> LinkedIn
+              </a>
+            </li>
             <li>
               <a
                 href="https://www.instagram.com/imland_radio/"

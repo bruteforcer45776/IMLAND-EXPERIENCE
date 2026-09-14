@@ -93,12 +93,12 @@ export const SECTIONS: SectionConfig[] = [
     prefix: "/news",
     logo: { url: logoNews.url, alt: "IMLAND NEWS" },
     theme: {
-      signal: "#7c22e8",
-      signalStrong: "#7c22e8",
-      signalInk: "#6d1cce",
+      signal: "#e21d2f",
+      signalStrong: "#c91627",
+      signalInk: "#b51222",
       signalForeground: "#ffffff",
-      signalGlow: "#e6d6ff",
-      horizon: "#b78dff",
+      signalGlow: "#ffd5da",
+      horizon: "#ff8995",
     },
   },
   {
@@ -213,4 +213,3 @@ export function sectionCssVars(section: SectionConfig): CSSProperties {
     "--service-ink": t.signalInk,
   } as CSSProperties;
 }
-
