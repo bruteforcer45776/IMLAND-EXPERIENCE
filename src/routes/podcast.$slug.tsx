@@ -74,14 +74,16 @@ function ProgramPage() {
     <>
       <section className="section-atmosphere">
         <div className="container-im grid gap-8 hero-pad md:grid-cols-[280px_1fr]">
-          <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-border bg-signal flex items-center justify-center">
-            <img
-              loading="lazy"
-              decoding="async"
-              src={program.cover}
-              alt={`Copertina ${program.name}`}
-              className="h-full w-full object-contain"
-            />
+          <div className="relative flex aspect-square w-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-signal p-6 text-white">
+            <span className="self-start rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+              {program.cat}
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
+                IMLAND Radio
+              </p>
+              <p className="mt-2 text-3xl font-bold leading-tight">{program.name}</p>
+            </div>
           </div>
           <div className="flex flex-col justify-center">
             <p className="text-xs font-semibold uppercase tracking-wider text-signal">
@@ -90,15 +92,31 @@ function ProgramPage() {
             <h1 className="mt-3 text-display-l">{program.name}</h1>
             <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{program.tagline}</p>
             <p className="mt-6 text-sm text-muted-foreground">
-              {program.episodes.length} episod{program.episodes.length === 1 ? "io" : "i"}{" "}
-              disponibil{program.episodes.length === 1 ? "e" : "i"}
+              {program.publishedEpisodes} episod{program.publishedEpisodes === 1 ? "io" : "i"}{" "}
+              disponibil{program.publishedEpisodes === 1 ? "e" : "i"} nel feed RSS
               {firstDate && lastDate && firstDate !== lastDate
                 ? ` · pubblicati tra il ${firstDate} e il ${lastDate}`
                 : firstDate
                   ? ` · dal ${firstDate}`
                   : ""}
             </p>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={program.rssUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-blue rounded-full px-5 py-2.5 text-sm font-semibold"
+              >
+                RSS diretto
+              </a>
+              <a
+                href={program.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-panel rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-muted"
+              >
+                Pagina IMLAND Radio
+              </a>
               <Link
                 to="/podcast"
                 className="inline-flex items-center gap-1 text-sm font-semibold text-signal hover:underline"
@@ -179,7 +197,8 @@ function ProgramPage() {
             ))}
           {program.episodes.length === 0 && (
             <p className="col-span-full rounded-3xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">
-              Nessun episodio ancora disponibile.
+              Gli episodi non sono caricati come dati statici nel sito: usa il feed RSS diretto
+              ufficiale per consultare e aggiornare le puntate.
             </p>
           )}
         </div>
@@ -212,12 +231,9 @@ function ProgramPage() {
                 className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 rounded-3xl"
               >
                 <SpotlightCard className="flex h-full items-center gap-4 glass-panel rounded-3xl p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
-                  <img
-                    src={p.cover}
-                    alt=""
-                    loading="lazy"
-                    className="h-16 w-16 shrink-0 rounded-2xl object-cover"
-                  />
+                  <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-signal text-lg font-bold text-white">
+                    {p.name.slice(0, 2).toUpperCase()}
+                  </span>
                   <div className="min-w-0">
                     <h3 className="truncate text-sm font-semibold">{p.name}</h3>
                     <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{p.tagline}</p>

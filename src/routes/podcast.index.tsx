@@ -6,8 +6,6 @@ import { NewsletterBanner } from "../components/newsletter-banner";
 import { SpotlightCard } from "../components/spotlight-card";
 import { StreamingBanner } from "../components/streaming-banner";
 import { BadgeIcon, type BadgeName } from "../components/badge-icon";
-import { Mic } from "lucide-react";
-import { PhotoBadge } from "../components/photo-badge";
 import { HeroBanner } from "../components/hero-banner";
 
 import { SectionSearch } from "../components/section-search";
@@ -24,7 +22,6 @@ import {
   allEpisodes,
   type ProgramCard,
 } from "../data/podcast-derived";
-import coverPlaceholder from "@/assets/cover-placeholder.webp.asset.json";
 import {
   EpisodePlayButton,
   PodcastMiniPlayer,
@@ -90,6 +87,25 @@ const catColor: Record<string, string> = {
   Lifestyle: "var(--meadow)",
   Weekend: "var(--horizon)",
 };
+
+function PodcastTile({ name, cat }: { name: string; cat: string }) {
+  return (
+    <div
+      className="relative flex aspect-[4/5] flex-col justify-between overflow-hidden p-5 text-white"
+      style={{ background: catColor[cat] || "var(--signal)" }}
+    >
+      <span className="self-start rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+        {cat}
+      </span>
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
+          IMLAND Radio
+        </p>
+        <p className="mt-2 text-2xl font-bold leading-tight">{name}</p>
+      </div>
+    </div>
+  );
+}
 
 function PodcastPage() {
   const [active, setActive] = useState("Tutti");
@@ -249,12 +265,7 @@ function PodcastPage() {
                     className="relative aspect-[4/5] overflow-hidden"
                     style={{ background: catColor[p.cat] || "var(--horizon)" }}
                   >
-                    <img
-                      src={p.cover}
-                      alt={`Copertina ${p.name}`}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                    />
+                    <PodcastTile name={p.name} cat={p.cat} />
                   </div>
                   <div className="p-5">
                     <div className="flex items-center justify-between gap-2">
@@ -274,7 +285,7 @@ function PodcastPage() {
                         <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current">
                           <path d="M8 5v14l11-7z" />
                         </svg>
-                        Guarda tutti gli episodi
+                        Apri scheda podcast
                       </span>
                       <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         {p.episodes}
@@ -304,59 +315,53 @@ function PodcastPage() {
           </BentoGrid>
         </section>
 
-        {/* Ultimi episodi — player inline */}
+        {/* Feed RSS ufficiali */}
         <section className="container-im section-canvas pb-14">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                Ultimi episodi
+                RSS diretti
               </p>
-              <h2 className="mt-2 text-h2-im">Ascolta subito.</h2>
+              <h2 className="mt-2 text-h2-im">Tutti i feed ufficiali.</h2>
+              <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+                I contenuti demo sono stati rimossi: da qui si accede ai feed RSS pubblici di
+                IMLAND Radio, pronti per essere collegati al player o a un'app podcast.
+              </p>
             </div>
             <span className="text-xs text-muted-foreground">
-              {totalEpisodes} episodi in archivio
+              {programs.length} programmi · {totalEpisodes} episodi nei feed
             </span>
           </div>
-          <ul className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-3">
-            {latestEpisodes.map(({ ep, program }) => (
-              <li key={`${program.slug}-${ep.slug}`}>
-                <SpotlightCard className="flex flex-wrap items-center gap-4 glass-panel rounded-3xl p-4">
-                  <img
-                    src={program.cover}
-                    alt=""
-                    loading="lazy"
-                    className="h-16 w-16 shrink-0 rounded-2xl object-cover"
-                  />
-                  <div className="min-w-0 flex-1">
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {programs.map((program) => (
+              <li key={`feed-${program.slug}`}>
+                <SpotlightCard className="flex h-full flex-col justify-between glass-panel rounded-3xl p-5">
+                  <div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      {program.name}
-                      {ep.date ? ` · ${ep.date.split("-").join("/")}` : ""}
+                      {program.cat} · {program.episodes}
                     </p>
-                    <h3 className="mt-1 text-h3-im truncate">{ep.title}</h3>
-                    {ep.subtitle && (
-                      <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">
-                        {ep.subtitle}
-                      </p>
-                    )}
+                    <h3 className="mt-2 text-h3-im">{program.name}</h3>
+                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                      {program.tagline}
+                    </p>
                   </div>
-                  <div className="flex shrink-0 items-center gap-2">
-                    <EpisodePlayButton
-                      track={{
-                        audio: ep.audio,
-                        title: ep.title,
-                        program: program.name,
-                        programSlug: program.slug,
-                        episodeSlug: ep.slug,
-                        cover: program.cover,
-                      }}
-                    />
-                    <Link
-                      to="/podcast/$slug/$episode"
-                      params={{ slug: program.slug, episode: ep.slug }}
-                      className="rounded-full px-3 py-2 text-xs font-semibold text-signal hover:underline"
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    <a
+                      href={program.rssUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full btn-blue px-4 py-2 text-xs font-semibold"
                     >
-                      Dettagli
-                    </Link>
+                      RSS diretto
+                    </a>
+                    <a
+                      href={program.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full glass-panel px-4 py-2 text-xs font-semibold hover:bg-muted"
+                    >
+                      Pagina IMLAND Radio
+                    </a>
                   </div>
                 </SpotlightCard>
               </li>
@@ -449,68 +454,6 @@ function PodcastPage() {
               </Link>
             ))}
           </div>
-        </section>
-
-        {/* MY PODCAST — episodio TEDx Biella */}
-        <section className="hidden">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                My Podcast
-              </p>
-              <h2 className="mt-2 text-h2-im">L'episodio del mese.</h2>
-            </div>
-          </div>
-          <SpotlightCard className="relative mt-6 overflow-hidden rounded-[36px] border border-border bg-signal text-white">
-            <div className="relative grid gap-8 p-6 md:grid-cols-[280px_1fr] md:items-center md:p-12">
-              <div className="relative mx-auto aspect-square w-48 rounded-2xl border border-white/20 md:w-full md:max-w-[280px]">
-                <PhotoBadge icon={Mic} tone="podcast" label="Podcast IMLAND" />
-                <img
-                  src={coverPlaceholder.url}
-                  alt="Grafica del podcast in arrivo"
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div>
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-                  My Podcast · Episodio
-                </span>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-horizon">
-                  TEDx Biella 2025
-                </p>
-                <h3 className="mt-3 text-h3-im">
-                  Le idee che meritano di essere{" "}
-                  <span className="im-gradient-text">condivise.</span>
-                </h3>
-                <p className="mt-5 text-base text-white/80 md:text-lg">
-                  L'episodio speciale di My Podcast dedicato a TEDx Biella 2025: gli speaker, il
-                  palco, le storie che accendono il territorio.
-                  <br />
-                  Disponibile sempre e ovunque su IMLAND Radio.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href="https://imlandradio.it/podcast-imland-radio/tedx-biella-2025/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full btn-blue px-6 py-3.5 text-sm"
-                  >
-                    <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                    Ascolta l'episodio
-                  </a>
-                  <a
-                    href="mailto:info@imlandradio.com?subject=INFO%20MYPODCAST"
-                    className="inline-flex items-center gap-2 rounded-full btn-ghost-glass px-6 py-3.5 text-sm"
-                  >
-                    Registra il tuo podcast
-                  </a>
-                </div>
-              </div>
-            </div>
-          </SpotlightCard>
         </section>
 
         {/* Piattaforme */}
