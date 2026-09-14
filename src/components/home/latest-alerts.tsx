@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { ALERT_STATUS_LABEL, formatHubDate } from "@/lib/hub";
 import { BadgeIcon } from "@/components/badge-icon";
 import { Reveal } from "@/components/reveal";
@@ -20,6 +20,7 @@ type AlertRow = {
 function useLatestAlerts() {
   return useQuery({
     queryKey: ["home", "alerts", "latest"],
+    enabled: isSupabaseConfigured(),
     staleTime: 60_000,
     queryFn: async (): Promise<AlertRow[]> => {
       const { data, error } = await supabase
