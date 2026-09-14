@@ -36,7 +36,7 @@
   --color-icon-podcast: #1646d8;
   --color-icon-member: #ffc400;
   --color-icon-eventi: #19c83a;
-  --color-icon-news: #7c3aed;
+  --color-icon-news: #e21d2f;
   --color-icon-aziende: #f59e0b;
   --color-icon-terrain: #a0522d;
   --color-icon-jobs: #6b7280;
@@ -46,7 +46,7 @@
   --color-surface-podcast: #1646d8;
   --color-surface-member: #8a6700;
   --color-surface-eventi: #0e8728;
-  --color-surface-news: #6d1cce;
+  --color-surface-news: #c91627;
   --color-surface-aziende: #9a6000;
   --color-surface-terrain: #7a3e22;
   --color-surface-jobs: #4b5563;
@@ -125,6 +125,39 @@
   --shadow-level-1: var(--elevation-1);
   --shadow-level-2: var(--elevation-2);
   --shadow-level-3: var(--elevation-3);
+}
+
+/* Palette semantica globale: ogni riferimento a un servizio mantiene
+   lo stesso colore anche quando appare fuori dalla sua pagina. */
+.theme-radio {
+  --signal: #0aa2cf;
+  --signal-strong: #077ea1;
+  --signal-ink: #076d8c;
+  --signal-foreground: #ffffff;
+}
+.theme-podcast {
+  --signal: #1646d8;
+  --signal-strong: #1646d8;
+  --signal-ink: #1646d8;
+  --signal-foreground: #ffffff;
+}
+.theme-news {
+  --signal: #e21d2f;
+  --signal-strong: #c91627;
+  --signal-ink: #b51222;
+  --signal-foreground: #ffffff;
+}
+.theme-eventi {
+  --signal: #12a531;
+  --signal-strong: #0e8728;
+  --signal-ink: #0e7d25;
+  --signal-foreground: #ffffff;
+}
+.theme-member {
+  --signal: #e0a800;
+  --signal-strong: #e0a800;
+  --signal-ink: #8a6700;
+  --signal-foreground: #0b0c0f;
 }
 
 /* ============================================================

@@ -214,7 +214,7 @@ export function SiteHeader() {
             <Link
               to="/radio"
               data-surface="dark"
-              className="hidden items-center gap-2 rounded-full btn-blue px-5 py-2.5 text-[14px] md:inline-flex"
+              className="theme-radio hidden items-center gap-2 rounded-full btn-blue px-5 py-2.5 text-[14px] md:inline-flex"
             >
               <span className="relative flex h-2 w-2" aria-hidden>
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--error)] opacity-75" />

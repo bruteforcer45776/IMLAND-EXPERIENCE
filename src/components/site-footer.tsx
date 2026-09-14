@@ -4,6 +4,15 @@ import logoBlack from "@/assets/imland-logo-google-trimmed-opt.webp";
 
 const provinces = ["Vercelli", "Novara", "Biella", "Verbania (VCO)"];
 
+const themeForLink = (to: string) => {
+  if (to.startsWith("/radio")) return "theme-radio";
+  if (to.startsWith("/podcast")) return "theme-podcast";
+  if (to.startsWith("/eventi")) return "theme-eventi";
+  if (to.startsWith("/news")) return "theme-news";
+  if (to.startsWith("/member")) return "theme-member";
+  return "";
+};
+
 const columns = [
   {
     title: "Esplora",
@@ -98,7 +107,7 @@ export function SiteFooter() {
           </p>
           <Link
             to="/member"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-citrus px-5 py-3 text-[14px] font-semibold text-ink"
+            className="theme-member mt-6 inline-flex items-center gap-2 rounded-full bg-signal px-5 py-3 text-[14px] font-semibold text-signal-foreground"
           >
             Diventa Partner
           </Link>
@@ -112,7 +121,7 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5 text-[15px]">
               {col.links.map((l) => (
                 <li key={l.label}>
-                  <Link to={l.to} className="text-ink-600 transition-colors hover:text-im-blue">
+                  <Link to={l.to} className={`${themeForLink(l.to)} text-ink-600 transition-colors hover:text-signal`}>
                     {l.label}
                   </Link>
                 </li>

@@ -61,6 +61,9 @@ const memberBenefits = [
   { k: "Community", v: "Entra tra le voci che raccontano il territorio." },
 ];
 
+const homeToneForTag = (tag: string) =>
+  tag === "Eventi" ? "theme-eventi" : tag === "Radio" ? "theme-radio" : "theme-news";
+
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
@@ -145,6 +148,7 @@ function Home() {
               <BentoLinkCard key={q.label} to={q.to} tone={q.tone} span={q.span} className="group">
                 <BadgeIcon
                   name={q.badge}
+                  tone={q.tone}
                   className="h-14 w-14 transition-transform duration-300 group-hover:scale-105"
                 />
 
@@ -173,9 +177,9 @@ function Home() {
               <Link
                 to="/podcast/$slug/$episode"
                 params={{ slug: featuredEpisode.program.slug, episode: featuredEpisode.ep.slug }}
-                className="card-im flex h-full flex-col rounded-[28px] bg-white p-7"
+                className="theme-podcast card-im flex h-full flex-col rounded-[28px] bg-white p-7"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-blue">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
                   Ultimo podcast · {featuredEpisode.program.name}
                 </p>
                 <h3 className="mt-3 text-h3-im leading-snug text-ink-950">
@@ -184,7 +188,7 @@ function Home() {
                 <p className="mt-2 line-clamp-3 text-sm text-ink-600">
                   {featuredEpisode.ep.subtitle ?? featuredEpisode.program.tagline}
                 </p>
-                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-blue">
+                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-signal">
                   Ascolta l'episodio <ArrowRight className="inline h-4 w-4" />
                 </span>
               </Link>
@@ -194,23 +198,23 @@ function Home() {
               <Link
                 to="/eventi/$slug"
                 params={{ slug: nextEvent.slug }}
-                className="card-im flex h-full flex-col rounded-[28px] bg-white p-7"
+                className="theme-eventi card-im flex h-full flex-col rounded-[28px] bg-white p-7"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-green">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
                   Prossimo evento · {nextEvent.territory}
                 </p>
                 <h3 className="mt-3 text-h3-im leading-snug text-ink-950">{nextEvent.title}</h3>
                 <p className="mt-2 text-sm text-ink-600">{formatEventDate(nextEvent.start)}</p>
-                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-green">
+                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-signal">
                   Scopri l'evento <ArrowRight className="inline h-4 w-4" />
                 </span>
               </Link>
             ) : (
               <Link
                 to="/eventi"
-                className="card-im flex h-full flex-col rounded-[28px] bg-white p-7"
+                className="theme-eventi card-im flex h-full flex-col rounded-[28px] bg-white p-7"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-green">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
                   Eventi
                 </p>
                 <h3 className="mt-3 text-h3-im leading-snug text-ink-950">
@@ -221,14 +225,14 @@ function Home() {
                   <br />
                   Guarda i format e proponi il tuo evento.
                 </p>
-                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-green">
+                <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-signal">
                   Vai agli eventi <ArrowRight className="inline h-4 w-4" />
                 </span>
               </Link>
             )}
 
-            <Link to="/news" className="card-im flex h-full flex-col rounded-[28px] bg-white p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-cyan">
+            <Link to="/news" className="theme-news card-im flex h-full flex-col rounded-[28px] bg-white p-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
                 Ultime news
               </p>
               <h3 className="mt-3 text-h3-im leading-snug text-ink-950">
@@ -239,7 +243,7 @@ function Home() {
                 <br />
                 Selezionate dalla redazione IMLAND.
               </p>
-              <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-im-cyan">
+              <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-semibold text-signal">
                 Leggi le news <ArrowRight className="inline h-4 w-4" />
               </span>
             </Link>
@@ -300,7 +304,7 @@ function Home() {
       <AdvSlot position="medio" />
 
       {/* NEWS */}
-      <section className="brand-grid relative section-pad">
+      <section className="theme-news brand-grid relative section-pad">
         <div className={shell}>
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <Reveal>
@@ -337,15 +341,15 @@ function Home() {
                 <Reveal key={n.tag} delay={i * 120}>
                   <Link
                     to="/news"
-                    className="group block min-w-[82vw] snap-center sm:min-w-[320px] md:min-w-0"
+                    className={`${homeToneForTag(n.tag)} group block min-w-[82vw] snap-center sm:min-w-[320px] md:min-w-0`}
                   >
                     <div className="card-im relative flex h-full flex-col rounded-[24px] bg-white p-6">
-                      <span className="inline-flex w-fit items-center rounded-full bg-im-blue/10 px-3 py-1 text-[12px] font-semibold uppercase tracking-wider text-im-blue">
+                      <span className="inline-flex w-fit items-center rounded-full bg-signal/10 px-3 py-1 text-[12px] font-semibold uppercase tracking-wider text-signal">
                         {n.tag}
                       </span>
                       <h3 className="mt-4 text-h3-im text-ink-950">{n.title}</h3>
                       <p className="mt-2 whitespace-pre-line text-sm text-ink-600">{n.abstract}</p>
-                      <span className="mt-6 ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-im-blue/10 text-im-blue transition-transform duration-300 group-hover:translate-x-1">
+                      <span className="mt-6 ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-signal/10 text-signal transition-transform duration-300 group-hover:translate-x-1">
                         <ArrowRight className="h-4 w-4" />
                       </span>
                     </div>
@@ -358,7 +362,7 @@ function Home() {
       </section>
 
       {/* PODCAST */}
-      <section className="section-focus section-pad">
+      <section className="theme-podcast section-focus section-pad">
         <div className={shell}>
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-6">
@@ -375,7 +379,7 @@ function Home() {
               </div>
               <Link
                 to="/podcast"
-                className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted"
+                className="inline-flex h-11 items-center rounded-full border border-signal bg-white px-5 text-sm font-semibold text-signal transition-colors hover:bg-signal/5"
               >
                 Tutte le serie
                 <span className="btn-arrow">→</span>
@@ -409,7 +413,7 @@ function Home() {
       </section>
 
       {/* EVENTI */}
-      <section className="decor-host bg-white section-pad">
+      <section className="theme-eventi decor-host bg-white section-pad">
         <div className={shell}>
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-6">
@@ -421,7 +425,7 @@ function Home() {
               </div>
               <Link
                 to="/eventi"
-                className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted"
+                className="inline-flex h-11 items-center rounded-full border border-signal bg-white px-5 text-sm font-semibold text-signal transition-colors hover:bg-signal/5"
               >
                 Vedi tutti
                 <span className="btn-arrow">→</span>
@@ -435,7 +439,7 @@ function Home() {
                 <Reveal key={e.slug} delay={i * 100}>
                   <div className="card-im group relative flex h-full flex-col rounded-[28px] bg-white p-7">
                     <div className="flex items-start justify-between">
-                      <div className="rounded-2xl bg-im-yellow/25 px-4 py-2.5 text-center">
+                      <div className="rounded-2xl bg-signal/15 px-4 py-2.5 text-center">
                         <span className="block font-display text-2xl font-bold leading-none text-ink-950">
                           {new Date(e.start).getDate()}
                         </span>
@@ -503,7 +507,7 @@ function Home() {
       <section className="bg-white section-pad">
         <div className={shell}>
           <Reveal>
-            <div className="relative overflow-hidden rounded-[32px] bg-im-blue p-8 text-white md:p-12">
+            <div className="theme-member relative overflow-hidden rounded-[32px] bg-signal p-8 text-signal-foreground md:p-12">
               <div className="max-w-3xl">
                 <div>
                   <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-white/70">
@@ -517,7 +521,7 @@ function Home() {
                   </p>
                   <Link
                     to="/member"
-                    className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-im-blue transition-all duration-fast hover:bg-white/90 active:scale-[0.98]"
+                    className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-ink-950 transition-all duration-fast hover:bg-white/90 active:scale-[0.98]"
                   >
                     Unisciti alla community
                     <ArrowRight className="h-4 w-4" />
@@ -534,7 +538,7 @@ function Home() {
         <div className={shell}>
           <div className="grid gap-5 md:grid-cols-2">
             <Reveal>
-              <div className="flex h-full flex-col rounded-[28px] border border-border bg-white p-8">
+              <div className="theme-radio flex h-full flex-col rounded-[28px] border border-border bg-white p-8">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-im-blue">
                   Sei una persona
                 </p>
@@ -556,7 +560,7 @@ function Home() {
               </div>
             </Reveal>
             <Reveal delay={90}>
-              <div className="flex h-full flex-col rounded-[28px] border border-border bg-white p-8">
+              <div className="theme-member flex h-full flex-col rounded-[28px] border border-border bg-white p-8">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-800">
                   Sei un'azienda
                 </p>
