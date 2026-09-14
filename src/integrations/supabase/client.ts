@@ -24,8 +24,6 @@ export function missingSupabaseEnvNames() {
   ];
 }
 
-export const isSupabaseConfigured = missingSupabaseEnvNames().length === 0;
-
 function createSupabaseFetch(supabaseKey: string): typeof fetch {
   return (input, init) => {
     const headers = new Headers(
@@ -71,6 +69,13 @@ function createSupabaseClient() {
       autoRefreshToken: true,
     },
   });
+}
+
+export function isSupabaseConfigured() {
+  return Boolean(
+    (import.meta.env['VITE_SUPABASE_URL'] || process.env['SUPABASE_URL']) &&
+    (import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'] || process.env['SUPABASE_PUBLISHABLE_KEY']),
+  );
 }
 
 let _supabase: ReturnType<typeof createSupabaseClient> | undefined;

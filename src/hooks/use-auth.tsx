@@ -48,7 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const load = async (uid: string | undefined) => {
-    if (!isSupabaseConfigured) {
+    if (!isSupabaseConfigured()) {
       resetAuthState();
       return;
     }
@@ -67,7 +67,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true;
 
-    if (!isSupabaseConfigured) {
+    // The editorial/public site must remain available even when the optional
+    // Supabase integration has not been configured on the hosting environment.
+    if (!isSupabaseConfigured()) {
       resetAuthState();
       setLoading(false);
       return () => {
@@ -124,7 +126,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     signOut: async () => {
       await queryClient.cancelQueries();
       queryClient.clear();
-      if (!isSupabaseConfigured) {
+      if (!isSupabaseConfigured()) {
         resetAuthState();
         return;
       }
