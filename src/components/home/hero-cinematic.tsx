@@ -4,26 +4,26 @@ import { streamingPlatforms } from "@/components/streaming-banner";
 
 const heroSlides = [
   {
-    desktop: "/assets/hero-carousel/vercelli-desktop-1.png",
-    mobile: "/assets/hero-carousel/vercelli-mobile-1.png",
+    desktop: "/assets/hero-carousel/vercelli-desktop-1.webp",
+    mobile: "/assets/hero-carousel/vercelli-mobile-1.webp",
   },
   {
-    desktop: "/assets/hero-carousel/verbania-desktop-1.png",
-    mobile: "/assets/hero-carousel/verbania-mobile-1.png",
+    desktop: "/assets/hero-carousel/verbania-desktop-1.webp",
+    mobile: "/assets/hero-carousel/verbania-mobile-1.webp",
   },
   {
-    desktop: "/assets/hero-carousel/novara-desktop-1.png",
-    mobile: "/assets/hero-carousel/novara-mobile-1.png",
+    desktop: "/assets/hero-carousel/novara-desktop-1.webp",
+    mobile: "/assets/hero-carousel/novara-mobile-1.webp",
   },
   {
-    desktop: "/assets/hero-carousel/biella-desktop-1.png",
-    mobile: "/assets/hero-carousel/biella-mobile-1.png",
+    desktop: "/assets/hero-carousel/biella-desktop-1.webp",
+    mobile: "/assets/hero-carousel/biella-mobile-1.webp",
   },
 ];
 
 export function HeroCinematic() {
   return (
-    <section className="relative isolate flex min-h-[86vh] flex-col overflow-hidden bg-ink md:min-h-[92vh]">
+    <section className="relative isolate flex min-h-[680px] flex-col overflow-hidden bg-[#dce5ea] md:min-h-[640px] md:aspect-[1672/941] md:max-h-[calc(100svh-74px)]">
       <div className="pointer-events-none absolute inset-0">
         {heroSlides.map((slide, index) => (
           <picture
@@ -41,7 +41,7 @@ export function HeroCinematic() {
               loading={index === 0 ? "eager" : "lazy"}
               fetchPriority={index === 0 ? "high" : "auto"}
               decoding="async"
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full object-contain object-center"
             />
           </picture>
         ))}
@@ -51,17 +51,18 @@ export function HeroCinematic() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.72) 28%, rgba(255,255,255,0.38) 52%, rgba(8,12,20,0.32) 75%, rgba(8,12,20,0.62) 100%)",
+            "linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.42) 45%, rgba(8,12,20,0.28) 78%, rgba(8,12,20,0.55) 100%)",
         }}
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 flex-col items-center justify-center px-4 pb-16 pt-4 text-center md:px-10 md:pb-24 md:pt-6">
-        <h1 className="text-display-l max-w-4xl text-ink-950">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 flex-col items-center justify-center px-4 pb-24 pt-8 text-center md:px-10 md:pb-28 md:pt-8">
+        <div className="w-full max-w-3xl rounded-[28px] border border-white/70 bg-white/82 px-5 py-7 shadow-[0_24px_80px_rgba(8,12,20,0.22)] backdrop-blur-md md:px-10 md:py-9">
+        <h1 className="text-display-l max-w-4xl text-ink-950 [text-shadow:0_1px_0_rgba(255,255,255,0.8)]">
           Dai voce al tuo <span>territorio</span>
         </h1>
 
-        <p className="mt-6 max-w-xl text-body-l text-ink-700">
+        <p className="mx-auto mt-5 max-w-xl text-body-l font-medium leading-relaxed text-ink-800">
           Radio, podcast, eventi e persone che raccontano Vercelli, Novara, Biella e il
           Verbano-Cusio-Ossola.
         </p>
@@ -91,7 +92,7 @@ export function HeroCinematic() {
             <ArrowRight size={18} className="text-ink-500" />
           </Link>
         </div>
-
+        </div>
       </div>
 
       <div className="absolute bottom-6 right-6 z-20 hidden items-center gap-3 rounded-2xl border border-white/45 bg-white/92 px-4 py-3 shadow-lg backdrop-blur-sm md:flex">
