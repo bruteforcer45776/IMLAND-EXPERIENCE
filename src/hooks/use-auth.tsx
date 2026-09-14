@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { Session, User } from "@supabase/supabase-js";
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 
 export type Profile = {
   id: string;
@@ -58,6 +58,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true;
 
+    // The editorial/public site must remain available even when the optional
+    // Supabase integration has not been configured on the hosting environment.
+    if (!isSupabaseConfigured()) {
+      setSession(null);
+      setProfile(null);
+      setIsAdmin(false);
+      setLoading(false);
+      return () => {
+        active = false;
+      };
+    }
+
     // getUser() valida il JWT lato server; getSession() restituisce solo il token locale
     supabase.auth.getUser().then(async ({ data: userData, error }) => {
       if (!active) return;
@@ -102,7 +114,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     signOut: async () => {
       await queryClient.cancelQueries();
       queryClient.clear();
-      await supabase.auth.signOut();
+      if (isSupabaseConfigured()) await supabase.auth.signOut();
     },
   };
 
