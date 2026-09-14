@@ -51,18 +51,18 @@ export function HeroCinematic() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.42) 45%, rgba(8,12,20,0.28) 78%, rgba(8,12,20,0.55) 100%)",
+            "linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.12) 45%, rgba(0,0,0,0.34) 78%, rgba(0,0,0,0.58) 100%)",
         }}
         aria-hidden
       />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 flex-col items-center justify-center px-4 pb-24 pt-8 text-center md:px-10 md:pb-28 md:pt-8">
-        <div className="w-full max-w-3xl rounded-[28px] border border-white/70 bg-white/82 px-5 py-7 shadow-[0_24px_80px_rgba(8,12,20,0.22)] backdrop-blur-md md:px-10 md:py-9">
-        <h1 className="text-display-l max-w-4xl text-ink-950 [text-shadow:0_1px_0_rgba(255,255,255,0.8)]">
+        <div className="w-full max-w-3xl rounded-[28px] border border-white/20 bg-black/20 px-5 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl backdrop-saturate-[1.2] md:px-10 md:py-9">
+        <h1 className="text-display-l max-w-4xl text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.7)]">
           Dai voce al tuo <span>territorio</span>
         </h1>
 
-        <p className="mx-auto mt-5 max-w-xl text-body-l font-medium leading-relaxed text-ink-800">
+        <p className="mx-auto mt-5 max-w-xl text-body-l font-medium leading-relaxed text-white/85">
           Radio, podcast, eventi e persone che raccontano Vercelli, Novara, Biella e il
           Verbano-Cusio-Ossola.
         </p>
@@ -79,14 +79,14 @@ export function HeroCinematic() {
           </Link>
           <Link
             to="/scarica-app"
-            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/55 bg-white/90 px-6 text-[15px] font-semibold text-ink-800 transition-colors hover:bg-white"
+            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/25 bg-black/20 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-black/35"
           >
             Scarica l'app
-            <Download size={18} className="text-ink-500" />
+            <Download size={18} className="text-white/75" />
           </Link>
           <Link
             to="/chi-siamo"
-            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/55 bg-white/90 px-6 text-[15px] font-semibold text-ink-800 transition-colors hover:bg-white"
+            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/25 bg-black/20 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-black/35"
           >
             Scopri IMLAND
             <ArrowRight size={18} className="text-ink-500" />

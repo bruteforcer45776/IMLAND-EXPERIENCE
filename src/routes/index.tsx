@@ -119,7 +119,7 @@ const shell = "mx-auto w-full max-w-[1200px] px-4 md:px-8";
 
 function Home() {
   return (
-    <div className="imland-night text-foreground">
+    <div className="home-glass-stack imland-night text-foreground">
       <PageRails variant="default" />
       <HeroCinematic />
 

@@ -8,6 +8,53 @@
   backdrop-filter: blur(20px) saturate(120%);
 }
 
+/* Home a pannelli glass: ogni blocco lascia vedere la cornice editoriale. */
+.home-glass-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  padding-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+  background: transparent;
+}
+
+.home-glass-stack > section {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: clamp(1.25rem, 2.5vw, 2rem);
+  background: rgba(0, 0, 0, 0.2) !important;
+  color: #fff;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.16);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  backdrop-filter: blur(20px) saturate(120%);
+}
+
+.home-glass-stack > section :is(.bg-white, .section-focus, .bento-card, .card-im) {
+  background-color: rgba(0, 0, 0, 0.24) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+.home-glass-stack > section :is(.text-ink-950, .text-ink-800) {
+  color: rgba(255, 255, 255, 0.96) !important;
+}
+
+.home-glass-stack > section :is(.text-ink-700, .text-ink-600, .text-ink-500, .text-black\/55) {
+  color: rgba(255, 255, 255, 0.76) !important;
+}
+
+.home-glass-stack > section .border-border {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.home-glass-stack > section:first-of-type {
+  min-height: 680px;
+}
+
+@media (max-width: 47.999rem) {
+  .home-glass-stack { gap: 0.75rem; padding-bottom: 0.75rem; }
+  .home-glass-stack > section { border-radius: 1.25rem; }
+}
+
 /* Cornice editoriale IMLAND: la pagina scorre, la grafica resta ferma. */
 .editorial-frame-page { position: relative; min-height: 100vh; isolation: isolate; }
 .editorial-frame-backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #22a9f2; pointer-events: none; }
