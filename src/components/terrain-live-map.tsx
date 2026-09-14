@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import "leaflet/dist/leaflet.css";
 
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { ALERT_STATUS_LABEL, formatHubDate } from "@/lib/hub";
 
 type MapPoint = {
@@ -22,6 +22,7 @@ const CENTER: [number, number] = [45.55, 8.35];
 function useMapPoints() {
   return useQuery({
     queryKey: ["terrain", "map", "points"],
+    enabled: isSupabaseConfigured(),
     staleTime: 60_000,
     queryFn: async (): Promise<MapPoint[]> => {
       const [places, alerts] = await Promise.all([

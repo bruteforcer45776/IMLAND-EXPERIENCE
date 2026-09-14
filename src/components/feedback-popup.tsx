@@ -3,7 +3,7 @@ import { Star, X, Heart } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 
 const STORAGE_KEY = "imland-feedback-given";
@@ -26,6 +26,7 @@ export function FeedbackPopup() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
+    if (!isSupabaseConfigured()) return;
     try {
       if (localStorage.getItem(STORAGE_KEY)) return;
     } catch {
@@ -81,7 +82,7 @@ export function FeedbackPopup() {
     window.setTimeout(() => setOpen(false), 3500);
   };
 
-  if (!open) return null;
+  if (!isSupabaseConfigured() || !open) return null;
 
   const shown = hover || rating;
 
