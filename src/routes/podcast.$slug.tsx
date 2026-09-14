@@ -105,48 +105,49 @@ function ProgramPage() {
 
   return (
     <>
-      <section className="section-atmosphere">
-        <div className="container-im grid gap-8 hero-pad md:grid-cols-[280px_1fr]">
-          {program.cover ? (
-            <img
-              src={program.cover}
-              alt={`Copertina di ${program.name}`}
-              className="aspect-square w-full rounded-3xl border border-border object-cover"
-            />
-          ) : (
-            <div className="flex aspect-square w-full items-center justify-center rounded-3xl border border-dashed border-signal/50 bg-signal/5 p-8 text-center">
-              <p className="text-lg font-semibold text-signal">
-                {program.name.toLowerCase().includes("carta canta")
-                  ? "Copertina in arrivo"
-                  : "Immagine in arrivo"}
-              </p>
-            </div>
-          )}
-          <div className="flex flex-col justify-center">
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-              Podcast · {program.cat}
-            </p>
-            <h1 className="mt-3 text-display-l">{program.name}</h1>
-            <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{program.tagline}</p>
-            <p className="mt-6 text-sm text-muted-foreground">
-              {program.publishedEpisodes} episod{program.publishedEpisodes === 1 ? "io" : "i"}{" "}
-              disponibil{program.publishedEpisodes === 1 ? "e" : "i"}
-              {firstDate && lastDate && firstDate !== lastDate
-                ? ` · pubblicati tra il ${firstDate} e il ${lastDate}`
-                : firstDate
-                  ? ` · dal ${firstDate}`
-                  : ""}
-            </p>
-            <div className="mt-6 max-w-xl">
-              <PodcastFeedPlayer slug={program.slug} />
-              <div className="mt-4">
-              <Link
-                to="/podcast"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-signal hover:underline"
-              >
-                <ArrowLeft className="inline h-4 w-4" /> Tutti i podcast
-              </Link>
+      <section className="section-atmosphere overflow-hidden">
+        <div className="container-im hero-pad">
+          <Link
+            to="/podcast"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-signal hover:underline"
+          >
+            <ArrowLeft className="inline h-4 w-4" /> Tutti i canali podcast
+          </Link>
+
+          <div className="mt-6 overflow-hidden rounded-[36px] border border-border bg-card shadow-2xl">
+            <div className="relative min-h-[340px] md:min-h-[520px]">
+              {program.cover ? (
+                <img
+                  src={program.cover}
+                  alt={`Grafica del canale ${program.name}`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-signal" />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
+              <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-10 lg:p-12">
+                <p className="text-xs font-semibold uppercase tracking-wider text-white/75">
+                  Canale podcast · {program.cat}
+                </p>
+                <h1 className="mt-3 max-w-4xl text-4xl font-bold leading-tight md:text-6xl">
+                  {program.name}
+                </h1>
+                <p className="mt-4 max-w-2xl text-base text-white/80 md:text-lg">
+                  {program.tagline}
+                </p>
+                <p className="mt-6 text-sm font-semibold text-white/80">
+                  {program.publishedEpisodes} puntat{program.publishedEpisodes === 1 ? "a" : "e"}
+                  {firstDate && lastDate && firstDate !== lastDate
+                    ? ` · pubblicate tra il ${firstDate} e il ${lastDate}`
+                    : firstDate
+                      ? ` · dal ${firstDate}`
+                      : ""}
+                </p>
               </div>
+            </div>
+            <div className="border-t border-border bg-background/80 p-5 md:p-6">
+              <PodcastFeedPlayer slug={program.slug} />
             </div>
           </div>
         </div>
@@ -154,7 +155,12 @@ function ProgramPage() {
 
       <section className="container-im section-canvas section-pad-sm">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 className="text-h2-im">Episodi</h2>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+              Puntate del canale
+            </p>
+            <h2 className="mt-2 text-h2-im">Tutte le puntate di {program.name}.</h2>
+          </div>
           <span className="text-xs text-muted-foreground">
             {loadingEpisodes
               ? "Caricamento episodi"
@@ -185,7 +191,7 @@ function ProgramPage() {
                     </div>
                     <div className="flex flex-1 flex-col p-5">
                       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                        Ep. {program.episodes.length - i}{" "}
+                        Puntata {episodes.length - i}{" "}
                         {ep.date ? `· ${formatDate(ep.date)}` : ""}
                       </p>
                       <h3 className="mt-2 text-h3-im">{ep.title}</h3>

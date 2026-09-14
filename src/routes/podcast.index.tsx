@@ -7,16 +7,14 @@ import { SpotlightCard } from "../components/spotlight-card";
 import { StreamingBanner } from "../components/streaming-banner";
 import { BadgeIcon, type BadgeName } from "../components/badge-icon";
 import { HeroBanner } from "../components/hero-banner";
-import { PodcastFeedPlayer } from "../components/podcast-feed-player";
 
 import { SectionSearch } from "../components/section-search";
-import { BentoGrid, BentoCard, BentoLinkCard } from "../components/bento";
+import { BentoGrid, BentoLinkCard } from "../components/bento";
 import heroPodcast from "@/assets/hero-podcast-v3.webp";
 import heroPodcastMobile from "@/assets/hero-podcast-mobile.webp";
 import { PageRails } from "../components/decor";
 import {
   programs,
-  latestEpisodes,
   totalEpisodes,
   categoryStats,
   curatedEpisodes,
@@ -106,6 +104,27 @@ function PodcastTile({ name, cat }: { name: string; cat: string }) {
       </div>
     </div>
   );
+}
+
+function ChannelArtwork({ program }: { program: Program }) {
+  if (program.cover) {
+    return (
+      <div className="relative aspect-[16/10] overflow-hidden bg-signal">
+        <img
+          src={program.cover}
+          alt={`Grafica del canale ${program.name}`}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+        <span className="absolute bottom-4 left-4 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur">
+          {program.cat}
+        </span>
+      </div>
+    );
+  }
+
+  return <PodcastTile name={program.name} cat={program.cat} />;
 }
 
 function PodcastPage() {
@@ -224,17 +243,21 @@ function PodcastPage() {
           </div>
         </section>
 
-        {/* Filters + programs grid */}
-        <section id="programmi" ref={gridRef} className="hidden">
+        {/* Canali podcast */}
+        <section id="programmi" ref={gridRef} className="container-im section-canvas section-pad-sm">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                Tutti i programmi
+                Canali podcast
               </p>
-              <h2 className="mt-2 text-h2-im">Tutti i canali, un solo territorio.</h2>
+              <h2 className="mt-2 text-h2-im">Scegli il canale dell'azienda.</h2>
+              <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+                Ogni canale ha la sua grafica dedicata. Aprilo per vedere la pagina del progetto e
+                tutte le puntate pubblicate.
+              </p>
             </div>
             <span className="text-xs text-muted-foreground">
-              {list.length} programmi · aggiornati ogni settimana
+              {list.length} canali · {totalEpisodes} puntate nei feed
             </span>
           </div>
 
@@ -262,12 +285,7 @@ function PodcastPage() {
             {list.map((p) => {
               const cardInner = (
                 <div className="group h-full">
-                  <div
-                    className="relative aspect-[4/5] overflow-hidden"
-                    style={{ background: catColor[p.cat] || "var(--horizon)" }}
-                  >
-                    <PodcastTile name={p.name} cat={p.cat} />
-                  </div>
+                  <ChannelArtwork program={p} />
                   <div className="p-5">
                     <div className="flex items-center justify-between gap-2">
                       <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider">
@@ -286,7 +304,7 @@ function PodcastPage() {
                         <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current">
                           <path d="M8 5v14l11-7z" />
                         </svg>
-                        Apri scheda podcast
+                        Apri canale
                       </span>
                       <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         {p.episodes}
@@ -314,57 +332,6 @@ function PodcastPage() {
               </p>
             )}
           </BentoGrid>
-        </section>
-
-        {/* Player dei canali */}
-        <section className="container-im section-canvas pb-14">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                Ascolta ora
-              </p>
-              <h2 className="mt-2 text-h2-im">I podcast, direttamente qui.</h2>
-              <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                Avvia l’ultima puntata senza lasciare il sito. Apri il canale per vedere tutti gli
-                episodi disponibili.
-              </p>
-            </div>
-            <span className="text-xs text-muted-foreground">
-              {programs.length} programmi · {totalEpisodes} episodi nei feed
-            </span>
-          </div>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {programs.map((program) => (
-              <li key={`feed-${program.slug}`}>
-                <SpotlightCard className="flex h-full flex-col justify-between overflow-hidden glass-panel rounded-3xl p-5">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      {program.cat} · {program.episodes}
-                    </p>
-                    <h3 className="mt-2 text-h3-im">{program.name}</h3>
-                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                      {program.tagline}
-                    </p>
-                  </div>
-                  <div className="mt-5 space-y-4">
-                    <PodcastFeedPlayer
-                      slug={program.slug}
-                      name={program.name}
-                      cover={program.cover}
-                      showArtwork
-                    />
-                    <Link
-                      to="/podcast/$slug"
-                      params={{ slug: program.slug }}
-                      className="inline-flex rounded-full btn-blue px-4 py-2 text-xs font-semibold"
-                    >
-                      Apri il canale
-                    </Link>
-                  </div>
-                </SpotlightCard>
-              </li>
-            ))}
-          </ul>
         </section>
 
         {/* Continua ad ascoltare */}
