@@ -21,7 +21,6 @@ import { StickyActions } from "../components/sticky-actions";
 import { MobileBottomNav } from "../components/system/mobile-bottom-nav";
 
 import { CookieBanner } from "../components/cookie-banner";
-import { DownloadAppPopup } from "../components/download-app-popup";
 import { FeedbackPopup } from "../components/feedback-popup";
 import { Toaster } from "sonner";
 import { AuthProvider } from "../hooks/use-auth";
@@ -200,7 +199,6 @@ function RootComponent() {
             <MobileBottomNav />
             <StickyActions />
             <CookieBanner />
-            <DownloadAppPopup />
             <FeedbackPopup />
             <OnboardingRedirect />
             <Toaster position="top-center" richColors closeButton />

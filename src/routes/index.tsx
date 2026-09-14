@@ -4,7 +4,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
-import { EcosystemFlow } from "../components/home/ecosystem-flow";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
 import { quickLinks } from "../data/home-quick-links";
@@ -159,8 +158,6 @@ function Home() {
       </section>
 
       {/* ECOSISTEMA — filo rouge tra i servizi */}
-      <EcosystemFlow />
-
       {/* ADV — banner pubblicitario alto */}
       <AdvSlot position="alto" />
 

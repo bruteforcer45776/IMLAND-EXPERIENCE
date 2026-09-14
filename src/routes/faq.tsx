@@ -6,7 +6,7 @@ import { ArrowRight, Mail } from "lucide-react";
 
 import { BrandIcon } from "../components/brand-icons";
 import { BadgeIcon, badgeForIcon, toneForBadge } from "../components/badge-icon";
-import { BentoGrid, BentoCard } from "../components/bento";
+import { BentoCard } from "../components/bento";
 import { PageHero } from "../components/page-hero";
 import { SectionHeader } from "../components/section-header";
 import {
@@ -114,14 +114,14 @@ const categories: Category[] = [
   },
   {
     id: "member",
-    title: "Member",
+    title: "Partners",
     icon: "tessera_member",
     tone: "member",
-    intro: "Vantaggi, pacchetti e visibilità per aziende e professionisti.",
+    intro: "Collaborazioni, adesione e opportunità per aziende e professionisti.",
     items: [
       {
-        q: "Come si diventa Member di IMLAND?",
-        a: "Aziende, professionisti e associazioni possono diventare Member scegliendo un pacchetto dalla pagina Member: include spot radio, produzione podcast, presenza negli eventi e visibilità nella community locale.",
+        q: "Come si diventa Partner di IMLAND?",
+        a: "Aziende, professionisti e associazioni possono entrare nel progetto dalla pagina Partners e costruire insieme a IMLAND la collaborazione più adatta.",
       },
       {
         q: "Cosa include la membership IMLAND?",
@@ -193,13 +193,8 @@ function FaqPage() {
       <PageHero
         eyebrow="Domande frequenti"
         badge="commento"
-        title={
-          <>
-            Le risposte, <br />
-            tutte <span className="im-gradient-text">insieme</span>.
-          </>
-        }
-        subtitle="Divise per argomento, per trovare subito quello che cerchi: radio, podcast, eventi, member e supporto tecnico."
+        title={<>Tutto quello che vuoi <span className="im-gradient-text">sapere</span>.</>}
+        subtitle="Risposte chiare e ordinate su radio, podcast, eventi, partnership e assistenza."
       >
         <a href="#radio" className="rounded-full btn-blue px-6 py-3 text-sm">
           Vai alle risposte
@@ -216,10 +211,10 @@ function FaqPage() {
             badge="news"
             title={
               <>
-                Scegli la tua <span className="im-gradient-text">categoria</span>.
+                Trova subito la <span className="im-gradient-text">risposta</span>.
               </>
             }
-            description="Cinque aree, un solo posto: apri la sezione che ti interessa e trova la risposta."
+            description="Seleziona un argomento oppure scorri le domande organizzate per area."
           />
 
           <div className="mt-8 flex flex-wrap gap-2">
@@ -235,26 +230,26 @@ function FaqPage() {
             ))}
           </div>
 
-          <BentoGrid className="mt-10">
+          <div className="mx-auto mt-10 grid max-w-5xl gap-6">
             {categories.map((cat) => (
               <BentoCard
                 key={cat.id}
                 tone={cat.tone ?? toneForBadge(badgeForIcon(cat.icon))}
-                span={6}
+                span={12}
                 className="scroll-mt-24"
                 id={cat.id}
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 border-b border-border pb-5">
                   <BadgeIcon name={badgeForIcon(cat.icon)} className="h-14 w-14" />
                   <div>
                     <h2 className="text-h2-im">{cat.title}</h2>
-                    <p className="mt-1 text-sm text-muted-foreground">{cat.intro}</p>
+                    <p className="mt-1 max-w-2xl text-base text-muted-foreground">{cat.intro}</p>
                   </div>
                 </div>
-                <Accordion type="single" collapsible className="mt-4">
+                <Accordion type="single" collapsible className="mt-2">
                   {cat.items.map((item, idx) => (
                     <AccordionItem key={idx} value={`${cat.id}-${idx}`} className="border-border">
-                      <AccordionTrigger className="text-base font-semibold hover:no-underline md:text-lg">
+                      <AccordionTrigger className="py-5 text-left text-base font-semibold hover:no-underline md:text-lg">
                         {item.q}
                       </AccordionTrigger>
                       <AccordionContent className="text-sm text-muted-foreground md:text-base">
@@ -265,7 +260,7 @@ function FaqPage() {
                 </Accordion>
               </BentoCard>
             ))}
-          </BentoGrid>
+          </div>
         </div>
       </section>
 

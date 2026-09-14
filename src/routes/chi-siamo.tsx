@@ -1,15 +1,10 @@
 import { canonical, jsonLd, organizationLd } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lazy, Suspense } from "react";
 import { ArrowRight } from "lucide-react";
-import { NewsletterBanner } from "../components/newsletter-banner";
-import { teamMembers } from "../data/team-members";
 import { BadgeIcon, badgeForIcon, toneForBadge } from "../components/badge-icon";
 import { BentoGrid, BentoCard, BentoLinkCard } from "../components/bento";
 import { PageHero } from "../components/page-hero";
 import { SectionHeader } from "../components/section-header";
-
-const Lanyard = lazy(() => import("../components/lanyard"));
 
 export const Route = createFileRoute("/chi-siamo")({
   head: () => ({
@@ -117,35 +112,19 @@ const numbers = [
   { n: "300+", l: "Episodi pubblicati" },
 ];
 
-const collaborations = [
-  "Regione Piemonte",
-  "Comune di Gattinara",
-  "Consorzio Tutela Gattinara Docg",
-  "Istituto Alberghiero di Gattinara",
-  "Confcommercio locale",
-  "Realtà del territorio",
-];
-
 function ChiSiamoPage() {
   return (
     <>
       <PageHero
-        eyebrow="Chi siamo"
+        eyebrow="Il Progetto"
         badge="community"
         title={
           <>
-            Un hub aperto, <br />
-            <span className="im-gradient-text">radicato</span>, indipendente.
+            Il territorio ha <br />
+            una nuova <span className="im-gradient-text">voce</span>.
           </>
         }
         subtitle="IMLAND Experience nasce per dare voce alle realtà dei nostri territori. Viviamo in territori ricchi di imprese, persone, competenze ed eccellenze che spesso, proprio perché lontani dai grandi centri, non hanno gli stessi strumenti e le stesse occasioni per raccontarsi, farsi conoscere e creare relazioni. Per questo abbiamo costruito un luogo in cui il territorio possa avere voce: attraverso la radio, i contenuti, gli incontri e una community che mette in relazione aziende, professionisti e persone. Raccontiamo ciò che di valore esiste qui, perché possa essere conosciuto dentro e fuori dal territorio."
-        aside={
-          <div className="relative h-[520px] w-full">
-            <Suspense fallback={null}>
-              <Lanyard position={[0, 0, 18]} gravity={[0, -40, 0]} />
-            </Suspense>
-          </div>
-        }
       />
 
       {/* Missione */}
@@ -154,12 +133,7 @@ function ChiSiamoPage() {
           <SectionHeader
             eyebrow="La missione"
             badge="luogo"
-            title={
-              <>
-                Dare voce a chi <br />
-                vive il <span className="im-gradient-text">territorio</span>.
-              </>
-            }
+            title={<>Dare voce al <span className="im-gradient-text">territorio</span>.</>}
             description="Crediamo che musica, informazione ed eventi locali abbiano bisogno di uno spazio comune, aperto e indipendente. IMLAND lo costruisce ogni giorno, con la radio come cuore."
           />
           <BentoGrid className="mt-10">
@@ -239,77 +213,6 @@ function ChiSiamoPage() {
         </div>
       </section>
 
-      {/* Team / Redazione */}
-      <section className="section-atmosphere">
-        <div className="container-im section-pad">
-          <SectionHeader
-            eyebrow="La redazione"
-            badge="profilo"
-            align="center"
-            title={
-              <>
-                Il TEAM <span className="im-gradient-text">IMLAND</span>.
-              </>
-            }
-            description="Una squadra che vive il territorio e lo trasforma in racconto sonoro: speaker, produzione, member e organizzazione eventi."
-          />
-
-          <ul
-            role="list"
-            className="mx-auto mt-14 grid max-w-2xl grid-cols-1 gap-x-10 gap-y-16 sm:grid-cols-2 lg:max-w-none"
-          >
-            {teamMembers.map((m) => {
-              const fullName =
-                [m.firstName, m.lastName].filter(Boolean).join(" ") ||
-                m.slug
-                  .split("-")
-                  .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-                  .join(" ");
-              const preview = m.description || m.bio.split("\n")[0];
-              return (
-                <li key={m.slug} className="flex flex-col items-start gap-x-8 gap-y-6 sm:flex-row">
-                  <div className="flex-none">
-                    <Link to="/team/$slug" params={{ slug: m.slug }}>
-                      <div className="relative aspect-square w-40 overflow-hidden rounded-full bg-muted ring-1 ring-inset ring-border">
-                        <img
-                          src={m.photo}
-                          alt={fullName}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                        />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="flex-auto">
-                    <Link to="/team/$slug" params={{ slug: m.slug }}>
-                      <h3 className="text-h3-im leading-9 text-foreground transition-colors hover:text-signal">
-                        {fullName}
-                      </h3>
-                    </Link>
-                    {m.nickname ? <p className="im-gradient-text">"{m.nickname}"</p> : null}
-                    {m.role ? (
-                      <p className="text-base leading-8 text-muted-foreground">{m.role}</p>
-                    ) : null}
-                    {preview ? (
-                      <p className="mt-4 line-clamp-4 text-base leading-7 text-muted-foreground">
-                        {preview}
-                      </p>
-                    ) : null}
-                    <Link
-                      to="/team/$slug"
-                      params={{ slug: m.slug }}
-                      className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-signal hover:underline"
-                    >
-                      Scopri il profilo <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Link>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
-
       {/* Timeline */}
       <section className="section-editorial">
         <div className="container-im section-pad">
@@ -339,59 +242,20 @@ function ChiSiamoPage() {
         </div>
       </section>
 
-      {/* Collaborazioni / Partner */}
-      <section className="section-atmosphere">
-        <div className="container-im section-pad-sm">
-          <p className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Collaborazioni e sostegno sul territorio
-          </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 opacity-70">
-            {collaborations.map((n) => (
-              <span
-                key={n}
-                className="font-display text-base font-semibold tracking-tight md:text-lg"
-              >
-                {n}
-              </span>
-            ))}
+      <section className="section-focus">
+        <div className="container-im section-pad">
+          <div className="rounded-[32px] bg-signal p-8 text-signal-foreground md:flex md:items-center md:justify-between md:gap-10 md:p-12">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold uppercase tracking-wider opacity-75">Costruiamo relazioni</p>
+              <h2 className="mt-3 text-h2-im">Vuoi entrare nel progetto?</h2>
+              <p className="mt-3 text-base opacity-85">Raccontaci la tua realtà, un’idea o una collaborazione per il territorio.</p>
+            </div>
+            <Link to="/contatti" className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-ink-950 md:mt-0">
+              Contattaci <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
           </div>
         </div>
       </section>
-
-      {/* Lavora con noi */}
-      <section className="section-focus">
-        <div className="container-im section-pad">
-          <SectionHeader
-            eyebrow="Lavora con noi"
-            badge="partner"
-            title={
-              <>
-                Hai qualcosa <br />
-                da <span className="im-gradient-text">raccontare</span>?
-              </>
-            }
-            description="Cerchiamo sempre nuove voci, produttori, tecnici ed eventi da ospitare. Se vivi il territorio e vuoi contribuire, scrivici: leggiamo ogni proposta."
-          />
-          <BentoGrid className="mt-10">
-            <BentoCard tone="podcast" span={3}>
-              <BadgeIcon name={badgeForIcon("microfono")} className="h-12 w-12" />
-              <p className="mt-4 font-display text-lg font-semibold">Proponi un format</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Radio, podcast o rubrica: raccontaci l'idea.
-              </p>
-            </BentoCard>
-            <BentoCard tone="member" span={3}>
-              <BadgeIcon name={badgeForIcon("stretta_mano")} className="h-12 w-12" />
-              <p className="mt-4 font-display text-lg font-semibold">Collabora con noi</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Aziende, associazioni e professionisti del territorio.
-              </p>
-            </BentoCard>
-          </BentoGrid>
-        </div>
-      </section>
-
-      <NewsletterBanner />
     </>
   );
 }
