@@ -155,32 +155,45 @@ function useSectionTheme() {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const section = useSectionTheme();
+  const editorialFrame =
+    section.key === "eventi"
+      ? { tone: "green", src: "/backgrounds/imland-frame-green.png" }
+      : section.key === "member"
+        ? { tone: "yellow", src: "/backgrounds/imland-frame-yellow.png" }
+        : section.key === "news"
+          ? { tone: "red", src: "/backgrounds/imland-frame-red.png" }
+          : { tone: "blue", src: "/backgrounds/imland-frame-blue.png" };
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <PlayerProvider>
           <div
             data-section={section.key}
+            data-editorial-frame={editorialFrame.tone}
             style={sectionCssVars(section)}
-            className="imland-night site-bg flex min-h-screen flex-col bg-transparent text-foreground"
+            className="imland-night site-bg editorial-frame-page min-h-screen bg-transparent text-foreground"
           >
+            <div className="editorial-frame-backdrop" aria-hidden="true">
+              <img src={editorialFrame.src} alt="" />
+            </div>
 
-            <a href="#main-content" className="skip-link">Salta al contenuto</a>
-            <SiteHeader />
-            <main id="main-content" className="relative flex-1 pt-[66px] pb-app-nav md:pt-[74px] md:pb-0">
-              
-              <Outlet />
-            </main>
+            <div className="editorial-frame-canvas">
+              <a href="#main-content" className="skip-link">Salta al contenuto</a>
+              <SiteHeader />
+              <main id="main-content" className="relative flex-1 pt-[66px] pb-app-nav md:pt-[74px] md:pb-0">
+                <Outlet />
+              </main>
 
-            <SiteFooter />
-            <RadioPlayer />
-            <MobileBottomNav />
-            <StickyActions />
-            <CookieBanner />
-            <DownloadAppPopup />
-            <FeedbackPopup />
-            <OnboardingRedirect />
-            <Toaster position="top-center" richColors closeButton />
+              <SiteFooter />
+              <RadioPlayer />
+              <MobileBottomNav />
+              <StickyActions />
+              <CookieBanner />
+              <DownloadAppPopup />
+              <FeedbackPopup />
+              <OnboardingRedirect />
+              <Toaster position="top-center" richColors closeButton />
+            </div>
           </div>
         </PlayerProvider>
       </AuthProvider>

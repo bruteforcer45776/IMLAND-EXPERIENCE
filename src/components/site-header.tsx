@@ -1,5 +1,5 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Search, ChevronDown, Radio, ArrowRight, LogOut, LayoutGrid, Megaphone } from "lucide-react";
 import { usePlayer } from "@/components/player-context";
 
@@ -72,6 +72,8 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [launcher, setLauncher] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [headerHidden, setHeaderHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const [dropdown, setDropdown] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const { user, profile, signOut } = useAuth();
@@ -114,16 +116,33 @@ export function SiteHeader() {
   }, [open]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 16);
+
+      if (window.matchMedia("(max-width: 767px)").matches && !open) {
+        if (currentY <= 48) {
+          setHeaderHidden(false);
+        } else if (currentY > lastScrollY.current + 4) {
+          setHeaderHidden(true);
+        } else if (currentY < lastScrollY.current - 12) {
+          setHeaderHidden(false);
+        }
+      } else {
+        setHeaderHidden(false);
+      }
+
+      lastScrollY.current = currentY;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open]);
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-40 transition-all duration-medium ${
+        className={`fixed inset-x-0 top-0 z-40 transition-all duration-medium ${headerHidden ? "mobile-header-hidden" : ""} ${
           scrolled
             ? "bg-white/92 shadow-[0_1px_3px_rgba(16,17,20,0.06)] backdrop-blur-xl"
             : "bg-white/80 backdrop-blur-md"
