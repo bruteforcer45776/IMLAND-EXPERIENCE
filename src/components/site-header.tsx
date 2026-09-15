@@ -111,7 +111,7 @@ export function SiteHeader() {
               decoding="async"
               src={logo.url}
               alt={logo.alt}
-              className="h-10 w-auto max-w-[150px] object-contain drop-shadow-[0_1px_2px_rgba(255,255,255,0.45)] md:h-12 md:max-w-[190px]"
+              className="header-logo-total-black h-10 w-auto max-w-[150px] object-contain md:h-12 md:max-w-[190px]"
               width={2048}
               height={960}
             />
@@ -175,7 +175,7 @@ export function SiteHeader() {
                   decoding="async"
                   src={logo.url}
                   alt={logo.alt}
-                  className="h-10 w-auto max-w-[170px] object-contain"
+                  className="header-logo-total-black h-10 w-auto max-w-[170px] object-contain"
                   width={2048}
                   height={960}
                 />

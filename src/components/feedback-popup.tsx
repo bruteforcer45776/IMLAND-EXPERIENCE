@@ -6,8 +6,10 @@ import { z } from "zod";
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 
-const STORAGE_KEY = "imland-feedback-given";
+const SUBMITTED_KEY = "imland-feedback-submitted-v2";
+const DISMISSED_UNTIL_KEY = "imland-feedback-dismissed-until-v2";
 const DELAY_MS = 120_000;
+const DISMISS_FOR_MS = 7 * 24 * 60 * 60 * 1000;
 const NOTE_MAX = 1000;
 
 const feedbackSchema = z.object({
@@ -29,9 +31,10 @@ export function FeedbackPopup() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    if (!isSupabaseConfigured()) return;
     try {
-      if (localStorage.getItem(STORAGE_KEY)) return;
+      if (localStorage.getItem(SUBMITTED_KEY)) return;
+      const dismissedUntil = Number(localStorage.getItem(DISMISSED_UNTIL_KEY) ?? 0);
+      if (dismissedUntil > Date.now()) return;
     } catch {
       /* ignore */
     }
@@ -39,9 +42,9 @@ export function FeedbackPopup() {
     return () => window.clearTimeout(t);
   }, []);
 
-  const remember = () => {
+  const rememberDismissal = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, "1");
+      localStorage.setItem(DISMISSED_UNTIL_KEY, String(Date.now() + DISMISS_FOR_MS));
     } catch {
       /* ignore */
     }
@@ -49,7 +52,7 @@ export function FeedbackPopup() {
 
   const close = () => {
     setOpen(false);
-    remember();
+    rememberDismissal();
   };
 
   useEffect(() => {
@@ -68,12 +71,14 @@ export function FeedbackPopup() {
       return;
     }
     setSending(true);
-    const { error } = await supabase.from("site_feedback").insert({
-      rating: parsed.data.rating,
-      note: parsed.data.note.length > 0 ? parsed.data.note : null,
-      page_path: window.location.pathname.slice(0, 300),
-      user_id: user?.id ?? null,
-    });
+    const { error } = isSupabaseConfigured()
+      ? await supabase.from("site_feedback").insert({
+          rating: parsed.data.rating,
+          note: parsed.data.note.length > 0 ? parsed.data.note : null,
+          page_path: window.location.pathname.slice(0, 300),
+          user_id: user?.id ?? null,
+        })
+      : { error: new Error("Servizio recensioni non configurato") };
     setSending(false);
     if (error) {
       toast.error("Non è stato possibile inviare il feedback. Riprova più tardi.");
@@ -81,11 +86,16 @@ export function FeedbackPopup() {
     }
     toast.success("Grazie, la tua opinione è stata registrata.");
     setSubmitted(true);
-    remember();
+    try {
+      localStorage.setItem(SUBMITTED_KEY, "1");
+      localStorage.removeItem(DISMISSED_UNTIL_KEY);
+    } catch {
+      /* ignore */
+    }
     window.setTimeout(() => setOpen(false), 3500);
   };
 
-  if (!isSupabaseConfigured() || !open) return null;
+  if (!open) return null;
 
   const shown = hover || rating;
 
