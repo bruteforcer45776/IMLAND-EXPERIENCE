@@ -368,7 +368,7 @@ function AiChatbot() {
         aria-expanded={chatOpen}
         aria-controls={panelId}
         aria-label={chatOpen ? "Chiudi chatbot AI" : "Apri chatbot AI"}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-im-blue text-white shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:h-16 md:w-16"
+        className="sticky-chat-trigger flex h-14 w-14 items-center justify-center rounded-full text-white shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:h-16 md:w-16"
       >
         {chatOpen ? <X size={24} aria-hidden /> : <Bot size={25} aria-hidden />}
       </button>

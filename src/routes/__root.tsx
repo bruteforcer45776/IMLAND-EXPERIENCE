@@ -182,8 +182,11 @@ function useSectionTheme() {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const section = useSectionTheme();
+  const usesSpectrumFrame = section.key === "default";
   const editorialFrame =
-    section.key === "eventi"
+    usesSpectrumFrame
+      ? { tone: "home", src: "/backgrounds/imland-home-spectrum-desktop.png" }
+      : section.key === "eventi"
       ? { tone: "green", src: "/backgrounds/imland-frame-green.png" }
       : section.key === "member"
         ? { tone: "yellow", src: "/backgrounds/imland-frame-yellow.png" }
@@ -201,7 +204,14 @@ function RootComponent() {
             className="imland-night site-bg editorial-frame-page min-h-screen bg-transparent text-foreground"
           >
             <div className="editorial-frame-backdrop" aria-hidden="true">
-              <img src={editorialFrame.src} alt="" />
+              {usesSpectrumFrame ? (
+                <picture>
+                  <source media="(max-width: 47.999rem)" srcSet="/backgrounds/imland-home-spectrum-mobile.png" />
+                  <img src={editorialFrame.src} alt="" />
+                </picture>
+              ) : (
+                <img src={editorialFrame.src} alt="" />
+              )}
             </div>
             <div className="editorial-frame-canvas">
               <a href="#main-content" className="skip-link">Salta al contenuto</a>

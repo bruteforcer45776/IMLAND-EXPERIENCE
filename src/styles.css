@@ -153,6 +153,13 @@
 .editorial-frame-page { position: relative; min-height: 100vh; isolation: isolate; }
 .editorial-frame-backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #22a9f2; pointer-events: none; }
 .editorial-frame-backdrop img { width: 100%; height: 100%; object-fit: cover; object-position: center; user-select: none; }
+.editorial-frame-backdrop picture { display: block; width: 100%; height: 100%; }
+[data-editorial-frame="home"] .editorial-frame-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 .editorial-frame-canvas { position: relative; display: flex; min-height: calc(100vh - 1.5rem); width: calc(100% - 3rem); max-width: 80rem; margin: 1.5rem auto 0; flex-direction: column; overflow: clip; border-radius: 1rem; background: transparent; }
 .editorial-frame-canvas > header,
 .editorial-frame-canvas > nav.fixed.inset-x-0 { right: auto; left: 50%; width: calc(100% - 3rem); max-width: 80rem; transform: translateX(-50%); }
@@ -160,6 +167,14 @@
 .editorial-frame-canvas > main { padding-top: calc(66px + 0.75rem) !important; overflow: clip; border-radius: 1rem 1rem 0 0; }
 @media (min-width: 48rem) {
   .editorial-frame-backdrop img { position: absolute; top: 50%; left: 50%; width: 100vh; height: 100vw; max-width: none; max-height: none; transform: translate(-50%, -50%) rotate(90deg); }
+  [data-editorial-frame="home"] .editorial-frame-backdrop img {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    transform: none;
+  }
   .editorial-frame-canvas,
   .editorial-frame-canvas > header,
   .editorial-frame-canvas > nav.fixed.inset-x-0 { width: calc(100% - 5rem); }
@@ -3282,4 +3297,69 @@ h6 {
 
 .site-glass-header .btn-blue {
   color: #ffffff !important;
+}
+
+/* Geometria finale delle superfici principali: il raggio deve appartenere
+   alla sezione completa, non soltanto alle card interne. */
+:root {
+  --ui-section-radius: clamp(2rem, 4vw, 3.5rem);
+}
+
+.home-glass-stack > section,
+#main-content > section,
+#main-content > div:not(.home-glass-stack) > section,
+#main-content > div:not(.home-glass-stack) > div > section {
+  overflow: clip;
+  border-radius: var(--ui-section-radius) !important;
+}
+
+.home-glass-stack > section.home-adv-slot > div,
+.home-glass-stack > section.home-color-band > div {
+  border-radius: inherit !important;
+}
+
+.site-footer {
+  width: calc(100% - clamp(1rem, 2.4vw, 2rem));
+  margin: clamp(.75rem, 1.5vw, 1.25rem) auto 0;
+  overflow: clip;
+  border: 1px solid rgb(15 23 42 / 9%);
+  border-bottom: 0;
+  border-radius: var(--ui-section-radius) var(--ui-section-radius) 0 0 !important;
+  box-shadow: 0 -14px 38px rgb(1 29 104 / 10%);
+}
+
+@media (max-width: 47.999rem) {
+  :root { --ui-section-radius: 1.75rem; }
+
+  .site-footer {
+    width: calc(100% - .5rem);
+    margin-top: .5rem;
+  }
+}
+
+/* Geometria globale: ogni sezione editoriale mantiene angoli visibili anche
+   quando e annidata in wrapper di pagina, Reveal o superfici invertite. */
+#main-content section {
+  overflow: clip;
+  border-radius: var(--ui-section-radius) !important;
+}
+
+#main-content section > :is(.container-im, [class*="max-w-"]) {
+  border-radius: inherit;
+}
+
+.home-color-band,
+.home-color-band > .container-im,
+.page-inverted > section,
+.member-inverted > section {
+  border-radius: var(--ui-section-radius) !important;
+}
+
+.sticky-chat-trigger {
+  background: #f28c18 !important;
+  box-shadow: 0 14px 34px rgb(242 140 24 / 42%);
+}
+
+.sticky-chat-trigger:hover {
+  background: #dc7410 !important;
 }
