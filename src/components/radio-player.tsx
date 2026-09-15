@@ -12,6 +12,8 @@ import {
   AlertTriangle,
   Loader2,
   RotateCw,
+  ChevronDown,
+  ChevronUp,
   X,
 } from "lucide-react";
 import { useNowPlaying } from "@/hooks/use-now-playing";
@@ -185,10 +187,10 @@ export function RadioPlayer() {
         role="complementary"
         aria-label="Player IMLAND Radio"
         data-surface="dark"
-        className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] left-4 z-50 md:bottom-6 md:left-6"
+        className="fixed inset-x-3 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] z-50 md:inset-x-6 md:bottom-4"
       >
         {expanded && (
-          <div className="absolute bottom-[4.5rem] left-0 max-h-[min(72vh,620px)] w-[min(92vw,420px)] origin-bottom-left overflow-y-auto rounded-[28px] border border-white/15 bg-black/40 p-5 text-white shadow-2xl backdrop-blur-xl animate-enter md:bottom-0 md:left-[4.5rem] md:origin-bottom-left">
+          <div className="absolute bottom-[4.75rem] left-0 max-h-[min(70vh,620px)] w-[min(92vw,420px)] origin-bottom-left overflow-y-auto rounded-[28px] border border-white/15 bg-black/40 p-5 text-white shadow-2xl backdrop-blur-xl backdrop-saturate-150 animate-enter">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-center gap-2">
                 <span
@@ -373,28 +375,74 @@ export function RadioPlayer() {
           </div>
         )}
 
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          aria-expanded={expanded}
-          aria-label={expanded ? "Chiudi il pannello del player" : "Apri il player radio"}
-          className={`relative flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white shadow-xl backdrop-blur-xl transition hover:scale-105 hover:bg-black/55 md:h-16 md:w-16 ${
+        <div
+          className={`flex h-16 items-center gap-3 rounded-[20px] border border-white/15 bg-black/40 px-3 text-white shadow-xl backdrop-blur-xl backdrop-saturate-150 md:h-[68px] md:px-4 ${
             status === "error" ? "ring-2 ring-[#c5221f]" : ""
           }`}
         >
-          {playing && status === "playing" && (
-            <span className="absolute inset-0 animate-ping rounded-full bg-white/25" />
-          )}
-          {status === "loading" ? (
-            <Loader2 size={24} className="relative animate-spin" />
-          ) : status === "error" ? (
-            <RotateCw size={24} className="relative" />
-          ) : playing ? (
-            <Pause size={24} className="relative fill-current" />
+          {artwork ? (
+            <img src={artwork} alt="" className="h-11 w-11 shrink-0 rounded-xl object-cover md:h-12 md:w-12" />
           ) : (
-            <Play size={24} className="relative ml-0.5 fill-current" />
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white/75 md:h-12 md:w-12">
+              <RadioIcon size={20} aria-hidden />
+            </span>
           )}
-        </button>
+
+          <button
+            type="button"
+            onClick={() => (status === "error" ? retry() : setPlaying(!playing))}
+            aria-label={status === "error" ? "Riprova" : playing ? "Pausa" : "Riproduci la radio"}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink-950 transition hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            {status === "loading" ? (
+              <Loader2 size={18} className="animate-spin" />
+            ) : status === "error" ? (
+              <RotateCw size={18} />
+            ) : playing ? (
+              <Pause size={18} className="fill-current" />
+            ) : (
+              <Play size={18} className="ml-0.5 fill-current" />
+            )}
+          </button>
+
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-bold md:text-[15px]">{trackTitle}</p>
+            <p className="truncate text-xs text-white/65">{trackArtist ? `${trackArtist} · ${stationName}` : stationName}</p>
+          </div>
+
+          <div className="hidden w-[min(24vw,260px)] items-center gap-2 md:flex">
+            <button
+              type="button"
+              onClick={() => setMuted(!muted)}
+              aria-label={muted ? "Riattiva audio" : "Silenzia"}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/15"
+            >
+              {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+            </button>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              value={effectiveVolume}
+              onChange={(event) => {
+                setMuted(false);
+                setVolume(Number(event.target.value));
+              }}
+              aria-label="Volume"
+              className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full accent-signal"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            aria-expanded={expanded}
+            aria-label={expanded ? "Chiudi il pannello del player" : "Apri il player radio"}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            {expanded ? <ChevronDown size={20} /> : <ChevronUp size={20} />}
+          </button>
+        </div>
       </div>
 
       <style>{`

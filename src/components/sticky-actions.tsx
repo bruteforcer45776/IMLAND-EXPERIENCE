@@ -269,14 +269,14 @@ function AiChatbot() {
   };
 
   return (
-    <div className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-3 z-[60] md:bottom-24 md:right-4">
+    <div className="fixed bottom-[calc(10rem+env(safe-area-inset-bottom))] left-3 z-[60] md:bottom-24 md:left-4">
       {chatOpen && (
         <section
           id={panelId}
           role="dialog"
           aria-label="Chatbot AI IMLAND"
           data-surface="dark"
-          className="absolute bottom-[4.25rem] right-0 flex h-[min(68vh,560px)] w-[min(92vw,380px)] origin-bottom-right flex-col overflow-hidden rounded-[24px] border border-white/15 bg-ink/95 text-white shadow-2xl backdrop-blur-xl animate-enter"
+          className="absolute bottom-[4.25rem] left-0 flex h-[min(68vh,560px)] w-[min(92vw,380px)] origin-bottom-left flex-col overflow-hidden rounded-[24px] border border-white/15 bg-ink/95 text-white shadow-2xl backdrop-blur-xl animate-enter"
         >
           <header className="flex items-center justify-between border-b border-white/10 px-4 py-3">
             <div className="flex items-center gap-3">

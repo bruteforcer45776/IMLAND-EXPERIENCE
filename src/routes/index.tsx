@@ -1,14 +1,12 @@
 import { lazy, Suspense } from "react";
 import { canonical, jsonLd, organizationLd, websiteLd, SITE_URL } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarDays, MapPin, Mic2, Newspaper, Radio, Users } from "lucide-react";
+import { ArrowRight, MapPin, Radio } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
-import { quickLinks } from "../data/home-quick-links";
 import { AdvSlot } from "../components/adv-slot";
-import { BentoGrid, BentoLinkCard } from "../components/bento";
 
 const PartnerLoop = lazy(() =>
   import("../components/partner-bar/PartnerLoop").then((module) => ({
@@ -27,14 +25,6 @@ import { latestEpisodes, programs } from "../data/podcast-derived";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
 
 const featuredEpisode = latestEpisodes[0];
-
-const serviceIcons = {
-  radio: Radio,
-  podcast: Mic2,
-  calendario: CalendarDays,
-  news: Newspaper,
-  community: Users,
-} as const;
 
 const newsPreviews = [
   {
@@ -127,31 +117,6 @@ function Home() {
         <Suspense fallback={<div className="h-16" />}>
           <PartnerLoop fadeOutColor="#ffffff" />
         </Suspense>
-      </section>
-
-      {/* QUICK LINKS — i nostri servizi */}
-
-      <section className="home-services decor-host relative isolate overflow-hidden bg-white section-pad-sm">
-        <div className={`relative ${shell}`}>
-          <p className={eyebrow}>I nostri servizi</p>
-          <h2 className={`${h2} mt-3`}>
-            Tutti i modi per vivere il <span className={keyword}>territorio</span>.
-          </h2>
-          <BentoGrid className="mt-10">
-            {quickLinks.map((q) => (
-              <BentoLinkCard key={q.label} to={q.to} tone={q.tone} span={q.span} className="group">
-                {(() => {
-                  const Icon = serviceIcons[q.badge];
-                  return <Icon className="service-symbol h-10 w-10 text-white" aria-hidden />;
-                })()}
-
-                <p className="mt-5 font-display text-lg font-bold text-ink-950">{q.label}</p>
-                <p className="mt-0.5 text-sm text-ink-600">{q.desc}</p>
-                <ArrowRight className="mt-5 h-4 w-4 text-[var(--bento-tone)] transition-transform duration-300 group-hover:translate-x-1" />
-              </BentoLinkCard>
-            ))}
-          </BentoGrid>
-        </div>
       </section>
 
       {/* ECOSISTEMA EDITORIALE — timeline Radio, Podcast, Eventi e News */}
