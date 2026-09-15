@@ -8,7 +8,7 @@
  */
 import type { CSSProperties } from "react";
 
-import logoExperience from "@/assets/imland-logo-google-trimmed-opt.webp";
+import logoExperience from "@/assets/imland-experience-principale.png";
 
 export type SectionKey = "default" | "radio" | "podcast" | "member" | "eventi" | "news";
 

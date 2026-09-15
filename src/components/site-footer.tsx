@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
-import logoBlack from "@/assets/imland-logo-google-trimmed-opt.webp";
+import logoBlack from "@/assets/imland-experience-principale.png";
 
 const provinces = ["Vercelli", "Novara", "Biella", "Verbania (VCO)"];
 
@@ -97,9 +97,9 @@ export function SiteFooter() {
             decoding="async"
             src={logoBlack}
             alt="IMLAND EXPERIENCE"
-            className="h-12 w-auto max-w-[210px] object-contain"
-            width={1248}
-            height={1248}
+            className="h-14 w-auto max-w-[210px] object-contain"
+            width={2048}
+            height={960}
           />
           <p className="mt-5 max-w-xs text-[15px] text-ink-700">Dai voce al tuo territorio.</p>
           <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-ink-600">

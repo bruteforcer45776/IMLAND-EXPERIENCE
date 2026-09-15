@@ -124,9 +124,9 @@ export function SiteHeader() {
               decoding="async"
               src={logo.url}
               alt={logo.alt}
-              className="h-9 w-auto max-w-[150px] object-contain drop-shadow-[0_1px_2px_rgba(255,255,255,0.45)] md:h-10 md:max-w-[190px]"
-              width={1000}
-              height={500}
+              className="h-10 w-auto max-w-[150px] object-contain drop-shadow-[0_1px_2px_rgba(255,255,255,0.45)] md:h-12 md:max-w-[190px]"
+              width={2048}
+              height={960}
             />
           </Link>
 
@@ -299,9 +299,9 @@ export function SiteHeader() {
                   decoding="async"
                   src={logo.url}
                   alt={logo.alt}
-                  className="h-9 w-auto max-w-[170px] object-contain"
-                  width={1000}
-                  height={500}
+                  className="h-10 w-auto max-w-[170px] object-contain"
+                  width={2048}
+                  height={960}
                 />
               </div>
               <button
