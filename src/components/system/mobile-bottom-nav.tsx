@@ -22,7 +22,8 @@ export function MobileBottomNav() {
   return (
     <nav
       aria-label="Navigazione rapida"
-      className="fixed inset-x-3 bottom-3 z-40 overflow-hidden rounded-[24px] border border-border bg-card/95 shadow-2xl backdrop-blur md:hidden"
+      data-floating-bottom-nav
+      className="floating-bottom-nav fixed inset-x-3 z-40 overflow-hidden rounded-[24px] border border-border bg-card/95 shadow-2xl backdrop-blur md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <ul className="mx-auto flex max-w-md items-end justify-between px-2 py-1.5">

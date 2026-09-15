@@ -290,7 +290,8 @@ export function RadioPlayer() {
         role="complementary"
         aria-label="Player IMLAND Radio"
         data-surface="dark"
-        className="fixed inset-x-3 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] z-50 md:inset-x-6 md:bottom-4"
+        data-floating-radio-player
+        className="floating-radio-player fixed inset-x-3 z-50 md:inset-x-6"
       >
         {expanded && (
           <div className="radio-player-glass absolute bottom-[4.75rem] left-0 max-h-[min(70vh,620px)] w-[min(92vw,420px)] origin-bottom-left overflow-y-auto rounded-[28px] p-5 text-white animate-enter">
@@ -361,7 +362,7 @@ export function RadioPlayer() {
                         : "Play"
                 }
                 className={`relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-white transition hover:opacity-90 ${
-                  status === "error" ? "bg-[#c5221f]" : "bg-[var(--error)]"
+                  status === "error" ? "bg-[#c5221f]" : "bg-[var(--color-icon-radio)]"
                 }`}
               >
                 {playing && status === "playing" && (
@@ -402,9 +403,10 @@ export function RadioPlayer() {
                       setVolume(Number(e.target.value));
                     }}
                     aria-label="Volume"
-                    className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full accent-signal"
+                    className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full"
                     style={{
-                      background: `linear-gradient(to right, var(--signal) 0%, var(--signal) ${effectiveVolume}%, rgba(255,255,255,0.15) ${effectiveVolume}%, rgba(255,255,255,0.15) 100%)`,
+                      accentColor: "#168cf2",
+                      background: `linear-gradient(to right, #168cf2 0%, #168cf2 ${effectiveVolume}%, rgba(255,255,255,0.15) ${effectiveVolume}%, rgba(255,255,255,0.15) 100%)`,
                     }}
                   />
                 </div>
@@ -599,7 +601,11 @@ export function RadioPlayer() {
                 setVolume(Number(event.target.value));
               }}
               aria-label="Volume"
-              className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full accent-signal"
+              className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full"
+              style={{
+                accentColor: "#168cf2",
+                background: `linear-gradient(to right, #168cf2 0%, #168cf2 ${effectiveVolume}%, rgba(255,255,255,0.15) ${effectiveVolume}%, rgba(255,255,255,0.15) 100%)`,
+              }}
             />
           </div>
 

@@ -72,7 +72,7 @@ export function StickyActions() {
       <AiChatbot />
       <aside
         aria-label="Azioni rapide"
-        className="fixed bottom-[calc(9rem+env(safe-area-inset-bottom))] right-3 z-[59] flex flex-col gap-2 md:bottom-40 md:right-4 md:gap-3"
+        className="floating-actions-right fixed right-3 z-[59] flex flex-col gap-2 md:right-4 md:gap-3"
       >
       <a
         href={WHATSAPP_MEMBER_URL}
@@ -105,7 +105,7 @@ export function StickyActions() {
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            className="sticky-glass fixed bottom-[calc(10.75rem+env(safe-area-inset-bottom))] right-3 z-[60] w-[min(20rem,calc(100vw-1.5rem))] rounded-[20px] p-4 md:bottom-36 md:right-4"
+            className="floating-access-panel sticky-glass fixed right-3 z-[60] w-[min(20rem,calc(100vw-1.5rem))] rounded-[20px] p-4 md:right-4"
           >
             <div className="flex items-center justify-between">
               <h2 id={titleId} tabIndex={-1} className="text-h3-im">
@@ -290,7 +290,7 @@ function AiChatbot() {
   };
 
   return (
-    <div className="fixed bottom-[calc(10rem+env(safe-area-inset-bottom))] left-3 z-[60] md:bottom-24 md:left-4">
+    <div className="floating-chatbot fixed left-3 z-[60] md:left-4">
       {chatOpen && (
         <section
           id={panelId}

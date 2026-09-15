@@ -261,7 +261,8 @@ export function PodcastMiniPlayer() {
     <aside
       aria-label="Player podcast"
       data-surface="dark"
-      className="fixed bottom-[calc(9.75rem+env(safe-area-inset-bottom))] left-4 z-40 md:bottom-[7rem] md:left-6"
+      data-floating-podcast-player
+      className="floating-podcast-player fixed left-4 z-40 md:left-6"
     >
       {expanded && (
         <div className="absolute bottom-[4.25rem] left-0 w-[min(92vw,360px)] origin-bottom-left animate-enter rounded-[24px] border border-white/10 bg-ink/95 p-4 text-white shadow-2xl backdrop-blur-xl md:bottom-0 md:left-[4.25rem]">

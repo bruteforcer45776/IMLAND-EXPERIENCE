@@ -58,6 +58,56 @@
   display: none;
 }
 
+/* Un solo sistema di impilamento per tutte le superfici flottanti.
+   Ogni livello libera automaticamente lo spazio occupato da quelli sotto. */
+.editorial-frame-canvas {
+  --dock-bottom-nav: 0rem;
+  --dock-radio-player: 4.75rem;
+  --dock-podcast-player: 0rem;
+  --dock-gap: 0.75rem;
+}
+
+@media (max-width: 47.999rem) {
+  .editorial-frame-canvas:has([data-floating-bottom-nav]) {
+    --dock-bottom-nav: 5.25rem;
+  }
+}
+
+.editorial-frame-canvas:not(:has([data-floating-radio-player])) {
+  --dock-radio-player: 0rem;
+}
+
+.editorial-frame-canvas:has([data-floating-podcast-player]) {
+  --dock-podcast-player: 4.5rem;
+}
+
+.floating-bottom-nav {
+  bottom: 0.75rem;
+}
+
+.floating-radio-player {
+  bottom: calc(var(--dock-bottom-nav) + var(--dock-gap) + env(safe-area-inset-bottom));
+}
+
+.floating-podcast-player {
+  bottom: calc(var(--dock-bottom-nav) + var(--dock-radio-player) + var(--dock-gap) + env(safe-area-inset-bottom));
+}
+
+.floating-actions-right,
+.floating-chatbot {
+  bottom: calc(
+    var(--dock-bottom-nav) + var(--dock-radio-player) + var(--dock-podcast-player) + var(--dock-gap) +
+      env(safe-area-inset-bottom)
+  );
+}
+
+.floating-access-panel {
+  bottom: calc(
+    var(--dock-bottom-nav) + var(--dock-radio-player) + var(--dock-podcast-player) + 4.5rem +
+      env(safe-area-inset-bottom)
+  );
+}
+
 /* Home a pannelli glass: ogni blocco lascia vedere la cornice editoriale. */
 .home-glass-stack {
   display: flex;
