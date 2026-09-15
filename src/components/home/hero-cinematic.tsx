@@ -19,7 +19,7 @@ export function HeroCinematic() {
       </div>
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center text-white">
         <h1 className="font-display text-[clamp(2.35rem,6vw,5.5rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.035em] text-balance !text-white">
-          IMLAND: DAI VOCE AL TUO TERRITORIO
+          DAI VOCE AL TUO TERRITORIO
         </h1>
         <p className="mt-7 font-display text-[clamp(1.2rem,2.6vw,2rem)] font-bold uppercase tracking-[0.08em] !text-white">
           RADIO · PODCAST · EVENTI

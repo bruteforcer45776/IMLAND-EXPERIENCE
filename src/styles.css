@@ -3,10 +3,10 @@
 @import "tw-animate-css";
 
 .site-glass-header {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.38);
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  -webkit-backdrop-filter: blur(20px) saturate(110%);
-  backdrop-filter: blur(20px) saturate(110%);
+  -webkit-backdrop-filter: blur(24px) saturate(135%);
+  backdrop-filter: blur(24px) saturate(135%);
 }
 
 .site-glass-header :is(.text-white, .text-white\/80, .text-white\/85, .text-white\/70) {
@@ -3266,4 +3266,14 @@ h6 {
 .home-glass-stack .home-unified-hero :is(h1, p) {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Vetro traslucido: mantiene leggibili le azioni sopra la cornice colorata. */
+.site-glass-header :is(a, button, input) {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.site-glass-header .btn-blue {
+  color: #ffffff !important;
 }
