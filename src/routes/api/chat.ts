@@ -1,69 +1,62 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { convertToModelMessages, generateText, streamText, type UIMessage } from "ai";
+import { generateText } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import { CHAT_SYSTEM, createChatLimiter, parseChatInput, shortcutAnswer } from "@/lib/chat-policy";
 
-const SYSTEM_PROMPT = `Sei l'assistente virtuale di IMLAND EXPERIENCE, l'hub territoriale che raccoglie radio, podcast, eventi e community locale.
-
-Il tuo compito è aiutare i visitatori a navigare il sito e dare informazioni chiare, brevi e cordiali su:
-
-• RADIO — IMLAND Radio va in diretta 24/7 sulle 4 province (Vercelli, Verbania, Biella, Novara). Palinsesto e programmi su /radio.
-• PODCAST — Storie, inchieste e interviste dal territorio. Ascolto e serie su /podcast.
-• EVENTI — Live, talk, radio in piazza, workshop. Calendario su /eventi.
-• NEWS — Aggiornamenti su /news.
-• CHI SIAMO — Info sul progetto su /chi-siamo.
-• CONTATTI — Modulo e riferimenti su /contatti.
-• FAQ — Domande frequenti su /faq.
-• MEMBER — Per andare in onda (spot radio, podcast, eventi) bisogna prima diventare Member. Info e vantaggi su /member.
-
-PACCHETTI (tutti con CTA "Contatta un commerciale" → /contatti):
-1) Member (obbligatorio per accedere agli altri): Base, Premium, Custom.
-2) Spot Radio (solo per Member): Base, Premium, Custom.
-3) Podcast (solo per Member): Base, Premium, Custom.
-
-Ricorda sempre: spot radio e podcast NON sono gratuiti e sono riservati ai Member. Per prezzi, tempistiche e preventivi personalizzati indirizza a /contatti ("Contatta un commerciale").
-
-Regole:
-- Rispondi sempre in italiano, con tono cordiale e conciso.
-- Quando citi una sezione del sito, includi il link relativo (es: [Radio](/radio)).
-- Se l'utente chiede qualcosa fuori scope IMLAND, riporta gentilmente alla navigazione del sito.
-- Non inventare prezzi, orari o dettagli specifici che non sono in questo prompt: indirizza a /contatti.
-- Dopo ogni punto vai a capo.`;
+const limit = createChatLimiter();
 
 export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const { messages, simple } = (await request.json()) as { messages?: unknown; simple?: boolean };
-        if (!Array.isArray(messages)) {
-          return new Response("Messages are required", { status: 400 });
-        }
+        const reply = (body: unknown, status = 200, headers: Record<string, string> = {}) => Response.json(body, { status, headers: { "Cache-Control": "no-store", ...headers } });
+        const origin = request.headers.get("origin");
+        if (origin && origin !== new URL(request.url).origin) return reply({ text: "Richiesta non consentita." }, 403);
+        if (!request.headers.get("content-type")?.includes("application/json")) return reply({ text: "Formato non valido." }, 415);
+        const reader = request.body?.getReader();
+        if (!reader) return reply({ text: "Scrivi una domanda." }, 400);
+        let raw = "";
+        let bytes = 0;
+        const decoder = new TextDecoder();
+        try {
+          while (true) {
+            const chunk = await reader.read();
+            if (chunk.done) break;
+            bytes += chunk.value.byteLength;
+            if (bytes > 4096) { await reader.cancel(); return reply({ text: "Messaggio troppo lungo." }, 413); }
+            raw += decoder.decode(chunk.value, { stream: true });
+          }
+          raw += decoder.decode();
+        } catch { return reply({ text: "Richiesta non valida." }, 400); }
+        let body: unknown;
+        try { body = JSON.parse(raw); } catch { return reply({ text: "Richiesta non valida." }, 400); }
+        const text = parseChatInput(body);
+        if (!text) return reply({ text: "Scrivi una domanda di massimo 240 caratteri." }, 400);
+        const ip = request.headers.get("cf-connecting-ip");
+        const quota = limit(ip ?? "local-preview");
+        if (!quota.allowed) return reply({ text: quota.remaining === 0 ? "Limite di 5 domande raggiunto. Riprova più tardi o visita Contatti." : "Attendi qualche secondo prima di inviare un'altra domanda.", remaining: quota.remaining }, 429, { "Retry-After": String(quota.retryAfter) });
+        const answer = shortcutAnswer(text);
+        if (answer) return reply({ text: answer, mode: "guide", remaining: quota.remaining });
 
         const key = process.env.LOVABLE_API_KEY;
-        if (!key) {
-          return new Response("Missing LOVABLE_API_KEY", { status: 500 });
-        }
+        if (!key || !ip) return reply({ text: "Le risposte AI non sono ancora attive. Posso indicarti Radio, Podcast, Eventi, News, Member, App e Contatti: scrivi uno di questi argomenti.", mode: "guide", remaining: quota.remaining });
 
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
 
-        if (simple) {
+        try {
           const result = await generateText({
             model,
-            system: SYSTEM_PROMPT,
-            messages: await convertToModelMessages(messages as UIMessage[]),
+            system: CHAT_SYSTEM,
+            messages: [{ role: "user", content: text }],
+            maxOutputTokens: 120,
+            maxRetries: 0,
+            abortSignal: AbortSignal.timeout(12000),
           });
-          return Response.json({ text: result.text });
+          return reply({ text: result.text.trim() || "Consulta [Contatti](/contatti).", mode: "ai", remaining: quota.remaining });
+        } catch {
+          return reply({ text: "Il servizio AI è temporaneamente indisponibile. Consulta [FAQ](/faq) o [Contatti](/contatti).", mode: "guide", remaining: quota.remaining }, 503);
         }
-
-        const result = streamText({
-          model,
-          system: SYSTEM_PROMPT,
-          messages: await convertToModelMessages(messages as UIMessage[]),
-        });
-
-        return result.toUIMessageStreamResponse({
-          originalMessages: messages as UIMessage[],
-        });
       },
     },
   },

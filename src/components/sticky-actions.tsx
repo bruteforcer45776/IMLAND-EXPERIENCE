@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { WHATSAPP_MEMBER_URL } from "@/lib/whatsapp";
 import { Accessibility, Bot, Send, X, Type, Minus, Plus, Contrast, ZapOff } from "lucide-react";
+import { CHAT_LIMIT, CHAT_MAX_CHARS, CHAT_WINDOW_MS } from "@/lib/chat-policy";
 
 // WhatsApp icon (replace number below with the real business number)
 
@@ -203,6 +204,9 @@ function AiChatbot() {
   const [chatOpen, setChatOpen] = useState(false);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
+  const [remaining, setRemaining] = useState(CHAT_LIMIT);
+  const [guideMode, setGuideMode] = useState(true);
+  const quotaRef = useRef({ count: 0, resetAt: 0 });
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -212,6 +216,16 @@ function AiChatbot() {
   ]);
   const inputRef = useRef<HTMLInputElement>(null);
   const panelId = useId();
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem("imland-chat-quota") || "null");
+      if (saved && Number.isFinite(saved.count) && saved.count >= 0 && saved.resetAt > Date.now() && saved.resetAt <= Date.now() + CHAT_WINDOW_MS) {
+        quotaRef.current = saved;
+        setRemaining(Math.max(0, CHAT_LIMIT - saved.count));
+      }
+    } catch { /* Storage is optional; server validation still applies. */ }
+  }, []);
 
   useEffect(() => {
     if (!chatOpen) return;
@@ -226,7 +240,16 @@ function AiChatbot() {
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     const text = input.trim();
-    if (!text || sending) return;
+    if (!text || text.length > CHAT_MAX_CHARS || sending) return;
+    const now = Date.now();
+    if (quotaRef.current.resetAt <= now) quotaRef.current = { count: 0, resetAt: now + CHAT_WINDOW_MS };
+    if (quotaRef.current.count >= CHAT_LIMIT) {
+      setMessages((current) => [...current, { id: crypto.randomUUID(), role: "assistant", text: "Hai raggiunto il limite di 5 domande. Riprova tra 30 minuti oppure visita Contatti." }]);
+      return;
+    }
+    quotaRef.current.count++;
+    setRemaining(CHAT_LIMIT - quotaRef.current.count);
+    try { sessionStorage.setItem("imland-chat-quota", JSON.stringify(quotaRef.current)); } catch { /* Optional storage. */ }
     const next = [...messages, { id: crypto.randomUUID(), role: "user" as const, text }];
     setMessages(next);
     setInput("");
@@ -236,16 +259,14 @@ function AiChatbot() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          simple: true,
-          messages: next.map((message) => ({
-            id: message.id,
-            role: message.role,
-            parts: [{ type: "text", text: message.text }],
-          })),
+          text,
         }),
+        signal: AbortSignal.timeout(15000),
       });
-      if (!response.ok) throw new Error("chat unavailable");
-      const data = (await response.json()) as { text?: string };
+      const data = (await response.json()) as { text?: string; mode?: string; remaining?: number };
+      if (!data.text) throw new Error("chat unavailable");
+      setGuideMode(data.mode !== "ai");
+      if (typeof data.remaining === "number") setRemaining(Math.min(CHAT_LIMIT - quotaRef.current.count, Math.max(0, data.remaining)));
       setMessages((current) => [
         ...current,
         {
@@ -285,7 +306,7 @@ function AiChatbot() {
               </span>
               <div>
                 <h2 className="font-display text-base font-bold">Assistente IMLAND</h2>
-                <p className="text-xs text-white/60">Online · risposte sul territorio</p>
+                <p className="text-xs text-white/70">{guideMode ? "Guida rapida" : "Risposte AI brevi"} · {remaining}/5 domande</p>
               </div>
             </div>
             <button
@@ -300,7 +321,7 @@ function AiChatbot() {
 
           <div className="scrollbar-imland flex-1 space-y-3 overflow-y-auto p-4" aria-live="polite">
             {messages.map((message) => (
-              <p
+              <div
                 key={message.id}
                 className={`max-w-[88%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                   message.role === "user"
@@ -308,8 +329,11 @@ function AiChatbot() {
                     : "bg-white/10 text-white/90"
                 }`}
               >
-                {message.text}
-              </p>
+                {message.text.split(/(\[[^\]]+\]\(\/[a-zA-Z0-9/_-]*\))/g).map((part, index) => {
+                  const link = part.match(/^\[([^\]]+)\]\((\/[a-zA-Z0-9/_-]*)\)$/);
+                  return link ? <a key={index} href={link[2]} className="font-semibold underline underline-offset-4">{link[1]}</a> : part;
+                })}
+              </div>
             ))}
             {sending && <p className="w-fit rounded-2xl bg-white/10 px-4 py-3 text-sm text-white/65">Sto scrivendo…</p>}
           </div>
@@ -322,7 +346,8 @@ function AiChatbot() {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               placeholder="Chiedi a IMLAND…"
-              className="h-11 min-w-0 flex-1 rounded-full border border-white/10 bg-white/10 px-4 text-sm text-white outline-none placeholder:text-white/45 focus:border-white/35"
+              maxLength={CHAT_MAX_CHARS}
+              className="h-11 min-w-0 flex-1 rounded-full border border-white/10 bg-white/10 px-4 text-base text-white outline-none placeholder:text-white/70 focus:border-white/35"
               disabled={sending}
             />
             <button
