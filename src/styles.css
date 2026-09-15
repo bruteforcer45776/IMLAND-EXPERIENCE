@@ -2420,6 +2420,41 @@ h6 {
   color: inherit;
 }
 
+/* Allineamento editoriale globale dei riquadri: contenuti e azioni restano
+   centrati anche quando la card cambia colonna o larghezza. */
+#main-content :is(.card-im, .surface-card, .glass-panel, .bento-card) {
+  text-align: center;
+  align-items: center;
+}
+
+#main-content :is(div, article, a, li, details)[class*="rounded-"][class*="bg-card"],
+#main-content :is(div, article, a, li, details)[class*="rounded-"][class*="bg-white"] {
+  text-align: center;
+}
+
+#main-content :is(.card-im, .surface-card, .glass-panel, .bento-card)
+  :is(h2, h3, h4, p, dt, dd, summary) {
+  margin-inline: auto;
+  text-align: center;
+}
+
+#main-content :is(.card-im, .surface-card, .glass-panel, .bento-card)
+  :is(a, button, [role="button"]) {
+  justify-content: center;
+}
+
+/* In Home il colore di categoria resta su superfici, icone, bordi e CTA.
+   Titoli, parole chiave e copy sono sempre neri come da direzione approvata. */
+.home-glass-stack > section
+  :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, summary, label, small, span, .im-gradient-text) {
+  color: #101114 !important;
+  -webkit-text-fill-color: #101114 !important;
+}
+
+.home-glass-stack > section .im-gradient-text {
+  background: none !important;
+}
+
 /* ============================================================
    LEGGIBILITÀ — contrasti AA sui casi residui
    ============================================================ */
