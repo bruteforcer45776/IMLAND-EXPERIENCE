@@ -110,7 +110,7 @@ export function SiteFooter() {
             to="/member"
             className="theme-member mt-6 inline-flex items-center gap-2 rounded-full bg-signal px-5 py-3 text-[14px] font-semibold text-signal-foreground"
           >
-            Diventa Partner
+            Diventa Member!
           </Link>
         </div>
 

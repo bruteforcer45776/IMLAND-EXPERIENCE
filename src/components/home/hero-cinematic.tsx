@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Play, ArrowRight, Download } from "lucide-react";
+import { Play, Download } from "lucide-react";
 import { streamingPlatforms } from "@/components/streaming-banner";
 
 const heroSlides = [
@@ -31,8 +31,8 @@ export function HeroCinematic() {
           <p className="mt-5 max-w-xl text-left text-body-l font-medium leading-relaxed text-ink-950">Radio, podcast, eventi e persone che raccontano Vercelli, Novara, Biella e il Verbano-Cusio-Ossola.</p>
           <div className="mt-9 flex flex-wrap items-center justify-start gap-3">
             <Link to="/radio" className="group inline-flex h-12 items-center gap-2.5 rounded-full btn-blue px-7 text-[15px]">Ascolta la diretta <Play className="h-4 w-4 fill-current" /></Link>
-            <Link to="/scarica-app" className="inline-flex h-12 items-center gap-2 rounded-full border border-black/15 bg-white px-6 text-[15px] font-semibold text-ink-950">Scarica l'app <Download size={18} /></Link>
-            <Link to="/chi-siamo" className="inline-flex h-12 items-center gap-2 rounded-full border border-black/15 bg-white px-6 text-[15px] font-semibold text-ink-950">Scopri IMLAND <ArrowRight size={18} /></Link>
+            <Link to="/scarica-app" className="hero-cta-app inline-flex h-12 items-center gap-2 rounded-full border border-black/15 bg-white px-6 text-[15px] font-semibold text-black shadow-sm">Scarica l'app <Download size={18} /></Link>
+            <Link to="/chi-siamo" className="hero-cta-discover inline-flex h-12 items-center rounded-full bg-[#ffc400] px-6 text-[15px] font-bold text-white shadow-sm">Scopri IMLAND</Link>
           </div>
         </div>
       </div>

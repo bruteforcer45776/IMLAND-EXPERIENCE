@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Search, ChevronDown, Radio, ArrowRight, LogOut, LayoutGrid } from "lucide-react";
+import { Search, ChevronDown, LogOut, LayoutGrid } from "lucide-react";
 import { usePlayer } from "@/components/player-context";
 
 import { getSectionConfig } from "@/config/sections";
@@ -22,6 +22,7 @@ type NavItem = {
 const nav: NavItem[] = [
   { to: "/", label: "Home" },
   { to: "/radio", label: "Radio" },
+  { to: "/news", label: "News" },
   {
     to: "/podcast",
     label: "Podcast",
@@ -30,22 +31,8 @@ const nav: NavItem[] = [
       { to: "/my-podcast", label: "My Podcast", desc: "Podcast su misura per aziende e organizzazioni." },
     ],
   },
+  { to: "/member", label: "Partner" },
   { to: "/eventi", label: "Eventi" },
-  { to: "/news", label: "News" },
-  { to: "/member", label: "Partners" },
-  { to: "/chi-siamo", label: "Il Progetto" },
-  { to: "/contatti", label: "Contatti" },
-  { to: "/faq", label: "FAQ" },
-];
-
-const mobileLinks = [
-  { to: "/", label: "Home" },
-  { to: "/radio", label: "Radio" },
-  { to: "/podcast", label: "Podcast" },
-  { to: "/my-podcast", label: "My Podcast" },
-  { to: "/eventi", label: "Eventi" },
-  { to: "/news", label: "News" },
-  { to: "/member", label: "Partners" },
   { to: "/chi-siamo", label: "Il Progetto" },
   { to: "/contatti", label: "Contatti" },
   { to: "/faq", label: "FAQ" },
@@ -346,28 +333,49 @@ export function SiteHeader() {
               className="scrollbar-imland flex-1 overflow-y-auto px-4 py-2"
               aria-label="Navigazione mobile"
             >
-              {mobileLinks.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-between rounded-2xl px-3 py-3 text-[16px] font-semibold text-ink-950 transition-colors hover:bg-muted md:px-4 md:py-3.5 md:text-[17px]"
-                >
-                  {item.label}
-                  <ArrowRight className="h-5 w-5 text-ink-400" />
-                </Link>
-              ))}
+              {nav.map((item) =>
+                item.children ? (
+                  <details key={item.to} className="group rounded-2xl">
+                    <summary className="flex cursor-pointer list-none items-center justify-between rounded-2xl px-3 py-3 text-[16px] font-semibold text-ink-950 marker:hidden hover:bg-muted md:px-4 md:py-3.5 md:text-[17px]">
+                      {item.label}
+                      <ChevronDown className="h-5 w-5 transition-transform group-open:rotate-180" />
+                    </summary>
+                    <div className="mx-3 mb-2 grid gap-1 border-l border-border pl-3">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.to}
+                          to={child.to}
+                          onClick={() => setOpen(false)}
+                          className="rounded-xl px-3 py-2.5 text-[15px] font-semibold text-ink-800 hover:bg-muted"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </details>
+                ) : (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setOpen(false)}
+                    className="flex items-center rounded-2xl px-3 py-3 text-[16px] font-semibold text-ink-950 transition-colors hover:bg-muted md:px-4 md:py-3.5 md:text-[17px]"
+                  >
+                    {item.label}
+                  </Link>
+                ),
+              )}
             </nav>
 
             <div className="space-y-3 border-t border-border p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
-              <Link
-                to="/radio"
+              <a
+                href={WHATSAPP_MEMBER_URL}
+                target="_blank"
+                rel="noreferrer"
                 onClick={() => setOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-full btn-blue px-5 py-3 text-[14px] md:py-3.5 md:text-[15px]"
+                className="theme-member flex w-full items-center justify-center rounded-full bg-signal px-5 py-3 text-[15px] font-bold text-ink-950 md:py-3.5"
               >
-                <Radio size={18} />
-                Ascolta live
-              </Link>
+                Diventa Member!
+              </a>
               {user ? (
                 <div className="rounded-3xl border border-border bg-white p-4">
                   <Link
@@ -406,23 +414,14 @@ export function SiteHeader() {
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-3">
+                <div className="flex justify-center">
                   <Link
                     to="/accedi"
                     onClick={() => setOpen(false)}
-                    className="flex w-full items-center justify-center rounded-full btn-liquid px-5 py-3 text-[14px] md:py-3.5 md:text-[15px]"
+                    className="px-4 py-2 text-[14px] font-semibold text-ink-700 underline underline-offset-4"
                   >
                     Accedi
                   </Link>
-                  <a
-                    href={WHATSAPP_MEMBER_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => setOpen(false)}
-                    className="flex w-full items-center justify-center rounded-full border border-border bg-white px-5 py-3 text-[14px] font-semibold text-ink-950 md:py-3.5 md:text-[15px]"
-                  >
-                    Sei un'azienda? Diventa Member
-                  </a>
                 </div>
               )}
               <div className="flex justify-center gap-4 text-[13px] text-ink-600">
