@@ -28,6 +28,7 @@ import {
   upcomingEvents,
 } from "../data/events";
 import { latestEpisodes, programs, totalEpisodes } from "../data/podcast-derived";
+import { partnerLogos } from "../data/partner-logos";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
 
 const featuredEpisode = latestEpisodes[0];
