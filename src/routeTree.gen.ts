@@ -20,6 +20,7 @@ import { Route as ContattiRouteImport } from './routes/contatti'
 import { Route as CookieRouteImport } from './routes/cookie'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MemberRouteImport } from './routes/member'
+import { Route as MyPodcastRouteImport } from './routes/my-podcast'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PerLeAziendeRouteImport } from './routes/per-le-aziende'
@@ -141,6 +142,11 @@ const FaqRoute = FaqRouteImport.update({
 const MemberRoute = MemberRouteImport.update({
   id: '/member',
   path: '/member',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyPodcastRoute = MyPodcastRouteImport.update({
+  id: '/my-podcast',
+  path: '/my-podcast',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRoute = NewsRouteImport.update({
@@ -526,6 +532,7 @@ export interface FileRoutesByFullPath {
   '/cookie': typeof CookieRoute
   '/faq': typeof FaqRoute
   '/member': typeof MemberRoute
+  '/my-podcast': typeof MyPodcastRoute
   '/news': typeof NewsRouteWithChildren
   '/partners': typeof PartnersRoute
   '/per-le-aziende': typeof PerLeAziendeRoute
@@ -606,6 +613,7 @@ export interface FileRoutesByTo {
   '/cookie': typeof CookieRoute
   '/faq': typeof FaqRoute
   '/member': typeof MemberRoute
+  '/my-podcast': typeof MyPodcastRoute
   '/news': typeof NewsRouteWithChildren
   '/partners': typeof PartnersRoute
   '/per-le-aziende': typeof PerLeAziendeRoute
@@ -684,6 +692,7 @@ export interface FileRoutesById {
   '/cookie': typeof CookieRoute
   '/faq': typeof FaqRoute
   '/member': typeof MemberRoute
+  '/my-podcast': typeof MyPodcastRoute
   '/news': typeof NewsRouteWithChildren
   '/partners': typeof PartnersRoute
   '/per-le-aziende': typeof PerLeAziendeRoute
@@ -766,6 +775,7 @@ export interface FileRouteTypes {
     | '/cookie'
     | '/faq'
     | '/member'
+    | '/my-podcast'
     | '/news'
     | '/partners'
     | '/per-le-aziende'
@@ -846,6 +856,7 @@ export interface FileRouteTypes {
     | '/cookie'
     | '/faq'
     | '/member'
+    | '/my-podcast'
     | '/news'
     | '/partners'
     | '/per-le-aziende'
@@ -923,6 +934,7 @@ export interface FileRouteTypes {
     | '/cookie'
     | '/faq'
     | '/member'
+    | '/my-podcast'
     | '/news'
     | '/partners'
     | '/per-le-aziende'
@@ -1005,6 +1017,7 @@ export interface RootRouteChildren {
   CookieRoute: typeof CookieRoute
   FaqRoute: typeof FaqRoute
   MemberRoute: typeof MemberRoute
+  MyPodcastRoute: typeof MyPodcastRoute
   NewsRoute: typeof NewsRouteWithChildren
   PartnersRoute: typeof PartnersRoute
   PerLeAziendeRoute: typeof PerLeAziendeRoute
@@ -1108,6 +1121,13 @@ declare module '@tanstack/react-router' {
       path: '/member'
       fullPath: '/member'
       preLoaderRoute: typeof MemberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-podcast': {
+      id: '/my-podcast'
+      path: '/my-podcast'
+      fullPath: '/my-podcast'
+      preLoaderRoute: typeof MyPodcastRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news': {
@@ -1768,6 +1788,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookieRoute: CookieRoute,
   FaqRoute: FaqRoute,
   MemberRoute: MemberRoute,
+  MyPodcastRoute: MyPodcastRoute,
   NewsRoute: NewsRouteWithChildren,
   PartnersRoute: PartnersRoute,
   PerLeAziendeRoute: PerLeAziendeRoute,

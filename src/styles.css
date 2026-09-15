@@ -2861,6 +2861,79 @@ h6 {
   background: #fff !important;
 }
 
+/* Rifinitura responsive e densita richiesta. */
+.home-glass-stack > section:not(:first-of-type) {
+  text-align: center;
+  padding-block: clamp(1.75rem, 4vw, 3.5rem) !important;
+}
+
+.home-glass-stack > section:not(:first-of-type) :is(h1, h2, h3) {
+  color: #0a0a0a !important;
+}
+
+.home-glass-stack > section:not(:first-of-type) :is(.flex, .grid) {
+  justify-content: center;
+}
+
+.home-glass-stack > section:not(:first-of-type) :is(p, h1, h2, h3) {
+  margin-inline: auto;
+}
+
+.home-feature-grid > :nth-child(2) {
+  transform: none !important;
+}
+
+.home-adv-slot {
+  width: 100%;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.home-adv-slot > div {
+  width: 100%;
+  border: 0 !important;
+  border-radius: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.site-footer {
+  overflow: clip;
+  border-radius: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem) 0 0;
+}
+
+.hero-editorial__copy {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.image-coming-soon {
+  min-height: 10rem;
+  color: #0a0a0a;
+  font-size: .8125rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-align: center;
+}
+
+@media (max-width: 47.999rem) {
+  .editorial-frame-canvas { width: calc(100% - 1rem); margin-top: .5rem; }
+  .editorial-frame-canvas > header,
+  .editorial-frame-canvas > nav.fixed.inset-x-0 { top: .5rem; width: calc(100% - 1rem); }
+  .home-glass-stack { gap: .5rem; padding-inline: .25rem; }
+  .home-glass-stack > section:not(:first-of-type) { padding-block: 1.5rem !important; }
+  .home-glass-stack > section:first-of-type { min-height: clamp(34rem, 78svh, 42rem); }
+  .hero-editorial { padding: 1.25rem !important; padding-bottom: 4.5rem !important; }
+  .hero-editorial__copy { text-align: center; }
+  .hero-editorial__copy :is(h1, p) { text-align: center !important; }
+  .hero-editorial__copy > div { justify-content: center !important; }
+}
+
 /* Correzione richiesta: le sezioni della Home tornano bianche. */
 .home-glass-stack > section:not(:first-of-type) {
   background: #fff !important;

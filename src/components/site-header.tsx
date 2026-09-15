@@ -22,7 +22,14 @@ type NavItem = {
 const nav: NavItem[] = [
   { to: "/", label: "Home" },
   { to: "/radio", label: "Radio" },
-  { to: "/podcast", label: "Podcast" },
+  {
+    to: "/podcast",
+    label: "Podcast",
+    children: [
+      { to: "/podcast", label: "Podcast", desc: "I format editoriali e tutte le puntate IMLAND." },
+      { to: "/my-podcast", label: "My Podcast", desc: "Podcast su misura per aziende e organizzazioni." },
+    ],
+  },
   { to: "/eventi", label: "Eventi" },
   { to: "/news", label: "News" },
   { to: "/member", label: "Partners" },
@@ -35,6 +42,7 @@ const mobileLinks = [
   { to: "/", label: "Home" },
   { to: "/radio", label: "Radio" },
   { to: "/podcast", label: "Podcast" },
+  { to: "/my-podcast", label: "My Podcast" },
   { to: "/eventi", label: "Eventi" },
   { to: "/news", label: "News" },
   { to: "/member", label: "Partners" },

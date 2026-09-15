@@ -11,7 +11,13 @@ type Props = {
 
 /** Copertina news con label logo IMLAND News centrata in alto. */
 export function NewsCover({ src, alt, className, logoClassName, priority = false }: Props) {
-  if (!src) return null;
+  if (!src) {
+    return (
+      <div className={cn("image-coming-soon flex items-center justify-center rounded-2xl bg-neutral-100", className)}>
+        <span>IMMAGINE IN ARRIVO</span>
+      </div>
+    );
+  }
   return (
     <div className={cn("relative overflow-hidden rounded-2xl bg-ink-950/5", className)}>
       <img

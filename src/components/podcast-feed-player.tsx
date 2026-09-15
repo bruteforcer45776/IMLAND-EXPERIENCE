@@ -44,7 +44,7 @@ export function PodcastFeedPlayer({
       <div className="space-y-4">
         {showArtwork && (
           <div className="flex aspect-square items-center justify-center rounded-2xl border border-dashed border-signal/40 bg-signal/5 p-6 text-center text-sm font-semibold text-signal">
-            {name?.toLowerCase().includes("carta canta") ? "Copertina in arrivo" : "Immagine in arrivo"}
+            IMMAGINE IN ARRIVO
           </div>
         )}
         <p className="text-sm text-muted-foreground">Nuove puntate in arrivo.</p>
@@ -64,7 +64,7 @@ export function PodcastFeedPlayer({
           />
         ) : (
           <div className="mb-5 flex aspect-square items-center justify-center rounded-2xl border border-dashed border-signal/40 bg-signal/5 p-6 text-center text-sm font-semibold text-signal">
-            {name?.toLowerCase().includes("carta canta") ? "Copertina in arrivo" : "Immagine in arrivo"}
+            IMMAGINE IN ARRIVO
           </div>
         )
       )}

@@ -31,7 +31,6 @@ import {
 import { latestEpisodes, programs, totalEpisodes } from "../data/podcast-derived";
 import { partnerLogos } from "../data/partner-logos";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
-import { WHATSAPP_MEMBER_URL } from "@/lib/whatsapp";
 
 const featuredEpisode = latestEpisodes[0];
 
@@ -52,13 +51,6 @@ const newsPreviews = [
     title: "Nuove voci in diretta.",
     abstract: "Conduttori che vivono qui.\nProgrammi pensati per la community.",
   },
-];
-
-const memberBenefits = [
-  { k: "Radio", v: "Crea il tuo spot o la tua rubrica in onda." },
-  { k: "Podcast", v: "Produci la tua serie con il nostro studio." },
-  { k: "Eventi", v: "Porta il tuo evento nel calendario IMLAND." },
-  { k: "Community", v: "Entra tra le voci che raccontano il territorio." },
 ];
 
 const homeToneForTag = (tag: string) =>
@@ -643,60 +635,6 @@ function Home() {
         </Reveal>
       </section>
 
-      {/* CTA FINALE — Member */}
-      <section className="theme-member bg-white section-pad">
-        <div className={shell}>
-          <Reveal>
-            <div className="relative overflow-hidden rounded-[32px] bg-[#e0a800] p-10 text-[#0b0c0f] md:p-16">
-              <div className="relative z-10 max-w-3xl">
-                <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-[#0b0c0f]/70">
-                  IMLAND Member
-                </p>
-                <h2 className="mt-4 text-h2-im text-[#0b0c0f]">
-                  Non ascoltare <span className="text-[#0b0c0f]">soltanto</span>.
-                </h2>
-                <p className="mt-5 text-lg text-[#0b0c0f]/70">
-                  Diventa Member.
-                  <br />
-                  Sblocchi radio, podcast ed eventi come creatore, non solo come pubblico.
-                </p>
-
-                <ul className="mt-10 grid gap-3 sm:grid-cols-2">
-                  {memberBenefits.map((b) => (
-                    <li
-                      key={b.k}
-                      className="flex items-start gap-3 rounded-2xl border border-[#0b0c0f]/10 bg-[#0b0c0f]/[0.05] px-4 py-3"
-                    >
-                      <span className="mt-0.5 rounded-full bg-[#0b0c0f]/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#0b0c0f]">
-                        {b.k}
-                      </span>
-                      <span className="text-sm text-[#0b0c0f]/80">{b.v}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-11 flex flex-wrap gap-3">
-                  <a
-                    href={WHATSAPP_MEMBER_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-ink-950 transition-all duration-fast hover:bg-white/90 active:scale-[0.98]"
-                  >
-                    Diventa Member
-                    <span className="btn-arrow">→</span>
-                  </a>
-                  <Link
-                    to="/chi-siamo"
-                    className="inline-flex h-12 items-center rounded-full border border-[#0b0c0f]/20 px-7 text-[15px] font-semibold text-[#0b0c0f] transition-colors hover:bg-[#0b0c0f]/10"
-                  >
-                    Chi siamo
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </div>
   );
 }

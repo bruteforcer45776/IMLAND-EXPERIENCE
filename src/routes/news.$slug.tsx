@@ -294,7 +294,6 @@ function ArticlePage() {
           </div>
         )}
 
-        {article.cover_image_url && (
           <figure className="mt-8">
             <NewsCover
               src={article.cover_image_url}
@@ -303,7 +302,6 @@ function ArticlePage() {
               priority
             />
           </figure>
-        )}
 
         <SanitizedBody html={article.body} />
 

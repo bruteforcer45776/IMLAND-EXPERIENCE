@@ -6,7 +6,7 @@ const provinces = ["Vercelli", "Novara", "Biella", "Verbania (VCO)"];
 
 const themeForLink = (to: string) => {
   if (to.startsWith("/radio")) return "theme-radio";
-  if (to.startsWith("/podcast")) return "theme-podcast";
+  if (to.startsWith("/podcast") || to.startsWith("/my-podcast")) return "theme-podcast";
   if (to.startsWith("/eventi")) return "theme-eventi";
   if (to.startsWith("/news")) return "theme-news";
   if (to.startsWith("/member")) return "theme-member";
@@ -19,6 +19,7 @@ const columns = [
     links: [
       { to: "/radio", label: "Radio" },
       { to: "/podcast", label: "Podcast" },
+      { to: "/my-podcast", label: "My Podcast" },
       { to: "/eventi", label: "Eventi" },
       { to: "/news", label: "News" },
       { to: "/member", label: "Partners" },
@@ -56,7 +57,7 @@ const columns = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-white text-ink-700">
+    <footer className="site-footer bg-white text-ink-700">
       {/* Newsletter strip */}
       <div className="border-b border-border">
         <div className="mx-auto flex max-w-[1280px] flex-col items-start justify-between gap-5 px-4 py-8 md:flex-row md:items-center md:px-10">

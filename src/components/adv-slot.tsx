@@ -94,9 +94,9 @@ export function AdvSlot({ position }: { position: AdvPosition }) {
   const slide = slides[index]!;
 
   return (
-    <section className="container-im py-3" aria-label={`Spazio pubblicitario ${position}`}>
+    <section className="home-adv-slot py-3" aria-label={`Spazio pubblicitario ${position}`}>
       <div
-        className="relative overflow-hidden rounded-[28px] border border-border p-4 md:p-5"
+        className="relative overflow-hidden rounded-[28px] border-0 p-5 md:p-7"
         style={{ background: slide.bg, color: slide.fg }}
       >
         <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">

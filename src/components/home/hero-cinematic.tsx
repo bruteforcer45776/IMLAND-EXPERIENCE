@@ -57,7 +57,7 @@ export function HeroCinematic() {
       />
 
       <div className="hero-editorial relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 items-end px-4 pb-20 pt-8 md:px-10 md:pb-24">
-        <div className="hero-editorial__copy w-full max-w-3xl rounded-[36px] border border-white/20 bg-black/55 px-5 py-7 shadow-[0_28px_90px_rgba(0,0,0,0.32)] backdrop-blur-xl backdrop-saturate-[1.2] md:px-10 md:py-10">
+        <div className="hero-editorial__copy w-full max-w-3xl">
         <p className="hero-editorial__label">Territori · idee · persone · storie</p>
         <h1 className="text-display-l max-w-4xl text-left text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.7)]">
           Dai voce al tuo <span>territorio</span>

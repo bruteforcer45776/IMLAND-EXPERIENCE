@@ -93,9 +93,7 @@ function PodcastTile({ name, cat }: { name: string; cat: string }) {
       className="relative flex aspect-[4/5] flex-col justify-between overflow-hidden p-5 text-white"
       style={{ background: catColor[cat] || "var(--signal)" }}
     >
-      <span className="self-start rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
-        {cat}
-      </span>
+      <span className="text-center text-sm font-bold uppercase tracking-[0.16em]">IMMAGINE IN ARRIVO</span>
       <div>
         <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
           IMLAND Radio
@@ -224,8 +222,8 @@ function PodcastPage() {
                 Terra di Diamanti · Casual Nerd · IMWeekend
               </p>
             </Link>
-            <a
-              href="#proponi-podcast"
+            <Link
+              to="/my-podcast"
               className="group rounded-[32px] border border-signal/30 bg-signal p-7 text-white transition hover:-translate-y-1 hover:shadow-xl md:p-10"
             >
               <p className="text-xs font-semibold uppercase tracking-wider text-white/75">My Podcast</p>
@@ -239,7 +237,7 @@ function PodcastPage() {
               <p className="mt-6 text-sm font-semibold text-white">
                 TEDx Biella · Biella Città Creativa
               </p>
-            </a>
+            </Link>
           </div>
         </section>
 
