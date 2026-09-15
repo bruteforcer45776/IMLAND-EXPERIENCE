@@ -4,12 +4,13 @@ import { canonical, faqLd, jsonLd } from "../lib/seo";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 
 const faqItems = [
-  { q: "Cos'è IMLAND EXPERIENCE?", a: "IMLAND è un hub territoriale che unisce radio, podcast, eventi e community per dare voce al Piemonte nord-orientale. Trasmettiamo 24/7 e organizziamo momenti live sul territorio." },
-  { q: "Come si ascolta la radio di IMLAND?", a: "La radio si ascolta gratuitamente online dal sito, dalla pagina Radio o dal player sempre attivo, oltre che dall'app installabile su iPhone, Android e desktop. La diretta è disponibile 24 ore su 24." },
-  { q: "Dove posso ascoltare i podcast?", a: "Tutti i podcast sono disponibili sul sito nella sezione Podcast, nell'app IMLAND e sulle principali piattaforme (Spotify, Apple Podcasts, Amazon Music)." },
-  { q: "Come partecipo agli eventi IMLAND?", a: "Trovi tutti gli eventi nella sezione Eventi con date, luogo e modalità di partecipazione. Alcuni sono gratuiti, altri richiedono prenotazione." },
-  { q: "Come si diventa Partner di IMLAND?", a: "Aziende, professionisti e associazioni possono entrare nel progetto dalla pagina Partners e costruire insieme a IMLAND la collaborazione più adatta." },
-  { q: "Ho un problema tecnico con il sito o l'app: a chi scrivo?", a: "Scrivici dalla pagina Contatti descrivendo il problema (dispositivo e browser usati): il team tecnico ti risponde in poche ore lavorative." },
+  { q: "Radio — Come posso ascoltare IMLAND Radio?", a: "Puoi ascoltare gratuitamente la diretta 24 ore su 24 dalla pagina Radio, dal player presente sul sito e dall'app IMLAND installabile sul tuo dispositivo." },
+  { q: "Podcast — Dove trovo i podcast IMLAND?", a: "Nella sezione Podcast trovi i format editoriali e le puntate disponibili. My Podcast è invece lo spazio dedicato ai progetti audio realizzati su misura per aziende e organizzazioni." },
+  { q: "Partner — Come si diventa Member di IMLAND?", a: "Aziende, professionisti e associazioni possono presentare la propria realtà dalla pagina Partner. Il team IMLAND valuterà insieme la collaborazione e le opportunità più adatte." },
+  { q: "Eventi — Come posso partecipare agli eventi?", a: "Nella sezione Eventi trovi gli appuntamenti pubblicati con data, luogo e modalità di partecipazione. Quando è richiesta una prenotazione, le indicazioni sono riportate nella scheda dell'evento." },
+  { q: "News — Come vengono selezionate le notizie?", a: "La sezione News raccoglie contenuti e segnalazioni legati al territorio. La redazione verifica e seleziona le informazioni prima della loro pubblicazione o condivisione." },
+  { q: "Community — Come posso partecipare alla rete IMLAND?", a: "Puoi ascoltare i contenuti, partecipare agli eventi, proporre storie e iniziative oppure entrare nella rete Member. Le pagine Contatti e Partner indicano il percorso più adatto." },
+  { q: "Tecnica — Cosa faccio se il sito, l'app o il player non funzionano?", a: "Verifica la connessione, aggiorna la pagina e prova con un browser aggiornato. Se il problema continua, scrivici dalla pagina Contatti indicando dispositivo, browser e una breve descrizione dell'errore." },
 ];
 
 export const Route = createFileRoute("/faq")({
