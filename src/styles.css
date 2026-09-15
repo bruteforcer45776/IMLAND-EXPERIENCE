@@ -2934,6 +2934,82 @@ h6 {
   .hero-editorial__copy > div { justify-content: center !important; }
 }
 
+/* Sistema UI coerente: solo geometria, tipografia, allineamento e colore del testo. */
+:root {
+  --ui-card-radius: 1.5rem;
+  --ui-control-radius: 999px;
+  --ui-card-pad: clamp(1.25rem, 2.2vw, 1.75rem);
+  --ui-section-gap: clamp(1.25rem, 2.4vw, 2rem);
+  --ui-grid-gap: clamp(.875rem, 1.8vw, 1.25rem);
+  --ui-border: rgb(10 10 10 / 12%);
+  --ui-shadow: 0 12px 30px rgb(10 10 10 / 8%);
+}
+
+:is(.card-im, .bento-card, .surface-card, .glass-panel) {
+  border-radius: var(--ui-card-radius) !important;
+  border-color: var(--ui-border) !important;
+  box-shadow: var(--ui-shadow) !important;
+}
+
+:is(.bento-grid, .home-feature-grid, .home-territory-grid, .home-proof-grid, .home-podcast-grid, .home-events-grid) {
+  gap: var(--ui-grid-gap);
+}
+
+:is(.section-pad, .section-pad-sm) {
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+:is(h1, h2, h3, h4, h5, h6),
+:is(h1, h2, h3, h4, h5, h6) :is(span, a) {
+  color: #0a0a0a;
+}
+
+:is(main, footer, header) :is(p, li, dt, dd, label, summary) {
+  color: #0a0a0a;
+}
+
+.site-glass-header :is(a, button, input),
+.site-footer :is(a, p, h2, li, label) {
+  color: #0a0a0a !important;
+}
+
+:is(.theme-radio, .theme-podcast, .theme-member, .theme-news, .theme-eventi)
+  :is(h1, h2, h3, h4, p) {
+  color: #0a0a0a !important;
+}
+
+:is(.btn-blue, .btn-liquid, .cta-light, [class*="bg-signal"])[data-surface="dark"],
+:is(.btn-blue, .btn-liquid, .cta-light) {
+  color: var(--signal-foreground, #fff) !important;
+}
+
+:is(a, button, [role="button"]) > :is(svg, img) + :is(span, p),
+:is(a, button, [role="button"]):has(> svg) {
+  align-items: center;
+}
+
+:is(.card-im, .bento-card, .surface-card) > :is(svg, img, [class*="icon"]) {
+  flex-shrink: 0;
+}
+
+:is(.card-im, .bento-card, .surface-card) :is(h2, h3) {
+  line-height: 1.15;
+  letter-spacing: -.025em;
+}
+
+:is(.card-im, .bento-card, .surface-card) p {
+  line-height: 1.55;
+}
+
+@media (max-width: 47.999rem) {
+  :root { --ui-card-radius: 1.25rem; --ui-card-pad: 1.25rem; --ui-grid-gap: .75rem; }
+  :is(.card-im, .bento-card, .surface-card, .glass-panel) { padding: var(--ui-card-pad); }
+  :is(h1, .text-display-l, .text-display-m) { font-size: clamp(2rem, 10vw, 3.5rem) !important; }
+  :is(h2, .text-h2-im) { font-size: clamp(1.65rem, 7vw, 2.5rem) !important; }
+  :is(h3, .text-h3-im) { font-size: clamp(1.15rem, 5vw, 1.5rem) !important; }
+  :is(a, button, [role="button"]) { min-height: 2.75rem; }
+}
+
 /* Correzione richiesta: le sezioni della Home tornano bianche. */
 .home-glass-stack > section:not(:first-of-type) {
   background: #fff !important;
