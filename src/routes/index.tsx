@@ -124,7 +124,7 @@ function Home() {
       <HeroCinematic />
 
       {/* PARTNER — I nostri partner ufficiali */}
-      <section className="relative overflow-hidden border-y border-black/10 bg-white section-pad-sm">
+      <section className="home-partners relative overflow-hidden border-y border-black/10 bg-white section-pad-sm">
         <div className="relative container-im">
           <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-black/55">
             Membri e realtà del territorio:
@@ -137,7 +137,7 @@ function Home() {
 
       {/* QUICK LINKS — i nostri servizi */}
 
-      <section className="decor-host relative isolate overflow-hidden bg-white section-pad-sm">
+      <section className="home-services decor-host relative isolate overflow-hidden bg-white section-pad-sm">
         <div className={`relative ${shell}`}>
           <p className={eyebrow}>I nostri servizi</p>
           <h2 className={`${h2} mt-3`}>
@@ -172,7 +172,7 @@ function Home() {
           <h2 className={`${h2} mt-3`}>
             Fresco di <span className={keyword}>oggi</span>.
           </h2>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <div className="home-feature-grid mt-10 grid gap-5 md:grid-cols-3">
             {featuredEpisode && (
               <Link
                 to="/podcast/$slug/$episode"
@@ -258,7 +258,7 @@ function Home() {
           <h2 className={`${h2} mt-3`}>
             Quattro province, una sola <span className={keyword}>voce</span>.
           </h2>
-          <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <div className="home-territory-grid mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
             {eventTerritories.map((t) => (
               <Link
                 key={t}
@@ -278,7 +278,7 @@ function Home() {
       {/* SOCIAL PROOF */}
       <section className="bg-white section-pad-sm">
         <div className={shell}>
-          <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <dl className="home-proof-grid grid grid-cols-2 gap-4 lg:grid-cols-4">
             {[
               { v: "24/7", k: "Radio in diretta" },
               { v: `${programs.length}`, k: "Canali podcast" },
@@ -306,7 +306,7 @@ function Home() {
       {/* NEWS */}
       <section className="theme-news brand-grid relative section-pad">
         <div className={shell}>
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div className="home-editorial-split grid gap-12 lg:grid-cols-2 lg:items-start">
             <Reveal>
               <div>
                 <p className={eyebrow}>News</p>
@@ -389,7 +389,7 @@ function Home() {
         </div>
 
         <div className={`${shell} mt-12`}>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="home-podcast-grid grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {programs.slice(0, 4).map((program) => (
               <Link
                 key={program.slug}
@@ -434,7 +434,7 @@ function Home() {
           </Reveal>
 
           {upcomingEvents.length > 0 ? (
-            <div className="mt-14 grid gap-5 md:grid-cols-3">
+            <div className="home-events-grid mt-14 grid gap-5 md:grid-cols-3">
               {upcomingEvents.slice(0, 3).map((e, i) => (
                 <Reveal key={e.slug} delay={i * 100}>
                   <div className="card-im group relative flex h-full flex-col rounded-[28px] bg-white p-7">

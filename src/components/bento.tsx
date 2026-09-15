@@ -59,6 +59,7 @@ export function BentoCard({
 }: BaseProps & Omit<HTMLAttributes<HTMLDivElement>, "children" | "style" | "className">) {
   return (
     <div
+      data-tone={tone}
       className={`bento-card p-5 sm:p-6 ${SPAN_CLASS[span]} ${className}`}
       style={toneStyle(tone, style)}
       {...props}
@@ -83,6 +84,7 @@ export function BentoLinkCard({
 }) {
   return (
     <Link
+      data-tone={tone}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       to={to as any}
       params={params as never}
@@ -105,6 +107,7 @@ export function BentoAnchorCard({
 }: BaseProps & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children" | "style" | "className">) {
   return (
     <a
+      data-tone={tone}
       className={`bento-card p-5 sm:p-6 no-underline ${SPAN_CLASS[span]} ${className}`}
       style={toneStyle(tone, style)}
       {...props}

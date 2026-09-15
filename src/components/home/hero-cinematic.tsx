@@ -56,18 +56,19 @@ export function HeroCinematic() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 flex-col items-center justify-center px-4 pb-24 pt-8 text-center md:px-10 md:pb-28 md:pt-8">
-        <div className="w-full max-w-3xl rounded-[28px] border border-white/20 bg-black/40 px-5 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl backdrop-saturate-[1.2] md:px-10 md:py-9">
-        <h1 className="text-display-l max-w-4xl text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.7)]">
+      <div className="hero-editorial relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 items-end px-4 pb-20 pt-8 md:px-10 md:pb-24">
+        <div className="hero-editorial__copy w-full max-w-3xl rounded-[36px] border border-white/20 bg-black/55 px-5 py-7 shadow-[0_28px_90px_rgba(0,0,0,0.32)] backdrop-blur-xl backdrop-saturate-[1.2] md:px-10 md:py-10">
+        <p className="hero-editorial__label">Territori · idee · persone · storie</p>
+        <h1 className="text-display-l max-w-4xl text-left text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.7)]">
           Dai voce al tuo <span>territorio</span>
         </h1>
 
-        <p className="mx-auto mt-5 max-w-xl text-body-l font-medium leading-relaxed text-white/85">
+        <p className="mt-5 max-w-xl text-left text-body-l font-medium leading-relaxed text-white/85">
           Radio, podcast, eventi e persone che raccontano Vercelli, Novara, Biella e il
           Verbano-Cusio-Ossola.
         </p>
 
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-9 flex flex-wrap items-center justify-start gap-3">
           <Link
             to="/radio"
             className="group inline-flex h-12 items-center gap-2.5 rounded-full btn-blue px-7 text-[15px]"
@@ -95,7 +96,7 @@ export function HeroCinematic() {
         </div>
       </div>
 
-      <div className="absolute bottom-6 right-6 z-20 hidden items-center gap-3 rounded-2xl border border-white/45 bg-white/92 px-4 py-3 shadow-lg backdrop-blur-sm md:flex">
+      <div className="hero-editorial__aside absolute right-6 top-7 z-20 hidden items-center gap-3 rounded-[24px] border border-white/45 bg-white/92 px-4 py-3 shadow-lg backdrop-blur-sm md:flex">
         <span className="text-xs font-semibold uppercase tracking-wider text-ink-600">
           Ascoltaci anche su
         </span>

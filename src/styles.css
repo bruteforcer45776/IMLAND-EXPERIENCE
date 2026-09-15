@@ -2622,3 +2622,148 @@ h6 {
 @utility pb-app-nav {
   padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
 }
+
+/* 2026 editorial restyle: stessa IMLAND, nuovi contenitori neo-brutalist / Swiss bento. */
+.home-glass-stack {
+  gap: clamp(0.85rem, 1.65vw, 1.4rem);
+  padding: 0 clamp(0.55rem, 1.2vw, 1rem) clamp(0.85rem, 1.65vw, 1.4rem);
+}
+
+.home-glass-stack > section {
+  border-color: rgb(255 255 255 / 14%) !important;
+  border-radius: clamp(2rem, 4vw, 4rem);
+  background: rgb(4 22 54 / 84%) !important;
+  color: #fff;
+  box-shadow: 0 28px 70px rgb(0 10 36 / 24%);
+  backdrop-filter: blur(18px) saturate(118%);
+}
+
+.home-glass-stack > section:first-of-type {
+  border-radius: clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 4rem) clamp(3rem, 6vw, 6rem) clamp(2rem, 4vw, 4rem);
+  background: #dce5ea !important;
+}
+
+.home-glass-stack > section :is(.text-ink-950, .text-ink-800),
+.home-glass-stack > section :is(h2, h3) {
+  color: #fff !important;
+}
+
+.home-glass-stack > section :is(.text-ink-700, .text-ink-600, .text-ink-500, .text-black\/55) {
+  color: #bfd1e8 !important;
+}
+
+.home-glass-stack > section .im-gradient-text {
+  color: #48ef72 !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.hero-editorial__copy {
+  max-width: min(48rem, 72%);
+  border-radius: 3.5rem 3.5rem 1.25rem 3.5rem;
+}
+
+.hero-editorial__copy :is(h1, h1 span) { color: #fff !important; }
+.hero-editorial__copy h1 span { color: #48ef72 !important; }
+.hero-editorial__copy > p { color: rgb(255 255 255 / 86%) !important; }
+.hero-editorial__copy a { color: #fff !important; }
+.home-glass-stack > section:first-of-type .im-hero-slide img { object-fit: cover !important; }
+
+.hero-editorial__label {
+  margin-bottom: 1rem;
+  color: rgb(255 255 255 / 78%);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.hero-editorial__aside { border-radius: 1.5rem 1.5rem 1.5rem .5rem; }
+
+.home-services .bento-grid {
+  grid-auto-rows: minmax(15rem, auto);
+}
+
+.home-glass-stack > section.home-services .bento-card {
+  min-height: 15rem;
+  justify-content: flex-end;
+  border: 0 !important;
+  border-radius: 3rem 3rem 1.1rem 3rem;
+  background: var(--bento-tone) !important;
+  box-shadow: 0 22px 50px rgb(0 10 36 / 28%) !important;
+}
+
+.home-glass-stack > section.home-services .bento-card:nth-child(2n) { border-radius: 1.1rem 3rem 3rem 3rem; }
+.home-glass-stack > section.home-services .bento-card:nth-child(3n) { border-radius: 3rem 1.1rem 3rem 3rem; }
+.home-glass-stack > section.home-services .bento-card::before,
+.home-glass-stack > section.home-services .bento-card::after { display: none; }
+.home-glass-stack > section.home-services .bento-card[data-tone="podcast"],
+.home-glass-stack > section.home-services .bento-card[data-tone="news"] { color: #fff; }
+.home-glass-stack > section.home-services .bento-card[data-tone="podcast"] :is(p, svg),
+.home-glass-stack > section.home-services .bento-card[data-tone="news"] :is(p, svg) { color: #fff !important; }
+.home-glass-stack > section.home-services .bento-card[data-tone="radio"] :is(p, svg),
+.home-glass-stack > section.home-services .bento-card[data-tone="member"] :is(p, svg),
+.home-glass-stack > section.home-services .bento-card[data-tone="eventi"] :is(p, svg) { color: #06142c !important; }
+
+.home-glass-stack > section.home-partners {
+  background: rgb(255 255 255 / 92%) !important;
+  color: #06142c;
+}
+.home-glass-stack > section.home-partners .text-black\/55 { color: #334155 !important; }
+
+.home-feature-grid > :first-child { grid-column: span 2; }
+.home-feature-grid > :nth-child(2) { transform: translateY(1.75rem); }
+.home-feature-grid > :nth-child(3) { border-radius: 3.75rem 1.25rem 3.75rem 3.75rem !important; }
+.home-feature-grid .card-im,
+.home-podcast-grid > a,
+.home-events-grid .card-im,
+.home-territory-grid > a,
+.home-proof-grid > div,
+.home-editorial-split .card-im {
+  border-color: rgb(255 255 255 / 14%) !important;
+  border-radius: 2.75rem 2.75rem 1rem 2.75rem !important;
+  background: rgb(8 32 68 / 92%) !important;
+  color: #fff;
+  box-shadow: 0 20px 48px rgb(0 10 36 / 22%) !important;
+}
+
+.home-feature-grid > :is(.theme-podcast, .theme-news, .theme-eventi) {
+  background: var(--signal) !important;
+}
+
+.home-feature-grid > :is(.theme-podcast, .theme-news, .theme-eventi) :is(p, h3, span, svg) {
+  color: var(--signal-foreground) !important;
+}
+
+.home-territory-grid > a:nth-child(2n),
+.home-proof-grid > div:nth-child(2n),
+.home-podcast-grid > a:nth-child(2n),
+.home-events-grid > :nth-child(2n) .card-im { border-radius: 1rem 2.75rem 2.75rem 2.75rem !important; }
+
+.home-podcast-grid > a:first-child { grid-column: span 2; }
+.home-events-grid > :first-child { grid-column: span 2; }
+
+.home-glass-stack > section a.border-signal,
+.home-glass-stack > section a.bg-white {
+  background: rgb(255 255 255 / 9%) !important;
+  color: #fff !important;
+  border-color: rgb(255 255 255 / 25%) !important;
+}
+
+@media (max-width: 47.999rem) {
+  .home-glass-stack { padding-inline: .45rem; }
+  .home-glass-stack > section { border-radius: 2rem; }
+  .hero-editorial { align-items: flex-end; }
+  .hero-editorial__copy { max-width: 100%; border-radius: 2rem 2rem .75rem 2rem; }
+  .hero-editorial__label { font-size: .68rem; letter-spacing: .16em; }
+  .home-feature-grid > :first-child,
+  .home-podcast-grid > a:first-child,
+  .home-events-grid > :first-child { grid-column: auto; }
+  .home-feature-grid > :nth-child(2) { transform: none; }
+  .home-services .bento-card,
+  .home-feature-grid .card-im,
+  .home-podcast-grid > a,
+  .home-events-grid .card-im,
+  .home-territory-grid > a,
+  .home-proof-grid > div { border-radius: 2rem 2rem .75rem 2rem !important; }
+}
