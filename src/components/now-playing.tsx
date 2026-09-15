@@ -5,10 +5,10 @@ import { usePlayer } from "./player-context";
 export function NowPlaying({ compact = false }: { compact?: boolean }) {
   const { setOpen } = usePlayer();
   const { data: np } = useNowPlaying();
-  const title = np?.trackTitle ?? "Voci di quartiere";
+  const title = np?.trackTitle ?? "IMLAND Radio in diretta";
   const subtitle = np?.trackArtist
     ? `${np.trackArtist} · ${np?.stationName ?? "IMLAND Radio"}`
-    : "Rubrica del mattino · fino alle 11:00";
+    : "Ascolta la diretta IMLAND";
   const artwork = np?.trackImage ?? np?.stationImage ?? null;
 
   return (

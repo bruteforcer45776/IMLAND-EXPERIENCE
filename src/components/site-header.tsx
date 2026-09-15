@@ -100,7 +100,12 @@ export function SiteHeader() {
       >
         <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-3 px-4 md:h-[72px] md:px-10">
           {/* Logo */}
-          <Link to="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)}>
+          <Link
+            to="/"
+            aria-label="IMLAND EXPERIENCE — Home"
+            className="flex shrink-0 items-center"
+            onClick={() => setOpen(false)}
+          >
             <img
               loading="lazy"
               decoding="async"

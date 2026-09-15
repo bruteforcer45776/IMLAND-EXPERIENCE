@@ -1,27 +1,7 @@
 import { BrandIcon } from "./brand-icons";
 import { ColorBlocks, MemphisConfetti } from "./decor";
-import { useState } from "react";
 
 type Variant = "default" | "compact" | "dark";
-
-const subscribers = [
-  {
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop",
-    alt: "Membro della community IMLAND",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1587397845856-e6cf49176c70?q=80&w=256&auto=format&fit=crop",
-    alt: "Membro della community IMLAND",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2",
-    alt: "Membro della community IMLAND",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2",
-    alt: "Membro della community IMLAND",
-  },
-];
 
 export function NewsletterBanner({
   variant = "default",
@@ -34,21 +14,11 @@ export function NewsletterBanner({
   title?: string;
   lead?: string;
 }) {
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
-
-  function submit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email) return;
-    setSent(true);
-    setEmail("");
-    setTimeout(() => setSent(false), 5000);
-  }
-
   const isCompact = variant === "compact";
 
   return (
     <section
+      id="newsletter"
       className={
         isCompact
           ? "section-closing container-im bg-white section-pad-sm"
@@ -75,67 +45,15 @@ export function NewsletterBanner({
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-muted-foreground">{lead}</p>
 
-          <form onSubmit={submit} className="mx-auto mt-10 max-w-md">
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <div className="flex-auto">
-                <label htmlFor={`nl-${variant}`} className="sr-only">
-                  Email
-                </label>
-                <input
-                  id={`nl-${variant}`}
-                  type="email"
-                  name="email"
-                  required
-                  maxLength={255}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="nome@dominio.it"
-                  className="w-full rounded-md border-0 bg-background px-3.5 py-3 text-base text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-inset focus:ring-signal sm:text-sm sm:leading-6"
-                />
-              </div>
-              <button
-                type="submit"
-                className="flex-none rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-cta transition-all hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
-              >
-                Iscrivimi
-              </button>
-            </div>
-          </form>
-
-          {sent && (
-            <p className="mx-auto mt-6 w-fit rounded-2xl bg-primary/10 px-4 py-3 text-center text-sm font-medium text-primary">
-              Grazie! Ti abbiamo aggiunto alla newsletter.
-            </p>
-          )}
-
-          <div className="mt-8 flex flex-col items-center justify-center gap-x-4 gap-y-3 sm:flex-row">
-            <div
-              className="flex flex-none items-center -space-x-2 rounded-full bg-surface-1 p-1.5 border border-border"
-              role="group"
-              aria-label="Foto membri della community"
-            >
-              {subscribers.map((s, i) => (
-                <div key={i} className="relative -m-0.5 rounded-full bg-card p-0.5">
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0.5 h-8 w-8 rounded-full ring-1 ring-inset ring-black/10"
-                  />
-                  <img
-                    alt={s.alt}
-                    src={s.src}
-                    className="relative h-8 w-8 rounded-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-            <p
-              className="text-sm font-medium text-muted-foreground"
-              aria-label="Più di 3.000 iscritti"
-            >
-              3.000+ già iscritti
-            </p>
-          </div>
+          <a
+            href="mailto:info@imlandradio.com?subject=Iscrizione%20newsletter%20IMLAND"
+            className="mx-auto mt-10 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-cta transition-all hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+          >
+            Iscrivimi
+          </a>
+          <p className="mt-5 text-sm font-medium text-muted-foreground">
+            Richiedi l'iscrizione direttamente alla redazione IMLAND.
+          </p>
         </div>
       </div>
     </section>

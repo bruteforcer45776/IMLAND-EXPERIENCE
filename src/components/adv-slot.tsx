@@ -139,13 +139,18 @@ export function AdvSlot({ position }: { position: AdvPosition }) {
               onClick={() => setIndex(i)}
               aria-label={`Slide ${i + 1} di ${slides.length}`}
               aria-current={i === index}
-              className="h-2 rounded-full transition-all"
-              style={{
-                width: i === index ? "1.5rem" : "0.5rem",
-                background: slide.fg,
-                opacity: i === index ? 1 : 0.45,
-              }}
-            />
+              className="inline-flex h-11 min-w-11 items-center justify-center rounded-full transition-opacity hover:bg-black/10"
+            >
+              <span
+                aria-hidden="true"
+                className="h-2 rounded-full transition-all"
+                style={{
+                  width: i === index ? "1.5rem" : "0.5rem",
+                  background: slide.fg,
+                  opacity: i === index ? 1 : 0.45,
+                }}
+              />
+            </button>
           ))}
         </div>
       </div>

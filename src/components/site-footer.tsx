@@ -69,23 +69,12 @@ export function SiteFooter() {
               Un riepilogo di radio, podcast ed eventi una volta al mese. Niente spam.
             </p>
           </div>
-          <form className="flex w-full max-w-md gap-2" onSubmit={(e) => e.preventDefault()}>
-            <label htmlFor="footer-email" className="sr-only">
-              La tua email
-            </label>
-            <input
-              id="footer-email"
-              type="email"
-              placeholder="La tua email"
-              className="h-12 flex-1 rounded-full border border-border bg-white px-5 text-[15px] text-ink-950 placeholder:text-ink-500 outline-none focus:border-im-blue/50 focus:ring-2 focus:ring-im-blue/20"
-            />
-            <button
-              type="submit"
-              className="btn-blue h-12 shrink-0 rounded-full px-6 text-[15px] font-semibold transition-transform active:scale-[0.98]"
-            >
-              Iscriviti
-            </button>
-          </form>
+          <a
+            href="#newsletter"
+            className="btn-blue inline-flex min-h-12 items-center justify-center rounded-full px-6 text-[15px] font-semibold transition-transform active:scale-[0.98]"
+          >
+            Iscriviti
+          </a>
         </div>
       </div>
 

@@ -3103,6 +3103,12 @@ h6 {
   :is(h2, .text-h2-im) { font-size: clamp(1.65rem, 7vw, 2.5rem) !important; }
   :is(h3, .text-h3-im) { font-size: clamp(1.15rem, 5vw, 1.5rem) !important; }
   :is(a, button, [role="button"]) { min-height: 2.75rem; }
+  .site-glass-header :is(a, button),
+  [aria-label="Player IMLAND Radio"] button,
+  [aria-label="Azioni rapide"] :is(a, button) {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
 }
 
 @media (max-width: 23rem) {

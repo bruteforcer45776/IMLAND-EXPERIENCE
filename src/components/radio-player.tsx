@@ -39,8 +39,8 @@ export function RadioPlayer() {
   const expanded = open;
 
   const effectiveVolume = muted ? 0 : volume;
-  const trackTitle = np?.trackTitle ?? "Voci di quartiere";
-  const trackArtist = np?.trackArtist ?? "Giulia Rinaldi";
+  const trackTitle = np?.trackTitle ?? "IMLAND Radio in diretta";
+  const trackArtist = np?.trackArtist ?? "";
   const artwork = np?.trackImage ?? np?.stationImage ?? null;
   const stationName = np?.stationName ?? "IMLAND Radio";
 
@@ -340,7 +340,7 @@ export function RadioPlayer() {
 
             <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4">
               <a
-                href="tel:+390000000000"
+                href="tel:+393514323003"
                 className="btn-blue inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold"
               >
                 <Mic size={14} />
