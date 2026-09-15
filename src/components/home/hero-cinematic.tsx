@@ -23,8 +23,21 @@ const heroSlides = [
 
 export function HeroCinematic() {
   return (
-    <section className="relative isolate flex min-h-[680px] flex-col overflow-hidden bg-[#dce5ea] md:min-h-[640px] md:aspect-[1672/941] md:max-h-[calc(100svh-74px)]">
-      <div className="pointer-events-none absolute inset-0">
+    <section className="home-split-hero grid min-h-[560px] overflow-hidden bg-white lg:grid-cols-[.9fr_1.1fr]">
+      <div className="hero-editorial relative z-10 flex items-center px-6 py-12 md:px-10 lg:px-14">
+        <div className="hero-editorial__copy w-full max-w-xl">
+          <p className="hero-editorial__label">Territori · idee · persone · storie</p>
+          <h1 className="text-display-l max-w-4xl text-left text-ink-950">Dai voce al tuo <span>territorio</span></h1>
+          <p className="mt-5 max-w-xl text-left text-body-l font-medium leading-relaxed text-ink-950">Radio, podcast, eventi e persone che raccontano Vercelli, Novara, Biella e il Verbano-Cusio-Ossola.</p>
+          <div className="mt-9 flex flex-wrap items-center justify-start gap-3">
+            <Link to="/radio" className="group inline-flex h-12 items-center gap-2.5 rounded-full btn-blue px-7 text-[15px]">Ascolta la diretta <Play className="h-4 w-4 fill-current" /></Link>
+            <Link to="/scarica-app" className="inline-flex h-12 items-center gap-2 rounded-full border border-black/15 bg-white px-6 text-[15px] font-semibold text-ink-950">Scarica l'app <Download size={18} /></Link>
+            <Link to="/chi-siamo" className="inline-flex h-12 items-center gap-2 rounded-full border border-black/15 bg-white px-6 text-[15px] font-semibold text-ink-950">Scopri IMLAND <ArrowRight size={18} /></Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="hero-visual relative min-h-[360px] overflow-hidden rounded-[2rem_0_0_2rem] lg:min-h-[560px]">
         {heroSlides.map((slide, index) => (
           <picture
             key={slide.desktop}
@@ -41,62 +54,11 @@ export function HeroCinematic() {
               loading={index === 0 ? "eager" : "lazy"}
               fetchPriority={index === 0 ? "high" : "auto"}
               decoding="async"
-              className="h-full w-full object-contain object-center"
+              className="h-full w-full object-cover object-center"
             />
           </picture>
         ))}
-      </div>
-
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.12) 45%, rgba(0,0,0,0.34) 78%, rgba(0,0,0,0.58) 100%)",
-        }}
-        aria-hidden
-      />
-
-      <div className="hero-editorial relative z-10 mx-auto flex w-full max-w-[1280px] flex-1 items-end px-4 pb-20 pt-8 md:px-10 md:pb-24">
-        <div className="hero-editorial__copy w-full max-w-3xl">
-        <p className="hero-editorial__label">Territori · idee · persone · storie</p>
-        <h1 className="text-display-l max-w-4xl text-left text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.7)]">
-          Dai voce al tuo <span>territorio</span>
-        </h1>
-
-        <p className="mt-5 max-w-xl text-left text-body-l font-medium leading-relaxed text-white/85">
-          Radio, podcast, eventi e persone che raccontano Vercelli, Novara, Biella e il
-          Verbano-Cusio-Ossola.
-        </p>
-
-        <div className="mt-9 flex flex-wrap items-center justify-start gap-3">
-          <Link
-            to="/radio"
-            className="group inline-flex h-12 items-center gap-2.5 rounded-full btn-blue px-7 text-[15px]"
-          >
-            Ascolta la diretta
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20">
-              <Play className="h-3 w-3 fill-white text-white" />
-            </span>
-          </Link>
-          <Link
-            to="/scarica-app"
-            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/25 bg-black/40 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-black/50"
-          >
-            Scarica l'app
-            <Download size={18} className="text-white/75" />
-          </Link>
-          <Link
-            to="/chi-siamo"
-            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/25 bg-black/40 px-6 text-[15px] font-semibold text-white transition-colors hover:bg-black/50"
-          >
-            Scopri IMLAND
-            <ArrowRight size={18} className="text-ink-500" />
-          </Link>
-        </div>
-        </div>
-      </div>
-
-      <div className="hero-editorial__aside absolute right-6 top-7 z-20 hidden items-center gap-3 rounded-[24px] border border-white/45 bg-white/92 px-4 py-3 shadow-lg backdrop-blur-sm md:flex">
+        <div className="hero-editorial__aside absolute right-5 top-5 z-20 hidden items-center gap-3 rounded-[24px] bg-white/95 px-4 py-3 shadow-lg md:flex">
         <span className="text-xs font-semibold uppercase tracking-wider text-ink-600">
           Ascoltaci anche su
         </span>
@@ -113,6 +75,7 @@ export function HeroCinematic() {
               <img src={p.icon} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
             </a>
           ))}
+        </div>
         </div>
       </div>
     </section>

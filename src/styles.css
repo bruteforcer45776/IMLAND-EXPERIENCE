@@ -3043,6 +3043,57 @@ h6 {
   .home-proof-grid { grid-template-columns: 1fr; }
 }
 
+/* Correzioni Home richieste: tipografia nera, servizi cromatici, Hero split. */
+.home-glass-stack > section:not(:first-of-type) :is(h1, h2, h3, h4, p),
+.home-glass-stack > section:not(:first-of-type) .im-gradient-text,
+.home-glass-stack > section:not(:first-of-type) :is(h1, h2, h3, h4, p) span {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
+}
+
+.home-glass-stack > section.home-services .bento-card {
+  background: var(--bento-tone) !important;
+  border: 0 !important;
+  box-shadow: 0 14px 30px rgb(10 10 10 / 12%) !important;
+}
+
+.home-services .bento-card .service-symbol {
+  color: #fff !important;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.home-split-hero {
+  min-height: clamp(34rem, 66vw, 44rem) !important;
+  background: #fff !important;
+}
+
+.home-split-hero .hero-editorial__label,
+.home-split-hero .hero-editorial__copy :is(h1, h1 span, p) {
+  color: #0a0a0a !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.home-split-hero .hero-visual .im-hero-slide img {
+  object-fit: cover !important;
+}
+
+.member-wall .dome-gallery {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 63.999rem) {
+  .home-split-hero { min-height: 0 !important; }
+  .home-split-hero .hero-visual {
+    order: -1;
+    min-height: clamp(20rem, 68vw, 34rem);
+    border-radius: 0 0 2rem 2rem;
+  }
+}
+
 /* Correzione richiesta: le sezioni della Home tornano bianche. */
 .home-glass-stack > section:not(:first-of-type) {
   background: #fff !important;

@@ -1,19 +1,16 @@
 import { lazy, Suspense } from "react";
 import { canonical, jsonLd, organizationLd, websiteLd, SITE_URL } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, CalendarDays, MapPin, Mic2, Newspaper, Radio, Users } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
 import { quickLinks } from "../data/home-quick-links";
-import { BadgeIcon } from "../components/badge-icon";
 import { AdvSlot } from "../components/adv-slot";
 import { BentoGrid, BentoLinkCard } from "../components/bento";
 
-const PartnerLoop = lazy(() =>
-  import("../components/partner-bar/PartnerLoop").then((m) => ({ default: m.PartnerLoop })),
-);
+const DomeGallery = lazy(() => import("../components/dome-gallery"));
 const NewsletterBanner = lazy(() =>
   import("../components/newsletter-banner").then((m) => ({ default: m.NewsletterBanner })),
 );
@@ -33,6 +30,14 @@ import { partnerLogos } from "../data/partner-logos";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
 
 const featuredEpisode = latestEpisodes[0];
+
+const serviceIcons = {
+  radio: Radio,
+  podcast: Mic2,
+  calendario: CalendarDays,
+  news: Newspaper,
+  community: Users,
+} as const;
 
 const newsPreviews = [
   {
@@ -122,8 +127,18 @@ function Home() {
             Membri e realtà del territorio:
           </p>
         </div>
-        <Suspense fallback={<div className="h-16" />}>
-          <PartnerLoop fadeOutColor="#ffffff" />
+        <Suspense fallback={<div className="h-[28rem]" />}>
+          <div className="member-wall mx-auto h-[clamp(25rem,52vw,40rem)] max-w-[1180px] overflow-hidden rounded-3xl bg-[#0a0a0a]">
+            <DomeGallery
+              images={partnerLogos.map((partner) => ({ src: partner.src, alt: partner.name, href: partner.href ?? undefined }))}
+              grayscale={false}
+              overlayBlurColor="#0a0a0a"
+              imageBorderRadius="18px"
+              openedImageBorderRadius="24px"
+              minRadius={420}
+              fit={0.72}
+            />
+          </div>
         </Suspense>
       </section>
 
@@ -138,11 +153,10 @@ function Home() {
           <BentoGrid className="mt-10">
             {quickLinks.map((q) => (
               <BentoLinkCard key={q.label} to={q.to} tone={q.tone} span={q.span} className="group">
-                <BadgeIcon
-                  name={q.badge}
-                  tone={q.tone}
-                  className="h-14 w-14 transition-transform duration-300 group-hover:scale-105"
-                />
+                {(() => {
+                  const Icon = serviceIcons[q.badge];
+                  return <Icon className="service-symbol h-10 w-10 text-white" aria-hidden />;
+                })()}
 
                 <p className="mt-5 font-display text-lg font-bold text-ink-950">{q.label}</p>
                 <p className="mt-0.5 text-sm text-ink-600">{q.desc}</p>
