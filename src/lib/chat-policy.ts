@@ -25,7 +25,7 @@ export function parseChatInput(body: unknown): string | null {
   if (typeof text !== "string" && Array.isArray(value.messages)) {
     const last = value.messages.at(-1);
     if (last?.role === "user" && Array.isArray(last.parts)) {
-      text = last.parts.filter((p: { type?: string; text?: unknown }) => p.type === "text" && typeof p.text === "string").map((p: { text: string }) => p.text).join("");
+      text = last.parts.filter((p: { type?: string; text?: unknown } | null) => p && p.type === "text" && typeof p.text === "string").map((p: { text: string }) => p.text).join("");
     }
   }
   return typeof text === "string" && text.trim().length > 0 && text.length <= CHAT_MAX_CHARS ? text.trim() : null;
