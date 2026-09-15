@@ -543,15 +543,15 @@ function MemberPage() {
         </section>
 
         {/* MEMBER WALL */}
-        <section className="hidden" aria-hidden="true">
-          <div className="container-im relative z-20 pt-32 pb-20">
+        <section className="section-editorial">
+          <div className="container-im relative z-20 section-pad">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl">
                 <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                  Member Wall
+                  Rete Member
                 </p>
                 <h2 className="mt-2 text-h2-im text-foreground">
-                  Le realtà che <span className="im-gradient-text">danno voce</span> al territorio.
+                  I nostri membri
                 </h2>
                 <p className="mt-4 text-foreground/70">
                   Aziende, professionisti e associazioni che fanno parte della rete IMLAND Member.

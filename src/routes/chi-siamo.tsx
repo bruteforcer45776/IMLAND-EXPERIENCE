@@ -5,6 +5,7 @@ import { BadgeIcon, badgeForIcon, toneForBadge } from "../components/badge-icon"
 import { BentoGrid, BentoCard, BentoLinkCard } from "../components/bento";
 import { PageHero } from "../components/page-hero";
 import { SectionHeader } from "../components/section-header";
+import { teamMembers } from "../data/team-members";
 
 export const Route = createFileRoute("/chi-siamo")({
   head: () => ({
@@ -210,6 +211,71 @@ function ChiSiamoPage() {
               </BentoCard>
             ))}
           </BentoGrid>
+        </div>
+      </section>
+
+      {/* Team / Redazione */}
+      <section className="section-atmosphere">
+        <div className="container-im section-pad">
+          <SectionHeader
+            eyebrow="La redazione"
+            badge="profilo"
+            align="center"
+            title={<>Il TEAM <span className="im-gradient-text">IMLAND</span>.</>}
+            description="Una squadra che vive il territorio e lo trasforma in racconto sonoro: speaker, produzione, member e organizzazione eventi."
+          />
+
+          <ul
+            role="list"
+            className="mx-auto mt-14 grid max-w-2xl grid-cols-1 gap-x-10 gap-y-16 sm:grid-cols-2 lg:max-w-none"
+          >
+            {teamMembers.map((m) => {
+              const fullName =
+                [m.firstName, m.lastName].filter(Boolean).join(" ") ||
+                m.slug
+                  .split("-")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ");
+              const preview = m.description || m.bio.split("\n")[0];
+              return (
+                <li key={m.slug} className="flex flex-col items-center gap-x-8 gap-y-6 text-center sm:flex-row sm:items-start sm:text-left">
+                  <div className="flex-none">
+                    <Link to="/team/$slug" params={{ slug: m.slug }}>
+                      <div className="relative aspect-square w-40 overflow-hidden rounded-full bg-muted ring-1 ring-inset ring-border">
+                        <img
+                          src={m.photo}
+                          alt={fullName}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="flex-auto">
+                    <Link to="/team/$slug" params={{ slug: m.slug }}>
+                      <h3 className="text-h3-im leading-9 text-foreground transition-colors hover:text-signal">
+                        {fullName}
+                      </h3>
+                    </Link>
+                    {m.nickname ? <p className="im-gradient-text">&quot;{m.nickname}&quot;</p> : null}
+                    {m.role ? <p className="text-base leading-8 text-muted-foreground">{m.role}</p> : null}
+                    {preview ? (
+                      <p className="mt-4 line-clamp-4 text-base leading-7 text-muted-foreground">
+                        {preview}
+                      </p>
+                    ) : null}
+                    <Link
+                      to="/team/$slug"
+                      params={{ slug: m.slug }}
+                      className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-signal hover:underline"
+                    >
+                      Scopri il profilo <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Link>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 
