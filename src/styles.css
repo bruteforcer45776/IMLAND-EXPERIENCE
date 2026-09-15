@@ -3239,3 +3239,19 @@ h6 {
   color: #ffffff !important;
   -webkit-text-fill-color: currentColor !important;
 }
+
+/* FAQ: il claim della Hero resta bianco sulla superficie introduttiva. */
+.faq-hero :is(h1, h2, h3, p, span) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* Home: nessun titolo o parola chiave eredita i colori di categoria. */
+.home-glass-stack :is(h1, h2, h3, h4, h5, h6),
+.home-glass-stack :is(h1, h2, h3, h4, h5, h6) span,
+.home-glass-stack .im-gradient-text {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: #0a0a0a !important;
+  background: none !important;
+}
