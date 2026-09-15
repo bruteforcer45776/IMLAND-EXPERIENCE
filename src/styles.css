@@ -2829,6 +2829,38 @@ h6 {
   }
 }
 
+/* Home chiara: nessuna dominante blu nei pannelli o nei riquadri. */
+.home-glass-stack > section:not(:first-of-type),
+.home-glass-stack > section:not(:first-of-type) :is(.section-focus, .bento-card, .card-im),
+.home-glass-stack > section:not(:first-of-type) :is(.home-territory-grid, .home-podcast-grid) > a,
+.home-glass-stack > section:not(:first-of-type) .home-proof-grid > div,
+.home-glass-stack > section:not(:first-of-type) .theme-member.bg-signal {
+  background: #fff !important;
+  background-image: none !important;
+  border-color: rgb(10 10 10 / 12%) !important;
+  color: #0a0a0a !important;
+  box-shadow: 0 14px 34px rgb(10 10 10 / 8%) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.home-glass-stack > section:not(:first-of-type)
+  :is(.bento-card, .card-im, .home-territory-grid > a, .home-podcast-grid > a, .home-proof-grid > div, .theme-member.bg-signal)
+  :is(p, h2, h3, span) {
+  color: #0a0a0a !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.home-glass-stack > section:not(:first-of-type)
+  :is(.home-feature-grid > *, .home-territory-grid > a, .home-podcast-grid > a, .home-events-grid .card-im)::after {
+  display: none !important;
+}
+
+.home-glass-stack > section.home-partners {
+  background: #fff !important;
+}
+
 /* Correzione richiesta: le sezioni della Home tornano bianche. */
 .home-glass-stack > section:not(:first-of-type) {
   background: #fff !important;
@@ -2851,12 +2883,13 @@ h6 {
   color: var(--im-green) !important;
 }
 
-/* Le card fotografiche mantengono testo bianco e contrasto editoriale. */
+/* Tutti i testi dei riquadri Home restano neri sul nuovo fondo bianco. */
 .home-glass-stack > section:not(:first-of-type) .home-feature-grid > * :is(p, h3, span, svg),
 .home-glass-stack > section:not(:first-of-type) .home-territory-grid > a :is(p, svg),
 .home-glass-stack > section:not(:first-of-type) .home-podcast-grid > a :is(p, h3, span, svg),
 .home-glass-stack > section:not(:first-of-type) .home-events-grid .card-im :is(p, h3, span, svg) {
-  color: #fff !important;
+  color: #0a0a0a !important;
+  text-shadow: none !important;
 }
 
 /* Header: raggio continuo, clipping pulito e profondita coerente. */
