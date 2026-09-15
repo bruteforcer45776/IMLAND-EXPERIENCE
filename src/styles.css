@@ -2890,7 +2890,39 @@ h6 {
 .home-adv-slot > div {
   width: 100%;
   border: 0 !important;
-  border-radius: clamp(1.25rem, 2.5vw, 2rem);
+  border-radius: 0 !important;
+}
+
+.home-glass-stack > section.home-adv-slot,
+.home-glass-stack > section.home-color-band {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: clamp(1.5rem, 3vw, 2.5rem) !important;
+  box-shadow: none !important;
+}
+
+.home-glass-stack > section.home-adv-slot {
+  background: var(--adv-bg) !important;
+}
+
+.home-glass-stack > section.home-color-band {
+  background: var(--signal) !important;
+}
+
+:is(.card-im, .bento-card, .surface-card) {
+  min-height: 0 !important;
+  padding: clamp(1rem, 2vw, 1.5rem) !important;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+:is(.card-im, .bento-card, .surface-card) > :is(h2, h3, p) {
+  margin-inline: auto;
+}
+
+.home-services .bento-grid {
+  grid-auto-rows: minmax(11.5rem, auto);
 }
 
 .site-footer {

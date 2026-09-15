@@ -48,13 +48,21 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    const recoveryKey = "imland-deploy-recovery";
+    const lastRecovery = Number(window.sessionStorage.getItem(recoveryKey) ?? 0);
+    if (Date.now() - lastRecovery > 30_000) {
+      window.sessionStorage.setItem(recoveryKey, String(Date.now()));
+      window.location.reload();
+    }
   }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-h1-im text-foreground">Qualcosa è andato storto</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Riprova o torna alla home.</p>
+        <h1 className="text-h1-im text-foreground">Ricarica la pagina</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Stiamo riallineando i contenuti con l’ultima versione pubblicata.
+        </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {

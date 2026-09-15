@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Megaphone } from "lucide-react";
 
@@ -94,13 +95,16 @@ export function AdvSlot({ position }: { position: AdvPosition }) {
   const slide = slides[index]!;
 
   return (
-    <section className="home-adv-slot py-3" aria-label={`Spazio pubblicitario ${position}`}>
+    <section
+      className="home-adv-slot"
+      aria-label={`Spazio pubblicitario ${position}`}
+      style={{ "--adv-bg": slide.bg, color: slide.fg } as CSSProperties}
+    >
       <div
-        className="relative overflow-hidden rounded-[28px] border-0 p-5 md:p-7"
-        style={{ background: slide.bg, color: slide.fg }}
+        className="relative mx-auto w-full max-w-[1200px] overflow-hidden px-5 py-6 md:px-8 md:py-8"
       >
-        <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
-          <div>
+        <div className="grid gap-4 text-center md:grid-cols-[1fr_auto] md:items-center md:text-left">
+          <div className="mx-auto md:mx-0">
             <span
               className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]"
               style={{
@@ -113,13 +117,13 @@ export function AdvSlot({ position }: { position: AdvPosition }) {
             <h2 className="mt-2 font-display text-lg font-extrabold uppercase tracking-tight md:text-2xl">
               {slide.title}
             </h2>
-            <p className="mt-1.5 max-w-2xl text-xs md:text-sm" style={{ opacity: 0.9 }}>
+            <p className="mt-1.5 max-w-2xl text-sm md:text-base" style={{ opacity: 0.92 }}>
               {slide.body}
             </p>
           </div>
           <Link
             to="/member"
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition-opacity hover:opacity-90"
+            className="mx-auto inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition-opacity hover:opacity-90 md:mx-0"
             style={{ background: slide.fg, color: slide.bg }}
           >
             {slide.cta}
@@ -127,7 +131,7 @@ export function AdvSlot({ position }: { position: AdvPosition }) {
           </Link>
         </div>
 
-        <div className="mt-3 flex items-center gap-2">
+        <div className="mt-4 flex items-center justify-center gap-2 md:justify-start">
           {slides.map((s, i) => (
             <button
               key={s.body}

@@ -632,13 +632,11 @@ function Home() {
       </section>
 
       {/* APP */}
-      <section className="section-focus pt-20">
-        <Reveal>
-          <Suspense fallback={<div className="h-64" />}>
-            <DownloadAppBanner />
-          </Suspense>
-        </Reveal>
-      </section>
+      <Reveal>
+        <Suspense fallback={<div className="h-64" />}>
+          <DownloadAppBanner />
+        </Suspense>
+      </Reveal>
 
     </div>
   );
