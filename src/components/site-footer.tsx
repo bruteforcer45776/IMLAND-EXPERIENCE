@@ -108,9 +108,9 @@ export function SiteFooter() {
           </p>
           <Link
             to="/member"
-            className="theme-member mt-6 inline-flex items-center gap-2 rounded-full bg-signal px-5 py-3 text-[14px] font-semibold text-signal-foreground"
+            className="theme-member mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-citrus px-6 text-[15px] font-semibold text-ink-950"
           >
-            Diventa Member!
+            Diventa Partner
           </Link>
         </div>
 

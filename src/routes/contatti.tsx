@@ -347,7 +347,7 @@ function ContattiPage() {
           >
             <h3 className="flex items-center gap-2.5 text-h3-im">
               <BrandIcon name="orologio" className="h-6 w-6" aria-hidden />
-              Studio
+              Orari di apertura dello studio
             </h3>
             <p className="mt-4 text-xs text-muted-foreground">
               Apertura studio: lun–ven, 9:00 – 19:00
@@ -408,6 +408,16 @@ function ContattiPage() {
                   name: "Instagram",
                   href: "https://www.instagram.com/imland_radio/",
                   icon: "https://cdn.simpleicons.org/instagram/E4405F",
+                },
+                {
+                  name: "Facebook",
+                  href: "https://www.facebook.com/imlandradio",
+                  icon: "https://cdn.simpleicons.org/facebook/1877F2",
+                },
+                {
+                  name: "LinkedIn",
+                  href: "https://www.linkedin.com/company/imland-experience/",
+                  icon: "https://cdn.simpleicons.org/linkedin/0A66C2",
                 },
                 {
                   name: "Spotify",

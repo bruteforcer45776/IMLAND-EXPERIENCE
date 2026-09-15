@@ -121,11 +121,10 @@ function ChiSiamoPage() {
         badge="community"
         title={
           <>
-            Il territorio ha <br />
-            una nuova <span className="im-gradient-text">voce</span>.
+            Un hub aperto, radicato, <span className="im-gradient-text">indipendente</span>.
           </>
         }
-        subtitle="IMLAND Experience nasce per dare voce alle realtà dei nostri territori. Viviamo in territori ricchi di imprese, persone, competenze ed eccellenze che spesso, proprio perché lontani dai grandi centri, non hanno gli stessi strumenti e le stesse occasioni per raccontarsi, farsi conoscere e creare relazioni. Per questo abbiamo costruito un luogo in cui il territorio possa avere voce: attraverso la radio, i contenuti, gli incontri e una community che mette in relazione aziende, professionisti e persone. Raccontiamo ciò che di valore esiste qui, perché possa essere conosciuto dentro e fuori dal territorio."
+        subtitle={"IMLAND Experience nasce per dare voce alle realtà dei nostri territori.\n\nViviamo in territori ricchi di imprese, persone, competenze ed eccellenze che spesso, proprio perché lontani dai grandi centri, non hanno gli stessi strumenti e le stesse occasioni per raccontarsi, farsi conoscere e creare relazioni.\n\nPer questo abbiamo costruito un luogo in cui il territorio possa avere voce: attraverso la radio, i contenuti, gli incontri e una community che mette in relazione aziende, professionisti e persone.\n\nRaccontiamo ciò che di valore esiste qui, perché possa essere conosciuto dentro e fuori dal territorio."}
       />
 
       {/* Missione */}
@@ -163,7 +162,7 @@ function ChiSiamoPage() {
               una <span className="im-gradient-text">redazione</span>.
             </>
           }
-          description="Radio, podcast, eventi e community: quattro modi per stare dentro il territorio."
+          description="Radio, podcast, eventi e news: quattro modi per stare dentro il territorio."
         />
         <BentoGrid className="mt-10">
           {whatWeDo.map((w, i) => (
@@ -308,16 +307,17 @@ function ChiSiamoPage() {
         </div>
       </section>
 
-      <section className="section-focus">
+      {/* Lavora con noi */}
+      <section className="section-canvas">
         <div className="container-im section-pad">
-          <div className="rounded-[32px] bg-signal p-8 text-signal-foreground md:flex md:items-center md:justify-between md:gap-10 md:p-12">
+          <div className="bento-card p-8 md:flex md:items-center md:justify-between md:gap-10 md:p-12">
             <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-wider opacity-75">Costruiamo relazioni</p>
-              <h2 className="mt-3 text-h2-im">Vuoi entrare nel progetto?</h2>
-              <p className="mt-3 text-base opacity-85">Raccontaci la tua realtà, un’idea o una collaborazione per il territorio.</p>
+              <p className="text-sm font-semibold uppercase tracking-wider text-signal">Lavora con noi</p>
+              <h2 className="mt-3 text-h2-im">Porta la tua voce in IMLAND.</h2>
+              <p className="mt-3 text-base text-muted-foreground">Raccontaci le tue competenze e come vorresti contribuire al progetto.</p>
             </div>
-            <Link to="/contatti" className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-ink-950 md:mt-0">
-              Contattaci <ArrowRight className="h-4 w-4" aria-hidden />
+            <Link to="/contatti" className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full btn-blue px-6 py-3 font-semibold md:mt-0">
+              Candidati <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
         </div>

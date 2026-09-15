@@ -37,7 +37,7 @@ export function PageHero({ eyebrow, title, subtitle, badge, children, aside }: P
           </div>
           <h1 className="mt-4 max-w-3xl text-display-l">{title}</h1>
           {subtitle ? (
-            <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{subtitle}</p>
+            <p className="mt-5 max-w-2xl whitespace-pre-line text-lg text-muted-foreground">{subtitle}</p>
           ) : null}
           {children ? (
             <div className="mt-8 flex flex-wrap justify-center gap-3">{children}</div>

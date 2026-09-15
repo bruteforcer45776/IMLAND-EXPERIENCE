@@ -173,15 +173,15 @@ const descriptions: Record<string, string> = {
 
 // Ordine e ruoli aggiornati: prima i ruoli direttivi, poi il resto nell'ordine precedente.
 export const teamMembers: TeamMember[] = [
-  build(teamM15.url, "Davide", "De Lisa", "", "CEO"),
+  build(teamM15.url, "Davide", "De Lisa", "", "Direzione artistica e speaker"),
 
-  build(teamM12.url, "Massimo", "Biasini", "", "Direzione eventi e logistica"),
+  build(teamM12.url, "Massimo", "Biasini", "", "Direzione eventi e logistica e speaker"),
 
-  build(teamM14.url, "Matteo", "Sella", "", "Direzione radio e tecnico"),
+  build(teamM14.url, "Matteo", "Sella", "", "Direzione radio e speaker"),
 
   build(teamM5.url, "Davide", "Negro", "", "Tecnico"),
 
-  build(teamM3.url, "Alberto", "Colpo", "", "Responsabile commerciale"),
+  build(teamM3.url, "Alberto", "Colpo", "", "Direzione commerciale e speaker"),
 
   build(teamM22.url, "Alessandra", "Campaci", "", "Responsabile marketing e member"),
 

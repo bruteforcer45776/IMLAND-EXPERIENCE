@@ -21,6 +21,7 @@ import {
 import { Reveal } from "../components/reveal";
 import { BadgeIcon, badgeForIcon, toneForBadge } from "../components/badge-icon";
 import { BentoGrid, BentoCard } from "../components/bento";
+import { StreamingBanner } from "../components/streaming-banner";
 
 export const Route = createFileRoute("/radio")({
   head: () => ({
@@ -257,6 +258,9 @@ function RadioPage() {
                 </BentoCard>
               ))}
             </BentoGrid>
+            <div className="mt-8 rounded-3xl border border-border bg-white/5 px-5 py-6">
+              <StreamingBanner label="Ascolta IMLAND anche su:" />
+            </div>
           </div>
         </section>
 

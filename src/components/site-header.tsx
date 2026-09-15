@@ -21,8 +21,8 @@ type NavItem = {
 
 const nav: NavItem[] = [
   { to: "/", label: "Home" },
+  { to: "/chi-siamo", label: "Il Progetto" },
   { to: "/radio", label: "Radio" },
-  { to: "/news", label: "News" },
   {
     to: "/podcast",
     label: "Podcast",
@@ -31,9 +31,9 @@ const nav: NavItem[] = [
       { to: "/my-podcast", label: "My Podcast", desc: "Podcast su misura per aziende e organizzazioni." },
     ],
   },
-  { to: "/member", label: "Partner" },
   { to: "/eventi", label: "Eventi" },
-  { to: "/chi-siamo", label: "Il Progetto" },
+  { to: "/news", label: "News" },
+  { to: "/member", label: "Members" },
   { to: "/contatti", label: "Contatti" },
   { to: "/faq", label: "FAQ" },
 ];
@@ -177,6 +177,14 @@ export function SiteHeader() {
 
           {/* Right actions */}
           <div className="flex items-center gap-1.5 md:gap-2">
+            <a
+              href={WHATSAPP_MEMBER_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="theme-member hidden items-center rounded-full bg-signal px-4 py-2.5 text-[13px] font-bold text-ink-950 2xl:inline-flex"
+            >
+              Sei un’azienda? Diventa Member
+            </a>
             <form
               onSubmit={submitSearch}
               role="search"
@@ -374,8 +382,15 @@ export function SiteHeader() {
                 onClick={() => setOpen(false)}
                 className="theme-member flex w-full items-center justify-center rounded-full bg-signal px-5 py-3 text-[15px] font-bold text-ink-950 md:py-3.5"
               >
-                Diventa Member!
+                Sei un’azienda? Diventa Member
               </a>
+              <Link
+                to="/radio"
+                onClick={() => setOpen(false)}
+                className="theme-radio flex w-full items-center justify-center rounded-full btn-blue px-5 py-3 text-[15px] font-bold md:py-3.5"
+              >
+                Ascolta Live
+              </Link>
               {user ? (
                 <div className="rounded-3xl border border-border bg-white p-4">
                   <Link
