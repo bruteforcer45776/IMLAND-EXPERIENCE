@@ -22,7 +22,7 @@ const columns = [
       { to: "/my-podcast", label: "My Podcast" },
       { to: "/eventi", label: "Eventi" },
       { to: "/news", label: "News" },
-      { to: "/member", label: "Partners" },
+      { to: "/member", label: "Partner" },
     ],
   },
   {
@@ -122,7 +122,10 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5 text-[15px]">
               {col.links.map((l) => (
                 <li key={l.label}>
-                  <Link to={l.to} className={`${themeForLink(l.to)} text-ink-600 transition-colors hover:text-signal`}>
+                  <Link
+                    to={l.to}
+                    className={`${themeForLink(l.to)} text-ink-600 transition-colors hover:text-signal`}
+                  >
                     {l.label}
                   </Link>
                 </li>
