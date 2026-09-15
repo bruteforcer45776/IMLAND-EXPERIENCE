@@ -3277,3 +3277,10 @@ h6 {
 .site-glass-header .btn-blue {
   color: #ffffff !important;
 }
+
+/* Ecosistema Home: lo stesso vetro traslucido della barra superiore. */
+.home-glass-stack > section.home-ecosystem:not(:first-of-type) {
+  background: rgba(255, 255, 255, 0.38) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(135%);
+  backdrop-filter: blur(24px) saturate(135%);
+}

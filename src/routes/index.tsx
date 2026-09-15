@@ -121,7 +121,7 @@ function Home() {
 
       {/* ECOSISTEMA EDITORIALE — timeline Radio, Podcast, Eventi e News */}
       <AdvSlot position="alto" />
-      <section className="relative overflow-hidden bg-white section-pad">
+      <section className="home-ecosystem relative overflow-hidden section-pad">
         <div className={shell}>
           <p className={eyebrow}>L'ecosistema IMLAND</p>
           <h2 className={`${h2} mt-3`}>
