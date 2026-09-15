@@ -10,7 +10,9 @@ import { quickLinks } from "../data/home-quick-links";
 import { AdvSlot } from "../components/adv-slot";
 import { BentoGrid, BentoLinkCard } from "../components/bento";
 
-const DomeGallery = lazy(() => import("../components/dome-gallery"));
+const PartnerLoop = lazy(() =>
+  import("../components/partner-bar/PartnerLoop").then((module) => ({ default: module.PartnerLoop })),
+);
 const NewsletterBanner = lazy(() =>
   import("../components/newsletter-banner").then((m) => ({ default: m.NewsletterBanner })),
 );
@@ -26,7 +28,6 @@ import {
   upcomingEvents,
 } from "../data/events";
 import { latestEpisodes, programs, totalEpisodes } from "../data/podcast-derived";
-import { partnerLogos } from "../data/partner-logos";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
 
 const featuredEpisode = latestEpisodes[0];
@@ -127,18 +128,8 @@ function Home() {
             Membri e realtà del territorio:
           </p>
         </div>
-        <Suspense fallback={<div className="h-[28rem]" />}>
-          <div className="member-wall mx-auto h-[clamp(25rem,52vw,40rem)] max-w-[1180px] overflow-hidden rounded-3xl bg-[#0a0a0a]">
-            <DomeGallery
-              images={partnerLogos.map((partner) => ({ src: partner.src, alt: partner.name, href: partner.href ?? undefined }))}
-              grayscale={false}
-              overlayBlurColor="#0a0a0a"
-              imageBorderRadius="18px"
-              openedImageBorderRadius="24px"
-              minRadius={420}
-              fit={0.72}
-            />
-          </div>
+        <Suspense fallback={<div className="h-16" />}>
+          <PartnerLoop fadeOutColor="#ffffff" />
         </Suspense>
       </section>
 

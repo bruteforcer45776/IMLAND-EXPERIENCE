@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { canonical } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Users } from "lucide-react";
-import DriftWall from "../components/drift-wall";
-import { useIsMobile } from "@/hooks/use-mobile";
 import todaroPhoto from "../assets/andrea-todaro.jpg.asset.json";
 import motorhouseWhite from "../assets/motorhouse-white.png.asset.json";
 import { NewsletterBanner } from "../components/newsletter-banner";
 import { SpotlightCard } from "../components/spotlight-card";
 import { PhotoBadge } from "../components/photo-badge";
 import { HeroBanner } from "../components/hero-banner";
+
+const DomeGallery = lazy(() => import("../components/dome-gallery"));
 
 import heroMember from "@/assets/hero-member-v3.webp";
 import heroMemberMobile from "@/assets/hero-member-mobile.webp";
@@ -435,7 +435,6 @@ const memberWall: MemberWallEntry[] = [
 ];
 
 function MemberPage() {
-  const isMobile = useIsMobile();
   const [openedId, setOpenedId] = useState<string | null>(null);
   const [flippedId, setFlippedId] = useState<string | null>(null);
 
@@ -521,41 +520,30 @@ function MemberPage() {
               </p>
             </div>
 
-            <div className="relative mt-10 h-[520px] w-full overflow-hidden rounded-2xl bg-surface md:h-[640px]">
+            <div className="partner-dome relative mt-10 h-[clamp(25rem,58vw,44rem)] w-full overflow-hidden bg-transparent">
               <div className="relative z-10 h-full w-full">
-                <DriftWall
-                  items={memberWall.map((m) => ({
-                    image: m.cover,
-                    title: m.name,
-                    href: m.url || undefined,
-                  }))}
-                  columns={isMobile ? 2 : 5}
-                  tileWidth={isMobile ? 132 : 200}
-                  tileHeight={isMobile ? 92 : 132}
-                  gap={isMobile ? 12 : 18}
-                  scale={isMobile ? 1 : 1.18}
-                  tilt={isMobile ? 6 : 16}
-                  turn={isMobile ? -4 : -14}
-                  depth={isMobile ? 40 : 120}
-                  speed={36}
-                  direction="up"
-                  variance={0.4}
-                  parallax={0.5}
-                  pauseOnHover
-                  lift={56}
-                  fade={0.25}
-                  dim={1}
-                  grayscale={false}
-                  overlayColor="transparent"
-                  fit="contain"
-                />
+                <Suspense fallback={<div className="h-full" />}>
+                  <DomeGallery
+                    images={memberWall.map((member) => ({
+                      src: member.cover,
+                      alt: member.name,
+                      href: member.url ?? undefined,
+                    }))}
+                    grayscale={false}
+                    overlayBlurColor="#ffffff"
+                    imageBorderRadius="18px"
+                    openedImageBorderRadius="24px"
+                    minRadius={420}
+                    fit={0.72}
+                  />
+                </Suspense>
               </div>
             </div>
           </div>
         </section>
 
         {/* MEMBER WALL */}
-        <section className="section-canvas relative overflow-hidden">
+        <section className="hidden" aria-hidden="true">
           <div className="container-im relative z-20 pt-32 pb-20">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl">

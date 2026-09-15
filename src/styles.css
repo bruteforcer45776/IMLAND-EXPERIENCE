@@ -3085,6 +3085,16 @@ h6 {
   height: 100%;
 }
 
+.partner-dome .dome-gallery {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.partner-dome :is(.overlay, .overlay--blur, .edge-fade) {
+  opacity: 0;
+}
+
 @media (max-width: 63.999rem) {
   .home-split-hero { min-height: 0 !important; }
   .home-split-hero .hero-visual {
@@ -3143,4 +3153,22 @@ h6 {
   .site-glass-header {
     border-radius: 1.5rem !important;
   }
+}
+
+/* Contrasto finale: rispetta le superfici dichiaratamente scure o colorate. */
+[class*="text-white"] {
+  color: #ffffff !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+[class~="bg-signal"] :is(h1, h2, h3, h4, p, li, span, label),
+[class~="bg-signal"] {
+  color: var(--signal-foreground, #ffffff) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+[data-surface="dark"] :is(h1, h2, h3, h4, p, li, span, label),
+[class~="bg-foreground"] :is(h1, h2, h3, h4, p, li, span, label) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: currentColor !important;
 }
