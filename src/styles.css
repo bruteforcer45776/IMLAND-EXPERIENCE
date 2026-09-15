@@ -2767,3 +2767,64 @@ h6 {
   .home-territory-grid > a,
   .home-proof-grid > div { border-radius: 2rem 2rem .75rem 2rem !important; }
 }
+
+/* Fotografia territoriale nei moduli prima solo testuali. */
+.home-feature-grid > *,
+.home-territory-grid > a,
+.home-podcast-grid > a,
+.home-events-grid .card-im {
+  isolation: isolate;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+.home-feature-grid > *::after,
+.home-territory-grid > a::after,
+.home-podcast-grid > a::after,
+.home-events-grid .card-im::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgb(2 14 36 / 34%), rgb(2 14 36 / 90%));
+  pointer-events: none;
+}
+
+.home-feature-grid > :nth-child(3n + 1),
+.home-territory-grid > :nth-child(3n + 1),
+.home-podcast-grid > :nth-child(3n + 1),
+.home-events-grid > :nth-child(3n + 1) .card-im {
+  background-image: url("/assets/editorial-territory/borgo-alpi.png") !important;
+}
+
+.home-feature-grid > :nth-child(3n + 2),
+.home-territory-grid > :nth-child(3n + 2),
+.home-podcast-grid > :nth-child(3n + 2),
+.home-events-grid > :nth-child(3n + 2) .card-im {
+  background-image: url("/assets/editorial-territory/lago-maggiore.png") !important;
+}
+
+.home-feature-grid > :nth-child(3n),
+.home-territory-grid > :nth-child(3n),
+.home-podcast-grid > :nth-child(3n),
+.home-events-grid > :nth-child(3n) .card-im {
+  background-image: url("/assets/editorial-territory/colline-borgo.png") !important;
+}
+
+.home-feature-grid > * :is(p, h3, span, svg),
+.home-territory-grid > a :is(p, svg),
+.home-podcast-grid > a :is(p, h3, span, svg),
+.home-events-grid .card-im :is(p, h3, span, svg) {
+  color: #fff !important;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 35%);
+}
+
+@media (max-width: 47.999rem) {
+  .home-feature-grid > *::after,
+  .home-territory-grid > a::after,
+  .home-podcast-grid > a::after,
+  .home-events-grid .card-im::after {
+    background: linear-gradient(180deg, rgb(2 14 36 / 42%), rgb(2 14 36 / 94%));
+  }
+}
