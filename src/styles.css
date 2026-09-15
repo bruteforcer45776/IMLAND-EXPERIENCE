@@ -3136,6 +3136,12 @@ h6 {
   background: #fff !important;
 }
 
+.home-unified-hero :is(h1, p) {
+  color: #fff !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: 0 2px 24px rgb(0 0 0 / 35%);
+}
+
 .home-split-hero .hero-editorial__label,
 .home-split-hero .hero-editorial__copy :is(h1, h1 span, p) {
   color: #0a0a0a !important;
@@ -3254,4 +3260,10 @@ h6 {
   color: #0a0a0a !important;
   -webkit-text-fill-color: #0a0a0a !important;
   background: none !important;
+}
+
+/* Hero Home unificata: testo sempre leggibile sulla fotografia territoriale. */
+.home-glass-stack .home-unified-hero :is(h1, p) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }

@@ -17,6 +17,7 @@ import {
 import { useNowPlaying } from "@/hooks/use-now-playing";
 import { usePlayer } from "./player-context";
 import { podcastAudio, registerRadioStop } from "./podcast-audio";
+import { streamingPlatforms } from "./streaming-banner";
 
 const RADIO_STREAM_URL = "https://stream.aiir.com/ylpompusqpatv";
 
@@ -187,7 +188,7 @@ export function RadioPlayer() {
         className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] left-4 z-50 md:bottom-6 md:left-6"
       >
         {expanded && (
-          <div className="absolute bottom-[4.5rem] left-0 w-[min(92vw,380px)] origin-bottom-left animate-enter rounded-[28px] border border-white/10 bg-ink/95 p-5 text-white shadow-2xl backdrop-blur-xl md:bottom-0 md:left-[4.5rem] md:origin-bottom-left">
+          <div className="absolute bottom-[4.5rem] left-0 max-h-[min(72vh,620px)] w-[min(92vw,420px)] origin-bottom-left overflow-y-auto rounded-[28px] border border-white/15 bg-black/40 p-5 text-white shadow-2xl backdrop-blur-xl animate-enter md:bottom-0 md:left-[4.5rem] md:origin-bottom-left">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-center gap-2">
                 <span
@@ -305,6 +306,20 @@ export function RadioPlayer() {
               </div>
             </div>
 
+            <div className="mt-4" aria-label="Avanzamento della diretta">
+              <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-wider text-white/55">
+                <span>Diretta</span>
+                <span>Live</span>
+              </div>
+              <div
+                role="progressbar"
+                aria-valuetext="Trasmissione in diretta"
+                className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/15"
+              >
+                <span className="block h-full w-2/3 rounded-full bg-signal" />
+              </div>
+            </div>
+
             {/* Live waveform */}
             <div className="mt-4 flex h-5 items-center gap-[3px]" aria-hidden>
               {[4, 7, 5, 9, 6, 8, 5, 7, 6, 9, 5, 7].map((h, i) => (
@@ -337,6 +352,24 @@ export function RadioPlayer() {
                 Proponi un brano
               </Link>
             </div>
+
+            <div className="mt-4 border-t border-white/10 pt-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-white/60">Ascoltaci su</p>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {streamingPlatforms.map((platform) => (
+                  <a
+                    key={platform.name}
+                    href={platform.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ascolta IMLAND su ${platform.name}`}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white p-1.5 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    <img src={platform.icon} alt="" className="h-full w-full object-contain" loading="lazy" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -345,8 +378,8 @@ export function RadioPlayer() {
           onClick={() => setOpen(!open)}
           aria-expanded={expanded}
           aria-label={expanded ? "Chiudi il pannello del player" : "Apri il player radio"}
-          className={`relative flex h-14 w-14 items-center justify-center rounded-full text-white shadow-xl transition hover:scale-105 md:h-16 md:w-16 ${
-            status === "error" ? "bg-[#c5221f]" : "bg-[var(--error)]"
+          className={`relative flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white shadow-xl backdrop-blur-xl transition hover:scale-105 hover:bg-black/55 md:h-16 md:w-16 ${
+            status === "error" ? "ring-2 ring-[#c5221f]" : ""
           }`}
         >
           {playing && status === "playing" && (

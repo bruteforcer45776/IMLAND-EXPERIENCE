@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import { convertToModelMessages, generateText, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 
 const SYSTEM_PROMPT = `Sei l'assistente virtuale di IMLAND EXPERIENCE, l'hub territoriale che raccoglie radio, podcast, eventi e community locale.
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const { messages } = (await request.json()) as { messages?: unknown };
+        const { messages, simple } = (await request.json()) as { messages?: unknown; simple?: boolean };
         if (!Array.isArray(messages)) {
           return new Response("Messages are required", { status: 400 });
         }
@@ -45,6 +45,15 @@ export const Route = createFileRoute("/api/chat")({
 
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
+
+        if (simple) {
+          const result = await generateText({
+            model,
+            system: SYSTEM_PROMPT,
+            messages: await convertToModelMessages(messages as UIMessage[]),
+          });
+          return Response.json({ text: result.text });
+        }
 
         const result = streamText({
           model,

@@ -1,7 +1,7 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { WHATSAPP_MEMBER_URL } from "@/lib/whatsapp";
-import { Accessibility, X, Type, Minus, Plus, Contrast, ZapOff } from "lucide-react";
+import { Accessibility, Bot, Send, X, Type, Minus, Plus, Contrast, ZapOff } from "lucide-react";
 
 // WhatsApp icon (replace number below with the real business number)
 
@@ -67,10 +67,12 @@ export function StickyActions() {
   }, [open]);
 
   return (
-    <aside
-      aria-label="Azioni rapide"
-      className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-3 z-[60] flex flex-col gap-2 md:bottom-24 md:right-4 md:gap-3"
-    >
+    <>
+      <AiChatbot />
+      <aside
+        aria-label="Azioni rapide"
+        className="fixed bottom-[calc(9rem+env(safe-area-inset-bottom))] right-3 z-[59] flex flex-col gap-2 md:bottom-40 md:right-4 md:gap-3"
+      >
       <a
         href={WHATSAPP_MEMBER_URL}
         target="_blank"
@@ -190,6 +192,161 @@ export function StickyActions() {
           </div>
         </>
       )}
-    </aside>
+      </aside>
+    </>
+  );
+}
+
+type ChatMessage = { id: string; role: "user" | "assistant"; text: string };
+
+function AiChatbot() {
+  const [chatOpen, setChatOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [sending, setSending] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      id: "welcome",
+      role: "assistant",
+      text: "Ciao! Sono l’assistente IMLAND. Posso aiutarti a trovare radio, podcast, eventi, news e informazioni per diventare Member.",
+    },
+  ]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const panelId = useId();
+
+  useEffect(() => {
+    if (!chatOpen) return;
+    inputRef.current?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setChatOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [chatOpen]);
+
+  const submit = async (event: FormEvent) => {
+    event.preventDefault();
+    const text = input.trim();
+    if (!text || sending) return;
+    const next = [...messages, { id: crypto.randomUUID(), role: "user" as const, text }];
+    setMessages(next);
+    setInput("");
+    setSending(true);
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          simple: true,
+          messages: next.map((message) => ({
+            id: message.id,
+            role: message.role,
+            parts: [{ type: "text", text: message.text }],
+          })),
+        }),
+      });
+      if (!response.ok) throw new Error("chat unavailable");
+      const data = (await response.json()) as { text?: string };
+      setMessages((current) => [
+        ...current,
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          text: data.text?.trim() || "Non ho trovato una risposta. Puoi riprovare?",
+        },
+      ]);
+    } catch {
+      setMessages((current) => [
+        ...current,
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          text: "In questo momento non riesco a rispondere. Puoi riprovare tra poco oppure visitare la pagina Contatti.",
+        },
+      ]);
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return (
+    <div className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-3 z-[60] md:bottom-24 md:right-4">
+      {chatOpen && (
+        <section
+          id={panelId}
+          role="dialog"
+          aria-label="Chatbot AI IMLAND"
+          data-surface="dark"
+          className="absolute bottom-[4.25rem] right-0 flex h-[min(68vh,560px)] w-[min(92vw,380px)] origin-bottom-right flex-col overflow-hidden rounded-[24px] border border-white/15 bg-ink/95 text-white shadow-2xl backdrop-blur-xl animate-enter"
+        >
+          <header className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-im-blue text-white">
+                <Bot size={20} aria-hidden />
+              </span>
+              <div>
+                <h2 className="font-display text-base font-bold">Assistente IMLAND</h2>
+                <p className="text-xs text-white/60">Online · risposte sul territorio</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setChatOpen(false)}
+              aria-label="Chiudi chat"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              <X size={18} />
+            </button>
+          </header>
+
+          <div className="scrollbar-imland flex-1 space-y-3 overflow-y-auto p-4" aria-live="polite">
+            {messages.map((message) => (
+              <p
+                key={message.id}
+                className={`max-w-[88%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  message.role === "user"
+                    ? "ml-auto bg-im-blue text-white"
+                    : "bg-white/10 text-white/90"
+                }`}
+              >
+                {message.text}
+              </p>
+            ))}
+            {sending && <p className="w-fit rounded-2xl bg-white/10 px-4 py-3 text-sm text-white/65">Sto scrivendo…</p>}
+          </div>
+
+          <form onSubmit={submit} className="flex items-center gap-2 border-t border-white/10 p-3">
+            <label htmlFor={`${panelId}-input`} className="sr-only">Scrivi un messaggio</label>
+            <input
+              ref={inputRef}
+              id={`${panelId}-input`}
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder="Chiedi a IMLAND…"
+              className="h-11 min-w-0 flex-1 rounded-full border border-white/10 bg-white/10 px-4 text-sm text-white outline-none placeholder:text-white/45 focus:border-white/35"
+              disabled={sending}
+            />
+            <button
+              type="submit"
+              aria-label="Invia messaggio"
+              disabled={sending || !input.trim()}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-im-blue text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              <Send size={18} aria-hidden />
+            </button>
+          </form>
+        </section>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setChatOpen((value) => !value)}
+        aria-expanded={chatOpen}
+        aria-controls={panelId}
+        aria-label={chatOpen ? "Chiudi chatbot AI" : "Apri chatbot AI"}
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-im-blue text-white shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:h-16 md:w-16"
+      >
+        {chatOpen ? <X size={24} aria-hidden /> : <Bot size={25} aria-hidden />}
+      </button>
+    </div>
   );
 }

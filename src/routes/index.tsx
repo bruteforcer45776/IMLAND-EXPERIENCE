@@ -22,14 +22,8 @@ const DownloadAppBanner = lazy(() =>
   import("../components/download-app-banner").then((m) => ({ default: m.DownloadAppBanner })),
 );
 import { seoFaq } from "../data/seo-faq";
-import {
-  eventTerritories,
-  formatEventDate,
-  formatEventTime,
-  upcomingEvents,
-} from "../data/events";
-import { latestEpisodes, programs, totalEpisodes } from "../data/podcast-derived";
-import { partnerLogos } from "../data/partner-logos";
+import { formatEventDate, formatEventTime, upcomingEvents } from "../data/events";
+import { latestEpisodes, programs } from "../data/podcast-derived";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
 
 const featuredEpisode = latestEpisodes[0];
@@ -127,7 +121,7 @@ function Home() {
       <section className="home-partners relative overflow-hidden border-y border-black/10 bg-white section-pad-sm">
         <div className="relative container-im">
           <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-black/55">
-            Membri e realtà del territorio:
+            Members e realtà del territorio:
           </p>
         </div>
         <Suspense fallback={<div className="h-16" />}>
@@ -402,57 +396,6 @@ function Home() {
       </section>
 
       <AdvSlot position="medio" />
-
-      {/* HUB TERRITORIALE */}
-      <section className="section-focus section-pad">
-        <div className={shell}>
-          <Reveal>
-            <div className="max-w-3xl">
-              <p className={eyebrow}>IMLAND Experience</p>
-              <h2 className={h2}>
-                Tanti servizi, un unico <span className={keyword}>HUB territoriale</span>.
-              </h2>
-              <p className="mt-5 text-lg text-ink-600">
-                Radio, Podcast, Eventi e News connettono persone, aziende, professionisti e
-                community in un solo ecosistema dedicato al territorio.
-              </p>
-            </div>
-          </Reveal>
-          <div className="home-territory-grid mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {eventTerritories.map((t) => (
-              <Link
-                key={t}
-                to="/cerca"
-                search={{ q: t }}
-                className="group flex h-full flex-col rounded-[24px] border border-border bg-white p-6 transition-all duration-fast hover:-translate-y-1 hover:shadow-[var(--elevation-2)]"
-              >
-                <MapPin className="h-6 w-6 text-im-blue" aria-hidden />
-                <p className="mt-4 font-display text-lg font-bold text-ink-950">{t}</p>
-                <p className="mt-1 text-sm text-ink-600">Radio, podcast, eventi e news in zona.</p>
-              </Link>
-            ))}
-          </div>
-          <dl className="home-proof-grid mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {[
-              { v: "24/7", k: "Radio in diretta" },
-              { v: `${programs.length}`, k: "Canali podcast" },
-              { v: `${totalEpisodes}`, k: "Episodi pubblicati" },
-              { v: `${partnerLogos.length}`, k: "Aziende partner" },
-            ].map((s) => (
-              <div
-                key={s.k}
-                className="rounded-[24px] border border-border bg-white p-6 text-center"
-              >
-                <dt className="sr-only">{s.k}</dt>
-                <dd>
-                  <span className="block font-display text-3xl font-bold text-ink-950">{s.v}</span>
-                  <span className="mt-1 block text-sm text-ink-600">{s.k}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
 
       {/* PARTNER / MEMBER */}
       <section className="theme-member bg-white section-pad">
