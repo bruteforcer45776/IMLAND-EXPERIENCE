@@ -3284,3 +3284,63 @@ h6 {
   -webkit-backdrop-filter: blur(24px) saturate(135%) !important;
   backdrop-filter: blur(24px) saturate(135%) !important;
 }
+
+/* Prova Home glass: tutte le sezioni riprendono il vetro dell'ecosistema. */
+.home-glass-stack > section:not(:first-of-type),
+.home-glass-stack > div > section.home-color-band {
+  background-color: rgba(255, 255, 255, 0.38) !important;
+  border-color: rgba(255, 255, 255, 0.46) !important;
+  box-shadow: 0 18px 46px rgb(1 29 104 / 12%);
+  -webkit-backdrop-filter: blur(24px) saturate(135%) !important;
+  backdrop-filter: blur(24px) saturate(135%) !important;
+}
+
+/* Le superfici editoriali restano chiare e leggibili sopra il vetro. */
+.home-glass-stack > section:not(:first-of-type)
+  :is(h1, h2, h3, h4, h5, h6, p, li, summary),
+.home-glass-stack > div > section.home-color-band
+  :is(h1, h2, h3, h4, p, span, svg) {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+}
+
+.home-glass-stack > section:not(:first-of-type)
+  :is(.card-im, .bento-card, details, [class~="bg-white"]),
+.home-glass-stack > section:not(:first-of-type) .section-closing {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.72) !important;
+}
+
+/* Banner e pubblicita: vetro coerente, contenuti con contrasto stabile. */
+.home-glass-stack > section.home-adv-slot {
+  background: rgba(255, 255, 255, 0.38) !important;
+}
+
+.home-glass-stack > section.home-adv-slot > div {
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 1.75rem;
+}
+
+.home-glass-stack > section.home-adv-slot :is(h2, p, span, svg) {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.home-glass-stack > div > section.home-color-band img {
+  opacity: 0.2 !important;
+}
+
+.home-glass-stack > div > section.home-color-band .btn-blue {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+@media (max-width: 47.999rem) {
+  .home-glass-stack > section.home-adv-slot > div {
+    margin-inline: 0.75rem;
+    width: calc(100% - 1.5rem);
+    border-radius: 1.35rem;
+  }
+}

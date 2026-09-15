@@ -115,7 +115,7 @@ function Home() {
           </p>
         </div>
         <Suspense fallback={<div className="h-16" />}>
-          <PartnerLoop fadeOutColor="#ffffff" />
+          <PartnerLoop fadeOutColor="rgba(255, 255, 255, 0.38)" />
         </Suspense>
       </section>
 
