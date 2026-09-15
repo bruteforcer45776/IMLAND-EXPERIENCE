@@ -2871,10 +2871,6 @@ h6 {
   color: #0a0a0a !important;
 }
 
-.home-glass-stack > section:not(:first-of-type) :is(.flex, .grid) {
-  justify-content: center;
-}
-
 .home-glass-stack > section:not(:first-of-type) :is(p, h1, h2, h3) {
   margin-inline: auto;
 }
@@ -2978,6 +2974,38 @@ h6 {
   color: #0a0a0a !important;
 }
 
+:is(.theme-radio, .theme-podcast, .theme-member, .theme-news, .theme-eventi)
+  :is(.text-signal, .text-im-blue):not(:is(h1, h2, h3, h4, p)) {
+  color: var(--signal) !important;
+}
+
+.home-services .bento-card {
+  align-items: center;
+  text-align: center;
+}
+
+.home-glass-stack {
+  --home-inline: clamp(1rem, 3.125vw, 2.5rem);
+}
+
+.home-glass-stack .container-im,
+.home-glass-stack > section > .mx-auto {
+  padding-inline: var(--home-inline);
+}
+
+.home-services .bento-grid,
+.home-feature-grid,
+.home-territory-grid,
+.home-podcast-grid,
+.home-events-grid {
+  margin-top: clamp(2rem, 3vw, 2.5rem);
+}
+
+.home-adv-slot h2 {
+  font-size: clamp(1.125rem, 2vw, 1.5rem) !important;
+  line-height: 1.1;
+}
+
 :is(.btn-blue, .btn-liquid, .cta-light, [class*="bg-signal"])[data-surface="dark"],
 :is(.btn-blue, .btn-liquid, .cta-light) {
   color: var(--signal-foreground, #fff) !important;
@@ -3008,6 +3036,11 @@ h6 {
   :is(h2, .text-h2-im) { font-size: clamp(1.65rem, 7vw, 2.5rem) !important; }
   :is(h3, .text-h3-im) { font-size: clamp(1.15rem, 5vw, 1.5rem) !important; }
   :is(a, button, [role="button"]) { min-height: 2.75rem; }
+}
+
+@media (max-width: 23rem) {
+  .home-territory-grid,
+  .home-proof-grid { grid-template-columns: 1fr; }
 }
 
 /* Correzione richiesta: le sezioni della Home tornano bianche. */
