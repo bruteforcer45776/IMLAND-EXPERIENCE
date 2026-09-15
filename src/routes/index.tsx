@@ -115,13 +115,13 @@ function Home() {
           </p>
         </div>
         <Suspense fallback={<div className="h-16" />}>
-          <PartnerLoop fadeOutColor="rgba(255, 255, 255, 0.38)" />
+          <PartnerLoop fadeOutColor="#ffffff" />
         </Suspense>
       </section>
 
       {/* ECOSISTEMA EDITORIALE — timeline Radio, Podcast, Eventi e News */}
       <AdvSlot position="alto" />
-      <section className="home-ecosystem relative overflow-hidden section-pad">
+      <section className="relative overflow-hidden bg-white section-pad">
         <div className={shell}>
           <p className={eyebrow}>L'ecosistema IMLAND</p>
           <h2 className={`${h2} mt-3`}>
