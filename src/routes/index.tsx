@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { canonical, jsonLd, organizationLd, websiteLd, SITE_URL } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin, Radio } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
@@ -172,17 +172,6 @@ function Home() {
             parte della stessa esperienza territoriale.
           </p>
 
-          <div className="mt-9" aria-label="Accesso rapido ai contenuti IMLAND">
-            <AccordionGallery
-              items={ecosystemGalleryItems}
-              defaultIndex={0}
-              height={280}
-              gap={10}
-              radius={16}
-              expandRatio={0.44}
-            />
-          </div>
-
           <div className="relative mt-14 pl-9 md:pl-0">
             <div
               aria-hidden
@@ -214,18 +203,14 @@ function Home() {
                 </Reveal>
                 <Reveal delay={90}>
                   <div className="mt-7 md:col-start-2 md:mt-0 md:pl-7">
-                    <div className="card-im rounded-[28px] bg-white p-7">
-                      <Radio className="h-10 w-10 text-signal" aria-hidden />
-                      <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-signal">
-                        In diretta ogni giorno
-                      </p>
-                      <h3 className="mt-3 text-h3-im text-ink-950">
-                        Programmi, musica e voci locali.
-                      </h3>
-                      <p className="mt-3 text-sm text-ink-600">
-                        Ascolta il flusso live e scopri il palinsesto completo nell'area Radio.
-                      </p>
-                    </div>
+                    <AccordionGallery
+                      items={ecosystemGalleryItems}
+                      defaultIndex={0}
+                      height={280}
+                      gap={10}
+                      radius={16}
+                      expandRatio={0.44}
+                    />
                   </div>
                 </Reveal>
               </li>
