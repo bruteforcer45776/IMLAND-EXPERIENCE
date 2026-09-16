@@ -78,7 +78,7 @@ export const Route = createFileRoute("/podcast/")({
   component: PodcastPage,
 });
 
-const categories = ["Tutti", "Business", "Cultura", "Cibo", "Tecnologia", "Weekend"];
+const categories = ["Tutti", "Business", "Cultura", "Cibo", "Tecnologia"];
 
 type Program = ProgramCard;
 
@@ -243,7 +243,7 @@ function PodcastPage() {
               </p>
               <p className="mt-6 text-sm font-semibold text-signal">
                 StuzzicAziende · Istruzioni per l’Uso · Carta Canta · Assaggi · Grigliata Mista ·
-                Terra di Diamanti · Casual Nerd Stories · IMWeekend · Schema Libero
+                Terra di Diamanti · Casual Nerd Stories
               </p>
             </Link>
             <Link

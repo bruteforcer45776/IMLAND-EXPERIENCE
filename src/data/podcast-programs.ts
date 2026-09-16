@@ -52,9 +52,7 @@ export const podcastPrograms: Record<string, PodcastProgram> = {
   "istruzioni-per-l-uso": program("istruzioni-per-l-uso", "Istruzioni per l'uso", "https://podcast.imlandradio.it/podcast/imland-istruzioni.xml", "Business", "Conversazioni pratiche con professionisti, imprese e voci del territorio.", 17),
   stuzzicaziende: program("stuzzicaziende", "Stuzzicaziende", "https://podcast.imlandradio.it/podcast/imland-stuzzicaziende.xml", "Business", "Aziende locali raccontate attraverso persone, filiere e scelte d'impresa.", 14),
   "terra-di-diamanti": program("terra-di-diamanti", "Terra di Diamanti", "https://podcast.imlandradio.it/podcast/imland-diamanti.xml", "Cultura", "Racconti, territorio e identità locale dal Piemonte nord-orientale.", 12),
-  imweekend: program("imweekend", "IMWeekend", "https://podcast.imlandradio.it/podcast/imland-imweekend.xml", "Weekend", "Eventi, serate e idee per vivere il weekend nel territorio.", 2),
   "grigliata-mista": program("grigliata-mista", "Grigliata Mista", "https://podcast.imlandradio.it/podcast/imland-grigliata.xml", "Lifestyle", "Voci, storie e attualità del territorio in forma diretta.", 4),
-  "schema-libero": program("schema-libero", "Schema Libero", "https://podcast.imlandradio.it/podcast/imland-schemalibero.xml", "Lifestyle", "Il territorio visto dal bordo campo.", 1),
   mirabilis: program("mirabilis", "Mirabilis", "https://podcast.imlandradio.it/podcast/imland-Mirabilis.xml", "Cultura", "Mente, cura e futuro.", 5, "my-podcast"),
   "tedx-biella-2025": program("tedx-biella-2025", "TEDx Biella 2025", "https://podcast.imlandradio.it/podcast/imland-tedxbiella2025.xml", "Cultura", "Idee e protagonisti di TEDx Biella 2025.", 2, "my-podcast"),
 };
