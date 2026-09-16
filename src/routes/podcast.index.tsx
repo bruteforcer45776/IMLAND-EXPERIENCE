@@ -10,8 +10,8 @@ import { HeroBanner } from "../components/hero-banner";
 
 import { SectionSearch } from "../components/section-search";
 import { BentoGrid, BentoLinkCard } from "../components/bento";
-import heroPodcast from "@/assets/hero-podcast-v3.webp";
-import heroPodcastMobile from "@/assets/hero-podcast-mobile.webp";
+import heroPodcast from "@/assets/hero-podcast-team-desktop.png";
+import heroPodcastMobile from "@/assets/hero-podcast-team-mobile.png";
 import { PageRails } from "../components/decor";
 import {
   programs,
@@ -180,7 +180,9 @@ function PodcastPage() {
         src={heroPodcast}
         srcMobile={heroPodcastMobile}
         alt="Il territorio ha storie da raccontare — IMLAND Podcast"
-        ctaTop="64%"
+        ctaTop="26%"
+        mobileCtaTop="17%"
+        className="podcast-team-hero"
         flush
         mobileBg="#1646D8"
       >

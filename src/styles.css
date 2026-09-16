@@ -3979,3 +3979,18 @@ h6 {
 .radio-team-hero .cta-light {
   color: var(--color-ink) !important;
 }
+
+/* Hero Podcast: la composizione resta ancorata alle persone e taglia solo il bianco superiore. */
+.podcast-team-hero img {
+  object-position: center bottom !important;
+}
+
+@media (min-width: 48rem) {
+  .podcast-team-hero img {
+    height: clamp(27rem, 38vw, 38.75rem) !important;
+  }
+}
+
+.podcast-team-hero .cta-light {
+  color: var(--color-ink) !important;
+}
