@@ -1941,17 +1941,19 @@
   --signal-strong: #ffd000;
   --signal-ink: var(--on-color);
   --signal-foreground: #101114;
-  /* Le sezioni sotto la hero sono bianche: il testo è sempre ink scuro. */
-  --on-color: #101114;
-  --on-color-muted: #5f6368;
+  /* Il fondo di verticale resta visibile; soltanto le card usano il bianco. */
+  --on-color: #ffffff;
+  --on-color-muted: color-mix(in oklab, #ffffff 86%, var(--background));
   color: var(--on-color);
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 /* Colore di fondo verticale per pagina, campionato dalla grafica hero. */
 .radio-inverted {
   --background: #049bce;
   background-color: #049bce;
+  --on-color: #ffffff;
+  --on-color-muted: color-mix(in oklab, #ffffff 88%, #049bce);
 }
 .podcast-inverted {
   --background: #023ed0;
@@ -1968,10 +1970,14 @@
 .eventi-inverted {
   --background: #0fa036;
   background-color: #0fa036;
+  --on-color: #ffffff;
+  --on-color-muted: color-mix(in oklab, #ffffff 88%, #0fa036);
 }
 .member-inverted {
   --background: #f2ab01;
   background-color: #f2ab01;
+  --on-color: #101114;
+  --on-color-muted: color-mix(in oklab, #101114 72%, #f2ab01);
 }
 .terrain-inverted {
   --background: #a0522d;
@@ -1992,22 +1998,6 @@
   --on-color-muted: color-mix(in oklab, #ffffff 88%, #ff0000);
 }
 
-/* Override globale: sotto la hero tutte le pagine verticali sono bianche. */
-.page-inverted,
-.radio-inverted,
-.podcast-inverted,
-.news-inverted,
-.eventi-inverted,
-.member-inverted,
-.terrain-inverted,
-.jobs-inverted,
-.alert-inverted {
-  background-color: #ffffff;
-  --on-color: #101114;
-  --on-color-muted: #5f6368;
-  color: #101114;
-}
-
 /* La prima sezione segue subito la hero, senza fascia bianca intermedia. */
 .page-inverted > section:first-child.section-pad,
 .page-inverted > section:first-child > .section-pad,
@@ -2015,23 +2005,24 @@
   padding-top: clamp(1.5rem, 3vw, 3rem);
 }
 
-/* Tutte le fasce della pagina sono bianche: solo la hero resta colorata. */
+/* Le fasce strutturali lasciano visibile il fondo di verticale. */
 .page-inverted .section-canvas::before,
 .page-inverted .section-focus::before,
 .page-inverted .section-editorial::before,
 .page-inverted .section-atmosphere::before {
-  background: #ffffff !important;
+  background: transparent !important;
   border-block: 0 !important;
 }
 
 .page-inverted .section-editorial {
-  --background: #ffffff;
-  --foreground: #101114;
+  --background: transparent;
+  --foreground: var(--on-color);
   --card: #ffffff;
   --card-foreground: #101114;
-  --muted: #ffffff;
-  --muted-foreground: #5f6368;
+  --muted: color-mix(in oklab, #ffffff 16%, transparent);
+  --muted-foreground: var(--on-color-muted);
   --border: color-mix(in oklab, #101114 10%, transparent);
+  color: var(--on-color);
 }
 
 /* Schede: bianco pieno con testo nero. */
@@ -3594,20 +3585,6 @@ h6 {
   }
 }
 
-/* Estensione globale: stesso sistema nelle pagine editoriali e di servizio. */
-#main-content > section,
-#main-content > div:not(.home-glass-stack) > section,
-#main-content > div:not(.home-glass-stack) > div > section,
-.page-inverted > section,
-.member-inverted > section,
-.section-focus {
-  border-color: rgb(255 255 255 / 44%) !important;
-  background-color: var(--im-glass-subtle-bg) !important;
-  box-shadow: var(--im-glass-highlight), var(--im-shadow-subtle) !important;
-  -webkit-backdrop-filter: blur(var(--im-blur-subtle)) saturate(118%) !important;
-  backdrop-filter: blur(var(--im-blur-subtle)) saturate(118%) !important;
-}
-
 /* I colori di verticale rimangono segnali, non diventano nuovi stili di card. */
 :where(.theme-radio, .theme-podcast, .theme-eventi, .theme-news, .theme-member)
   :where(.glass-panel, .surface-card, .bento-card, .card-im) {
@@ -3889,18 +3866,34 @@ h6 {
   padding-block: var(--im-section-gap);
 }
 
-/* Ogni sezione, a qualsiasi profondità, condivide lo stesso materiale della Home. */
+/* Le sezioni strutturali restano aperte sul fondo di verticale: il vetro appartiene alle card. */
 #main-content section:not(.hidden) {
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
-  border: 1px solid var(--im-section-border) !important;
-  border-radius: var(--im-section-radius) !important;
-  background-color: var(--im-section-glass) !important;
-  box-shadow: var(--im-section-shadow) !important;
-  -webkit-backdrop-filter: blur(var(--im-blur-subtle)) saturate(122%) !important;
-  backdrop-filter: blur(var(--im-blur-subtle)) saturate(122%) !important;
   margin-block: var(--im-section-gap) !important;
+}
+
+/* I contenitori di pagina non sono card: niente riquadri o fondi bianchi strutturali. */
+#main-content section:is(.bg-white, .bg-card, .section-canvas) {
+  border-color: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+#main-content .section-canvas::before {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+/* Nessuna section strutturale deve sembrare una card bianca. */
+#main-content section:not(.hidden):not([class*="hero"]):not([class*="rounded-"]):not(.home-color-band):not(.home-adv-slot):not(.glass-panel):not(.surface-card):not(.bento-card):not(.card-im):not(.imland-map-card) {
+  overflow: visible;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }
 
 /* Le sezioni della Home restano la fonte di verità e usano gli stessi token. */
@@ -3929,14 +3922,6 @@ h6 {
   #main-content > .jobs-inverted,
   #main-content > .alert-inverted {
     padding-block: var(--im-section-gap);
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  #main-content section:not(.hidden) {
-    background-color: rgb(255 255 255 / 92%) !important;
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
   }
 }
 
