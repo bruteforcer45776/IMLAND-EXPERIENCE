@@ -13,15 +13,20 @@ import {
   getSavedPosition,
   trackKey,
 } from "../components/podcast-audio";
+import { getPodcastFeedEpisodes } from "../lib/podcast-feed.functions";
 
 export const Route = createFileRoute("/podcast/$slug/$episode")({
   loader: async ({ params }) => {
     const { podcastPrograms } = await import("../data/podcast-programs");
     const program = podcastPrograms[params.slug];
     if (!program) throw notFound();
-    const episode = program.episodes.find((e) => e.slug === params.episode);
+    const episodes =
+      program.episodes.length > 0
+        ? program.episodes
+        : await getPodcastFeedEpisodes({ data: { slug: program.slug, limit: 100 } });
+    const episode = episodes.find((e) => e.slug === params.episode);
     if (!episode) throw notFound();
-    return { program, episode };
+    return { program, episode, episodes };
   },
   head: ({ loaderData }) => {
     const title = loaderData
@@ -34,8 +39,8 @@ export const Route = createFileRoute("/podcast/$slug/$episode")({
         { name: "description", content: desc },
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
-        ...(loaderData?.program.cover
-          ? [{ property: "og:image", content: loaderData.program.cover }]
+        ...(loaderData?.episode.image || loaderData?.program.cover
+          ? [{ property: "og:image", content: loaderData.episode.image || loaderData.program.cover }]
           : []),
       ],
     };
@@ -55,16 +60,17 @@ export const Route = createFileRoute("/podcast/$slug/$episode")({
 });
 
 function EpisodePage() {
-  const { program, episode } = Route.useLoaderData();
+  const { program, episode, episodes } = Route.useLoaderData();
   const { track, playing: globalPlaying, time, duration } = usePodcastAudio();
 
+  const episodeCover = episode.image || ("cover" in episode ? episode.cover : null) || program.cover;
   const currentTrack = {
     audio: episode.audio,
     title: episode.title,
     program: program.name,
     programSlug: program.slug,
     episodeSlug: episode.slug,
-    cover: program.cover,
+    cover: episodeCover,
   };
 
   const isCurrent = Boolean(
@@ -86,12 +92,12 @@ function EpisodePage() {
     if (isCurrent) podcastAudio.seek(Number(e.target.value));
   };
 
-  const idx = program.episodes.findIndex(
+  const idx = episodes.findIndex(
     (e: (typeof program.episodes)[number]) => e.slug === episode.slug,
   );
-  const prev = idx > 0 ? program.episodes[idx - 1] : null;
-  const next = idx < program.episodes.length - 1 ? program.episodes[idx + 1] : null;
-  const others = program.episodes
+  const prev = idx > 0 ? episodes[idx - 1] : null;
+  const next = idx < episodes.length - 1 ? episodes[idx + 1] : null;
+  const others = episodes
     .filter((e: (typeof program.episodes)[number]) => e.slug !== episode.slug)
     .slice(0, 4);
 
@@ -133,7 +139,7 @@ function EpisodePage() {
               <img
                 loading="lazy"
                 decoding="async"
-                src={program.cover}
+                src={episodeCover}
                 alt={episode.title}
                 className="h-full w-full object-contain"
               />

@@ -7,7 +7,6 @@ import { PodcastFeedPlayer } from "../components/podcast-feed-player";
 import { programs as allPrograms } from "../data/podcast-derived";
 import {
   getPodcastFeedEpisodes,
-  type PodcastFeedEpisode,
 } from "../lib/podcast-feed.functions";
 
 export const Route = createFileRoute("/podcast/$slug")({
@@ -15,7 +14,11 @@ export const Route = createFileRoute("/podcast/$slug")({
     const { podcastPrograms } = await import("../data/podcast-programs");
     const program = podcastPrograms[params.slug];
     if (!program) throw notFound();
-    return { program };
+    const episodes =
+      program.episodes.length > 0
+        ? program.episodes
+        : await getPodcastFeedEpisodes({ data: { slug: program.slug, limit: 100 } });
+    return { program, episodes };
   },
   head: ({ loaderData }) => {
     const p = loaderData?.program;
@@ -55,34 +58,36 @@ function formatDate(d: string | null) {
 const PAGE_SIZE = 6;
 
 function ProgramPage() {
-  const { program } = Route.useLoaderData();
+  const { program, episodes: loadedEpisodes } = Route.useLoaderData();
   const [visible, setVisible] = useState(PAGE_SIZE);
-  const [feedEpisodes, setFeedEpisodes] = useState<PodcastFeedEpisode[]>([]);
-  const [loadingEpisodes, setLoadingEpisodes] = useState(program.episodes.length === 0);
+  const [episodes, setEpisodes] = useState(loadedEpisodes);
+  const [loadingEpisodes, setLoadingEpisodes] = useState(loadedEpisodes.length === 0);
+  const [feedError, setFeedError] = useState(false);
+
+  const reloadEpisodes = () => {
+    setLoadingEpisodes(true);
+    setFeedError(false);
+    getPodcastFeedEpisodes({ data: { slug: program.slug, limit: 100 } })
+      .then((items) => {
+        setEpisodes(items);
+        setFeedError(items.length === 0);
+      })
+      .catch(() => setFeedError(true))
+      .finally(() => setLoadingEpisodes(false));
+  };
 
   useEffect(() => {
-    let active = true;
-    if (program.episodes.length > 0) {
-      setFeedEpisodes([]);
+    setEpisodes(loadedEpisodes);
+    if (loadedEpisodes.length === 0) reloadEpisodes();
+    else {
       setLoadingEpisodes(false);
-      return () => {
-        active = false;
-      };
+      setFeedError(false);
     }
+    // loadedEpisodes changes only when the route loader runs again.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadedEpisodes, program.slug]);
 
-    setLoadingEpisodes(true);
-    getPodcastFeedEpisodes({ data: { slug: program.slug, limit: program.publishedEpisodes } })
-      .then((episodes) => active && setFeedEpisodes(episodes))
-      .catch(() => active && setFeedEpisodes([]))
-      .finally(() => active && setLoadingEpisodes(false));
-
-    return () => {
-      active = false;
-    };
-  }, [program.episodes.length, program.publishedEpisodes, program.slug]);
-
-  const episodes = program.episodes.length > 0 ? program.episodes : feedEpisodes;
-  const hasLocalEpisodes = program.episodes.length > 0;
+  const programCover = episodes[0]?.image || program.cover;
   const episodeCover = (ep: (typeof episodes)[number]) =>
     "image" in ep && ep.image ? ep.image : "cover" in ep && ep.cover ? ep.cover : program.cover;
 
@@ -116,9 +121,9 @@ function ProgramPage() {
 
           <div className="mt-6 overflow-hidden rounded-[36px] border border-border bg-card shadow-2xl">
             <div className="relative min-h-[340px] md:min-h-[520px]">
-              {program.cover ? (
+              {programCover ? (
                 <img
-                  src={program.cover}
+                  src={programCover}
                   alt={`Grafica del canale ${program.name}`}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
@@ -137,7 +142,8 @@ function ProgramPage() {
                   {program.tagline}
                 </p>
                 <p className="mt-6 text-sm font-semibold text-white/80">
-                  {program.publishedEpisodes} puntat{program.publishedEpisodes === 1 ? "a" : "e"}
+                  {episodes.length || program.publishedEpisodes} puntat
+                  {(episodes.length || program.publishedEpisodes) === 1 ? "a" : "e"}
                   {firstDate && lastDate && firstDate !== lastDate
                     ? ` · pubblicate tra il ${firstDate} e il ${lastDate}`
                     : firstDate
@@ -147,7 +153,12 @@ function ProgramPage() {
               </div>
             </div>
             <div className="border-t border-border bg-background/80 p-5 md:p-6">
-              <PodcastFeedPlayer slug={program.slug} />
+              <PodcastFeedPlayer
+                slug={program.slug}
+                name={program.name}
+                cover={programCover}
+                initialTrack={episodes[0] ?? null}
+              />
             </div>
           </div>
         </div>
@@ -175,12 +186,18 @@ function ProgramPage() {
                 <div className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 rounded-3xl">
                   <SpotlightCard className="flex h-full flex-col overflow-hidden glass-panel rounded-3xl transition-all hover:-translate-y-0.5 hover:shadow-lg">
                     <div className="relative aspect-square w-full overflow-hidden bg-signal flex items-center justify-center">
-                      <img
-                        src={episodeCover(ep)}
-                        alt={ep.title}
-                        loading="lazy"
-                        className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
-                      />
+                      {episodeCover(ep) ? (
+                        <img
+                          src={episodeCover(ep)}
+                          alt={ep.title}
+                          loading="lazy"
+                          className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                        />
+                      ) : (
+                        <span className="px-6 text-center text-sm font-semibold text-white">
+                          IMMAGINE IN ARRIVO
+                        </span>
+                      )}
                       <span className="absolute inset-0 flex items-center justify-center bg-background/40 opacity-0 transition-opacity group-hover:opacity-100">
                         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-signal text-white shadow-lg [&>svg]:text-white">
                           <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
@@ -201,19 +218,13 @@ function ProgramPage() {
                         </p>
                       )}
                       <div className="mt-auto flex items-center justify-between pt-5">
-                        {hasLocalEpisodes ? (
-                          <Link
-                            to="/podcast/$slug/$episode"
-                            params={{ slug: program.slug, episode: ep.slug }}
-                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-signal"
-                          >
-                            Apri episodio <ArrowRight className="inline h-4 w-4" />
-                          </Link>
-                        ) : (
-                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-signal">
-                            Ascolta episodio
-                          </span>
-                        )}
+                        <Link
+                          to="/podcast/$slug/$episode"
+                          params={{ slug: program.slug, episode: ep.slug }}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-signal"
+                        >
+                          Apri episodio <ArrowRight className="inline h-4 w-4" />
+                        </Link>
                         <span className="text-xs text-muted-foreground">{ep.duration ?? ""}</span>
                       </div>
                     </div>
@@ -233,11 +244,19 @@ function ProgramPage() {
                 </div>
               </div>
             ))}
-          {!loadingEpisodes && episodes.length === 0 && (
-            <p className="col-span-full rounded-3xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">
-              Le puntate complete saranno disponibili qui a breve. Puoi già ascoltare l’ultima
-              uscita dal player in alto.
-            </p>
+          {!loadingEpisodes && feedError && episodes.length === 0 && (
+            <div className="col-span-full rounded-3xl border border-dashed border-border p-8 text-center">
+              <p className="text-sm font-medium text-foreground">
+                Non è stato possibile aggiornare le puntate dal feed in questo momento.
+              </p>
+              <button
+                type="button"
+                onClick={reloadEpisodes}
+                className="mt-4 rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
+              >
+                Ricarica le puntate
+              </button>
+            </div>
           )}
           {loadingEpisodes && (
             <p className="col-span-full rounded-3xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">

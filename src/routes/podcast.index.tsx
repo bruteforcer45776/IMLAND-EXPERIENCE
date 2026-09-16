@@ -28,6 +28,10 @@ import {
   fmtTime,
 } from "../components/podcast-audio";
 import {
+  getPodcastCatalog,
+  type PodcastCatalogItem,
+} from "../lib/podcast-feed.functions";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -128,15 +132,35 @@ function ChannelArtwork({ program }: { program: Program }) {
 function PodcastPage() {
   const [active, setActive] = useState("Tutti");
   const gridRef = useRef<HTMLDivElement>(null);
+  const [catalog, setCatalog] = useState<PodcastCatalogItem[]>([]);
+  useEffect(() => {
+    let activeRequest = true;
+    getPodcastCatalog({ data: { group: "podcast" } })
+      .then((items) => activeRequest && setCatalog(items))
+      .catch(() => activeRequest && setCatalog([]));
+    return () => {
+      activeRequest = false;
+    };
+  }, []);
+  const catalogBySlug = new Map(catalog.map((item) => [item.slug, item]));
+  const orderBySlug = new Map(catalog.map((item, index) => [item.slug, index]));
   const normalizedPrograms = programs.map((p) => ({
     ...p,
+    cover: catalogBySlug.get(p.slug)?.cover || p.cover,
+    publishedEpisodes: catalogBySlug.get(p.slug)?.publishedEpisodes ?? p.publishedEpisodes,
+    episodes: `${catalogBySlug.get(p.slug)?.publishedEpisodes ?? p.publishedEpisodes} episodi`,
     cat: p.name.toLowerCase().includes("istruzioni per l'uso")
       ? "Business"
       : p.name.toLowerCase().includes("casual nerd")
         ? "Tecnologia"
         : p.cat,
-  }));
+  })).sort(
+    (a, b) =>
+      (orderBySlug.get(a.slug) ?? Number.MAX_SAFE_INTEGER) -
+      (orderBySlug.get(b.slug) ?? Number.MAX_SAFE_INTEGER),
+  );
   const list = normalizedPrograms.filter((p) => active === "Tutti" || p.cat === active);
+  const liveTotalEpisodes = normalizedPrograms.reduce((sum, program) => sum + program.publishedEpisodes, 0);
 
   const selectCategory = (c: string) => {
     setActive(c);
@@ -219,7 +243,7 @@ function PodcastPage() {
               </p>
               <p className="mt-6 text-sm font-semibold text-signal">
                 StuzzicAziende · Istruzioni per l’Uso · Carta Canta · Assaggi · Grigliata Mista ·
-                Terra di Diamanti · Casual Nerd · IMWeekend
+                Terra di Diamanti · Casual Nerd Stories · IMWeekend · Schema Libero
               </p>
             </Link>
             <Link
@@ -235,7 +259,7 @@ function PodcastPage() {
                 produzione e pubblicazione.
               </p>
               <p className="mt-6 text-sm font-semibold text-white">
-                TEDx Biella · Biella Città Creativa
+                TEDx Biella 2025 · Mirabilis
               </p>
             </Link>
           </div>
@@ -255,7 +279,7 @@ function PodcastPage() {
               </p>
             </div>
             <span className="text-xs text-muted-foreground">
-              {list.length} canali · {totalEpisodes} puntate nei feed
+              {list.length} canali · {catalog.length ? liveTotalEpisodes : totalEpisodes} puntate nei feed
             </span>
           </div>
 

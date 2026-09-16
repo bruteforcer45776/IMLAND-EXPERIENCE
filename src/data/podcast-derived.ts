@@ -1,4 +1,4 @@
-import { podcastProgramList } from "./podcast-programs";
+import { editorialPodcastProgramList } from "./podcast-programs";
 
 export type ProgramCard = {
   name: string;
@@ -13,8 +13,7 @@ export type ProgramCard = {
 };
 
 /** Canali ufficiali IMLAND Radio con feed RSS diretto, dal più ricco al più leggero. */
-export const programs: ProgramCard[] = podcastProgramList
-  .sort((a, b) => b.publishedEpisodes - a.publishedEpisodes)
+export const programs: ProgramCard[] = editorialPodcastProgramList
   .map((p) => ({
     name: p.name,
     cover: p.cover,
@@ -30,18 +29,18 @@ export const programs: ProgramCard[] = podcastProgramList
 const dateKey = (d: string | null) => (d ? d.split("-").reverse().join("") : "");
 
 /** Tutti gli episodi di tutti i canali, con il programma di appartenenza, dal più recente. */
-export const allEpisodes = podcastProgramList
+export const allEpisodes = editorialPodcastProgramList
   .flatMap((p) => p.episodes.map((ep) => ({ ep, program: p })))
   .sort((a, b) => dateKey(b.ep.date).localeCompare(dateKey(a.ep.date)));
 
 /** Ultimi episodi pubblicati su tutti i canali. */
 export const latestEpisodes = allEpisodes.slice(0, 8);
 
-export const totalEpisodes = podcastProgramList.reduce((n, p) => n + p.publishedEpisodes, 0);
+export const totalEpisodes = editorialPodcastProgramList.reduce((n, p) => n + p.publishedEpisodes, 0);
 
 /** Conteggio canali ed episodi per categoria, calcolato sui dati reali. */
 export const categoryStats: Record<string, { programs: number; episodes: number }> = {};
-for (const p of podcastProgramList) {
+for (const p of editorialPodcastProgramList) {
   const s = categoryStats[p.cat] ?? { programs: 0, episodes: 0 };
   s.programs += 1;
   s.episodes += p.publishedEpisodes;
