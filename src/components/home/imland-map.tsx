@@ -1,54 +1,60 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Layers3, MapPinned } from "lucide-react";
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 
-import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
-
-type MapPlace = {
-  id: string;
-  slug: string;
-  name: string;
-  category: string;
-  comune: string;
-  province: string | null;
-  address: string | null;
-  latitude: number;
-  longitude: number;
-};
+import { memberWall } from "@/routes/member";
 
 const MAP_CENTER: [number, number] = [8.35, 45.55];
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
 
-function usePublishedPlaces() {
-  return useQuery({
-    queryKey: ["home", "imland-map", "published-places"],
-    enabled: isSupabaseConfigured(),
-    staleTime: 5 * 60_000,
-    queryFn: async (): Promise<MapPlace[]> => {
-      const { data, error } = await supabase
-        .from("terrain_places")
-        .select("id, slug, name, category, comune, province, address, latitude, longitude")
-        .eq("status", "published")
-        .not("latitude", "is", null)
-        .not("longitude", "is", null)
-        .order("plan", { ascending: false })
-        .order("name", { ascending: true })
-        .limit(300);
+type MemberLocation = {
+  memberName: string;
+  label: string;
+  address: string;
+  coordinates: [number, number];
+};
 
-      if (error) throw error;
-
-      return (data ?? []).flatMap((place) => {
-        const latitude = Number(place.latitude);
-        const longitude = Number(place.longitude);
-        if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return [];
-        return [{ ...place, latitude, longitude }];
-      });
-    },
-  });
-}
+// Coordinate verificate sulla cartografia OpenStreetMap. Un Member può avere più sedi.
+const MEMBER_LOCATIONS: MemberLocation[] = [
+  {
+    memberName: "Ottica Zonco",
+    label: "Sede di Cossato",
+    address: "Via Giuseppe Mazzini 32, 13836 Cossato (BI)",
+    coordinates: [8.1797981, 45.5680788],
+  },
+  {
+    memberName: "Ottica Zonco",
+    label: "Sede di Valdilana",
+    address: "SP200II, 13823 Valdilana (BI)",
+    coordinates: [8.1881912, 45.6548307],
+  },
+  {
+    memberName: "Parafarmacia San Rocco",
+    label: "Gattinara",
+    address: "Corso Valsesia, località San Bernardo, 13045 Gattinara (VC)",
+    coordinates: [8.3708344, 45.6166837],
+  },
+  {
+    memberName: "Multone",
+    label: "Borgosesia",
+    address: "Corso Vercelli, 13011 Borgosesia (VC)",
+    coordinates: [8.288122, 45.7056248],
+  },
+  {
+    memberName: "Motel Piranha",
+    label: "Orfengo",
+    address: "SS11 Padana Superiore, 28060 Casalino (NO)",
+    coordinates: [8.5112407, 45.3949541],
+  },
+  {
+    memberName: "AG Autotrasporti",
+    label: "Invorio",
+    address: "Via Barro 31, 28045 Invorio (NO)",
+    coordinates: [8.4830381, 45.7605114],
+  },
+];
 
 export function ImLandMap() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -56,18 +62,26 @@ export function ImLandMap() {
   const markersRef = useRef<import("maplibre-gl").Marker[]>([]);
   const [mapReady, setMapReady] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Tutte");
-  const { data = [], isLoading, isError } = usePublishedPlaces();
+
+  const locatedMembers = useMemo(
+    () =>
+      MEMBER_LOCATIONS.flatMap((location) => {
+        const member = memberWall.find((entry) => entry.name === location.memberName);
+        return member ? [{ ...location, member }] : [];
+      }),
+    [],
+  );
 
   const categories = useMemo(
-    () => ["Tutte", ...Array.from(new Set(data.map((place) => place.category))).sort()],
-    [data],
+    () => ["Tutte", ...Array.from(new Set(locatedMembers.map(({ member }) => member.category))).sort()],
+    [locatedMembers],
   );
-  const visiblePlaces = useMemo(
+  const visibleLocations = useMemo(
     () =>
       activeCategory === "Tutte"
-        ? data
-        : data.filter((place) => place.category === activeCategory),
-    [activeCategory, data],
+        ? locatedMembers
+        : locatedMembers.filter(({ member }) => member.category === activeCategory),
+    [activeCategory, locatedMembers],
   );
 
   useEffect(() => {
@@ -92,10 +106,8 @@ export function ImLandMap() {
         "bottom-left",
       );
       map.scrollZoom.disable();
-      map.once("load", () => {
-        if (!cancelled) setMapReady(true);
-      });
       mapRef.current = map;
+      map.once("load", () => setMapReady(true));
     })();
 
     return () => {
@@ -104,62 +116,82 @@ export function ImLandMap() {
       markersRef.current = [];
       mapRef.current?.remove();
       mapRef.current = null;
+      setMapReady(false);
     };
   }, []);
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!mapReady || !map) return;
+    if (!map || !mapReady) return;
 
     markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = [];
 
-    void (async () => {
-      const maplibre = await import("maplibre-gl");
+    void import("maplibre-gl").then((maplibre) => {
+      if (!mapRef.current) return;
       const bounds = new maplibre.LngLatBounds();
 
-      visiblePlaces.forEach((place) => {
-        const markerElement = document.createElement("button");
-        markerElement.type = "button";
-        markerElement.className = "imland-map-marker";
-        markerElement.setAttribute("aria-label", `Apri ${place.name} sulla mappa`);
-        markerElement.appendChild(document.createElement("span"));
+      markersRef.current = visibleLocations.map(({ member, label, address, coordinates }) => {
+        const markerButton = document.createElement("button");
+        markerButton.type = "button";
+        markerButton.className = "imland-map-marker";
+        markerButton.setAttribute("aria-label", `Apri ${member.name}, ${label}`);
+
+        const markerImage = document.createElement("img");
+        markerImage.src = member.cover;
+        markerImage.alt = "";
+        markerButton.append(markerImage);
 
         const popupContent = document.createElement("article");
         popupContent.className = "imland-map-popup";
-        const category = document.createElement("p");
-        category.className = "imland-map-popup__category";
-        category.textContent = place.category;
-        const title = document.createElement("h3");
-        title.textContent = place.name;
-        const address = document.createElement("p");
-        address.textContent = [place.address, place.comune, place.province]
-          .filter(Boolean)
-          .join(" · ");
-        const link = document.createElement("a");
-        link.href = `/terrain/${encodeURIComponent(place.slug)}`;
-        link.textContent = "Apri la scheda →";
-        popupContent.append(category, title, address, link);
 
-        const marker = new maplibre.Marker({ element: markerElement, anchor: "bottom" })
-          .setLngLat([place.longitude, place.latitude])
-          .setPopup(
-            new maplibre.Popup({ offset: 22, closeButton: false, maxWidth: "280px" }).setDOMContent(
-              popupContent,
-            ),
-          )
+        const popupImage = document.createElement("img");
+        popupImage.className = "imland-map-popup__image";
+        popupImage.src = member.cover;
+        popupImage.alt = "";
+
+        const popupCopy = document.createElement("div");
+        const popupCategory = document.createElement("p");
+        popupCategory.className = "imland-map-popup__category";
+        popupCategory.textContent = member.category;
+        const popupTitle = document.createElement("h3");
+        popupTitle.textContent = member.name;
+        const popupLabel = document.createElement("strong");
+        popupLabel.textContent = label;
+        const popupAddress = document.createElement("p");
+        popupAddress.textContent = address;
+        popupCopy.append(popupCategory, popupTitle, popupLabel, popupAddress);
+
+        if (member.url) {
+          const popupLink = document.createElement("a");
+          popupLink.href = member.url;
+          popupLink.target = "_blank";
+          popupLink.rel = "noopener noreferrer";
+          popupLink.textContent = "Scopri il Member →";
+          popupCopy.append(popupLink);
+        }
+        popupContent.append(popupImage, popupCopy);
+
+        const popup = new maplibre.Popup({ offset: 30, closeButton: true, maxWidth: "320px" })
+          .setDOMContent(popupContent);
+        const marker = new maplibre.Marker({ element: markerButton, anchor: "bottom" })
+          .setLngLat(coordinates)
+          .setPopup(popup)
           .addTo(map);
-        markersRef.current.push(marker);
-        bounds.extend([place.longitude, place.latitude]);
+        bounds.extend(coordinates);
+        return marker;
       });
 
-      if (visiblePlaces.length > 0) {
-        map.fitBounds(bounds, { padding: 70, maxZoom: 12, duration: 700 });
-      } else {
-        map.easeTo({ center: MAP_CENTER, zoom: 7.7, duration: 600 });
+      if (!bounds.isEmpty()) {
+        map.fitBounds(bounds, { padding: 74, maxZoom: 11.6, duration: 700 });
       }
-    })();
-  }, [mapReady, visiblePlaces]);
+    });
+
+    return () => {
+      markersRef.current.forEach((marker) => marker.remove());
+      markersRef.current = [];
+    };
+  }, [mapReady, visibleLocations]);
 
   return (
     <section id="imland-map" className="imland-map-card" aria-labelledby="imland-map-title">
@@ -170,16 +202,16 @@ export function ImLandMap() {
           </p>
           <h2 id="imland-map-title">Il territorio, tutto in un punto.</h2>
           <p>
-            Esplora Member, attività e luoghi selezionati: scegli una categoria e apri ogni
-            segnaposto per scoprire chi anima il territorio.
+            Esplora le aziende, i professionisti e le associazioni della rete IMLAND Member.
+            Scegli una categoria e apri direttamente la realtà che vuoi conoscere.
           </p>
         </div>
-        <Link to="/terrain" className="imland-map-card__cta">
-          Esplora il territorio <ArrowRight aria-hidden />
+        <Link to="/member" hash="member-wall" className="imland-map-card__cta">
+          Tutti i Member <ArrowRight aria-hidden />
         </Link>
       </div>
 
-      <div className="imland-map-card__filters" aria-label="Filtra i luoghi per categoria">
+      <div className="imland-map-card__filters" aria-label="Filtra i Member per categoria">
         <span>
           <Layers3 aria-hidden /> Categorie
         </span>
@@ -196,9 +228,7 @@ export function ImLandMap() {
           ))}
         </div>
         <strong>
-          {isLoading
-            ? "Caricamento…"
-            : `${visiblePlaces.length} ${visiblePlaces.length === 1 ? "luogo" : "luoghi"}`}
+          {visibleLocations.length} {visibleLocations.length === 1 ? "sede" : "sedi"}
         </strong>
       </div>
 
@@ -213,18 +243,12 @@ export function ImLandMap() {
           ref={containerRef}
           className="imland-map-card__canvas"
           role="region"
-          aria-label="Mappa interattiva delle attività IMLAND"
+          aria-label="Mappa della rete IMLAND Member"
         />
-        {!isLoading && (isError || !isSupabaseConfigured()) ? (
-          <div className="imland-map-card__notice">
-            La mappa è pronta. I segnaposti appariranno quando il collegamento dati sarà attivo.
-          </div>
-        ) : null}
-        {!isLoading && !isError && isSupabaseConfigured() && data.length === 0 ? (
-          <div className="imland-map-card__notice">
-            Le prime attività con posizione verificata compariranno qui.
-          </div>
-        ) : null}
+        <div className="imland-map-card__map-hint" aria-live="polite">
+          <strong>{visibleLocations.length} sedi verificate</strong>
+          <span>Tocca una foto sulla mappa per vedere Member, indirizzo e link.</span>
+        </div>
       </div>
     </section>
   );

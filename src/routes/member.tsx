@@ -167,7 +167,7 @@ const memberFaqs = [
   },
 ];
 
-type MemberWallEntry = {
+export type MemberWallEntry = {
   name: string;
   cover: string;
   url: string | null;
@@ -185,7 +185,7 @@ const slugify = (s: string) =>
     .replace(/(^-|-$)/g, "");
 
 // Fonte: https://imlandradio.it/members-wall/
-const memberWall: MemberWallEntry[] = [
+export const memberWall: MemberWallEntry[] = [
   {
     name: "Travaini Carpenterie",
     cover: "https://imlandradio.it/wp-content/uploads/2025/10/travaini-Carpenterie.jpg",
@@ -543,7 +543,7 @@ function MemberPage() {
         </section>
 
         {/* MEMBER WALL */}
-        <section className="section-editorial">
+        <section id="member-wall" className="section-editorial scroll-mt-24">
           <div className="container-im relative z-20 section-pad">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl">
