@@ -27,6 +27,11 @@ export type PodcastCatalogItem = {
   latestPublishedAt: string | null;
 };
 
+export type HomePodcastPreview = PodcastFeedEpisode & {
+  programSlug: string;
+  programName: string;
+};
+
 const FEED_CACHE_TTL = 10 * 60 * 1000;
 const feedCache = new Map<string, { expires: number; xml: string }>();
 
@@ -195,4 +200,27 @@ export const getPodcastCatalog = createServerFn({ method: "GET" })
     return rows.sort((a, b) =>
       (b.latestPublishedAt ?? "").localeCompare(a.latestPublishedAt ?? ""),
     );
+  });
+
+/** Gli episodi editoriali più recenti, ricavati esclusivamente dai feed RSS ufficiali. */
+export const getLatestHomePodcastEpisodes = createServerFn({ method: "GET" })
+  .handler(async (): Promise<HomePodcastPreview[]> => {
+    const rows = await Promise.all(
+      podcastProgramList
+        .filter((program) => program.group === "podcast")
+        .map(async (program) => {
+          const xml = await getPodcastFeedXml(program.slug, program.rssUrl);
+          if (!xml) return [];
+          return parseFeed(xml, program.name).map((episode) => ({
+            ...episode,
+            programSlug: program.slug,
+            programName: program.name,
+          }));
+        }),
+    );
+
+    return rows
+      .flat()
+      .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""))
+      .slice(0, 2);
   });

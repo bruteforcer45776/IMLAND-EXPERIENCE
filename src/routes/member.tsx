@@ -8,6 +8,7 @@ import { NewsletterBanner } from "../components/newsletter-banner";
 import { SpotlightCard } from "../components/spotlight-card";
 import { PhotoBadge } from "../components/photo-badge";
 import { HeroBanner } from "../components/hero-banner";
+import { MEMBER_DETAILS, type MemberAddress } from "../data/member-details";
 
 const DomeGallery = lazy(() => import("../components/dome-gallery"));
 
@@ -172,8 +173,8 @@ export type MemberWallEntry = {
   cover: string;
   url: string | null;
   category: string;
-  city?: string;
-  desc?: string;
+  desc: string;
+  addresses: MemberAddress[];
 };
 
 const slugify = (s: string) =>
@@ -185,7 +186,7 @@ const slugify = (s: string) =>
     .replace(/(^-|-$)/g, "");
 
 // Fonte: https://imlandradio.it/members-wall/
-export const memberWall: MemberWallEntry[] = [
+const memberWallSource: Omit<MemberWallEntry, "desc" | "addresses">[] = [
   {
     name: "Travaini Carpenterie",
     cover: "https://imlandradio.it/wp-content/uploads/2025/10/travaini-Carpenterie.jpg",
@@ -434,6 +435,14 @@ export const memberWall: MemberWallEntry[] = [
   },
 ];
 
+export const memberWall: MemberWallEntry[] = memberWallSource.map((member) => {
+  const details = MEMBER_DETAILS[member.name];
+  if (!details) {
+    throw new Error(`Dati Member mancanti per ${member.name}`);
+  }
+  return { ...member, desc: details.description, addresses: details.addresses };
+});
+
 function MemberPage() {
   const [openedId, setOpenedId] = useState<string | null>(null);
   const [flippedId, setFlippedId] = useState<string | null>(null);
@@ -622,7 +631,12 @@ function MemberPage() {
                               {m.name}
                             </h3>
                             <p className="line-clamp-2 text-[11px] leading-snug text-muted-foreground">
-                              {m.desc || "Realtà del territorio, parte della rete IMLAND Member."}
+                              {m.desc}
+                            </p>
+                            <p className="line-clamp-2 text-[11px] leading-snug text-foreground/70">
+                              <span className="font-semibold">{m.addresses[0].label}:</span>{" "}
+                              {m.addresses[0].address}
+                              {m.addresses.length > 1 ? ` · +${m.addresses.length - 1} sede` : ""}
                             </p>
                             {displayHost ? (
                               <span className="truncate text-[11px] text-signal">
@@ -670,6 +684,15 @@ function MemberPage() {
                               <h3 className="mt-2 text-sm font-semibold leading-snug md:text-base">
                                 {m.name}
                               </h3>
+                              <p className="mt-2 text-[11px] leading-snug text-foreground/80">{m.desc}</p>
+                              <div className="mt-2 space-y-1 text-[10px] leading-snug text-foreground/70">
+                                {m.addresses.map((location) => (
+                                  <p key={`${location.label}-${location.address}`}>
+                                    <strong className="text-foreground">{location.label}:</strong>{" "}
+                                    {location.address}
+                                  </p>
+                                ))}
+                              </div>
                               <div className="mt-auto flex w-full flex-col gap-2 pt-3">
                                 {m.url ? (
                                   <a
@@ -719,8 +742,16 @@ function MemberPage() {
                                 </div>
                               </div>
                               <p className="mt-2 font-serif text-[11px] italic font-medium leading-snug text-foreground/85">
-                                {m.desc || "Realtà del territorio, parte della rete IMLAND Member."}
+                                {m.desc}
                               </p>
+                              <div className="mt-2 space-y-1 text-[10px] leading-snug text-foreground/70">
+                                {m.addresses.map((location) => (
+                                  <p key={`${location.label}-${location.address}`}>
+                                    <strong className="text-foreground">{location.label}:</strong>{" "}
+                                    {location.address}
+                                  </p>
+                                ))}
+                              </div>
                               <div className="mt-auto flex flex-col gap-2 pt-3">
                                 {m.url ? (
                                   <a

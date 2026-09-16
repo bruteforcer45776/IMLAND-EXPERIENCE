@@ -9,53 +9,6 @@ import { memberWall } from "@/routes/member";
 const MAP_CENTER: [number, number] = [8.35, 45.55];
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
 
-type MemberLocation = {
-  memberName: string;
-  label: string;
-  address: string;
-  coordinates: [number, number];
-};
-
-// Coordinate verificate sulla cartografia OpenStreetMap. Un Member può avere più sedi.
-const MEMBER_LOCATIONS: MemberLocation[] = [
-  {
-    memberName: "Ottica Zonco",
-    label: "Sede di Cossato",
-    address: "Via Giuseppe Mazzini 32, 13836 Cossato (BI)",
-    coordinates: [8.1797981, 45.5680788],
-  },
-  {
-    memberName: "Ottica Zonco",
-    label: "Sede di Valdilana",
-    address: "SP200II, 13823 Valdilana (BI)",
-    coordinates: [8.1881912, 45.6548307],
-  },
-  {
-    memberName: "Parafarmacia San Rocco",
-    label: "Gattinara",
-    address: "Corso Valsesia, località San Bernardo, 13045 Gattinara (VC)",
-    coordinates: [8.3708344, 45.6166837],
-  },
-  {
-    memberName: "Multone",
-    label: "Borgosesia",
-    address: "Corso Vercelli, 13011 Borgosesia (VC)",
-    coordinates: [8.288122, 45.7056248],
-  },
-  {
-    memberName: "Motel Piranha",
-    label: "Orfengo",
-    address: "SS11 Padana Superiore, 28060 Casalino (NO)",
-    coordinates: [8.5112407, 45.3949541],
-  },
-  {
-    memberName: "AG Autotrasporti",
-    label: "Invorio",
-    address: "Via Barro 31, 28045 Invorio (NO)",
-    coordinates: [8.4830381, 45.7605114],
-  },
-];
-
 export function ImLandMap() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<import("maplibre-gl").Map | null>(null);
@@ -65,10 +18,11 @@ export function ImLandMap() {
 
   const locatedMembers = useMemo(
     () =>
-      MEMBER_LOCATIONS.flatMap((location) => {
-        const member = memberWall.find((entry) => entry.name === location.memberName);
-        return member ? [{ ...location, member }] : [];
-      }),
+      memberWall.flatMap((member) =>
+        member.addresses.flatMap((location) =>
+          location.coordinates ? [{ ...location, coordinates: location.coordinates, member }] : [],
+        ),
+      ),
     [],
   );
 
@@ -231,6 +185,11 @@ export function ImLandMap() {
           {visibleLocations.length} {visibleLocations.length === 1 ? "sede" : "sedi"}
         </strong>
       </div>
+
+      <p className="imland-map-card__notice">
+        La mappa mostra solo le sedi con coordinate cartografiche già verificate. Tutti gli
+        indirizzi disponibili, comprese le sedi multiple, sono riportati nelle schede Member.
+      </p>
 
       <div className="imland-map-card__canvas-wrap">
         <div className="imland-map-card__fallback" aria-hidden>

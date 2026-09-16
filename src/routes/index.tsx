@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { canonical, jsonLd, organizationLd, websiteLd, SITE_URL } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
@@ -25,17 +25,22 @@ const ImLandMap = lazy(() =>
 );
 import { seoFaq } from "../data/seo-faq";
 import { formatEventDate, formatEventTime, upcomingEvents } from "../data/events";
-import { latestEpisodes, programs } from "../data/podcast-derived";
 import { curatedNews } from "../data/curated-news";
+import {
+  getLatestHomePodcastEpisodes,
+  type HomePodcastPreview,
+} from "../lib/podcast-feed.functions";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
 import radioHostImage from "@/assets/home-radio-host-opt.webp";
 import podcastImage from "@/assets/hero-podcast-v3.webp";
 import eventiImage from "@/assets/hero-eventi-v3.webp";
 import newsImage from "@/assets/hero-news-v3.webp";
 
-const featuredEpisode = latestEpisodes[0];
+const latestNews = [...curatedNews].sort(
+  (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+);
 
-const ecosystemGalleryItems = [
+const createEcosystemGalleryItems = (latestPodcast?: HomePodcastPreview) => [
   {
     image: radioHostImage,
     label: "Radio · In diretta 24/7",
@@ -44,10 +49,14 @@ const ecosystemGalleryItems = [
     accentColor: "#32b8ff",
   },
   {
-    image: featuredEpisode?.program.cover || podcastImage,
-    label: featuredEpisode ? `Podcast · ${featuredEpisode.program.name}` : "Podcast · On demand",
-    link: "/podcast",
-    alt: featuredEpisode ? `Copertina ${featuredEpisode.program.name}` : "Podcast IMLAND on demand",
+    image: latestPodcast?.image || podcastImage,
+    label: latestPodcast ? `Podcast · ${latestPodcast.title}` : "Podcast · On demand",
+    link: latestPodcast
+      ? `/podcast/${latestPodcast.programSlug}/${latestPodcast.slug}`
+      : "/podcast",
+    alt: latestPodcast?.image
+      ? `Copertina dell'episodio ${latestPodcast.title}`
+      : "Podcast IMLAND on demand",
     accentColor: "#2157ff",
   },
   {
@@ -58,35 +67,23 @@ const ecosystemGalleryItems = [
     accentColor: "#42c96b",
   },
   {
-    image: newsImage,
-    label: curatedNews[0] ? `News · ${curatedNews[0].title}` : "News dal territorio",
-    link: "/news",
-    alt: curatedNews[0] ? `Anteprima della notizia: ${curatedNews[0].title}` : "News IMLAND",
+    image: latestNews[0]?.image || newsImage,
+    label: latestNews[0] ? `News · ${latestNews[0].title}` : "News dal territorio",
+    link: latestNews[0]?.url || "/news",
+    alt: latestNews[0] ? `Anteprima della notizia: ${latestNews[0].title}` : "News IMLAND",
     accentColor: "#e21d2f",
   },
 ].filter((item): item is typeof item & { image: string } => Boolean(item.image));
 
-const newsPreviews = [
-  {
-    tag: "Territorio",
-    title: "Le Langhe si raccontano.",
-    abstract:
-      "Cantine, borghi e strade panoramiche.\nUn itinerario per scoprire il cuore del Piemonte.",
-  },
-  {
-    tag: "Eventi",
-    title: "La stagione degli appuntamenti.",
-    abstract: "Festival, sagre e concerti in arrivo.\nTutto quello che accade vicino a te.",
-  },
-  {
-    tag: "Radio",
-    title: "Nuove voci in diretta.",
-    abstract: "Conduttori che vivono qui.\nProgrammi pensati per la community.",
-  },
-];
-
 const homeToneForTag = (tag: string) =>
   tag === "Eventi" ? "theme-eventi" : tag === "Radio" ? "theme-radio" : "theme-news";
+
+const formatNewsDate = (publishedAt: string) =>
+  new Intl.DateTimeFormat("it-IT", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(publishedAt));
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -142,6 +139,20 @@ const keyword = "im-gradient-text";
 const shell = "mx-auto w-full max-w-[1200px] px-4 md:px-8";
 
 function Home() {
+  const [latestPodcastEpisodes, setLatestPodcastEpisodes] = useState<HomePodcastPreview[]>([]);
+
+  useEffect(() => {
+    let activeRequest = true;
+    getLatestHomePodcastEpisodes()
+      .then((episodes) => activeRequest && setLatestPodcastEpisodes(episodes))
+      .catch(() => activeRequest && setLatestPodcastEpisodes([]));
+    return () => {
+      activeRequest = false;
+    };
+  }, []);
+
+  const ecosystemGalleryItems = createEcosystemGalleryItems(latestPodcastEpisodes[0]);
+
   return (
     <div className="home-glass-stack imland-night text-foreground">
       <PageRails variant="default" />
@@ -237,49 +248,51 @@ function Home() {
                     </Link>
                   </div>
                 </Reveal>
-                <div className="mt-7 grid gap-4 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
-                  {featuredEpisode && (
+                <div className="mt-7 grid gap-4 sm:grid-cols-2 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
+                  {latestPodcastEpisodes.map((episode, index) => (
                     <Link
+                      key={`${episode.programSlug}-${episode.slug}`}
                       to="/podcast/$slug/$episode"
                       params={{
-                        slug: featuredEpisode.program.slug,
-                        episode: featuredEpisode.ep.slug,
+                        slug: episode.programSlug,
+                        episode: episode.slug,
                       }}
-                      className="card-im flex h-full flex-col rounded-[28px] bg-white p-7"
+                      className="card-im group flex h-full min-h-[280px] flex-col overflow-hidden rounded-[28px] bg-white"
                     >
-                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
-                        Ultimo episodio · {featuredEpisode.program.name}
+                      {episode.image ? (
+                        <img
+                          src={episode.image}
+                          alt={`Copertina dell'episodio ${episode.title}`}
+                          loading="lazy"
+                          className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="flex aspect-[16/10] items-center justify-center bg-signal/10 px-5 text-center text-xs font-semibold uppercase tracking-[0.16em] text-signal">
+                          Copertina non disponibile
+                        </div>
+                      )}
+                      <div className="flex flex-1 flex-col p-5">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
+                          {index === 0 ? "Ultimo episodio" : "Episodio recente"} · {episode.programName}
+                        </p>
+                        <h3 className="mt-3 font-display text-lg font-bold leading-snug text-ink-950">
+                          {episode.title}
+                        </h3>
+                        {episode.date && <p className="mt-2 text-xs text-ink-600">{episode.date}</p>}
+                        <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-signal">
+                          Ascolta <ArrowRight className="h-4 w-4" />
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                  {latestPodcastEpisodes.length === 0 && (
+                    <Link to="/podcast" className="card-im rounded-[28px] bg-white p-7 sm:col-span-2">
+                      <h3 className="text-h3-im text-ink-950">Podcast IMLAND</h3>
+                      <p className="mt-3 text-sm text-ink-600">
+                        Consulta gli episodi disponibili nella sezione Podcast.
                       </p>
-                      <h3 className="mt-3 text-h3-im leading-snug text-ink-950">
-                        {featuredEpisode.ep.title}
-                      </h3>
-                      <p className="mt-2 line-clamp-3 text-sm text-ink-600">
-                        {featuredEpisode.ep.subtitle ?? featuredEpisode.program.tagline}
-                      </p>
-                      <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-signal">
-                        Ascolta l'episodio <ArrowRight className="h-4 w-4" />
-                      </span>
                     </Link>
                   )}
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {programs.slice(0, 2).map((program) => (
-                      <Link
-                        key={program.slug}
-                        to="/podcast"
-                        className="group flex h-full flex-col rounded-[24px] border border-border bg-white p-5 transition-all duration-fast hover:-translate-y-1 hover:shadow-[var(--elevation-2)]"
-                      >
-                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
-                          Podcast
-                        </p>
-                        <h3 className="mt-3 font-display text-lg font-bold leading-tight text-ink-950">
-                          {program.name}
-                        </h3>
-                        <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-signal">
-                          Scopri <ArrowRight className="h-4 w-4" />
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
                 </div>
               </li>
 
@@ -360,7 +373,8 @@ function Home() {
                     </p>
                     <h2 className={h2}>Le ultime voci diventano notizia.</h2>
                     <p className="mt-5 text-lg text-ink-600">
-                      Storie, novità e informazioni selezionate dalla redazione IMLAND.
+                      Storie, novità e informazioni selezionate da IMLAND e collegate alle fonti
+                      originali.
                     </p>
                     <Link
                       to="/news"
@@ -370,25 +384,46 @@ function Home() {
                     </Link>
                   </div>
                 </Reveal>
-                <div className="mt-7 grid gap-4 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
-                  {newsPreviews.map((n) => (
-                    <Link
-                      key={n.title}
-                      to="/news"
-                      className={`${homeToneForTag(n.tag)} group block`}
+                <div className="mt-7 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
+                  <div className="grid gap-4">
+                  {latestNews.slice(0, 3).map((news) => (
+                    <a
+                      href={news.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={news.url}
+                      className={`${homeToneForTag(news.category)} group block`}
                     >
-                      <div className="card-im relative flex h-full flex-col rounded-[24px] bg-white p-6">
-                        <span className="inline-flex w-fit items-center rounded-full bg-signal/10 px-3 py-1 text-[12px] font-semibold uppercase tracking-wider text-signal">
-                          {n.tag}
-                        </span>
-                        <h3 className="mt-4 text-h3-im text-ink-950">{n.title}</h3>
-                        <p className="mt-2 whitespace-pre-line text-sm text-ink-600">
-                          {n.abstract}
-                        </p>
-                        <ArrowRight className="mt-5 h-4 w-4 self-end text-signal transition-transform duration-300 group-hover:translate-x-1" />
+                      <div className="card-im grid h-full overflow-hidden rounded-[24px] bg-white sm:grid-cols-[9rem_1fr]">
+                        <img
+                          src={news.image}
+                          alt=""
+                          loading="lazy"
+                          className="aspect-[16/9] h-full w-full object-cover sm:aspect-auto"
+                        />
+                        <div className="flex min-w-0 flex-col p-5">
+                          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-semibold uppercase tracking-wider text-signal">
+                            <span>{news.category}</span>
+                            <span aria-hidden>·</span>
+                            <time dateTime={news.publishedAt}>{formatNewsDate(news.publishedAt)}</time>
+                          </div>
+                          <h3 className="mt-3 font-display text-lg font-bold leading-snug text-ink-950">
+                            {news.title}
+                          </h3>
+                          <div className="mt-4 flex items-center justify-between gap-3 text-xs text-ink-600">
+                            <span>{news.source}</span>
+                            <ArrowRight className="h-4 w-4 shrink-0 text-signal transition-transform duration-300 group-hover:translate-x-1" />
+                          </div>
+                        </div>
                       </div>
-                    </Link>
+                    </a>
                   ))}
+                  </div>
+                  <p className="mt-5 text-xs leading-relaxed text-ink-600">
+                    IMLAND non è una redazione né una testata giornalistica; seleziona e raggruppa
+                    in un'unica piattaforma le notizie più rilevanti del territorio e rimanda alle
+                    fonti originali.
+                  </p>
                 </div>
               </li>
             </ol>
