@@ -3964,3 +3964,18 @@ h6 {
     backdrop-filter: none !important;
   }
 }
+
+/* Hero Radio: tutela il gruppo e sacrifica, se necessario, solo il cielo bianco. */
+.radio-team-hero img {
+  object-position: center bottom !important;
+}
+
+@media (min-width: 48rem) {
+  .radio-team-hero img {
+    height: clamp(27rem, 38vw, 38.75rem) !important;
+  }
+}
+
+.radio-team-hero .cta-light {
+  color: var(--color-ink) !important;
+}

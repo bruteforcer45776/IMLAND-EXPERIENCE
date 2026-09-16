@@ -41,7 +41,7 @@ export function HeroBanner({
   heading,
   mobileBg = "#101114",
   srcMobile,
-  mobileCtaTop = "38%",
+  mobileCtaTop,
 }: HeroBannerProps) {
   // Mobile: massimo 2 CTA nella fascia bianca
   const mobileCtas = Children.toArray(children).filter(Boolean).slice(0, 2);
@@ -66,15 +66,22 @@ export function HeroBanner({
           decoding="async"
           className={cn("absolute inset-0 h-full w-full", "object-cover object-top")}
         />
-        {/* Un quarto del display: bianco pieno che sfuma verso la grafica */}
+        {!mobileCtaTop && (
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-[25%]"
+            style={{
+              background:
+                "linear-gradient(to top, #ffffff 0%, #ffffff 45%, rgba(255,255,255,0.85) 65%, rgba(255,255,255,0) 100%)",
+            }}
+          />
+        )}
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[25%]"
-          style={{
-            background:
-              "linear-gradient(to top, #ffffff 0%, #ffffff 45%, rgba(255,255,255,0.85) 65%, rgba(255,255,255,0) 100%)",
-          }}
-        />
-        <div className="absolute inset-x-0 bottom-0 h-[25%] px-6 pb-5 flex items-end">
+          className={cn(
+            "absolute inset-x-0 px-6 flex",
+            mobileCtaTop ? "items-start" : "bottom-0 h-[25%] items-end pb-5",
+          )}
+          style={mobileCtaTop ? { top: mobileCtaTop } : undefined}
+        >
           <div className="mx-auto flex w-full max-w-[320px] flex-col items-stretch gap-3 [&>*]:w-full [&>*]:justify-center">
             {mobileCtas}
           </div>

@@ -9,8 +9,8 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../compon
 import { Play } from "lucide-react";
 import { HeroBanner } from "../components/hero-banner";
 
-import heroRadio from "@/assets/hero-radio-v3.webp";
-import heroRadioMobile from "@/assets/hero-radio-mobile.webp";
+import heroRadio from "@/assets/hero-radio-team-desktop.png";
+import heroRadioMobile from "@/assets/hero-radio-team-mobile.png";
 import { PageRails } from "../components/decor";
 import {
   Accordion,
@@ -185,7 +185,9 @@ function RadioPage() {
         src={heroRadio}
         srcMobile={heroRadioMobile}
         alt="Ascolta le voci del territorio — IMLAND Radio"
-        ctaTop="64%"
+        ctaTop="34%"
+        mobileCtaTop="17%"
+        className="radio-team-hero"
         flush
         mobileBg="#16BFF2"
       >
