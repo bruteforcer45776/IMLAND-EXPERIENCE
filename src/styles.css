@@ -3866,18 +3866,9 @@ h6 {
   padding-block: var(--im-section-gap);
 }
 
-/* Le sezioni strutturali restano aperte sul fondo di verticale: il vetro appartiene alle card. */
+/* Le sezioni strutturali si separano con ritmo costante sopra la grafica di fondo. */
 #main-content section:not(.hidden) {
   margin-block: var(--im-section-gap) !important;
-}
-
-/* I contenitori di pagina non sono card: niente riquadri o fondi bianchi strutturali. */
-#main-content section:is(.bg-white, .bg-card, .section-canvas) {
-  border-color: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
 }
 
 #main-content .section-canvas::before {
@@ -3885,15 +3876,51 @@ h6 {
   border-color: transparent !important;
 }
 
-/* Nessuna section strutturale deve sembrare una card bianca. */
-#main-content section:not(.hidden):not([class*="hero"]):not([class*="rounded-"]):not(.home-color-band):not(.home-adv-slot):not(.glass-panel):not(.surface-card):not(.bento-card):not(.card-im):not(.imland-map-card) {
-  overflow: visible;
-  border: 0 !important;
-  border-radius: 0 !important;
+/* La grafica editoriale resta lo sfondo; ogni sezione è una finestra Liquid Glass. */
+:where(.page-inverted, .radio-inverted, .podcast-inverted, .news-inverted, .eventi-inverted, .member-inverted, .terrain-inverted, .jobs-inverted, .alert-inverted) {
   background: transparent !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
+  color: #101114;
+  --on-color: #101114;
+  --on-color-muted: #5f6368;
+}
+
+#main-content section:not(.hidden):not([class*="hero"]):not([class*="rounded-"]):not(.home-color-band):not(.home-adv-slot):not(.glass-panel):not(.surface-card):not(.bento-card):not(.card-im):not(.imland-map-card) {
+  overflow: clip;
+  border: 1px solid rgb(255 255 255 / 58%) !important;
+  border-radius: var(--im-section-radius) !important;
+  background: rgb(255 255 255 / 46%) !important;
+  color: #101114;
+  box-shadow: var(--im-glass-highlight), var(--im-shadow-standard) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(128%) !important;
+  backdrop-filter: blur(22px) saturate(128%) !important;
+}
+
+#main-content section:not(.hidden):not([class*="hero"]) :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, label) {
+  text-shadow: none;
+}
+
+#main-content section:not(.hidden):not([class*="hero"])
+  :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, label):not(
+    :where(.glass-panel *, .surface-card *, .bento-card *, .card-im *, [class*="bg-foreground"] *, [class*="bg-signal"] *, [class*="text-white"])
+  ) {
+  color: #101114 !important;
+  -webkit-text-fill-color: #101114 !important;
+}
+
+#main-content section:not(.hidden):not([class*="hero"])
+  :is(.text-muted-foreground, .text-foreground\/70, .text-foreground\/60):not(
+    :where(.glass-panel *, .surface-card *, .bento-card *, .card-im *, [class*="bg-foreground"] *, [class*="bg-signal"] *)
+  ) {
+  color: #5f6368 !important;
+  -webkit-text-fill-color: #5f6368 !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  #main-content section:not(.hidden):not([class*="hero"]):not([class*="rounded-"]):not(.home-color-band):not(.home-adv-slot):not(.glass-panel):not(.surface-card):not(.bento-card):not(.card-im):not(.imland-map-card) {
+    background: rgb(255 255 255 / 92%) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
 }
 
 /* Le sezioni della Home restano la fonte di verità e usano gli stessi token. */

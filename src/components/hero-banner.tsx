@@ -48,7 +48,7 @@ export function HeroBanner({
 
   return (
     <section
-      className={cn("relative isolate w-full bg-white pb-6 md:pb-10", flush && "!pb-0", className)}
+      className={cn("hero-banner relative isolate w-full bg-white pb-6 md:pb-10", flush && "!pb-0", className)}
     >
       {/* La headline è parte della grafica: la esponiamo come H1 accessibile */}
       <h1 className="sr-only">{heading ?? alt}</h1>
