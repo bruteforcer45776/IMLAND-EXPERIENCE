@@ -3861,3 +3861,177 @@ h6 {
   }
   .imland-map-marker { width: 48px; height: 48px; }
 }
+
+/* ============================================================
+   DESIGN.md — applicazione live del sistema "Il territorio, a fuoco"
+   Gerarchia dei materiali: contenuto stabile, card standard,
+   navigazione e player elevati. Copy e struttura restano invariati.
+   ============================================================ */
+:root {
+  --im-radius-control: 0.75rem;
+  --im-radius-card: 1.375rem;
+  --im-radius-panel: 1.875rem;
+  --im-glass-subtle-bg: rgb(255 255 255 / 52%);
+  --im-glass-standard-bg: rgb(255 255 255 / 72%);
+  --im-glass-elevated-bg: rgb(255 255 255 / 86%);
+  --im-glass-dark-bg: rgb(10 10 10 / 68%);
+  --im-glass-border: rgb(255 255 255 / 64%);
+  --im-glass-highlight: inset 0 1px 0 rgb(255 255 255 / 62%);
+}
+
+/* Il livello editoriale non compete con i controlli: meno blur e ombra. */
+.home-glass-stack > section:not(:first-of-type),
+#main-content > section,
+#main-content > div:not(.home-glass-stack) > section,
+#main-content > div:not(.home-glass-stack) > div > section,
+.page-inverted > section,
+.member-inverted > section,
+.section-focus {
+  border: 1px solid rgb(255 255 255 / 48%) !important;
+  border-radius: var(--im-radius-panel) !important;
+  background: var(--im-glass-subtle-bg) !important;
+  box-shadow: var(--im-glass-highlight), 0 10px 28px rgb(1 29 104 / 8%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(112%) !important;
+  backdrop-filter: blur(10px) saturate(112%) !important;
+}
+
+/* Card e moduli condividono una sola geometria e una profondità contenuta. */
+:where(.glass-panel, .surface-card, .bento-card, .card-im, .sticky-glass) {
+  border: 1px solid var(--im-glass-border) !important;
+  border-radius: var(--im-radius-card) !important;
+  background: var(--im-glass-standard-bg) !important;
+  box-shadow: var(--im-glass-highlight), 0 16px 40px rgb(1 29 104 / 12%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(118%) !important;
+  backdrop-filter: blur(16px) saturate(118%) !important;
+}
+
+/* Niente doppia elevazione quando una card vive dentro una sezione in vetro. */
+.home-glass-stack > section :where(.glass-panel, .surface-card, .bento-card, .card-im) {
+  box-shadow: var(--im-glass-highlight), 0 10px 28px rgb(1 29 104 / 9%) !important;
+}
+
+/* Header e player costituiscono il livello funzionale più alto. */
+.site-glass-header {
+  border: 1px solid rgb(255 255 255 / 72%) !important;
+  border-radius: var(--im-radius-panel) !important;
+  background: var(--im-glass-elevated-bg) !important;
+  box-shadow: var(--im-glass-highlight), 0 22px 56px rgb(1 29 104 / 16%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(126%) !important;
+  backdrop-filter: blur(22px) saturate(126%) !important;
+}
+
+.site-glass-header[data-scrolled="true"] {
+  background: rgb(255 255 255 / 92%) !important;
+  box-shadow: var(--im-glass-highlight), 0 16px 44px rgb(1 29 104 / 14%) !important;
+}
+
+.radio-player-glass {
+  border: 1px solid rgb(255 255 255 / 20%) !important;
+  background: var(--im-glass-dark-bg) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 16%), 0 22px 56px rgb(0 10 36 / 24%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(126%) !important;
+  backdrop-filter: blur(22px) saturate(126%) !important;
+}
+
+/* Gerarchia e misura di lettura definite dal documento di design. */
+:where(.text-h1-im, .text-display-m) {
+  max-width: 14ch;
+  font-size: clamp(2.35rem, 6vw, 5.75rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.035em !important;
+}
+
+:where(.text-h2-im, .text-display-s, .text-title-l) {
+  max-width: 22ch;
+  font-size: clamp(1.8rem, 4vw, 3.5rem) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.025em !important;
+}
+
+:where(.glass-panel, .surface-card, .bento-card, .card-im, section) :where(p, li) {
+  max-width: 72ch;
+}
+
+/* Controlli tattili e stati visibili, senza cambiare le etichette. */
+:where(
+  .btn-liquid,
+  .btn-blue,
+  .btn-ghost-glass,
+  .cta-dark,
+  .cta-light,
+  .chip-im,
+  .chip-im-active,
+  .site-glass-header a,
+  .site-glass-header button,
+  .floating-actions-right a,
+  .floating-actions-right button,
+  .floating-chatbot button
+) {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+}
+
+:where(a, button).bento-card:hover,
+:where(a, button).card-im:hover,
+.bento-card:has(> a):hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--surface-tone, var(--signal)) 22%, white) !important;
+  box-shadow: var(--im-glass-highlight), 0 20px 46px rgb(1 29 104 / 15%) !important;
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--signal-ink, #087cf0) 72%, white) !important;
+  outline-offset: 3px;
+}
+
+/* Form leggibili: il blur non sostituisce il contrasto. */
+:where(.field-im, input:not([type="range"]), textarea, select) {
+  min-height: 2.75rem;
+  border: 1px solid rgb(15 23 42 / 16%) !important;
+  border-radius: var(--im-radius-control) !important;
+  background: rgb(255 255 255 / 82%) !important;
+  color: var(--color-ink, #101114);
+}
+
+:where(.field-im, input, textarea)::placeholder {
+  color: rgb(16 17 20 / 62%);
+  opacity: 1;
+}
+
+/* Mobile: più spazio utile, stessa completezza e safe area. */
+@media (max-width: 47.999rem) {
+  :root {
+    --im-radius-card: 1rem;
+    --im-radius-panel: 1.25rem;
+    --im-card-pad: 1rem;
+  }
+
+  .editorial-frame-canvas {
+    width: calc(100% - 1rem);
+    margin-top: 0.5rem;
+  }
+
+  .editorial-frame-canvas > header,
+  .editorial-frame-canvas > nav.fixed.inset-x-0 {
+    width: calc(100% - 1rem);
+  }
+
+  .editorial-frame-canvas > header {
+    top: 0.5rem;
+  }
+
+  .editorial-frame-canvas > main {
+    padding-top: calc(64px + 0.75rem) !important;
+  }
+
+  .home-glass-stack > section:not(:first-of-type) {
+    border-radius: var(--im-radius-panel) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.site-glass-header, .site-glass-header > div, .bento-card, .card-im, .btn-liquid, .btn-blue) {
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
+}
