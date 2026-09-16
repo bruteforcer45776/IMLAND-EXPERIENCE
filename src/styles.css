@@ -3889,23 +3889,10 @@ h6 {
   padding-block: var(--im-section-gap);
 }
 
-/* Sezioni principali: stesso materiale, raggio e profondità della Home. */
-:is(
-  #main-content > section:not(.hidden),
-  #main-content > article > section:not(.hidden),
-  #main-content > div:not(.home-glass-stack) > section:not(.hidden),
-  #main-content > div:not(.home-glass-stack) > div > section:not(.hidden),
-  .page-inverted > section:not(.hidden),
-  .member-inverted > section:not(.hidden),
-  .radio-inverted > section:not(.hidden),
-  .podcast-inverted > section:not(.hidden),
-  .eventi-inverted > section:not(.hidden),
-  .news-inverted > section:not(.hidden),
-  .terrain-inverted > section:not(.hidden),
-  .jobs-inverted > section:not(.hidden),
-  .alert-inverted > section:not(.hidden)
-) {
+/* Ogni sezione, a qualsiasi profondità, condivide lo stesso materiale della Home. */
+#main-content section:not(.hidden) {
   position: relative;
+  isolation: isolate;
   overflow: clip;
   border: 1px solid var(--im-section-border) !important;
   border-radius: var(--im-section-radius) !important;
@@ -3913,13 +3900,6 @@ h6 {
   box-shadow: var(--im-section-shadow) !important;
   -webkit-backdrop-filter: blur(var(--im-blur-subtle)) saturate(122%) !important;
   backdrop-filter: blur(var(--im-blur-subtle)) saturate(122%) !important;
-}
-
-/* Spazio tra sezioni anche nelle pagine senza wrapper tematico. */
-#main-content > section:not(.hidden),
-#main-content > article > section:not(.hidden),
-#main-content > div:not(.home-glass-stack):not(.page-inverted) > section:not(.hidden),
-#main-content > div:not(.home-glass-stack):not(.page-inverted) > div > section:not(.hidden) {
   margin-block: var(--im-section-gap) !important;
 }
 
@@ -3953,12 +3933,7 @@ h6 {
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  :is(
-    #main-content > section,
-    #main-content > article > section,
-    #main-content > div > section,
-    #main-content > div > div > section
-  ) {
+  #main-content section:not(.hidden) {
     background-color: rgb(255 255 255 / 92%) !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
