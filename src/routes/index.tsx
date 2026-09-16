@@ -7,7 +7,6 @@ import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
 import { AdvSlot } from "../components/adv-slot";
-import { AccordionGallery } from "../components/home/accordion-gallery";
 
 const PartnerLoop = lazy(() =>
   import("../components/partner-bar/PartnerLoop").then((module) => ({
@@ -20,9 +19,6 @@ const NewsletterBanner = lazy(() =>
 const DownloadAppBanner = lazy(() =>
   import("../components/download-app-banner").then((m) => ({ default: m.DownloadAppBanner })),
 );
-const ImLandMap = lazy(() =>
-  import("../components/home/imland-map").then((m) => ({ default: m.ImLandMap })),
-);
 import { seoFaq } from "../data/seo-faq";
 import { formatEventDate, formatEventTime, upcomingEvents } from "../data/events";
 import { curatedNews } from "../data/curated-news";
@@ -30,49 +26,10 @@ import {
   getLatestHomePodcastEpisodes,
   type HomePodcastPreview,
 } from "../lib/podcast-feed.functions";
-import radioHostImage from "@/assets/home-radio-host-opt.webp";
-import podcastImage from "@/assets/hero-podcast-v3.webp";
-import eventiImage from "@/assets/hero-eventi-v3.webp";
-import newsImage from "@/assets/hero-news-v3.webp";
 
 const latestNews = [...curatedNews].sort(
   (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
 );
-
-const createEcosystemGalleryItems = (latestPodcast?: HomePodcastPreview) => [
-  {
-    image: radioHostImage,
-    label: "Radio · In diretta 24/7",
-    link: "/radio",
-    alt: "IMLAND Radio in diretta",
-    accentColor: "#32b8ff",
-  },
-  {
-    image: latestPodcast?.image || podcastImage,
-    label: latestPodcast ? `Podcast · ${latestPodcast.title}` : "Podcast · On demand",
-    link: latestPodcast
-      ? `/podcast/${latestPodcast.programSlug}/${latestPodcast.slug}`
-      : "/podcast",
-    alt: latestPodcast?.image
-      ? `Copertina dell'episodio ${latestPodcast.title}`
-      : "Podcast IMLAND on demand",
-    accentColor: "#2157ff",
-  },
-  {
-    image: eventiImage,
-    label: "Eventi · Il territorio si incontra",
-    link: "/eventi",
-    alt: "Eventi IMLAND sul territorio",
-    accentColor: "#42c96b",
-  },
-  {
-    image: latestNews[0]?.image || newsImage,
-    label: latestNews[0] ? `News · ${latestNews[0].title}` : "News dal territorio",
-    link: latestNews[0]?.url || "/news",
-    alt: latestNews[0] ? `Anteprima della notizia: ${latestNews[0].title}` : "News IMLAND",
-    accentColor: "#e21d2f",
-  },
-].filter((item): item is typeof item & { image: string } => Boolean(item.image));
 
 const homeToneForTag = (tag: string) =>
   tag === "Eventi" ? "theme-eventi" : tag === "Radio" ? "theme-radio" : "theme-news";
@@ -151,8 +108,6 @@ function Home() {
     };
   }, []);
 
-  const ecosystemGalleryItems = createEcosystemGalleryItems(latestPodcastEpisodes[0]);
-
   return (
     <div className="home-glass-stack imland-night text-foreground">
       <PageRails variant="default" />
@@ -166,7 +121,7 @@ function Home() {
           </p>
         </div>
         <Suspense fallback={<div className="h-16" />}>
-          <PartnerLoop fadeOutColor="#ffffff" />
+          <PartnerLoop />
         </Suspense>
       </section>
 
@@ -214,14 +169,14 @@ function Home() {
                 </Reveal>
                 <Reveal delay={90}>
                   <div className="mt-7 md:col-start-2 md:mt-0 md:pl-7">
-                    <AccordionGallery
-                      items={ecosystemGalleryItems}
-                      defaultIndex={0}
-                      height={280}
-                      gap={10}
-                      radius={16}
-                      expandRatio={0.44}
-                    />
+                    <div className="flex min-h-[280px] items-center justify-center rounded-[28px] bg-[var(--color-surface-radio)] px-8 text-center text-white">
+                      <div className="max-w-sm">
+                        <p className="font-display text-2xl font-bold text-white">IMLAND Radio</p>
+                        <p className="mt-3 text-sm leading-relaxed text-white/85">
+                          Le nuove copertine ufficiali saranno pubblicate prossimamente.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </Reveal>
               </li>
@@ -432,17 +387,6 @@ function Home() {
       </section>
 
       <AdvSlot position="medio" />
-
-      {/* IMLAND MAP — luoghi e attività dal territorio */}
-      <section className="relative overflow-hidden bg-white section-pad">
-        <div className={shell}>
-          <Reveal>
-            <Suspense fallback={<div className="h-[620px] rounded-[32px] bg-white/55" />}>
-              <ImLandMap />
-            </Suspense>
-          </Reveal>
-        </div>
-      </section>
 
       {/* PARTNER / MEMBER */}
       <section className="theme-member bg-white section-pad">

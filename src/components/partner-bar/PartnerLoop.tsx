@@ -53,8 +53,7 @@ export function PartnerLoop({
       gap={34}
       hoverSpeed={16}
       scaleOnHover
-      fadeOut
-      fadeOutColor={fadeOutColor}
+      fadeOut={false}
       ariaLabel="Partner IMLAND Experience"
     />
   );

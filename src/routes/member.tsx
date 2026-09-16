@@ -11,6 +11,9 @@ import { HeroBanner } from "../components/hero-banner";
 import { MEMBER_DETAILS, type MemberAddress } from "../data/member-details";
 
 const DomeGallery = lazy(() => import("../components/dome-gallery"));
+const ImLandMap = lazy(() =>
+  import("../components/home/imland-map").then((m) => ({ default: m.ImLandMap })),
+);
 
 import heroMember from "@/assets/hero-member-v3.webp";
 import heroMemberMobile from "@/assets/hero-member-mobile.webp";
@@ -1241,6 +1244,12 @@ function MemberPage() {
           title="Novità dalla rete IMLAND."
           lead="Nuove voci, format e opportunità per i Member: te le raccontiamo per prime."
         />
+
+        <section className="container-im section-pad" aria-label="Mappa dei Member IMLAND">
+          <Suspense fallback={<div className="h-[620px] rounded-[32px] bg-white/55" />}>
+            <ImLandMap />
+          </Suspense>
+        </section>
       </div>
     </>
   );
