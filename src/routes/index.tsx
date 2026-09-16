@@ -7,6 +7,7 @@ import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
 import { AdvSlot } from "../components/adv-slot";
+import { AccordionGallery } from "../components/home/accordion-gallery";
 
 const PartnerLoop = lazy(() =>
   import("../components/partner-bar/PartnerLoop").then((module) => ({
@@ -25,9 +26,45 @@ const ImLandMap = lazy(() =>
 import { seoFaq } from "../data/seo-faq";
 import { formatEventDate, formatEventTime, upcomingEvents } from "../data/events";
 import { latestEpisodes, programs } from "../data/podcast-derived";
+import { curatedNews } from "../data/curated-news";
 import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
+import radioHostImage from "@/assets/home-radio-host-opt.webp";
+import podcastImage from "@/assets/hero-podcast-v3.webp";
+import eventiImage from "@/assets/hero-eventi-v3.webp";
+import newsImage from "@/assets/hero-news-v3.webp";
 
 const featuredEpisode = latestEpisodes[0];
+
+const ecosystemGalleryItems = [
+  {
+    image: radioHostImage,
+    label: "Radio · In diretta 24/7",
+    link: "/radio",
+    alt: "IMLAND Radio in diretta",
+    accentColor: "#32b8ff",
+  },
+  {
+    image: featuredEpisode?.program.cover || podcastImage,
+    label: featuredEpisode ? `Podcast · ${featuredEpisode.program.name}` : "Podcast · On demand",
+    link: "/podcast",
+    alt: featuredEpisode ? `Copertina ${featuredEpisode.program.name}` : "Podcast IMLAND on demand",
+    accentColor: "#2157ff",
+  },
+  {
+    image: eventiImage,
+    label: "Eventi · Il territorio si incontra",
+    link: "/eventi",
+    alt: "Eventi IMLAND sul territorio",
+    accentColor: "#42c96b",
+  },
+  {
+    image: newsImage,
+    label: curatedNews[0] ? `News · ${curatedNews[0].title}` : "News dal territorio",
+    link: "/news",
+    alt: curatedNews[0] ? `Anteprima della notizia: ${curatedNews[0].title}` : "News IMLAND",
+    accentColor: "#e21d2f",
+  },
+].filter((item): item is typeof item & { image: string } => Boolean(item.image));
 
 const newsPreviews = [
   {
@@ -134,6 +171,17 @@ function Home() {
             Dalla diretta all'ascolto on demand, dagli appuntamenti alle notizie: ogni contenuto è
             parte della stessa esperienza territoriale.
           </p>
+
+          <div className="mt-9" aria-label="Accesso rapido ai contenuti IMLAND">
+            <AccordionGallery
+              items={ecosystemGalleryItems}
+              defaultIndex={0}
+              height={280}
+              gap={10}
+              radius={16}
+              expandRatio={0.44}
+            />
+          </div>
 
           <div className="relative mt-14 pl-9 md:pl-0">
             <div

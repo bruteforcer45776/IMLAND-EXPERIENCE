@@ -1,0 +1,135 @@
+.ecosystem-gallery {
+  --ag-accent: #ffffff;
+  --ag-overlay: #060010;
+  --ag-text: #ffffff;
+  --ag-gap: 10px;
+  --ag-radius: 16px;
+  display: flex;
+  gap: var(--ag-gap);
+  width: 100%;
+  max-width: 100%;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.ecosystem-gallery__panel {
+  position: relative;
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--ag-radius);
+  background: #0a0713;
+  box-shadow: 0 14px 34px -22px rgba(0, 0, 0, 0.72);
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  will-change: flex-grow, transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ecosystem-gallery__panel:focus-visible {
+  box-shadow: 0 0 0 3px var(--ag-accent), 0 14px 34px -22px rgba(0, 0, 0, 0.72);
+}
+
+.ecosystem-gallery__frame,
+.ecosystem-gallery__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.ecosystem-gallery__frame {
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.ecosystem-gallery__media {
+  --ag-gray: 0;
+  --ag-dim: 0.3;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100% + 36px);
+  height: calc(100% + 16px);
+  filter: grayscale(var(--ag-gray));
+  will-change: transform, filter;
+}
+
+.ecosystem-gallery__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.ecosystem-gallery__overlay {
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 34%, rgba(6, 0, 16, 0.9) 100%),
+    rgba(6, 0, 16, 0.16);
+}
+
+.ecosystem-gallery__label {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.ecosystem-gallery__bar {
+  width: 3px;
+  height: 25px;
+  flex: 0 0 auto;
+  border-radius: 3px;
+  background: var(--ag-accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ag-accent) 60%, transparent);
+}
+
+.home-glass-stack .ecosystem-gallery__text {
+  overflow: hidden;
+  color: var(--ag-text) !important;
+  -webkit-text-fill-color: var(--ag-text) !important;
+  font-family: inherit;
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.58);
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .ecosystem-gallery {
+    height: auto !important;
+    flex-direction: column;
+    perspective: none;
+  }
+
+  .ecosystem-gallery__panel {
+    min-height: 78px;
+    transform: none !important;
+  }
+
+  .ecosystem-gallery__media {
+    width: calc(100% + 28px);
+    height: calc(100% + 12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ecosystem-gallery__panel,
+  .ecosystem-gallery__media {
+    will-change: auto;
+  }
+}
