@@ -3861,3 +3861,106 @@ h6 {
   }
   .imland-map-marker { width: 48px; height: 48px; }
 }
+
+/* ============================================================
+   Parità globale con la Home: sezioni Liquid Glass distanziate
+   ============================================================ */
+:root {
+  --im-section-gap: clamp(.75rem, 1.5vw, 1.25rem);
+  --im-section-radius: clamp(1.25rem, 2.5vw, 2rem);
+  --im-section-glass: rgb(255 255 255 / 58%);
+  --im-section-border: rgb(255 255 255 / 48%);
+  --im-section-shadow: inset 0 1px 0 rgb(255 255 255 / 56%), 0 14px 38px rgb(1 29 104 / 10%);
+}
+
+/* I wrapper editoriali diventano stack regolari, come la homepage. */
+#main-content > .page-inverted,
+#main-content > .member-inverted,
+#main-content > .radio-inverted,
+#main-content > .podcast-inverted,
+#main-content > .eventi-inverted,
+#main-content > .news-inverted,
+#main-content > .terrain-inverted,
+#main-content > .jobs-inverted,
+#main-content > .alert-inverted {
+  display: flex;
+  flex-direction: column;
+  gap: var(--im-section-gap);
+  padding-block: var(--im-section-gap);
+}
+
+/* Sezioni principali: stesso materiale, raggio e profondità della Home. */
+:is(
+  #main-content > section:not(.hidden),
+  #main-content > article > section:not(.hidden),
+  #main-content > div:not(.home-glass-stack) > section:not(.hidden),
+  #main-content > div:not(.home-glass-stack) > div > section:not(.hidden),
+  .page-inverted > section:not(.hidden),
+  .member-inverted > section:not(.hidden),
+  .radio-inverted > section:not(.hidden),
+  .podcast-inverted > section:not(.hidden),
+  .eventi-inverted > section:not(.hidden),
+  .news-inverted > section:not(.hidden),
+  .terrain-inverted > section:not(.hidden),
+  .jobs-inverted > section:not(.hidden),
+  .alert-inverted > section:not(.hidden)
+) {
+  position: relative;
+  overflow: clip;
+  border: 1px solid var(--im-section-border) !important;
+  border-radius: var(--im-section-radius) !important;
+  background-color: var(--im-section-glass) !important;
+  box-shadow: var(--im-section-shadow) !important;
+  -webkit-backdrop-filter: blur(var(--im-blur-subtle)) saturate(122%) !important;
+  backdrop-filter: blur(var(--im-blur-subtle)) saturate(122%) !important;
+}
+
+/* Spazio tra sezioni anche nelle pagine senza wrapper tematico. */
+#main-content > section:not(.hidden),
+#main-content > article > section:not(.hidden),
+#main-content > div:not(.home-glass-stack):not(.page-inverted) > section:not(.hidden),
+#main-content > div:not(.home-glass-stack):not(.page-inverted) > div > section:not(.hidden) {
+  margin-block: var(--im-section-gap) !important;
+}
+
+/* Le sezioni della Home restano la fonte di verità e usano gli stessi token. */
+.home-glass-stack {
+  gap: var(--im-section-gap) !important;
+  padding-bottom: var(--im-section-gap) !important;
+}
+
+.home-glass-stack > section {
+  border-radius: var(--im-section-radius) !important;
+}
+
+@media (max-width: 47.999rem) {
+  :root {
+    --im-section-gap: .75rem;
+    --im-section-radius: 1.25rem;
+  }
+
+  #main-content > .page-inverted,
+  #main-content > .member-inverted,
+  #main-content > .radio-inverted,
+  #main-content > .podcast-inverted,
+  #main-content > .eventi-inverted,
+  #main-content > .news-inverted,
+  #main-content > .terrain-inverted,
+  #main-content > .jobs-inverted,
+  #main-content > .alert-inverted {
+    padding-block: var(--im-section-gap);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :is(
+    #main-content > section,
+    #main-content > article > section,
+    #main-content > div > section,
+    #main-content > div > div > section
+  ) {
+    background-color: rgb(255 255 255 / 92%) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
