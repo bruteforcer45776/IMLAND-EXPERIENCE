@@ -30,7 +30,6 @@ import {
   getLatestHomePodcastEpisodes,
   type HomePodcastPreview,
 } from "../lib/podcast-feed.functions";
-import heroMoleLcp from "@/assets/home-mole-torino-opt.webp";
 import radioHostImage from "@/assets/home-radio-host-opt.webp";
 import podcastImage from "@/assets/hero-podcast-v3.webp";
 import eventiImage from "@/assets/hero-eventi-v3.webp";
@@ -125,7 +124,8 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       canonical("/"),
-      { rel: "preload", as: "image", href: heroMoleLcp, fetchPriority: "high" },
+      { rel: "preload", as: "image", href: "/hero-carousel/vercelli-mobile.png", media: "(max-width: 639px) and (orientation: portrait)", fetchPriority: "high" },
+      { rel: "preload", as: "image", href: "/hero-carousel/vercelli-desktop.png", media: "(min-width: 640px), (orientation: landscape)", fetchPriority: "high" },
     ],
 
     scripts: [jsonLd(organizationLd), jsonLd(websiteLd)],

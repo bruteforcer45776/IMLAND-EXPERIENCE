@@ -2,6 +2,16 @@
 @source "../src";
 @import "tw-animate-css";
 
+.hero-territory-image {
+  object-position: var(--hero-desktop-position, 50% 20%);
+}
+
+@media (max-width: 639px) and (orientation: portrait) {
+  .hero-territory-image {
+    object-position: var(--hero-mobile-position, 50% 10%);
+  }
+}
+
 .site-glass-header {
   background: rgba(255, 255, 255, 0.38);
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
