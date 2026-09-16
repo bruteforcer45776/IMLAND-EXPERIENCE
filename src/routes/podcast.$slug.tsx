@@ -6,6 +6,7 @@ import { EpisodePlayButton, PodcastMiniPlayer } from "../components/podcast-audi
 import { PodcastFeedPlayer } from "../components/podcast-feed-player";
 import { programs as allPrograms } from "../data/podcast-derived";
 import {
+  getPodcastCatalog,
   getPodcastFeedEpisodes,
 } from "../lib/podcast-feed.functions";
 
@@ -14,11 +15,14 @@ export const Route = createFileRoute("/podcast/$slug")({
     const { podcastPrograms } = await import("../data/podcast-programs");
     const program = podcastPrograms[params.slug];
     if (!program) throw notFound();
-    const episodes =
+    const [episodes, catalog] = await Promise.all([
       program.episodes.length > 0
-        ? program.episodes
-        : await getPodcastFeedEpisodes({ data: { slug: program.slug, limit: 100 } });
-    return { program, episodes };
+        ? Promise.resolve(program.episodes)
+        : getPodcastFeedEpisodes({ data: { slug: program.slug, limit: 100 } }),
+      getPodcastCatalog({ data: { group: program.group } }),
+    ]);
+    const programCover = catalog.find((item) => item.slug === program.slug)?.cover || program.cover;
+    return { program, programCover, episodes };
   },
   head: ({ loaderData }) => {
     const p = loaderData?.program;
@@ -30,7 +34,9 @@ export const Route = createFileRoute("/podcast/$slug")({
         { name: "description", content: desc },
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
-        ...(p?.cover ? [{ property: "og:image", content: p.cover }] : []),
+        ...(loaderData?.programCover
+          ? [{ property: "og:image", content: loaderData.programCover }]
+          : []),
       ],
     };
   },
@@ -58,7 +64,7 @@ function formatDate(d: string | null) {
 const PAGE_SIZE = 6;
 
 function ProgramPage() {
-  const { program, episodes: loadedEpisodes } = Route.useLoaderData();
+  const { program, programCover, episodes: loadedEpisodes } = Route.useLoaderData();
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [episodes, setEpisodes] = useState(loadedEpisodes);
   const [loadingEpisodes, setLoadingEpisodes] = useState(loadedEpisodes.length === 0);
@@ -87,9 +93,8 @@ function ProgramPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadedEpisodes, program.slug]);
 
-  const programCover = episodes[0]?.image || program.cover;
   const episodeCover = (ep: (typeof episodes)[number]) =>
-    "image" in ep && ep.image ? ep.image : "cover" in ep && ep.cover ? ep.cover : program.cover;
+    "image" in ep && ep.image ? ep.image : "cover" in ep && ep.cover ? ep.cover : programCover;
 
   const dates = episodes
     .map((e: (typeof program.episodes)[number]) => e.date)

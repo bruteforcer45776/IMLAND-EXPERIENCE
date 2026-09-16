@@ -189,9 +189,13 @@ export const getPodcastCatalog = createServerFn({ method: "GET" })
             };
           }
           const episodes = parseFeed(xml, program.name);
+          const rssCover = channelImage(xml);
           return {
             slug: program.slug,
-            cover: episodes[0]?.image ?? program.cover,
+            // La copertina del programma deve arrivare dal livello <channel>
+            // del feed. Le eventuali immagini dei singoli <item> restano invece
+            // miniature delle rispettive puntate.
+            cover: rssCover ? decodeXml(rssCover) : program.cover,
             publishedEpisodes: episodes.length,
             latestPublishedAt: episodes[0]?.publishedAt ?? null,
           };
