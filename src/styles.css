@@ -3438,3 +3438,390 @@ h6 {
 .sticky-chat-trigger:hover {
   background: #dc7410 !important;
 }
+
+/* IMLAND Liquid Glass System: tre livelli condivisi, stesso concept e contenuti. */
+:root {
+  --im-container: 80rem;
+  --im-grid-gap: clamp(.875rem, 1.5vw, 1.25rem);
+  --im-section-space: clamp(3rem, 6vw, 5.5rem);
+  --im-card-pad: clamp(1.125rem, 2vw, 1.625rem);
+  --im-radius-control: .75rem;
+  --im-radius-card: 1.375rem;
+  --im-radius-panel: 1.875rem;
+  --im-glass-subtle-bg: rgb(255 255 255 / 46%);
+  --im-glass-standard-bg: rgb(255 255 255 / 68%);
+  --im-glass-elevated-bg: rgb(255 255 255 / 78%);
+  --im-glass-dark-bg: rgb(10 10 10 / 58%);
+  --im-glass-border: rgb(255 255 255 / 54%);
+  --im-glass-border-dark: rgb(255 255 255 / 18%);
+  --im-glass-highlight: inset 0 1px 0 rgb(255 255 255 / 52%);
+  --im-shadow-subtle: 0 10px 28px rgb(1 29 104 / 8%);
+  --im-shadow-standard: 0 16px 40px rgb(1 29 104 / 12%);
+  --im-shadow-elevated: 0 22px 56px rgb(1 29 104 / 18%);
+  --im-blur-subtle: 10px;
+  --im-blur-standard: 16px;
+  --im-blur-elevated: 22px;
+  --im-motion-fast: 180ms;
+  --im-motion-standard: 220ms;
+  --im-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --im-z-nav: 40;
+  --im-z-player: 50;
+  --im-z-tools: 59;
+  --im-z-modal: 70;
+}
+
+/* 1. Glass subtle: superfici ampie e sezioni. */
+.home-glass-stack > section:not(:first-of-type),
+.glass-subtle {
+  border: 1px solid rgb(255 255 255 / 44%) !important;
+  background: var(--im-glass-subtle-bg) !important;
+  box-shadow: var(--im-glass-highlight), var(--im-shadow-subtle) !important;
+  -webkit-backdrop-filter: blur(var(--im-blur-subtle)) saturate(118%) !important;
+  backdrop-filter: blur(var(--im-blur-subtle)) saturate(118%) !important;
+}
+
+/* 2. Glass standard: card, moduli e strumenti secondari. */
+:where(.glass-panel, .surface-card, .bento-card, .card-im, .sticky-glass) {
+  border: 1px solid var(--im-glass-border) !important;
+  border-radius: var(--im-radius-card) !important;
+  background: var(--im-glass-standard-bg) !important;
+  box-shadow: var(--im-glass-highlight), var(--im-shadow-standard) !important;
+  -webkit-backdrop-filter: blur(var(--im-blur-standard)) saturate(125%) !important;
+  backdrop-filter: blur(var(--im-blur-standard)) saturate(125%) !important;
+  transition: transform var(--im-motion-fast) var(--im-ease-out), border-color var(--im-motion-fast) ease, box-shadow var(--im-motion-standard) var(--im-ease-out) !important;
+}
+
+:where(a, button).bento-card:hover,
+:where(a, button).card-im:hover,
+.bento-card:has(> a):hover {
+  transform: translateY(-3px);
+  border-color: rgb(255 255 255 / 76%) !important;
+  box-shadow: var(--im-glass-highlight), 0 20px 46px rgb(1 29 104 / 16%) !important;
+}
+
+/* 3. Glass elevated: header, player, menu e dialog. */
+.site-glass-header,
+.radio-player-glass,
+[role="dialog"] > [data-surface],
+[data-full-panel] {
+  box-shadow: var(--im-glass-highlight), var(--im-shadow-elevated) !important;
+  -webkit-backdrop-filter: blur(var(--im-blur-elevated)) saturate(132%) !important;
+  backdrop-filter: blur(var(--im-blur-elevated)) saturate(132%) !important;
+}
+
+.site-glass-header {
+  z-index: var(--im-z-nav) !important;
+  background: var(--im-glass-elevated-bg) !important;
+  border-color: rgb(255 255 255 / 62%) !important;
+  transition: top var(--im-motion-standard) var(--im-ease-out), width var(--im-motion-standard) var(--im-ease-out), box-shadow var(--im-motion-standard) ease, background-color var(--im-motion-standard) ease !important;
+}
+
+.site-glass-header > div { transition: height var(--im-motion-standard) var(--im-ease-out); }
+.site-glass-header[data-scrolled="true"] {
+  background: rgb(255 255 255 / 84%) !important;
+  box-shadow: var(--im-glass-highlight), 0 16px 44px rgb(1 29 104 / 16%) !important;
+}
+.site-glass-header[data-scrolled="true"] > div { height: 3.5rem !important; }
+
+.radio-player-glass {
+  background: var(--im-glass-dark-bg) !important;
+  border-color: var(--im-glass-border-dark) !important;
+}
+.floating-radio-player { z-index: var(--im-z-player) !important; }
+.floating-actions-right,
+.floating-chatbot { z-index: var(--im-z-tools) !important; }
+
+/* Bento: 12 colonne desktop, 6 tablet, una o due mobile. */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--im-grid-gap) !important;
+  align-items: stretch;
+}
+.bento-card { min-width: 0; padding: var(--im-card-pad) !important; }
+@media (min-width: 40rem) { .bento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 48rem) { .bento-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (min-width: 64rem) { .bento-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
+
+/* Gerarchia tipografica condivisa senza alterare i testi. */
+:where(.text-h1-im, .text-display-m) {
+  font-size: clamp(2.35rem, 6vw, 5.75rem) !important;
+  line-height: .98 !important;
+  letter-spacing: -.035em !important;
+  text-wrap: balance;
+}
+:where(.text-h2-im, .text-display-s, .text-title-l) {
+  font-size: clamp(1.8rem, 4vw, 3.5rem) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.025em !important;
+  text-wrap: balance;
+}
+:where(.text-h3-im, .text-title-m) {
+  line-height: 1.18 !important;
+  letter-spacing: -.015em !important;
+  text-wrap: pretty;
+}
+:where(.glass-panel, .surface-card, .bento-card, .card-im) :where(p, li) { max-width: 72ch; }
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid rgb(0 126 255 / 48%) !important;
+  outline-offset: 3px;
+}
+::selection { background: rgb(0 126 255 / 26%); color: #07111f; }
+
+@media (max-width: 47.999rem) {
+  .editorial-frame-canvas {
+    padding-bottom: calc(var(--dock-bottom-nav) + var(--dock-radio-player) + var(--dock-podcast-player) + 1.5rem + env(safe-area-inset-bottom));
+  }
+  .site-glass-header[data-scrolled="true"] > div { height: 3.25rem !important; }
+  .bento-card { padding: 1rem !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.site-glass-header, .site-glass-header > div, .bento-card, .card-im) {
+    transition-duration: .01ms !important;
+    transform: none !important;
+  }
+}
+
+/* Estensione globale: stesso sistema nelle pagine editoriali e di servizio. */
+#main-content > section,
+#main-content > div:not(.home-glass-stack) > section,
+#main-content > div:not(.home-glass-stack) > div > section,
+.page-inverted > section,
+.member-inverted > section,
+.section-focus {
+  border-color: rgb(255 255 255 / 44%) !important;
+  background-color: var(--im-glass-subtle-bg) !important;
+  box-shadow: var(--im-glass-highlight), var(--im-shadow-subtle) !important;
+  -webkit-backdrop-filter: blur(var(--im-blur-subtle)) saturate(118%) !important;
+  backdrop-filter: blur(var(--im-blur-subtle)) saturate(118%) !important;
+}
+
+/* I colori di verticale rimangono segnali, non diventano nuovi stili di card. */
+:where(.theme-radio, .theme-podcast, .theme-eventi, .theme-news, .theme-member)
+  :where(.glass-panel, .surface-card, .bento-card, .card-im) {
+  --surface-tone: var(--signal, var(--im-blue));
+}
+
+:where(.theme-radio, .theme-podcast, .theme-eventi, .theme-news, .theme-member)
+  :where(.glass-panel, .surface-card, .bento-card, .card-im):hover {
+  border-color: color-mix(in srgb, var(--surface-tone) 28%, white) !important;
+}
+
+/* Form, ricerca, FAQ, newsletter e footer condividono la stessa profondità. */
+:where(.field-im, input:not([type="range"]), textarea, select) {
+  border-color: rgb(15 23 42 / 13%) !important;
+  background-color: rgb(255 255 255 / 72%) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 62%);
+  -webkit-backdrop-filter: blur(10px) saturate(115%);
+  backdrop-filter: blur(10px) saturate(115%);
+}
+
+:where(details, .newsletter-banner, .download-app-banner) {
+  border-color: var(--im-glass-border) !important;
+}
+
+.site-footer {
+  border-color: rgb(255 255 255 / 44%) !important;
+  background: rgb(255 255 255 / 70%) !important;
+  box-shadow: var(--im-glass-highlight), 0 -12px 36px rgb(1 29 104 / 10%) !important;
+  -webkit-backdrop-filter: blur(var(--im-blur-standard)) saturate(120%);
+  backdrop-filter: blur(var(--im-blur-standard)) saturate(120%);
+}
+
+/* Le aree autenticate restano operative e compatte, con gli stessi token. */
+:where(.area-shell, .business-shell, .listener-shell)
+  :where(.glass-panel, .surface-card, .bento-card, .card-im) {
+  border-radius: var(--im-radius-card) !important;
+  padding: var(--im-card-pad);
+}
+
+/* IMLAND Map — MapLibre + OpenFreeMap */
+.imland-map-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 24px 70px rgba(18, 47, 87, 0.14);
+  backdrop-filter: blur(24px) saturate(140%);
+}
+
+.imland-map-card__intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  padding: clamp(26px, 4vw, 48px);
+}
+
+.imland-map-card__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #006ee6;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.imland-map-card__eyebrow svg { width: 18px; height: 18px; }
+.imland-map-card__intro h2 {
+  max-width: 700px;
+  margin-top: 12px;
+  color: #07111f;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.imland-map-card__intro p:not(.imland-map-card__eyebrow) {
+  max-width: 680px;
+  margin-top: 18px;
+  color: rgba(7, 17, 31, 0.68);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.imland-map-card__cta {
+  display: inline-flex;
+  min-height: 48px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 9px;
+  border-radius: 999px;
+  background: #07111f;
+  padding: 0 22px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 180ms ease, background 180ms ease;
+}
+.imland-map-card__cta:hover { transform: translateY(-2px); background: #006ee6; }
+.imland-map-card__cta svg { width: 17px; height: 17px; }
+
+.imland-map-card__filters {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+  border-top: 1px solid rgba(7, 17, 31, 0.08);
+  padding: 14px clamp(18px, 3vw, 32px);
+}
+.imland-map-card__filters > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(7, 17, 31, 0.62);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.imland-map-card__filters > span svg { width: 16px; height: 16px; }
+.imland-map-card__filters > div {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.imland-map-card__filters > div::-webkit-scrollbar { display: none; }
+.imland-map-card__filters button {
+  min-height: 36px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(7, 17, 31, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 0 15px;
+  color: rgba(7, 17, 31, 0.72);
+  font-size: 12px;
+  font-weight: 700;
+}
+.imland-map-card__filters button[aria-pressed="true"] {
+  border-color: #006ee6;
+  background: #006ee6;
+  color: white;
+}
+.imland-map-card__filters > strong {
+  color: rgba(7, 17, 31, 0.56);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.imland-map-card__canvas-wrap { position: relative; margin: 0 10px 10px; overflow: hidden; border-radius: 26px; }
+.imland-map-card__fallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 28%, rgba(169, 255, 27, 0.44), transparent 23%),
+    radial-gradient(circle at 24% 68%, rgba(0, 110, 230, 0.3), transparent 27%),
+    repeating-radial-gradient(ellipse at 70% 35%, transparent 0 42px, rgba(7, 17, 31, 0.07) 43px 45px),
+    linear-gradient(145deg, #e8f5ef, #d8edf8 54%, #f0f5d5);
+}
+.imland-map-card__fallback::after {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.48) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.48) 1px, transparent 1px);
+  background-size: 44px 44px;
+  content: "";
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent 85%);
+}
+.imland-map-card__city { position: absolute; z-index: 1; color: rgba(7, 17, 31, 0.52); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.imland-map-card__city::before { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border: 2px solid white; border-radius: 99px; background: #ff7a00; box-shadow: 0 2px 7px rgba(7, 17, 31, 0.2); content: ""; }
+.imland-map-card__city--biella { top: 28%; left: 24%; }
+.imland-map-card__city--vercelli { top: 61%; left: 38%; }
+.imland-map-card__city--novara { top: 47%; right: 22%; }
+.imland-map-card__city--vco { top: 16%; right: 12%; }
+.imland-map-card__canvas { position: relative; z-index: 1; height: clamp(430px, 57vw, 610px); min-height: 430px; width: 100%; }
+.imland-map-card__notice {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 14px 18px;
+  color: rgba(7, 17, 31, 0.7);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 12px 34px rgba(7, 17, 31, 0.13);
+  backdrop-filter: blur(14px);
+}
+.imland-map-marker {
+  width: 29px;
+  height: 38px;
+  border: 3px solid white;
+  border-radius: 50% 50% 50% 5px;
+  background: #ff7a00;
+  box-shadow: 0 5px 18px rgba(7, 17, 31, 0.32);
+  cursor: pointer;
+  transform: rotate(-45deg);
+  transition: scale 160ms ease;
+}
+.imland-map-marker:hover { scale: 1.12; }
+.imland-map-marker span {
+  position: absolute;
+  inset: 8px;
+  border-radius: 999px;
+  background: white;
+}
+.maplibregl-popup-content { border-radius: 18px !important; padding: 0 !important; overflow: hidden; box-shadow: 0 15px 40px rgba(7, 17, 31, 0.2) !important; }
+.imland-map-popup { min-width: 210px; padding: 17px; font-family: inherit; }
+.imland-map-popup__category { color: #006ee6; font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.imland-map-popup h3 { margin-top: 5px; color: #07111f; font-size: 16px; font-weight: 800; line-height: 1.2; }
+.imland-map-popup > p:not(.imland-map-popup__category) { margin-top: 7px; color: rgba(7, 17, 31, 0.62); font-size: 12px; }
+.imland-map-popup a { display: inline-flex; margin-top: 12px; color: #006ee6; font-size: 12px; font-weight: 800; }
+.maplibregl-ctrl-group { border-radius: 14px !important; overflow: hidden; }
+
+@media (max-width: 767px) {
+  .imland-map-card { border-radius: 28px; }
+  .imland-map-card__intro { align-items: flex-start; flex-direction: column; gap: 22px; }
+  .imland-map-card__cta { width: 100%; justify-content: center; }
+  .imland-map-card__filters { grid-template-columns: 1fr auto; }
+  .imland-map-card__filters > div { grid-column: 1 / -1; grid-row: 2; }
+  .imland-map-card__canvas-wrap { border-radius: 21px; }
+  .imland-map-card__canvas { height: 470px; min-height: 470px; }
+}

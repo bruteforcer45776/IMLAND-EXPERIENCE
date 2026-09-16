@@ -16,14 +16,14 @@ import { ICON_TONES, type IconTone } from "@/components/brand-icons";
 
 export type BentoTone = IconTone;
 
-/** Colonne occupate su desktop (griglia a 6 colonne). */
+/** Colonne logiche; su desktop vengono proiettate sulla griglia a 12 colonne. */
 export type BentoSpan = 2 | 3 | 4 | 6;
 
 const SPAN_CLASS: Record<BentoSpan, string> = {
-  2: "lg:col-span-2",
-  3: "lg:col-span-3",
-  4: "lg:col-span-4",
-  6: "sm:col-span-2 lg:col-span-6",
+  2: "lg:col-span-4",
+  3: "lg:col-span-6",
+  4: "lg:col-span-8",
+  6: "sm:col-span-2 lg:col-span-12",
 };
 
 export function BentoGrid({ className = "", children, ...props }: HTMLAttributes<HTMLDivElement>) {

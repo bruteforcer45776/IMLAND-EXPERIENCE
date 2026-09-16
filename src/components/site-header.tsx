@@ -90,6 +90,7 @@ export function SiteHeader() {
   return (
     <>
       <header
+        data-scrolled={scrolled ? "true" : "false"}
         className={`site-glass-header fixed inset-x-0 top-0 z-40 transition-all duration-medium ${
           scrolled ? "shadow-[0_12px_36px_rgba(0,0,0,0.22)]" : "shadow-[0_6px_24px_rgba(0,0,0,0.12)]"
         }`}

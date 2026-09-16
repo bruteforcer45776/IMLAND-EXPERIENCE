@@ -19,6 +19,9 @@ const NewsletterBanner = lazy(() =>
 const DownloadAppBanner = lazy(() =>
   import("../components/download-app-banner").then((m) => ({ default: m.DownloadAppBanner })),
 );
+const ImLandMap = lazy(() =>
+  import("../components/home/imland-map").then((m) => ({ default: m.ImLandMap })),
+);
 import { seoFaq } from "../data/seo-faq";
 import { formatEventDate, formatEventTime, upcomingEvents } from "../data/events";
 import { latestEpisodes, programs } from "../data/podcast-derived";
@@ -361,6 +364,17 @@ function Home() {
       </section>
 
       <AdvSlot position="medio" />
+
+      {/* IMLAND MAP — luoghi e attività dal territorio */}
+      <section className="relative overflow-hidden bg-white section-pad">
+        <div className={shell}>
+          <Reveal>
+            <Suspense fallback={<div className="h-[620px] rounded-[32px] bg-white/55" />}>
+              <ImLandMap />
+            </Suspense>
+          </Reveal>
+        </div>
+      </section>
 
       {/* PARTNER / MEMBER */}
       <section className="theme-member bg-white section-pad">
