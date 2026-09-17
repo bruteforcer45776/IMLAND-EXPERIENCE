@@ -152,12 +152,12 @@ function RadioPage() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="cta-light px-6 py-3.5 text-sm"
+          className="hero-cta-radio-play inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold"
         >
           <Play className="h-4 w-4 fill-current" />
           Ascolta ora
         </button>
-        <a href="#palinsesto" className="cta-dark px-6 py-3.5 text-sm">
+        <a href="#palinsesto" className="hero-cta-radio-schedule inline-flex rounded-full px-6 py-3.5 text-sm font-semibold">
           Vedi il palinsesto
         </a>
       </HeroBanner>
@@ -241,11 +241,6 @@ function RadioPage() {
                           loading="lazy"
                           className="h-full w-full object-contain"
                         />
-                        <span className="absolute inset-0 flex items-center justify-center bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/15">
-                          <span className="flex scale-75 items-center justify-center rounded-full bg-background/90 px-4 py-2 text-sm font-semibold text-foreground opacity-0 shadow-cta-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
-                            Apri
-                          </span>
-                        </span>
                       </button>
                     ) : (
                       <div className="flex h-full items-center justify-center px-4 text-center">
@@ -286,14 +281,6 @@ function RadioPage() {
                 />
               </div>
             )}
-            <div className="absolute bottom-5 left-5 right-5 glass-panel rounded-2xl px-5 py-3 text-center backdrop-blur-md">
-              <p className="font-display text-lg font-semibold text-foreground">
-                {selectedShow?.name}
-              </p>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                {selectedShow?.tag}
-              </p>
-            </div>
           </DialogContent>
         </Dialog>
 

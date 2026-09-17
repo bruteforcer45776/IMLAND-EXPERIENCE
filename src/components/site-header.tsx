@@ -137,7 +137,7 @@ export function SiteHeader() {
               className="btn-blue inline-flex h-10 items-center gap-1.5 rounded-full px-3 text-[12px] min-[380px]:px-4 min-[380px]:text-[13px] md:h-11 md:gap-2 md:px-5 md:text-[14px]"
             >
               <Download size={17} aria-hidden />
-              <span>Scarica l'app</span>
+              <span className="hidden md:inline">Scarica l'app</span>
             </Link>
 
             <Link

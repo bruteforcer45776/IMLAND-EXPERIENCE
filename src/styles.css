@@ -125,33 +125,53 @@
 }
 
 .hero-cta-claim {
-  width: fit-content;
-  max-width: 32rem;
+  width: min(100%, 58rem);
+  max-width: 58rem;
   margin-inline: auto;
-  border: 1px solid rgb(255 255 255 / 74%);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 88%);
-  padding: 0.55rem 1rem;
-  color: #0a0a0a !important;
-  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
-  font-weight: 800;
-  letter-spacing: 0.075em;
-  line-height: 1.25;
+  padding: 0;
+  color: #ffffff !important;
+  font-size: clamp(2rem, 5vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
   text-align: center !important;
-  text-transform: uppercase;
-  box-shadow: 0 10px 24px rgb(1 29 104 / 16%);
-  -webkit-backdrop-filter: blur(14px) saturate(135%);
-  backdrop-filter: blur(14px) saturate(135%);
+  text-wrap: balance;
+  text-shadow: 0 3px 18px rgb(0 0 0 / 55%);
 }
 
 .hero-cta-claim-editorial {
   font-family: var(--font-keyword);
-  font-size: clamp(1.25rem, 2.6vw, 2rem);
+  font-size: clamp(2rem, 5vw, 5rem);
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.1;
   text-transform: none;
+}
+
+.hero-section-bubble {
+  color: var(--signal) !important;
+  filter: drop-shadow(0 5px 14px rgb(0 0 0 / 28%));
+}
+
+.hero-cta-radio-play {
+  background: #0aa2cf !important;
+  color: #ffffff !important;
+}
+
+.hero-cta-radio-schedule {
+  background: #1646d8 !important;
+  color: #ffffff !important;
+}
+
+.hero-cta-member {
+  background: #e0a800 !important;
+  color: #101114 !important;
+}
+
+.member-network-hero .hero-cta-claim {
+  color: #101114 !important;
+  text-shadow: 0 2px 14px rgb(255 255 255 / 72%);
 }
 
 .hero-banner .cta-light {

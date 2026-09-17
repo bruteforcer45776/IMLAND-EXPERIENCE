@@ -31,27 +31,23 @@ export function RadioProgramCarousel({ items }: Props) {
 
   return (
     <section
-      className="relative overflow-hidden rounded-[28px] border border-[#0aa2cf]/35 bg-[#07161d] p-3 shadow-[0_16px_40px_rgb(1_29_104/12%)]"
+      className="relative overflow-hidden rounded-[28px] border border-[#0aa2cf]/35 bg-white shadow-[0_16px_40px_rgb(1_29_104/12%)]"
       aria-label="Programmi radio IMLAND"
     >
       <Link
         to={current.link}
-        className="group relative block aspect-[4/3] overflow-hidden rounded-[20px] bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0aa2cf]"
+        className="group relative block overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0aa2cf]"
         aria-label={`Apri ${current.label}`}
       >
         <img
           key={current.image}
           src={current.image}
           alt={current.alt}
-          className="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-[1.02]"
+          className="block h-auto w-full transition-transform duration-300 group-hover:scale-[1.01]"
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent px-5 pb-5 pt-14">
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#7ddcff]">In onda su IMLAND</p>
-          <p className="mt-1 font-display text-xl font-bold text-white">{current.label}</p>
-        </div>
       </Link>
 
-      <div className="mt-3 flex items-center justify-between gap-3 px-1">
+      <div className="flex items-center justify-between gap-3 border-t border-[#0aa2cf]/20 px-4 py-3">
         <div className="flex gap-1.5" aria-label={`Programma ${active + 1} di ${items.length}`}>
           {items.map((item, index) => (
             <button
@@ -61,7 +57,7 @@ export function RadioProgramCarousel({ items }: Props) {
               aria-current={index === active ? "true" : undefined}
               onClick={() => setActive(index)}
               className={`h-2.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0aa2cf] ${
-                index === active ? "w-7 bg-[#0aa2cf]" : "w-2.5 bg-white/35 hover:bg-white/65"
+                index === active ? "w-7 bg-[#0aa2cf]" : "w-2.5 bg-[#0aa2cf]/25 hover:bg-[#0aa2cf]/50"
               }`}
             />
           ))}
@@ -71,7 +67,7 @@ export function RadioProgramCarousel({ items }: Props) {
             type="button"
             onClick={() => move(-1)}
             aria-label="Programma precedente"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0aa2cf]"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0aa2cf]/30 text-[#076d8c] transition-colors hover:bg-[#0aa2cf]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0aa2cf]"
           >
             <ChevronLeft className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -79,7 +75,7 @@ export function RadioProgramCarousel({ items }: Props) {
             type="button"
             onClick={() => move(1)}
             aria-label="Programma successivo"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0aa2cf]"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0aa2cf]/30 text-[#076d8c] transition-colors hover:bg-[#0aa2cf]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0aa2cf]"
           >
             <ChevronRight className="h-5 w-5" aria-hidden="true" />
           </button>

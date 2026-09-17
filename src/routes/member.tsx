@@ -468,6 +468,7 @@ function MemberPage() {
         claimClassName="hero-cta-claim-editorial"
         ctaTop="34%"
         mobileCtaTop="38%"
+        className="member-network-hero"
         flush
         mobileBg="#ffffff"
       >
@@ -475,13 +476,10 @@ function MemberPage() {
           href={WHATSAPP_MEMBER_URL}
           target="_blank"
           rel="noreferrer"
-          className="cta-light px-6 py-3.5 text-sm"
+          className="hero-cta-member inline-flex rounded-full px-6 py-3.5 text-sm font-semibold"
         >
           DIVENTA MEMBER
         </a>
-        <Link to="/contatti" className="cta-dark px-6 py-3.5 text-sm">
-          PARLA CON NOI
-        </Link>
       </HeroBanner>
 
       <div className="page-inverted member-inverted">

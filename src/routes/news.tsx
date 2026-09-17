@@ -6,6 +6,7 @@ import { getPublishedArticles } from "../lib/news-automation/public.functions";
 import { NewsCover } from "../components/news-cover";
 import { NewsDisclaimerModal } from "../components/news-disclaimer-modal";
 import { curatedNews, type CuratedNewsItem } from "../data/curated-news";
+import { IconFumetto } from "../components/brand-icons";
 
 export const Route = createFileRoute("/news")({
   head: () => ({
@@ -97,9 +98,6 @@ function CuratedNewsCard({ item, priority = false }: { item: CuratedNewsItem; pr
             className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.025]"
           />
         )}
-        <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-semibold text-white backdrop-blur-sm">
-          Anteprima: {item.source}
-        </span>
       </a>
       <div className="flex flex-1 flex-col p-5">
         <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-ink-600">
@@ -136,6 +134,7 @@ function NewsPage() {
     <main className="theme-news min-w-0 overflow-x-clip">
       <NewsDisclaimerModal />
       <header className="hero-frame min-w-0 border border-border bg-white section-pad px-6 text-center md:px-10">
+        <IconFumetto tone="news" className="mx-auto h-14 w-14" />
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">IMLAND News</p>
         <h1 className="mx-auto mt-4 max-w-4xl break-words text-display-m text-ink-950">Le notizie che raccontano il territorio.</h1>
       </header>

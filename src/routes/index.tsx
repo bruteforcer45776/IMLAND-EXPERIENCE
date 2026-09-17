@@ -614,7 +614,7 @@ function Home() {
               </div>
               <Link
                 to="/contatti"
-                className="inline-flex h-12 shrink-0 items-center rounded-full btn-blue px-7 text-[15px]"
+                className="inline-flex h-12 shrink-0 items-center rounded-full bg-[#e0a800] px-7 text-[15px] font-semibold text-[#101114] transition-colors hover:bg-[#c99500]"
               >
                 Contattaci
               </Link>
