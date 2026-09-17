@@ -15,8 +15,6 @@ const ImLandMap = lazy(() =>
   import("../components/home/imland-map").then((m) => ({ default: m.ImLandMap })),
 );
 
-import heroMember from "@/assets/hero-member-v3.webp";
-import heroMemberMobile from "@/assets/hero-member-mobile.webp";
 import { PageRails } from "../components/decor";
 import { BentoGrid, BentoCard } from "../components/bento";
 import { WHATSAPP_MEMBER_URL } from "@/lib/whatsapp";
@@ -472,13 +470,14 @@ function MemberPage() {
       <PageRails variant="member" />
       {/* HERO */}
       <HeroBanner
-        src={heroMember}
-        srcMobile={heroMemberMobile}
+        src="/assets/member-network-desktop.png"
+        srcMobile="/assets/member-network-mobile.png"
         alt="I membri ufficiali di IMLAND Experience"
         claim="I membri ufficiali di IMLAND Experience"
-        ctaTop="64%"
+        ctaTop="34%"
+        mobileCtaTop="38%"
         flush
-        mobileBg="#FFC400"
+        mobileBg="#ffffff"
       >
         <a
           href={WHATSAPP_MEMBER_URL}
@@ -486,10 +485,10 @@ function MemberPage() {
           rel="noreferrer"
           className="cta-light px-6 py-3.5 text-sm"
         >
-          Diventa Member
+          DIVENTA MEMBER
         </a>
         <Link to="/contatti" className="cta-dark px-6 py-3.5 text-sm">
-          Parla con noi
+          PARLA CON NOI
         </Link>
       </HeroBanner>
 
