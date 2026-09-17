@@ -20,12 +20,14 @@ export function SectionHeader({
   title,
   description,
   badge,
-  align = "left",
+  align = "center",
   className = "",
 }: Props) {
   const centered = align === "center";
   return (
-    <div className={`${centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}>
+    <div
+      className={`section-header ${centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}
+    >
       <div className={`flex items-center gap-3 ${centered ? "justify-center" : ""}`}>
         {badge ? <BadgeIcon name={badge} className="h-10 w-10" /> : null}
         <p className="text-xs font-semibold uppercase tracking-wider text-signal">{eyebrow}</p>
