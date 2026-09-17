@@ -31,27 +31,6 @@ const pages: SearchItem[] = [
   },
   {
     kind: "pagina",
-    title: "Offerte di lavoro",
-    subtitle: "Opportunità professionali pubblicate dalle realtà del territorio.",
-    to: "/jobs",
-    tags: ["lavoro", "candidature", "aziende"],
-  },
-  {
-    kind: "pagina",
-    title: "Mappa del territorio",
-    subtitle: "Luoghi, attività e segnalazioni verificate sul territorio.",
-    to: "/terrain",
-    tags: ["mappa", "attività", "luoghi", "territorio"],
-  },
-  {
-    kind: "pagina",
-    title: "Segnalazioni territoriali",
-    subtitle: "Invia e consulta segnalazioni utili per la comunità.",
-    to: "/alert",
-    tags: ["segnalazioni", "territorio", "comunità"],
-  },
-  {
-    kind: "pagina",
     title: "My Podcast",
     subtitle: "Produzione di podcast su misura per aziende e organizzazioni.",
     to: "/my-podcast",

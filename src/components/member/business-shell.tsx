@@ -4,12 +4,10 @@
 
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
-  Briefcase,
   Building2,
   Download,
   LayoutDashboard,
   LogOut,
-  MapPin,
   Star,
   UserRound,
   Users,
@@ -22,8 +20,6 @@ import { fullName } from "@/lib/member-area";
 const links = [
   { to: "/area-aziende", label: "Dashboard", icon: LayoutDashboard },
   { to: "/area-aziende/realta", label: "La tua realtà", icon: Building2 },
-  { to: "/area-aziende/luoghi", label: "Schede TERRAIN", icon: MapPin },
-  { to: "/area-aziende/opportunita", label: "Opportunità JOBS", icon: Briefcase },
   { to: "/area-aziende/recensioni", label: "Recensioni", icon: Star },
   { to: "/area-aziende/collaboratori", label: "Collaboratori", icon: Users },
   { to: "/area-aziende/materiali", label: "Materiali e loghi", icon: Download },

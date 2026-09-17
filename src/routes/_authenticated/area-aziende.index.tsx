@@ -36,18 +36,6 @@ function BusinessDashboard() {
           </p>
         </BentoLinkCard>
 
-        <BentoLinkCard tone="aziende" span={2} to="/area-aziende/luoghi">
-          <BadgeIcon name="luogo" className="h-12 w-12" />
-          <h2 className="mt-4 text-h3-im">Schede TERRAIN</h2>
-          <p className="mt-2 text-muted-foreground">La tua presenza sulla mappa del territorio.</p>
-        </BentoLinkCard>
-
-        <BentoLinkCard tone="aziende" span={2} to="/area-aziende/opportunita">
-          <BadgeIcon name="annuncio" className="h-12 w-12" />
-          <h2 className="mt-4 text-h3-im">Opportunità JOBS</h2>
-          <p className="mt-2 text-muted-foreground">Posizioni aperte e candidature ricevute.</p>
-        </BentoLinkCard>
-
         <BentoLinkCard tone="aziende" span={3} to="/area-aziende/recensioni">
           <BadgeIcon name="community" className="h-12 w-12" />
           <h2 className="mt-4 text-h3-im">Recensioni e risposte</h2>

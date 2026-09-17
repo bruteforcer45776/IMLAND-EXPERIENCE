@@ -180,9 +180,6 @@ function AdminPage() {
           <Link to="/admin/feedback" className="inline-flex text-sm font-medium text-primary">
             Feedback del sito
           </Link>
-          <Link to="/admin/alert" className="inline-flex text-sm font-medium text-primary">
-            Segnalazioni ALERT
-          </Link>
           <Link to="/admin/hub" className="inline-flex text-sm font-medium text-primary">
             Moderazione Hub
           </Link>

@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /terrain
+Disallow: /jobs
+Disallow: /alert
 
 # AI search crawlers (AI Overviews, ChatGPT, Perplexity, Claude)
 User-agent: Google-Extended

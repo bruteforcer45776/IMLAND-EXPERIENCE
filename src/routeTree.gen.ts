@@ -33,34 +33,21 @@ import { Route as AuthenticatedAreaRouteImport } from './routes/_authenticated/a
 import { Route as AuthenticatedAreaAziendeRouteImport } from './routes/_authenticated/area-aziende'
 import { Route as AuthenticatedAscoltatoreRouteImport } from './routes/_authenticated/ascoltatore'
 import { Route as AuthenticatedBenvenutoRouteImport } from './routes/_authenticated/benvenuto'
-import { Route as AlertIndexRouteImport } from './routes/alert.index'
-import { Route as AlertSegnalaRouteImport } from './routes/alert.segnala'
-import { Route as AlertStatoRouteImport } from './routes/alert.stato'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as EventiIndexRouteImport } from './routes/eventi.index'
 import { Route as EventiSlugRouteImport } from './routes/eventi.$slug'
-import { Route as JobsIndexRouteImport } from './routes/jobs.index'
-import { Route as JobsSlugRouteImport } from './routes/jobs.$slug'
-import { Route as JobsOfferteRouteImport } from './routes/jobs.offerte'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as PodcastIndexRouteImport } from './routes/podcast.index'
 import { Route as PodcastSlugRouteImport } from './routes/podcast.$slug'
 import { Route as STokenRouteImport } from './routes/s.$token'
 import { Route as TeamSlugRouteImport } from './routes/team.$slug'
-import { Route as TerrainIndexRouteImport } from './routes/terrain.index'
-import { Route as TerrainSlugRouteImport } from './routes/terrain.$slug'
-import { Route as TerrainLuoghiRouteImport } from './routes/terrain.luoghi'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
-import { Route as AuthenticatedAdminAlertRouteImport } from './routes/_authenticated/admin.alert'
 import { Route as AuthenticatedAdminFeedbackRouteImport } from './routes/_authenticated.admin.feedback'
 import { Route as AuthenticatedAdminHubRouteImport } from './routes/_authenticated/admin.hub'
 import { Route as AuthenticatedAdminNewsAutomationRouteImport } from './routes/_authenticated.admin.news-automation'
-import { Route as AuthenticatedAlertMieRouteImport } from './routes/_authenticated/alert.mie'
 import { Route as AuthenticatedAreaAziendeIndexRouteImport } from './routes/_authenticated/area-aziende.index'
 import { Route as AuthenticatedAreaAziendeCollaboratoriRouteImport } from './routes/_authenticated/area-aziende.collaboratori'
-import { Route as AuthenticatedAreaAziendeLuoghiRouteImport } from './routes/_authenticated/area-aziende.luoghi'
 import { Route as AuthenticatedAreaAziendeMaterialiRouteImport } from './routes/_authenticated/area-aziende.materiali'
-import { Route as AuthenticatedAreaAziendeOpportunitaRouteImport } from './routes/_authenticated/area-aziende.opportunita'
 import { Route as AuthenticatedAreaAziendeRealtaRouteImport } from './routes/_authenticated/area-aziende.realta'
 import { Route as AuthenticatedAreaAziendeRecensioniRouteImport } from './routes/_authenticated/area-aziende.recensioni'
 import { Route as AuthenticatedAreaAziendeReferenteRouteImport } from './routes/_authenticated/area-aziende.referente'
@@ -85,8 +72,6 @@ import { Route as AuthenticatedAscoltatoreRaccolteRouteImport } from './routes/_
 import { Route as AuthenticatedAscoltatoreRecensioniRouteImport } from './routes/_authenticated/ascoltatore.recensioni'
 import { Route as AuthenticatedAscoltatoreSalvatiRouteImport } from './routes/_authenticated/ascoltatore.salvati'
 import { Route as AuthenticatedAscoltatoreSegnalazioniRouteImport } from './routes/_authenticated/ascoltatore.segnalazioni'
-import { Route as AuthenticatedJobsPubblicaRouteImport } from './routes/_authenticated/jobs.pubblica'
-import { Route as AuthenticatedTerrainNuovaRouteImport } from './routes/_authenticated/terrain.nuova'
 import { Route as ApiPublicCollectDailyNewsRouteImport } from './routes/api/public/collect-daily-news'
 import { Route as PodcastSlugEpisodeRouteImport } from './routes/podcast.$slug.$episode'
 
@@ -211,21 +196,6 @@ const AuthenticatedBenvenutoRoute = AuthenticatedBenvenutoRouteImport.update({
   path: '/benvenuto',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AlertIndexRoute = AlertIndexRouteImport.update({
-  id: '/alert/',
-  path: '/alert/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlertSegnalaRoute = AlertSegnalaRouteImport.update({
-  id: '/alert/segnala',
-  path: '/alert/segnala',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlertStatoRoute = AlertStatoRouteImport.update({
-  id: '/alert/stato',
-  path: '/alert/stato',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -239,21 +209,6 @@ const EventiIndexRoute = EventiIndexRouteImport.update({
 const EventiSlugRoute = EventiSlugRouteImport.update({
   id: '/eventi/$slug',
   path: '/eventi/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const JobsIndexRoute = JobsIndexRouteImport.update({
-  id: '/jobs/',
-  path: '/jobs/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const JobsSlugRoute = JobsSlugRouteImport.update({
-  id: '/jobs/$slug',
-  path: '/jobs/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const JobsOfferteRoute = JobsOfferteRouteImport.update({
-  id: '/jobs/offerte',
-  path: '/jobs/offerte',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsSlugRoute = NewsSlugRouteImport.update({
@@ -281,29 +236,9 @@ const TeamSlugRoute = TeamSlugRouteImport.update({
   path: '/team/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TerrainIndexRoute = TerrainIndexRouteImport.update({
-  id: '/terrain/',
-  path: '/terrain/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TerrainSlugRoute = TerrainSlugRouteImport.update({
-  id: '/terrain/$slug',
-  path: '/terrain/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TerrainLuoghiRoute = TerrainLuoghiRouteImport.update({
-  id: '/terrain/luoghi',
-  path: '/terrain/luoghi',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthenticatedAdminRoute,
-} as any)
-const AuthenticatedAdminAlertRoute = AuthenticatedAdminAlertRouteImport.update({
-  id: '/alert',
-  path: '/alert',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
 const AuthenticatedAdminFeedbackRoute =
@@ -323,11 +258,6 @@ const AuthenticatedAdminNewsAutomationRoute =
     path: '/news-automation',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
-const AuthenticatedAlertMieRoute = AuthenticatedAlertMieRouteImport.update({
-  id: '/alert/mie',
-  path: '/alert/mie',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedAreaAziendeIndexRoute =
   AuthenticatedAreaAziendeIndexRouteImport.update({
     id: '/',
@@ -340,22 +270,10 @@ const AuthenticatedAreaAziendeCollaboratoriRoute =
     path: '/collaboratori',
     getParentRoute: () => AuthenticatedAreaAziendeRoute,
   } as any)
-const AuthenticatedAreaAziendeLuoghiRoute =
-  AuthenticatedAreaAziendeLuoghiRouteImport.update({
-    id: '/luoghi',
-    path: '/luoghi',
-    getParentRoute: () => AuthenticatedAreaAziendeRoute,
-  } as any)
 const AuthenticatedAreaAziendeMaterialiRoute =
   AuthenticatedAreaAziendeMaterialiRouteImport.update({
     id: '/materiali',
     path: '/materiali',
-    getParentRoute: () => AuthenticatedAreaAziendeRoute,
-  } as any)
-const AuthenticatedAreaAziendeOpportunitaRoute =
-  AuthenticatedAreaAziendeOpportunitaRouteImport.update({
-    id: '/opportunita',
-    path: '/opportunita',
     getParentRoute: () => AuthenticatedAreaAziendeRoute,
   } as any)
 const AuthenticatedAreaAziendeRealtaRoute =
@@ -497,18 +415,6 @@ const AuthenticatedAscoltatoreSegnalazioniRoute =
     path: '/segnalazioni',
     getParentRoute: () => AuthenticatedAscoltatoreRoute,
   } as any)
-const AuthenticatedJobsPubblicaRoute =
-  AuthenticatedJobsPubblicaRouteImport.update({
-    id: '/jobs/pubblica',
-    path: '/jobs/pubblica',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedTerrainNuovaRoute =
-  AuthenticatedTerrainNuovaRouteImport.update({
-    id: '/terrain/nuova',
-    path: '/terrain/nuova',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const ApiPublicCollectDailyNewsRoute =
   ApiPublicCollectDailyNewsRouteImport.update({
     id: '/api/public/collect-daily-news',
@@ -545,32 +451,19 @@ export interface FileRoutesByFullPath {
   '/area-aziende': typeof AuthenticatedAreaAziendeRouteWithChildren
   '/ascoltatore': typeof AuthenticatedAscoltatoreRouteWithChildren
   '/benvenuto': typeof AuthenticatedBenvenutoRoute
-  '/alert/segnala': typeof AlertSegnalaRoute
-  '/alert/stato': typeof AlertStatoRoute
   '/api/chat': typeof ApiChatRoute
   '/eventi/$slug': typeof EventiSlugRoute
-  '/jobs/$slug': typeof JobsSlugRoute
-  '/jobs/offerte': typeof JobsOfferteRoute
   '/news/$slug': typeof NewsSlugRoute
   '/podcast/$slug': typeof PodcastSlugRouteWithChildren
   '/s/$token': typeof STokenRoute
   '/team/$slug': typeof TeamSlugRoute
-  '/terrain/$slug': typeof TerrainSlugRoute
-  '/terrain/luoghi': typeof TerrainLuoghiRoute
-  '/alert/': typeof AlertIndexRoute
   '/eventi/': typeof EventiIndexRoute
-  '/jobs/': typeof JobsIndexRoute
   '/podcast/': typeof PodcastIndexRoute
-  '/terrain/': typeof TerrainIndexRoute
-  '/admin/alert': typeof AuthenticatedAdminAlertRoute
   '/admin/feedback': typeof AuthenticatedAdminFeedbackRoute
   '/admin/hub': typeof AuthenticatedAdminHubRoute
   '/admin/news-automation': typeof AuthenticatedAdminNewsAutomationRoute
-  '/alert/mie': typeof AuthenticatedAlertMieRoute
   '/area-aziende/collaboratori': typeof AuthenticatedAreaAziendeCollaboratoriRoute
-  '/area-aziende/luoghi': typeof AuthenticatedAreaAziendeLuoghiRoute
   '/area-aziende/materiali': typeof AuthenticatedAreaAziendeMaterialiRoute
-  '/area-aziende/opportunita': typeof AuthenticatedAreaAziendeOpportunitaRoute
   '/area-aziende/realta': typeof AuthenticatedAreaAziendeRealtaRoute
   '/area-aziende/recensioni': typeof AuthenticatedAreaAziendeRecensioniRoute
   '/area-aziende/referente': typeof AuthenticatedAreaAziendeReferenteRoute
@@ -593,8 +486,6 @@ export interface FileRoutesByFullPath {
   '/ascoltatore/recensioni': typeof AuthenticatedAscoltatoreRecensioniRoute
   '/ascoltatore/salvati': typeof AuthenticatedAscoltatoreSalvatiRoute
   '/ascoltatore/segnalazioni': typeof AuthenticatedAscoltatoreSegnalazioniRoute
-  '/jobs/pubblica': typeof AuthenticatedJobsPubblicaRoute
-  '/terrain/nuova': typeof AuthenticatedTerrainNuovaRoute
   '/api/public/collect-daily-news': typeof ApiPublicCollectDailyNewsRoute
   '/podcast/$slug/$episode': typeof PodcastSlugEpisodeRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -622,32 +513,19 @@ export interface FileRoutesByTo {
   '/scarica-app': typeof ScaricaAppRoute
   '/termini': typeof TerminiRoute
   '/benvenuto': typeof AuthenticatedBenvenutoRoute
-  '/alert/segnala': typeof AlertSegnalaRoute
-  '/alert/stato': typeof AlertStatoRoute
   '/api/chat': typeof ApiChatRoute
   '/eventi/$slug': typeof EventiSlugRoute
-  '/jobs/$slug': typeof JobsSlugRoute
-  '/jobs/offerte': typeof JobsOfferteRoute
   '/news/$slug': typeof NewsSlugRoute
   '/podcast/$slug': typeof PodcastSlugRouteWithChildren
   '/s/$token': typeof STokenRoute
   '/team/$slug': typeof TeamSlugRoute
-  '/terrain/$slug': typeof TerrainSlugRoute
-  '/terrain/luoghi': typeof TerrainLuoghiRoute
-  '/alert': typeof AlertIndexRoute
   '/eventi': typeof EventiIndexRoute
-  '/jobs': typeof JobsIndexRoute
   '/podcast': typeof PodcastIndexRoute
-  '/terrain': typeof TerrainIndexRoute
-  '/admin/alert': typeof AuthenticatedAdminAlertRoute
   '/admin/feedback': typeof AuthenticatedAdminFeedbackRoute
   '/admin/hub': typeof AuthenticatedAdminHubRoute
   '/admin/news-automation': typeof AuthenticatedAdminNewsAutomationRoute
-  '/alert/mie': typeof AuthenticatedAlertMieRoute
   '/area-aziende/collaboratori': typeof AuthenticatedAreaAziendeCollaboratoriRoute
-  '/area-aziende/luoghi': typeof AuthenticatedAreaAziendeLuoghiRoute
   '/area-aziende/materiali': typeof AuthenticatedAreaAziendeMaterialiRoute
-  '/area-aziende/opportunita': typeof AuthenticatedAreaAziendeOpportunitaRoute
   '/area-aziende/realta': typeof AuthenticatedAreaAziendeRealtaRoute
   '/area-aziende/recensioni': typeof AuthenticatedAreaAziendeRecensioniRoute
   '/area-aziende/referente': typeof AuthenticatedAreaAziendeReferenteRoute
@@ -670,8 +548,6 @@ export interface FileRoutesByTo {
   '/ascoltatore/recensioni': typeof AuthenticatedAscoltatoreRecensioniRoute
   '/ascoltatore/salvati': typeof AuthenticatedAscoltatoreSalvatiRoute
   '/ascoltatore/segnalazioni': typeof AuthenticatedAscoltatoreSegnalazioniRoute
-  '/jobs/pubblica': typeof AuthenticatedJobsPubblicaRoute
-  '/terrain/nuova': typeof AuthenticatedTerrainNuovaRoute
   '/api/public/collect-daily-news': typeof ApiPublicCollectDailyNewsRoute
   '/podcast/$slug/$episode': typeof PodcastSlugEpisodeRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
@@ -705,32 +581,19 @@ export interface FileRoutesById {
   '/_authenticated/area-aziende': typeof AuthenticatedAreaAziendeRouteWithChildren
   '/_authenticated/ascoltatore': typeof AuthenticatedAscoltatoreRouteWithChildren
   '/_authenticated/benvenuto': typeof AuthenticatedBenvenutoRoute
-  '/alert/segnala': typeof AlertSegnalaRoute
-  '/alert/stato': typeof AlertStatoRoute
   '/api/chat': typeof ApiChatRoute
   '/eventi/$slug': typeof EventiSlugRoute
-  '/jobs/$slug': typeof JobsSlugRoute
-  '/jobs/offerte': typeof JobsOfferteRoute
   '/news/$slug': typeof NewsSlugRoute
   '/podcast/$slug': typeof PodcastSlugRouteWithChildren
   '/s/$token': typeof STokenRoute
   '/team/$slug': typeof TeamSlugRoute
-  '/terrain/$slug': typeof TerrainSlugRoute
-  '/terrain/luoghi': typeof TerrainLuoghiRoute
-  '/alert/': typeof AlertIndexRoute
   '/eventi/': typeof EventiIndexRoute
-  '/jobs/': typeof JobsIndexRoute
   '/podcast/': typeof PodcastIndexRoute
-  '/terrain/': typeof TerrainIndexRoute
-  '/_authenticated/admin/alert': typeof AuthenticatedAdminAlertRoute
   '/_authenticated/admin/feedback': typeof AuthenticatedAdminFeedbackRoute
   '/_authenticated/admin/hub': typeof AuthenticatedAdminHubRoute
   '/_authenticated/admin/news-automation': typeof AuthenticatedAdminNewsAutomationRoute
-  '/_authenticated/alert/mie': typeof AuthenticatedAlertMieRoute
   '/_authenticated/area-aziende/collaboratori': typeof AuthenticatedAreaAziendeCollaboratoriRoute
-  '/_authenticated/area-aziende/luoghi': typeof AuthenticatedAreaAziendeLuoghiRoute
   '/_authenticated/area-aziende/materiali': typeof AuthenticatedAreaAziendeMaterialiRoute
-  '/_authenticated/area-aziende/opportunita': typeof AuthenticatedAreaAziendeOpportunitaRoute
   '/_authenticated/area-aziende/realta': typeof AuthenticatedAreaAziendeRealtaRoute
   '/_authenticated/area-aziende/recensioni': typeof AuthenticatedAreaAziendeRecensioniRoute
   '/_authenticated/area-aziende/referente': typeof AuthenticatedAreaAziendeReferenteRoute
@@ -753,8 +616,6 @@ export interface FileRoutesById {
   '/_authenticated/ascoltatore/recensioni': typeof AuthenticatedAscoltatoreRecensioniRoute
   '/_authenticated/ascoltatore/salvati': typeof AuthenticatedAscoltatoreSalvatiRoute
   '/_authenticated/ascoltatore/segnalazioni': typeof AuthenticatedAscoltatoreSegnalazioniRoute
-  '/_authenticated/jobs/pubblica': typeof AuthenticatedJobsPubblicaRoute
-  '/_authenticated/terrain/nuova': typeof AuthenticatedTerrainNuovaRoute
   '/api/public/collect-daily-news': typeof ApiPublicCollectDailyNewsRoute
   '/podcast/$slug/$episode': typeof PodcastSlugEpisodeRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
@@ -788,32 +649,19 @@ export interface FileRouteTypes {
     | '/area-aziende'
     | '/ascoltatore'
     | '/benvenuto'
-    | '/alert/segnala'
-    | '/alert/stato'
     | '/api/chat'
     | '/eventi/$slug'
-    | '/jobs/$slug'
-    | '/jobs/offerte'
     | '/news/$slug'
     | '/podcast/$slug'
     | '/s/$token'
     | '/team/$slug'
-    | '/terrain/$slug'
-    | '/terrain/luoghi'
-    | '/alert/'
     | '/eventi/'
-    | '/jobs/'
     | '/podcast/'
-    | '/terrain/'
-    | '/admin/alert'
     | '/admin/feedback'
     | '/admin/hub'
     | '/admin/news-automation'
-    | '/alert/mie'
     | '/area-aziende/collaboratori'
-    | '/area-aziende/luoghi'
     | '/area-aziende/materiali'
-    | '/area-aziende/opportunita'
     | '/area-aziende/realta'
     | '/area-aziende/recensioni'
     | '/area-aziende/referente'
@@ -836,8 +684,6 @@ export interface FileRouteTypes {
     | '/ascoltatore/recensioni'
     | '/ascoltatore/salvati'
     | '/ascoltatore/segnalazioni'
-    | '/jobs/pubblica'
-    | '/terrain/nuova'
     | '/api/public/collect-daily-news'
     | '/podcast/$slug/$episode'
     | '/admin/'
@@ -865,32 +711,19 @@ export interface FileRouteTypes {
     | '/scarica-app'
     | '/termini'
     | '/benvenuto'
-    | '/alert/segnala'
-    | '/alert/stato'
     | '/api/chat'
     | '/eventi/$slug'
-    | '/jobs/$slug'
-    | '/jobs/offerte'
     | '/news/$slug'
     | '/podcast/$slug'
     | '/s/$token'
     | '/team/$slug'
-    | '/terrain/$slug'
-    | '/terrain/luoghi'
-    | '/alert'
     | '/eventi'
-    | '/jobs'
     | '/podcast'
-    | '/terrain'
-    | '/admin/alert'
     | '/admin/feedback'
     | '/admin/hub'
     | '/admin/news-automation'
-    | '/alert/mie'
     | '/area-aziende/collaboratori'
-    | '/area-aziende/luoghi'
     | '/area-aziende/materiali'
-    | '/area-aziende/opportunita'
     | '/area-aziende/realta'
     | '/area-aziende/recensioni'
     | '/area-aziende/referente'
@@ -913,8 +746,6 @@ export interface FileRouteTypes {
     | '/ascoltatore/recensioni'
     | '/ascoltatore/salvati'
     | '/ascoltatore/segnalazioni'
-    | '/jobs/pubblica'
-    | '/terrain/nuova'
     | '/api/public/collect-daily-news'
     | '/podcast/$slug/$episode'
     | '/admin'
@@ -947,32 +778,19 @@ export interface FileRouteTypes {
     | '/_authenticated/area-aziende'
     | '/_authenticated/ascoltatore'
     | '/_authenticated/benvenuto'
-    | '/alert/segnala'
-    | '/alert/stato'
     | '/api/chat'
     | '/eventi/$slug'
-    | '/jobs/$slug'
-    | '/jobs/offerte'
     | '/news/$slug'
     | '/podcast/$slug'
     | '/s/$token'
     | '/team/$slug'
-    | '/terrain/$slug'
-    | '/terrain/luoghi'
-    | '/alert/'
     | '/eventi/'
-    | '/jobs/'
     | '/podcast/'
-    | '/terrain/'
-    | '/_authenticated/admin/alert'
     | '/_authenticated/admin/feedback'
     | '/_authenticated/admin/hub'
     | '/_authenticated/admin/news-automation'
-    | '/_authenticated/alert/mie'
     | '/_authenticated/area-aziende/collaboratori'
-    | '/_authenticated/area-aziende/luoghi'
     | '/_authenticated/area-aziende/materiali'
-    | '/_authenticated/area-aziende/opportunita'
     | '/_authenticated/area-aziende/realta'
     | '/_authenticated/area-aziende/recensioni'
     | '/_authenticated/area-aziende/referente'
@@ -995,8 +813,6 @@ export interface FileRouteTypes {
     | '/_authenticated/ascoltatore/recensioni'
     | '/_authenticated/ascoltatore/salvati'
     | '/_authenticated/ascoltatore/segnalazioni'
-    | '/_authenticated/jobs/pubblica'
-    | '/_authenticated/terrain/nuova'
     | '/api/public/collect-daily-news'
     | '/podcast/$slug/$episode'
     | '/_authenticated/admin/'
@@ -1025,22 +841,13 @@ export interface RootRouteChildren {
   RadioRoute: typeof RadioRoute
   ScaricaAppRoute: typeof ScaricaAppRoute
   TerminiRoute: typeof TerminiRoute
-  AlertSegnalaRoute: typeof AlertSegnalaRoute
-  AlertStatoRoute: typeof AlertStatoRoute
   ApiChatRoute: typeof ApiChatRoute
   EventiSlugRoute: typeof EventiSlugRoute
-  JobsSlugRoute: typeof JobsSlugRoute
-  JobsOfferteRoute: typeof JobsOfferteRoute
   PodcastSlugRoute: typeof PodcastSlugRouteWithChildren
   STokenRoute: typeof STokenRoute
   TeamSlugRoute: typeof TeamSlugRoute
-  TerrainSlugRoute: typeof TerrainSlugRoute
-  TerrainLuoghiRoute: typeof TerrainLuoghiRoute
-  AlertIndexRoute: typeof AlertIndexRoute
   EventiIndexRoute: typeof EventiIndexRoute
-  JobsIndexRoute: typeof JobsIndexRoute
   PodcastIndexRoute: typeof PodcastIndexRoute
-  TerrainIndexRoute: typeof TerrainIndexRoute
   ApiPublicCollectDailyNewsRoute: typeof ApiPublicCollectDailyNewsRoute
 }
 
@@ -1214,27 +1021,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBenvenutoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/alert/': {
-      id: '/alert/'
-      path: '/alert'
-      fullPath: '/alert/'
-      preLoaderRoute: typeof AlertIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/alert/segnala': {
-      id: '/alert/segnala'
-      path: '/alert/segnala'
-      fullPath: '/alert/segnala'
-      preLoaderRoute: typeof AlertSegnalaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/alert/stato': {
-      id: '/alert/stato'
-      path: '/alert/stato'
-      fullPath: '/alert/stato'
-      preLoaderRoute: typeof AlertStatoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -1254,27 +1040,6 @@ declare module '@tanstack/react-router' {
       path: '/eventi/$slug'
       fullPath: '/eventi/$slug'
       preLoaderRoute: typeof EventiSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/jobs/': {
-      id: '/jobs/'
-      path: '/jobs'
-      fullPath: '/jobs/'
-      preLoaderRoute: typeof JobsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/jobs/$slug': {
-      id: '/jobs/$slug'
-      path: '/jobs/$slug'
-      fullPath: '/jobs/$slug'
-      preLoaderRoute: typeof JobsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/jobs/offerte': {
-      id: '/jobs/offerte'
-      path: '/jobs/offerte'
-      fullPath: '/jobs/offerte'
-      preLoaderRoute: typeof JobsOfferteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news/$slug': {
@@ -1312,39 +1077,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/terrain/': {
-      id: '/terrain/'
-      path: '/terrain'
-      fullPath: '/terrain/'
-      preLoaderRoute: typeof TerrainIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terrain/$slug': {
-      id: '/terrain/$slug'
-      path: '/terrain/$slug'
-      fullPath: '/terrain/$slug'
-      preLoaderRoute: typeof TerrainSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terrain/luoghi': {
-      id: '/terrain/luoghi'
-      path: '/terrain/luoghi'
-      fullPath: '/terrain/luoghi'
-      preLoaderRoute: typeof TerrainLuoghiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
-    '/_authenticated/admin/alert': {
-      id: '/_authenticated/admin/alert'
-      path: '/alert'
-      fullPath: '/admin/alert'
-      preLoaderRoute: typeof AuthenticatedAdminAlertRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/feedback': {
@@ -1368,13 +1105,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminNewsAutomationRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
-    '/_authenticated/alert/mie': {
-      id: '/_authenticated/alert/mie'
-      path: '/alert/mie'
-      fullPath: '/alert/mie'
-      preLoaderRoute: typeof AuthenticatedAlertMieRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/area-aziende/': {
       id: '/_authenticated/area-aziende/'
       path: '/'
@@ -1389,25 +1119,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAreaAziendeCollaboratoriRouteImport
       parentRoute: typeof AuthenticatedAreaAziendeRoute
     }
-    '/_authenticated/area-aziende/luoghi': {
-      id: '/_authenticated/area-aziende/luoghi'
-      path: '/luoghi'
-      fullPath: '/area-aziende/luoghi'
-      preLoaderRoute: typeof AuthenticatedAreaAziendeLuoghiRouteImport
-      parentRoute: typeof AuthenticatedAreaAziendeRoute
-    }
     '/_authenticated/area-aziende/materiali': {
       id: '/_authenticated/area-aziende/materiali'
       path: '/materiali'
       fullPath: '/area-aziende/materiali'
       preLoaderRoute: typeof AuthenticatedAreaAziendeMaterialiRouteImport
-      parentRoute: typeof AuthenticatedAreaAziendeRoute
-    }
-    '/_authenticated/area-aziende/opportunita': {
-      id: '/_authenticated/area-aziende/opportunita'
-      path: '/opportunita'
-      fullPath: '/area-aziende/opportunita'
-      preLoaderRoute: typeof AuthenticatedAreaAziendeOpportunitaRouteImport
       parentRoute: typeof AuthenticatedAreaAziendeRoute
     }
     '/_authenticated/area-aziende/realta': {
@@ -1578,20 +1294,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAscoltatoreSegnalazioniRouteImport
       parentRoute: typeof AuthenticatedAscoltatoreRoute
     }
-    '/_authenticated/jobs/pubblica': {
-      id: '/_authenticated/jobs/pubblica'
-      path: '/jobs/pubblica'
-      fullPath: '/jobs/pubblica'
-      preLoaderRoute: typeof AuthenticatedJobsPubblicaRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/terrain/nuova': {
-      id: '/_authenticated/terrain/nuova'
-      path: '/terrain/nuova'
-      fullPath: '/terrain/nuova'
-      preLoaderRoute: typeof AuthenticatedTerrainNuovaRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/api/public/collect-daily-news': {
       id: '/api/public/collect-daily-news'
       path: '/api/public/collect-daily-news'
@@ -1610,7 +1312,6 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
-  AuthenticatedAdminAlertRoute: typeof AuthenticatedAdminAlertRoute
   AuthenticatedAdminFeedbackRoute: typeof AuthenticatedAdminFeedbackRoute
   AuthenticatedAdminHubRoute: typeof AuthenticatedAdminHubRoute
   AuthenticatedAdminNewsAutomationRoute: typeof AuthenticatedAdminNewsAutomationRoute
@@ -1618,7 +1319,6 @@ interface AuthenticatedAdminRouteChildren {
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
-  AuthenticatedAdminAlertRoute: AuthenticatedAdminAlertRoute,
   AuthenticatedAdminFeedbackRoute: AuthenticatedAdminFeedbackRoute,
   AuthenticatedAdminHubRoute: AuthenticatedAdminHubRoute,
   AuthenticatedAdminNewsAutomationRoute: AuthenticatedAdminNewsAutomationRoute,
@@ -1661,9 +1361,7 @@ const AuthenticatedAreaRouteWithChildren =
 
 interface AuthenticatedAreaAziendeRouteChildren {
   AuthenticatedAreaAziendeCollaboratoriRoute: typeof AuthenticatedAreaAziendeCollaboratoriRoute
-  AuthenticatedAreaAziendeLuoghiRoute: typeof AuthenticatedAreaAziendeLuoghiRoute
   AuthenticatedAreaAziendeMaterialiRoute: typeof AuthenticatedAreaAziendeMaterialiRoute
-  AuthenticatedAreaAziendeOpportunitaRoute: typeof AuthenticatedAreaAziendeOpportunitaRoute
   AuthenticatedAreaAziendeRealtaRoute: typeof AuthenticatedAreaAziendeRealtaRoute
   AuthenticatedAreaAziendeRecensioniRoute: typeof AuthenticatedAreaAziendeRecensioniRoute
   AuthenticatedAreaAziendeReferenteRoute: typeof AuthenticatedAreaAziendeReferenteRoute
@@ -1674,11 +1372,8 @@ const AuthenticatedAreaAziendeRouteChildren: AuthenticatedAreaAziendeRouteChildr
   {
     AuthenticatedAreaAziendeCollaboratoriRoute:
       AuthenticatedAreaAziendeCollaboratoriRoute,
-    AuthenticatedAreaAziendeLuoghiRoute: AuthenticatedAreaAziendeLuoghiRoute,
     AuthenticatedAreaAziendeMaterialiRoute:
       AuthenticatedAreaAziendeMaterialiRoute,
-    AuthenticatedAreaAziendeOpportunitaRoute:
-      AuthenticatedAreaAziendeOpportunitaRoute,
     AuthenticatedAreaAziendeRealtaRoute: AuthenticatedAreaAziendeRealtaRoute,
     AuthenticatedAreaAziendeRecensioniRoute:
       AuthenticatedAreaAziendeRecensioniRoute,
@@ -1735,9 +1430,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAreaAziendeRoute: typeof AuthenticatedAreaAziendeRouteWithChildren
   AuthenticatedAscoltatoreRoute: typeof AuthenticatedAscoltatoreRouteWithChildren
   AuthenticatedBenvenutoRoute: typeof AuthenticatedBenvenutoRoute
-  AuthenticatedAlertMieRoute: typeof AuthenticatedAlertMieRoute
-  AuthenticatedJobsPubblicaRoute: typeof AuthenticatedJobsPubblicaRoute
-  AuthenticatedTerrainNuovaRoute: typeof AuthenticatedTerrainNuovaRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -1746,9 +1438,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAreaAziendeRoute: AuthenticatedAreaAziendeRouteWithChildren,
   AuthenticatedAscoltatoreRoute: AuthenticatedAscoltatoreRouteWithChildren,
   AuthenticatedBenvenutoRoute: AuthenticatedBenvenutoRoute,
-  AuthenticatedAlertMieRoute: AuthenticatedAlertMieRoute,
-  AuthenticatedJobsPubblicaRoute: AuthenticatedJobsPubblicaRoute,
-  AuthenticatedTerrainNuovaRoute: AuthenticatedTerrainNuovaRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -1796,22 +1485,13 @@ const rootRouteChildren: RootRouteChildren = {
   RadioRoute: RadioRoute,
   ScaricaAppRoute: ScaricaAppRoute,
   TerminiRoute: TerminiRoute,
-  AlertSegnalaRoute: AlertSegnalaRoute,
-  AlertStatoRoute: AlertStatoRoute,
   ApiChatRoute: ApiChatRoute,
   EventiSlugRoute: EventiSlugRoute,
-  JobsSlugRoute: JobsSlugRoute,
-  JobsOfferteRoute: JobsOfferteRoute,
   PodcastSlugRoute: PodcastSlugRouteWithChildren,
   STokenRoute: STokenRoute,
   TeamSlugRoute: TeamSlugRoute,
-  TerrainSlugRoute: TerrainSlugRoute,
-  TerrainLuoghiRoute: TerrainLuoghiRoute,
-  AlertIndexRoute: AlertIndexRoute,
   EventiIndexRoute: EventiIndexRoute,
-  JobsIndexRoute: JobsIndexRoute,
   PodcastIndexRoute: PodcastIndexRoute,
-  TerrainIndexRoute: TerrainIndexRoute,
   ApiPublicCollectDailyNewsRoute: ApiPublicCollectDailyNewsRoute,
 }
 export const routeTree = rootRouteImport

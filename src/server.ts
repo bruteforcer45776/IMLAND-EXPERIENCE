@@ -73,6 +73,21 @@ function canonicalHostRedirect(request: Request): Response | undefined {
   return Response.redirect(url.toString(), 301);
 }
 
+const UNRELEASED_PRODUCT_RE = /^\/(?:terrain|jobs|alert)(?:\/|$)/i;
+
+function blockUnreleasedProducts(request: Request): Response | undefined {
+  const url = new URL(request.url);
+  if (!UNRELEASED_PRODUCT_RE.test(url.pathname)) return;
+  return new Response("Not Found", {
+    status: 404,
+    headers: {
+      "content-type": "text/plain; charset=utf-8",
+      "cache-control": "no-store",
+      "x-robots-tag": "noindex, nofollow, noarchive, nosnippet, noimageindex",
+    },
+  });
+}
+
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
 async function getServerEntry(): Promise<ServerEntry> {
@@ -150,6 +165,8 @@ export default {
       if (redirectResponse) return redirectResponse;
       const hostRedirectResponse = canonicalHostRedirect(request);
       if (hostRedirectResponse) return hostRedirectResponse;
+      const unreleasedResponse = blockUnreleasedProducts(request);
+      if (unreleasedResponse) return unreleasedResponse;
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);

@@ -104,22 +104,12 @@ function SearchPage() {
     enabled: isSupabaseConfigured(),
     staleTime: 5 * 60_000,
     queryFn: async (): Promise<SearchItem[]> => {
-      const [news, places, jobs] = await Promise.all([
+      const [news] = await Promise.all([
         supabase
           .from("news_articles")
           .select("slug,title,summary,category_slug,published_at")
           .eq("status", "published")
           .limit(100),
-        supabase
-          .from("terrain_places")
-          .select("slug,name,category,description,comune,province")
-          .eq("status", "published")
-          .limit(300),
-        supabase
-          .from("job_posts")
-          .select("slug,title,company_name,sector,description,comune,province")
-          .eq("status", "published")
-          .limit(150),
       ]);
 
       return [
@@ -129,24 +119,6 @@ function SearchPage() {
           subtitle: item.summary ?? "Notizia pubblicata da IMLAND Experience.",
           meta: item.category_slug ?? "News",
           to: `/news/${item.slug}`,
-        })),
-        ...(places.data ?? []).map<SearchItem>((item) => ({
-          kind: "luogo",
-          title: item.name,
-          subtitle: item.description ?? "Attività presente sulla mappa del territorio.",
-          meta: [item.category, item.comune, item.province].filter(Boolean).join(" · "),
-          to: `/terrain/${item.slug}`,
-          tags: [item.category, item.comune, item.province].filter(Boolean),
-        })),
-        ...(jobs.data ?? []).map<SearchItem>((item) => ({
-          kind: "lavoro",
-          title: item.title,
-          subtitle: item.description ?? `Opportunità pubblicata da ${item.company_name}.`,
-          meta: [item.company_name, item.sector, item.comune, item.province]
-            .filter(Boolean)
-            .join(" · "),
-          to: `/jobs/${item.slug}`,
-          tags: [item.company_name, item.sector, item.comune, item.province].filter(Boolean),
         })),
       ];
     },
