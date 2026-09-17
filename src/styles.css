@@ -4560,9 +4560,11 @@ body {
   border-radius: 999px !important;
   padding-inline: clamp(1.125rem, 2vw, 1.75rem) !important;
   font-weight: 700;
+  letter-spacing: 0.055em;
   line-height: 1.15;
   text-align: center;
   text-decoration: none !important;
+  text-transform: uppercase;
   box-shadow: 0 10px 24px rgb(1 29 104 / 15%);
 }
 
@@ -4583,12 +4585,19 @@ body {
   padding: 0.65rem 1.125rem !important;
   color: #0a0a0a !important;
   font-weight: 700;
+  letter-spacing: 0.055em;
   line-height: 1.15;
   text-align: center;
   text-decoration: none !important;
+  text-transform: uppercase;
   box-shadow: 0 8px 20px rgb(1 29 104 / 11%);
   -webkit-backdrop-filter: blur(12px) saturate(130%);
   backdrop-filter: blur(12px) saturate(130%);
+}
+
+.imland-map-card__cta {
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
 }
 
 #main-content a.inline-flex.text-signal:hover {
@@ -4709,4 +4718,39 @@ body {
 
 #main-content :where(input, textarea, select, pre, code, [contenteditable="true"]) {
   text-align: start !important;
+}
+
+/* Una sola superficie visiva per blocco.
+   Se una sezione contiene gia card reali, il wrapper resta soltanto layout:
+   niente ulteriore riquadro, bordo, ombra o vetro annidato. */
+#main-content#main-content
+  section:not(.hidden):has(
+    :is(
+      .card-im,
+      .surface-card,
+      .bento-card,
+      article[class*="rounded"],
+      details[class*="rounded"]
+    )
+  ) {
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Difesa globale contro una card inserita dentro un'altra card. Il contenuto
+   interno conserva spaziatura e funzione, ma non disegna una seconda scatola. */
+#main-content#main-content
+  :is(.card-im, .surface-card, .bento-card)
+  :is(.card-im, .surface-card, .bento-card) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }

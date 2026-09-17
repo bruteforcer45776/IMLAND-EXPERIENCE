@@ -163,7 +163,7 @@ function Home() {
                       to="/radio"
                       className="mt-7 inline-flex h-12 items-center rounded-full btn-blue px-7 text-[15px]"
                     >
-                      Vai alla Radio
+                      RADIO
                     </Link>
                   </div>
                 </Reveal>
@@ -199,7 +199,7 @@ function Home() {
                       to="/podcast"
                       className="mt-7 inline-flex h-12 items-center rounded-full btn-blue px-7 text-[15px]"
                     >
-                      Vai ai Podcast
+                      PODCAST
                     </Link>
                   </div>
                 </Reveal>
@@ -269,7 +269,7 @@ function Home() {
                       to="/eventi"
                       className="mt-7 inline-flex h-12 items-center rounded-full btn-blue px-7 text-[15px]"
                     >
-                      Vai agli Eventi
+                      EVENTI
                     </Link>
                   </div>
                 </Reveal>
@@ -335,7 +335,7 @@ function Home() {
                       to="/news"
                       className="mt-7 inline-flex h-12 items-center rounded-full btn-blue px-7 text-[15px]"
                     >
-                      Vai alle News
+                      NEWS
                     </Link>
                   </div>
                 </Reveal>

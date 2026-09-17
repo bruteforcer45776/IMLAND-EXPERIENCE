@@ -3,7 +3,7 @@ export type MemberAddress = {
   address: string;
   coordinates?: [number, number];
   coordinatePrecision?: "civic" | "street";
-  coordinateSource?: "OpenStreetMap Nominatim";
+  coordinateSource?: "OpenStreetMap Nominatim" | "Google Maps";
 };
 
 export type MemberDetail = {
@@ -46,7 +46,10 @@ export const MEMBER_DETAILS: Record<string, MemberDetail> = {
     description: "Maglificio specializzato nella produzione tessile e nell’abbigliamento.",
     addresses: [{ label: "Sede", address: "Via Torino 21, 28064 Carpignano Sesia (NO)", coordinates: [8.41219, 45.5323985], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
-  "Class Luxury Beauty PMU": { description: "Centro beauty specializzato in trucco permanente e trattamenti estetici.", addresses: updating },
+  "Class Luxury Beauty PMU": {
+    description: "Centro beauty specializzato in trucco permanente e trattamenti estetici.",
+    addresses: [{ label: "Sede", address: "Via Confalonieri 19, 21016 Luino (VA)", coordinates: [8.745803, 46.002655], coordinatePrecision: "civic", coordinateSource: "Google Maps" }],
+  },
   "Andrea Todaro — Consulente": {
     description: "Consulenza aziendale e supporto allo sviluppo organizzativo delle imprese.",
     addresses: [{ label: "Sede", address: "Via Torino 10, 13868 Villa del Bosco (BI)", coordinates: [8.2848997, 45.6172541], coordinatePrecision: "civic", coordinateSource: "OpenStreetMap Nominatim" }],
@@ -86,7 +89,10 @@ export const MEMBER_DETAILS: Record<string, MemberDetail> = {
       { label: "Sede legale", address: "Viale Carlo Fassò 3, 13011 Borgosesia (VC)", coordinates: [8.2781006, 45.7141404], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" },
     ],
   },
-  "L'Orizzo — SOS Genitori": { description: "Progetto educativo e di supporto rivolto a genitori e famiglie.", addresses: updating },
+  "L'Orizzo — SOS Genitori": {
+    description: "Progetto educativo e di supporto rivolto a genitori e famiglie.",
+    addresses: [{ label: "Sede", address: "Via Celestino Vignani 33, 13037 Serravalle Sesia (VC)", coordinates: [8.3623936, 45.6097792], coordinatePrecision: "civic", coordinateSource: "Google Maps" }],
+  },
   "Magnolia Ristorante Gattinara": {
     description: "Ristorante a Gattinara dedicato alla cucina e all’ospitalità.",
     addresses: [{ label: "Sede", address: "Corso Valsesia 116, 13045 Gattinara (VC)", coordinates: [8.3709967, 45.6164313], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
@@ -175,5 +181,8 @@ export const MEMBER_DETAILS: Record<string, MemberDetail> = {
     description: "Centro sportivo dedicato al padel.",
     addresses: [{ label: "Sede", address: "Piazza Vittime di Bologna, angolo Via San Felice, 13030 Ghislarengo (VC)", coordinates: [8.3845807, 45.5294904], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
-  "Agricola La Quercia": { description: "Azienda agricola e produzione del territorio.", addresses: updating },
+  "Agricola La Quercia": {
+    description: "Azienda agricola e produzione del territorio.",
+    addresses: [{ label: "Sede", address: "Via per Cascina Ernia 3, 13060 Roasio (VC)", coordinates: [8.2872531, 45.5939574], coordinatePrecision: "civic", coordinateSource: "Google Maps" }],
+  },
 };

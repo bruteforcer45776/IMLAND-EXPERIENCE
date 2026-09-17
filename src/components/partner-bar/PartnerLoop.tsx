@@ -14,14 +14,14 @@ function PartnerMark({ partner }: { partner: PartnerLogo }) {
   }
 
   return (
-    <span className="flex h-18 items-center justify-center px-7 py-2">
+    <span className="partner-loop__mark flex items-center justify-center">
       <img
         src={partner.src}
         alt={partner.name}
-        loading="eager"
+        loading="lazy"
         decoding="async"
         onError={() => setFailed(true)}
-        className="h-14 w-auto max-w-[220px] object-contain transition duration-300 hover:scale-[1.04]"
+        className="partner-loop__image object-contain"
       />
     </span>
   );
@@ -45,14 +45,14 @@ export function PartnerLoop({
 
   return (
     <LogoLoop
-      className={className}
+      className={["partner-loop", className].filter(Boolean).join(" ")}
       logos={logos}
       speed={60}
       direction="left"
       logoHeight={58}
       gap={34}
       hoverSpeed={16}
-      scaleOnHover
+      scaleOnHover={false}
       fadeOut={false}
       ariaLabel="Partner IMLAND Experience"
     />
