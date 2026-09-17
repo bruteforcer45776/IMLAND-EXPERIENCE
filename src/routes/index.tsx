@@ -7,7 +7,7 @@ import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
 import { AdvSlot } from "../components/adv-slot";
-import { AccordionGallery } from "../components/home/accordion-gallery";
+import { RadioProgramCarousel } from "../components/home/radio-program-carousel";
 import coverAssaggi from "@/assets/cover-assaggi.webp.asset.json";
 import coverCartaCanta from "@/assets/cover-carta-canta.webp.asset.json";
 import coverStuzzicaziende from "@/assets/cover-stuzzicaziende.webp.asset.json";
@@ -228,15 +228,7 @@ function Home() {
                 </Reveal>
                 <Reveal delay={90}>
                   <div className="mt-7 md:col-start-2 md:mt-0 md:pl-7">
-                    <AccordionGallery
-                      items={radioProgramGallery}
-                      ariaLabel="Esplora quattro programmi IMLAND Radio"
-                      defaultIndex={0}
-                      height={280}
-                      gap={10}
-                      radius={16}
-                      expandRatio={0.44}
-                    />
+                    <RadioProgramCarousel items={radioProgramGallery} />
                   </div>
                 </Reveal>
               </li>
