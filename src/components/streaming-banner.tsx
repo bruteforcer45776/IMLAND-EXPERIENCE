@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 export const streamingPlatforms = [
   {
@@ -33,6 +34,35 @@ export const streamingPlatforms = [
   },
 ];
 
+function StreamingPlatformLogo({
+  platform,
+  iconClassName,
+}: {
+  platform: (typeof streamingPlatforms)[number];
+  iconClassName: string;
+}) {
+  const [logoAvailable, setLogoAvailable] = useState(true);
+  if (!platform.icon || !logoAvailable) return null;
+
+  return (
+    <a
+      href={platform.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={platform.name}
+      className="transition-transform hover:scale-110"
+    >
+      <img
+        src={platform.icon}
+        alt={platform.name}
+        className={cn("object-contain opacity-85 hover:opacity-100", iconClassName)}
+        loading="lazy"
+        onError={() => setLogoAvailable(false)}
+      />
+    </a>
+  );
+}
+
 export function StreamingBanner({
   className,
   label = "Ascoltaci su:",
@@ -50,22 +80,12 @@ export function StreamingBanner({
         </span>
       )}
       <div className="flex flex-wrap items-center justify-center gap-4">
-        {streamingPlatforms.map((p) => (
-          <a
-            key={p.name}
-            href={p.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={p.name}
-            className="transition-transform hover:scale-110"
-          >
-            <img
-              src={p.icon}
-              alt={p.name}
-              className={cn("object-contain opacity-85 hover:opacity-100", iconClassName)}
-              loading="lazy"
-            />
-          </a>
+        {streamingPlatforms.map((platform) => (
+          <StreamingPlatformLogo
+            key={platform.name}
+            platform={platform}
+            iconClassName={iconClassName}
+          />
         ))}
       </div>
     </div>

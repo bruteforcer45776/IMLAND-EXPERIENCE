@@ -23,7 +23,6 @@ import {
 import { useNowPlaying } from "@/hooks/use-now-playing";
 import { usePlayer } from "./player-context";
 import { podcastAudio, registerRadioStop } from "./podcast-audio";
-import { streamingPlatforms } from "./streaming-banner";
 
 const RADIO_STREAM_URL = "https://stream.aiir.com/ylpompusqpatv";
 
@@ -527,23 +526,6 @@ export function RadioPlayer() {
               </Link>
             </div>
 
-            <div className="mt-4 border-t border-white/10 pt-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-white/60">Ascoltaci su</p>
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                {streamingPlatforms.map((platform) => (
-                  <a
-                    key={platform.name}
-                    href={platform.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Ascolta IMLAND su ${platform.name}`}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white p-1.5 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                  >
-                    <img src={platform.icon} alt="" className="h-full w-full object-contain" loading="lazy" />
-                  </a>
-                ))}
-              </div>
-            </div>
           </div>
         )}
 

@@ -75,6 +75,23 @@
   height: 3.5rem;
 }
 
+@media (max-width: 47.999rem) {
+  .partner-loop {
+    --logoloop-gap: 1rem;
+    --logoloop-logoHeight: 2.75rem;
+  }
+
+  .partner-loop__mark {
+    width: clamp(7rem, 32vw, 9rem);
+    height: 3.75rem;
+    padding: 0.375rem 0.5rem;
+  }
+
+  .partner-loop__image {
+    height: 2.75rem;
+  }
+}
+
 .logoloop--vertical .logoloop__item {
   margin-right: 0;
   margin-bottom: var(--logoloop-gap);

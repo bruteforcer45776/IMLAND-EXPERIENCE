@@ -17,14 +17,14 @@ export function HeroCinematic() {
   }, []);
   const select = (index: number) => setActive((index + slides.length) % slides.length);
   return (
-    <section className="hero-frame home-unified-hero relative min-h-[620px] overflow-hidden bg-sky-500 md:min-h-[680px]" aria-label="Territori IMLAND" aria-roledescription="carosello">
+    <section className="hero-frame home-unified-hero relative overflow-hidden bg-sky-500" aria-label="Territori IMLAND" aria-roledescription="carosello">
       {slides.map((slide, index) => (
         <picture key={slide.city} className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${index === active ? "z-10 opacity-100" : "pointer-events-none opacity-0"}`} aria-hidden={index !== active}>
           <source media="(max-width: 639px) and (orientation: portrait)" srcSet={slide.mobile} />
           <img src={slide.desktop} alt={index === active ? `IMLAND ${slide.city}` : ""} width={1672} height={941} loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"} decoding="async" className="hero-territory-image h-full w-full object-cover" style={{ "--hero-desktop-position": slide.desktopPosition, "--hero-mobile-position": slide.mobilePosition } as React.CSSProperties} />
         </picture>
       ))}
-      <div className="absolute inset-0 z-10 bg-black/45 backdrop-blur-[1.5px] backdrop-saturate-75" aria-hidden />
+      <div className="hero-sand-overlay absolute inset-0 z-10" aria-hidden />
       <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-5 py-20 text-center md:px-10">
         <div className="mx-auto flex max-w-5xl flex-col items-center text-white drop-shadow-[0_3px_18px_rgba(0,0,0,0.7)]">
           <h1 className="font-display text-[clamp(2.35rem,6vw,5.5rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.035em] text-balance !text-white">
