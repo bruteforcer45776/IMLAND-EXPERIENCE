@@ -13,7 +13,9 @@ import heroRadio from "@/assets/hero-radio-team-desktop.webp";
 import heroRadioMobile from "@/assets/hero-radio-team-mobile.webp";
 import barInOndaCover from "@/assets/bar-in-onda.webp";
 import schemaLiberoCover from "@/assets/schema-libero.webp";
+import musicalBoxCover from "@/assets/musical-box.webp";
 import seCiSeiCover from "@/assets/se-ci-sei-batti-un-colpo.webp";
+import imlandChartsCover from "@/assets/imland-charts.webp";
 import { PageRails } from "../components/decor";
 import {
   Accordion,
@@ -54,51 +56,21 @@ export const Route = createFileRoute("/radio")({
   component: RadioPage,
 });
 
-const daysLong = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"];
+const daysLong = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
 // JS getDay(): 0=Sun..6=Sat → map to our 0=Mon..6=Sun
 const todayIndex = (() => {
   const d = new Date().getDay();
   return d === 0 ? 6 : d - 1;
 })();
 
-type Entry = { time: string; show: string; music?: boolean };
+type Entry = { time: string; show: string };
 
-// Palinsesto ufficiale IMLAND Radio — fonte: imlandradio.it
 const schedule: Entry[][] = [
-  // Lunedì
-  [
-    { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Barionda" },
-    { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
-  ],
-  // Martedì
-  [
-    { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Schemalibre" },
-    { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
-  ],
-  // Mercoledì
-  [
-    { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Musical Ghost" },
-    { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
-  ],
-  // Giovedì
-  [
-    { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Se ci sei batti un colpo" },
-    { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
-  ],
-  // Venerdì
-  [
-    { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "I Blanchetis" },
-    { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
-  ],
-  // Sabato
-  [{ time: "00:00 – 23:59", show: "Imland Music Selection", music: true }],
-  // Domenica
-  [{ time: "00:00 – 23:59", show: "Imland Music Selection", music: true }],
+  [{ time: "18:00–19:00", show: "Barionda" }],
+  [{ time: "18:00–19:00", show: "Schema Libero" }],
+  [{ time: "18:00–19:00", show: "Musical Box" }],
+  [{ time: "18:00–19:00", show: "Se ci sei batti un colpo" }],
+  [{ time: "18:00–19:00", show: "IMLAND CHARTS" }],
 ];
 
 // Programmi live (non music selection): descrizioni ufficiali da imlandradio.it
@@ -110,16 +82,16 @@ const shows = [
     cover: barInOndaCover,
   },
   {
-    name: "Schemalibre",
+    name: "Schema Libero",
     desc: "In onda il martedì dalle 18:00 alle 19:00.",
     tag: "Talk",
     cover: schemaLiberoCover,
   },
   {
-    name: "Musical Ghost",
+    name: "Musical Box",
     desc: "In onda il mercoledì dalle 18:00 alle 19:00.",
     tag: "Musica",
-    cover: "",
+    cover: musicalBoxCover,
   },
   {
     name: "Se ci sei batti un colpo",
@@ -128,10 +100,10 @@ const shows = [
     cover: seCiSeiCover,
   },
   {
-    name: "I Blanchetis",
+    name: "IMLAND CHARTS",
     desc: "In onda il venerdì dalle 18:00 alle 19:00.",
     tag: "Musica",
-    cover: "",
+    cover: imlandChartsCover,
   },
 ];
 
@@ -154,7 +126,7 @@ const faqs = [
   },
   {
     q: "La programmazione musicale è sempre la stessa?",
-    a: "No, la Imland Music Selection viene aggiornata regolarmente e alterna generi ed epoche diverse, mentre nelle fasce serali e weekend lasciamo spazio alle rubriche condotte in diretta dal nostro team.",
+    a: "No, la selezione musicale viene aggiornata regolarmente e alterna generi ed epoche diverse.",
   },
 ];
 
@@ -198,7 +170,7 @@ function RadioPage() {
         <section className="section-editorial">
           <div className="container-im section-pad-sm">
             <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-              Ovunque tu sia
+              Canali radio
             </p>
             <h2 className="mt-3 text-h2-im">
               Come ascoltarci.
@@ -422,22 +394,17 @@ function Palinsesto() {
               {entries.map((entry) => (
                 <li
                   key={`${entry.time}-${entry.show}`}
-                  className={`rounded-2xl px-3 py-3 ${entry.music ? "bg-white/5" : "bg-signal text-white"}`}
+                  className="rounded-2xl bg-signal px-3 py-3 text-white"
                 >
                   <time className="block font-mono text-xs font-semibold tabular-nums">{entry.time}</time>
                   <span className="mt-1 block text-xs font-semibold leading-snug">{entry.show}</span>
-                  <span className="mt-1 block text-xs font-bold uppercase tracking-wider opacity-75">{entry.music ? "Musica" : "Live"}</span>
+                  <span className="mt-1 block text-xs font-bold uppercase tracking-wider opacity-75">Live</span>
                 </li>
               ))}
             </ul>
           </article>
         ))}
       </div>
-
-      <p className="mt-4 text-xs text-muted-foreground">
-        Fonte: palinsesto ufficiale IMLAND Radio (imlandradio.it). Fuori dagli orari live va in onda
-        Imland Music Selection.
-      </p>
     </section>
   );
 }

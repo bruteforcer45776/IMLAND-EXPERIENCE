@@ -240,10 +240,8 @@ function PodcastPage() {
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">Podcast</p>
               <h2 className="mt-3 text-h2-im">I podcast di IMLAND</h2>
               <p className="mt-4 text-base text-muted-foreground">
-                I nostri podcast fanno parte della programmazione editoriale di IMLAND Experience.
-                Sono format ideati e prodotti dalla nostra redazione per raccontare aziende,
-                persone, territori, cultura, tecnologia, enogastronomia e storie che meritano di
-                essere conosciute.
+                Tutte le puntate podcast sono raccolte per programma, così puoi scegliere il format
+                che preferisci e ascoltare ogni episodio disponibile.
               </p>
               <p className="mt-6 text-sm font-semibold text-signal">
                 StuzzicAziende · Istruzioni per l’Uso · Carta Canta · Assaggi · Grigliata Mista ·
@@ -276,10 +274,9 @@ function PodcastPage() {
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
                 Canali podcast
               </p>
-              <h2 className="mt-2 text-h2-im">Scegli il canale dell'azienda.</h2>
+              <h2 className="mt-2 text-h2-im">Tutte le puntate, programma per programma.</h2>
               <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                Ogni canale ha la sua grafica dedicata. Aprilo per vedere la pagina del progetto e
-                tutte le puntate pubblicate.
+                Apri un programma per vedere e ascoltare tutte le puntate pubblicate.
               </p>
             </div>
             <span className="text-xs text-muted-foreground">

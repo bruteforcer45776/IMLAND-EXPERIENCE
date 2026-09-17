@@ -50,7 +50,7 @@ export const SECTIONS: SectionConfig[] = [
     theme: {
       signal: "#0aa2cf",
       secondary: "#1646d8",
-      signalStrong: "#077ea1",
+      signalStrong: "#1646d8",
       signalInk: "#076d8c",
       signalForeground: "#ffffff",
       signalGlow: "#bfeeff",
@@ -65,7 +65,7 @@ export const SECTIONS: SectionConfig[] = [
     theme: {
       signal: "#1646d8",
       secondary: "#16bff2",
-      signalStrong: "#1646d8",
+      signalStrong: "#0aa2cf",
       signalInk: "#1646d8",
       signalForeground: "#ffffff",
       signalGlow: "#c8d6ff",
@@ -80,7 +80,7 @@ export const SECTIONS: SectionConfig[] = [
     theme: {
       signal: "#e0a800",
       secondary: "#ff7a00",
-      signalStrong: "#e0a800",
+      signalStrong: "#ff7a00",
       signalInk: "#8a6700",
       signalForeground: "#0b0c0f",
       signalGlow: "#ffe9a3",
@@ -95,7 +95,7 @@ export const SECTIONS: SectionConfig[] = [
     theme: {
       signal: "#e21d2f",
       secondary: "#101114",
-      signalStrong: "#c91627",
+      signalStrong: "#101114",
       signalInk: "#b51222",
       signalForeground: "#ffffff",
       signalGlow: "#ffd5da",

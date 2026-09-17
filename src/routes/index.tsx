@@ -8,10 +8,11 @@ import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
 import { AdvSlot } from "../components/adv-slot";
 import { RadioProgramCarousel } from "../components/home/radio-program-carousel";
-import coverAssaggi from "@/assets/cover-assaggi.webp.asset.json";
-import coverCartaCanta from "@/assets/cover-carta-canta.webp.asset.json";
-import coverStuzzicaziende from "@/assets/cover-stuzzicaziende.webp.asset.json";
-import coverImweekend from "@/assets/cover-imweekend.webp.asset.json";
+import coverBarionda from "@/assets/bar-in-onda.webp";
+import coverSchemaLibero from "@/assets/schema-libero.webp";
+import coverMusicalBox from "@/assets/musical-box.webp";
+import coverSeCiSei from "@/assets/se-ci-sei-batti-un-colpo.webp";
+import coverImLandCharts from "@/assets/imland-charts.webp";
 
 const PartnerLoop = lazy(() =>
   import("../components/partner-bar/PartnerLoop").then((module) => ({
@@ -117,31 +118,38 @@ const shell = "mx-auto w-full max-w-[1200px] px-4 md:px-8";
 
 const radioProgramGallery = [
   {
-    image: coverAssaggi.url,
-    label: "Assaggi",
+    image: coverBarionda,
+    label: "Barionda",
     link: "/radio",
-    alt: "Copertina di Assaggi",
+    alt: "Grafica del programma Barionda",
     accentColor: "#32b8ff",
   },
   {
-    image: coverCartaCanta.url,
-    label: "Carta Canta",
+    image: coverSchemaLibero,
+    label: "Schema Libero",
     link: "/radio",
-    alt: "Copertina di Carta Canta",
+    alt: "Grafica del programma Schema Libero",
     accentColor: "#32b8ff",
   },
   {
-    image: coverStuzzicaziende.url,
-    label: "Stuzzicaziende",
+    image: coverMusicalBox,
+    label: "Musical Box",
     link: "/radio",
-    alt: "Copertina di Stuzzicaziende",
+    alt: "Grafica del programma Musical Box",
     accentColor: "#32b8ff",
   },
   {
-    image: coverImweekend.url,
-    label: "IMWeekend",
+    image: coverSeCiSei,
+    label: "Se ci sei batti un colpo",
     link: "/radio",
-    alt: "Copertina di IMWeekend",
+    alt: "Grafica del programma Se ci sei batti un colpo",
+    accentColor: "#32b8ff",
+  },
+  {
+    image: coverImLandCharts,
+    label: "IMLAND CHARTS",
+    link: "/radio",
+    alt: "Grafica del programma IMLAND CHARTS",
     accentColor: "#32b8ff",
   },
 ];
@@ -245,7 +253,7 @@ function Home() {
                     </p>
                     <h2 className={h2}>Le storie continuano oltre la diretta.</h2>
                     <p className="mt-5 text-lg text-ink-600">
-                      Serie, episodi e approfondimenti da ascoltare quando vuoi.
+                      Tutte le puntate podcast, organizzate per programma, da ascoltare quando vuoi.
                     </p>
                     <Link
                       to="/podcast"

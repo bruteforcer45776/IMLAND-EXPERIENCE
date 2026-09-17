@@ -59,51 +59,12 @@ function MyPodcastPage() {
     <>
       <PageRails variant="podcast" />
       <main className="my-podcast-page container-im section-pad">
-        <section className="mx-auto max-w-4xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-signal">My Podcast</p>
-          <h1 className="mt-4 text-display-m text-ink-950">Un progetto completamente tuo</h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-700">
-            Se un’azienda o un’organizzazione vuole raccontarsi attraverso un progetto
-            completamente proprio, IMLAND mette a disposizione microfoni, studio, competenze e
-            produzione.
-          </p>
-        </section>
-
-        <section className="mx-auto mt-10 grid max-w-5xl gap-4 md:grid-cols-3">
-          {[
-            {
-              icon: Mic2,
-              title: "Idea e registrazione",
-              text: "Costruiamo il format e registriamo il progetto con il supporto dello studio.",
-            },
-            {
-              icon: Settings2,
-              title: "Produzione",
-              text: "Seguiamo il podcast dall’idea alla lavorazione, con un percorso su misura.",
-            },
-            {
-              icon: Radio,
-              title: "Pubblicazione",
-              text: "Prepariamo il progetto per la pubblicazione e la distribuzione concordata.",
-            },
-          ].map(({ icon: Icon, title, text }) => (
-            <article
-              key={title}
-              className="flex h-full flex-col items-center rounded-2xl border border-border bg-white p-6 text-center"
-            >
-              <Icon className="h-7 w-7 text-signal" aria-hidden />
-              <h2 className="mt-4 text-xl font-bold text-ink-950">{title}</h2>
-              <p className="mt-2 text-base text-ink-700">{text}</p>
-            </article>
-          ))}
-        </section>
-
-        <section className="mx-auto mt-12 max-w-5xl">
+        <section className="mx-auto max-w-5xl">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 className="text-h2-im text-ink-950">Progetti My Podcast</h2>
+              <h1 className="text-h2-im text-ink-950">Progetti My Podcast</h1>
               <p className="mt-2 text-sm text-ink-700">
-                Puntate, copertine e date sono aggiornate automaticamente dai feed ufficiali.
+                I due canali e tutte le relative puntate, aggiornati dai feed ufficiali.
               </p>
             </div>
             <span className="text-sm font-semibold text-ink-700">
@@ -156,6 +117,35 @@ function MyPodcastPage() {
               </article>
             ))}
           </div>
+        </section>
+
+        <section className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-3">
+          {[
+            {
+              icon: Mic2,
+              title: "Idea e registrazione",
+              text: "Costruiamo il format e registriamo il progetto con il supporto dello studio.",
+            },
+            {
+              icon: Settings2,
+              title: "Produzione",
+              text: "Seguiamo il podcast dall’idea alla lavorazione, con un percorso su misura.",
+            },
+            {
+              icon: Radio,
+              title: "Pubblicazione",
+              text: "Prepariamo il progetto per la pubblicazione e la distribuzione concordata.",
+            },
+          ].map(({ icon: Icon, title, text }) => (
+            <article
+              key={title}
+              className="flex h-full flex-col items-center rounded-2xl border border-border bg-white p-6 text-center"
+            >
+              <Icon className="h-7 w-7 text-signal" aria-hidden />
+              <h2 className="mt-4 text-xl font-bold text-ink-950">{title}</h2>
+              <p className="mt-2 text-base text-ink-700">{text}</p>
+            </article>
+          ))}
         </section>
 
         <section className="mx-auto mt-10 max-w-3xl rounded-2xl bg-white p-7 text-center md:p-10">
