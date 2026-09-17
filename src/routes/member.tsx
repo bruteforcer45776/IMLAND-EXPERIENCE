@@ -473,7 +473,8 @@ function MemberPage() {
         src="/assets/member-network-desktop.png"
         srcMobile="/assets/member-network-mobile.png"
         alt="I membri ufficiali di IMLAND Experience"
-        claim="I membri ufficiali di IMLAND Experience"
+        claim="La rete che valorizza la conoscenza."
+        claimClassName="hero-cta-claim-editorial"
         ctaTop="34%"
         mobileCtaTop="38%"
         flush

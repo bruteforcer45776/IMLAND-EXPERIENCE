@@ -185,7 +185,8 @@ function RadioPage() {
         src={heroRadio}
         srcMobile={heroRadioMobile}
         alt="Ascolta le voci del territorio — IMLAND Radio"
-        claim="Ascolta le voci del territorio"
+        claim="La radio che non c'era."
+        claimClassName="hero-cta-claim-editorial"
         ctaTop="34%"
         mobileCtaTop="17%"
         className="radio-team-hero"

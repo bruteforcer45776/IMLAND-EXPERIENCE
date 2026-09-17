@@ -6,9 +6,11 @@ type HeroBannerProps = {
   src: string;
   alt: string;
   /** CTA della pagina: mostrate centrate sotto il blocco di testo della grafica */
-  children: ReactNode;
+  children?: ReactNode;
   /** Claim breve mostrato immediatamente sopra le CTA. */
   claim?: string;
+  /** Variante visiva del claim. */
+  claimClassName?: string;
   priority?: boolean;
   /** posizione verticale delle CTA sopra la grafica (desktop) */
   ctaTop?: string;
@@ -37,6 +39,7 @@ export function HeroBanner({
   alt,
   children,
   claim,
+  claimClassName,
   priority = true,
   ctaTop = "63%",
   className,
@@ -78,20 +81,22 @@ export function HeroBanner({
             }}
           />
         )}
-        <div
-          className={cn(
-            "absolute inset-x-0 flex -translate-y-[1cm] px-6",
-            mobileCtaTop ? "items-start" : "bottom-0 h-[34%] items-end pb-5",
-          )}
-          style={mobileCtaTop ? { top: mobileCtaTop } : undefined}
-        >
-          <div className="mx-auto flex w-full max-w-[320px] flex-col items-stretch gap-3">
-            {claim ? <p className="hero-cta-claim">{claim}</p> : null}
-            <div className="flex flex-col items-stretch gap-3 [&>*]:w-full [&>*]:justify-center">
-              {mobileCtas}
+        {(claim || mobileCtas.length > 0) && (
+          <div
+            className={cn(
+              "absolute inset-x-0 flex -translate-y-[1cm] px-6",
+              mobileCtaTop ? "items-start" : "bottom-0 h-[34%] items-end pb-5",
+            )}
+            style={mobileCtaTop ? { top: mobileCtaTop } : undefined}
+          >
+            <div className="mx-auto flex w-full max-w-[320px] flex-col items-stretch gap-3">
+              {claim ? <p className={cn("hero-cta-claim", claimClassName)}>{claim}</p> : null}
+              <div className="flex flex-col items-stretch gap-3 [&>*]:w-full [&>*]:justify-center">
+                {mobileCtas}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Desktop: grafica 16:9 full-bleed, CTA sovrapposte sotto il testo */}
@@ -108,16 +113,16 @@ export function HeroBanner({
           className="block w-full object-cover object-top"
           style={{ height: "min(56.25vw, calc(100vh - 74px))" }}
         />
-        <div className="pointer-events-none absolute inset-0">
+        {(claim || Children.count(children) > 0) && <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-0 w-1/2 -translate-y-[1cm] px-[4%]" style={{ top: ctaTop }}>
             <div className="pointer-events-auto flex flex-col items-center gap-3">
-              {claim ? <p className="hero-cta-claim">{claim}</p> : null}
+              {claim ? <p className={cn("hero-cta-claim", claimClassName)}>{claim}</p> : null}
               <div className="flex flex-wrap items-center justify-center gap-3">
                 {children}
               </div>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </section>
   );

@@ -180,7 +180,8 @@ function PodcastPage() {
         src={heroPodcast}
         srcMobile={heroPodcastMobile}
         alt="Il territorio ha storie da raccontare — IMLAND Podcast"
-        claim="Il territorio ha storie da raccontare"
+        claim="Le storie dei protagonisti del territorio."
+        claimClassName="hero-cta-claim-editorial"
         ctaTop="26%"
         mobileCtaTop="17%"
         className="podcast-team-hero"

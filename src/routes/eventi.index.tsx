@@ -17,8 +17,6 @@ import {
 } from "../components/ui/accordion";
 import { HeroBanner } from "../components/hero-banner";
 
-import heroEventi from "@/assets/hero-eventi-v3.webp";
-import heroEventiMobile from "@/assets/hero-eventi-mobile.webp";
 
 export const Route = createFileRoute("/eventi/")({
   head: () => ({
@@ -288,21 +286,12 @@ function EventiPage() {
       <PageRails variant="eventi" />
       {/* Hero */}
       <HeroBanner
-        src={heroEventi}
-        srcMobile={heroEventiMobile}
-        alt="Vivi gli eventi del territorio"
-        claim="Vivi gli eventi del territorio"
-        ctaTop="64%"
+        src="/assets/hero-eventi-member-2026.jpg"
+        srcMobile="/assets/hero-eventi-member-2026.jpg"
+        alt="Evento Member 2026 segnato sul calendario"
         flush
-        mobileBg="#19C83A"
-      >
-        <a href="#proponi-evento" className="cta-light px-6 py-3.5 text-sm">
-          Proponi il tuo evento
-        </a>
-        <a href="tel:+393514323003" className="cta-dark px-6 py-3.5 text-sm">
-          Chiamaci ora
-        </a>
-      </HeroBanner>
+        mobileBg="#f4f4f2"
+      />
 
       <div className="page-inverted eventi-inverted">
         {/* Contesti */}

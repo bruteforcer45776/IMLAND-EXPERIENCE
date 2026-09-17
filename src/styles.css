@@ -139,6 +139,16 @@
   backdrop-filter: blur(14px) saturate(135%);
 }
 
+.hero-cta-claim-editorial {
+  font-family: var(--font-keyword);
+  font-size: clamp(1.25rem, 2.6vw, 2rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.1;
+  text-transform: none;
+}
+
 .hero-banner .cta-light {
   color: #0a0a0a !important;
 }
