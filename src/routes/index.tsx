@@ -24,6 +24,7 @@ const NewsletterBanner = lazy(() =>
 const DownloadAppBanner = lazy(() =>
   import("../components/download-app-banner").then((m) => ({ default: m.DownloadAppBanner })),
 );
+const CircularGallery = lazy(() => import("../components/circular-gallery"));
 import { seoFaq } from "../data/seo-faq";
 import { formatEventDate, formatEventTime, upcomingEvents } from "../data/events";
 import { curatedNews } from "../data/curated-news";
@@ -86,8 +87,22 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       canonical("/"),
-      { rel: "preload", as: "image", href: "/assets/hero-carousel/vercelli-mobile-1.webp", type: "image/webp", media: "(max-width: 639px) and (orientation: portrait)", fetchPriority: "high" },
-      { rel: "preload", as: "image", href: "/assets/hero-carousel/vercelli-desktop-1.webp", type: "image/webp", media: "(min-width: 640px), (orientation: landscape)", fetchPriority: "high" },
+      {
+        rel: "preload",
+        as: "image",
+        href: "/assets/hero-carousel/vercelli-mobile-1.webp",
+        type: "image/webp",
+        media: "(max-width: 639px) and (orientation: portrait)",
+        fetchPriority: "high",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        href: "/assets/hero-carousel/vercelli-desktop-1.webp",
+        type: "image/webp",
+        media: "(min-width: 640px), (orientation: landscape)",
+        fetchPriority: "high",
+      },
     ],
 
     scripts: [jsonLd(organizationLd), jsonLd(websiteLd)],
@@ -101,11 +116,43 @@ const keyword = "im-gradient-text";
 const shell = "mx-auto w-full max-w-[1200px] px-4 md:px-8";
 
 const radioProgramGallery = [
-  { image: coverAssaggi.url, label: "Assaggi", link: "/radio", alt: "Copertina di Assaggi", accentColor: "#32b8ff" },
-  { image: coverCartaCanta.url, label: "Carta Canta", link: "/radio", alt: "Copertina di Carta Canta", accentColor: "#32b8ff" },
-  { image: coverStuzzicaziende.url, label: "Stuzzicaziende", link: "/radio", alt: "Copertina di Stuzzicaziende", accentColor: "#32b8ff" },
-  { image: coverImweekend.url, label: "IMWeekend", link: "/radio", alt: "Copertina di IMWeekend", accentColor: "#32b8ff" },
+  {
+    image: coverAssaggi.url,
+    label: "Assaggi",
+    link: "/radio",
+    alt: "Copertina di Assaggi",
+    accentColor: "#32b8ff",
+  },
+  {
+    image: coverCartaCanta.url,
+    label: "Carta Canta",
+    link: "/radio",
+    alt: "Copertina di Carta Canta",
+    accentColor: "#32b8ff",
+  },
+  {
+    image: coverStuzzicaziende.url,
+    label: "Stuzzicaziende",
+    link: "/radio",
+    alt: "Copertina di Stuzzicaziende",
+    accentColor: "#32b8ff",
+  },
+  {
+    image: coverImweekend.url,
+    label: "IMWeekend",
+    link: "/radio",
+    alt: "Copertina di IMWeekend",
+    accentColor: "#32b8ff",
+  },
 ];
+
+const socialItems = [
+  { image: "/assets/social-reels/imland-social-01.png", text: "" },
+  { image: "/assets/social-reels/imland-social-02.png", text: "" },
+  { image: "/assets/social-reels/imland-social-03.png", text: "" },
+  { image: "/assets/social-reels/imland-social-04.png", text: "" },
+  { image: "/assets/social-reels/imland-social-05.png", text: "" },
+] as const;
 
 function Home() {
   const [latestPodcastEpisodes, setLatestPodcastEpisodes] = useState<HomePodcastPreview[]>([]);
@@ -241,12 +288,15 @@ function Home() {
                       )}
                       <div className="flex flex-1 flex-col p-5">
                         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
-                          {index === 0 ? "Ultimo episodio" : "Episodio recente"} · {episode.programName}
+                          {index === 0 ? "Ultimo episodio" : "Episodio recente"} ·{" "}
+                          {episode.programName}
                         </p>
                         <h3 className="mt-3 font-display text-lg font-bold leading-snug text-ink-950">
                           {episode.title}
                         </h3>
-                        {episode.date && <p className="mt-2 text-xs text-ink-600">{episode.date}</p>}
+                        {episode.date && (
+                          <p className="mt-2 text-xs text-ink-600">{episode.date}</p>
+                        )}
                         <span className="mt-auto inline-flex w-fit items-center rounded-full border border-signal/20 bg-white/75 px-4 py-2 text-sm font-semibold text-signal">
                           Ascolta
                         </span>
@@ -254,7 +304,10 @@ function Home() {
                     </Link>
                   ))}
                   {latestPodcastEpisodes.length === 0 && (
-                    <Link to="/podcast" className="card-im rounded-[28px] bg-white p-7 sm:col-span-2">
+                    <Link
+                      to="/podcast"
+                      className="card-im rounded-[28px] bg-white p-7 sm:col-span-2"
+                    >
                       <h3 className="text-h3-im text-ink-950">Podcast IMLAND</h3>
                       <p className="mt-3 text-sm text-ink-600">
                         Consulta gli episodi disponibili nella sezione Podcast.
@@ -354,37 +407,39 @@ function Home() {
                 </Reveal>
                 <div className="mt-7 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
                   <div className="grid gap-4">
-                  {latestNews.slice(0, 3).map((news) => (
-                    <a
-                      href={news.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      key={news.url}
-                      className={`${homeToneForTag(news.category)} group block`}
-                    >
-                      <div className="card-im grid h-full overflow-hidden rounded-[24px] bg-white sm:grid-cols-[9rem_1fr]">
-                        <img
-                          src={news.image}
-                          alt=""
-                          loading="lazy"
-                          className="aspect-[16/9] h-full w-full object-cover sm:aspect-auto"
-                        />
-                        <div className="flex min-w-0 flex-col p-5">
-                          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-semibold uppercase tracking-wider text-signal">
-                            <span>{news.category}</span>
-                            <span aria-hidden>·</span>
-                            <time dateTime={news.publishedAt}>{formatNewsDate(news.publishedAt)}</time>
-                          </div>
-                          <h3 className="mt-3 font-display text-lg font-bold leading-snug text-ink-950">
-                            {news.title}
-                          </h3>
-                          <div className="mt-4 flex items-center justify-between gap-3 text-xs text-ink-600">
-                            <span>{news.source}</span>
+                    {latestNews.slice(0, 3).map((news) => (
+                      <a
+                        href={news.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        key={news.url}
+                        className={`${homeToneForTag(news.category)} group block`}
+                      >
+                        <div className="card-im grid h-full overflow-hidden rounded-[24px] bg-white sm:grid-cols-[9rem_1fr]">
+                          <img
+                            src={news.image}
+                            alt=""
+                            loading="lazy"
+                            className="aspect-[16/9] h-full w-full object-cover sm:aspect-auto"
+                          />
+                          <div className="flex min-w-0 flex-col p-5">
+                            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-semibold uppercase tracking-wider text-signal">
+                              <span>{news.category}</span>
+                              <span aria-hidden>·</span>
+                              <time dateTime={news.publishedAt}>
+                                {formatNewsDate(news.publishedAt)}
+                              </time>
+                            </div>
+                            <h3 className="mt-3 font-display text-lg font-bold leading-snug text-ink-950">
+                              {news.title}
+                            </h3>
+                            <div className="mt-4 flex items-center justify-between gap-3 text-xs text-ink-600">
+                              <span>{news.source}</span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </a>
-                  ))}
+                      </a>
+                    ))}
                   </div>
                   <p className="mt-5 text-xs leading-relaxed text-ink-600">
                     IMLAND non è una redazione né una testata giornalistica; seleziona e raggruppa
@@ -463,6 +518,37 @@ function Home() {
 
       {/* ADV — banner pubblicitario basso */}
       <AdvSlot position="basso" />
+
+      {/* SOCIAL */}
+      <section className="relative overflow-hidden bg-white section-pad">
+        <div className={shell}>
+          <Reveal>
+            <div className="card-im overflow-hidden rounded-[28px] bg-white px-0 py-8 md:py-10">
+              <div className="px-6 text-center md:px-10">
+                <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[1.06] tracking-[-0.03em] !text-ink-950">
+                  I nostri social
+                </h2>
+                <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed !text-ink-600 md:text-base">
+                  Scorri i momenti, le storie e le voci che ogni giorno animano IMLAND.
+                </p>
+              </div>
+              <div className="mt-5 h-[28rem] w-full sm:h-[34rem] md:mt-7 md:h-[38rem]">
+                <Suspense fallback={<div className="h-full" />}>
+                  <CircularGallery
+                    items={socialItems}
+                    bend={1.5}
+                    textColor="#ffffff"
+                    borderRadius={0.045}
+                    scrollSpeed={1.4}
+                    scrollEase={0.045}
+                    font="700 24px Inter"
+                  />
+                </Suspense>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       {/* NEWSLETTER */}
       <section className="relative isolate overflow-hidden bg-white section-pad">

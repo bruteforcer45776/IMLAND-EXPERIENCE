@@ -261,15 +261,14 @@ class Media {
         }
 
         void main() {
-          vec2 ratio = vec2(
-            min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
-            min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
-          );
-          vec2 uv = vec2(
-            vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-            vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
-          );
-          vec4 color = texture2D(tMap, uv);
+          float imageAspect = uImageSizes.x / uImageSizes.y;
+          float planeAspect = uPlaneSizes.x / uPlaneSizes.y;
+          vec2 containScale = imageAspect > planeAspect
+            ? vec2(1.0, planeAspect / imageAspect)
+            : vec2(imageAspect / planeAspect, 1.0);
+          vec2 uv = (vUv - 0.5) / containScale + 0.5;
+          bool outside = uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0;
+          vec4 color = outside ? vec4(0.0, 0.0, 0.0, 1.0) : texture2D(tMap, uv);
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           float edgeSmooth = 0.002;
           float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
@@ -299,6 +298,7 @@ class Media {
     this.plane.setParent(this.scene);
   }
   createTitle() {
+    if (!this.text) return;
     this.title = new Title({
       gl: this.gl,
       plane: this.plane,
@@ -355,11 +355,10 @@ class Media {
         ];
       }
     }
-    this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    this.plane.scale.y = this.viewport.height * 0.72;
+    this.plane.scale.x = this.plane.scale.y * (9 / 16);
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
-    this.padding = 2;
+    this.padding = this.plane.scale.x * 0.24;
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
@@ -520,31 +519,31 @@ class App {
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     this.boundOnKeyDown = this.onKeyDown.bind(this);
     window.addEventListener("resize", this.boundOnResize);
-    window.addEventListener("mousewheel", this.boundOnWheel);
-    window.addEventListener("wheel", this.boundOnWheel);
-    window.addEventListener("mousedown", this.boundOnTouchDown);
-    window.addEventListener("mousemove", this.boundOnTouchMove);
-    window.addEventListener("mouseup", this.boundOnTouchUp);
-    window.addEventListener("touchstart", this.boundOnTouchDown);
-    window.addEventListener("touchmove", this.boundOnTouchMove);
-    window.addEventListener("touchend", this.boundOnTouchUp);
-    this.container?.addEventListener("keydown", this.boundOnKeyDown);
+    this.container.addEventListener("wheel", this.boundOnWheel, { passive: true });
+    this.container.addEventListener("mousedown", this.boundOnTouchDown);
+    this.container.addEventListener("mousemove", this.boundOnTouchMove);
+    this.container.addEventListener("mouseup", this.boundOnTouchUp);
+    this.container.addEventListener("mouseleave", this.boundOnTouchUp);
+    this.container.addEventListener("touchstart", this.boundOnTouchDown, { passive: true });
+    this.container.addEventListener("touchmove", this.boundOnTouchMove, { passive: true });
+    this.container.addEventListener("touchend", this.boundOnTouchUp);
+    this.container.addEventListener("keydown", this.boundOnKeyDown);
   }
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener("resize", this.boundOnResize);
-    window.removeEventListener("mousewheel", this.boundOnWheel);
-    window.removeEventListener("wheel", this.boundOnWheel);
-    window.removeEventListener("mousedown", this.boundOnTouchDown);
-    window.removeEventListener("mousemove", this.boundOnTouchMove);
-    window.removeEventListener("mouseup", this.boundOnTouchUp);
-    window.removeEventListener("touchstart", this.boundOnTouchDown);
-    window.removeEventListener("touchmove", this.boundOnTouchMove);
-    window.removeEventListener("touchend", this.boundOnTouchUp);
     if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
       this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
     }
     if (this.container) {
+      this.container.removeEventListener("wheel", this.boundOnWheel);
+      this.container.removeEventListener("mousedown", this.boundOnTouchDown);
+      this.container.removeEventListener("mousemove", this.boundOnTouchMove);
+      this.container.removeEventListener("mouseup", this.boundOnTouchUp);
+      this.container.removeEventListener("mouseleave", this.boundOnTouchUp);
+      this.container.removeEventListener("touchstart", this.boundOnTouchDown);
+      this.container.removeEventListener("touchmove", this.boundOnTouchMove);
+      this.container.removeEventListener("touchend", this.boundOnTouchUp);
       this.container.removeEventListener("keydown", this.boundOnKeyDown);
     }
   }
@@ -582,5 +581,13 @@ export default function CircularGallery({
       if (app) app.destroy();
     };
   }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase]);
-  return <div className="circular-gallery" ref={containerRef} tabIndex={0} />;
+  return (
+    <div
+      className="circular-gallery"
+      ref={containerRef}
+      tabIndex={0}
+      role="region"
+      aria-label="Galleria dei social IMLAND. Usa le frecce sinistra e destra per scorrere."
+    />
+  );
 }

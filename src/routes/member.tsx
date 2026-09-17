@@ -564,9 +564,7 @@ function MemberPage() {
                 <p className="text-xs font-semibold uppercase tracking-wider text-signal">
                   Rete Member
                 </p>
-                <h2 className="mt-2 text-h2-im text-foreground">
-                  I nostri membri
-                </h2>
+                <h2 className="mt-2 text-h2-im text-foreground">I nostri membri</h2>
                 <p className="mt-4 text-foreground/70">
                   Aziende, professionisti e associazioni che fanno parte della rete IMLAND Member.
                   <br />
@@ -579,7 +577,7 @@ function MemberPage() {
               Clicca una copertina per aprirla · clicca ancora per scoprire la storia e i contatti.
             </p>
 
-            <ul className="mt-6 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+            <ul className="mt-6 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {memberWall.map((m) => {
                 const id = slugify(m.name);
                 const isOpen = openedId === id;
@@ -591,13 +589,13 @@ function MemberPage() {
                   <li
                     key={m.name}
                     id={`member-${id}`}
-                    className="scroll-mt-24 [perspective:1200px]"
+                    className="min-w-0 scroll-mt-24 [perspective:1200px]"
                   >
                     {/* Contenitore non interattivo: i controlli reali sono i
                       bottoni/link dentro le due facce (nessun annidamento). */}
                     <div
                       onClick={() => handleCardClick(id)}
-                      className={`group relative block h-full w-full text-left transition-transform duration-300 ${
+                      className={`group relative block min-h-[28rem] w-full text-left transition-transform duration-300 sm:min-h-[25rem] ${
                         isOpen && !isFlipped ? "-translate-y-1" : ""
                       }`}
                     >
@@ -675,7 +673,7 @@ function MemberPage() {
 
                         {/* BACK */}
                         <div
-                          className="absolute inset-0 flex h-full flex-col overflow-hidden rounded-3xl border border-signal bg-foreground p-3 text-foreground [backface-visibility:hidden]"
+                          className="absolute inset-0 flex h-full flex-col overflow-y-auto overscroll-contain rounded-3xl border border-signal bg-foreground p-3 text-foreground [backface-visibility:hidden]"
                           style={{ transform: "rotateY(180deg)" }}
                         >
                           {id === "andrea-todaro-consulente" ? (
@@ -689,7 +687,9 @@ function MemberPage() {
                               <h3 className="mt-2 text-sm font-semibold leading-snug md:text-base">
                                 {m.name}
                               </h3>
-                              <p className="mt-2 text-[11px] leading-snug text-foreground/80">{m.desc}</p>
+                              <p className="mt-2 text-[11px] leading-snug text-foreground/80">
+                                {m.desc}
+                              </p>
                               <div className="mt-2 space-y-1 text-[10px] leading-snug text-foreground/70">
                                 {m.addresses.map((location) => (
                                   <p key={`${location.label}-${location.address}`}>

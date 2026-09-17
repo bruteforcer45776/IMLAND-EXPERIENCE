@@ -3,6 +3,7 @@
   height: 100%;
   overflow: hidden;
   cursor: grab;
+  touch-action: pan-y;
 }
 
 .circular-gallery:active {
@@ -10,6 +11,6 @@
 }
 
 .circular-gallery:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid #006ee6;
   outline-offset: 4px;
 }

@@ -4181,11 +4181,9 @@ h6 {
   line-height: 1.35;
 }
 .imland-map-card__notice {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  left: 18px;
+  position: relative;
   z-index: 2;
+  margin: 0 clamp(18px, 3vw, 32px) 14px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.88);
@@ -4240,12 +4238,29 @@ h6 {
 }
 .imland-map-popup {
   display: grid;
-  min-width: 270px;
+  width: min(270px, calc(100vw - 64px));
+  min-width: 0;
   grid-template-columns: 74px 1fr;
   gap: 13px;
   align-items: start;
   padding: 14px;
   font-family: inherit;
+}
+
+#member-wall .surface-card {
+  align-items: stretch !important;
+  padding: 0 !important;
+}
+
+@media (max-width: 419px) {
+  .imland-map-popup {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .imland-map-popup__image {
+    width: 56px;
+    height: 56px;
+  }
 }
 .imland-map-popup__image {
   width: 74px;
