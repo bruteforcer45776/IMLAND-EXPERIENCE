@@ -18,6 +18,21 @@ type MapPoint = {
 
 const CENTER: [number, number] = [45.55, 8.35];
 
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+    return entities[character];
+  });
+
+const safeInternalHref = (value: string | null) =>
+  value && value.startsWith("/") && !value.startsWith("//") ? escapeHtml(value) : null;
+
 /** Luoghi pubblicati e segnalazioni pubbliche con una posizione sulla mappa. */
 function useMapPoints() {
   return useQuery({
@@ -134,11 +149,12 @@ export function TerrainLiveMap() {
           iconSize: [22, 22],
           iconAnchor: [11, 11],
         });
+        const href = safeInternalHref(p.href);
         const popup = `
           <div style="font-family:system-ui,-apple-system,sans-serif;line-height:1.35">
-            <strong style="font-size:14px;display:block;color:#111">${p.title}</strong>
-            <span style="font-size:12px;color:#666">${p.comune}</span>
-            ${p.href ? `<br/><a href="${p.href}" style="font-size:12px;font-weight:600;color:${color};text-decoration:none">Apri la scheda &rarr;</a>` : ""}
+            <strong style="font-size:14px;display:block;color:#111">${escapeHtml(p.title)}</strong>
+            <span style="font-size:12px;color:#666">${escapeHtml(p.comune)}</span>
+            ${href ? `<br/><a href="${href}" style="font-size:12px;font-weight:600;color:${color};text-decoration:none">Apri la scheda &rarr;</a>` : ""}
           </div>
         `;
         L.marker([p.lat, p.lon], { icon })

@@ -310,14 +310,14 @@ function JobsPage() {
           <div className="container-im section-pad">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-                Automazioni editoriali
+                Opportunità in rete
               </p>
               <h2 className="mt-3 text-h2-im">
-                JOBS alimenta <span className="im-gradient-text">tutto l'hub</span>.
+                Le opportunità del territorio arrivano <span className="im-gradient-text">più lontano</span>.
               </h2>
               <p className="mt-4 text-muted-foreground">
-                Gli annunci vengono recuperati direttamente dal database per newsletter, social,
-                rubriche radiofoniche e notifiche territoriali.
+                Gli annunci possono essere valorizzati nei canali IMLAND, dalle newsletter alle
+                rubriche e alle notifiche territoriali.
               </p>
             </div>
             <BentoGrid className="mt-10">

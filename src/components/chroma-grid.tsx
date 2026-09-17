@@ -107,6 +107,14 @@ export const ChromaGrid = ({
           className="chroma-card"
           onPointerMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
+          onKeyDown={(event) => {
+            if (c.url && (event.key === "Enter" || event.key === " ")) {
+              event.preventDefault();
+              handleCardClick(c.url);
+            }
+          }}
+          role={c.url ? "link" : undefined}
+          tabIndex={c.url ? 0 : undefined}
           style={
             {
               "--card-border": c.borderColor || "transparent",

@@ -70,7 +70,7 @@ export function SiteFooter() {
             </p>
           </div>
           <a
-            href="#newsletter"
+            href="/#newsletter"
             className="btn-blue inline-flex min-h-12 items-center justify-center rounded-full px-6 text-[15px] font-semibold transition-transform active:scale-[0.98]"
           >
             Iscriviti

@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useApplyToJob, useJob, useJobSaves, useMyApplication } from "@/hooks/use-hub";
 import { formatHubDate } from "@/lib/hub";
 import { RelatedContent } from "@/components/related-content";
+import { LegalConsent } from "@/components/legal-consent";
 
 export const Route = createFileRoute("/jobs/$slug")({
   head: ({ params }) => ({
@@ -42,6 +43,7 @@ function JobDetail() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [cv, setCv] = useState<File | null>(null);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   if (isLoading) {
     return (
@@ -290,9 +292,17 @@ function JobDetail() {
                 />
               </label>
               <div className="md:col-span-2">
+                <LegalConsent
+                  id="job-application-privacy"
+                  checked={privacyAccepted}
+                  onChange={setPrivacyAccepted}
+                  includeTerms
+                />
+              </div>
+              <div className="md:col-span-2">
                 <button
                   type="submit"
-                  disabled={apply.isPending}
+                  disabled={apply.isPending || !privacyAccepted}
                   className="inline-flex rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground disabled:opacity-60"
                 >
                   {apply.isPending ? "Invio…" : "Invia la candidatura"}

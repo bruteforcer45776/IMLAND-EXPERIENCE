@@ -13,6 +13,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "../components/ui/accordion";
+import { LegalConsent } from "../components/legal-consent";
 
 export const Route = createFileRoute("/contatti")({
   head: () => ({
@@ -111,7 +112,7 @@ const miniFaqs = [
 ];
 
 function ContattiPage() {
-  const [sent, setSent] = useState(false);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [form, setForm] = useState({
     nome: "",
     email: "",
@@ -121,9 +122,11 @@ function ContattiPage() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    setSent(true);
-    setForm({ nome: "", email: "", topic: topics[0], messaggio: "" });
-    setTimeout(() => setSent(false), 4000);
+    const subject = encodeURIComponent(`[${form.topic}] Richiesta dal sito IMLAND`);
+    const body = encodeURIComponent(
+      `Nome: ${form.nome}\nEmail: ${form.email}\n\n${form.messaggio}`,
+    );
+    window.location.href = `mailto:info@imlandradio.com?subject=${subject}&body=${body}`;
   }
 
   return (
@@ -200,9 +203,7 @@ function ContattiPage() {
               <BrandIcon name="fumetti" className="h-7 w-7" aria-hidden />
               Scrivici
             </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Raccontaci la tua richiesta.
-            </p>
+            <p className="mt-2 text-sm text-muted-foreground">Raccontaci la tua richiesta.</p>
 
             <div className="mt-6 space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
@@ -271,11 +272,14 @@ function ContattiPage() {
               >
                 Invia messaggio
               </button>
-              {sent && (
-                <p className="rounded-2xl bg-meadow/20 px-4 py-3 text-center text-sm font-medium text-foreground">
-                  Grazie! Abbiamo ricevuto il tuo messaggio.
-                </p>
-              )}
+              <LegalConsent
+                id="contact-privacy"
+                checked={privacyAccepted}
+                onChange={setPrivacyAccepted}
+              />
+              <p className="text-center text-xs text-muted-foreground">
+                Si aprirà la tua app email con il messaggio già compilato.
+              </p>
             </div>
           </form>
 

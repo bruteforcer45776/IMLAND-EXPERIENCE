@@ -44,7 +44,7 @@ export function DownloadAppPopup() {
         aria-modal="true"
         aria-label="Scarica l'app IMLAND"
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-signal text-signal-foreground shadow-2xl"
+        className="relative w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-signal text-center text-signal-foreground shadow-2xl"
       >
         <img
           src={bannerBg.url}
@@ -68,7 +68,7 @@ export function DownloadAppPopup() {
 
           <div className="h-40 md:h-48" aria-hidden="true" />
 
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-ink/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+          <div className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-ink/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
             <Smartphone className="h-3.5 w-3.5" aria-hidden />
             App IMLAND
           </div>
@@ -78,7 +78,7 @@ export function DownloadAppPopup() {
             <br />
             Un tocco per aprirla, sempre l'ultima versione.
           </p>
-          <div className="mt-6 flex flex-wrap items-center gap-2.5">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
             <Link
               to="/scarica-app"
               onClick={close}

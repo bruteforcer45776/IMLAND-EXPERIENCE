@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Star, X, Heart } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
+import { LegalConsent } from "./legal-consent";
 
 const SUBMITTED_KEY = "imland-feedback-submitted-v2";
 const DISMISSED_UNTIL_KEY = "imland-feedback-dismissed-until-v2";
@@ -29,6 +30,7 @@ export function FeedbackPopup() {
   const [note, setNote] = useState("");
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   useEffect(() => {
     try {
@@ -42,18 +44,18 @@ export function FeedbackPopup() {
     return () => window.clearTimeout(t);
   }, []);
 
-  const rememberDismissal = () => {
+  const rememberDismissal = useCallback(() => {
     try {
       localStorage.setItem(DISMISSED_UNTIL_KEY, String(Date.now() + DISMISS_FOR_MS));
     } catch {
       /* ignore */
     }
-  };
+  }, []);
 
-  const close = () => {
+  const close = useCallback(() => {
     setOpen(false);
     rememberDismissal();
-  };
+  }, [rememberDismissal]);
 
   useEffect(() => {
     if (!open) return;
@@ -62,9 +64,13 @@ export function FeedbackPopup() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  }, [close, open]);
 
   const submit = async () => {
+    if (!privacyAccepted) {
+      toast.error("Leggi e conferma la Privacy Policy prima di inviare.");
+      return;
+    }
     const parsed = feedbackSchema.safeParse({ rating, note });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Controlla i dati inseriti");
@@ -109,7 +115,7 @@ export function FeedbackPopup() {
         aria-modal="true"
         aria-labelledby="feedback-title"
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-md overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-2xl"
+        className="relative w-full max-w-md overflow-hidden rounded-3xl border border-border bg-card p-6 text-center shadow-2xl"
       >
         <button
           type="button"
@@ -128,7 +134,7 @@ export function FeedbackPopup() {
             <h2 id="feedback-title" className="mt-5 text-title-l">
               Grazie!
             </h2>
-            <p className="mt-2 text-[15px] text-muted-foreground">
+            <p className="mt-2 text-base text-muted-foreground">
               La tua opinione ci aiuta a migliorare IMLAND Experience.
             </p>
             <div className="mt-4 flex items-center gap-1">
@@ -142,9 +148,6 @@ export function FeedbackPopup() {
                 />
               ))}
             </div>
-            <p className="mt-5 text-sm text-muted-foreground">
-              Ti ricontatteremo presto se ci saranno novità.
-            </p>
           </div>
         ) : (
           <>
@@ -152,12 +155,12 @@ export function FeedbackPopup() {
             <h2 id="feedback-title" className="mt-2 text-title-l">
               La tua opinione è importante
             </h2>
-            <p className="mt-2 text-[15px] text-muted-foreground">
+            <p className="mt-2 text-base text-muted-foreground">
               Come valuti la tua esperienza su questo sito?
             </p>
 
             <div
-              className="mt-5 flex items-center gap-2"
+              className="mt-5 flex items-center justify-center gap-2"
               role="radiogroup"
               aria-label="Valutazione da 1 a 5 stelle"
             >
@@ -200,7 +203,15 @@ export function FeedbackPopup() {
               {note.length}/{NOTE_MAX}
             </p>
 
-            <div className="mt-4 flex items-center justify-end gap-3">
+            <div className="mt-4">
+              <LegalConsent
+                id="feedback-privacy"
+                checked={privacyAccepted}
+                onChange={setPrivacyAccepted}
+              />
+            </div>
+
+            <div className="mt-4 flex items-center justify-center gap-3">
               <button
                 type="button"
                 onClick={close}
@@ -211,7 +222,7 @@ export function FeedbackPopup() {
               <button
                 type="button"
                 onClick={() => void submit()}
-                disabled={sending || rating === 0}
+                disabled={sending || rating === 0 || !privacyAccepted}
                 className="rounded-full bg-signal px-6 py-2.5 text-sm font-bold text-white disabled:opacity-50"
               >
                 {sending ? "Invio…" : "Invia"}

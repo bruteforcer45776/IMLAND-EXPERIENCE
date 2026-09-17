@@ -223,7 +223,7 @@ function AccediPage() {
           {isBusiness && (
             <Link
               to="/member"
-              className="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold text-primary"
+              className="mt-6 inline-flex items-center gap-2 text-base font-semibold text-primary"
             >
               Scopri Member
             </Link>
@@ -383,15 +383,15 @@ function AccediPage() {
                   htmlFor="privacy"
                   className="text-xs font-normal leading-relaxed text-muted-foreground"
                 >
-                  Accetto i{" "}
+                  Ho letto e accetto i{" "}
                   <Link to="/termini" className="underline">
                     Termini di servizio
                   </Link>{" "}
-                  e la{" "}
+                  e dichiaro di aver letto la{" "}
                   <Link to="/privacy" className="underline">
                     Privacy Policy
-                  </Link>{" "}
-                  e autorizzo il trattamento dei dati personali.
+                  </Link>
+                  .
                 </Label>
               </div>
             )}

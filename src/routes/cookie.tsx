@@ -23,7 +23,7 @@ export const Route = createFileRoute("/cookie")({
 function CookiePage() {
   const resetConsent = () => {
     try {
-      sessionStorage.removeItem("imland-cookie-consent");
+      localStorage.removeItem("imland-cookie-consent");
       window.dispatchEvent(new Event("imland:cookie-reset"));
     } catch {
       // ignore
@@ -34,9 +34,7 @@ function CookiePage() {
     <section className="decor-host overflow-hidden mx-auto max-w-3xl px-4 section-pad md:px-8">
       <SectionDecor variant="bubbles" />
       <h1 className="text-display-l">Cookie Policy</h1>
-      <p className="mt-3 text-sm text-muted-foreground">
-        Ultimo aggiornamento: {new Date().toLocaleDateString("it-IT")}
-      </p>
+      <p className="mt-3 text-sm text-muted-foreground">Ultimo aggiornamento: 17 settembre 2026</p>
 
       <div className="mt-10 space-y-6 text-foreground/85">
         <p>
@@ -52,22 +50,32 @@ function CookiePage() {
           consenso.
         </p>
 
-        <h2 className="text-h2-im">2. Cookie di analisi</h2>
+        <h2 className="text-h2-im">2. Memorie locali e autenticazione</h2>
+        <p>
+          Il sito può usare localStorage o sessionStorage per conservare preferenze cookie, chiusura
+          dei popup e impostazioni dell'interfaccia. L'autenticazione e le sessioni delle aree
+          riservate sono gestite tramite Supabase e possono richiedere identificativi tecnici
+          strettamente necessari alla sicurezza e alla continuità della sessione.
+        </p>
+
+        <h2 className="text-h2-im">3. Cookie di analisi</h2>
         <p>
           Utilizzati in forma aggregata per misurare l&apos;uso del sito e migliorare i contenuti.
           Vengono attivati solo dopo il tuo consenso.
         </p>
 
-        <h2 className="text-h2-im">3. Cookie di marketing</h2>
+        <h2 className="text-h2-im">4. Cookie di marketing</h2>
         <p>
           Utilizzati per proporre contenuti e comunicazioni personalizzate. Vengono attivati solo
           dopo il tuo consenso.
         </p>
 
-        <h2 className="text-h2-im">4. Gestione delle preferenze</h2>
+        <h2 className="text-h2-im">5. Gestione e durata delle preferenze</h2>
         <p>
-          Puoi modificare in qualsiasi momento il tuo consenso rimuovendolo dal browser oppure
-          cliccando il pulsante qui sotto per far ricomparire il banner dei cookie.
+          Le categorie facoltative sono disattivate fino a una scelta positiva. La preferenza viene
+          conservata nel browser e può essere modificata o revocata in qualsiasi momento con il
+          pulsante seguente. Il rifiuto è semplice quanto l'accettazione e non limita i servizi
+          essenziali.
         </p>
 
         <button
@@ -78,11 +86,19 @@ function CookiePage() {
           Rivedi le preferenze cookie
         </button>
 
-        <h2 className="text-h2-im">5. Contatti</h2>
+        <h2 className="text-h2-im">6. Terze parti e browser</h2>
+        <p>
+          Se vengono attivati servizi esterni che impostano cookie o identificatori propri, la
+          relativa categoria resta subordinata al consenso quando richiesto. Puoi inoltre cancellare
+          o bloccare cookie e memorie locali dalle impostazioni del browser; il blocco degli
+          strumenti tecnici può compromettere accesso e preferenze.
+        </p>
+
+        <h2 className="text-h2-im">7. Contatti</h2>
         <p>
           Titolare del trattamento: IMLAND EXPERIENCE SRL — P.IVA 02802650024 —{" "}
-          <a href="mailto:info@imlandradio.com" className="text-signal">
-            info@imlandradio.com
+          <a href="mailto:imlandexperience@gmail.com" className="text-signal">
+            imlandexperience@gmail.com
           </a>
           .
         </p>

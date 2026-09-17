@@ -13,7 +13,8 @@ export function NewsDisclaimerModal() {
   }, []);
 
   useEffect(() => {
-    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    previousFocusRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
   }, []);
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export function NewsDisclaimerModal() {
         aria-modal="true"
         aria-labelledby="news-disclaimer-title"
         aria-describedby="news-disclaimer-description"
-        className="relative my-auto w-full min-w-0 max-w-xl rounded-3xl border border-border bg-background p-6 shadow-2xl md:p-8"
+        className="relative my-auto w-full min-w-0 max-w-xl rounded-3xl border border-border bg-background p-6 text-center shadow-2xl md:p-8"
       >
         <button
           ref={closeButtonRef}
@@ -70,8 +71,13 @@ export function NewsDisclaimerModal() {
         >
           <X className="h-5 w-5" />
         </button>
-        <h2 id="news-disclaimer-title" className="pr-10 text-h3-im">Una rassegna, fonti sempre visibili.</h2>
-        <p id="news-disclaimer-description" className="mt-4 text-base leading-relaxed text-muted-foreground">
+        <h2 id="news-disclaimer-title" className="px-10 text-h3-im">
+          Una rassegna, fonti sempre visibili.
+        </h2>
+        <p
+          id="news-disclaimer-description"
+          className="mt-4 text-base leading-relaxed text-muted-foreground"
+        >
           IMLAND News seleziona notizie pubblicate da testate giornalistiche del territorio. Titoli,
           immagini e informazioni restano attribuiti alla fonte indicata: ogni card apre l’articolo
           originale sul sito dell’editore. IMLAND non è una testata giornalistica.

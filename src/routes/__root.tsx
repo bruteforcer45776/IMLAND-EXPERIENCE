@@ -59,9 +59,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-h1-im text-foreground">Ricarica la pagina</h1>
+        <h1 className="text-h1-im text-foreground">Si è verificato un problema</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Stiamo riallineando i contenuti con l’ultima versione pubblicata.
+          Il servizio è momentaneamente indisponibile. Riprova oppure torna alla home.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button

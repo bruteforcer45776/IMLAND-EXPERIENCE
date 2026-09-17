@@ -9,6 +9,42 @@ import { memberWall } from "@/routes/member";
 const MAP_CENTER: [number, number] = [8.35, 45.55];
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
 
+function applyMonochromeMapStyle(map: import("maplibre-gl").Map) {
+  const layers = map.getStyle().layers ?? [];
+
+  layers.forEach((layer) => {
+    const searchableId =
+      `${layer.id} ${(layer as { "source-layer"?: string })["source-layer"] ?? ""}`.toLowerCase();
+    try {
+      if (layer.type === "background") {
+        map.setPaintProperty(layer.id, "background-color", "#ffffff");
+      } else if (layer.type === "fill") {
+        const isWater = /water|ocean|river|lake/.test(searchableId);
+        const isBuilding = /building/.test(searchableId);
+        map.setPaintProperty(
+          layer.id,
+          "fill-color",
+          isWater ? "#e9e9e9" : isBuilding ? "#d8d8d8" : "#ffffff",
+        );
+        map.setPaintProperty(layer.id, "fill-opacity", 1);
+      } else if (layer.type === "line") {
+        const isRoad = /road|street|highway|motorway|transport|rail/.test(searchableId);
+        map.setPaintProperty(layer.id, "line-color", isRoad ? "#050505" : "#b7b7b7");
+        if (isRoad) map.setPaintProperty(layer.id, "line-opacity", 0.92);
+      } else if (layer.type === "symbol" && layer.layout?.["text-field"]) {
+        const isRoadLabel = /road|street|highway|motorway|transport/.test(searchableId);
+        map.setPaintProperty(layer.id, "text-color", isRoadLabel ? "#ffffff" : "#050505");
+        map.setPaintProperty(layer.id, "text-halo-color", isRoadLabel ? "#050505" : "#ffffff");
+        map.setPaintProperty(layer.id, "text-halo-width", isRoadLabel ? 3 : 2);
+        map.setPaintProperty(layer.id, "text-halo-blur", 0);
+        if (layer.layout?.["icon-image"]) map.setPaintProperty(layer.id, "icon-opacity", 0.75);
+      }
+    } catch {
+      // Alcuni layer del provider non espongono tutte le proprietà: li lasciamo invariati.
+    }
+  });
+}
+
 export function ImLandMap() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<import("maplibre-gl").Map | null>(null);
@@ -27,7 +63,10 @@ export function ImLandMap() {
   );
 
   const categories = useMemo(
-    () => ["Tutte", ...Array.from(new Set(locatedMembers.map(({ member }) => member.category))).sort()],
+    () => [
+      "Tutte",
+      ...Array.from(new Set(locatedMembers.map(({ member }) => member.category))).sort(),
+    ],
     [locatedMembers],
   );
   const visibleLocations = useMemo(
@@ -61,7 +100,10 @@ export function ImLandMap() {
       );
       map.scrollZoom.disable();
       mapRef.current = map;
-      map.once("load", () => setMapReady(true));
+      map.once("load", () => {
+        applyMonochromeMapStyle(map);
+        setMapReady(true);
+      });
     })();
 
     return () => {
@@ -126,8 +168,11 @@ export function ImLandMap() {
         }
         popupContent.append(popupImage, popupCopy);
 
-        const popup = new maplibre.Popup({ offset: 30, closeButton: true, maxWidth: "320px" })
-          .setDOMContent(popupContent);
+        const popup = new maplibre.Popup({
+          offset: 30,
+          closeButton: true,
+          maxWidth: "320px",
+        }).setDOMContent(popupContent);
         const marker = new maplibre.Marker({ element: markerButton, anchor: "bottom" })
           .setLngLat(coordinates)
           .setPopup(popup)
@@ -156,8 +201,8 @@ export function ImLandMap() {
           </p>
           <h2 id="imland-map-title">Il territorio, tutto in un punto.</h2>
           <p>
-            Esplora le aziende, i professionisti e le associazioni della rete IMLAND Member.
-            Scegli una categoria e apri direttamente la realtà che vuoi conoscere.
+            Esplora le aziende, i professionisti e le associazioni della rete IMLAND Member. Scegli
+            una categoria e apri direttamente la realtà che vuoi conoscere.
           </p>
         </div>
         <Link to="/member" hash="member-wall" className="imland-map-card__cta">
@@ -196,7 +241,9 @@ export function ImLandMap() {
           <span className="imland-map-card__city imland-map-card__city--biella">Biella</span>
           <span className="imland-map-card__city imland-map-card__city--vercelli">Vercelli</span>
           <span className="imland-map-card__city imland-map-card__city--novara">Novara</span>
-          <span className="imland-map-card__city imland-map-card__city--vco">Verbano · Cusio · Ossola</span>
+          <span className="imland-map-card__city imland-map-card__city--vco">
+            Verbano · Cusio · Ossola
+          </span>
         </div>
         <div
           ref={containerRef}

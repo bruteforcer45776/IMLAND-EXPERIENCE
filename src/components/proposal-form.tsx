@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SpotlightCard } from "./spotlight-card";
 import { BrandIcon } from "./brand-icons";
+import { LegalConsent } from "./legal-consent";
 
 type Kind = "spot" | "podcast" | "evento";
 
@@ -73,6 +74,7 @@ export function ProposalForm({ kind }: { kind: Kind }) {
   const c = config[kind];
   const [type, setType] = useState(c.types[0]);
   const [sent, setSent] = useState(false);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [form, setForm] = useState({ nome: "", email: "", titolo: "", messaggio: "" });
 
   function submit(e: React.FormEvent) {
@@ -197,6 +199,13 @@ export function ProposalForm({ kind }: { kind: Kind }) {
             >
               Invia la proposta
             </button>
+            <div className="mt-4">
+              <LegalConsent
+                id={`proposal-${kind}-privacy`}
+                checked={privacyAccepted}
+                onChange={setPrivacyAccepted}
+              />
+            </div>
 
             {sent && (
               <p className="mt-4 rounded-2xl bg-meadow/20 px-4 py-3 text-center text-sm font-medium text-foreground">

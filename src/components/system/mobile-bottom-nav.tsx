@@ -6,11 +6,13 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Bookmark, Compass, Home, UserRound } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { cn } from "@/lib/utils";
 
 export function MobileBottomNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { user } = useAuth();
+  const visible = useScrollReveal();
 
   const items = [
     { to: "/", label: "Home", icon: Home },
@@ -23,6 +25,7 @@ export function MobileBottomNav() {
     <nav
       aria-label="Navigazione rapida"
       data-floating-bottom-nav
+      data-scroll-visible={visible ? "true" : "false"}
       className="floating-bottom-nav fixed inset-x-3 z-40 overflow-hidden rounded-[24px] border border-border bg-card/95 shadow-2xl backdrop-blur md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >

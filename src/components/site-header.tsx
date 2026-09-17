@@ -27,7 +27,11 @@ const nav: NavItem[] = [
     label: "Podcast",
     children: [
       { to: "/podcast", label: "Podcast", desc: "I format editoriali e tutte le puntate IMLAND." },
-      { to: "/my-podcast", label: "My Podcast", desc: "Podcast su misura per aziende e organizzazioni." },
+      {
+        to: "/my-podcast",
+        label: "My Podcast",
+        desc: "Podcast su misura per aziende e organizzazioni.",
+      },
     ],
   },
   { to: "/eventi", label: "Eventi" },
@@ -79,12 +83,28 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, setOpen]);
+
   return (
     <>
       <header
         data-scrolled={scrolled ? "true" : "false"}
         className={`site-glass-header fixed inset-x-0 top-0 z-40 transition-all duration-medium ${
-          scrolled ? "shadow-[0_12px_36px_rgba(0,0,0,0.22)]" : "shadow-[0_6px_24px_rgba(0,0,0,0.12)]"
+          scrolled
+            ? "shadow-[0_12px_36px_rgba(0,0,0,0.22)]"
+            : "shadow-[0_6px_24px_rgba(0,0,0,0.12)]"
         }`}
         style={{
           // banda contestuale: assume il colore della verticale corrente
@@ -104,7 +124,7 @@ export function SiteHeader() {
               decoding="async"
               src={logo.url}
               alt={logo.alt}
-              className="header-logo-total-black h-10 w-auto max-w-[150px] object-contain md:h-12 md:max-w-[190px]"
+              className="header-logo-total-black h-10 w-auto max-w-[108px] object-contain min-[380px]:max-w-[135px] md:h-12 md:max-w-[190px]"
               width={2048}
               height={960}
             />
@@ -113,19 +133,19 @@ export function SiteHeader() {
           {/* Right actions */}
           <div className="flex items-center gap-1.5 md:gap-2">
             <Link
+              to="/scarica-app"
+              className="btn-blue inline-flex h-10 items-center gap-1.5 rounded-full px-3 text-[12px] min-[380px]:px-4 min-[380px]:text-[13px] md:h-11 md:gap-2 md:px-5 md:text-[14px]"
+            >
+              <Download size={17} aria-hidden />
+              <span>Scarica l'app</span>
+            </Link>
+
+            <Link
               to="/cerca"
               aria-label="Cerca"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white/85 transition-colors hover:bg-white/10 hover:text-white md:h-11 md:w-11"
             >
               <Search size={22} />
-            </Link>
-
-            <Link
-              to="/scarica-app"
-              className="btn-blue inline-flex h-10 items-center gap-2 rounded-full px-4 text-[13px] md:h-11 md:px-5 md:text-[14px]"
-            >
-              <Download size={17} aria-hidden />
-              <span>Scarica l'app</span>
             </Link>
 
             <button
@@ -150,10 +170,15 @@ export function SiteHeader() {
 
       {/* Pannello compatto ancorato all'header su ogni breakpoint. */}
       {open && (
-        <div className="fixed inset-0 z-50 pointer-events-auto opacity-100 animate-enter">
-          <div className="absolute inset-0 bg-black/10" onClick={() => setOpen(false)} />
+        <div className="fixed inset-0 z-[80] pointer-events-auto opacity-100 animate-enter">
+          <button
+            type="button"
+            className="absolute inset-0 h-full w-full cursor-default bg-black/25"
+            aria-label="Chiudi menu"
+            onClick={() => setOpen(false)}
+          />
           <aside
-            className="site-menu-glass absolute right-3 top-[calc(4.5rem+env(safe-area-inset-top))] flex max-h-[calc(100dvh-5.5rem-env(safe-area-inset-top))] w-[min(26.25rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white/95 shadow-[0_22px_56px_rgba(1,29,104,0.18)] backdrop-blur-xl md:right-5 md:top-[calc(5rem+env(safe-area-inset-top))]"
+            className="site-menu-glass absolute right-3 top-[calc(4.5rem+env(safe-area-inset-top))] z-10 flex max-h-[calc(100dvh-5.5rem-env(safe-area-inset-top))] w-[min(26.25rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white/95 shadow-[0_22px_56px_rgba(1,29,104,0.18)] backdrop-blur-xl md:right-5 md:top-[calc(5rem+env(safe-area-inset-top))]"
             role="dialog"
             aria-modal="true"
             aria-label="Menu di navigazione"
@@ -311,8 +336,12 @@ export function SiteHeader() {
                 </div>
               )}
               <div className="flex justify-center gap-4 text-[13px] text-ink-600">
-                <Link to="/brand" onClick={() => setOpen(false)}>Brand &amp; loghi</Link>
-                <Link to="/scarica-app" onClick={() => setOpen(false)}>Scarica l'app</Link>
+                <Link to="/brand" onClick={() => setOpen(false)}>
+                  Brand &amp; loghi
+                </Link>
+                <Link to="/scarica-app" onClick={() => setOpen(false)}>
+                  Scarica l'app
+                </Link>
               </div>
               <div className="flex justify-center gap-4 pt-1 text-[13px] text-ink-600">
                 <Link to="/privacy" onClick={() => setOpen(false)}>

@@ -21,6 +21,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import { useNowPlaying } from "@/hooks/use-now-playing";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { usePlayer } from "./player-context";
 import { podcastAudio, registerRadioStop } from "./podcast-audio";
 
@@ -34,6 +35,7 @@ const PARTY_LEAD_MS = 8_000;
 
 export function RadioPlayer() {
   const { open, setOpen, playing, setPlaying } = usePlayer();
+  const scrollVisible = useScrollReveal();
   const [volume, setVolume] = useState(60);
   const [muted, setMuted] = useState(false);
   const { data: np, error: npError } = useNowPlaying();
@@ -126,7 +128,8 @@ export function RadioPlayer() {
     const rawStart = Number(params.get(PARTY_QUERY_KEY));
     const rawChannel = params.get("channel");
     if (!Number.isFinite(rawStart) || rawStart <= 0) return;
-    const channel: PartyChannel = rawChannel === "left" || rawChannel === "right" ? rawChannel : "stereo";
+    const channel: PartyChannel =
+      rawChannel === "left" || rawChannel === "right" ? rawChannel : "stereo";
     void joinParty(rawStart, channel);
   }, [joinParty]);
 
@@ -290,6 +293,7 @@ export function RadioPlayer() {
         aria-label="Player IMLAND Radio"
         data-surface="dark"
         data-floating-radio-player
+        data-scroll-visible={scrollVisible || expanded ? "true" : "false"}
         className="floating-radio-player fixed inset-x-3 z-50 md:inset-x-6"
       >
         {expanded && (
@@ -452,14 +456,23 @@ export function RadioPlayer() {
                 <span className="flex min-w-0 items-center gap-3">
                   <AudioLines size={20} aria-hidden />
                   <span>
-                    <span className="block text-sm font-extrabold tracking-wide">MODALITÀ PARTY</span>
-                    <span className="block text-xs text-white/80">Sincronizza più dispositivi vicini</span>
+                    <span className="block text-sm font-extrabold tracking-wide">
+                      MODALITÀ PARTY
+                    </span>
+                    <span className="block text-xs text-white/80">
+                      Sincronizza più dispositivi vicini
+                    </span>
                   </span>
                 </span>
                 {partyActive ? (
-                  <span className="shrink-0 rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-bold uppercase">Attiva</span>
+                  <span className="shrink-0 rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-bold uppercase">
+                    Attiva
+                  </span>
                 ) : (
-                  <ChevronDown className={`shrink-0 transition-transform ${partyPanelOpen ? "rotate-180" : ""}`} size={18} />
+                  <ChevronDown
+                    className={`shrink-0 transition-transform ${partyPanelOpen ? "rotate-180" : ""}`}
+                    size={18}
+                  />
                 )}
               </button>
 
@@ -467,10 +480,14 @@ export function RadioPlayer() {
                 <div className="mt-3 rounded-2xl border border-white/15 bg-black/20 p-4">
                   <p className="text-sm font-semibold">Un’unica diretta, più casse.</p>
                   <p className="mt-1 text-xs leading-relaxed text-white/65">
-                    Apri lo stesso link sui dispositivi vicini: partiranno insieme. La precisione può variare leggermente in base alla rete.
+                    Apri lo stesso link sui dispositivi vicini: partiranno insieme. La precisione
+                    può variare leggermente in base alla rete.
                   </p>
 
-                  <div className="mt-4 grid grid-cols-3 gap-2" aria-label="Canale audio del dispositivo">
+                  <div
+                    className="mt-4 grid grid-cols-3 gap-2"
+                    aria-label="Canale audio del dispositivo"
+                  >
                     {(["left", "stereo", "right"] as const).map((channel) => (
                       <button
                         key={channel}
@@ -478,10 +495,16 @@ export function RadioPlayer() {
                         onClick={() => setPartyChannel(channel)}
                         aria-pressed={partyChannel === channel}
                         className={`rounded-xl px-2 py-2 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
-                          partyChannel === channel ? "bg-white text-black" : "bg-white/10 text-white hover:bg-white/15"
+                          partyChannel === channel
+                            ? "bg-white text-black"
+                            : "bg-white/10 text-white hover:bg-white/15"
                         }`}
                       >
-                        {channel === "left" ? "Sinistra" : channel === "right" ? "Destra" : "Stereo"}
+                        {channel === "left"
+                          ? "Sinistra"
+                          : channel === "right"
+                            ? "Destra"
+                            : "Stereo"}
                       </button>
                     ))}
                   </div>
@@ -525,7 +548,6 @@ export function RadioPlayer() {
                 Proponi un brano
               </Link>
             </div>
-
           </div>
         )}
 
@@ -535,7 +557,11 @@ export function RadioPlayer() {
           }`}
         >
           {artwork ? (
-            <img src={artwork} alt="" className="h-11 w-11 shrink-0 rounded-xl object-cover md:h-12 md:w-12" />
+            <img
+              src={artwork}
+              alt=""
+              className="h-11 w-11 shrink-0 rounded-xl object-cover md:h-12 md:w-12"
+            />
           ) : (
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white/75 md:h-12 md:w-12">
               <RadioIcon size={20} aria-hidden />
@@ -561,7 +587,9 @@ export function RadioPlayer() {
 
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-bold md:text-[15px]">{trackTitle}</p>
-            <p className="truncate text-xs text-white/65">{trackArtist ? `${trackArtist} · ${stationName}` : stationName}</p>
+            <p className="truncate text-xs text-white/65">
+              {trackArtist ? `${trackArtist} · ${stationName}` : stationName}
+            </p>
           </div>
 
           <div className="hidden w-[min(24vw,260px)] items-center gap-2 md:flex">

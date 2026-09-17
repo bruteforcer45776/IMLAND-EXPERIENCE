@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { BrandIcon } from "./brand-icons";
 import { ColorBlocks, MemphisConfetti } from "./decor";
 
@@ -15,6 +17,7 @@ export function NewsletterBanner({
   lead?: string;
 }) {
   const isCompact = variant === "compact";
+  const [marketingAccepted, setMarketingAccepted] = useState(false);
 
   return (
     <section
@@ -45,12 +48,33 @@ export function NewsletterBanner({
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-muted-foreground">{lead}</p>
 
-          <a
-            href="mailto:info@imlandradio.com?subject=Iscrizione%20newsletter%20IMLAND"
-            className="mx-auto mt-10 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-cta transition-all hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+          <label className="mx-auto mt-7 flex max-w-xl items-start justify-center gap-3 rounded-2xl border border-border bg-background/75 p-3 text-left text-xs leading-relaxed text-muted-foreground">
+            <input
+              type="checkbox"
+              required
+              checked={marketingAccepted}
+              onChange={(event) => setMarketingAccepted(event.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+            />
+            <span>
+              Acconsento a ricevere la newsletter IMLAND e dichiaro di aver letto la{" "}
+              <Link to="/privacy" className="font-semibold underline underline-offset-2">
+                Privacy Policy
+              </Link>
+              . Posso revocare il consenso in qualsiasi momento.
+            </span>
+          </label>
+          <button
+            type="button"
+            disabled={!marketingAccepted}
+            onClick={() => {
+              window.location.href =
+                "mailto:imlandexperience@gmail.com?subject=Iscrizione%20newsletter%20IMLAND";
+            }}
+            className="mx-auto mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-cta transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
           >
             Iscrivimi
-          </a>
+          </button>
           <p className="mt-5 text-sm font-medium text-muted-foreground">
             Richiedi l'iscrizione direttamente alla redazione IMLAND.
           </p>

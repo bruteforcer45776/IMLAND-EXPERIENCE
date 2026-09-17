@@ -202,11 +202,7 @@ function IosSteps() {
         <StepHead icon={<Chrome className="h-5 w-5" />} n={1} title="Apri IMLAND in Safari" />
         <p className="mt-2 text-sm text-muted-foreground">
           Su iPhone o iPad devi usare <strong>Safari</strong> (Chrome iOS non supporta
-          l'installazione). Vai su{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5">
-            imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site
-          </code>
-          .
+          l'installazione). Apri questa pagina direttamente in Safari.
         </p>
       </Step>
       <Step>
@@ -244,11 +240,8 @@ function AndroidSteps() {
       <Step>
         <StepHead icon={<Chrome className="h-5 w-5" />} n={1} title="Apri IMLAND in Chrome" />
         <p className="mt-2 text-sm text-muted-foreground">
-          Su Android usa <strong>Google Chrome</strong> (o Edge / Samsung Internet). Vai su{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5">
-            imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site
-          </code>
-          .
+          Su Android usa <strong>Google Chrome</strong> (o Edge / Samsung Internet) e apri questa
+          pagina nel browser scelto.
         </p>
       </Step>
       <Step>
