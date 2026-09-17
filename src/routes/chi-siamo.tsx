@@ -124,7 +124,9 @@ function ChiSiamoPage() {
             Un hub aperto, radicato, <span className="im-gradient-text">indipendente</span>.
           </>
         }
-        subtitle={"IMLAND Experience nasce per dare voce alle realtà dei nostri territori.\n\nViviamo in territori ricchi di imprese, persone, competenze ed eccellenze che spesso, proprio perché lontani dai grandi centri, non hanno gli stessi strumenti e le stesse occasioni per raccontarsi, farsi conoscere e creare relazioni.\n\nPer questo abbiamo costruito un luogo in cui il territorio possa avere voce: attraverso la radio, i contenuti, gli incontri e una community che mette in relazione aziende, professionisti e persone.\n\nRaccontiamo ciò che di valore esiste qui, perché possa essere conosciuto dentro e fuori dal territorio."}
+        subtitle={
+          "IMLAND Experience nasce per dare voce alle realtà dei nostri territori.\n\nViviamo in territori ricchi di imprese, persone, competenze ed eccellenze che spesso, proprio perché lontani dai grandi centri, non hanno gli stessi strumenti e le stesse occasioni per raccontarsi, farsi conoscere e creare relazioni.\n\nPer questo abbiamo costruito un luogo in cui il territorio possa avere voce: attraverso la radio, i contenuti, gli incontri e una community che mette in relazione aziende, professionisti e persone.\n\nRaccontiamo ciò che di valore esiste qui, perché possa essere conosciuto dentro e fuori dal territorio."
+        }
       />
 
       {/* Missione */}
@@ -133,7 +135,11 @@ function ChiSiamoPage() {
           <SectionHeader
             eyebrow="La missione"
             badge="luogo"
-            title={<>Dare voce al <span className="im-gradient-text">territorio</span>.</>}
+            title={
+              <>
+                Dare voce al <span className="im-gradient-text">territorio</span>.
+              </>
+            }
             description="Crediamo che musica, informazione ed eventi locali abbiano bisogno di uno spazio comune, aperto e indipendente. IMLAND lo costruisce ogni giorno, con la radio come cuore."
           />
           <BentoGrid className="mt-10">
@@ -220,13 +226,17 @@ function ChiSiamoPage() {
             eyebrow="La redazione"
             badge="profilo"
             align="center"
-            title={<>Il TEAM <span className="im-gradient-text">IMLAND</span>.</>}
+            title={
+              <>
+                Il TEAM <span className="im-gradient-text">IMLAND</span>.
+              </>
+            }
             description="Una squadra che vive il territorio e lo trasforma in racconto sonoro: speaker, produzione, member e organizzazione eventi."
           />
 
           <ul
             role="list"
-            className="mx-auto mt-14 grid max-w-2xl grid-cols-1 gap-x-10 gap-y-16 sm:grid-cols-2 lg:max-w-none"
+            className="mx-auto mt-14 grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {teamMembers.map((m) => {
               const fullName =
@@ -237,40 +247,61 @@ function ChiSiamoPage() {
                   .join(" ");
               const preview = m.description || m.bio.split("\n")[0];
               return (
-                <li key={m.slug} className="flex flex-col items-center gap-x-8 gap-y-6 text-center sm:flex-row sm:items-start sm:text-left">
-                  <div className="flex-none">
-                    <Link to="/team/$slug" params={{ slug: m.slug }}>
-                      <div className="relative aspect-square w-40 overflow-hidden rounded-full bg-muted ring-1 ring-inset ring-border">
+                <li
+                  key={m.slug}
+                  className="group overflow-hidden rounded-2xl bg-card shadow-[0_16px_40px_rgba(15,23,42,0.10)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(15,23,42,0.16)]"
+                >
+                  <Link
+                    to="/team/$slug"
+                    params={{ slug: m.slug }}
+                    aria-label={`Scopri il profilo di ${fullName}`}
+                    className="block focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-signal/40"
+                  >
+                    <div className="relative aspect-[4/5] overflow-hidden bg-[#059cff]">
+                      {m.photo ? (
                         <img
                           src={m.photo}
                           alt={fullName}
                           loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                          width={800}
+                          height={1000}
+                          sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
                         />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="flex-auto">
-                    <Link to="/team/$slug" params={{ slug: m.slug }}>
-                      <h3 className="text-h3-im leading-9 text-foreground transition-colors hover:text-signal">
+                      ) : (
+                        <div className="flex h-full items-center justify-center px-8 text-center text-white">
+                          <span className="font-display text-5xl font-bold tracking-[-0.03em]">
+                            BIXONT.IT
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-h3-im leading-tight text-foreground transition-colors group-hover:text-signal">
                         {fullName}
                       </h3>
-                    </Link>
-                    {m.nickname ? <p className="im-gradient-text">&quot;{m.nickname}&quot;</p> : null}
-                    {m.role ? <p className="text-base leading-8 text-muted-foreground">{m.role}</p> : null}
-                    {preview ? (
-                      <p className="mt-4 line-clamp-4 text-base leading-7 text-muted-foreground">
-                        {preview}
-                      </p>
-                    ) : null}
-                    <Link
-                      to="/team/$slug"
-                      params={{ slug: m.slug }}
-                      className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-signal hover:underline"
-                    >
-                      Scopri il profilo <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Link>
-                  </div>
+                      {m.nickname ? (
+                        <p className="mt-1 im-gradient-text">&quot;{m.nickname}&quot;</p>
+                      ) : null}
+                      {m.role ? (
+                        <p className="mt-2 text-sm font-semibold leading-6 text-muted-foreground">
+                          {m.role}
+                        </p>
+                      ) : null}
+                      {preview ? (
+                        <p className="mt-4 line-clamp-3 text-sm leading-6 text-muted-foreground">
+                          {preview}
+                        </p>
+                      ) : null}
+                      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-signal">
+                        Scopri il profilo
+                        <ArrowRight
+                          className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                          aria-hidden
+                        />
+                      </span>
+                    </div>
+                  </Link>
                 </li>
               );
             })}
@@ -312,11 +343,18 @@ function ChiSiamoPage() {
         <div className="container-im section-pad">
           <div className="bento-card p-8 md:flex md:items-center md:justify-between md:gap-10 md:p-12">
             <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-wider text-signal">Lavora con noi</p>
+              <p className="text-sm font-semibold uppercase tracking-wider text-signal">
+                Lavora con noi
+              </p>
               <h2 className="mt-3 text-h2-im">Porta la tua voce in IMLAND.</h2>
-              <p className="mt-3 text-base text-muted-foreground">Raccontaci le tue competenze e come vorresti contribuire al progetto.</p>
+              <p className="mt-3 text-base text-muted-foreground">
+                Raccontaci le tue competenze e come vorresti contribuire al progetto.
+              </p>
             </div>
-            <Link to="/contatti" className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full btn-blue px-6 py-3 font-semibold md:mt-0">
+            <Link
+              to="/contatti"
+              className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full btn-blue px-6 py-3 font-semibold md:mt-0"
+            >
               Candidati <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>

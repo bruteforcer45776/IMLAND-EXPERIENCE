@@ -1,24 +1,4 @@
-import teamM1 from "../assets/team-m1-color.webp.asset.json";
-import teamM2 from "../assets/team-m2-color.webp.asset.json";
-import teamM3 from "../assets/team-m3-color.webp.asset.json";
-import teamM4 from "../assets/team-m4-color.webp.asset.json";
-import teamM5 from "../assets/team-m5-color.webp.asset.json";
-import teamM6 from "../assets/team-m6-color.webp.asset.json";
-import teamM7 from "../assets/team-m7-color.webp.asset.json";
-import teamM9 from "../assets/team-m9-color.webp.asset.json";
-import teamM11 from "../assets/team-m11-color.webp.asset.json";
-import teamM12 from "../assets/team-m12-color.webp.asset.json";
-import teamM13 from "../assets/team-m13-color.webp.asset.json";
-import teamM14 from "../assets/team-m14-color.webp.asset.json";
-import teamM15 from "../assets/team-m15-color.webp.asset.json";
-import teamM16 from "../assets/team-m16-color.webp.asset.json";
-import teamM17 from "../assets/team-m17-color.webp.asset.json";
-import teamM18 from "../assets/team-m18-color.webp.asset.json";
-import teamM19 from "../assets/team-m19-color.webp.asset.json";
-import teamM20 from "../assets/team-m20-color.webp.asset.json";
-import teamM21 from "../assets/team-m21-color.webp.asset.json";
-import teamM22 from "../assets/team-m22-color.webp.asset.json";
-import coverPlaceholder from "../assets/cover-placeholder.webp.asset.json";
+const teamPhoto = (slug: string) => `/assets/team/${slug}.webp`;
 
 export type TimelineEntry = {
   year: string;
@@ -173,47 +153,59 @@ const descriptions: Record<string, string> = {
 
 // Ordine e ruoli aggiornati: prima i ruoli direttivi, poi il resto nell'ordine precedente.
 export const teamMembers: TeamMember[] = [
-  build(teamM15.url, "Davide", "De Lisa", "", "Direzione artistica e speaker"),
+  build(teamPhoto("davide-de-lisa"), "Davide", "De Lisa", "", "Direzione artistica e speaker"),
 
-  build(teamM12.url, "Massimo", "Biasini", "", "Direzione eventi e logistica e speaker"),
+  build(
+    teamPhoto("massimo-biasini"),
+    "Massimo",
+    "Biasini",
+    "",
+    "Direzione eventi e logistica e speaker",
+  ),
 
-  build(teamM14.url, "Matteo", "Sella", "", "Direzione radio e speaker"),
+  build(teamPhoto("matteo-sella"), "Matteo", "Sella", "", "Direzione radio e speaker"),
 
-  build(teamM5.url, "Davide", "Negro", "", "Tecnico"),
+  build(teamPhoto("davide-negro"), "Davide", "Negro", "", "Tecnico"),
 
-  build(teamM3.url, "Alberto", "Colpo", "", "Direzione commerciale e speaker"),
+  build(teamPhoto("alberto-colpo"), "Alberto", "Colpo", "", "Direzione commerciale e speaker"),
 
-  build(teamM22.url, "Alessandra", "Campaci", "", "Responsabile marketing e member"),
+  build(
+    teamPhoto("alessandra-campaci"),
+    "Alessandra",
+    "Campaci",
+    "",
+    "Responsabile marketing e member",
+  ),
 
-  build(coverPlaceholder.url, "Bixont", "", "Bixont", "Content Creation, SMM, Web Development"),
+  build("", "Bixont", "", "Bixont", "Content Creation, SMM, Web Development"),
 
-  build(teamM4.url, "Paolo", "Paracchini", "", "Direzione di produzione"),
+  build(teamPhoto("paolo-paracchini"), "Paolo", "Paracchini", "", "Direzione di produzione"),
 
-  build(teamM7.url, "Davide", "Maiorano", "", "Speaker"),
+  build(teamPhoto("davide-maiorano"), "Davide", "Maiorano", "", "Speaker"),
 
-  build(teamM20.url, "Andrea", "Libero", "", "Speaker"),
+  build(teamPhoto("andrea-libero"), "Andrea", "Libero", "", "Speaker"),
 
-  build(teamM11.url, "Simone", "Abondio", "", "Speaker"),
+  build(teamPhoto("simone-abondio"), "Simone", "Abondio", "", "Speaker"),
 
-  build(teamM2.url, "Sonia", "Ferraiuolo", "", "Speaker"),
+  build(teamPhoto("sonia-ferraiuolo"), "Sonia", "Ferraiuolo", "", "Speaker"),
 
-  build(teamM16.url, "Roberto", "Lisi", "", "Speaker"),
+  build(teamPhoto("roberto-lisi"), "Roberto", "Lisi", "", "Speaker"),
 
-  build(teamM17.url, "Celeste", "Miolo", "", "Speaker"),
+  build(teamPhoto("celeste-miolo"), "Celeste", "Miolo", "", "Speaker"),
 
-  build(teamM6.url, "Mattia", "Tassar", "", "Speaker"),
+  build(teamPhoto("mattia-tassar"), "Mattia", "Tassar", "", "Speaker"),
 
-  build(teamM9.url, "Luana", "Spinella", "", "Speaker"),
+  build(teamPhoto("luana-spinella"), "Luana", "Spinella", "", "Speaker"),
 
-  build(teamM18.url, "Luca", "Golzio", "", "Commerciale"),
+  build(teamPhoto("luca-golzio"), "Luca", "Golzio", "", "Commerciale"),
 
-  build(teamM13.url, "Matteo", "Pedrina", "", "Commerciale"),
+  build(teamPhoto("matteo-pedrina"), "Matteo", "Pedrina", "", "Commerciale"),
 
-  build(teamM1.url, "Alessia", "Pezzimenti", "", "Grafica"),
+  build(teamPhoto("alessia-pezzimenti"), "Alessia", "Pezzimenti", "", "Grafica"),
 
-  build(teamM19.url, "Roberto", "Filiberti", "", "Amministrazione"),
+  build(teamPhoto("roberto-filiberti"), "Roberto", "Filiberti", "", "Amministrazione"),
 
-  build(teamM21.url, "Tommaso", "Segato", "", "Eventi"),
+  build(teamPhoto("tommaso-segato"), "Tommaso", "Segato", "", "Eventi"),
 ].map((m, i) => ({
   ...m,
   // slug fallback stabile quando nome/cognome sono vuoti
