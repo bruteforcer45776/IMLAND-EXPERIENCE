@@ -42,16 +42,35 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/cookie-policy": "/cookie",
 };
 
+const LEGACY_PREFIX_REDIRECTS: Array<[RegExp, string]> = [
+  [/^\/(?:shows|radiochannel|schedule)(?:\/|$)/, "/radio"],
+  [/^\/podcastfilter(?:\/|$)/, "/podcast"],
+  [/^\/(?:event|eventtype)(?:\/|$)/, "/eventi"],
+  [/^\/(?:members|membertype)(?:\/|$)/, "/chi-siamo"],
+  [/^\/(?:category|post_tag)(?:\/|$)/, "/news"],
+];
+
 function legacyRedirect(request: Request): Response | undefined {
   if (request.method !== "GET" && request.method !== "HEAD") return;
   const url = new URL(request.url);
   const normalizedPath = url.pathname !== "/" ? url.pathname.replace(/\/+$/, "") : "/";
-  const destination = LEGACY_REDIRECTS[normalizedPath];
+  const destination =
+    LEGACY_REDIRECTS[normalizedPath] ??
+    LEGACY_PREFIX_REDIRECTS.find(([pattern]) => pattern.test(normalizedPath))?.[1];
   if (!destination) return;
 
   const target = new URL(destination, "https://www.imlandradio.it");
   target.search = url.search;
   return Response.redirect(target.toString(), 301);
+}
+
+function canonicalHostRedirect(request: Request): Response | undefined {
+  if (request.method !== "GET" && request.method !== "HEAD") return;
+  const url = new URL(request.url);
+  if (url.hostname !== "imlandradio.it") return;
+  url.hostname = "www.imlandradio.it";
+  url.protocol = "https:";
+  return Response.redirect(url.toString(), 301);
 }
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
@@ -94,6 +113,7 @@ function withPerformanceHeaders(request: Request, response: Response): Response 
   const headers = new Headers(response.headers);
 
   headers.set("x-content-type-options", "nosniff");
+  headers.set("referrer-policy", "strict-origin-when-cross-origin");
 
   if (response.status >= 200 && response.status < 400) {
     if (IMMUTABLE_ASSET_RE.test(url.pathname)) {
@@ -128,6 +148,8 @@ export default {
     try {
       const redirectResponse = legacyRedirect(request);
       if (redirectResponse) return redirectResponse;
+      const hostRedirectResponse = canonicalHostRedirect(request);
+      if (hostRedirectResponse) return hostRedirectResponse;
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
