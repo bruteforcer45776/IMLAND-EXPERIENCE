@@ -12,8 +12,6 @@ import { HeroBanner } from "../components/hero-banner";
 import heroRadio from "@/assets/hero-radio-team-desktop.webp";
 import heroRadioMobile from "@/assets/hero-radio-team-mobile.webp";
 import barInOndaCover from "@/assets/bar-in-onda.webp";
-import imlandChartsCover from "@/assets/imland-charts.webp";
-import musicalBoxCover from "@/assets/musical-box.webp";
 import schemaLiberoCover from "@/assets/schema-libero.webp";
 import seCiSeiCover from "@/assets/se-ci-sei-batti-un-colpo.webp";
 import { PageRails } from "../components/decor";
@@ -69,40 +67,36 @@ type Entry = { time: string; show: string; music?: boolean };
 const schedule: Entry[][] = [
   // Lunedì
   [
-    { time: "07:00 – 08:00", show: "Se Ci Sei Batti un Colpo" },
-    { time: "08:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Bar in Onda" },
+    { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
+    { time: "18:00 – 19:00", show: "Barionda" },
     { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
   ],
   // Martedì
   [
     { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Schema Libero" },
+    { time: "18:00 – 19:00", show: "Schemalibre" },
     { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
   ],
   // Mercoledì
   [
     { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Musical Box" },
+    { time: "18:00 – 19:00", show: "Musical Ghost" },
     { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
   ],
   // Giovedì
   [
-    { time: "00:00 – 23:59", show: "Imland Music Selection", music: true },
+    { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
+    { time: "18:00 – 19:00", show: "Se ci sei batti un colpo" },
+    { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
   ],
   // Venerdì
   [
     { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "IMLAND Charts" },
-    { time: "19:00 – 20:00", show: "Made in 80s" },
-    { time: "20:00 – 23:59", show: "Imland Music Selection", music: true },
+    { time: "18:00 – 19:00", show: "I Blanchetis" },
+    { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
   ],
   // Sabato
-  [
-    { time: "00:00 – 13:00", show: "Imland Music Selection", music: true },
-    { time: "13:00 – 14:00", show: "IMLAND Charts" },
-    { time: "14:00 – 23:59", show: "Imland Music Selection", music: true },
-  ],
+  [{ time: "00:00 – 23:59", show: "Imland Music Selection", music: true }],
   // Domenica
   [{ time: "00:00 – 23:59", show: "Imland Music Selection", music: true }],
 ];
@@ -110,38 +104,32 @@ const schedule: Entry[][] = [
 // Programmi live (non music selection): descrizioni ufficiali da imlandradio.it
 const shows = [
   {
-    name: "Bar in Onda",
-    desc: "Le notizie del territorio raccontate a modo nostro, con satira e un goccio di sana follia. Con Maio, Max Biasu e Sellino.",
+    name: "Barionda",
+    desc: "In onda il lunedì dalle 18:00 alle 19:00.",
     tag: "Talk",
     cover: barInOndaCover,
   },
   {
-    name: "Schema Libero",
-    desc: "Assaggi e riflessioni di vita tra emozioni e sentimenti: la filosofia incontra la vita quotidiana.",
+    name: "Schemalibre",
+    desc: "In onda il martedì dalle 18:00 alle 19:00.",
     tag: "Talk",
     cover: schemaLiberoCover,
   },
   {
-    name: "Musical Box",
-    desc: "Il programma che racconta la musica. Con Roberto, Celeste e Marty tra successi, curiosità e aneddoti.",
+    name: "Musical Ghost",
+    desc: "In onda il mercoledì dalle 18:00 alle 19:00.",
     tag: "Musica",
-    cover: musicalBoxCover,
+    cover: "",
   },
   {
-    name: "Se Ci Sei Batti un Colpo",
-    desc: "Il risveglio in radio: musica, umore e territorio per iniziare la giornata.",
-    tag: "Morning",
+    name: "Se ci sei batti un colpo",
+    desc: "In onda il giovedì dalle 18:00 alle 19:00.",
+    tag: "Radio",
     cover: seCiSeiCover,
   },
   {
-    name: "IMLAND Charts",
-    desc: "La classifica IMLAND: i brani più suonati e votati della settimana.",
-    tag: "Musica",
-    cover: imlandChartsCover,
-  },
-  {
-    name: "Made in 80s",
-    desc: "Un'ora dedicata al meglio degli anni Ottanta, tra hit internazionali e italiane.",
+    name: "I Blanchetis",
+    desc: "In onda il venerdì dalle 18:00 alle 19:00.",
     tag: "Musica",
     cover: "",
   },
