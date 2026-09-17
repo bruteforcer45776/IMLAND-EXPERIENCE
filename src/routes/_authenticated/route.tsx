@@ -4,7 +4,7 @@ import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   beforeLoad: async () => {
-    if (!isSupabaseConfigured) throw redirect({ to: "/accedi" });
+    if (!isSupabaseConfigured()) throw redirect({ to: "/accedi" });
 
     const { data, error } = await supabase.auth.getUser();
     if (error || !data.user) throw redirect({ to: "/accedi" });

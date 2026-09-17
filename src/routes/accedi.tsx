@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { describeError } from "@/lib/errors";
-import { lovable } from "@/integrations/lovable/index";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -108,6 +107,12 @@ function AccediPage() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isSupabaseConfigured()) {
+      toast.error(
+        "Registrazione e accesso sono temporaneamente non disponibili. Riprova più tardi.",
+      );
+      return;
+    }
     setBusy(true);
     try {
       if (mode === "signup") {
@@ -124,8 +129,11 @@ function AccediPage() {
             data: {
               first_name: parsed.data.first_name,
               last_name: parsed.data.last_name,
-              referral_code: ref || undefined,
+              referral_code: ref.trim().toUpperCase().slice(0, 32) || undefined,
               account_type: accountType,
+              legal_consent_accepted_at: new Date().toISOString(),
+              terms_version: "2026-09-17",
+              privacy_version: "2026-09-17",
             },
           },
         });
@@ -164,20 +172,6 @@ function AccediPage() {
     } finally {
       setBusy(false);
     }
-  };
-
-  const onGoogle = async () => {
-    setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) {
-      toast.error("Accesso con Google non riuscito.");
-      setBusy(false);
-      return;
-    }
-    if (result.redirected) return;
-    navigate({ to: destination });
   };
 
   return (
@@ -417,38 +411,6 @@ function AccediPage() {
               </button>
             )}
           </form>
-
-          {mode !== "reset" && (
-            <>
-              <div className="my-5 flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
-                <span className="h-px flex-1 bg-border" />
-                oppure
-                <span className="h-px flex-1 bg-border" />
-              </div>
-
-              <Button
-                type="button"
-                variant="outline"
-                disabled={busy}
-                onClick={onGoogle}
-                className="w-full rounded-full"
-              >
-                Continua con Google
-              </Button>
-
-              <p className="mt-5 text-xs text-muted-foreground">
-                Registrandoti con Google accetti i{" "}
-                <Link to="/termini" className="underline">
-                  Termini
-                </Link>{" "}
-                e la{" "}
-                <Link to="/privacy" className="underline">
-                  Privacy Policy
-                </Link>
-                .
-              </p>
-            </>
-          )}
         </div>
       </div>
     </section>

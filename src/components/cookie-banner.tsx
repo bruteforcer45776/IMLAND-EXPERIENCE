@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrandIcon } from "./brand-icons";
 import { Link } from "@tanstack/react-router";
+import { useModalA11y } from "@/hooks/use-modal-a11y";
 
 const STORAGE_KEY = "imland-cookie-consent";
 
@@ -43,6 +44,7 @@ export function CookieBanner() {
       // ignore
     }
     setOpen(false);
+    window.dispatchEvent(new CustomEvent("imland:cookie-consent-updated"));
   };
 
   const acceptAll = () =>
@@ -50,12 +52,14 @@ export function CookieBanner() {
   const rejectAll = () =>
     save({ necessary: true, analytics: false, marketing: false, ts: Date.now() });
   const saveChoices = () => save({ necessary: true, analytics, marketing, ts: Date.now() });
+  const { dialogRef, initialFocusRef } = useModalA11y(open);
 
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-live="polite"
@@ -121,6 +125,7 @@ export function CookieBanner() {
 
           <div className="flex w-full flex-col justify-center gap-2 sm:flex-row">
             <button
+              ref={initialFocusRef}
               type="button"
               onClick={acceptAll}
               className="min-h-9 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"

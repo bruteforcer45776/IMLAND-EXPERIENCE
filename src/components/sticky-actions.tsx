@@ -44,7 +44,6 @@ function AiChatbot() {
   const [sending, setSending] = useState(false);
   const [remaining, setRemaining] = useState(CHAT_LIMIT);
   const [guideMode, setGuideMode] = useState(true);
-  const [aiAcknowledged, setAiAcknowledged] = useState(false);
   const quotaRef = useRef({ count: 0, resetAt: 0 });
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -76,18 +75,18 @@ function AiChatbot() {
 
   useEffect(() => {
     if (!chatOpen) return;
-    if (aiAcknowledged) inputRef.current?.focus();
+    inputRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setChatOpen(false);
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [aiAcknowledged, chatOpen, setChatOpen]);
+  }, [chatOpen, setChatOpen]);
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     const text = input.trim();
-    if (!aiAcknowledged || !text || text.length > CHAT_MAX_CHARS || sending) return;
+    if (!text || text.length > CHAT_MAX_CHARS || sending) return;
     const now = Date.now();
     if (quotaRef.current.resetAt <= now)
       quotaRef.current = { count: 0, resetAt: now + CHAT_WINDOW_MS };
@@ -217,23 +216,14 @@ function AiChatbot() {
           </div>
 
           <form onSubmit={submit} className="border-t border-white/10 p-3">
-            <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 text-sm leading-relaxed text-white">
-              <input
-                type="checkbox"
-                checked={aiAcknowledged}
-                onChange={(event) => setAiAcknowledged(event.target.checked)}
-                className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--im-blue)]"
-                required
-              />
-              <span>
-                Ho compreso che sto parlando con un <strong>Assistente AI</strong>, non con una
-                persona, e che le risposte possono contenere errori. Ho preso visione della{" "}
-                <a href="/privacy" className="font-semibold underline underline-offset-4">
-                  Privacy Policy
-                </a>
-                .
-              </span>
-            </label>
+            <p className="mb-1.5 px-2 text-[9px] leading-tight text-white/55">
+              Assistente AI: le risposte possono contenere errori. Continuando dichiari di aver
+              preso visione della{" "}
+              <a href="/privacy" className="underline underline-offset-2 hover:text-white/80">
+                Privacy Policy
+              </a>
+              .
+            </p>
             <div className="flex items-center gap-2">
               <label htmlFor={`${panelId}-input`} className="sr-only">
                 Scrivi un messaggio
@@ -243,17 +233,15 @@ function AiChatbot() {
                 id={`${panelId}-input`}
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
-                placeholder={
-                  aiAcknowledged ? "Chiedi a IMLAND…" : "Prima conferma la presa visione"
-                }
+                placeholder="Chiedi a IMLAND…"
                 maxLength={CHAT_MAX_CHARS}
                 className="h-11 min-w-0 flex-1 rounded-full border border-white/10 bg-white/10 px-4 text-base text-white outline-none placeholder:text-white/70 focus:border-white/35 disabled:cursor-not-allowed disabled:opacity-50"
-                disabled={sending || !aiAcknowledged}
+                disabled={sending}
               />
               <button
                 type="submit"
                 aria-label="Invia messaggio"
-                disabled={sending || !aiAcknowledged || !input.trim()}
+                disabled={sending || !input.trim()}
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-im-blue text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 <Send size={18} aria-hidden />

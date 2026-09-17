@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Download, X, Smartphone } from "lucide-react";
 import bannerBg from "../assets/download-app-bg.png.asset.json";
+import { useModalA11y } from "@/hooks/use-modal-a11y";
 
 const STORAGE_KEY = "imland-app-popup-seen";
 
@@ -23,14 +24,7 @@ export function DownloadAppPopup() {
     }
   };
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  const { dialogRef, initialFocusRef } = useModalA11y(open, close);
 
   if (!open) return null;
 
@@ -40,6 +34,7 @@ export function DownloadAppPopup() {
       onClick={close}
     >
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label="Scarica l'app IMLAND"
@@ -58,6 +53,7 @@ export function DownloadAppPopup() {
 
         <div className="relative z-10 p-6">
           <button
+            ref={initialFocusRef}
             type="button"
             onClick={close}
             aria-label="Chiudi"

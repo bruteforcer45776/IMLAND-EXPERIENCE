@@ -6,6 +6,7 @@ import { z } from "zod";
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { LegalConsent } from "./legal-consent";
+import { useModalA11y } from "@/hooks/use-modal-a11y";
 
 const SUBMITTED_KEY = "imland-feedback-submitted-v2";
 const DISMISSED_UNTIL_KEY = "imland-feedback-dismissed-until-v2";
@@ -57,14 +58,7 @@ export function FeedbackPopup() {
     rememberDismissal();
   }, [rememberDismissal]);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [close, open]);
+  const { dialogRef, initialFocusRef } = useModalA11y(open, close);
 
   const submit = async () => {
     if (!privacyAccepted) {
@@ -111,6 +105,7 @@ export function FeedbackPopup() {
       onClick={close}
     >
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="feedback-title"
@@ -118,6 +113,7 @@ export function FeedbackPopup() {
         className="relative w-full max-w-md overflow-hidden rounded-3xl border border-border bg-card p-6 text-center shadow-2xl"
       >
         <button
+          ref={initialFocusRef}
           type="button"
           onClick={close}
           aria-label="Chiudi il sondaggio"
