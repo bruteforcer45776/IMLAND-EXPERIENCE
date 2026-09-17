@@ -88,9 +88,7 @@ const schedule: Entry[][] = [
   ],
   // Giovedì
   [
-    { time: "00:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Assaggi" },
-    { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
+    { time: "00:00 – 23:59", show: "Imland Music Selection", music: true },
   ],
   // Venerdì
   [
@@ -130,22 +128,16 @@ const shows = [
     cover: musicalBoxCover,
   },
   {
-    name: "Assaggi",
-    desc: "Enogastronomia del territorio: prodotti, allevamento e gastronomia raccontati da chi ci ha dedicato la vita.",
-    tag: "Cibo",
-    cover: seCiSeiCover,
-  },
-  {
     name: "Se Ci Sei Batti un Colpo",
     desc: "Il risveglio in radio: musica, umore e territorio per iniziare la giornata.",
     tag: "Morning",
-    cover: imlandChartsCover,
+    cover: seCiSeiCover,
   },
   {
     name: "IMLAND Charts",
     desc: "La classifica IMLAND: i brani più suonati e votati della settimana.",
     tag: "Musica",
-    cover: "",
+    cover: imlandChartsCover,
   },
   {
     name: "Made in 80s",
