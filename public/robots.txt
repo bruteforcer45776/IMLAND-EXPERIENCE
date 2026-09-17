@@ -23,4 +23,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/sitemap.xml
+Sitemap: https://www.imlandradio.it/sitemap.xml

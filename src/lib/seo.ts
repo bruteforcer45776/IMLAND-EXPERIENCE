@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from "react";
 
-export const SITE_URL = "https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site";
+export const SITE_URL = "https://www.imlandradio.it";
 
 export const SITE_NAME = "IMLAND EXPERIENCE";
 

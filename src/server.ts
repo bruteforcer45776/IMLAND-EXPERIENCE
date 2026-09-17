@@ -7,6 +7,53 @@ type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
 
+const LEGACY_REDIRECTS: Record<string, string> = {
+  "/home-imland-radio": "/",
+  "/programmi-della-settimana": "/radio",
+  "/custom-player": "/radio",
+  "/imland-radio-team": "/chi-siamo",
+  "/team-members": "/chi-siamo",
+  "/la-storia-imland-radio": "/chi-siamo",
+  "/la-storia": "/chi-siamo",
+  "/podcast-imland-radio": "/podcast",
+  "/podcast-imland-radio/grigliata-mista-podcast": "/podcast/grigliata-mista",
+  "/podcast-imland-radio/stuzzicaziende-podcast": "/podcast/stuzzicaziende",
+  "/podcast-imland-radio/istruzioni-per-l-uso-podcast": "/podcast/istruzioni-per-l-uso",
+  "/podcast-imland-radio/schema-libero-podcast": "/podcast",
+  "/podcast-imland-radio/terra-di-diamanti-podcast": "/podcast/terra-di-diamanti",
+  "/podcast-imland-radio/imweekend-podcast": "/podcast",
+  "/podcast-imland-radio/assaggi-podcast-imland": "/podcast/assaggi",
+  "/podcast-imland-radio/carta-canta-podcast": "/podcast/carta-canta",
+  "/podcast-imland-radio/tedx-biella-2025": "/my-podcast",
+  "/podcast-imland-radio/mirabilis-podcast": "/my-podcast",
+  "/members-wall": "/member",
+  "/diventa-member": "/member",
+  "/events-archive": "/eventi",
+  "/events-page-elementor": "/eventi",
+  "/blog-grid": "/news",
+  "/blog-no-sidebar": "/news",
+  "/blog-grid-sidebar": "/news",
+  "/blog-horizontal": "/news",
+  "/blog-masonry": "/news",
+  "/blog-sidebar": "/news",
+  "/social-media": "/contatti",
+  "/merchandising": "/member",
+  "/privacy-policy": "/privacy",
+  "/cookie-policy": "/cookie",
+};
+
+function legacyRedirect(request: Request): Response | undefined {
+  if (request.method !== "GET" && request.method !== "HEAD") return;
+  const url = new URL(request.url);
+  const normalizedPath = url.pathname !== "/" ? url.pathname.replace(/\/+$/, "") : "/";
+  const destination = LEGACY_REDIRECTS[normalizedPath];
+  if (!destination) return;
+
+  const target = new URL(destination, "https://www.imlandradio.it");
+  target.search = url.search;
+  return Response.redirect(target.toString(), 301);
+}
+
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
 async function getServerEntry(): Promise<ServerEntry> {
@@ -79,6 +126,9 @@ function isH3SwallowedErrorBody(body: string): boolean {
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const redirectResponse = legacyRedirect(request);
+      if (redirectResponse) return redirectResponse;
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       const normalized = await normalizeCatastrophicSsrResponse(response);

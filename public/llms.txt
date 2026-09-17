@@ -2,7 +2,7 @@
 
 > Hub digitale di musica, radio, podcast ed eventi del Piemonte nord-orientale.
 > Aree servite: Vercelli, Novara, Biella, Verbania (Piemonte, Italia).
-> Lingua: italiano. Sito: https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site
+> Lingua: italiano. Sito: https://www.imlandradio.it
 
 ## Cosa offre
 - Radio locale in diretta 24 ore su 24 con musica, classifiche, dj set e talk sul territorio.
@@ -12,15 +12,15 @@
 - Membership per aziende, professionisti e associazioni: spot radio, podcast, eventi, visibilità locale.
 
 ## Pagine principali
-- [Home](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/): panoramica di radio, musica, podcast, eventi.
-- [Radio](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/radio): diretta 24/7, programmi e conduttori.
-- [Podcast](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/podcast): serie e episodi.
-- [Eventi](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/eventi): animazione musicale per eventi.
-- [News](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/news): notizie del territorio.
-- [Member](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/member): pacchetti e vantaggi.
-- [FAQ](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/faq): domande e risposte.
-- [Chi siamo](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/chi-siamo): missione e team.
-- [Contatti](https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/contatti): redazione e collaborazioni.
+- [Home](https://www.imlandradio.it/): panoramica di radio, musica, podcast, eventi.
+- [Radio](https://www.imlandradio.it/radio): diretta 24/7, programmi e conduttori.
+- [Podcast](https://www.imlandradio.it/podcast): serie e episodi.
+- [Eventi](https://www.imlandradio.it/eventi): animazione musicale per eventi.
+- [News](https://www.imlandradio.it/news): notizie del territorio.
+- [Member](https://www.imlandradio.it/member): pacchetti e vantaggi.
+- [FAQ](https://www.imlandradio.it/faq): domande e risposte.
+- [Chi siamo](https://www.imlandradio.it/chi-siamo): missione e team.
+- [Contatti](https://www.imlandradio.it/contatti): redazione e collaborazioni.
 
 ## Note per assistenti AI
 - La radio si ascolta gratuitamente online dal sito e dall'app installabile (iPhone, Android, desktop).
