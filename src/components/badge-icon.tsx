@@ -1,10 +1,48 @@
-/**
- * IMLAND badge icons — bollini circolari a colore pieno, ritagliati dal kit
- * ufficiale. Palette per sezione: viola = News, giallo = Community/Membri,
- * verde = Eventi/Territorio, azzurro = Radio, blu = Podcast.
- */
+/** Bollini IMLAND: colore pieno della verticale e pittogramma vettoriale bianco. */
 
 import { useRouterState } from "@tanstack/react-router";
+import {
+  Antenna,
+  AudioLines,
+  AudioWaveform,
+  BadgeCheck,
+  BriefcaseBusiness,
+  Building2,
+  CalendarDays,
+  ChartNoAxesCombined,
+  Compass,
+  Contact,
+  FileText,
+  FileUser,
+  FolderDown,
+  Handshake,
+  Headphones,
+  Landmark,
+  Map,
+  MapPin,
+  MapPinned,
+  Megaphone,
+  MessageCircle,
+  Mic2,
+  Mountain,
+  Newspaper,
+  PartyPopper,
+  Play,
+  Podcast,
+  Radio,
+  ShieldCheck,
+  Siren,
+  Smartphone,
+  Store,
+  Ticket,
+  TriangleAlert,
+  UserCircle,
+  UserRound,
+  UserSearch,
+  Users,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 
 import type { IconTone } from "@/components/brand-icons";
 
@@ -79,6 +117,64 @@ const SECTION_TONES = [
 
 type SectionTone = (typeof SECTION_TONES)[number];
 
+const TONE_COLOR: Record<SectionTone, string> = {
+  alert: "var(--color-icon-alert)",
+  jobs: "var(--color-icon-jobs)",
+  terrain: "var(--color-icon-terrain)",
+  member: "var(--color-icon-member)",
+  eventi: "var(--color-icon-eventi)",
+  news: "var(--color-icon-news)",
+  radio: "var(--color-icon-radio)",
+  podcast: "var(--color-icon-podcast)",
+  aziende: "var(--color-icon-aziende)",
+};
+
+const ICON_BY_BADGE: Record<BadgeName, LucideIcon> = {
+  news: Newspaper,
+  articolo: FileText,
+  flash: Zap,
+  annuncio: Megaphone,
+  commento: MessageCircle,
+  community: Users,
+  profilo: UserRound,
+  membri: BadgeCheck,
+  partner: Handshake,
+  account: UserCircle,
+  calendario: CalendarDays,
+  biglietto: Ticket,
+  luogo: MapPin,
+  cultura: Landmark,
+  festa: PartyPopper,
+  radio: Radio,
+  antenna: Antenna,
+  cuffie: Headphones,
+  onde: AudioWaveform,
+  microfono: Mic2,
+  "podcast-mic": Podcast,
+  play: Play,
+  podcast: Podcast,
+  "podcast-cuffie": Headphones,
+  waveform: AudioLines,
+  aziende: Building2,
+  materiali: FolderDown,
+  referente: Contact,
+  alert: TriangleAlert,
+  sirena: Siren,
+  "alert-pin": MapPinned,
+  scudo: ShieldCheck,
+  "alert-phone": Smartphone,
+  jobs: BriefcaseBusiness,
+  cv: FileUser,
+  "cerca-profilo": UserSearch,
+  "stretta-mano": Handshake,
+  crescita: ChartNoAxesCombined,
+  terrain: Mountain,
+  negozio: Store,
+  mappa: Map,
+  bussola: Compass,
+  edificio: Building2,
+};
+
 /** Ogni pagina usa un solo colore: il bollino segue la verticale corrente. */
 const TONE_BY_PATH: Array<[RegExp, SectionTone]> = [
   [/^\/alert/, "alert"],
@@ -117,19 +213,24 @@ export function BadgeIcon({
   tone = "auto",
 }: Props) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const resolved = tone === "none" ? null : tone === "auto" ? toneForPath(pathname) : tone;
+  const routeTone = toneForPath(pathname);
+  const resolved =
+    tone === "none"
+      ? TONE_BY_BADGE[name]
+      : tone === "auto"
+        ? routeTone ?? TONE_BY_BADGE[name]
+        : tone;
+  const Icon = ICON_BY_BADGE[name];
   return (
-    <img
-      src={resolved ? `/assets/badges/${resolved}/${name}.webp` : `/assets/badges/${name}.webp`}
-
-      alt={alt ?? ""}
-      aria-hidden={alt ? undefined : true}
-      width={256}
-      height={256}
-      loading={eager ? "eager" : "lazy"}
-      decoding="async"
-      className={`shrink-0 select-none object-contain ${className}`}
-    />
+    <span
+      {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
+      className={`inline-flex shrink-0 select-none items-center justify-center rounded-full text-white ${className}`}
+      style={{ backgroundColor: TONE_COLOR[resolved] }}
+      data-badge-icon={name}
+      data-loading-priority={eager ? "eager" : undefined}
+    >
+      <Icon className="h-[48%] w-[48%]" strokeWidth={2.15} aria-hidden="true" />
+    </span>
   );
 }
 
