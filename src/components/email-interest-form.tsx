@@ -24,9 +24,11 @@ export function EmailInterestForm({
     const normalizedEmail = email.trim();
     if (!normalizedEmail || !consentAccepted) return;
 
-    void subject;
-    void message;
+    const body = `${message}\n\nEmail da avvisare: ${normalizedEmail}`;
     setSubmitted(true);
+    window.setTimeout(() => {
+      window.location.href = `mailto:imlandexperience@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }, 0);
   };
 
   return (
@@ -70,7 +72,7 @@ export function EmailInterestForm({
         </span>
       </label>
       <p className="mt-3 min-h-5 text-center text-xs text-muted-foreground" role="status">
-        {submitted ? "Grazie, la tua richiesta di aggiornamento è stata ricevuta." : "Ti avviseremo non appena ci saranno novità."}
+        {submitted ? "Grazie, la richiesta è pronta: inviala dalla tua app email." : "Ti avviseremo non appena ci saranno novità."}
       </p>
     </form>
   );
