@@ -7,6 +7,11 @@ import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
 import { AdvSlot } from "../components/adv-slot";
+import { AccordionGallery } from "../components/home/accordion-gallery";
+import coverAssaggi from "@/assets/cover-assaggi.webp.asset.json";
+import coverCartaCanta from "@/assets/cover-carta-canta.webp.asset.json";
+import coverStuzzicaziende from "@/assets/cover-stuzzicaziende.webp.asset.json";
+import coverImweekend from "@/assets/cover-imweekend.webp.asset.json";
 
 const PartnerLoop = lazy(() =>
   import("../components/partner-bar/PartnerLoop").then((module) => ({
@@ -95,6 +100,13 @@ const h2 =
 const keyword = "im-gradient-text";
 const shell = "mx-auto w-full max-w-[1200px] px-4 md:px-8";
 
+const radioProgramGallery = [
+  { image: coverAssaggi.url, label: "Assaggi", link: "/radio", alt: "Copertina di Assaggi", accentColor: "#32b8ff" },
+  { image: coverCartaCanta.url, label: "Carta Canta", link: "/radio", alt: "Copertina di Carta Canta", accentColor: "#32b8ff" },
+  { image: coverStuzzicaziende.url, label: "Stuzzicaziende", link: "/radio", alt: "Copertina di Stuzzicaziende", accentColor: "#32b8ff" },
+  { image: coverImweekend.url, label: "IMWeekend", link: "/radio", alt: "Copertina di IMWeekend", accentColor: "#32b8ff" },
+];
+
 function Home() {
   const [latestPodcastEpisodes, setLatestPodcastEpisodes] = useState<HomePodcastPreview[]>([]);
 
@@ -169,14 +181,15 @@ function Home() {
                 </Reveal>
                 <Reveal delay={90}>
                   <div className="mt-7 md:col-start-2 md:mt-0 md:pl-7">
-                    <div className="flex min-h-[280px] items-center justify-center rounded-[28px] bg-[var(--color-surface-radio)] px-8 text-center text-white">
-                      <div className="max-w-sm">
-                        <p className="font-display text-2xl font-bold text-white">IMLAND Radio</p>
-                        <p className="mt-3 text-sm leading-relaxed text-white/85">
-                          Le nuove copertine ufficiali saranno pubblicate prossimamente.
-                        </p>
-                      </div>
-                    </div>
+                    <AccordionGallery
+                      items={radioProgramGallery}
+                      ariaLabel="Esplora quattro programmi IMLAND Radio"
+                      defaultIndex={0}
+                      height={280}
+                      gap={10}
+                      radius={16}
+                      expandRatio={0.44}
+                    />
                   </div>
                 </Reveal>
               </li>

@@ -88,6 +88,34 @@
   }
 }
 
+.hero-cta-claim {
+  width: fit-content;
+  max-width: 32rem;
+  margin-inline: auto;
+  border: 1px solid rgb(255 255 255 / 74%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 88%);
+  padding: 0.55rem 1rem;
+  color: #0a0a0a !important;
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  font-weight: 800;
+  letter-spacing: 0.075em;
+  line-height: 1.25;
+  text-align: center !important;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgb(1 29 104 / 16%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  backdrop-filter: blur(14px) saturate(135%);
+}
+
+.hero-banner .cta-light {
+  color: #0a0a0a !important;
+}
+
+.hero-banner .cta-dark {
+  color: #ffffff !important;
+}
+
 .editorial-frame-canvas:not(:has([data-floating-radio-player])) {
   --dock-radio-player: 0rem;
 }
@@ -4753,4 +4781,41 @@ body {
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
+}
+
+/* Tutte le hero sono superfici autonome e chiaramente delimitate. */
+.hero-frame {
+  width: calc(100% - clamp(1rem, 4vw, 3rem));
+  max-width: 1280px;
+  margin: clamp(0.5rem, 1.5vw, 1rem) auto clamp(1.5rem, 3vw, 2.5rem);
+  overflow: clip;
+  border: 1px solid rgb(255 255 255 / 76%);
+  border-radius: clamp(1.25rem, 3vw, 2.25rem) !important;
+  box-shadow:
+    0 20px 54px rgb(1 29 104 / 16%),
+    inset 0 1px 0 rgb(255 255 255 / 70%);
+  isolation: isolate;
+}
+
+/* Le hero chiare mantengono testo e controlli leggibili; quelle fotografiche
+   conservano il testo bianco sopra l'overlay scuro. */
+.hero-frame:not(.home-unified-hero):not(.hero-banner):not(.faq-hero) {
+  color: #0a0a0a;
+}
+
+.hero-frame :is(.text-muted-foreground, .text-ink-600) {
+  color: #3f4652 !important;
+}
+
+:is(.home-unified-hero, .hero-banner, .faq-hero)[class*="hero"]
+  :is(.text-muted-foreground, .text-ink-600) {
+  color: rgb(255 255 255 / 88%) !important;
+}
+
+@media (max-width: 47.999rem) {
+  .hero-frame {
+    width: calc(100% - 1rem);
+    margin-top: 0.5rem;
+    border-radius: 1.25rem !important;
+  }
 }

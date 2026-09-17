@@ -83,7 +83,7 @@ function FaqPage() {
 
   return (
     <main>
-      <section className="faq-hero container-im flex min-h-[42svh] items-center justify-center section-pad text-center">
+      <section className="hero-frame faq-hero flex min-h-[42svh] items-center justify-center section-pad px-6 text-center md:px-10">
         <div className="mx-auto max-w-4xl">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-ink-950">Domande frequenti</p>
           <h1 className="text-display-m text-ink-950">Tutto quello che vuoi sapere.</h1>

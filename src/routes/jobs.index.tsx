@@ -177,6 +177,7 @@ function JobsPage() {
         src={heroJobs}
         srcMobile={heroJobsMobile}
         alt="JOBS — Opportunità di lavoro nel territorio"
+        claim="Opportunità di lavoro nel territorio"
         ctaTop="64%"
         flush
         mobileBg="#6B7280"

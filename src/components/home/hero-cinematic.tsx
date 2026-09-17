@@ -17,7 +17,7 @@ export function HeroCinematic() {
   }, []);
   const select = (index: number) => setActive((index + slides.length) % slides.length);
   return (
-    <section className="home-unified-hero relative min-h-[620px] overflow-hidden bg-sky-500 md:min-h-[680px]" aria-label="Territori IMLAND" aria-roledescription="carosello">
+    <section className="hero-frame home-unified-hero relative min-h-[620px] overflow-hidden bg-sky-500 md:min-h-[680px]" aria-label="Territori IMLAND" aria-roledescription="carosello">
       {slides.map((slide, index) => (
         <picture key={slide.city} className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${index === active ? "z-10 opacity-100" : "pointer-events-none opacity-0"}`} aria-hidden={index !== active}>
           <source media="(max-width: 639px) and (orientation: portrait)" srcSet={slide.mobile} />

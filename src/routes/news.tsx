@@ -129,7 +129,7 @@ function NewsPage() {
   return (
     <main className="min-w-0 overflow-x-clip">
       <NewsDisclaimerModal />
-      <header className="container-im min-w-0 section-pad text-center">
+      <header className="hero-frame min-w-0 section-pad px-6 text-center md:px-10">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">IMLAND News</p>
         <h1 className="mx-auto mt-4 max-w-4xl break-words text-display-m text-ink-950">Le notizie che raccontano il territorio.</h1>
       </header>

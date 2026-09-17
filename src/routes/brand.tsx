@@ -203,7 +203,7 @@ function BrandPage() {
   return (
     <div className="pb-24">
       {/* Hero */}
-      <section className="container-im hero-pad text-center">
+      <section className="hero-frame hero-pad px-6 text-center md:px-10">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           Brand system
         </p>

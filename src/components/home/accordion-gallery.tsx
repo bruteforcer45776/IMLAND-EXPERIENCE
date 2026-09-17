@@ -13,6 +13,7 @@ export type AccordionGalleryItem = {
 
 type Props = {
   items: AccordionGalleryItem[];
+  ariaLabel?: string;
   defaultIndex?: number;
   height?: number;
   gap?: number;
@@ -22,6 +23,7 @@ type Props = {
 
 export function AccordionGallery({
   items,
+  ariaLabel = "Esplora i contenuti IMLAND",
   defaultIndex = 0,
   height = 280,
   gap = 10,
@@ -102,7 +104,7 @@ export function AccordionGallery({
         height: `${height}px`,
       } as React.CSSProperties}
       role="navigation"
-      aria-label="Esplora Radio, Podcast, Eventi e News IMLAND"
+      aria-label={ariaLabel}
     >
       {items.map((item, index) => {
         const isActive = index === active;

@@ -89,7 +89,7 @@ function TeamMemberPage() {
   return (
     <div className="animate-fade-in">
       {/* HERO */}
-      <section className="section-atmosphere">
+      <section className="hero-frame section-atmosphere">
         <div className="container-im grid gap-10 hero-pad md:grid-cols-[380px_1fr]">
           <div className="overflow-hidden glass-panel rounded-2xl">
             <div className="aspect-[3/4] w-full overflow-hidden">

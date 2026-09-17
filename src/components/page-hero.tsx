@@ -24,7 +24,7 @@ type Props = {
 
 export function PageHero({ eyebrow, title, subtitle, badge, children, aside }: Props) {
   return (
-    <section className="section-atmosphere">
+    <section className="hero-frame section-atmosphere">
       <div
         className={`container-im hero-pad grid items-center gap-10 ${
           aside ? "lg:grid-cols-[1.2fr_1fr]" : ""

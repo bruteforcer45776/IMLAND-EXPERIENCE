@@ -475,6 +475,7 @@ function MemberPage() {
         src={heroMember}
         srcMobile={heroMemberMobile}
         alt="I membri ufficiali di IMLAND Experience"
+        claim="I membri ufficiali di IMLAND Experience"
         ctaTop="64%"
         flush
         mobileBg="#FFC400"

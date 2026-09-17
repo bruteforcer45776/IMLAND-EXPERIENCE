@@ -291,6 +291,7 @@ function EventiPage() {
         src={heroEventi}
         srcMobile={heroEventiMobile}
         alt="Vivi gli eventi del territorio"
+        claim="Vivi gli eventi del territorio"
         ctaTop="64%"
         flush
         mobileBg="#19C83A"

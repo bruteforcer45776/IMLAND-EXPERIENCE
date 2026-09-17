@@ -76,7 +76,7 @@ function DownloadPage() {
   };
 
   return (
-    <div className="decor-host overflow-hidden mx-auto max-w-5xl px-4 hero-pad md:px-8">
+    <div className="hero-frame decor-host overflow-hidden max-w-5xl px-4 hero-pad md:px-8">
       <SectionDecor variant="cool" />
       {/* Hero */}
       <div className="text-center">

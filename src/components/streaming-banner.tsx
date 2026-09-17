@@ -23,7 +23,7 @@ export const streamingPlatforms = [
   },
   {
     name: "TuneIn",
-    icon: "https://cdn.simpleicons.org/tunein/14D8CC",
+    icon: "/assets/tunin-logo.jpeg",
     url: "https://tunein.com/radio/Imland-Radio-s357176/",
   },
   {

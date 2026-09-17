@@ -176,6 +176,7 @@ function AlertPage() {
         src={heroAlert}
         srcMobile={heroAlertMobile}
         alt="ALERT — Segnala ciò che accade nel territorio"
+        claim="Segnala ciò che accade nel territorio"
         ctaTop="64%"
         flush
         mobileBg="#FF0000"

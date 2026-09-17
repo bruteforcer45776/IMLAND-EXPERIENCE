@@ -208,6 +208,7 @@ function TerrainPage() {
         src={heroTerrain}
         srcMobile={heroTerrainMobile}
         alt="TERRAIN — La mappa del territorio IMLAND"
+        claim="La mappa del territorio IMLAND"
         ctaTop="64%"
         flush
         mobileBg="#A0522D"

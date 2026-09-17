@@ -115,7 +115,7 @@ function ProgramPage() {
 
   return (
     <>
-      <section className="section-atmosphere overflow-hidden">
+      <section className="hero-frame section-atmosphere overflow-hidden">
         <div className="container-im hero-pad">
           <Link
             to="/podcast"
