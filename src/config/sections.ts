@@ -9,6 +9,9 @@
 import type { CSSProperties } from "react";
 
 import logoExperience from "@/assets/imland-experience-principale.webp";
+import logoRadio from "@/assets/imland-radio-principale.svg";
+import logoEventi from "@/assets/imland-eventi-principale.svg";
+import logoPodcast from "@/assets/imland-podcast-principale.svg";
 
 export type SectionKey = "default" | "radio" | "podcast" | "member" | "eventi" | "news";
 
@@ -41,7 +44,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "radio",
     label: "Radio",
     prefix: "/radio",
-    logo: { url: logoExperience, alt: "IMLAND RADIO" },
+    logo: { url: logoRadio, alt: "IMLAND RADIO" },
     theme: {
       signal: "#0aa2cf",
       signalStrong: "#077ea1",
@@ -55,7 +58,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "podcast",
     label: "Podcast",
     prefix: "/podcast",
-    logo: { url: logoExperience, alt: "IMLAND PODCAST" },
+    logo: { url: logoPodcast, alt: "IMLAND PODCAST" },
     theme: {
       signal: "#1646d8",
       signalStrong: "#1646d8",
@@ -97,7 +100,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "eventi",
     label: "Eventi",
     prefix: "/eventi",
-    logo: { url: logoExperience, alt: "IMLAND EVENTI" },
+    logo: { url: logoEventi, alt: "IMLAND EVENTI" },
     theme: {
       signal: "#12a531",
       signalStrong: "#0e8728",
