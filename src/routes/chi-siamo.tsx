@@ -16,6 +16,7 @@ export const Route = createFileRoute("/chi-siamo")({
         content:
           "IMLAND EXPERIENCE unisce musica, radio, podcast ed eventi a Vercelli, Novara, Biella e Verbania. Scopri il team e la nostra missione sul territorio.",
       },
+      { name: "robots", content: "index, follow, noimageindex" },
       { name: "geo.region", content: "IT-PIE" },
       { property: "og:title", content: "Chi siamo — IMLAND EXPERIENCE" },
       {

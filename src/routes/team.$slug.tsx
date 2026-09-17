@@ -33,6 +33,7 @@ export const Route = createFileRoute("/team/$slug")({
       meta: [
         { title },
         { name: "description", content: description },
+        { name: "robots", content: "index, follow, noimageindex" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:image", content: OG_IMAGE },
