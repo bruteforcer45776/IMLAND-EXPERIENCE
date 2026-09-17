@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { WHATSAPP_MEMBER_URL } from "@/lib/whatsapp";
 import { Accessibility, Bot, Send, X, Type, Minus, Plus, Contrast, ZapOff } from "lucide-react";
 import { CHAT_LIMIT, CHAT_MAX_CHARS, CHAT_WINDOW_MS } from "@/lib/chat-policy";
+import { usePlayer } from "./player-context";
 
 // WhatsApp icon (replace number below with the real business number)
 
@@ -201,7 +202,7 @@ export function StickyActions() {
 type ChatMessage = { id: string; role: "user" | "assistant"; text: string };
 
 function AiChatbot() {
-  const [chatOpen, setChatOpen] = useState(false);
+  const { chatOpen, setChatOpen } = usePlayer();
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [remaining, setRemaining] = useState(CHAT_LIMIT);
@@ -364,7 +365,7 @@ function AiChatbot() {
 
       <button
         type="button"
-        onClick={() => setChatOpen((value) => !value)}
+        onClick={() => setChatOpen(!chatOpen)}
         aria-expanded={chatOpen}
         aria-controls={panelId}
         aria-label={chatOpen ? "Chiudi chatbot AI" : "Apri chatbot AI"}

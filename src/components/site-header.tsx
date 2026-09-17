@@ -5,6 +5,7 @@ import { Search, ChevronDown, Download, LogOut } from "lucide-react";
 import { getSectionConfig } from "@/config/sections";
 import { WHATSAPP_MEMBER_URL } from "@/lib/whatsapp";
 import { useAuth } from "@/hooks/use-auth";
+import { usePlayer } from "./player-context";
 
 function useCurrentSection() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -40,7 +41,7 @@ export function SiteHeader() {
   const section = useCurrentSection();
   const logo = section.logo;
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const { menuOpen: open, setMenuOpen: setOpen } = usePlayer();
   const [scrolled, setScrolled] = useState(false);
   const [query, setQuery] = useState("");
   const { user, profile, signOut } = useAuth();
@@ -70,15 +71,6 @@ export function SiteHeader() {
     setQuery("");
     navigate({ to: "/cerca", search: { q } });
   };
-
-  useEffect(() => {
-    if (!open) return;
-    const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = original;
-    };
-  }, [open]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -137,7 +129,7 @@ export function SiteHeader() {
             </Link>
 
             <button
-              onClick={() => setOpen((v) => !v)}
+              onClick={() => setOpen(!open)}
               aria-label="Menu"
               aria-expanded={open}
               className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 md:h-11 md:w-11"
@@ -156,17 +148,14 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* Mobile full-height panel: montato solo quando aperto, così
-          nessun link resta focalizzabile a menu chiuso. */}
+      {/* Pannello compatto ancorato all'header su ogni breakpoint. */}
       {open && (
         <div className="fixed inset-0 z-50 pointer-events-auto opacity-100 animate-enter">
-          <div className="absolute inset-0 bg-black/30" onClick={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-black/10" onClick={() => setOpen(false)} />
           <aside
-            className={`absolute inset-x-0 top-0 bottom-0 flex h-full flex-col bg-white transition-transform duration-300 ease-out lg:left-auto lg:w-[420px] lg:max-w-[92vw] lg:border-l lg:border-border ${
-              open ? "translate-y-0" : "-translate-y-full"
-            }`}
-            data-full-panel
+            className="absolute right-3 top-[calc(4.5rem+env(safe-area-inset-top))] flex max-h-[calc(100dvh-5.5rem-env(safe-area-inset-top))] w-[min(26.25rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white/95 shadow-[0_22px_56px_rgba(1,29,104,0.18)] backdrop-blur-xl md:right-5 md:top-[calc(5rem+env(safe-area-inset-top))]"
             role="dialog"
+            aria-modal="true"
             aria-label="Menu di navigazione"
           >
             <div className="flex h-16 items-center justify-between border-b border-border px-4">
