@@ -9,8 +9,8 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../compon
 import { Play } from "lucide-react";
 import { HeroBanner } from "../components/hero-banner";
 
-import heroRadio from "@/assets/hero-radio-team-desktop.png";
-import heroRadioMobile from "@/assets/hero-radio-team-mobile.png";
+import heroRadio from "@/assets/hero-radio-team-desktop.webp";
+import heroRadioMobile from "@/assets/hero-radio-team-mobile.webp";
 import { PageRails } from "../components/decor";
 import {
   Accordion,

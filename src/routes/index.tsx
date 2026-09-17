@@ -81,8 +81,8 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       canonical("/"),
-      { rel: "preload", as: "image", href: "/hero-carousel/vercelli-mobile.png", media: "(max-width: 639px) and (orientation: portrait)", fetchPriority: "high" },
-      { rel: "preload", as: "image", href: "/hero-carousel/vercelli-desktop.png", media: "(min-width: 640px), (orientation: landscape)", fetchPriority: "high" },
+      { rel: "preload", as: "image", href: "/assets/hero-carousel/vercelli-mobile-1.webp", type: "image/webp", media: "(max-width: 639px) and (orientation: portrait)", fetchPriority: "high" },
+      { rel: "preload", as: "image", href: "/assets/hero-carousel/vercelli-desktop-1.webp", type: "image/webp", media: "(min-width: 640px), (orientation: landscape)", fetchPriority: "high" },
     ],
 
     scripts: [jsonLd(organizationLd), jsonLd(websiteLd)],

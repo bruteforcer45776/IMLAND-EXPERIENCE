@@ -10,8 +10,8 @@ import { HeroBanner } from "../components/hero-banner";
 
 import { SectionSearch } from "../components/section-search";
 import { BentoGrid, BentoLinkCard } from "../components/bento";
-import heroPodcast from "@/assets/hero-podcast-team-desktop.png";
-import heroPodcastMobile from "@/assets/hero-podcast-team-mobile.png";
+import heroPodcast from "@/assets/hero-podcast-team-desktop.webp";
+import heroPodcastMobile from "@/assets/hero-podcast-team-mobile.webp";
 import { PageRails } from "../components/decor";
 import {
   programs,

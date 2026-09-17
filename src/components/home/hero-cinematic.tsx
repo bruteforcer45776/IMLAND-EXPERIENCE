@@ -2,10 +2,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const slides = [
-  { city: "Vercelli", desktop: "/hero-carousel/vercelli-desktop.png", mobile: "/hero-carousel/vercelli-mobile.png", desktopPosition: "50% 24%", mobilePosition: "50% 12%" },
-  { city: "Verbania", desktop: "/hero-carousel/verbania-desktop.png", mobile: "/hero-carousel/verbania-mobile.png", desktopPosition: "50% 24%", mobilePosition: "50% 10%" },
-  { city: "Novara", desktop: "/hero-carousel/novara-desktop.png", mobile: "/hero-carousel/novara-mobile.png", desktopPosition: "50% 20%", mobilePosition: "50% 9%" },
-  { city: "Biella", desktop: "/hero-carousel/biella-desktop.png", mobile: "/hero-carousel/biella-mobile.png", desktopPosition: "50% 22%", mobilePosition: "50% 10%" },
+  { city: "Vercelli", desktop: "/assets/hero-carousel/vercelli-desktop-1.webp", mobile: "/assets/hero-carousel/vercelli-mobile-1.webp", desktopPosition: "50% 24%", mobilePosition: "50% 12%" },
+  { city: "Verbania", desktop: "/assets/hero-carousel/verbania-desktop-1.webp", mobile: "/assets/hero-carousel/verbania-mobile-1.webp", desktopPosition: "50% 24%", mobilePosition: "50% 10%" },
+  { city: "Novara", desktop: "/assets/hero-carousel/novara-desktop-1.webp", mobile: "/assets/hero-carousel/novara-mobile-1.webp", desktopPosition: "50% 20%", mobilePosition: "50% 9%" },
+  { city: "Biella", desktop: "/assets/hero-carousel/biella-desktop-1.webp", mobile: "/assets/hero-carousel/biella-mobile-1.webp", desktopPosition: "50% 22%", mobilePosition: "50% 10%" },
 ] as const;
 
 export function HeroCinematic() {

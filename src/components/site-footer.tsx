@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
-import logoBlack from "@/assets/imland-experience-principale.png";
+import logoBlack from "@/assets/imland-experience-principale.webp";
 
 const provinces = ["Vercelli", "Novara", "Biella", "Verbania (VCO)"];
 

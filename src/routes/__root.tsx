@@ -185,14 +185,14 @@ function RootComponent() {
   const usesSpectrumFrame = section.key === "default";
   const editorialFrame =
     usesSpectrumFrame
-      ? { tone: "home", src: "/backgrounds/imland-home-spectrum-desktop.png" }
+      ? { tone: "home", src: "/backgrounds/imland-home-spectrum-desktop.webp" }
       : section.key === "eventi"
-      ? { tone: "green", src: "/backgrounds/imland-frame-green.png" }
+      ? { tone: "green", src: "/backgrounds/imland-frame-green.webp" }
       : section.key === "member"
-        ? { tone: "yellow", src: "/backgrounds/imland-frame-yellow.png" }
+        ? { tone: "yellow", src: "/backgrounds/imland-frame-yellow.webp" }
         : section.key === "news"
-          ? { tone: "red", src: "/backgrounds/imland-frame-red.png" }
-          : { tone: "blue", src: "/backgrounds/imland-frame-blue.png" };
+          ? { tone: "red", src: "/backgrounds/imland-frame-red.webp" }
+          : { tone: "blue", src: "/backgrounds/imland-frame-blue.webp" };
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -206,11 +206,11 @@ function RootComponent() {
             <div className="editorial-frame-backdrop" aria-hidden="true">
               {usesSpectrumFrame ? (
                 <picture>
-                  <source media="(max-width: 47.999rem)" srcSet="/backgrounds/imland-home-spectrum-mobile.png" />
-                  <img src={editorialFrame.src} alt="" />
+                  <source media="(max-width: 47.999rem)" srcSet="/backgrounds/imland-home-spectrum-mobile.webp" type="image/webp" />
+                  <img src={editorialFrame.src} alt="" decoding="async" fetchPriority="low" />
                 </picture>
               ) : (
-                <img src={editorialFrame.src} alt="" />
+                <img src={editorialFrame.src} alt="" decoding="async" fetchPriority="low" />
               )}
             </div>
             <div className="editorial-frame-canvas">

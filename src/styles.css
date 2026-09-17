@@ -2921,21 +2921,21 @@ h6 {
 .home-territory-grid > :nth-child(3n + 1),
 .home-podcast-grid > :nth-child(3n + 1),
 .home-events-grid > :nth-child(3n + 1) .card-im {
-  background-image: url("/assets/editorial-territory/borgo-alpi.png") !important;
+  background-image: url("/assets/editorial-territory/borgo-alpi.webp") !important;
 }
 
 .home-feature-grid > :nth-child(3n + 2),
 .home-territory-grid > :nth-child(3n + 2),
 .home-podcast-grid > :nth-child(3n + 2),
 .home-events-grid > :nth-child(3n + 2) .card-im {
-  background-image: url("/assets/editorial-territory/lago-maggiore.png") !important;
+  background-image: url("/assets/editorial-territory/lago-maggiore.webp") !important;
 }
 
 .home-feature-grid > :nth-child(3n),
 .home-territory-grid > :nth-child(3n),
 .home-podcast-grid > :nth-child(3n),
 .home-events-grid > :nth-child(3n) .card-im {
-  background-image: url("/assets/editorial-territory/colline-borgo.png") !important;
+  background-image: url("/assets/editorial-territory/colline-borgo.webp") !important;
 }
 
 .home-feature-grid > * :is(p, h3, span, svg),
@@ -3980,4 +3980,53 @@ h6 {
 
 .podcast-team-hero .cta-light {
   color: var(--color-ink) !important;
+}
+
+/* Standard globale: ruoli tipografici e controlli restano coerenti a ogni breakpoint. */
+body {
+  font-size: var(--type-body, 1rem);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+:where(h1, .text-h1-im, .text-display-l, .text-display-m) {
+  line-height: 1.02 !important;
+  letter-spacing: -0.035em !important;
+}
+
+:where(h2, .text-h2-im, .text-display-s, .text-title-l) {
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
+}
+
+:where(h3, .text-h3-im, .text-title-m) {
+  line-height: 1.18 !important;
+  letter-spacing: -0.015em !important;
+}
+
+:where(.text-xs) {
+  font-size: var(--type-caption, 0.8125rem) !important;
+  line-height: 1.4 !important;
+}
+
+:where(button, input, select, textarea) {
+  font: inherit;
+}
+
+:where(button, input, select, textarea, [role="button"]) {
+  font-size: max(0.875rem, 1em);
+}
+
+:where(main) :where(p, li, dd) {
+  text-wrap: pretty;
+}
+
+:where(main) :where(p, ul, ol, dl):not([class*="max-w-"]) {
+  max-width: 72ch;
+}
+
+@media (max-width: 47.999rem) {
+  :where(main) :where(p, li, dd) {
+    overflow-wrap: anywhere;
+  }
 }

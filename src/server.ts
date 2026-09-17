@@ -39,6 +39,8 @@ const IMMUTABLE_ASSET_RE =
   /^\/(?:assets|icons|logos|brand|__l5e\/assets-v1)\/.+\.(?:avif|webp|png|jpe?g|gif|svg|ico|css|js|mjs|woff2?)$/i;
 const PUBLIC_STATIC_RE =
   /^\/(?:favicon\.ico|favicon\.png|apple-touch-icon\.png|icon-\d+\.png|icon-maskable-\d+\.png|manifest\.webmanifest|robots\.txt|sitemap\.xml|llms\.txt)$/i;
+const PUBLIC_MEDIA_RE =
+  /^\/(?:backgrounds|hero-carousel|podcast-covers)\/.+\.(?:avif|webp|png|jpe?g|gif|svg)$/i;
 
 function withPerformanceHeaders(request: Request, response: Response): Response {
   const url = new URL(request.url);
@@ -49,7 +51,7 @@ function withPerformanceHeaders(request: Request, response: Response): Response 
   if (response.status >= 200 && response.status < 400) {
     if (IMMUTABLE_ASSET_RE.test(url.pathname)) {
       headers.set("cache-control", "public, max-age=31536000, immutable");
-    } else if (PUBLIC_STATIC_RE.test(url.pathname)) {
+    } else if (PUBLIC_STATIC_RE.test(url.pathname) || PUBLIC_MEDIA_RE.test(url.pathname)) {
       headers.set("cache-control", "public, max-age=86400, stale-while-revalidate=604800");
     } else if (url.pathname.startsWith("/_server/") || url.pathname.startsWith("/_build/")) {
       headers.set("cache-control", "public, max-age=31536000, immutable");
