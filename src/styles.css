@@ -14,17 +14,13 @@
 }
 
 .hero-sand-overlay {
-  background:
-    radial-gradient(circle at 18% 22%, rgb(255 255 255 / 14%) 0 0.7px, transparent 0.9px),
-    radial-gradient(circle at 73% 61%, rgb(255 255 255 / 10%) 0 0.6px, transparent 0.85px),
-    linear-gradient(180deg, rgb(2 12 28 / 44%), rgb(2 12 28 / 58%));
-  background-size:
-    3px 3px,
-    4px 4px,
-    100% 100%;
-  box-shadow: inset 0 0 9rem rgb(0 7 24 / 38%);
-  -webkit-backdrop-filter: blur(0.7px);
-  backdrop-filter: blur(0.7px);
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 82%) 0%,
+    rgb(0 0 0 / 48%) 38%,
+    rgb(0 0 0 / 12%) 72%,
+    transparent 100%
+  );
 }
 
 @media (max-width: 639px) and (orientation: portrait) {
@@ -38,14 +34,13 @@
   }
 
   .hero-sand-overlay {
-    background:
-      radial-gradient(circle at 18% 22%, rgb(255 255 255 / 12%) 0 0.7px, transparent 0.9px),
-      radial-gradient(circle at 73% 61%, rgb(255 255 255 / 9%) 0 0.6px, transparent 0.85px),
-      linear-gradient(180deg, rgb(2 12 28 / 48%), rgb(2 12 28 / 65%));
-    background-size:
-      3px 3px,
-      4px 4px,
-      100% 100%;
+    background: linear-gradient(
+      to top,
+      rgb(0 0 0 / 86%) 0%,
+      rgb(0 0 0 / 52%) 42%,
+      rgb(0 0 0 / 14%) 76%,
+      transparent 100%
+    );
   }
 }
 
