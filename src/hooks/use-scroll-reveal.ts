@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export function useScrollReveal() {
   const [visible, setVisible] = useState(true);
   const previousY = useRef(0);
+  const directionDistance = useRef(0);
 
   useEffect(() => {
     previousY.current = window.scrollY;
@@ -12,8 +13,25 @@ export function useScrollReveal() {
       const currentY = Math.max(0, window.scrollY);
       const delta = currentY - previousY.current;
 
-      if (currentY < 80 || delta < -6) setVisible(true);
-      else if (delta > 8 && currentY > 140) setVisible(false);
+      if (
+        (delta > 0 && directionDistance.current < 0) ||
+        (delta < 0 && directionDistance.current > 0)
+      ) {
+        directionDistance.current = delta;
+      } else {
+        directionDistance.current += delta;
+      }
+
+      if (currentY < 80) {
+        setVisible(true);
+        directionDistance.current = 0;
+      } else if (directionDistance.current > 24 && currentY > 140) {
+        setVisible(false);
+        directionDistance.current = 0;
+      } else if (directionDistance.current < -18) {
+        setVisible(true);
+        directionDistance.current = 0;
+      }
 
       previousY.current = currentY;
       frame = 0;

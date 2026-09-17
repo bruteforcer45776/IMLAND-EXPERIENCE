@@ -44,12 +44,13 @@ function AiChatbot() {
   const [sending, setSending] = useState(false);
   const [remaining, setRemaining] = useState(CHAT_LIMIT);
   const [guideMode, setGuideMode] = useState(true);
+  const [aiAcknowledged, setAiAcknowledged] = useState(false);
   const quotaRef = useRef({ count: 0, resetAt: 0 });
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
       role: "assistant",
-      text: "Ciao! Sono l’assistente IMLAND. Posso aiutarti a trovare radio, podcast, eventi, news e informazioni per diventare Member.",
+      text: "Ciao! Sono un Assistente AI di IMLAND. Posso aiutarti a trovare contenuti e attività presenti sul sito, ma le mie risposte possono contenere errori.",
     },
   ]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,18 +76,18 @@ function AiChatbot() {
 
   useEffect(() => {
     if (!chatOpen) return;
-    inputRef.current?.focus();
+    if (aiAcknowledged) inputRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setChatOpen(false);
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [chatOpen, setChatOpen]);
+  }, [aiAcknowledged, chatOpen, setChatOpen]);
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     const text = input.trim();
-    if (!text || text.length > CHAT_MAX_CHARS || sending) return;
+    if (!aiAcknowledged || !text || text.length > CHAT_MAX_CHARS || sending) return;
     const now = Date.now();
     if (quotaRef.current.resetAt <= now)
       quotaRef.current = { count: 0, resetAt: now + CHAT_WINDOW_MS };
@@ -118,6 +119,7 @@ function AiChatbot() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           text,
+          aiAcknowledged: true,
         }),
         signal: AbortSignal.timeout(15000),
       });
@@ -164,7 +166,7 @@ function AiChatbot() {
                 <Bot size={20} aria-hidden />
               </span>
               <div>
-                <h2 className="font-display text-base font-bold">Assistente IMLAND</h2>
+                <h2 className="font-display text-base font-bold">Assistente AI IMLAND</h2>
                 <p className="text-xs text-white/70">
                   {guideMode ? "Guida rapida" : "Risposte rapide"} · {remaining} richieste
                   disponibili
@@ -214,28 +216,49 @@ function AiChatbot() {
             )}
           </div>
 
-          <form onSubmit={submit} className="flex items-center gap-2 border-t border-white/10 p-3">
-            <label htmlFor={`${panelId}-input`} className="sr-only">
-              Scrivi un messaggio
+          <form onSubmit={submit} className="border-t border-white/10 p-3">
+            <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 text-sm leading-relaxed text-white">
+              <input
+                type="checkbox"
+                checked={aiAcknowledged}
+                onChange={(event) => setAiAcknowledged(event.target.checked)}
+                className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--im-blue)]"
+                required
+              />
+              <span>
+                Ho compreso che sto parlando con un <strong>Assistente AI</strong>, non con una
+                persona, e che le risposte possono contenere errori. Ho preso visione della{" "}
+                <a href="/privacy" className="font-semibold underline underline-offset-4">
+                  Privacy Policy
+                </a>
+                .
+              </span>
             </label>
-            <input
-              ref={inputRef}
-              id={`${panelId}-input`}
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              placeholder="Chiedi a IMLAND…"
-              maxLength={CHAT_MAX_CHARS}
-              className="h-11 min-w-0 flex-1 rounded-full border border-white/10 bg-white/10 px-4 text-base text-white outline-none placeholder:text-white/70 focus:border-white/35"
-              disabled={sending}
-            />
-            <button
-              type="submit"
-              aria-label="Invia messaggio"
-              disabled={sending || !input.trim()}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-im-blue text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-            >
-              <Send size={18} aria-hidden />
-            </button>
+            <div className="flex items-center gap-2">
+              <label htmlFor={`${panelId}-input`} className="sr-only">
+                Scrivi un messaggio
+              </label>
+              <input
+                ref={inputRef}
+                id={`${panelId}-input`}
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                placeholder={
+                  aiAcknowledged ? "Chiedi a IMLAND…" : "Prima conferma la presa visione"
+                }
+                maxLength={CHAT_MAX_CHARS}
+                className="h-11 min-w-0 flex-1 rounded-full border border-white/10 bg-white/10 px-4 text-base text-white outline-none placeholder:text-white/70 focus:border-white/35 disabled:cursor-not-allowed disabled:opacity-50"
+                disabled={sending || !aiAcknowledged}
+              />
+              <button
+                type="submit"
+                aria-label="Invia messaggio"
+                disabled={sending || !aiAcknowledged || !input.trim()}
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-im-blue text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <Send size={18} aria-hidden />
+              </button>
+            </div>
           </form>
         </section>
       )}

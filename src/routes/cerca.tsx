@@ -1,10 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { z } from "zod";
 
 import { canonical } from "../lib/seo";
 import { searchAll, searchKindLabel, type SearchItem, type SearchKind } from "../data/search-index";
+import { isSupabaseConfigured, supabase } from "../integrations/supabase/client";
 
 const searchSchema = z.object({ q: z.string().optional() });
 
@@ -37,6 +39,10 @@ const filters: { key: SearchKind | "tutti"; label: string }[] = [
   { key: "podcast", label: "Canali" },
   { key: "episodio", label: "Episodi" },
   { key: "evento", label: "Eventi" },
+  { key: "news", label: "News" },
+  { key: "member", label: "Member" },
+  { key: "luogo", label: "Mappa" },
+  { key: "lavoro", label: "Lavoro" },
   { key: "partner", label: "Partner" },
   { key: "pagina", label: "Sezioni" },
 ];
@@ -93,8 +99,61 @@ function SearchPage() {
   const [value, setValue] = useState(q ?? "");
   const [kind, setKind] = useState<SearchKind | "tutti">("tutti");
 
+  const { data: liveItems = [] } = useQuery({
+    queryKey: ["global-search-live-index"],
+    enabled: isSupabaseConfigured(),
+    staleTime: 5 * 60_000,
+    queryFn: async (): Promise<SearchItem[]> => {
+      const [news, places, jobs] = await Promise.all([
+        supabase
+          .from("news_articles")
+          .select("slug,title,summary,category_slug,published_at")
+          .eq("status", "published")
+          .limit(100),
+        supabase
+          .from("terrain_places")
+          .select("slug,name,category,description,comune,province")
+          .eq("status", "published")
+          .limit(300),
+        supabase
+          .from("job_posts")
+          .select("slug,title,company_name,sector,description,comune,province")
+          .eq("status", "published")
+          .limit(150),
+      ]);
+
+      return [
+        ...(news.data ?? []).map<SearchItem>((item) => ({
+          kind: "news",
+          title: item.title,
+          subtitle: item.summary ?? "Notizia pubblicata da IMLAND Experience.",
+          meta: item.category_slug ?? "News",
+          to: `/news/${item.slug}`,
+        })),
+        ...(places.data ?? []).map<SearchItem>((item) => ({
+          kind: "luogo",
+          title: item.name,
+          subtitle: item.description ?? "Attività presente sulla mappa del territorio.",
+          meta: [item.category, item.comune, item.province].filter(Boolean).join(" · "),
+          to: `/terrain/${item.slug}`,
+          tags: [item.category, item.comune, item.province].filter(Boolean),
+        })),
+        ...(jobs.data ?? []).map<SearchItem>((item) => ({
+          kind: "lavoro",
+          title: item.title,
+          subtitle: item.description ?? `Opportunità pubblicata da ${item.company_name}.`,
+          meta: [item.company_name, item.sector, item.comune, item.province]
+            .filter(Boolean)
+            .join(" · "),
+          to: `/jobs/${item.slug}`,
+          tags: [item.company_name, item.sector, item.comune, item.province].filter(Boolean),
+        })),
+      ];
+    },
+  });
+
   const query = q ?? "";
-  const results = useMemo(() => searchAll(query, 60), [query]);
+  const results = useMemo(() => searchAll(query, 60, liveItems), [liveItems, query]);
   const shown = kind === "tutti" ? results : results.filter((r) => r.kind === kind);
 
   return (
@@ -111,7 +170,7 @@ function SearchPage() {
         Cerca in tutto <span className="im-gradient-text">IMLAND</span>.
       </h1>
       <p className="mt-3 max-w-2xl text-muted-foreground">
-        Podcast, episodi, eventi, aziende partner e sezioni del sito.
+        Podcast, episodi, eventi, news, Member, attività sulla mappa, lavoro e pagine del sito.
         <br />
         Una sola barra per tutti i contenuti.
       </p>
