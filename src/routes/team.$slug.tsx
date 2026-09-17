@@ -8,6 +8,7 @@ import { BrandIcon } from "../components/brand-icons";
 import { getTeamMember, teamMembers, type TeamMember } from "../data/team-members";
 import { podcastPrograms, type PodcastProgram } from "../data/podcast-programs";
 import { BentoGrid, BentoCard } from "../components/bento";
+import { canonical, OG_IMAGE } from "../lib/seo";
 
 export const Route = createFileRoute("/team/$slug")({
   loader: ({ params }) => {
@@ -34,9 +35,12 @@ export const Route = createFileRoute("/team/$slug")({
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
-        { property: "og:image", content: member.photo },
+        { property: "og:image", content: OG_IMAGE },
+        { property: "og:image:alt", content: "IMLAND Experience e il territorio" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: OG_IMAGE },
       ],
-      links: [{ rel: "canonical", href: `/team/${member.slug}` }],
+      links: [canonical(`/team/${member.slug}`)],
     };
   },
   component: TeamMemberPage,

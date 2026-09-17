@@ -4,6 +4,7 @@ import { ArrowRight, Check, Copy, Download, X } from "lucide-react";
 
 import { SECTIONS, DEFAULT_SECTION } from "../config/sections";
 import phoneMockup from "../assets/phone-mockup-imland-opt.webp";
+import { canonical } from "../lib/seo";
 
 export const Route = createFileRoute("/brand")({
   head: () => ({
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/brand")({
         content: "Il sistema visivo IMLAND in una pagina: loghi, colori, icone e regole d'uso.",
       },
     ],
+    links: [canonical("/brand")],
   }),
   component: BrandPage,
 });

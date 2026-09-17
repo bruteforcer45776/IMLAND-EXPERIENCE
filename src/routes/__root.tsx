@@ -25,6 +25,7 @@ import { FeedbackPopup } from "../components/feedback-popup";
 import { Toaster } from "sonner";
 import { AuthProvider } from "../hooks/use-auth";
 import { getSectionConfig, sectionCssVars } from "../config/sections";
+import { OG_IMAGE } from "../lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -113,13 +114,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         property: "og:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/P0C1ClGWD4YD0lkRvi88JtyEBWr2/social-images/social-1783652683370-Gemini_Generated_Image_7lk1k17lk1k17lk1-removebg-preview.webp",
+        content: OG_IMAGE,
       },
+      { property: "og:image:alt", content: "IMLAND Experience e il territorio di Vercelli" },
       {
         name: "twitter:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/P0C1ClGWD4YD0lkRvi88JtyEBWr2/social-images/social-1783652683370-Gemini_Generated_Image_7lk1k17lk1k17lk1-removebg-preview.webp",
+        content: OG_IMAGE,
       },
       { name: "theme-color", content: "#ffffff" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
@@ -139,8 +139,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", sizes: "512x512", href: "/icon-512.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
 
-      { rel: "preconnect", href: "https://imlandradio.it", crossOrigin: "anonymous" },
-      { rel: "dns-prefetch", href: "https://imlandradio.it" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

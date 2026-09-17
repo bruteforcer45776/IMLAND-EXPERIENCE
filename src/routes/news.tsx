@@ -63,8 +63,8 @@ function NewsCard({ article, member = false }: { article: Article; member?: bool
 
 function AdvCard() {
   return (
-    <article className="theme-member flex min-h-[320px] flex-col justify-between rounded-[28px] border border-signal/30 bg-signal p-6 text-signal-foreground">
-      <span className="inline-flex w-fit items-center gap-2 rounded-full bg-black/15 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em]"><Megaphone className="h-4 w-4" aria-hidden /> ADV</span>
+    <article className="flex min-h-[320px] flex-col justify-between rounded-[28px] border border-black bg-black p-6 text-white">
+      <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em]"><Megaphone className="h-4 w-4" aria-hidden /> ADV</span>
       <div>
         <h3 className="font-display text-2xl font-bold leading-tight">Comunica le novità della tua attività? Questo spazio può essere tuo.</h3>
         <Link to="/contatti" className="mt-5 inline-flex items-center gap-1 rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink-950">Contattaci <ArrowRight className="h-4 w-4" aria-hidden /></Link>
@@ -133,9 +133,9 @@ function NewsPage() {
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
   return (
-    <main className="min-w-0 overflow-x-clip">
+    <main className="theme-news min-w-0 overflow-x-clip">
       <NewsDisclaimerModal />
-      <header className="hero-frame min-w-0 section-pad px-6 text-center md:px-10">
+      <header className="hero-frame min-w-0 border border-border bg-white section-pad px-6 text-center md:px-10">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">IMLAND News</p>
         <h1 className="mx-auto mt-4 max-w-4xl break-words text-display-m text-ink-950">Le notizie che raccontano il territorio.</h1>
       </header>
@@ -149,11 +149,11 @@ function NewsPage() {
           </div>
         </div>
       </section>
-      <section className="theme-member section-editorial">
+      <section className="theme-news section-editorial">
         <div className="container-im section-pad-sm">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div><p className="text-xs font-bold uppercase tracking-[0.18em] text-signal">News dei Member</p><h2 className="mt-3 text-h2-im text-ink-950">Lo spazio esclusivo dedicato ai Member.</h2></div>
-            <span className="rounded-full bg-signal px-4 py-2 text-xs font-bold uppercase tracking-wider text-signal-foreground">Esclusivo Member</span>
+            <span className="rounded-full bg-black px-4 py-2 text-xs font-bold uppercase tracking-wider text-white">Esclusivo Member</span>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {memberNews.map((article) => <NewsCard key={article.id} article={article} member />)}

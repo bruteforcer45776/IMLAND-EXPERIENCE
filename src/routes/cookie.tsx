@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SectionDecor } from "../components/decor";
+import { canonical } from "../lib/seo";
 
 export const Route = createFileRoute("/cookie")({
   head: () => ({
@@ -16,6 +17,7 @@ export const Route = createFileRoute("/cookie")({
         content: "Cookie policy IMLAND ai sensi del GDPR e della normativa italiana.",
       },
     ],
+    links: [canonical("/cookie")],
   }),
   component: CookiePage,
 });

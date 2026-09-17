@@ -18,6 +18,8 @@ export type SectionKey = "default" | "radio" | "podcast" | "member" | "eventi" |
 export type SectionTheme = {
   /** colore dominante: CTA, link, accenti */
   signal: string;
+  /** colore secondario della verticale: CTA alternative e accenti di supporto */
+  secondary: string;
   /** variante scura AA-safe: sfondo dei bottoni con testo bianco */
   signalStrong: string;
   /** variante scura AA-safe: testo/icone del colore su fondo bianco */
@@ -47,11 +49,12 @@ export const SECTIONS: SectionConfig[] = [
     logo: { url: logoRadio, alt: "IMLAND RADIO" },
     theme: {
       signal: "#0aa2cf",
+      secondary: "#1646d8",
       signalStrong: "#077ea1",
       signalInk: "#076d8c",
       signalForeground: "#ffffff",
       signalGlow: "#bfeeff",
-      horizon: "#7fdcf5",
+      horizon: "#1646d8",
     },
   },
   {
@@ -61,11 +64,12 @@ export const SECTIONS: SectionConfig[] = [
     logo: { url: logoPodcast, alt: "IMLAND PODCAST" },
     theme: {
       signal: "#1646d8",
+      secondary: "#16bff2",
       signalStrong: "#1646d8",
       signalInk: "#1646d8",
       signalForeground: "#ffffff",
       signalGlow: "#c8d6ff",
-      horizon: "#9db4ff",
+      horizon: "#16bff2",
     },
   },
   {
@@ -75,11 +79,12 @@ export const SECTIONS: SectionConfig[] = [
     logo: { url: logoExperience, alt: "IMLAND MEMBER" },
     theme: {
       signal: "#e0a800",
+      secondary: "#ff7a00",
       signalStrong: "#e0a800",
       signalInk: "#8a6700",
       signalForeground: "#0b0c0f",
       signalGlow: "#ffe9a3",
-      horizon: "#ffd75e",
+      horizon: "#ff7a00",
     },
   },
   {
@@ -89,11 +94,12 @@ export const SECTIONS: SectionConfig[] = [
     logo: { url: logoExperience, alt: "IMLAND NEWS" },
     theme: {
       signal: "#e21d2f",
+      secondary: "#101114",
       signalStrong: "#c91627",
       signalInk: "#b51222",
       signalForeground: "#ffffff",
       signalGlow: "#ffd5da",
-      horizon: "#ff8995",
+      horizon: "#101114",
     },
   },
   {
@@ -103,6 +109,7 @@ export const SECTIONS: SectionConfig[] = [
     logo: { url: logoEventi, alt: "IMLAND EVENTI" },
     theme: {
       signal: "#12a531",
+      secondary: "#0e8728",
       signalStrong: "#0e8728",
       signalInk: "#0e7d25",
       signalForeground: "#ffffff",
@@ -119,6 +126,7 @@ export const DEFAULT_SECTION: SectionConfig = {
   logo: { url: logoExperience, alt: "IMLAND EXPERIENCE" },
   theme: {
     signal: "#1a73e8",
+    secondary: "#101114",
     signalStrong: "#1668d4",
     signalInk: "#1668d4",
     signalForeground: "#ffffff",
@@ -146,6 +154,7 @@ export function sectionCssVars(section: SectionConfig): CSSProperties {
   const t = section.theme;
   return {
     "--signal": t.signal,
+    "--signal-secondary": t.secondary,
     "--signal-strong": t.signalStrong,
     "--signal-ink": t.signalInk,
     "--signal-foreground": t.signalForeground,

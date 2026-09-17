@@ -11,6 +11,11 @@ import { HeroBanner } from "../components/hero-banner";
 
 import heroRadio from "@/assets/hero-radio-team-desktop.webp";
 import heroRadioMobile from "@/assets/hero-radio-team-mobile.webp";
+import barInOndaCover from "@/assets/bar-in-onda.webp";
+import imlandChartsCover from "@/assets/imland-charts.webp";
+import musicalBoxCover from "@/assets/musical-box.webp";
+import schemaLiberoCover from "@/assets/schema-libero.webp";
+import seCiSeiCover from "@/assets/se-ci-sei-batti-un-colpo.webp";
 import { PageRails } from "../components/decor";
 import {
   Accordion,
@@ -51,7 +56,6 @@ export const Route = createFileRoute("/radio")({
   component: RadioPage,
 });
 
-const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
 const daysLong = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"];
 // JS getDay(): 0=Sun..6=Sat → map to our 0=Mon..6=Sun
 const todayIndex = (() => {
@@ -67,7 +71,7 @@ const schedule: Entry[][] = [
   [
     { time: "07:00 – 08:00", show: "Se Ci Sei Batti un Colpo" },
     { time: "08:00 – 18:00", show: "Imland Music Selection", music: true },
-    { time: "18:00 – 19:00", show: "Barinonda" },
+    { time: "18:00 – 19:00", show: "Bar in Onda" },
     { time: "19:00 – 23:59", show: "Imland Music Selection", music: true },
   ],
   // Martedì
@@ -108,34 +112,34 @@ const schedule: Entry[][] = [
 // Programmi live (non music selection): descrizioni ufficiali da imlandradio.it
 const shows = [
   {
-    name: "Barinonda",
+    name: "Bar in Onda",
     desc: "Le notizie del territorio raccontate a modo nostro, con satira e un goccio di sana follia. Con Maio, Max Biasu e Sellino.",
     tag: "Talk",
-    cover: "",
+    cover: barInOndaCover,
   },
   {
     name: "Schema Libero",
     desc: "Assaggi e riflessioni di vita tra emozioni e sentimenti: la filosofia incontra la vita quotidiana.",
     tag: "Talk",
-    cover: "",
+    cover: schemaLiberoCover,
   },
   {
     name: "Musical Box",
     desc: "Il programma che racconta la musica. Con Roberto, Celeste e Marty tra successi, curiosità e aneddoti.",
     tag: "Musica",
-    cover: "",
+    cover: musicalBoxCover,
   },
   {
     name: "Assaggi",
     desc: "Enogastronomia del territorio: prodotti, allevamento e gastronomia raccontati da chi ci ha dedicato la vita.",
     tag: "Cibo",
-    cover: "",
+    cover: seCiSeiCover,
   },
   {
     name: "Se Ci Sei Batti un Colpo",
     desc: "Il risveglio in radio: musica, umore e territorio per iniziare la giornata.",
     tag: "Morning",
-    cover: "",
+    cover: imlandChartsCover,
   },
   {
     name: "IMLAND Charts",
@@ -207,9 +211,6 @@ function RadioPage() {
       </HeroBanner>
 
       <div className="page-inverted radio-inverted">
-        <section className="container-im pt-8 md:pt-12">
-          <h1 className="text-h1-im">Ascolta i nostri programmi</h1>
-        </section>
         {/* Palinsesto settimanale */}
         <Palinsesto />
 
@@ -275,7 +276,7 @@ function RadioPage() {
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {shows.map((s) => (
                 <SpotlightCard key={s.name} className="glass-panel rounded-3xl p-5">
-                  <div className="relative mb-5 aspect-square overflow-hidden rounded-2xl bg-muted">
+                  <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-2xl bg-neutral-950/5">
                     {s.cover ? (
                       <button
                         type="button"
@@ -286,7 +287,7 @@ function RadioPage() {
                           src={s.cover}
                           alt={`Copertina ${s.name}`}
                           loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                          className="h-full w-full object-contain"
                         />
                         <span className="absolute inset-0 flex items-center justify-center bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/15">
                           <span className="flex scale-75 items-center justify-center rounded-full bg-background/90 px-4 py-2 text-sm font-semibold text-foreground opacity-0 shadow-cta-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
@@ -415,115 +416,43 @@ function RadioPage() {
 }
 
 function Palinsesto() {
-  const [expanded, setExpanded] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(todayIndex);
-
   return (
     <section id="palinsesto" className="container-im section-canvas section-pad-sm">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
+      <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-signal">Palinsesto</p>
-          <h2 className="mt-2 text-h2-im">
-            {expanded ? "La settimana in radio" : `In onda ${daysLong[selectedDay].toLowerCase()}`}
-          </h2>
-          <p className="mt-2 max-w-lg text-sm text-muted-foreground">
-            {expanded
-              ? "Dal lunedì alla domenica: la programmazione ufficiale di IMLAND Radio."
-              : "La programmazione di oggi. Espandi per vedere tutta la settimana."}
+          <h2 className="mt-2 text-h2-im">La settimana in radio.</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Il palinsesto completo di IMLAND Radio, sempre visibile dal lunedì alla domenica.
           </p>
-        </div>
-        <button
-          type="button"
-          onClick={() => setExpanded((v) => !v)}
-          className="rounded-full glass-panel px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-foreground hover:bg-white/5"
-        >
-          {expanded ? "Torna al giorno" : "Vedi tutta la settimana"}
-        </button>
       </div>
 
-      {!expanded && (
-        <div className="mt-6 flex flex-wrap gap-2">
-          {days.map((d, i) => (
-            <button
-              key={d}
-              type="button"
-              onClick={() => setSelectedDay(i)}
-              className={`rounded-full px-4 py-2 min-h-10 text-xs font-semibold uppercase tracking-wider transition glow-orange-hover ${
-                i === selectedDay
-                  ? "bg-signal text-white glow-orange"
-                  : "glass-panel text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {d}
-              {i === todayIndex && <span className="ml-1.5 text-xs text-signal">oggi</span>}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {expanded ? (
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {schedule.map((entries, di) => (
-            <div
-              key={daysLong[di]}
-              className={`rounded-3xl border p-5 ${di === todayIndex ? "border-signal bg-signal/5" : "glass-panel"}`}
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="text-h3-im">{daysLong[di]}</h3>
-                {di === todayIndex && (
-                  <span className="rounded-full bg-signal/20 px-2 py-0.5 text-xs font-semibold uppercase tracking-wider text-signal">
-                    Oggi
-                  </span>
-                )}
-              </div>
-              <ul className="mt-4 space-y-2">
-                {entries.map((e) => (
-                  <li
-                    key={e.time}
-                    className={`flex items-center gap-3 rounded-2xl px-3 py-2 text-sm ${
-                      e.music ? "bg-white/5 text-muted-foreground" : "bg-signal text-white"
-                    }`}
-                  >
-                    <span className="w-28 shrink-0 font-mono text-xs tabular-nums">{e.time}</span>
-                    <span className="flex-1 font-medium">{e.show}</span>
-                    {!e.music && (
-                      <span className="text-xs font-semibold uppercase tracking-wider opacity-80">
-                        Live
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
+      <div className="mt-8 grid grid-cols-1 gap-4 xl:grid-cols-7" aria-label="Palinsesto settimanale IMLAND Radio">
+        {schedule.map((entries, di) => (
+          <article
+            key={daysLong[di]}
+            className={`rounded-3xl border p-4 text-center ${di === todayIndex ? "border-signal bg-signal/10" : "glass-panel"}`}
+          >
+            <div className="flex min-h-11 items-center justify-center gap-2 xl:flex-col xl:gap-1">
+              <h3 className="font-display text-base font-bold">{daysLong[di]}</h3>
+              {di === todayIndex ? (
+                <span className="rounded-full bg-signal px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-white">Oggi</span>
+              ) : null}
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="mt-8 grid gap-3">
-          {schedule[selectedDay].map((e) => (
-            <div
-              key={e.time}
-              className={`flex items-center gap-4 rounded-2xl border px-4 py-4 md:px-6 ${
-                e.music ? "glass-panel" : "border-transparent bg-signal/10"
-              }`}
-            >
-              <div className="w-32 shrink-0 md:w-40">
-                <p className="font-display text-sm font-semibold leading-tight tabular-nums">
-                  {e.time}
-                </p>
-                <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-                  {e.music ? "Musica" : "Live"}
-                </p>
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold leading-tight">{e.show}</p>
-                {e.music && (
-                  <p className="mt-0.5 text-xs text-muted-foreground">Selezione musicale IMLAND</p>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            <ul className="mt-3 space-y-2">
+              {entries.map((entry) => (
+                <li
+                  key={`${entry.time}-${entry.show}`}
+                  className={`rounded-2xl px-3 py-3 ${entry.music ? "bg-white/5" : "bg-signal text-white"}`}
+                >
+                  <time className="block font-mono text-xs font-semibold tabular-nums">{entry.time}</time>
+                  <span className="mt-1 block text-xs font-semibold leading-snug">{entry.show}</span>
+                  <span className="mt-1 block text-xs font-bold uppercase tracking-wider opacity-75">{entry.music ? "Musica" : "Live"}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
 
       <p className="mt-4 text-xs text-muted-foreground">
         Fonte: palinsesto ufficiale IMLAND Radio (imlandradio.it). Fuori dagli orari live va in onda

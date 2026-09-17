@@ -1,7 +1,7 @@
 import { canonical, jsonLd, organizationLd } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { BadgeIcon, badgeForIcon, toneForBadge } from "../components/badge-icon";
+import { BadgeIcon, badgeForIcon } from "../components/badge-icon";
 import { BentoGrid, BentoCard, BentoLinkCard } from "../components/bento";
 import { PageHero } from "../components/page-hero";
 import { SectionHeader } from "../components/section-header";
@@ -134,7 +134,6 @@ function ChiSiamoPage() {
         <div className="container-im section-pad">
           <SectionHeader
             eyebrow="La missione"
-            badge="luogo"
             title={
               <>
                 Dare voce al <span className="im-gradient-text">territorio</span>.
@@ -148,6 +147,7 @@ function ChiSiamoPage() {
                 key={n.l}
                 tone={(["radio", "podcast", "eventi", "news"] as const)[i % 4]}
                 span={3}
+                className="flex flex-col items-center text-center"
               >
                 <p className="font-display text-4xl font-bold text-signal">{n.n}</p>
                 <p className="mt-3 text-sm text-muted-foreground">{n.l}</p>
@@ -161,7 +161,6 @@ function ChiSiamoPage() {
       <section className="container-im section-editorial section-pad">
         <SectionHeader
           eyebrow="Cosa facciamo"
-          badge="onde"
           title={
             <>
               Quattro spazi, <br />
@@ -171,13 +170,13 @@ function ChiSiamoPage() {
           description="Radio, podcast, eventi e news: quattro modi per stare dentro il territorio."
         />
         <BentoGrid className="mt-10">
-          {whatWeDo.map((w, i) => (
+          {whatWeDo.map((w) => (
             <BentoLinkCard
               key={w.title}
               to={w.href}
-              tone={(["radio", "podcast", "eventi", "member", "news"] as const)[i % 5]}
+              tone={w.tone}
               span={3}
-              className="group"
+              className="group flex flex-col items-center text-center"
             >
               <BadgeIcon
                 name={badgeForIcon(w.icon)}
@@ -198,7 +197,6 @@ function ChiSiamoPage() {
         <div className="container-im section-pad">
           <SectionHeader
             eyebrow="Il metodo"
-            badge="microfono"
             title={
               <>
                 Come lavoriamo, <br />
@@ -209,8 +207,8 @@ function ChiSiamoPage() {
           />
           <BentoGrid className="mt-10">
             {method.map((m, i) => (
-              <BentoCard key={m.title} tone={toneForBadge(badgeForIcon(m.icon))} span={3}>
-                <BadgeIcon name={badgeForIcon(m.icon)} className="h-12 w-12" />
+              <BentoCard key={m.title} span={3} className="flex flex-col items-center text-center">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-signal">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 font-display text-lg font-semibold">{m.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{m.desc}</p>
               </BentoCard>
@@ -224,7 +222,6 @@ function ChiSiamoPage() {
         <div className="container-im section-pad">
           <SectionHeader
             eyebrow="La redazione"
-            badge="profilo"
             align="center"
             title={
               <>
@@ -276,7 +273,7 @@ function ChiSiamoPage() {
                         </div>
                       )}
                     </div>
-                    <div className="p-6">
+                    <div className="p-6 text-center">
                       <h3 className="text-h3-im leading-tight text-foreground transition-colors group-hover:text-signal">
                         {fullName}
                       </h3>
@@ -314,7 +311,6 @@ function ChiSiamoPage() {
         <div className="container-im section-pad">
           <SectionHeader
             eyebrow="Percorso"
-            badge="calendario"
             title={
               <>
                 Da una <span className="im-gradient-text">idea</span>, a una rete.
@@ -328,6 +324,7 @@ function ChiSiamoPage() {
                 key={s2.y}
                 tone={(["radio", "podcast", "eventi", "member"] as const)[i % 4]}
                 span={3}
+                className="flex flex-col items-center text-center"
               >
                 <p className="font-display text-2xl font-bold text-signal">{s2.y}</p>
                 <p className="mt-4 font-display text-lg font-semibold">{s2.t}</p>
@@ -341,8 +338,8 @@ function ChiSiamoPage() {
       {/* Lavora con noi */}
       <section className="section-canvas">
         <div className="container-im section-pad">
-          <div className="bento-card p-8 md:flex md:items-center md:justify-between md:gap-10 md:p-12">
-            <div className="max-w-2xl">
+          <div className="bento-card flex flex-col items-center p-8 text-center md:p-12">
+            <div className="mx-auto max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-wider text-signal">
                 Lavora con noi
               </p>
@@ -353,7 +350,7 @@ function ChiSiamoPage() {
             </div>
             <Link
               to="/contatti"
-              className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full btn-blue px-6 py-3 font-semibold md:mt-0"
+              className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full btn-blue px-6 py-3 font-semibold"
             >
               Candidati <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>

@@ -6,8 +6,8 @@ export const SITE_NAME = "IMLAND EXPERIENCE";
 
 export const GEO_CITIES = ["Vercelli", "Verbania", "Novara", "Biella"] as const;
 
-export const OG_IMAGE =
-  "https://storage.googleapis.com/gpt-engineer-file-uploads/P0C1ClGWD4YD0lkRvi88JtyEBWr2/social-images/social-1783652683370-Gemini_Generated_Image_7lk1k17lk1k17lk1-removebg-preview.webp";
+// Immagine territoriale ufficiale: niente ritratti del team nei risultati o nelle anteprime social.
+export const OG_IMAGE = `${SITE_URL}/assets/hero-carousel/vercelli-desktop-1.webp`;
 
 /** Absolute canonical URL for a route path ("/radio"). */
 export const canonical = (path: string) => ({
@@ -40,6 +40,11 @@ export const organizationLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/imland-logo-black.png`,
   image: OG_IMAGE,
+  sameAs: [
+    "https://www.facebook.com/imlandradio",
+    "https://www.instagram.com/imland_radio/",
+    "https://www.linkedin.com/company/imland-experience/",
+  ],
   description:
     "IMLAND EXPERIENCE è l'hub di musica, radio, podcast ed eventi del Piemonte nord-orientale: Vercelli, Verbania, Novara e Biella.",
   areaServed,
@@ -73,7 +78,7 @@ export const websiteLd = {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: `${SITE_URL}/news?q={search_term_string}`,
+      urlTemplate: `${SITE_URL}/cerca?q={search_term_string}`,
     },
     "query-input": "required name=search_term_string",
   },

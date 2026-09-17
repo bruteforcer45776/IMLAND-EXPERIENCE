@@ -591,30 +591,35 @@
    lo stesso colore anche quando appare fuori dalla sua pagina. */
 .theme-radio {
   --signal: #0aa2cf;
+  --signal-secondary: #1646d8;
   --signal-strong: #077ea1;
   --signal-ink: #076d8c;
   --signal-foreground: #ffffff;
 }
 .theme-podcast {
   --signal: #1646d8;
+  --signal-secondary: #16bff2;
   --signal-strong: #1646d8;
   --signal-ink: #1646d8;
   --signal-foreground: #ffffff;
 }
 .theme-news {
   --signal: #e21d2f;
+  --signal-secondary: #101114;
   --signal-strong: #c91627;
   --signal-ink: #b51222;
   --signal-foreground: #ffffff;
 }
 .theme-eventi {
   --signal: #12a531;
+  --signal-secondary: #0e8728;
   --signal-strong: #0e8728;
   --signal-ink: #0e7d25;
   --signal-foreground: #ffffff;
 }
 .theme-member {
   --signal: #e0a800;
+  --signal-secondary: #ff7a00;
   --signal-strong: #e0a800;
   --signal-ink: #8a6700;
   --signal-foreground: #0b0c0f;
@@ -1509,7 +1514,7 @@
   justify-content: center;
   gap: 0.5rem;
   border-radius: var(--radius-full);
-  background: #0b0c0f;
+  background: var(--signal-secondary, #0b0c0f);
   color: #ffffff;
   font-family: var(--font-display);
   font-weight: 600;
@@ -1518,7 +1523,7 @@
     background 0.2s ease,
     box-shadow 0.2s ease;
   &:hover {
-    background: #1a1c22;
+    background: color-mix(in oklab, var(--signal-secondary, #0b0c0f) 86%, black);
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
   }
   &:active {

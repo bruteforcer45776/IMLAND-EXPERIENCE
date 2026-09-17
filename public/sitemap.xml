@@ -39,6 +39,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.imlandradio.it/terrain</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.imlandradio.it/jobs</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.imlandradio.it/alert</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.imlandradio.it/chi-siamo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

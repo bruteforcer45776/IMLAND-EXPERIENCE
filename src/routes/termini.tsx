@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SectionDecor } from "../components/decor";
+import { canonical } from "../lib/seo";
 
 export const Route = createFileRoute("/termini")({
   head: () => ({
@@ -10,6 +11,7 @@ export const Route = createFileRoute("/termini")({
         content: "Condizioni d'uso del sito e dei servizi IMLAND EXPERIENCE.",
       },
     ],
+    links: [canonical("/termini")],
   }),
   component: TerminiPage,
 });

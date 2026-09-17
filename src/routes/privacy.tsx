@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SectionDecor } from "../components/decor";
+import { canonical } from "../lib/seo";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/privacy")({
           "Informativa sul trattamento dei dati personali di IMLAND EXPERIENCE SRL ai sensi degli articoli 13 e 14 del GDPR.",
       },
     ],
+    links: [canonical("/privacy")],
   }),
   component: PrivacyPage,
 });

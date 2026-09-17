@@ -27,16 +27,6 @@ import {
 
 export const Route = createFileRoute("/member")({
   head: () => {
-    const preconnect = {
-      rel: "preconnect" as const,
-      href: "https://imlandradio.it",
-      crossOrigin: "anonymous" as const,
-    };
-    const criticalLogos = memberWall.slice(0, 12).map((m) => ({
-      rel: "preload" as const,
-      as: "image" as const,
-      href: m.cover,
-    }));
     return {
       meta: [
         { title: "Diventa Member — IMLAND EXPERIENCE" },
@@ -52,7 +42,7 @@ export const Route = createFileRoute("/member")({
           content: "Diventa IMLAND Member: la rete di chi dà voce al territorio.",
         },
       ],
-      links: [canonical("/member"), preconnect, ...criticalLogos],
+      links: [canonical("/member")],
       scripts: [jsonLd(memberProgramLd)],
     };
   },
@@ -500,7 +490,7 @@ function MemberPage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-signal">
               I Partner ufficiali di IMLAND Experience
             </p>
-            <h1 className="mt-3 text-h1-im">Perché diventare Member</h1>
+            <h2 className="mt-3 text-h1-im">Perché diventare Member</h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
               Diventare Member significa entrare nel cuore di una rete di imprenditori e
               professionisti del territorio, creare nuove relazioni, partecipare a eventi esclusivi
