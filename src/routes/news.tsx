@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowUpRight, ArrowRight, Megaphone } from "lucide-react";
-import { canonical } from "../lib/seo";
+import { canonical, jsonLd, newsCollectionLd, SITE_URL } from "../lib/seo";
 import { getPublishedArticles } from "../lib/news-automation/public.functions";
 import { NewsCover } from "../components/news-cover";
 import { NewsDisclaimerModal } from "../components/news-disclaimer-modal";
@@ -12,8 +12,14 @@ export const Route = createFileRoute("/news")({
     meta: [
       { title: "News del territorio e dei Member — IMLAND EXPERIENCE" },
       { name: "description", content: "Notizie dal territorio e aggiornamenti delle realtà Member di IMLAND Experience." },
+      { property: "og:title", content: "News del territorio e dei Member — IMLAND EXPERIENCE" },
+      { property: "og:description", content: "Notizie verificate, aggiornamenti locali e storie dei Member tra Vercelli, Novara, Biella e Verbania." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/news` },
+      { name: "geo.region", content: "IT-PIE" },
     ],
     links: [canonical("/news")],
+    scripts: [jsonLd(newsCollectionLd)],
   }),
   loader: async () => {
     try {

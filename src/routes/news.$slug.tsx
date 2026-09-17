@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, MapPin, Share2, AlertCircle } from "lucide-react";
 import DOMPurify from "isomorphic-dompurify";
 import { useMemo } from "react";
 import type { Database } from "@/integrations/supabase/types";
-import { canonical, newsArticleLd } from "@/lib/seo";
+import { canonical, jsonLd, newsArticleLd, SITE_URL } from "@/lib/seo";
 import {
   getPublishedArticleBySlug,
   getNewsCategories,
@@ -84,9 +84,7 @@ export const Route = createFileRoute("/news/$slug")({
       article?.seo_description ||
       article?.summary ||
       "Notizie dal territorio piemontese — IMLAND Experience.";
-    const url = article
-      ? `https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/news/${article.slug}`
-      : "https://imland-experience-hub-territoriale.area-di-lavo-2221.chatgpt.site/news";
+    const url = article ? `${SITE_URL}/news/${article.slug}` : `${SITE_URL}/news`;
     const image = article?.cover_image_url || undefined;
     return {
       meta: [
@@ -107,6 +105,21 @@ export const Route = createFileRoute("/news/$slug")({
           : []),
       ],
       links: [canonical(`/news/${article?.slug ?? ""}`)],
+      scripts: article
+        ? [
+            jsonLd(
+              newsArticleLd({
+                title,
+                description,
+                url,
+                image,
+                publishedAt: article.published_at || undefined,
+                modifiedAt: article.updated_at || undefined,
+                category: article.category_slug || undefined,
+              }),
+            ),
+          ]
+        : [],
     };
   },
   loader: async ({ params }) => {

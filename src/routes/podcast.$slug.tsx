@@ -9,6 +9,7 @@ import {
   getPodcastCatalog,
   getPodcastFeedEpisodes,
 } from "../lib/podcast-feed.functions";
+import { canonical, jsonLd, podcastProgramLd } from "../lib/seo";
 
 export const Route = createFileRoute("/podcast/$slug")({
   loader: async ({ params }) => {
@@ -38,6 +39,8 @@ export const Route = createFileRoute("/podcast/$slug")({
           ? [{ property: "og:image", content: loaderData.programCover }]
           : []),
       ],
+      links: p ? [canonical(`/podcast/${p.slug}`)] : [],
+      scripts: p ? [jsonLd(podcastProgramLd(p))] : [],
     };
   },
   component: ProgramPage,

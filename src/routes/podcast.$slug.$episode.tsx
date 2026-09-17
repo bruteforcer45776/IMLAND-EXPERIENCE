@@ -14,6 +14,7 @@ import {
   trackKey,
 } from "../components/podcast-audio";
 import { getPodcastFeedEpisodes } from "../lib/podcast-feed.functions";
+import { canonical, jsonLd, podcastEpisodeLd } from "../lib/seo";
 
 export const Route = createFileRoute("/podcast/$slug/$episode")({
   loader: async ({ params }) => {
@@ -43,6 +44,24 @@ export const Route = createFileRoute("/podcast/$slug/$episode")({
           ? [{ property: "og:image", content: loaderData.episode.image || loaderData.program.cover }]
           : []),
       ],
+      links: loaderData
+        ? [canonical(`/podcast/${loaderData.program.slug}/${loaderData.episode.slug}`)]
+        : [],
+      scripts: loaderData
+        ? [
+            jsonLd(
+              podcastEpisodeLd({
+                programSlug: loaderData.program.slug,
+                programName: loaderData.program.name,
+                episodeSlug: loaderData.episode.slug,
+                title: loaderData.episode.title,
+                description: loaderData.episode.subtitle,
+                audio: loaderData.episode.audio,
+                date: loaderData.episode.date,
+              }),
+            ),
+          ]
+        : [],
     };
   },
   component: EpisodePage,

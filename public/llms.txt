@@ -11,6 +11,16 @@
 - Animazione e intrattenimento musicale per eventi (non catering, non service tecnico).
 - Membership per aziende, professionisti e associazioni: spot radio, podcast, eventi, visibilità locale.
 
+## Entità principali
+- IMLAND Radio: web radio locale gratuita, in diretta 24 ore su 24.
+- Podcast IMLAND: produzioni originali su imprese, cultura, cibo, tecnologia e territorio.
+- Eventi IMLAND: animazione, conduzione, DJ set, talk e radio in diretta; non offre catering.
+- IMLAND Member: rete per aziende, professionisti e associazioni delle province servite.
+- News IMLAND: notizie territoriali verificate e aggiornamenti delle realtà Member.
+
+## Copertura geografica
+IMLAND opera principalmente nelle province di Vercelli, Novara, Biella e Verbano-Cusio-Ossola, in Piemonte.
+
 ## Pagine principali
 - [Home](https://www.imlandradio.it/): panoramica di radio, musica, podcast, eventi.
 - [Radio](https://www.imlandradio.it/radio): diretta 24/7, programmi e conduttori.

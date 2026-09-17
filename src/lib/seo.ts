@@ -125,6 +125,72 @@ export const localBusinessLd = {
   },
 };
 
+export const memberProgramLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${SITE_URL}/member#service`,
+  name: "IMLAND Member",
+  serviceType: "Comunicazione territoriale per aziende, professionisti e associazioni",
+  url: `${SITE_URL}/member`,
+  provider: { "@id": `${SITE_URL}/#organization` },
+  areaServed,
+  description:
+    "Rete territoriale con spot radio, podcast, eventi e visibilità locale nelle province di Vercelli, Novara, Biella e Verbania.",
+};
+
+export const newsCollectionLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${SITE_URL}/news#collection`,
+  name: "News del territorio e dei Member",
+  url: `${SITE_URL}/news`,
+  inLanguage: "it-IT",
+  about: ["Vercelli", "Novara", "Biella", "Verbania", "Piemonte", "imprese locali"],
+  publisher: { "@id": `${SITE_URL}/#organization` },
+};
+
+export const podcastProgramLd = (program: {
+  slug: string;
+  name: string;
+  tagline: string;
+  cat: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "PodcastSeries",
+  "@id": `${SITE_URL}/podcast/${program.slug}#series`,
+  name: program.name,
+  description: program.tagline,
+  url: `${SITE_URL}/podcast/${program.slug}`,
+  genre: program.cat,
+  inLanguage: "it-IT",
+  publisher: { "@id": `${SITE_URL}/#organization` },
+});
+
+export const podcastEpisodeLd = (opts: {
+  programSlug: string;
+  programName: string;
+  episodeSlug: string;
+  title: string;
+  description?: string | null;
+  audio: string;
+  date?: string | null;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "PodcastEpisode",
+  "@id": `${SITE_URL}/podcast/${opts.programSlug}/${opts.episodeSlug}#episode`,
+  name: opts.title,
+  description: opts.description || undefined,
+  url: `${SITE_URL}/podcast/${opts.programSlug}/${opts.episodeSlug}`,
+  associatedMedia: { "@type": "MediaObject", contentUrl: opts.audio },
+  datePublished: opts.date || undefined,
+  partOfSeries: {
+    "@type": "PodcastSeries",
+    name: opts.programName,
+    url: `${SITE_URL}/podcast/${opts.programSlug}`,
+  },
+  inLanguage: "it-IT",
+});
+
 function reactNodeToString(node: ReactNode): string {
   if (node == null) return "";
   if (typeof node === "string" || typeof node === "number") return String(node);

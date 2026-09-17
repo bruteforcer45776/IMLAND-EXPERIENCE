@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from "react";
-import { canonical } from "../lib/seo";
+import { canonical, jsonLd, memberProgramLd } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Users } from "lucide-react";
 import todaroPhoto from "../assets/andrea-todaro.jpg.asset.json";
@@ -53,6 +53,7 @@ export const Route = createFileRoute("/member")({
         },
       ],
       links: [canonical("/member"), preconnect, ...criticalLogos],
+      scripts: [jsonLd(memberProgramLd)],
     };
   },
   component: MemberPage,
