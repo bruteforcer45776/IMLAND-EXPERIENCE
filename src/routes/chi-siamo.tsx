@@ -107,19 +107,11 @@ const method = [
   },
 ];
 
-const numbers = [
-  { n: "24/7", l: "Diretta radio ininterrotta" },
-  { n: "4", l: "Città presidiate: Vercelli, Novara, Biella, Verbania" },
-  { n: "10+", l: "Serie podcast originali" },
-  { n: "300+", l: "Episodi pubblicati" },
-];
-
 function ChiSiamoPage() {
   return (
     <>
       <PageHero
         eyebrow="Il Progetto"
-        badge="community"
         title={
           <>
             Un hub aperto, radicato, <span className="im-gradient-text">indipendente</span>.
@@ -142,19 +134,6 @@ function ChiSiamoPage() {
             }
             description="Crediamo che musica, informazione ed eventi locali abbiano bisogno di uno spazio comune, aperto e indipendente. IMLAND lo costruisce ogni giorno, con la radio come cuore."
           />
-          <BentoGrid className="mt-10">
-            {numbers.map((n, i) => (
-              <BentoCard
-                key={n.l}
-                tone={(["radio", "podcast", "eventi", "news"] as const)[i % 4]}
-                span={3}
-                className="flex flex-col items-center text-center"
-              >
-                <p className="font-display text-4xl font-bold text-signal">{n.n}</p>
-                <p className="mt-3 text-sm text-muted-foreground">{n.l}</p>
-              </BentoCard>
-            ))}
-          </BentoGrid>
         </div>
       </section>
 
@@ -181,6 +160,7 @@ function ChiSiamoPage() {
             >
               <BadgeIcon
                 name={badgeForIcon(w.icon)}
+                tone={w.tone}
                 className="h-14 w-14 transition-transform duration-300 group-hover:scale-105"
               />
               <h3 className="mt-4 text-h3-im group-hover:text-signal">{w.title}</h3>

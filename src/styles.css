@@ -3268,7 +3268,8 @@ h6 {
 }
 
 .home-glass-stack > section.home-adv-slot,
-.home-glass-stack > section.home-color-band {
+.home-glass-stack > section.home-color-band,
+.home-glass-stack > section.home-download-glass {
   padding: 0 !important;
   border: 0 !important;
   border-radius: clamp(1.5rem, 3vw, 2.5rem) !important;
@@ -3281,6 +3282,12 @@ h6 {
 
 .home-glass-stack > section.home-color-band {
   background: var(--signal) !important;
+}
+
+.home-glass-stack > section.home-download-glass {
+  background: rgb(255 255 255 / 70%) !important;
+  border: 1px solid var(--im-glass-border) !important;
+  box-shadow: var(--im-glass-highlight), var(--im-shadow-surface) !important;
 }
 
 :is(.card-im, .bento-card, .surface-card) {
