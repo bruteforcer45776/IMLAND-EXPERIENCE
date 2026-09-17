@@ -153,7 +153,7 @@ export function SiteHeader() {
         <div className="fixed inset-0 z-50 pointer-events-auto opacity-100 animate-enter">
           <div className="absolute inset-0 bg-black/10" onClick={() => setOpen(false)} />
           <aside
-            className="absolute right-3 top-[calc(4.5rem+env(safe-area-inset-top))] flex max-h-[calc(100dvh-5.5rem-env(safe-area-inset-top))] w-[min(26.25rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white/95 shadow-[0_22px_56px_rgba(1,29,104,0.18)] backdrop-blur-xl md:right-5 md:top-[calc(5rem+env(safe-area-inset-top))]"
+            className="site-menu-glass absolute right-3 top-[calc(4.5rem+env(safe-area-inset-top))] flex max-h-[calc(100dvh-5.5rem-env(safe-area-inset-top))] w-[min(26.25rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white/95 shadow-[0_22px_56px_rgba(1,29,104,0.18)] backdrop-blur-xl md:right-5 md:top-[calc(5rem+env(safe-area-inset-top))]"
             role="dialog"
             aria-modal="true"
             aria-label="Menu di navigazione"

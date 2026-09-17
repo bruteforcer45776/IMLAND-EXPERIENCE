@@ -7,7 +7,6 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
 
 import { BadgeIcon, type BadgeName } from "@/components/badge-icon";
 import { ICON_TONES, type IconTone } from "@/components/brand-icons";
@@ -216,9 +215,8 @@ export function EcosystemFlow() {
                         {step.title}
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-ink-600">{step.desc}</p>
-                      <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[var(--bento-tone)]">
+                      <span className="mt-5 inline-flex w-fit items-center rounded-full border border-current/20 bg-white/75 px-4 py-2 text-sm font-semibold text-[var(--bento-tone)]">
                         Scopri
-                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
                     </Link>
                   </div>

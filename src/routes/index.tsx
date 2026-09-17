@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { canonical, jsonLd, organizationLd, websiteLd, SITE_URL } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
@@ -234,8 +234,8 @@ function Home() {
                           {episode.title}
                         </h3>
                         {episode.date && <p className="mt-2 text-xs text-ink-600">{episode.date}</p>}
-                        <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-signal">
-                          Ascolta <ArrowRight className="h-4 w-4" />
+                        <span className="mt-auto inline-flex w-fit items-center rounded-full border border-signal/20 bg-white/75 px-4 py-2 text-sm font-semibold text-signal">
+                          Ascolta
                         </span>
                       </div>
                     </Link>
@@ -367,7 +367,6 @@ function Home() {
                           </h3>
                           <div className="mt-4 flex items-center justify-between gap-3 text-xs text-ink-600">
                             <span>{news.source}</span>
-                            <ArrowRight className="h-4 w-4 shrink-0 text-signal transition-transform duration-300 group-hover:translate-x-1" />
                           </div>
                         </div>
                       </div>

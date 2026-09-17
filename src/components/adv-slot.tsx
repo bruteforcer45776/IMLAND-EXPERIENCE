@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Megaphone } from "lucide-react";
+import { Megaphone } from "lucide-react";
 
 /**
  * Spazio pubblicitario del sito: tre banner (alto, medio, basso),
@@ -127,7 +127,6 @@ export function AdvSlot({ position }: { position: AdvPosition }) {
             style={{ background: slide.fg, color: slide.bg }}
           >
             {slide.cta}
-            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 

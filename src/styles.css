@@ -1666,17 +1666,15 @@
   background-image: var(--im-gradient-soft);
 }
 
-/* Parole chiave: gradiente animato stile GradientText (React Bits),
-   colori presi dal --signal della sezione di appartenenza. */
+/* Parole chiave editoriali: nere sulle superfici chiare; le eccezioni
+   ad alto contrasto sono definite in fondo al foglio. */
 @utility im-gradient-text {
-  /* Keyword: corsivo editoriale moderno, colore PIENO della sezione
-     (--signal cambia per pagina: radio, podcast, member, eventi, news). */
   font-family: inherit;
   font-style: inherit;
   font-weight: inherit;
   font-synthesis: inherit;
   letter-spacing: inherit;
-  color: var(--signal-ink, var(--signal, #006cfb));
+  color: #0a0a0a;
 }
 
 /* Sottile linea/firma gradiente per divisori istituzionali */
@@ -2626,15 +2624,6 @@ h6 {
   justify-content: center;
 }
 
-/* In Home il colore di categoria resta su superfici, icone, bordi e CTA.
-   Titoli, parole chiave e copy sono sempre neri come da direzione approvata. */
-.home-glass-stack
-  > section
-  :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, summary, label, small, span, .im-gradient-text) {
-  color: #101114 !important;
-  -webkit-text-fill-color: #101114 !important;
-}
-
 .home-glass-stack > section .im-gradient-text {
   background: none !important;
 }
@@ -2872,12 +2861,6 @@ h6 {
   color: #bfd1e8 !important;
 }
 
-.home-glass-stack > section .im-gradient-text {
-  color: #48ef72 !important;
-  background: none !important;
-  -webkit-text-fill-color: currentColor !important;
-}
-
 .hero-editorial__copy {
   max-width: min(48rem, 72%);
   border-radius: 3.5rem 3.5rem 1.25rem 3.5rem;
@@ -2885,9 +2868,6 @@ h6 {
 
 .hero-editorial__copy :is(h1, h1 span) {
   color: #fff !important;
-}
-.hero-editorial__copy h1 span {
-  color: #48ef72 !important;
 }
 .hero-editorial__copy > p {
   color: rgb(255 255 255 / 86%) !important;
@@ -3502,10 +3482,6 @@ h6 {
   > section:not(:first-of-type)
   :is(.text-ink-700, .text-ink-600, .text-ink-500, .text-black\/55) {
   color: var(--color-ink-600) !important;
-}
-
-.home-glass-stack > section:not(:first-of-type) .im-gradient-text {
-  color: var(--im-green) !important;
 }
 
 /* Tutti i testi dei riquadri Home restano neri sul nuovo fondo bianco. */
@@ -4548,6 +4524,31 @@ body {
   background: var(--im-glass-standard-bg) !important;
 }
 
+#main-content
+  section:not(.hidden):not([class*="hero"]):not(.home-color-band):not(.home-adv-slot):not(
+    [class~="bg-signal"]
+  ):not([data-surface="dark"]) {
+  border-color: var(--im-glass-border) !important;
+  background: var(--im-glass-subtle-bg) !important;
+  box-shadow:
+    var(--im-glass-highlight),
+    var(--im-shadow-standard),
+    inset 0 -1px 0 rgb(255 255 255 / 28%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(138%) contrast(104%) !important;
+  backdrop-filter: blur(18px) saturate(138%) contrast(104%) !important;
+}
+
+.site-menu-glass {
+  border-color: rgb(255 255 255 / 72%) !important;
+  background: var(--im-glass-elevated-bg) !important;
+  box-shadow:
+    var(--im-glass-highlight),
+    var(--im-shadow-elevated),
+    inset 0 -1px 0 rgb(255 255 255 / 32%) !important;
+  -webkit-backdrop-filter: blur(var(--im-blur-elevated)) saturate(142%) contrast(104%) !important;
+  backdrop-filter: blur(var(--im-blur-elevated)) saturate(142%) contrast(104%) !important;
+}
+
 /* Ogni vera CTA ha la stessa geometria a capsula, area tattile e stato focus.
    I normali collegamenti editoriali restano link e non vengono trasformati. */
 :where(.btn-blue, .btn-liquid, .cta-light, .cta-dark, .btn-ghost-glass) {
@@ -4619,6 +4620,32 @@ body {
     min-height: 2.75rem;
     max-width: 100%;
     white-space: normal;
+  }
+}
+
+@media (max-width: 22.5rem) {
+  .site-glass-header > div {
+    gap: 0.25rem !important;
+    padding-inline: 0.625rem !important;
+  }
+
+  .site-glass-header img[alt^="IMLAND"] {
+    max-width: 7.25rem !important;
+  }
+
+  .site-glass-header .btn-blue {
+    width: 2.75rem;
+    min-width: 2.75rem;
+    padding-inline: 0 !important;
+  }
+
+  .site-glass-header .btn-blue span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 }
 

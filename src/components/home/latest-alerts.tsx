@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { ALERT_STATUS_LABEL, formatHubDate } from "@/lib/hub";
@@ -101,9 +101,8 @@ export function LatestAlerts() {
                 {a.category ?? "Segnalazione"} ·{" "}
                 {ALERT_STATUS_LABEL[a.status ?? ""] ?? "Pubblicata"}
               </p>
-              <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-[var(--color-surface-alert)]">
+              <span className="mt-auto inline-flex w-fit items-center rounded-full border border-current/20 bg-white/75 px-4 py-2 text-sm font-semibold text-[var(--color-surface-alert)]">
                 {formatHubDate(a.created_at)}
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
           ))}
