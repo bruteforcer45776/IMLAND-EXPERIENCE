@@ -62,7 +62,6 @@ export function LatestAlerts() {
               className="inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted"
             >
               Vai ad ALERT
-              <span className="btn-arrow">→</span>
             </Link>
           </div>
         </Reveal>

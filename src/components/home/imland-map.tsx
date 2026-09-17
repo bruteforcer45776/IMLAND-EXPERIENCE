@@ -121,7 +121,7 @@ export function ImLandMap() {
           popupLink.href = member.url;
           popupLink.target = "_blank";
           popupLink.rel = "noopener noreferrer";
-          popupLink.textContent = "Scopri il Member →";
+          popupLink.textContent = "Scopri il Member";
           popupCopy.append(popupLink);
         }
         popupContent.append(popupImage, popupCopy);

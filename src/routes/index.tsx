@@ -163,7 +163,7 @@ function Home() {
                       to="/radio"
                       className="mt-7 inline-flex h-12 items-center rounded-full btn-blue px-7 text-[15px]"
                     >
-                      Vai alla Radio <span className="btn-arrow">→</span>
+                      Vai alla Radio
                     </Link>
                   </div>
                 </Reveal>
@@ -199,7 +199,7 @@ function Home() {
                       to="/podcast"
                       className="mt-7 inline-flex h-12 items-center rounded-full btn-blue px-7 text-[15px]"
                     >
-                      Vai ai Podcast <span className="btn-arrow">→</span>
+                      Vai ai Podcast
                     </Link>
                   </div>
                 </Reveal>
@@ -269,7 +269,7 @@ function Home() {
                       to="/eventi"
                       className="mt-7 inline-flex h-12 items-center rounded-full btn-blue px-7 text-[15px]"
                     >
-                      Vai agli Eventi <span className="btn-arrow">→</span>
+                      Vai agli Eventi
                     </Link>
                   </div>
                 </Reveal>
@@ -335,7 +335,7 @@ function Home() {
                       to="/news"
                       className="mt-7 inline-flex h-12 items-center rounded-full btn-blue px-7 text-[15px]"
                     >
-                      Vai alle News <span className="btn-arrow">→</span>
+                      Vai alle News
                     </Link>
                   </div>
                 </Reveal>
@@ -408,7 +408,6 @@ function Home() {
                   className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[15px] font-semibold text-ink-950 transition-all duration-fast hover:bg-white/90 active:scale-[0.98]"
                 >
                   Sei un'azienda o un professionista? Diventa partner
-                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
@@ -431,7 +430,6 @@ function Home() {
                   className="mt-8 inline-flex h-11 items-center rounded-full border border-border bg-white px-5 text-sm font-semibold text-ink-800 transition-colors hover:bg-muted"
                 >
                   Vai alle FAQ
-                  <span className="btn-arrow">→</span>
                 </Link>
               </div>
             </Reveal>
@@ -490,7 +488,7 @@ function Home() {
                 to="/contatti"
                 className="inline-flex h-12 shrink-0 items-center rounded-full btn-blue px-7 text-[15px]"
               >
-                Contattaci <span className="btn-arrow">→</span>
+                Contattaci
               </Link>
             </div>
           </Reveal>

@@ -4488,6 +4488,157 @@ body {
   max-width: 72ch;
 }
 
+/* Rifinitura globale approvata: parole chiave neutre, CTA coerenti e
+   Liquid Glass con profondita materiale pari al player. */
+:root {
+  --im-glass-subtle-bg: rgb(255 255 255 / 54%);
+  --im-glass-standard-bg: rgb(255 255 255 / 66%);
+  --im-glass-elevated-bg: rgb(255 255 255 / 76%);
+  --im-glass-border: rgb(255 255 255 / 70%);
+  --im-glass-highlight: inset 0 1px 0 rgb(255 255 255 / 78%);
+  --im-shadow-subtle: 0 12px 32px rgb(1 29 104 / 11%);
+  --im-shadow-standard: 0 18px 46px rgb(1 29 104 / 15%);
+  --im-shadow-elevated: 0 24px 60px rgb(1 29 104 / 20%);
+}
+
+/* Le parole chiave editoriali non assumono il colore della verticale. */
+#main-content .im-gradient-text,
+#main-content :is(h1, h2, h3, h4, h5, h6) .im-gradient-text,
+.home-glass-stack > section:not(:first-of-type) .im-gradient-text {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: #0a0a0a !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+/* Eccezioni necessarie al contrasto: testo sopra immagini o superfici scure. */
+:is(.home-unified-hero, .faq-hero, [data-surface="dark"], [class~="bg-foreground"])
+  .im-gradient-text {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Il vetro non e una semplice trasparenza: bordo luminoso, rifrazione,
+   saturazione e ombra ambientale costruiscono lo stesso materiale del player. */
+:where(
+  .home-glass-stack > section:not(:first-of-type),
+  .glass-subtle,
+  .glass-panel,
+  .surface-card,
+  .bento-card,
+  .card-im,
+  .sticky-glass,
+  .site-footer
+) {
+  border-color: var(--im-glass-border) !important;
+  box-shadow:
+    var(--im-glass-highlight),
+    0 18px 46px rgb(1 29 104 / 15%),
+    inset 0 -1px 0 rgb(255 255 255 / 28%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(138%) contrast(104%) !important;
+  backdrop-filter: blur(18px) saturate(138%) contrast(104%) !important;
+}
+
+.home-glass-stack > section:not(:first-of-type),
+.glass-subtle {
+  background: var(--im-glass-subtle-bg) !important;
+}
+
+:where(.glass-panel, .surface-card, .bento-card, .card-im, .sticky-glass) {
+  background: var(--im-glass-standard-bg) !important;
+}
+
+/* Ogni vera CTA ha la stessa geometria a capsula, area tattile e stato focus.
+   I normali collegamenti editoriali restano link e non vengono trasformati. */
+:where(.btn-blue, .btn-liquid, .cta-light, .cta-dark, .btn-ghost-glass) {
+  display: inline-flex !important;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px !important;
+  padding-inline: clamp(1.125rem, 2vw, 1.75rem) !important;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none !important;
+  box-shadow: 0 10px 24px rgb(1 29 104 / 15%);
+}
+
+:where(.btn-blue, .btn-liquid, .cta-light, .cta-dark, .btn-ghost-glass):focus-visible {
+  outline: 3px solid rgb(0 126 255 / 48%) !important;
+  outline-offset: 3px;
+}
+
+/* Anche le azioni editoriali precedentemente rese come semplice testo
+   diventano CTA riconoscibili, senza trasformare i link di navigazione. */
+#main-content a.inline-flex.text-signal {
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--signal, #1a73e8) 28%, white) !important;
+  border-radius: 999px !important;
+  background: rgb(255 255 255 / 72%) !important;
+  padding: 0.65rem 1.125rem !important;
+  color: #0a0a0a !important;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none !important;
+  box-shadow: 0 8px 20px rgb(1 29 104 / 11%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  backdrop-filter: blur(12px) saturate(130%);
+}
+
+#main-content a.inline-flex.text-signal:hover {
+  border-color: color-mix(in srgb, var(--signal, #1a73e8) 48%, white) !important;
+  background: rgb(255 255 255 / 86%) !important;
+}
+
+/* Le frecce testuali decorative non fanno parte del linguaggio delle CTA. */
+.btn-arrow {
+  display: none !important;
+}
+
+#main-content
+  a:is(
+    .btn-blue,
+    .btn-liquid,
+    .cta-light,
+    .cta-dark,
+    .btn-ghost-glass,
+    .inline-flex.text-signal,
+    .rounded-full
+  )
+  > .lucide-arrow-right {
+  display: none !important;
+}
+
+@media (max-width: 47.999rem) {
+  :where(.btn-blue, .btn-liquid, .cta-light, .cta-dark, .btn-ghost-glass) {
+    min-height: 2.75rem;
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :where(
+    .home-glass-stack > section:not(:first-of-type),
+    .glass-subtle,
+    .glass-panel,
+    .surface-card,
+    .bento-card,
+    .card-im,
+    .sticky-glass,
+    .site-footer
+  ) {
+    background: rgb(255 255 255 / 94%) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
 @media (max-width: 47.999rem) {
   :where(main) :where(p, li, dd) {
     overflow-wrap: anywhere;
