@@ -4843,6 +4843,12 @@ body {
   pointer-events: none;
 }
 
+@media (min-width: 48rem) {
+  .floating-radio-player[data-scroll-visible="false"] {
+    transform: translate(-50%, calc(100% + 12rem));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .floating-bottom-nav,
   .floating-radio-player {

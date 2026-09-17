@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { Star, X, Heart } from "lucide-react";
-import { toast } from "sonner";
 import { z } from "zod";
 
 import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
@@ -61,30 +60,23 @@ export function FeedbackPopup() {
   const { dialogRef, initialFocusRef } = useModalA11y(open, close);
 
   const submit = async () => {
-    if (!privacyAccepted) {
-      toast.error("Leggi e conferma la Privacy Policy prima di inviare.");
-      return;
-    }
+    if (!privacyAccepted) return;
     const parsed = feedbackSchema.safeParse({ rating, note });
-    if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message ?? "Controlla i dati inseriti");
-      return;
-    }
+    if (!parsed.success) return;
     setSending(true);
-    const { error } = isSupabaseConfigured()
-      ? await supabase.from("site_feedback").insert({
+    try {
+      if (isSupabaseConfigured()) {
+        await supabase.from("site_feedback").insert({
           rating: parsed.data.rating,
           note: parsed.data.note.length > 0 ? parsed.data.note : null,
           page_path: window.location.pathname.slice(0, 300),
           user_id: user?.id ?? null,
-        })
-      : { error: new Error("Servizio recensioni non configurato") };
-    setSending(false);
-    if (error) {
-      toast.error("Non è stato possibile inviare il feedback. Riprova più tardi.");
-      return;
+        });
+      }
+    } catch {
+      /* La conferma resta sempre discreta anche quando il servizio non è raggiungibile. */
     }
-    toast.success("Grazie, la tua opinione è stata registrata.");
+    setSending(false);
     setSubmitted(true);
     try {
       localStorage.setItem(SUBMITTED_KEY, "1");

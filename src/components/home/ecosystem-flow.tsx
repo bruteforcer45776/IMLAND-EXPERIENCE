@@ -194,7 +194,13 @@ export function EcosystemFlow() {
                     style={{ background: "var(--bento-tone)" }}
                   />
 
-                  <div className={left ? "md:col-start-1 md:pr-4" : "md:col-start-2 md:pl-4"}>
+                  <div
+                    className={
+                      left
+                        ? "md:col-start-1 md:row-start-1 md:justify-self-end md:pr-6"
+                        : "md:col-start-2 md:row-start-1 md:justify-self-start md:pl-6"
+                    }
+                  >
                     <Link
                       // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       to={step.to as any}

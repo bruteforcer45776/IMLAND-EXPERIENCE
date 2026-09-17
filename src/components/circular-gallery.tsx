@@ -558,6 +558,7 @@ export default function CircularGallery({
   fontUrl = undefined,
   scrollSpeed = 2,
   scrollEase = 0.05,
+  onClick = undefined,
 }) {
   const containerRef = useRef(null);
   useEffect(() => {
@@ -585,9 +586,10 @@ export default function CircularGallery({
     <div
       className="circular-gallery"
       ref={containerRef}
+      onClick={onClick}
       tabIndex={0}
       role="region"
-      aria-label="Galleria dei social IMLAND. Usa le frecce sinistra e destra per scorrere."
+      aria-label="Galleria dei social IMLAND. Seleziona una foto per aprire Instagram; usa le frecce sinistra e destra per scorrere."
     />
   );
 }

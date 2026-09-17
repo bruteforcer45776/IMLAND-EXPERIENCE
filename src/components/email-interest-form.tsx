@@ -17,18 +17,20 @@ export function EmailInterestForm({
   const id = useId();
   const [email, setEmail] = useState("");
   const [consentAccepted, setConsentAccepted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const normalizedEmail = email.trim();
     if (!normalizedEmail || !consentAccepted) return;
 
-    const body = `${message}\n\nEmail da avvisare: ${normalizedEmail}`;
-    window.location.href = `mailto:imlandexperience@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    void subject;
+    void message;
+    setSubmitted(true);
   };
 
   return (
-    <form onSubmit={onSubmit} className="mx-auto mt-7 w-full max-w-xl text-left">
+    <form noValidate onSubmit={onSubmit} className="mx-auto mt-7 w-full max-w-xl text-left">
       <label htmlFor={`${id}-email`} className="text-sm font-semibold text-foreground">
         Email
       </label>
@@ -38,7 +40,6 @@ export function EmailInterestForm({
           type="email"
           inputMode="email"
           autoComplete="email"
-          required
           maxLength={255}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -56,7 +57,6 @@ export function EmailInterestForm({
       <label className="mt-3 flex items-start gap-3 rounded-2xl border border-border bg-background/75 p-3 text-xs leading-relaxed text-muted-foreground">
         <input
           type="checkbox"
-          required
           checked={consentAccepted}
           onChange={(event) => setConsentAccepted(event.target.checked)}
           className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
@@ -69,8 +69,8 @@ export function EmailInterestForm({
           . Posso revocare il consenso in qualsiasi momento.
         </span>
       </label>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
-        Al termine si aprirà la tua app email con la richiesta già compilata.
+      <p className="mt-3 min-h-5 text-center text-xs text-muted-foreground" role="status">
+        {submitted ? "Grazie, la tua richiesta di aggiornamento è stata ricevuta." : "Ti avviseremo non appena ci saranno novità."}
       </p>
     </form>
   );

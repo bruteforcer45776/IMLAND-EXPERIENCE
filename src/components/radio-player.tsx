@@ -294,7 +294,7 @@ export function RadioPlayer() {
         data-surface="dark"
         data-floating-radio-player
         data-scroll-visible={scrollVisible || expanded ? "true" : "false"}
-        className="floating-radio-player fixed inset-x-3 z-50 md:inset-x-6"
+        className="floating-radio-player fixed inset-x-3 z-50 md:left-1/2 md:w-[min(68vw,780px)] md:-translate-x-1/2"
       >
         {expanded && (
           <div className="radio-player-glass absolute bottom-[4.75rem] left-0 max-h-[min(70vh,620px)] w-[min(92vw,420px)] origin-bottom-left overflow-y-auto rounded-[28px] p-5 text-white animate-enter">
@@ -552,7 +552,7 @@ export function RadioPlayer() {
         )}
 
         <div
-          className={`radio-player-glass flex h-16 items-center gap-3 rounded-[20px] px-3 text-white md:h-[68px] md:px-4 ${
+          className={`radio-player-glass flex h-16 items-center gap-3 rounded-[20px] px-3 text-white md:h-14 md:px-4 ${
             status === "error" ? "ring-2 ring-[#c5221f]" : ""
           }`}
         >

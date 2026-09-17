@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { canonical, jsonLd, organizationLd, websiteLd, SITE_URL } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MapPin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, MapPin } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
 import { Reveal } from "../components/reveal";
@@ -523,10 +523,10 @@ function Home() {
       <section className="relative overflow-hidden bg-white section-pad">
         <div className={shell}>
           <Reveal>
-            <div className="card-im overflow-hidden rounded-[28px] bg-white px-0 py-8 md:py-10">
+            <div className="card-im relative overflow-hidden rounded-[28px] bg-white px-0 py-8 md:py-10">
               <div className="px-6 text-center md:px-10">
                 <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[1.06] tracking-[-0.03em] !text-ink-950">
-                  I nostri social
+                  SEGUICI ANCHE SUI SOCIAL:
                 </h2>
                 <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed !text-ink-600 md:text-base">
                   Scorri i momenti, le storie e le voci che ogni giorno animano IMLAND.
@@ -542,8 +542,38 @@ function Home() {
                     scrollSpeed={1.4}
                     scrollEase={0.045}
                     font="700 24px Inter"
+                    onClick={() => window.open("https://www.instagram.com/imlandradio/", "_blank", "noopener,noreferrer")}
                   />
                 </Suspense>
+              </div>
+              <div className="absolute bottom-5 right-5 z-20 flex items-center gap-2 md:bottom-7 md:right-7">
+                <a
+                  href="https://www.instagram.com/imlandradio/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Segui IMLAND su Instagram"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#E4405F] text-white shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E4405F]"
+                >
+                  <Instagram className="h-5 w-5" aria-hidden="true" />
+                </a>
+                <a
+                  href="https://www.facebook.com/imlandradio"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Segui IMLAND su Facebook"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1877F2] text-white shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1877F2]"
+                >
+                  <Facebook className="h-5 w-5" aria-hidden="true" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/imland-experience/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Segui IMLAND su LinkedIn"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#0A66C2] text-white shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A66C2]"
+                >
+                  <Linkedin className="h-5 w-5" aria-hidden="true" />
+                </a>
               </div>
             </div>
           </Reveal>
