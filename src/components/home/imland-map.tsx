@@ -6,7 +6,6 @@ import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&ur
 
 import { memberWall } from "@/routes/member";
 
-const MAP_CENTER: [number, number] = [8.35, 45.55];
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
 
 function applyMonochromeMapStyle(map: import("maplibre-gl").Map) {
@@ -87,8 +86,8 @@ export function ImLandMap() {
       const map = new maplibre.Map({
         container: containerRef.current,
         style: MAP_STYLE,
-        center: MAP_CENTER,
-        zoom: 7.7,
+        center: [8.35, 45.55],
+        zoom: 7,
         minZoom: 6,
         maxZoom: 17,
         attributionControl: false,
@@ -106,6 +105,16 @@ export function ImLandMap() {
       map.once("load", () => {
         applyMonochromeMapStyle(map);
         map.resize();
+        const memberBounds = new maplibre.LngLatBounds();
+        locatedMembers.forEach(({ coordinates }) => memberBounds.extend(coordinates));
+        if (!memberBounds.isEmpty()) {
+          const compact = window.matchMedia("(max-width: 767px)").matches;
+          map.fitBounds(memberBounds, {
+            padding: compact ? 34 : 74,
+            maxZoom: 11.6,
+            duration: 0,
+          });
+        }
         setMapReady(true);
       });
 
@@ -120,7 +129,7 @@ export function ImLandMap() {
       mapRef.current = null;
       setMapReady(false);
     };
-  }, []);
+  }, [locatedMembers]);
 
   useEffect(() => {
     const map = mapRef.current;
