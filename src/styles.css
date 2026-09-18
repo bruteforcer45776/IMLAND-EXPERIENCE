@@ -5575,3 +5575,107 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
     grid-column-start: 6;
   }
 }
+
+/* ============================================================
+   ECOSISTEMA IMLAND — layout definitivo, chiaro e professionale.
+   Quattro feature band coerenti: contenuto a sinistra, preview a destra.
+   ============================================================ */
+.home-ecosystem > div > :is(p, h2) {
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+
+.home-ecosystem .home-ecosystem-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(1.5rem, 3vw, 2.5rem) !important;
+}
+
+.home-ecosystem .home-ecosystem-row,
+.home-ecosystem .home-ecosystem-row:nth-child(even) {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: clamp(1.5rem, 4vw, 3.5rem) !important;
+  width: 100%;
+  height: auto;
+  padding: clamp(1.5rem, 4vw, 3rem) !important;
+  border-radius: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.home-ecosystem .home-ecosystem-row::before {
+  position: absolute;
+  top: 0;
+  left: clamp(1.5rem, 4vw, 3rem);
+  right: clamp(1.5rem, 4vw, 3rem);
+  height: 3px;
+  border-radius: 999px;
+  background: #1687ff;
+  content: "";
+}
+
+.home-ecosystem .home-ecosystem-row:nth-child(2)::before {
+  background: #1838a8;
+}
+
+.home-ecosystem .home-ecosystem-row:nth-child(3)::before {
+  background: #178b57;
+}
+
+.home-ecosystem .home-ecosystem-row:nth-child(4)::before {
+  background: #d9414c;
+}
+
+.home-ecosystem .home-ecosystem-row > div:first-of-type {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+}
+
+.home-ecosystem .home-ecosystem-row > div:nth-of-type(2) {
+  min-width: 0;
+}
+
+.home-ecosystem .home-ecosystem-copy,
+.home-ecosystem .home-ecosystem-row:nth-child(even) .home-ecosystem-copy {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+.home-ecosystem .home-ecosystem-copy :is(h2, h3, p) {
+  margin-inline: 0 !important;
+  text-align: left !important;
+}
+
+.home-ecosystem .home-ecosystem-copy > p:first-child {
+  margin-bottom: 0.65rem;
+}
+
+.home-ecosystem .home-ecosystem-copy :is(a, button) {
+  justify-content: center !important;
+}
+
+@media (min-width: 48rem) {
+  .home-ecosystem .home-ecosystem-row,
+  .home-ecosystem .home-ecosystem-row:nth-child(even) {
+    grid-template-columns: minmax(16rem, 0.78fr) minmax(0, 1.22fr) !important;
+    align-items: center;
+  }
+
+  .home-ecosystem .home-ecosystem-row > div:first-of-type {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .home-ecosystem .home-ecosystem-row > div:nth-of-type(2) {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+}
+
+@media (min-width: 75rem) {
+  .home-ecosystem .home-ecosystem-row,
+  .home-ecosystem .home-ecosystem-row:nth-child(even) {
+    grid-template-columns: minmax(19rem, 0.72fr) minmax(0, 1.28fr) !important;
+  }
+}
