@@ -199,10 +199,10 @@ function Home() {
             parte della stessa esperienza territoriale.
           </p>
 
-          <div className="relative mt-14 pl-9 md:pl-0">
+          <div className="home-ecosystem-grid-wrap relative mt-14 pl-9 md:pl-0">
             <div
               aria-hidden
-              className="absolute bottom-0 left-[14px] top-0 w-[3px] rounded-full bg-black/10 md:left-1/2 md:-translate-x-1/2"
+              className="home-ecosystem-line absolute bottom-0 left-[14px] top-0 w-[3px] rounded-full bg-black/10 md:left-1/2 md:-translate-x-1/2"
             />
             <ol className="home-ecosystem-list relative space-y-14 md:space-y-20">
               <li className="home-ecosystem-row theme-radio relative md:grid md:grid-cols-2 md:gap-14">

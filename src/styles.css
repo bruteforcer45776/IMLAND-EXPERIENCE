@@ -5479,3 +5479,99 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
     animation-duration: 180s;
   }
 }
+
+/* ============================================================
+   ECOSISTEMA IMLAND — composizione editoriale Bento.
+   Stessi contenuti, gerarchia più dinamica e responsive.
+   ============================================================ */
+.home-ecosystem .home-ecosystem-grid-wrap {
+  padding-left: 0 !important;
+}
+
+.home-ecosystem .home-ecosystem-line,
+.home-ecosystem .home-ecosystem-row > span[aria-hidden] {
+  display: none !important;
+}
+
+.home-ecosystem .home-ecosystem-list {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: clamp(1.25rem, 3vw, 2rem) !important;
+  margin: 0 !important;
+}
+
+.home-ecosystem .home-ecosystem-row,
+.home-ecosystem .home-ecosystem-row:nth-child(even) {
+  display: flex !important;
+  min-width: 0;
+  flex-direction: column !important;
+  gap: clamp(1.5rem, 3vw, 2.25rem) !important;
+  padding: clamp(1.35rem, 3vw, 2.25rem) !important;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 78%);
+  border-radius: clamp(1.75rem, 4vw, 3rem);
+  background: rgb(255 255 255 / 34%) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 88%),
+    0 20px 54px rgb(1 29 104 / 12%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+  backdrop-filter: blur(24px) saturate(145%) !important;
+}
+
+.home-ecosystem .home-ecosystem-copy,
+.home-ecosystem .home-ecosystem-row:nth-child(even) .home-ecosystem-copy {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.home-ecosystem .home-ecosystem-copy :is(h2, h3, p) {
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+
+.home-ecosystem .home-ecosystem-media,
+.home-ecosystem .home-ecosystem-row:nth-child(even) .home-ecosystem-media {
+  width: 100%;
+  min-width: 0;
+  margin-top: 0 !important;
+  padding: 0 !important;
+}
+
+@media (min-width: 48rem) {
+  .home-ecosystem .home-ecosystem-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch;
+  }
+
+  .home-ecosystem .home-ecosystem-row {
+    height: 100%;
+  }
+}
+
+@media (min-width: 64rem) {
+  .home-ecosystem .home-ecosystem-list {
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    align-items: start;
+  }
+
+  .home-ecosystem .home-ecosystem-row:nth-child(1),
+  .home-ecosystem .home-ecosystem-row:nth-child(4) {
+    grid-column: span 7;
+  }
+
+  .home-ecosystem .home-ecosystem-row:nth-child(2),
+  .home-ecosystem .home-ecosystem-row:nth-child(3) {
+    grid-column: span 5;
+  }
+
+  .home-ecosystem .home-ecosystem-row:nth-child(3) {
+    grid-column-start: 1;
+  }
+
+  .home-ecosystem .home-ecosystem-row:nth-child(4) {
+    grid-column-start: 6;
+  }
+}
