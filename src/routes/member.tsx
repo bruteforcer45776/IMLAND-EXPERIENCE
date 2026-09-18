@@ -579,7 +579,7 @@ function MemberPage() {
             </p>
 
             <ul className="member-card-grid mt-6 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
-              {memberWall.map((m, memberIndex) => {
+              {memberWall.map((m) => {
                 const id = slugify(m.name);
                 const isOpen = openedId === id;
                 const isFlipped = flippedId === id;
@@ -596,7 +596,7 @@ function MemberPage() {
                       bottoni/link dentro le due facce (nessun annidamento). */}
                     <div
                       onClick={() => handleCardClick(id)}
-                      className={`member-card group relative block min-h-[23rem] w-full text-left transition-transform duration-300 sm:min-h-[22rem] xl:min-h-[23rem] ${
+                      className={`member-card group relative block h-[25rem] w-full text-left transition-transform duration-300 sm:h-[24rem] xl:h-[26rem] ${
                         isOpen && !isFlipped ? "-translate-y-1" : ""
                       }`}
                     >
@@ -610,12 +610,12 @@ function MemberPage() {
                             isOpen ? "border-signal shadow-lg" : "border-border"
                           }`}
                         >
-                          <div className="relative aspect-[4/3] w-full overflow-hidden bg-white/5">
+                          <div className="relative h-36 w-full shrink-0 overflow-hidden bg-white sm:h-40 xl:h-36">
                             <img
                               src={m.cover}
                               alt={m.name}
                               loading="lazy"
-                              className={`member-logo-color member-logo-color-${(memberIndex % 8) + 1} absolute inset-0 h-full w-full bg-white object-contain p-2 transition-transform duration-500 ${
+                              className={`absolute inset-0 h-full w-full bg-white object-contain p-3 transition-transform duration-500 ${
                                 isOpen ? "scale-105" : "group-hover:scale-105"
                               }`}
                             />
@@ -627,11 +627,11 @@ function MemberPage() {
                               </div>
                             )}
                           </div>
-                          <div className="flex flex-1 flex-col gap-2 p-4 xl:p-3">
+                          <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden p-4 xl:p-3">
                             <span className="w-fit rounded-full bg-foreground/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground/70">
                               {m.category}
                             </span>
-                            <h3 className="text-sm font-semibold leading-snug md:text-base">
+                            <h3 className="line-clamp-2 text-sm font-semibold leading-snug md:text-base">
                               {m.name}
                             </h3>
                             <p className="line-clamp-2 text-xs leading-snug text-foreground/70 xl:text-[11px]">
@@ -662,11 +662,11 @@ function MemberPage() {
 
                         {/* BACK */}
                         <div
-                          className="absolute inset-0 flex h-full flex-col overflow-y-auto overscroll-contain rounded-3xl border border-signal bg-foreground p-3 text-foreground [backface-visibility:hidden]"
+                          className="absolute inset-0 flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-signal bg-white p-3 text-foreground [backface-visibility:hidden]"
                           style={{ transform: "rotateY(180deg)" }}
                         >
                           {id === "andrea-todaro-consulente" ? (
-                            <div className="flex h-full flex-col items-center justify-center text-center">
+                            <div className="flex h-full min-h-0 flex-col items-center text-center">
                               <img
                                 src={todaroPhoto.url}
                                 alt={m.name}
@@ -676,16 +676,16 @@ function MemberPage() {
                               <h3 className="mt-2 text-sm font-semibold leading-snug md:text-base">
                                 {m.name}
                               </h3>
-                              <p className="mt-2 text-[11px] leading-snug text-foreground/80">
-                                {m.desc}
-                              </p>
-                              <div className="mt-2 space-y-1 text-[10px] leading-snug text-foreground/70">
-                                {m.addresses.map((location) => (
-                                  <p key={`${location.label}-${location.address}`}>
-                                    <strong className="text-foreground">{location.label}:</strong>{" "}
-                                    {location.address}
-                                  </p>
-                                ))}
+                              <div className="mt-2 min-h-0 flex-1 overflow-y-auto overscroll-contain pr-1">
+                                <p className="text-[11px] leading-snug text-foreground/80">{m.desc}</p>
+                                <div className="mt-2 space-y-1 text-[10px] leading-snug text-foreground/70">
+                                  {m.addresses.map((location) => (
+                                    <p key={`${location.label}-${location.address}`}>
+                                      <strong className="text-foreground">{location.label}:</strong>{" "}
+                                      {location.address}
+                                    </p>
+                                  ))}
+                                </div>
                               </div>
                               <div className="mt-auto flex w-full flex-col gap-2 pt-3">
                                 {m.url ? (
@@ -735,16 +735,16 @@ function MemberPage() {
                                   </h3>
                                 </div>
                               </div>
-                              <p className="mt-2 font-serif text-[11px] italic font-medium leading-snug text-foreground/85">
-                                {m.desc}
-                              </p>
-                              <div className="mt-2 space-y-1 text-[10px] leading-snug text-foreground/70">
-                                {m.addresses.map((location) => (
-                                  <p key={`${location.label}-${location.address}`}>
-                                    <strong className="text-foreground">{location.label}:</strong>{" "}
-                                    {location.address}
-                                  </p>
-                                ))}
+                              <div className="mt-2 min-h-0 flex-1 overflow-y-auto overscroll-contain pr-1">
+                                <p className="font-serif text-[11px] italic font-medium leading-snug text-foreground/85">{m.desc}</p>
+                                <div className="mt-2 space-y-1 text-[10px] leading-snug text-foreground/70">
+                                  {m.addresses.map((location) => (
+                                    <p key={`${location.label}-${location.address}`}>
+                                      <strong className="text-foreground">{location.label}:</strong>{" "}
+                                      {location.address}
+                                    </p>
+                                  ))}
+                                </div>
                               </div>
                               <div className="mt-auto flex flex-col gap-2 pt-3">
                                 {m.url ? (
