@@ -289,6 +289,7 @@ function EventiPage() {
         src="/assets/hero-eventi-member-2026.jpg"
         srcMobile="/assets/hero-eventi-member-2026.jpg"
         alt="Evento Member 2026 segnato sul calendario"
+        className="eventi-calendar-hero"
         flush
         mobileBg="#f4f4f2"
       />

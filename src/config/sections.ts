@@ -76,7 +76,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "member",
     label: "Member",
     prefix: "/member",
-    logo: { url: logoExperience, alt: "IMLAND MEMBER" },
+    logo: { url: "/brand/imland-member.webp", alt: "IMLAND MEMBER" },
     theme: {
       signal: "#e0a800",
       secondary: "#ff7a00",
@@ -91,7 +91,7 @@ export const SECTIONS: SectionConfig[] = [
     key: "news",
     label: "News",
     prefix: "/news",
-    logo: { url: logoExperience, alt: "IMLAND NEWS" },
+    logo: { url: "/brand/imland-news.webp", alt: "IMLAND NEWS" },
     theme: {
       signal: "#e21d2f",
       secondary: "#101114",
@@ -137,6 +137,9 @@ export const DEFAULT_SECTION: SectionConfig = {
 
 /** Risolve la sezione a partire dal pathname corrente. */
 export function getSectionConfig(pathname: string): SectionConfig {
+  if (pathname === "/my-podcast" || pathname.startsWith("/my-podcast/")) {
+    return SECTIONS.find((section) => section.key === "podcast") ?? DEFAULT_SECTION;
+  }
   return (
     SECTIONS.find(
       (s) => s.prefix && (pathname === s.prefix || pathname.startsWith(`${s.prefix}/`)),

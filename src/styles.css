@@ -5706,3 +5706,75 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
     grid-template-columns: minmax(19rem, 0.72fr) minmax(0, 1.28fr) !important;
   }
 }
+
+/* Correzioni finali richieste: hero, mappa e layout editoriale Home. */
+.hero-banner__content {
+  z-index: 4;
+}
+
+.radio-team-hero .hero-cta-claim,
+.podcast-team-hero .hero-cta-claim {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: #0a0a0a !important;
+  text-shadow: 0 2px 16px rgb(255 255 255 / 82%) !important;
+}
+
+@media (min-width: 48rem) {
+  .eventi-calendar-hero img {
+    object-position: center 35% !important;
+  }
+
+  .imland-map-card__canvas {
+    height: clamp(520px, 52vw, 680px);
+  }
+}
+
+.imland-map-card__filters {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.imland-map-card__canvas-wrap {
+  background-color: #040918;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgb(255 255 255 / 92%) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 72% 64%, rgb(190 216 255 / 86%) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 42% 78%, rgb(255 255 255 / 76%) 0 0.8px, transparent 1.5px),
+    radial-gradient(ellipse at 50% 0%, rgb(32 71 150 / 52%), transparent 58%);
+  background-size: 150px 150px, 210px 210px, 180px 180px, 100% 100%;
+}
+
+.imland-map-card__canvas-wrap::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image:
+    radial-gradient(circle at 12% 28%, rgb(255 255 255 / 70%) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 84% 19%, rgb(180 210 255 / 70%) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 63% 82%, rgb(255 255 255 / 62%) 0 0.8px, transparent 1.6px);
+  background-size: 190px 190px, 240px 240px, 170px 170px;
+  content: "";
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+@media (min-width: 48rem) {
+  .home-ecosystem .home-ecosystem-copy,
+  .home-ecosystem .home-ecosystem-copy :is(h2, h3, p) {
+    margin-inline: 0 !important;
+    text-align: left !important;
+  }
+
+  .home-ecosystem .home-ecosystem-copy {
+    align-items: flex-start !important;
+  }
+
+  .home-ecosystem .home-ecosystem-row > div:first-of-type {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .home-ecosystem .home-ecosystem-row > div:nth-of-type(2) {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+}

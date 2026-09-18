@@ -226,9 +226,6 @@ export function ImLandMap() {
             </button>
           ))}
         </div>
-        <strong>
-          {visibleLocations.length} {visibleLocations.length === 1 ? "sede" : "sedi"}
-        </strong>
       </div>
 
       <p className="imland-map-card__notice">
@@ -251,10 +248,6 @@ export function ImLandMap() {
           role="region"
           aria-label="Mappa della rete IMLAND Member"
         />
-        <div className="imland-map-card__map-hint" aria-live="polite">
-          <strong>{visibleLocations.length} sedi verificate</strong>
-          <span>Tocca una foto sulla mappa per vedere Member, indirizzo e link.</span>
-        </div>
       </div>
     </section>
   );

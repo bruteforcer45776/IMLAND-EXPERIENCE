@@ -1112,40 +1112,6 @@ function MemberPage() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="section-focus mx-auto max-w-4xl px-4 section-pad md:px-8">
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
-              FAQ Membership
-            </p>
-            <h2 className="mt-2 text-h2-im">
-              Le domande più <span className="im-gradient-text">frequenti.</span>
-            </h2>
-          </div>
-          <Accordion type="single" collapsible className="mt-10 space-y-3">
-            {memberFaqs.map((f, i) => (
-              <AccordionItem
-                key={f.q}
-                value={`item-${i}`}
-                className="glass-panel rounded-2xl px-5 shadow-soft"
-              >
-                <AccordionTrigger className="text-left font-display text-base font-semibold hover:no-underline">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground">{f.a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-          <div className="mt-8 text-center">
-            <Link
-              to="/faq"
-              className="inline-flex items-center gap-1 text-sm font-semibold text-signal underline-offset-4 hover:underline"
-            >
-              Vedi tutte le FAQ <ArrowRight className="inline h-4 w-4" />
-            </Link>
-          </div>
-        </section>
-
         {/* COME FUNZIONA L'ADESIONE */}
         <section className="container-im section-focus section-pad">
           <div className="max-w-2xl">
@@ -1184,6 +1150,40 @@ function MemberPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/contatti" className="rounded-full btn-blue px-6 py-3.5 text-sm">
               Diventa Member
+            </Link>
+          </div>
+        </section>
+
+        {/* FAQ — dopo il percorso di adesione */}
+        <section className="section-focus mx-auto max-w-4xl px-4 section-pad md:px-8">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-wider text-signal">
+              FAQ Membership
+            </p>
+            <h2 className="mt-2 text-h2-im">
+              Le domande più <span className="im-gradient-text">frequenti.</span>
+            </h2>
+          </div>
+          <Accordion type="single" collapsible className="mt-10 space-y-3">
+            {memberFaqs.map((f, i) => (
+              <AccordionItem
+                key={f.q}
+                value={`item-${i}`}
+                className="glass-panel rounded-2xl px-5 shadow-soft"
+              >
+                <AccordionTrigger className="text-left font-display text-base font-semibold hover:no-underline">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground">{f.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+          <div className="mt-8 text-center">
+            <Link
+              to="/faq"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-signal underline-offset-4 hover:underline"
+            >
+              Vedi tutte le FAQ <ArrowRight className="inline h-4 w-4" />
             </Link>
           </div>
         </section>
