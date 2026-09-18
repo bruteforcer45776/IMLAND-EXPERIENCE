@@ -7,6 +7,7 @@ import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&ur
 import { memberWall } from "@/routes/member";
 
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
+const MEMBER_DOT_COLORS = ["#1646d8", "#16bff2", "#19c83a", "#ffc400", "#e5232a"];
 
 function applyMonochromeMapStyle(map: import("maplibre-gl").Map) {
   const layers = map.getStyle().layers ?? [];
@@ -147,12 +148,8 @@ export function ImLandMap() {
         markerButton.type = "button";
         markerButton.className = "imland-map-marker";
         markerButton.setAttribute("aria-label", `Apri ${member.name}, ${label}`);
-
-        const markerImage = document.createElement("img");
-        markerImage.className = `member-logo-color member-logo-color-${(index % 8) + 1}`;
-        markerImage.src = member.cover;
-        markerImage.alt = "";
-        markerButton.append(markerImage);
+        markerButton.title = member.name;
+        markerButton.style.setProperty("--member-dot", MEMBER_DOT_COLORS[index % MEMBER_DOT_COLORS.length]);
 
         const popupContent = document.createElement("article");
         popupContent.className = "imland-map-popup";
@@ -189,7 +186,7 @@ export function ImLandMap() {
           closeButton: true,
           maxWidth: "320px",
         }).setDOMContent(popupContent);
-        const marker = new maplibre.Marker({ element: markerButton, anchor: "bottom" })
+        const marker = new maplibre.Marker({ element: markerButton, anchor: "center" })
           .setLngLat(coordinates)
           .setPopup(popup)
           .addTo(map);
