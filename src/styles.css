@@ -4468,10 +4468,23 @@ h6 {
 }
 .imland-map-card__canvas {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   height: clamp(430px, 57vw, 610px);
   min-height: 430px;
   width: 100%;
+}
+
+.imland-map-card__canvas .maplibregl-marker {
+  z-index: 20 !important;
+}
+
+.imland-map-card__canvas .maplibregl-marker:hover,
+.imland-map-card__canvas .maplibregl-marker:focus-within {
+  z-index: 30 !important;
+}
+
+.imland-map-card__canvas .maplibregl-popup {
+  z-index: 40 !important;
 }
 .imland-map-card__map-hint {
   position: absolute;
