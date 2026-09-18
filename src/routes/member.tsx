@@ -9,6 +9,7 @@ import { SpotlightCard } from "../components/spotlight-card";
 import { PhotoBadge } from "../components/photo-badge";
 import { HeroBanner } from "../components/hero-banner";
 import { MEMBER_DETAILS, type MemberAddress } from "../data/member-details";
+import { partnerLogos } from "../data/partner-logos";
 
 const DomeGallery = lazy(() => import("../components/dome-gallery"));
 const ImLandMap = lazy(() =>
@@ -427,6 +428,8 @@ const memberWallSource: Omit<MemberWallEntry, "desc" | "addresses">[] = [
   },
 ];
 
+const partnerLogoByName = new Map(partnerLogos.map((partner) => [partner.name, partner.src]));
+
 export const memberWall: MemberWallEntry[] = memberWallSource.map((member) => {
   const details = MEMBER_DETAILS[member.name];
   if (!details) {
@@ -434,6 +437,7 @@ export const memberWall: MemberWallEntry[] = memberWallSource.map((member) => {
   }
   return {
     ...member,
+    cover: partnerLogoByName.get(member.name) ?? member.cover,
     desc: details.description,
     addresses: details.addresses,
   };
@@ -575,7 +579,7 @@ function MemberPage() {
             </p>
 
             <ul className="member-card-grid mt-6 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
-              {memberWall.map((m) => {
+              {memberWall.map((m, memberIndex) => {
                 const id = slugify(m.name);
                 const isOpen = openedId === id;
                 const isFlipped = flippedId === id;
@@ -611,7 +615,7 @@ function MemberPage() {
                               src={m.cover}
                               alt={m.name}
                               loading="lazy"
-                              className={`absolute inset-0 h-full w-full bg-white object-contain p-2 transition-transform duration-500 ${
+                              className={`member-logo-color member-logo-color-${(memberIndex % 8) + 1} absolute inset-0 h-full w-full bg-white object-contain p-2 transition-transform duration-500 ${
                                 isOpen ? "scale-105" : "group-hover:scale-105"
                               }`}
                             />

@@ -500,6 +500,8 @@ export default function DomeGallery({
       const rawHref = parent.dataset.href || "";
       const img = document.createElement("img");
       img.src = rawSrc;
+      const sourceImg = el.querySelector("img");
+      if (sourceImg) img.style.filter = getComputedStyle(sourceImg).filter;
       overlay.appendChild(img);
       if (rawHref) {
         overlay.style.cursor = "pointer";

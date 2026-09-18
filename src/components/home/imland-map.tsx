@@ -142,13 +142,14 @@ export function ImLandMap() {
       if (!mapRef.current) return;
       const bounds = new maplibre.LngLatBounds();
 
-      markersRef.current = visibleLocations.map(({ member, label, address, coordinates }) => {
+      markersRef.current = visibleLocations.map(({ member, label, address, coordinates }, index) => {
         const markerButton = document.createElement("button");
         markerButton.type = "button";
         markerButton.className = "imland-map-marker";
         markerButton.setAttribute("aria-label", `Apri ${member.name}, ${label}`);
 
         const markerImage = document.createElement("img");
+        markerImage.className = `member-logo-color member-logo-color-${(index % 8) + 1}`;
         markerImage.src = member.cover;
         markerImage.alt = "";
         markerButton.append(markerImage);
@@ -157,7 +158,7 @@ export function ImLandMap() {
         popupContent.className = "imland-map-popup";
 
         const popupImage = document.createElement("img");
-        popupImage.className = "imland-map-popup__image";
+        popupImage.className = `imland-map-popup__image member-logo-color member-logo-color-${(index % 8) + 1}`;
         popupImage.src = member.cover;
         popupImage.alt = "";
 
