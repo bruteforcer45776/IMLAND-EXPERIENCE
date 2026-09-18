@@ -5653,6 +5653,16 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
 
 .home-ecosystem .home-ecosystem-copy :is(a, button) {
   justify-content: center !important;
+  align-self: center !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.home-ecosystem .home-ecosystem-row > div:first-of-type,
+.home-ecosystem .home-ecosystem-row > div:nth-of-type(2),
+.home-ecosystem .home-ecosystem-copy,
+.home-ecosystem .home-ecosystem-media {
+  align-self: center !important;
 }
 
 @media (min-width: 48rem) {
