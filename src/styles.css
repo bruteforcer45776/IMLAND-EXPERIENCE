@@ -5306,3 +5306,154 @@ body #main-content :is(input, textarea, select, option, pre, code, [contentedita
   position: relative;
   z-index: 2;
 }
+
+/* ============================================================
+   OVERRIDE FINALE 2 — nessun bianco pieno, layout Ecosistema fisso,
+   loghi Member renderizzati senza dipendenze dall'animazione JS.
+   ============================================================ */
+body .editorial-frame-canvas #main-content :is(
+  section:not(.hidden),
+  article[class*="bg-white"],
+  article[class*="bg-card"],
+  div[class*="bg-white"],
+  div[class*="bg-card"],
+  .card-im,
+  .surface-card,
+  .glass-panel,
+  .bento-card,
+  .section-focus,
+  .section-surface
+),
+body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass, .site-footer) {
+  border-color: rgb(255 255 255 / 72%) !important;
+  background: rgb(255 255 255 / 42%) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 82%),
+    0 18px 48px rgb(1 29 104 / 13%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(138%) !important;
+  backdrop-filter: blur(22px) saturate(138%) !important;
+}
+
+body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
+  background: rgb(255 255 255 / 58%) !important;
+}
+
+@media (min-width: 64rem) {
+  .home-ecosystem .home-ecosystem-row,
+  .home-ecosystem .home-ecosystem-row:nth-child(even) {
+    grid-template-columns: minmax(18rem, 0.82fr) minmax(0, 1.18fr) !important;
+  }
+
+  .home-ecosystem .home-ecosystem-row .home-ecosystem-copy,
+  .home-ecosystem .home-ecosystem-row:nth-child(even) .home-ecosystem-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .home-ecosystem .home-ecosystem-row .home-ecosystem-media,
+  .home-ecosystem .home-ecosystem-row:nth-child(even) .home-ecosystem-media {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  .home-ecosystem .home-ecosystem-copy :is(h2, h3, p) {
+    margin-inline: 0 !important;
+    text-align: left !important;
+  }
+
+  .home-ecosystem .home-ecosystem-copy :is(a, button) {
+    justify-content: center !important;
+  }
+}
+
+.partner-loop--forced {
+  display: block !important;
+  width: 100%;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.75rem clamp(1rem, 3vw, 2rem) 1rem;
+  scrollbar-width: thin;
+  contain: none;
+}
+
+.partner-loop__forced-grid {
+  display: grid !important;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(9rem, 12rem);
+  grid-template-rows: repeat(2, 5rem);
+  width: max-content;
+  min-width: 100%;
+  align-items: center;
+  justify-content: start !important;
+  gap: 0.75rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.partner-loop__forced-item,
+.partner-loop__forced-link {
+  display: flex !important;
+  width: 100%;
+  height: 100%;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.partner-loop__forced-item {
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 30%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 76%);
+}
+
+.partner-loop--forced .partner-loop__mark {
+  width: 100%;
+  height: 100%;
+  padding: 0.65rem;
+}
+
+.partner-loop--forced .partner-loop__image {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 10rem !important;
+  max-height: 3.75rem !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+  object-fit: contain !important;
+}
+
+@media (max-width: 47.999rem) {
+  body .editorial-frame-canvas #main-content :is(
+    section:not(.hidden),
+    article[class*="bg-white"],
+    article[class*="bg-card"],
+    div[class*="bg-white"],
+    div[class*="bg-card"],
+    .card-im,
+    .surface-card,
+    .glass-panel,
+    .bento-card,
+    .section-focus,
+    .section-surface
+  ) {
+    background: rgb(255 255 255 / 38%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(132%) !important;
+    backdrop-filter: blur(16px) saturate(132%) !important;
+  }
+
+  .partner-loop__forced-grid {
+    grid-auto-columns: minmax(8rem, 9.5rem);
+    grid-template-rows: 4.5rem;
+  }
+
+  .partner-loop--forced .partner-loop__image {
+    max-width: 8rem !important;
+    max-height: 3rem !important;
+  }
+}

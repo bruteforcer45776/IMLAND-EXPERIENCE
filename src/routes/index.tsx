@@ -4,6 +4,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, MapPin } from "lucide-react";
 
 import { HeroCinematic } from "../components/home/hero-cinematic";
+import { PartnerLoop } from "../components/partner-bar/PartnerLoop";
 import { Reveal } from "../components/reveal";
 import { PageRails, BauhausStrip } from "../components/decor";
 import { AdvSlot } from "../components/adv-slot";
@@ -14,11 +15,6 @@ import coverMusicalBox from "@/assets/musical-box.webp";
 import coverSeCiSei from "@/assets/se-ci-sei-batti-un-colpo.webp";
 import coverImLandCharts from "@/assets/imland-charts.webp";
 
-const PartnerLoop = lazy(() =>
-  import("../components/partner-bar/PartnerLoop").then((module) => ({
-    default: module.PartnerLoop,
-  })),
-);
 const NewsletterBanner = lazy(() =>
   import("../components/newsletter-banner").then((m) => ({ default: m.NewsletterBanner })),
 );
@@ -187,9 +183,7 @@ function Home() {
             Members e realtà del territorio:
           </p>
         </div>
-        <Suspense fallback={<div className="h-16" />}>
-          <PartnerLoop />
-        </Suspense>
+        <PartnerLoop />
       </section>
 
       {/* ECOSISTEMA EDITORIALE — timeline Radio, Podcast, Eventi e News */}

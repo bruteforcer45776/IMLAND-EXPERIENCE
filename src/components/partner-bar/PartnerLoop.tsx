@@ -1,6 +1,6 @@
 import { useState } from "react";
-import LogoLoop, { type LogoItem } from "./LogoLoop";
 import { partnerLogos, type PartnerLogo } from "@/data/partner-logos";
+import "./LogoLoop.css";
 
 function PartnerMark({ partner }: { partner: PartnerLogo }) {
   const [failed, setFailed] = useState(false);
@@ -20,7 +20,7 @@ function PartnerMark({ partner }: { partner: PartnerLogo }) {
         alt={partner.name}
         loading="eager"
         fetchPriority="high"
-        decoding="async"
+        decoding="sync"
         onError={() => setFailed(true)}
         className="partner-loop__image object-contain"
       />
@@ -30,33 +30,38 @@ function PartnerMark({ partner }: { partner: PartnerLogo }) {
 
 export function PartnerLoop({
   partners = partnerLogos,
-  fadeOutColor = "#f8fafd",
   className,
 }: {
   partners?: PartnerLogo[];
   fadeOutColor?: string;
   className?: string;
 }) {
-  const logos: LogoItem[] = partners.map((p) => ({
-    node: <PartnerMark partner={p} />,
-    title: p.name,
-    ariaLabel: p.name,
-    ...(p.href ? { href: p.href } : {}),
-  }));
-
   return (
-    <LogoLoop
-      className={["partner-loop", className].filter(Boolean).join(" ")}
-      logos={logos}
-      speed={60}
-      direction="left"
-      logoHeight={58}
-      gap={34}
-      hoverSpeed={16}
-      scaleOnHover={false}
-      fadeOut={false}
-      ariaLabel="Partner IMLAND Experience"
-    />
+    <div
+      className={["partner-loop partner-loop--forced", className].filter(Boolean).join(" ")}
+      role="region"
+      aria-label="Partner IMLAND Experience"
+    >
+      <ul className="partner-loop__forced-grid" role="list">
+        {partners.map((partner) => (
+          <li className="partner-loop__forced-item" key={partner.src}>
+            {partner.href ? (
+              <a
+                className="partner-loop__forced-link"
+                href={partner.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={partner.name}
+              >
+                <PartnerMark partner={partner} />
+              </a>
+            ) : (
+              <PartnerMark partner={partner} />
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
