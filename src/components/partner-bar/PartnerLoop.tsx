@@ -36,31 +36,43 @@ export function PartnerLoop({
   fadeOutColor?: string;
   className?: string;
 }) {
+  const renderPartners = (duplicate = false) => (
+    <ul
+      className="partner-loop__forced-grid"
+      role="list"
+      aria-hidden={duplicate || undefined}
+    >
+      {partners.map((partner) => (
+        <li className="partner-loop__forced-item" key={`${duplicate ? "copy-" : ""}${partner.src}`}>
+          {partner.href ? (
+            <a
+              className="partner-loop__forced-link"
+              href={partner.href}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={partner.name}
+              tabIndex={duplicate ? -1 : undefined}
+            >
+              <PartnerMark partner={partner} />
+            </a>
+          ) : (
+            <PartnerMark partner={partner} />
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <div
       className={["partner-loop partner-loop--forced", className].filter(Boolean).join(" ")}
       role="region"
       aria-label="Partner IMLAND Experience"
     >
-      <ul className="partner-loop__forced-grid" role="list">
-        {partners.map((partner) => (
-          <li className="partner-loop__forced-item" key={partner.src}>
-            {partner.href ? (
-              <a
-                className="partner-loop__forced-link"
-                href={partner.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={partner.name}
-              >
-                <PartnerMark partner={partner} />
-              </a>
-            ) : (
-              <PartnerMark partner={partner} />
-            )}
-          </li>
-        ))}
-      </ul>
+      <div className="partner-loop__forced-track">
+        {renderPartners()}
+        {renderPartners(true)}
+      </div>
     </div>
   );
 }

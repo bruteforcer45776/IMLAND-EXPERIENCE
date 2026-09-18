@@ -5348,8 +5348,8 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
   .home-ecosystem .home-ecosystem-row:nth-child(even) .home-ecosystem-copy {
     grid-column: 1 !important;
     grid-row: 1 !important;
-    align-items: flex-start !important;
-    text-align: left !important;
+    align-items: center !important;
+    text-align: center !important;
   }
 
   .home-ecosystem .home-ecosystem-row .home-ecosystem-media,
@@ -5359,8 +5359,8 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
   }
 
   .home-ecosystem .home-ecosystem-copy :is(h2, h3, p) {
-    margin-inline: 0 !important;
-    text-align: left !important;
+    margin-inline: auto !important;
+    text-align: center !important;
   }
 
   .home-ecosystem .home-ecosystem-copy :is(a, button) {
@@ -5372,26 +5372,42 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
   display: block !important;
   width: 100%;
   min-height: 0;
-  overflow-x: auto;
+  overflow: hidden;
   overflow-y: hidden;
   padding: 0.75rem clamp(1rem, 3vw, 2rem) 1rem;
-  scrollbar-width: thin;
   contain: none;
+}
+
+.partner-loop__forced-track {
+  display: flex;
+  width: max-content;
+  min-width: max-content;
+  align-items: center;
+  animation: partner-logo-marquee 75s linear infinite;
+  will-change: transform;
 }
 
 .partner-loop__forced-grid {
   display: grid !important;
   grid-auto-flow: column;
   grid-auto-columns: minmax(9rem, 12rem);
-  grid-template-rows: repeat(2, 5rem);
+  grid-template-rows: 5rem;
   width: max-content;
-  min-width: 100%;
   align-items: center;
   justify-content: start !important;
-  gap: 0.75rem 1rem;
+  gap: 1rem;
   margin: 0;
-  padding: 0;
+  padding: 0 1rem 0 0;
   list-style: none;
+}
+
+@keyframes partner-logo-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 .partner-loop__forced-item,
@@ -5455,5 +5471,11 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
   .partner-loop--forced .partner-loop__image {
     max-width: 8rem !important;
     max-height: 3rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-loop__forced-track {
+    animation-duration: 180s;
   }
 }
