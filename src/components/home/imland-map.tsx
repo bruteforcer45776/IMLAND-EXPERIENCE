@@ -7,7 +7,7 @@ import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&ur
 import { memberWall } from "@/routes/member";
 
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
-const MEMBER_DOT_COLORS = ["#1646d8", "#16bff2", "#19c83a", "#ffc400", "#e5232a"];
+const GATTINARA_CENTER: [number, number] = [8.371, 45.614];
 
 function applyMonochromeMapStyle(map: import("maplibre-gl").Map) {
   const layers = map.getStyle().layers ?? [];
@@ -87,8 +87,8 @@ export function ImLandMap() {
       const map = new maplibre.Map({
         container: containerRef.current,
         style: MAP_STYLE,
-        center: [8.35, 45.55],
-        zoom: 7,
+        center: GATTINARA_CENTER,
+        zoom: 10.5,
         minZoom: 6,
         maxZoom: 17,
         attributionControl: false,
@@ -106,16 +106,7 @@ export function ImLandMap() {
       map.once("load", () => {
         applyMonochromeMapStyle(map);
         map.resize();
-        const memberBounds = new maplibre.LngLatBounds();
-        locatedMembers.forEach(({ coordinates }) => memberBounds.extend(coordinates));
-        if (!memberBounds.isEmpty()) {
-          const compact = window.matchMedia("(max-width: 767px)").matches;
-          map.fitBounds(memberBounds, {
-            padding: compact ? 34 : 74,
-            maxZoom: 11.6,
-            duration: 0,
-          });
-        }
+        map.jumpTo({ center: GATTINARA_CENTER, zoom: 10.5 });
         setMapReady(true);
       });
 
@@ -141,15 +132,17 @@ export function ImLandMap() {
 
     void import("maplibre-gl").then((maplibre) => {
       if (!mapRef.current) return;
-      const bounds = new maplibre.LngLatBounds();
-
       markersRef.current = visibleLocations.map(({ member, label, address, coordinates }, index) => {
         const markerButton = document.createElement("button");
         markerButton.type = "button";
         markerButton.className = "imland-map-marker";
         markerButton.setAttribute("aria-label", `Apri ${member.name}, ${label}`);
         markerButton.title = member.name;
-        markerButton.style.setProperty("--member-dot", MEMBER_DOT_COLORS[index % MEMBER_DOT_COLORS.length]);
+
+        const markerImage = document.createElement("img");
+        markerImage.src = member.cover;
+        markerImage.alt = "";
+        markerButton.append(markerImage);
 
         const popupContent = document.createElement("article");
         popupContent.className = "imland-map-popup";
@@ -190,14 +183,8 @@ export function ImLandMap() {
           .setLngLat(coordinates)
           .setPopup(popup)
           .addTo(map);
-        bounds.extend(coordinates);
         return marker;
       });
-
-      if (!bounds.isEmpty()) {
-        const compact = window.matchMedia("(max-width: 767px)").matches;
-        map.fitBounds(bounds, { padding: compact ? 34 : 74, maxZoom: 11.6, duration: 700 });
-      }
     });
 
     return () => {
