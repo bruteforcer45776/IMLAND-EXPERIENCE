@@ -179,6 +179,7 @@ function useSectionTheme() {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const section = useSectionTheme();
   const usesSpectrumFrame = section.key === "default";
   const editorialFrame =
@@ -214,7 +215,11 @@ function RootComponent() {
             <div className="editorial-frame-canvas">
               <a href="#main-content" className="skip-link">Salta al contenuto</a>
               <SiteHeader />
-              <main id="main-content" className="relative flex-1 pt-[66px] pb-app-nav md:pt-[74px] md:pb-0">
+              <main
+                id="main-content"
+                data-page={pathname === "/" ? "home" : "internal"}
+                className="relative flex-1 pt-[66px] pb-app-nav md:pt-[74px] md:pb-0"
+              >
                 <Outlet />
               </main>
               <SiteFooter />
