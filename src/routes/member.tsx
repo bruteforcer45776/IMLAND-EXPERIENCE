@@ -578,7 +578,7 @@ function MemberPage() {
               Clicca una copertina per aprirla · clicca ancora per scoprire la storia e i contatti.
             </p>
 
-            <ul className="member-card-grid mt-6 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+            <ul className="member-card-grid mt-6">
               {memberWall.map((m) => {
                 const id = slugify(m.name);
                 const isOpen = openedId === id;

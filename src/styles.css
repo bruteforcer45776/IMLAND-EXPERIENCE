@@ -3666,7 +3666,15 @@ h6 {
 
 /* Member: proporzioni stabili a tutte le risoluzioni. */
 .member-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   align-items: stretch;
+  width: 100%;
+}
+
+.member-card-grid > li {
+  flex: 1 1 100%;
 }
 
 .member-card-grid > li,
@@ -3695,6 +3703,22 @@ h6 {
 @media (min-width: 80rem) {
   .member-card-grid {
     gap: 0.875rem;
+  }
+
+  .member-card-grid > li {
+    flex-basis: calc((100% - 4.375rem) / 6);
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 79.999rem) {
+  .member-card-grid > li {
+    flex-basis: calc((100% - 2rem) / 3);
+  }
+}
+
+@media (min-width: 30rem) and (max-width: 47.999rem) {
+  .member-card-grid > li {
+    flex-basis: calc((100% - 1rem) / 2);
   }
 }
 
