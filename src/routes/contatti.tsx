@@ -3,8 +3,6 @@ import { canonical } from "../lib/seo";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { BrandIcon } from "../components/brand-icons";
-import { BadgeIcon } from "../components/badge-icon";
-import { BentoGrid, BentoCard } from "../components/bento";
 import { PageHero } from "../components/page-hero";
 import { SectionHeader } from "../components/section-header";
 import {
@@ -40,54 +38,6 @@ const topics = [
   "Member",
   "Altro",
 ] as const;
-
-const paths = [
-  {
-    icon: "fumetti" as const,
-    badge: "news" as const,
-    tone: "news" as const,
-    title: "Redazione",
-    desc: "Segnalaci una notizia, un evento o un errore da correggere nei nostri contenuti.",
-    contact: "info@imlandradio.com",
-    time: "Entro 48 ore lavorative",
-  },
-  {
-    icon: "nota_musicale" as const,
-    badge: "calendario" as const,
-    tone: "eventi" as const,
-    title: "Eventi",
-    desc: "Vuoi portare IMLAND al tuo evento? Raccontaci data, luogo e format che immagini.",
-    contact: "info@imlandradio.com",
-    time: "Entro 3 giorni lavorativi",
-  },
-  {
-    icon: "tessera_member" as const,
-    badge: "account" as const,
-    tone: "member" as const,
-    title: "Member",
-    desc: "Domande su tessere, vantaggi o attivazione dell'area riservata IMLAND Member.",
-    contact: "info@imlandradio.com",
-    time: "Entro 48 ore lavorative",
-  },
-  {
-    icon: "stretta_mano" as const,
-    badge: "partner" as const,
-    tone: "member" as const,
-    title: "Partnership",
-    desc: "Sei un'azienda o un ente e vuoi collaborare con IMLAND? Parliamone.",
-    contact: "info@imlandradio.com",
-    time: "Entro 5 giorni lavorativi",
-  },
-  {
-    icon: "megafono" as const,
-    badge: "annuncio" as const,
-    tone: "news" as const,
-    title: "Ufficio stampa",
-    desc: "Comunicati, richieste media e accrediti per interviste o collegamenti.",
-    contact: "info@imlandradio.com",
-    time: "Entro 24-48 ore",
-  },
-];
 
 const usefulLinks = [
   { to: "/eventi" as const, label: "Scopri gli eventi IMLAND" },
@@ -151,43 +101,6 @@ function ContattiPage() {
           Scrivi una email
         </a>
       </PageHero>
-
-      {/* Come possiamo aiutarti */}
-      <section className="section-focus">
-        <div className="container-im section-pad">
-          <SectionHeader
-            eyebrow="Percorsi"
-            badge="partner"
-            title={
-              <>
-                Come possiamo <span className="im-gradient-text">aiutarti</span>.
-              </>
-            }
-            description="Scegli il percorso più vicino alla tua richiesta: ti indichiamo il contatto giusto e i tempi di risposta."
-          />
-          <BentoGrid className="mt-10">
-            {paths.map((p) => (
-              <BentoCard key={p.title} tone={p.tone} span={2}>
-                <BadgeIcon name={p.badge} className="h-14 w-14" />
-                <h3 className="mt-4 text-h3-im leading-snug">{p.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
-                <div className="mt-4 border-t border-border pt-4">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Tempo di risposta
-                  </p>
-                  <p className="mt-1 text-sm font-medium">{p.time}</p>
-                </div>
-                <a
-                  href={`mailto:${p.contact}`}
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-signal"
-                >
-                  Scrivi ora <ArrowRight className="inline h-4 w-4" />
-                </a>
-              </BentoCard>
-            ))}
-          </BentoGrid>
-        </div>
-      </section>
 
       <section
         id="scrivici"

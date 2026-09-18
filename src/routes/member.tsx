@@ -782,17 +782,6 @@ function MemberPage() {
               })}
             </ul>
 
-            <p className="mt-8 text-xs text-foreground/60">
-              {memberWall.length} Member attivi sul territorio · fonte:{" "}
-              <a
-                href="https://imlandradio.it/members-wall/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground underline underline-offset-2"
-              >
-                imlandradio.it/members-wall
-              </a>
-            </p>
           </div>
         </section>
         <section className="container-im section-editorial section-pad">

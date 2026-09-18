@@ -205,12 +205,11 @@ export const teamMembers: TeamMember[] = [
 
   build(teamPhoto("roberto-filiberti"), "Roberto", "Filiberti", "", "Amministrazione"),
 
-  build(teamPhoto("tommaso-segato"), "Tommaso", "Segato", "", "Eventi"),
+  build(teamPhoto("tommaso-segato"), "Tommaso", "Segatto", "", "Eventi"),
 ].map((m, i) => ({
   ...m,
-  // slug fallback stabile quando nome/cognome sono vuoti
-  slug: m.slug || `membro-${i + 1}`,
-  description: descriptions[m.slug] ?? m.description,
+  description: descriptions[m.slug === "tommaso-segatto" ? "tommaso-segato" : m.slug] ?? m.description,
+  slug: m.slug === "tommaso-segatto" ? "tommaso-segato" : m.slug || `membro-${i + 1}`,
 }));
 
 export function getTeamMember(slug: string): TeamMember | undefined {

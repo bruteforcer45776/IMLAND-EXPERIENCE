@@ -244,7 +244,7 @@ function ChiSiamoPage() {
                           width={800}
                           height={1000}
                           sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw"
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+                          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.025]"
                         />
                       ) : (
                         <div className="flex h-full items-center justify-center px-8 text-center text-white">

@@ -6,7 +6,7 @@ export type PartnerLogo = {
   href?: string | null;
 };
 
-/** Partner "Si sono fidati di noi" — 41 loghi reali. */
+/** Partner "Si sono fidati di noi" — loghi ufficiali. */
 export const partnerLogos: PartnerLogo[] = [
   {
     name: "Travaini Carpenterie",
