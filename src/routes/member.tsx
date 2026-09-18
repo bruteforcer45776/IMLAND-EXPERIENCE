@@ -540,6 +540,8 @@ function MemberPage() {
                       href: member.url ?? undefined,
                     }))}
                     grayscale={false}
+                    autoRotate
+                    autoRotateSpeed={0.025}
                     overlayBlurColor="#ffffff"
                     imageBorderRadius="18px"
                     openedImageBorderRadius="24px"
@@ -573,7 +575,7 @@ function MemberPage() {
               Clicca una copertina per aprirla · clicca ancora per scoprire la storia e i contatti.
             </p>
 
-            <ul className="mt-6 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <ul className="mt-6 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-6">
               {memberWall.map((m) => {
                 const id = slugify(m.name);
                 const isOpen = openedId === id;
