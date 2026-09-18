@@ -18,7 +18,8 @@ function PartnerMark({ partner }: { partner: PartnerLogo }) {
       <img
         src={partner.src}
         alt={partner.name}
-        loading="lazy"
+        loading="eager"
+        fetchPriority="high"
         decoding="async"
         onError={() => setFailed(true)}
         className="partner-loop__image object-contain"

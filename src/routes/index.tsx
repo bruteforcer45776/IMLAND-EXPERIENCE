@@ -194,7 +194,7 @@ function Home() {
 
       {/* ECOSISTEMA EDITORIALE — timeline Radio, Podcast, Eventi e News */}
       <AdvSlot position="alto" />
-      <section className="relative overflow-hidden bg-white section-pad">
+      <section className="home-ecosystem relative overflow-hidden bg-white section-pad">
         <div className={shell}>
           <p className={eyebrow}>L'ecosistema IMLAND</p>
           <h2 className={`${h2} mt-3`}>
@@ -210,14 +210,14 @@ function Home() {
               aria-hidden
               className="absolute bottom-0 left-[14px] top-0 w-[3px] rounded-full bg-black/10 md:left-1/2 md:-translate-x-1/2"
             />
-            <ol className="relative space-y-14 md:space-y-20">
-              <li className="theme-radio relative md:grid md:grid-cols-2 md:gap-14">
+            <ol className="home-ecosystem-list relative space-y-14 md:space-y-20">
+              <li className="home-ecosystem-row theme-radio relative md:grid md:grid-cols-2 md:gap-14">
                 <span
                   aria-hidden
                   className="absolute -left-9 top-10 h-7 w-7 rounded-full border-4 border-white bg-signal shadow-md md:left-1/2 md:-translate-x-1/2"
                 />
                 <Reveal>
-                  <div className="md:pr-7">
+                  <div className="home-ecosystem-copy md:pr-7">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
                       Radio · 24/7
                     </p>
@@ -235,19 +235,19 @@ function Home() {
                   </div>
                 </Reveal>
                 <Reveal delay={90}>
-                  <div className="mt-7 md:col-start-2 md:mt-0 md:pl-7">
+                  <div className="home-ecosystem-media mt-7 md:col-start-2 md:mt-0 md:pl-7">
                     <RadioProgramCarousel items={radioProgramGallery} />
                   </div>
                 </Reveal>
               </li>
 
-              <li className="theme-podcast relative md:grid md:grid-cols-2 md:gap-14">
+              <li className="home-ecosystem-row theme-podcast relative md:grid md:grid-cols-2 md:gap-14">
                 <span
                   aria-hidden
                   className="absolute -left-9 top-10 h-7 w-7 rounded-full border-4 border-white bg-signal shadow-md md:left-1/2 md:-translate-x-1/2"
                 />
                 <Reveal>
-                  <div className="md:col-start-2 md:pl-7">
+                  <div className="home-ecosystem-copy md:col-start-2 md:pl-7">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
                       Podcast · on demand
                     </p>
@@ -263,7 +263,7 @@ function Home() {
                     </Link>
                   </div>
                 </Reveal>
-                <div className="mt-7 grid gap-4 sm:grid-cols-2 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
+                <div className="home-ecosystem-media mt-7 grid gap-4 sm:grid-cols-2 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
                   {latestPodcastEpisodes.map((episode, index) => (
                     <Link
                       key={`${episode.programSlug}-${episode.slug}`}
@@ -317,13 +317,13 @@ function Home() {
                 </div>
               </li>
 
-              <li className="theme-eventi relative md:grid md:grid-cols-2 md:gap-14">
+              <li className="home-ecosystem-row theme-eventi relative md:grid md:grid-cols-2 md:gap-14">
                 <span
                   aria-hidden
                   className="absolute -left-9 top-10 h-7 w-7 rounded-full border-4 border-white bg-signal shadow-md md:left-1/2 md:-translate-x-1/2"
                 />
                 <Reveal>
-                  <div className="md:pr-7">
+                  <div className="home-ecosystem-copy md:pr-7">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
                       Eventi · dal vivo
                     </p>
@@ -339,7 +339,7 @@ function Home() {
                     </Link>
                   </div>
                 </Reveal>
-                <div className="mt-7 grid gap-4 md:col-start-2 md:mt-0 md:pl-7">
+                <div className="home-ecosystem-media mt-7 grid gap-4 md:col-start-2 md:mt-0 md:pl-7">
                   {upcomingEvents.length > 0 ? (
                     upcomingEvents.slice(0, 2).map((e) => (
                       <Link
@@ -382,13 +382,13 @@ function Home() {
                 </div>
               </li>
 
-              <li className="theme-news relative md:grid md:grid-cols-2 md:gap-14">
+              <li className="home-ecosystem-row theme-news relative md:grid md:grid-cols-2 md:gap-14">
                 <span
                   aria-hidden
                   className="absolute -left-9 top-10 h-7 w-7 rounded-full border-4 border-white bg-signal shadow-md md:left-1/2 md:-translate-x-1/2"
                 />
                 <Reveal>
-                  <div className="md:col-start-2 md:pl-7">
+                  <div className="home-ecosystem-copy md:col-start-2 md:pl-7">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
                       News · territorio
                     </p>
@@ -405,7 +405,7 @@ function Home() {
                     </Link>
                   </div>
                 </Reveal>
-                <div className="mt-7 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
+                <div className="home-ecosystem-media mt-7 md:col-start-1 md:row-start-1 md:mt-0 md:pr-7">
                   <div className="grid gap-4">
                     {latestNews.slice(0, 3).map((news) => (
                       <a

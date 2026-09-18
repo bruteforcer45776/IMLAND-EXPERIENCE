@@ -1,6 +1,5 @@
 import { Children, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { IconFumetto } from "./brand-icons";
 
 type HeroBannerProps = {
   /** URL della grafica hero (1600x900) */
@@ -85,13 +84,12 @@ export function HeroBanner({
         {(
           <div
             className={cn(
-              "absolute inset-x-0 flex -translate-y-[1cm] px-6",
-              mobileCtaTop ? "items-start" : "bottom-0 h-[34%] items-end pb-5",
+              "hero-banner__content hero-banner__content--mobile absolute inset-x-0 flex px-6",
+              mobileCtaTop ? "items-start" : "items-start",
             )}
             style={mobileCtaTop ? { top: mobileCtaTop } : undefined}
           >
             <div className="mx-auto flex w-full max-w-[320px] flex-col items-stretch gap-3">
-              <IconFumetto tone="current" className="hero-section-bubble mx-auto h-12 w-12 text-signal" />
               {claim ? <p className={cn("hero-cta-claim", claimClassName)}>{claim}</p> : null}
               <div className="flex flex-col items-stretch gap-3 [&>*]:w-full [&>*]:justify-center">
                 {mobileCtas}
@@ -116,9 +114,8 @@ export function HeroBanner({
           style={{ height: "min(56.25vw, calc(100vh - 74px))" }}
         />
         {<div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-x-0 -translate-y-[1cm] px-[4%]" style={{ top: ctaTop }}>
+          <div className="hero-banner__content hero-banner__content--desktop absolute inset-x-0 px-[4%]" style={{ top: ctaTop }}>
             <div className="pointer-events-auto flex flex-col items-center gap-3">
-              <IconFumetto tone="current" className="hero-section-bubble h-14 w-14 text-signal" />
               {claim ? <p className={cn("hero-cta-claim", claimClassName)}>{claim}</p> : null}
               <div className="flex flex-wrap items-center justify-center gap-3">
                 {children}
