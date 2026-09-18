@@ -3585,6 +3585,39 @@ h6 {
   opacity: 0;
 }
 
+/* Member: proporzioni stabili a tutte le risoluzioni. */
+.member-card-grid {
+  align-items: stretch;
+}
+
+.member-card-grid > li,
+.member-card-grid .member-card,
+.member-card-grid .member-card > div,
+.member-card-grid .surface-card {
+  height: 100%;
+}
+
+.member-map-section {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 47.999rem) {
+  .partner-dome {
+    margin-inline: calc(var(--im-gutter, 1rem) * -0.35);
+    width: calc(100% + var(--im-gutter, 1rem) * 0.7);
+  }
+
+  .partner-dome .dg-zoom-controls {
+    right: 0.5rem;
+    bottom: 0.5rem;
+  }
+
+  .member-map-section {
+    padding-inline: 0.75rem !important;
+  }
+}
+
 @media (max-width: 63.999rem) {
   .home-split-hero {
     min-height: 0 !important;

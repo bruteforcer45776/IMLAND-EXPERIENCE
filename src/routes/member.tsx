@@ -530,7 +530,7 @@ function MemberPage() {
               </p>
             </div>
 
-            <div className="partner-dome relative mt-10 h-[clamp(25rem,58vw,44rem)] w-full overflow-hidden bg-transparent">
+            <div className="partner-dome relative mt-8 h-[clamp(22rem,62vw,44rem)] w-full overflow-hidden bg-transparent sm:mt-10">
               <div className="relative z-10 h-full w-full">
                 <Suspense fallback={<div className="h-full" />}>
                   <DomeGallery
@@ -545,8 +545,11 @@ function MemberPage() {
                     overlayBlurColor="#ffffff"
                     imageBorderRadius="18px"
                     openedImageBorderRadius="24px"
-                    minRadius={420}
-                    fit={0.72}
+                    minRadius={280}
+                    maxRadius={760}
+                    fit={0.68}
+                    openedImageWidth="min(400px, 82vw)"
+                    openedImageHeight="min(400px, 82vw)"
                   />
                 </Suspense>
               </div>
@@ -575,7 +578,7 @@ function MemberPage() {
               Clicca una copertina per aprirla · clicca ancora per scoprire la storia e i contatti.
             </p>
 
-            <ul className="mt-6 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-6">
+            <ul className="member-card-grid mt-6 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
               {memberWall.map((m) => {
                 const id = slugify(m.name);
                 const isOpen = openedId === id;
@@ -593,7 +596,7 @@ function MemberPage() {
                       bottoni/link dentro le due facce (nessun annidamento). */}
                     <div
                       onClick={() => handleCardClick(id)}
-                      className={`group relative block min-h-[28rem] w-full text-left transition-transform duration-300 sm:min-h-[25rem] ${
+                      className={`member-card group relative block min-h-[28rem] w-full text-left transition-transform duration-300 sm:min-h-[25rem] xl:min-h-[27rem] ${
                         isOpen && !isFlipped ? "-translate-y-1" : ""
                       }`}
                     >
@@ -612,7 +615,7 @@ function MemberPage() {
                               src={m.cover}
                               alt={m.name}
                               loading="lazy"
-                              className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${
+                              className={`absolute inset-0 h-full w-full bg-white object-contain p-2 transition-transform duration-500 ${
                                 isOpen ? "scale-105" : "group-hover:scale-105"
                               }`}
                             />
@@ -794,6 +797,13 @@ function MemberPage() {
 
           </div>
         </section>
+
+        <section className="member-map-section container-im section-pad" aria-label="Mappa dei Member IMLAND">
+          <Suspense fallback={<div className="h-[clamp(28rem,60vw,42rem)] rounded-[32px] bg-white/55" />}>
+            <ImLandMap />
+          </Suspense>
+        </section>
+
         <section className="container-im section-editorial section-pad">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-wider text-signal">
@@ -1234,11 +1244,6 @@ function MemberPage() {
           lead="Nuove voci, format e opportunità per i Member: te le raccontiamo per prime."
         />
 
-        <section className="container-im section-pad" aria-label="Mappa dei Member IMLAND">
-          <Suspense fallback={<div className="h-[620px] rounded-[32px] bg-white/55" />}>
-            <ImLandMap />
-          </Suspense>
-        </section>
       </div>
     </>
   );

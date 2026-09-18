@@ -100,10 +100,16 @@ export function ImLandMap() {
       );
       map.scrollZoom.disable();
       mapRef.current = map;
+      const resizeMap = () => map.resize();
+      const resizeObserver = new ResizeObserver(resizeMap);
+      resizeObserver.observe(containerRef.current);
       map.once("load", () => {
         applyMonochromeMapStyle(map);
+        map.resize();
         setMapReady(true);
       });
+
+      map.once("remove", () => resizeObserver.disconnect());
     })();
 
     return () => {
@@ -182,7 +188,8 @@ export function ImLandMap() {
       });
 
       if (!bounds.isEmpty()) {
-        map.fitBounds(bounds, { padding: 74, maxZoom: 11.6, duration: 700 });
+        const compact = window.matchMedia("(max-width: 767px)").matches;
+        map.fitBounds(bounds, { padding: compact ? 34 : 74, maxZoom: 11.6, duration: 700 });
       }
     });
 
