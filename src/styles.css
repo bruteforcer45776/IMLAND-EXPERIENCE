@@ -5665,6 +5665,23 @@ body .editorial-frame-canvas :is(.site-glass-header, .site-menu-glass) {
   align-self: center !important;
 }
 
+@media (max-width: 47.999rem) {
+  .home-ecosystem .home-ecosystem-copy,
+  .home-ecosystem .home-ecosystem-row:nth-child(even) .home-ecosystem-copy {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .home-ecosystem .home-ecosystem-copy :is(h2, h3, p) {
+    margin-inline: auto !important;
+    text-align: center !important;
+  }
+
+  .home-ecosystem .home-ecosystem-media {
+    margin-inline: auto !important;
+  }
+}
+
 @media (min-width: 48rem) {
   .home-ecosystem .home-ecosystem-row,
   .home-ecosystem .home-ecosystem-row:nth-child(even) {
