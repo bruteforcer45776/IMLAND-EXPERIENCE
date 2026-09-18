@@ -9,7 +9,6 @@ import { SpotlightCard } from "../components/spotlight-card";
 import { PhotoBadge } from "../components/photo-badge";
 import { HeroBanner } from "../components/hero-banner";
 import { MEMBER_DETAILS, type MemberAddress } from "../data/member-details";
-import { partnerLogos } from "../data/partner-logos";
 
 const DomeGallery = lazy(() => import("../components/dome-gallery"));
 const ImLandMap = lazy(() =>
@@ -428,8 +427,6 @@ const memberWallSource: Omit<MemberWallEntry, "desc" | "addresses">[] = [
   },
 ];
 
-const partnerLogoByName = new Map(partnerLogos.map((partner) => [partner.name, partner.src]));
-
 export const memberWall: MemberWallEntry[] = memberWallSource.map((member) => {
   const details = MEMBER_DETAILS[member.name];
   if (!details) {
@@ -437,7 +434,6 @@ export const memberWall: MemberWallEntry[] = memberWallSource.map((member) => {
   }
   return {
     ...member,
-    cover: partnerLogoByName.get(member.name) ?? member.cover,
     desc: details.description,
     addresses: details.addresses,
   };
@@ -542,7 +538,7 @@ function MemberPage() {
                     grayscale={false}
                     autoRotate
                     autoRotateSpeed={0.025}
-                    overlayBlurColor="#ffffff"
+                    overlayBlurColor="#040918"
                     imageBorderRadius="18px"
                     openedImageBorderRadius="24px"
                     minRadius={280}
@@ -596,7 +592,7 @@ function MemberPage() {
                       bottoni/link dentro le due facce (nessun annidamento). */}
                     <div
                       onClick={() => handleCardClick(id)}
-                      className={`member-card group relative block min-h-[28rem] w-full text-left transition-transform duration-300 sm:min-h-[25rem] xl:min-h-[27rem] ${
+                      className={`member-card group relative block min-h-[23rem] w-full text-left transition-transform duration-300 sm:min-h-[22rem] xl:min-h-[23rem] ${
                         isOpen && !isFlipped ? "-translate-y-1" : ""
                       }`}
                     >
@@ -627,30 +623,18 @@ function MemberPage() {
                               </div>
                             )}
                           </div>
-                          <div className="flex flex-1 flex-col gap-1.5 p-3">
+                          <div className="flex flex-1 flex-col gap-2 p-4 xl:p-3">
                             <span className="w-fit rounded-full bg-foreground/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground/70">
                               {m.category}
                             </span>
                             <h3 className="text-sm font-semibold leading-snug md:text-base">
                               {m.name}
                             </h3>
-                            <p className="line-clamp-2 text-[11px] leading-snug text-muted-foreground">
-                              {m.desc}
-                            </p>
-                            <p className="line-clamp-2 text-[11px] leading-snug text-foreground/70">
+                            <p className="line-clamp-2 text-xs leading-snug text-foreground/70 xl:text-[11px]">
                               <span className="font-semibold">{m.addresses[0].label}:</span>{" "}
                               {m.addresses[0].address}
                               {m.addresses.length > 1 ? ` · +${m.addresses.length - 1} sede` : ""}
                             </p>
-                            {displayHost ? (
-                              <span className="truncate text-[11px] text-signal">
-                                {displayHost}
-                              </span>
-                            ) : (
-                              <span className="text-[11px] text-muted-foreground">
-                                Contatti su richiesta
-                              </span>
-                            )}
                             <button
                               type="button"
                               onClick={(e) => {
@@ -658,7 +642,7 @@ function MemberPage() {
                                 handleCardClick(id);
                               }}
                               aria-expanded={isOpen || isFlipped}
-                              className="mt-auto w-full rounded-full border border-border px-2.5 py-1 text-[11px] font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                              className="mt-auto w-full rounded-full bg-signal px-3 py-2 text-xs font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-md"
                             >
                               {isOpen ? (
                                 <>

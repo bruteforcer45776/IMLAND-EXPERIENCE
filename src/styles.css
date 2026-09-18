@@ -3581,6 +3581,37 @@ h6 {
   background: transparent;
 }
 
+.partner-dome {
+  border: 1px solid rgb(143 180 255 / 22%);
+  border-radius: clamp(1.5rem, 3vw, 2.25rem);
+  background-color: #040918 !important;
+  background-image:
+    radial-gradient(circle at 12% 22%, rgb(255 255 255 / 92%) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 78% 18%, rgb(145 190 255 / 84%) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 68% 72%, rgb(255 255 255 / 74%) 0 0.8px, transparent 1.6px),
+    radial-gradient(circle at 28% 82%, rgb(185 214 255 / 72%) 0 1px, transparent 1.8px),
+    radial-gradient(ellipse at 50% 45%, rgb(27 70 156 / 46%), transparent 62%) !important;
+  background-size: 150px 150px, 210px 210px, 175px 175px, 235px 235px, 100% 100% !important;
+  box-shadow: inset 0 0 90px rgb(0 0 0 / 48%), 0 22px 58px rgb(1 18 54 / 18%);
+}
+
+.partner-dome .item__image {
+  border: 1px solid rgb(255 255 255 / 78%);
+  background: rgb(255 255 255 / 96%);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 28%);
+}
+
+.partner-dome .item__image img,
+.partner-dome .viewer .enlarge img,
+.partner-dome .enlarge-closing img {
+  object-fit: contain !important;
+  background: #fff;
+  padding: clamp(0.2rem, 0.7vw, 0.5rem);
+  filter: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+
 .partner-dome :is(.overlay, .overlay--blur, .edge-fade) {
   opacity: 0;
 }
@@ -3595,6 +3626,29 @@ h6 {
 .member-card-grid .member-card > div,
 .member-card-grid .surface-card {
   height: 100%;
+}
+
+.member-card-grid .member-card .surface-card {
+  border: 1px solid rgb(15 23 42 / 10%) !important;
+  background: rgb(255 255 255 / 92%) !important;
+  box-shadow: 0 12px 34px rgb(1 29 104 / 10%) !important;
+}
+
+.member-card-grid .member-card img {
+  filter: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+
+.member-card-grid .member-card:hover .surface-card {
+  border-color: color-mix(in srgb, var(--signal) 48%, transparent) !important;
+  box-shadow: 0 18px 42px rgb(1 29 104 / 16%) !important;
+}
+
+@media (min-width: 80rem) {
+  .member-card-grid {
+    gap: 0.875rem;
+  }
 }
 
 .member-map-section {
