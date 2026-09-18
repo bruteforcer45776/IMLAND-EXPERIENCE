@@ -9,6 +9,7 @@ import { SpotlightCard } from "../components/spotlight-card";
 import { PhotoBadge } from "../components/photo-badge";
 import { HeroBanner } from "../components/hero-banner";
 import { MEMBER_DETAILS, type MemberAddress } from "../data/member-details";
+import { partnerLogos } from "../data/partner-logos";
 
 const DomeGallery = lazy(() => import("../components/dome-gallery"));
 const ImLandMap = lazy(() =>
@@ -427,12 +428,19 @@ const memberWallSource: Omit<MemberWallEntry, "desc" | "addresses">[] = [
   },
 ];
 
+const partnerLogoByName = new Map(partnerLogos.map((partner) => [partner.name, partner.src]));
+
 export const memberWall: MemberWallEntry[] = memberWallSource.map((member) => {
   const details = MEMBER_DETAILS[member.name];
   if (!details) {
     throw new Error(`Dati Member mancanti per ${member.name}`);
   }
-  return { ...member, desc: details.description, addresses: details.addresses };
+  return {
+    ...member,
+    cover: partnerLogoByName.get(member.name) ?? member.cover,
+    desc: details.description,
+    addresses: details.addresses,
+  };
 });
 
 function MemberPage() {
