@@ -3664,17 +3664,26 @@ h6 {
   opacity: 0;
 }
 
-/* Member: proporzioni stabili a tutte le risoluzioni. */
+/* Member Wall: usa tutta la sezione e distribuisce anche l'ultima riga. */
+#member-wall > .container-im {
+  width: 100% !important;
+  max-width: none !important;
+}
+
 .member-card-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   align-items: stretch;
-  width: 100%;
+  justify-content: space-evenly !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-inline: auto;
 }
 
 .member-card-grid > li {
-  flex: 1 1 100%;
+  flex: 0 1 100%;
+  width: 100%;
 }
 
 .member-card-grid > li,
@@ -3702,23 +3711,32 @@ h6 {
 
 @media (min-width: 80rem) {
   .member-card-grid {
-    gap: 0.875rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
   }
 
   .member-card-grid > li {
-    flex-basis: calc((100% - 4.375rem) / 6);
+    width: auto;
+    max-width: none;
+  }
+
+  .member-card-grid > li:last-child:nth-child(5n + 1) {
+    grid-column: 3;
   }
 }
 
 @media (min-width: 48rem) and (max-width: 79.999rem) {
   .member-card-grid > li {
     flex-basis: calc((100% - 2rem) / 3);
+    max-width: calc((100% - 2rem) / 3);
   }
 }
 
 @media (min-width: 30rem) and (max-width: 47.999rem) {
   .member-card-grid > li {
     flex-basis: calc((100% - 1rem) / 2);
+    max-width: calc((100% - 1rem) / 2);
   }
 }
 
