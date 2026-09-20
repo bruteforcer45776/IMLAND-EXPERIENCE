@@ -132,7 +132,7 @@ export function ImLandMap() {
 
     void import("maplibre-gl").then((maplibre) => {
       if (!mapRef.current) return;
-      markersRef.current = visibleLocations.map(({ member, label, address, coordinates }, index) => {
+      markersRef.current = visibleLocations.map(({ member, label, address, coordinates }) => {
         const markerButton = document.createElement("button");
         markerButton.type = "button";
         markerButton.className = "imland-map-marker";
@@ -140,6 +140,7 @@ export function ImLandMap() {
         markerButton.title = member.name;
 
         const markerImage = document.createElement("img");
+        markerImage.className = "imland-map-marker__image";
         markerImage.src = member.cover;
         markerImage.alt = "";
         markerButton.append(markerImage);
@@ -148,7 +149,7 @@ export function ImLandMap() {
         popupContent.className = "imland-map-popup";
 
         const popupImage = document.createElement("img");
-        popupImage.className = `imland-map-popup__image member-logo-color member-logo-color-${(index % 8) + 1}`;
+        popupImage.className = "imland-map-popup__image";
         popupImage.src = member.cover;
         popupImage.alt = "";
 

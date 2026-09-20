@@ -2,14 +2,11 @@ import { lazy, Suspense, useState } from "react";
 import { canonical, jsonLd, memberProgramLd } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Users } from "lucide-react";
-import todaroPhoto from "../assets/andrea-todaro.jpg.asset.json";
-import motorhouseWhite from "../assets/motorhouse-white.png.asset.json";
 import { NewsletterBanner } from "../components/newsletter-banner";
 import { SpotlightCard } from "../components/spotlight-card";
 import { PhotoBadge } from "../components/photo-badge";
 import { HeroBanner } from "../components/hero-banner";
 import { MEMBER_DETAILS, type MemberAddress } from "../data/member-details";
-import { partnerLogos } from "../data/partner-logos";
 
 const DomeGallery = lazy(() => import("../components/dome-gallery"));
 const ImLandMap = lazy(() =>
@@ -290,7 +287,7 @@ const memberWallSource: Omit<MemberWallEntry, "desc" | "addresses">[] = [
   },
   {
     name: "Magnolia Ristorante Gattinara",
-    cover: "https://imlandradio.it/wp-content/uploads/2026/01/Magnolia.jpg",
+    cover: "/logos/magnolia-ristorante-gattinara.png",
     url: "https://www.magnoliaristorantegattinara.com/",
     category: "Ristorazione",
   },
@@ -302,7 +299,7 @@ const memberWallSource: Omit<MemberWallEntry, "desc" | "addresses">[] = [
   },
   {
     name: "Motorhouse",
-    cover: motorhouseWhite.url,
+    cover: "/logos/motorhouse.png",
     url: "https://motorh.it/",
     category: "Automotive",
   },
@@ -428,8 +425,6 @@ const memberWallSource: Omit<MemberWallEntry, "desc" | "addresses">[] = [
   },
 ];
 
-const partnerLogoByName = new Map(partnerLogos.map((partner) => [partner.name, partner.src]));
-
 export const memberWall: MemberWallEntry[] = memberWallSource.map((member) => {
   const details = MEMBER_DETAILS[member.name];
   if (!details) {
@@ -437,7 +432,6 @@ export const memberWall: MemberWallEntry[] = memberWallSource.map((member) => {
   }
   return {
     ...member,
-    cover: partnerLogoByName.get(member.name) ?? member.cover,
     desc: details.description,
     addresses: details.addresses,
   };
@@ -668,7 +662,7 @@ function MemberPage() {
                           {id === "andrea-todaro-consulente" ? (
                             <div className="flex h-full min-h-0 flex-col items-center text-center">
                               <img
-                                src={todaroPhoto.url}
+                                src="/logos/andrea-todaro-consulente.png"
                                 alt={m.name}
                                 loading="lazy"
                                 className="h-24 w-24 object-cover"
