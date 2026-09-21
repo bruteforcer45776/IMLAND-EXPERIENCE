@@ -1,0 +1,19 @@
+.newsletter-banner{display:grid;grid-template-columns:1.05fr .95fr;gap:8vw;align-items:end;padding:clamp(4rem,8vw,8rem) clamp(1rem,6vw,7rem);background:var(--blue);color:#fff}
+.newsletter-copy>p{margin:0 0 1.5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em}
+.newsletter-copy h2{margin:0 0 1.5rem;font-size:clamp(3rem,6vw,6rem);line-height:.88;letter-spacing:-.04em}
+.newsletter-copy h2 em{color:#08090b}
+.newsletter-copy>span{display:block;max-width:520px;line-height:1.55;color:#ffffffd0}
+.newsletter-form>label:first-child{display:block;margin-bottom:.7rem;font-size:.78rem;font-weight:700}
+.newsletter-field{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem;padding:.45rem;border-radius:16px;background:#fff;box-shadow:0 16px 44px #08090b1f;transition:box-shadow .2s ease}
+.newsletter-field:focus-within{box-shadow:0 0 0 3px #08090b,0 18px 48px #08090b29}
+.newsletter-field input{min-width:0;min-height:54px;padding:.65rem 1rem;border:0;outline:0;background:#fff;color:#08090b;font-size:clamp(1rem,1.4vw,1.2rem)}
+.newsletter-field input::placeholder{color:#64655f;opacity:1}
+.newsletter-field button{min-height:54px;padding:0 1.35rem;border:0;border-radius:11px;background:#08090b;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;transition:background .2s ease,transform .2s ease}
+.newsletter-field button:hover{background:#24262b;transform:translateY(-1px)}
+.newsletter-field button:focus-visible{outline:3px solid #fff;outline-offset:-5px}
+.newsletter-consent{display:flex;gap:.7rem;align-items:flex-start;margin-top:1rem;color:#ffffffc4;font-size:.78rem;line-height:1.4}
+.newsletter-consent input{width:18px;height:18px;margin:0;accent-color:var(--ink)}
+.newsletter-status{min-height:2.5em;margin:1rem 0 0;color:#fff;font-size:.8rem;line-height:1.4}
+@media(max-width:800px){.newsletter-banner{grid-template-columns:1fr;gap:3rem}.newsletter-copy h2{font-size:clamp(3rem,13vw,5rem)}}
+@media(max-width:480px){.newsletter-field{grid-template-columns:1fr}.newsletter-field button{width:100%}}
+@media(prefers-reduced-motion:reduce){.newsletter-field,.newsletter-field button{transition:none}.newsletter-field button:hover{transform:none}}

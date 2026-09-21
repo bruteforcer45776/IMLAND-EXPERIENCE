@@ -1,0 +1,10 @@
+{
+  "name": "imland-radio-redesign-local",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:podcasts": "node sync-podcast-feeds.mjs",
+    "sync:content": "node sync-content.mjs && node sync-podcast-feeds.mjs",
+    "check": "node --check script-v56.js"
+  }
+}
