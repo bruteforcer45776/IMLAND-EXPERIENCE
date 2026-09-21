@@ -4,7 +4,7 @@ const PRECACHE = [
   '/navigation.css',
   '/typography.css',
   '/newsletter.css',
-  '/script-v57.js',
+  '/script-v59.js',
   '/content-sync.js',
   '/podcast-episodes.js',
   '/forms.js',
