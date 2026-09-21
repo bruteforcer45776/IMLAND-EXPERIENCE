@@ -1,0 +1,19 @@
+.account-link,
+.search-toggle,
+.topbar .menu,
+.signal-card > a,
+.player-expand,
+.player-close,
+.podcast-channel [data-channel-close],
+.party-mode button {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+@media (max-width: 800px) {
+  .search-toggle,
+  .topbar .menu {
+    width: 44px;
+    height: 44px;
+  }
+}

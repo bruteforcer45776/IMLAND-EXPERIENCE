@@ -30,6 +30,10 @@ const authStyles=document.createElement('link');
 authStyles.rel='stylesheet';
 authStyles.href='auth.css?v=1';
 document.head.append(authStyles);
+const auditFixes=document.createElement('link');
+auditFixes.rel='stylesheet';
+auditFixes.href='audit-fixes.css?v=1';
+document.head.append(auditFixes);
 const newsStyles=document.createElement('link');
 newsStyles.rel='stylesheet';
 newsStyles.href='news.css?v=1';
@@ -258,8 +262,10 @@ if(header&&siteMenu&&menu){
 }
 function setMenuState(open,{restoreFocus=false}={}){
   if(!header||!menu||!siteMenu)return;
+  const backgroundTargets=document.querySelectorAll('main,footer,.player,.floating-actions,.brand,.mini-cta,.account-link,.search-toggle');
   header.classList.toggle('open',open);
   document.body.classList.toggle('menu-open',open);
+  backgroundTargets.forEach(target=>{target.inert=open});
   menu.setAttribute('aria-expanded',String(open));
   menu.setAttribute('aria-label',open?'Chiudi menu':'Apri menu');
   siteMenu.setAttribute('aria-hidden',String(!open));
