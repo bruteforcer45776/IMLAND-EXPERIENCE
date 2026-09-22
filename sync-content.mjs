@@ -14,13 +14,22 @@ async function page(path){
 }
 
 const metaValue=(html,key)=>decode(html.match(new RegExp(`<meta[^>]+(?:property|name)="${key}"[^>]+content="([^"]*)"`,'i'))?.[1]||html.match(new RegExp(`<meta[^>]+content="([^"]*)"[^>]+(?:property|name)="${key}"`,'i'))?.[1]);
-const negativeNews=/omicid|uccis|morto|morte|incidente|arrest|denunc|aggress|accoltell|droga|spaccio|rapina|furto|violenz|maltratt|abuso|process|indagat|carabinier|polizia|traged|ferit|cadaver|suicid|pusher|chiude uno stabilimento|licenzi|bollett.*aument|emergenza|alluvion/i;
+const negativeNews=/omicid|uccis|morto|morte|incidente|arrest|denunc|aggress|accoltell|droga|spaccio|rapina|furto|violenz|maltratt|abuso|process|indagat|carabinier|polizia|traged|ferit|cadaver|suicid|pusher|chiude|licenzi|bollett.*aument|emergenza|alluvion|sicurezza|politic|partit|governo|\bddl\b|votiam|destra|sinistra|divisiv|antisemit/i;
 const positiveNews=/cultur|evento|festival|mostra|musica|teatro|libro|arte|premio|success|inaugur|ricerca|innovaz|impres|solidar|inclus|turismo|territorio|sport|scuol|universit|giovani|volontari|tradizion|enogastr|natura|ambiente|restaur|progetto|eccellen|festa|benessere|comunit|shopping|muse/i;
 const isPositive=item=>{const text=`${item?.title||''} ${item?.description||''}`;return !negativeNews.test(text)&&positiveNews.test(text)};
 const sourceName=url=>{const host=new URL(url).hostname.replace(/^www\./,'');return ({'ansa.it':'ANSA Piemonte','videoembed.ansa.it':'ANSA Piemonte','newsbiella.it':'NewsBiella','infovercelli24.it':'InfoVercelli24','primanovara.it':'Prima Novara','lopinionista.it':"L'Opinionista"})[host]||host};
 
 async function latestPositiveNews(){
-  const indexes=await Promise.all(['https://www.ansa.it/piemonte/notizie/spettacolo.shtml','https://www.ansa.it/piemonte/notizie/economia.shtml'].map(url=>fetch(url,{headers:{accept:'text/html','user-agent':'IMLAND news sync'},signal:AbortSignal.timeout(15000)}).then(response=>response.ok?response.text():'')));
+  const indexUrls=[
+    'https://www.ansa.it/piemonte/notizie/spettacolo.shtml',
+    'https://www.ansa.it/piemonte/notizie/economia.shtml',
+    'https://www.newsbiella.it/2026/09/22/tutte-le-notizie.html',
+    'https://www.newsbiella.it/2026/09/21/tutte-le-notizie.html',
+    'https://www.infovercelli24.it/2026/09/22/tutte-le-notizie.html',
+    'https://www.infovercelli24.it/2026/09/21/tutte-le-notizie.html',
+    'https://primanovara.it/attualita/'
+  ];
+  const indexes=await Promise.all(indexUrls.map(async sourceUrl=>({sourceUrl,html:await fetch(sourceUrl,{headers:{accept:'text/html','user-agent':'IMLAND news sync'},signal:AbortSignal.timeout(15000)}).then(response=>response.ok?response.text():'')})));
   const seedUrls=[
     'https://www.ansa.it/piemonte/notizie/2026/09/19/microchirurgia-migliora-autonomia-14enne-dopo-paralisi-cerebrale-infantile_733f761e-a7b4-4582-888d-0cc2d242413c.html',
     'https://videoembed.ansa.it/piemonte/notizie/2026/09/18/lambasciatrice-daustralia-incontra-le-imprese-piemontesi_4d5f1ddc-8ca9-4c8d-bc64-63e6a2d28279.html',
@@ -32,7 +41,8 @@ async function latestPositiveNews(){
     'https://www.infovercelli24.it/2026/09/12/leggi-notizia/argomenti/attualita-7/articolo/riso-tra-talk-show-cooking-e-cultura-una-giornata-per-vivere-a-vercelli.html',
     'https://www.lopinionista.it/con-una-penna-in-mano-il-libro-di-nicola-gardini-229729.html'
   ];
-  const urls=[...new Set([...seedUrls,...[...indexes.join('\n').matchAll(/href=["']([^"']*\/piemonte\/notizie\/2026\/09\/[^"']+\.html)["']/gi)].map(match=>absolute.call(null,match[1]).replace(ORIGIN,'https://www.ansa.it'))])].slice(0,80);
+  const discovered=indexes.flatMap(({sourceUrl,html})=>[...html.matchAll(/href=["']([^"']*(?:\/2026\/09\/|\/attualita\/)[^"'#?]+(?:\.html|\/))["']/gi)].map(match=>{try{return new URL(match[1],sourceUrl).href}catch{return''}})).filter(Boolean);
+  const urls=[...new Set([...seedUrls,...discovered])].slice(0,140);
   const items=(await Promise.all(urls.map(async url=>{
     try{
       const html=await fetch(url,{headers:{accept:'text/html','user-agent':'IMLAND news sync'},signal:AbortSignal.timeout(12000)}).then(response=>response.ok?response.text():'');
@@ -42,9 +52,9 @@ async function latestPositiveNews(){
       return {source:sourceName(url),area:'Piemonte',date:new Intl.DateTimeFormat('it-IT',{day:'numeric',month:'short',year:'numeric'}).format(dateValue),publishedAt,title:metaValue(html,'og:title').replace(/\s*-\s*Notizie\s*[-|].*$/i,''),description:metaValue(html,'og:description'),image:metaValue(html,'og:image'),url};
     }catch{return null}
   }))).filter(item=>item?.title&&item?.url&&isPositive(item)).sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
-  const perDay=new Map();
+  const perDay=new Map(),perDaySource=new Map();
   const perSource=new Map();
-  return items.filter(item=>{const day=item.publishedAt.slice(0,10),dayCount=perDay.get(day)||0,sourceCount=perSource.get(item.source)||0;if(dayCount>=5||sourceCount>=10)return false;perDay.set(day,dayCount+1);perSource.set(item.source,sourceCount+1);return true}).slice(0,25);
+  return items.filter(item=>{const day=item.publishedAt.slice(0,10),dayCount=perDay.get(day)||0,sourceCount=perSource.get(item.source)||0,daySourceKey=`${day}|${item.source}`,daySourceCount=perDaySource.get(daySourceKey)||0;if(dayCount>=5||sourceCount>=8||daySourceCount>=2)return false;perDay.set(day,dayCount+1);perSource.set(item.source,sourceCount+1);perDaySource.set(daySourceKey,daySourceCount+1);return true}).slice(0,25);
 }
 
 async function previousPayload(){
@@ -114,7 +124,7 @@ try{
 }catch(error){console.warn(`News IMLAND non disponibili, mantengo il fallback locale: ${error.message}`)}
 try{
   const latest=await latestPositiveNews();
-  if(latest.length){const merged=[...latest,...news].filter((item,index,array)=>array.findIndex(other=>other.url===item.url)===index).filter(isPositive).sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));const perDay=new Map(),perSource=new Map();news=merged.filter(item=>{const day=String(item.publishedAt||'').slice(0,10),dayCount=perDay.get(day)||0,sourceCount=perSource.get(item.source)||0;if(dayCount>=5||sourceCount>=8)return false;perDay.set(day,dayCount+1);perSource.set(item.source,sourceCount+1);return true}).slice(0,25);availability.news='live'}
+  if(latest.length){const merged=[...latest,...news].filter((item,index,array)=>array.findIndex(other=>other.url===item.url)===index).filter(isPositive).sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));const perDay=new Map(),perSource=new Map(),perDaySource=new Map();news=merged.filter(item=>{const day=String(item.publishedAt||'').slice(0,10),dayCount=perDay.get(day)||0,sourceCount=perSource.get(item.source)||0,daySourceKey=`${day}|${item.source}`,daySourceCount=perDaySource.get(daySourceKey)||0;if(dayCount>=5||sourceCount>=8||daySourceCount>=2)return false;perDay.set(day,dayCount+1);perSource.set(item.source,sourceCount+1);perDaySource.set(daySourceKey,daySourceCount+1);return true}).slice(0,25);availability.news='live'}
 }catch(error){console.warn(`Aggiornamento rassegna positiva non disponibile: ${error.message}`)}
 try{
   events=confirmedEvents(await page('/eventi')).slice(0,24);
