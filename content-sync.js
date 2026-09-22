@@ -1,5 +1,5 @@
 window.IMLAND_SYNC_DATA={
-  "generatedAt": "2026-09-21T14:32:58.556Z",
+  "generatedAt": "2026-09-22T05:21:44.709Z",
   "news": [
     {
       "source": "L'Opinionista",
