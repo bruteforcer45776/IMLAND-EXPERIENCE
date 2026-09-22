@@ -16,7 +16,7 @@ reviewStyles.href='review-bento.css?v=4';
 document.head.append(reviewStyles);
 const newsletterStyles=document.createElement('link');
 newsletterStyles.rel='stylesheet';
-newsletterStyles.href='newsletter.css?v=3';
+newsletterStyles.href='newsletter.css?v=4';
 document.head.append(newsletterStyles);
 const contactStyles=document.createElement('link');
 contactStyles.rel='stylesheet';
@@ -327,7 +327,7 @@ document.querySelector('[data-chat-close]')?.addEventListener('click',()=>{close
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){const wasOpen=header?.classList.contains('open');const wasChatOpen=chatbotPanel&&!chatbotPanel.hidden;closeHeaderPanels({restoreFocus:wasOpen});closeChatbot();if(wasChatOpen)chatbotToggle?.focus();return}if(event.key==='Tab'&&header?.classList.contains('open')){const focusable=[...siteMenu.querySelectorAll('a'),menu].filter(el=>!el.hasAttribute('disabled'));if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}});
 
 const approvedContentScript=document.createElement('script');
-approvedContentScript.src='approved-content.js?v=2';
+approvedContentScript.src='approved-content.js?v=3';
 document.body.append(approvedContentScript);
 
 

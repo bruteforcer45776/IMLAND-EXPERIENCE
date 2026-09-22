@@ -1,7 +1,8 @@
 .newsletter-banner{display:grid;grid-template-columns:1.05fr .95fr;gap:8vw;align-items:end;padding:clamp(4rem,8vw,8rem) clamp(1rem,6vw,7rem);background:var(--blue);color:#fff}
 .newsletter-copy>p{margin:0 0 1.5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em}
-.newsletter-copy h2{margin:0 0 1.5rem;font-size:clamp(3rem,6vw,6rem);line-height:.88;letter-spacing:-.04em}
-.newsletter-copy h2 em{color:#08090b}
+.newsletter-banner,.newsletter-banner button,.newsletter-banner input{font-family:Arial,Helvetica,sans-serif}
+.newsletter-copy h2{margin:0 0 1.5rem;font-family:Arial,Helvetica,sans-serif;font-size:clamp(3rem,6vw,6rem);line-height:.88;letter-spacing:-.04em}
+.newsletter-copy h2 em{color:#08090b;font-family:'Caveat','Segoe Print',cursive;font-style:normal;font-weight:600;letter-spacing:-.02em;line-height:.8}
 .newsletter-copy>span{display:block;max-width:520px;line-height:1.55;color:#ffffffd0}
 .newsletter-form>label:first-child{display:block;margin-bottom:.7rem;font-size:.78rem;font-weight:700}
 .newsletter-field{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem;padding:.45rem;border-radius:16px;background:#fff;box-shadow:0 16px 44px #08090b1f;transition:box-shadow .2s ease}
