@@ -1,5 +1,8 @@
-const CACHE_NAME = 'imland-static-v1';
+const CACHE_NAME = 'imland-static-v2';
 const PRECACHE = [
+  '/',
+  '/index.html',
+  '/404.html',
   '/styles-v37.css',
   '/navigation.css',
   '/typography.css',
@@ -29,6 +32,13 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+  if (request.mode === 'navigate') {
+    event.respondWith(fetch(request).then(response => {
+      if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
+      return response;
+    }).catch(async () => (await caches.match(request)) || (await caches.match('/index.html')) || caches.match('/404.html')));
+    return;
+  }
   if (!/\.(?:css|js|png|jpe?g|webp|svg|woff2?|webmanifest)$/i.test(url.pathname)) return;
 
   event.respondWith(
