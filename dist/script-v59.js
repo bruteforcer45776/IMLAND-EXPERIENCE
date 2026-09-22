@@ -220,9 +220,13 @@ function renderPage(name){
   };
   const p=pages[name];
   const heroActions={
+    progetto:`<a class="button primary" href="#contenuti">Scopri il progetto</a><a class="button ghost" href="contatti.html">Porta la tua voce</a>`,
     radio:`<button class="button primary" type="button" data-play>Ascolta ora</button><a class="button ghost" href="#palinsesto">Vedi il palinsesto</a>`,
     podcast:`<a class="button primary" href="#programmi">Esplora i programmi</a>`,
+    'my-podcast':`<a class="button primary" href="#programmi">Scopri i progetti</a><a class="button ghost" href="contatti.html">Proponi il tuo podcast</a>`,
+    eventi:`<a class="button primary" href="#calendario">Scopri gli eventi</a><a class="button ghost" href="#porta-evento">Proponi il tuo evento</a>`,
     member:`<a class="button primary" href="https://wa.me/393423535595?text=Salve%2C%20vorrei%20maggiori%20informazioni%20per%20unirmi%20alla%20rete%20IMLAND%20EXPERIENCE." target="_blank" rel="noreferrer">Diventa Member</a>`,
+    news:`<a class="button primary" href="#notizie">Leggi le News</a><a class="button ghost" href="contatti.html">Segnala una notizia</a>`,
     contatti:`<a class="button primary" href="#scrivici">Compila il form</a><a class="button ghost" href="mailto:info@imlandradio.com">Scrivi una email</a>`,
   };
   const extras={
@@ -321,6 +325,10 @@ function closeChatbot(){if(!chatbotPanel)return;chatbotPanel.hidden=true;chatbot
 chatbotToggle?.addEventListener('click',()=>{const open=chatbotPanel.hidden;chatbotPanel.hidden=!open;chatbotToggle.setAttribute('aria-expanded',String(open));if(open)chatbotPanel.querySelector('[data-chat-close]')?.focus()});
 document.querySelector('[data-chat-close]')?.addEventListener('click',()=>{closeChatbot();chatbotToggle?.focus()});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){const wasOpen=header?.classList.contains('open');const wasChatOpen=chatbotPanel&&!chatbotPanel.hidden;closeHeaderPanels({restoreFocus:wasOpen});closeChatbot();if(wasChatOpen)chatbotToggle?.focus();return}if(event.key==='Tab'&&header?.classList.contains('open')){const focusable=[...siteMenu.querySelectorAll('a'),menu].filter(el=>!el.hasAttribute('disabled'));if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}});
+
+const approvedContentScript=document.createElement('script');
+approvedContentScript.src='approved-content.js?v=2';
+document.body.append(approvedContentScript);
 
 
 
