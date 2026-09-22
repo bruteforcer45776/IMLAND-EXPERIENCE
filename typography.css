@@ -2,4 +2,4 @@
 
 /* IMLAND editorial typography — authoritative across every page and module */
 html body,html body :where(*),html body :where(button,input,textarea,select){font-family:Arial,Helvetica,sans-serif!important}
-html body :where(h1,h2,h3) em{font-family:'Caveat','Segoe Print',cursive!important;font-style:normal;font-weight:600;letter-spacing:-.02em;line-height:.8;text-transform:lowercase!important}
+html body :where(h1,h2,h3) em{font-family:'Caveat','Segoe Print',cursive!important;font-size:1.25em!important;font-style:normal;font-weight:600;letter-spacing:-.02em;line-height:.8;text-transform:lowercase!important}
