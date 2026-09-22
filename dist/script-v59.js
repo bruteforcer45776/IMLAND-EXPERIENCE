@@ -8,7 +8,7 @@ navigation.href='navigation.css?v=8';
 document.head.append(navigation);
 const homeSections=document.createElement('link');
 homeSections.rel='stylesheet';
-homeSections.href='home-sections.css?v=3';
+homeSections.href='home-sections.css?v=4';
 document.head.append(homeSections);
 const reviewStyles=document.createElement('link');
 reviewStyles.rel='stylesheet';
@@ -326,9 +326,50 @@ chatbotToggle?.addEventListener('click',()=>{const open=chatbotPanel.hidden;chat
 document.querySelector('[data-chat-close]')?.addEventListener('click',()=>{closeChatbot();chatbotToggle?.focus()});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){const wasOpen=header?.classList.contains('open');const wasChatOpen=chatbotPanel&&!chatbotPanel.hidden;closeHeaderPanels({restoreFocus:wasOpen});closeChatbot();if(wasChatOpen)chatbotToggle?.focus();return}if(event.key==='Tab'&&header?.classList.contains('open')){const focusable=[...siteMenu.querySelectorAll('a'),menu].filter(el=>!el.hasAttribute('disabled'));if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}});
 
+function homeAdvMarkup(position){
+  const label={partners:'Dopo la rete territoriale',news:'Dopo le News',faq:'Prima delle domande frequenti'}[position]||'Spazio pubblicitario';
+  return `<section class="adv-banner" data-adv-banner aria-label="${label}">
+    <div class="adv-viewport"><div class="adv-track">
+      ${[1,2,3].map((slide)=>`<article class="adv-slide" aria-hidden="${slide===1?'false':'true'}">
+        <div class="adv-signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div><p>ADV · ${String(slide).padStart(2,'0')} / 03</p><h2>QUESTO SPAZIO PUÒ ESSERE <em>TUO.</em></h2><span>Porta la tua attività dentro IMLAND.</span></div>
+        <a href="contatti.html">CONTATTACI <b aria-hidden="true">↗</b></a>
+      </article>`).join('')}
+    </div></div>
+    <div class="adv-controls">
+      <button type="button" data-adv-prev aria-label="Slide precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+      <div role="tablist" aria-label="Seleziona slide">${[1,2,3].map((slide)=>`<button type="button" role="tab" data-adv-dot="${slide-1}" aria-label="Slide ${slide}" aria-selected="${slide===1?'true':'false'}"></button>`).join('')}</div>
+      <span><b data-adv-current>01</b> / 03</span>
+      <button type="button" data-adv-next aria-label="Slide successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+    </div>
+  </section>`;
+}
+function mountHomeAdvBanners(){
+  if(document.body.dataset.page!=='home'||document.querySelector('[data-home-adv-mounted]'))return;
+  const partner=document.querySelector('.partner-loop-section'),news=document.querySelector('.home-news'),faq=document.querySelector('#home-faq');
+  if(!partner||!news||!faq)return;
+  partner.insertAdjacentHTML('afterend',homeAdvMarkup('partners'));
+  news.insertAdjacentHTML('afterend',homeAdvMarkup('news'));
+  faq.insertAdjacentHTML('beforebegin',homeAdvMarkup('faq'));
+  document.querySelector('[data-adv-banner]')?.setAttribute('data-home-adv-mounted','');
+  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-adv-banner]').forEach((banner)=>{
+    const track=banner.querySelector('.adv-track'),slides=[...banner.querySelectorAll('.adv-slide')],dots=[...banner.querySelectorAll('[data-adv-dot]')],current=banner.querySelector('[data-adv-current]');
+    let index=0,timer;
+    const show=(next)=>{index=(next+slides.length)%slides.length;track.style.transform=`translateX(-${index*100}%)`;slides.forEach((slide,i)=>slide.setAttribute('aria-hidden',String(i!==index)));dots.forEach((dot,i)=>dot.setAttribute('aria-selected',String(i===index)));current.textContent=String(index+1).padStart(2,'0')};
+    const stop=()=>clearInterval(timer),start=()=>{if(!reduceMotion){stop();timer=setInterval(()=>show(index+1),5500)}};
+    banner.querySelector('[data-adv-prev]').addEventListener('click',()=>{show(index-1);start()});
+    banner.querySelector('[data-adv-next]').addEventListener('click',()=>{show(index+1);start()});
+    dots.forEach((dot)=>dot.addEventListener('click',()=>{show(Number(dot.dataset.advDot));start()}));
+    banner.addEventListener('mouseenter',stop);banner.addEventListener('mouseleave',start);banner.addEventListener('focusin',stop);banner.addEventListener('focusout',start);start();
+  });
+}
+const advStyles=document.createElement('link');advStyles.rel='stylesheet';advStyles.href='adv-banners.css?v=2';document.head.append(advStyles);
 const approvedContentScript=document.createElement('script');
-approvedContentScript.src='approved-content.js?v=3';
+approvedContentScript.src='approved-content.js?v=4';
+approvedContentScript.onload=mountHomeAdvBanners;
 document.body.append(approvedContentScript);
+
 
 
 
