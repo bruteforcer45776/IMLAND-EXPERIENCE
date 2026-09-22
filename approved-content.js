@@ -1,5 +1,5 @@
 (()=>{
-const page=document.body.dataset.approvedPage||document.body.dataset.page||'home',css=document.createElement('link');css.rel='stylesheet';css.href='approved-content.css?v=3';document.head.append(css);
+const page=document.body.dataset.approvedPage||document.body.dataset.page||'home',css=document.createElement('link');css.rel='stylesheet';css.href='approved-content.css?v=4';document.head.append(css);
 const card=(t,p,m='',k='')=>`<article class="approved-card ${k}">${m?`<span>${m}</span>`:''}<div><h3>${t}</h3><p>${p}</p></div></article>`;
 const section=(id,k,t,i,b)=>`<section class="approved-content" id="${id}"><header class="approved-head"><div><p class="approved-kicker">${k}</p><h2>${t}</h2></div><p>${i}</p></header>${b}</section>`;
 const faq=a=>`<div class="approved-faq">${a.map(x=>`<details><summary>${x[0]}</summary><p>${x[1]}</p></details>`).join('')}</div>`;
@@ -15,8 +15,6 @@ section('home-social','Community','SEGUICI ANCHE SUI <em>SOCIAL.</em>','Scorri i
 ],
 radio:()=>[
 section('radio-faq','Domande frequenti','Tutto quello che serve sapere.<br><em>Prima di sintonizzarti.</em>','Diretta, programmi e partecipazione.',faq([['Come faccio ad ascoltare IMLAND Radio in diretta?','Premi Ascolta ora o usa il player fisso del sito.'],['I programmi vanno in onda anche in podcast?','Le puntate disponibili on demand sono raccolte nella sezione Podcast.'],['Posso proporre un brano o un argomento?','Sì, puoi contattarci durante la diretta o inviare una proposta.'],['Come si diventa conduttori o collaboratori?','Presentati dalla pagina Contatti indicando esperienza e idea.'],['La programmazione musicale è sempre la stessa?','No, alterna rotazione musicale, classifiche, rubriche e dirette.']])),
-section('sei-in-onda','Sei in onda','La radio si fa <em>insieme.</em>','Chiamaci durante una diretta o proponi il brano che vuoi sentire suonare.',cta('Le voci del territorio sono le <em>tue.</em>','Partecipa alla diretta e porta la tua proposta in radio.','tel:+393514323003','Parlaci in diretta')),
-section('spot-radio','Spot Radio','Proponi il tuo <em>spot radio.</em>','Raccontaci la tua azienda o il progetto radiofonico che immagini.',`<div class="approved-chips"><span class="approved-chip">Spot pubblicitario</span><span class="approved-chip">Rubrica ricorrente</span><span class="approved-chip">Ospitata singola</span><span class="approved-chip">Format nuovo</span></div>${form('spot-radio',fields+'<label class="full"><span>Titolo dello spot o della rubrica</span><input name="title" required></label>','Invia la proposta')}`)
 ],
 podcast:()=>[
 section('categorie-podcast','Categorie','Scegli un <em>tema.</em>','Seleziona una categoria per arrivare ai programmi coerenti.',`<div class="approved-chips"><a class="approved-chip" href="#programmi">Tutti</a><a class="approved-chip" href="#programmi">Business</a><a class="approved-chip" href="#programmi">Cultura</a><a class="approved-chip" href="#programmi">Cibo</a><a class="approved-chip" href="#programmi">Tecnologia</a></div>`),
