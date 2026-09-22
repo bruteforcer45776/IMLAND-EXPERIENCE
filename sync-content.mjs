@@ -131,7 +131,7 @@ try{
   availability.events=events.length?'live':'empty';
 }catch(error){console.warn(`Eventi IMLAND non disponibili, mantengo il fallback locale: ${error.message}`)}
 
-const metadataUrl='https://streaming-api.aiir.com/mounts/metadata/history/ylpompusqpate?limit=1';
+const metadataUrl='https://streaming-api.aiir.com/mounts/metadata/history/ylpompusqpatv?limit=1';
 let radio=previous.radio??null;
 try{
   const response=await fetch(metadataUrl,{signal:AbortSignal.timeout(10000)});

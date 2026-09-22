@@ -5,6 +5,6 @@
   "scripts": {
     "sync:podcasts": "node sync-podcast-feeds.mjs",
     "sync:content": "node sync-content.mjs && node sync-podcast-feeds.mjs",
-    "check": "node --check script-v56.js"
+    "check": "node --check script-v59.js && node --check sync-content.mjs && node --check sync-podcast-feeds.mjs && node --check forms.js && node --check sw.js"
   }
 }

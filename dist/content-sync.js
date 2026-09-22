@@ -1,5 +1,5 @@
 window.IMLAND_SYNC_DATA={
-  "generatedAt": "2026-09-22T23:29:26.630Z",
+  "generatedAt": "2026-09-22T23:37:14.093Z",
   "news": [
     {
       "source": "ANSA Piemonte",
@@ -174,7 +174,12 @@ window.IMLAND_SYNC_DATA={
   ],
   "events": [],
   "memberNews": [],
-  "radio": null,
+  "radio": {
+    "title": "Lola Young",
+    "artist": "One Thing",
+    "listeners": 0,
+    "timestamp": 1790120116893
+  },
   "availability": {
     "news": "live",
     "events": "empty",
@@ -184,6 +189,6 @@ window.IMLAND_SYNC_DATA={
     "news": "https://www.imlandradio.it/news",
     "events": "https://www.imlandradio.it/eventi",
     "memberNews": "https://www.imlandradio.it/news",
-    "radio": "https://streaming-api.aiir.com/mounts/metadata/history/ylpompusqpate?limit=1"
+    "radio": "https://streaming-api.aiir.com/mounts/metadata/history/ylpompusqpatv?limit=1"
   }
 };

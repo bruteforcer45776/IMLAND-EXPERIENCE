@@ -29,6 +29,8 @@
     const submit = form.querySelector('[type="submit"]');
     const data = new FormData(form);
     const payload = Object.fromEntries(data.entries());
+    const consent = form.querySelector('input[type="checkbox"][required]');
+    if (consent) payload.consent = consent.checked ? 'accepted' : '';
     const endpoint = isNewsletter ? endpoints.newsletter : endpoints.contact;
 
     if (!endpoint) {
