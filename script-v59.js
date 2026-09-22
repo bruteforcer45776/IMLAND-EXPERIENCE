@@ -1,6 +1,6 @@
 const typography=document.createElement('link');
 typography.rel='stylesheet';
-typography.href='typography.css';
+typography.href='typography.css?v=2';
 document.head.append(typography);
 const navigation=document.createElement('link');
 navigation.rel='stylesheet';
