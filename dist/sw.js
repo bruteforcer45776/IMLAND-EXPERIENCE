@@ -3,7 +3,7 @@ const PRECACHE = [
   '/',
   '/index.html',
   '/404.html',
-  '/progetto.html',
+  '/il-progetto.html',
   '/radio.html',
   '/podcast.html',
   '/my-podcast.html',
