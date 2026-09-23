@@ -8,13 +8,29 @@
   };
 
   const submitJson = async (endpoint, payload) => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: controller.signal
     });
+    clearTimeout(timeout);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
   };
+
+  document.querySelectorAll('[data-newsletter-form],[data-contact-form]').forEach(form => {
+    if (form.querySelector('[name="website"]')) return;
+    const trap = document.createElement('input');
+    trap.type = 'text';
+    trap.name = 'website';
+    trap.tabIndex = -1;
+    trap.autocomplete = 'off';
+    trap.setAttribute('aria-hidden', 'true');
+    trap.style.cssText = 'position:absolute;left:-10000px;width:1px;height:1px;opacity:0;pointer-events:none';
+    form.appendChild(trap);
+  });
 
   document.addEventListener('submit', async event => {
     const form = event.target;
