@@ -1,8 +1,9 @@
-const CACHE_NAME = 'imland-static-v3';
+const CACHE_NAME = 'imland-static-v4';
 const PRECACHE = [
   '/',
   '/index.html',
   '/404.html',
+  '/progetto.html',
   '/radio.html',
   '/podcast.html',
   '/my-podcast.html',
@@ -11,7 +12,22 @@ const PRECACHE = [
   '/news.html',
   '/contatti.html',
   '/faq.html',
+  '/download.html',
+  '/auth.html',
+  '/privacy.html',
+  '/cookie.html',
+  '/termini.html',
+  '/aggiorna-password.html',
   '/styles-v37.css',
+  '/auth.css',
+  '/contact.css',
+  '/floating-actions.css',
+  '/home-sections.css',
+  '/news.css',
+  '/download.css',
+  '/member-dome.css',
+  '/member-map.css',
+  '/review-bento.css',
   '/navigation.css',
   '/typography.css',
   '/newsletter.css',
@@ -19,7 +35,11 @@ const PRECACHE = [
   '/content-sync.js',
   '/podcast-episodes.js',
   '/forms.js',
+  '/form-config.js',
+  '/auth-config.js',
+  '/auth-client.js',
   '/assets/logos/imland-experience.png',
+  '/assets/logos/pwa-icon.svg',
   '/manifest.webmanifest'
 ];
 

@@ -35,7 +35,7 @@
   document.addEventListener('submit', async event => {
     const form = event.target;
     const isNewsletter = form.matches('[data-newsletter-form]');
-    const isContact = form.matches('[data-contact-form]');
+    const isContact = form.matches('[data-contact-form],[data-approved-form="faq-contact"]');
     if (!isNewsletter && !isContact) return;
 
     event.preventDefault();
