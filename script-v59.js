@@ -8,7 +8,7 @@ navigation.href='navigation.css?v=9';
 document.head.append(navigation);
 const homeSections=document.createElement('link');
 homeSections.rel='stylesheet';
-homeSections.href='home-sections.css?v=6';
+homeSections.href='home-sections.css?v=7';
 document.head.append(homeSections);
 const reviewStyles=document.createElement('link');
 reviewStyles.rel='stylesheet';
