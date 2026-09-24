@@ -1,4 +1,4 @@
-const CACHE_NAME = 'imland-static-v9';
+const CACHE_NAME = 'imland-static-v12';
 const PRECACHE = [
   '/',
   '/index.html',
