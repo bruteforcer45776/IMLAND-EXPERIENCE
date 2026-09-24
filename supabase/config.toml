@@ -1,2 +1,5 @@
 [functions.imland-chat]
 verify_jwt = false
+
+[functions.imland-ab]
+verify_jwt = false

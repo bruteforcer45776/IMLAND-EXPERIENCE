@@ -4,7 +4,7 @@ typography.href='typography.css?v=4';
 document.head.append(typography);
 const navigation=document.createElement('link');
 navigation.rel='stylesheet';
-navigation.href='navigation.css?v=8';
+navigation.href='navigation.css?v=9';
 document.head.append(navigation);
 const homeSections=document.createElement('link');
 homeSections.rel='stylesheet';
@@ -55,6 +55,23 @@ memberMapStyles.rel='stylesheet';
 memberMapStyles.href='member-map.css?v=5';
 document.head.append(memberMapStyles);
 const page=document.body.dataset.page;
+const abExperiment={id:'header_app_cta_v1',endpoint:'https://wfevttxbbhihapgmcbgh.supabase.co/functions/v1/imland-ab'};
+function initGlobalAbTest(){
+  let variant='A';
+  try{
+    variant=sessionStorage.getItem(abExperiment.id)||'';
+    if(!/^[AB]$/.test(variant)){
+      const bucket=globalThis.crypto?.getRandomValues?crypto.getRandomValues(new Uint8Array(1))[0]:Math.floor(Math.random()*256);
+      variant=bucket%2?'B':'A';
+      sessionStorage.setItem(abExperiment.id,variant);
+    }
+  }catch{variant=Math.random()<.5?'A':'B'}
+  document.documentElement.dataset.abAppCta=variant;
+  const send=(event)=>fetch(abExperiment.endpoint,{method:'POST',headers:{'content-type':'application/json'},keepalive:true,body:JSON.stringify({experiment:abExperiment.id,variant,event,page:location.pathname})}).catch(()=>{});
+  const impressionKey=`${abExperiment.id}:${variant}:${location.pathname}`;
+  try{if(!sessionStorage.getItem(impressionKey)){sessionStorage.setItem(impressionKey,'1');send('impression')}}catch{send('impression')}
+  document.querySelectorAll('.mini-cta[href$="download.html"]').forEach(link=>link.addEventListener('click',()=>send('conversion'),{once:true}));
+}
 const escapeSyncText=value=>String(value??'').replace(/[&<>"']/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
 const safeExternalUrl=(value,fallback='')=>{try{const url=new URL(String(value||''),window.location.href);return /^(https?):$/.test(url.protocol)?escapeSyncText(url.href):fallback}catch{return fallback}};
 const syncedRadio=window.IMLAND_SYNC_DATA?.radio||null;
@@ -386,4 +403,5 @@ const approvedContentScript=document.createElement('script');
 approvedContentScript.src='approved-content.js?v=9';
 approvedContentScript.onload=mountHomeAdvBanners;
 document.body.append(approvedContentScript);
+initGlobalAbTest();
 
