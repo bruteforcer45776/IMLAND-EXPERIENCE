@@ -8,7 +8,7 @@ navigation.href='navigation.css?v=9';
 document.head.append(navigation);
 const homeSections=document.createElement('link');
 homeSections.rel='stylesheet';
-homeSections.href='home-sections.css?v=5';
+homeSections.href='home-sections.css?v=6';
 document.head.append(homeSections);
 const reviewStyles=document.createElement('link');
 reviewStyles.rel='stylesheet';
@@ -36,7 +36,7 @@ auditFixes.href='audit-fixes.css?v=1';
 document.head.append(auditFixes);
 const layoutPolish=document.createElement('link');
 layoutPolish.rel='stylesheet';
-layoutPolish.href='layout-polish.css?v=8';
+layoutPolish.href='layout-polish.css?v=9';
 document.head.append(layoutPolish);
 const newsStyles=document.createElement('link');
 newsStyles.rel='stylesheet';
@@ -452,7 +452,7 @@ function mountHomeAdvBanners(){
     banner.addEventListener('mouseenter',stop);banner.addEventListener('mouseleave',start);banner.addEventListener('focusin',stop);banner.addEventListener('focusout',start);start();
   });
 }
-const advStyles=document.createElement('link');advStyles.rel='stylesheet';advStyles.href='adv-banners.css?v=2';document.head.append(advStyles);
+const advStyles=document.createElement('link');advStyles.rel='stylesheet';advStyles.href='adv-banners.css?v=3';document.head.append(advStyles);
 const approvedContentScript=document.createElement('script');
 approvedContentScript.src='approved-content.js?v=9';
 approvedContentScript.onload=mountHomeAdvBanners;

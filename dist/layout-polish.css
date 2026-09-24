@@ -281,3 +281,23 @@ footer>div>a{color:#d2d4d7}
   :root{--line:#9b9c97;--text-muted:#343531;--text-muted-dark:#eef0f2}
   .button,.newsletter-field,.signal-card{border-width:2px}
 }
+
+/* CTA primaria dell'header, coerente con il colore Radio. */
+html[data-ab-app-cta] .topbar .mini-cta,
+.topbar .mini-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:.65rem 1rem;
+  border:1px solid #22b8ff;
+  border-radius:999px;
+  background:#22b8ff;
+  color:#07131a;
+  font-weight:700;
+  opacity:1;
+}
+html[data-ab-app-cta] .topbar .mini-cta:hover,
+html[data-ab-app-cta] .topbar .mini-cta:focus-visible,
+.topbar .mini-cta:hover,.topbar .mini-cta:focus-visible{background:#079fe4;color:#07131a}
+@media(max-width:800px){.topbar .mini-cta{display:none}}
