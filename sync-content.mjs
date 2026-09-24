@@ -15,18 +15,17 @@ async function page(path){
 
 const metaValue=(html,key)=>decode(html.match(new RegExp(`<meta[^>]+(?:property|name)="${key}"[^>]+content="([^"]*)"`,'i'))?.[1]||html.match(new RegExp(`<meta[^>]+content="([^"]*)"[^>]+(?:property|name)="${key}"`,'i'))?.[1]);
 const negativeNews=/omicid|uccis|morto|morte|incidente|arrest|denunc|aggress|accoltell|droga|spaccio|rapina|furto|violenz|maltratt|abuso|process|indagat|carabinier|polizia|traged|ferit|cadaver|suicid|pusher|chiude|licenzi|bollett.*aument|emergenza|alluvion|sicurezza|politic|partit|governo|\bddl\b|votiam|destra|sinistra|divisiv|antisemit/i;
-const positiveNews=/cultur|evento|festival|mostra|musica|teatro|libro|arte|premio|success|inaugur|ricerca|innovaz|impres|solidar|inclus|turismo|territorio|sport|scuol|universit|giovani|volontari|tradizion|enogastr|natura|ambiente|restaur|progetto|eccellen|festa|benessere|comunit|shopping|muse/i;
+const positiveNews=/cultur|evento|festival|mostra|musica|teatro|libro|arte|premio|success|inaugur|ricerca|innovaz|impres|solidar|inclus|turismo|territorio|sport|scuol|universit|giovani|volontari|tradizion|enogastr|\bnatura\b|ambiente|restaur|progetto|eccellen|festa|benessere|comunit|shopping|muse/i;
 const isPositive=item=>{const text=`${item?.title||''} ${item?.description||''}`;return !negativeNews.test(text)&&positiveNews.test(text)};
 const sourceName=url=>{const host=new URL(url).hostname.replace(/^www\./,'');return ({'ansa.it':'ANSA Piemonte','videoembed.ansa.it':'ANSA Piemonte','newsbiella.it':'NewsBiella','infovercelli24.it':'InfoVercelli24','primanovara.it':'Prima Novara','lopinionista.it':"L'Opinionista"})[host]||host};
 
 async function latestPositiveNews(){
+  const recentDays=Array.from({length:4},(_,offset)=>{const date=new Date();date.setDate(date.getDate()-offset);const year=date.getFullYear(),month=String(date.getMonth()+1).padStart(2,'0'),day=String(date.getDate()).padStart(2,'0');return `${year}/${month}/${day}`});
   const indexUrls=[
     'https://www.ansa.it/piemonte/notizie/spettacolo.shtml',
     'https://www.ansa.it/piemonte/notizie/economia.shtml',
-    'https://www.newsbiella.it/2026/09/22/tutte-le-notizie.html',
-    'https://www.newsbiella.it/2026/09/21/tutte-le-notizie.html',
-    'https://www.infovercelli24.it/2026/09/22/tutte-le-notizie.html',
-    'https://www.infovercelli24.it/2026/09/21/tutte-le-notizie.html',
+    ...recentDays.map(day=>`https://www.newsbiella.it/${day}/tutte-le-notizie.html`),
+    ...recentDays.map(day=>`https://www.infovercelli24.it/${day}/tutte-le-notizie.html`),
     'https://primanovara.it/attualita/'
   ];
   const indexes=await Promise.all(indexUrls.map(async sourceUrl=>({sourceUrl,html:await fetch(sourceUrl,{headers:{accept:'text/html','user-agent':'IMLAND news sync'},signal:AbortSignal.timeout(15000)}).then(response=>response.ok?response.text():'')})));
@@ -41,13 +40,13 @@ async function latestPositiveNews(){
     'https://www.infovercelli24.it/2026/09/12/leggi-notizia/argomenti/attualita-7/articolo/riso-tra-talk-show-cooking-e-cultura-una-giornata-per-vivere-a-vercelli.html',
     'https://www.lopinionista.it/con-una-penna-in-mano-il-libro-di-nicola-gardini-229729.html'
   ];
-  const discovered=indexes.flatMap(({sourceUrl,html})=>[...html.matchAll(/href=["']([^"']*(?:\/2026\/09\/|\/attualita\/)[^"'#?]+(?:\.html|\/))["']/gi)].map(match=>{try{return new URL(match[1],sourceUrl).href}catch{return''}})).filter(Boolean);
+  const discovered=indexes.flatMap(({sourceUrl,html})=>[...html.matchAll(/href=["']([^"']*(?:\/20\d{2}\/\d{2}\/|\/attualita\/)[^"'#?]+(?:\.html|\/))["']/gi)].map(match=>{try{return new URL(match[1],sourceUrl).href}catch{return''}})).filter(Boolean);
   const urls=[...new Set([...seedUrls,...discovered])].slice(0,140);
   const items=(await Promise.all(urls.map(async url=>{
     try{
       const html=await fetch(url,{headers:{accept:'text/html','user-agent':'IMLAND news sync'},signal:AbortSignal.timeout(12000)}).then(response=>response.ok?response.text():'');
       const publishedAt=metaValue(html,'article:published_time');
-      if(!html||!publishedAt)return null;
+      if(!html||!publishedAt||(/(?:^|\.)ansa\.it$/i.test(new URL(url).hostname)&&!new URL(url).pathname.includes('/piemonte/')))return null;
       const dateValue=new Date(publishedAt);
       return {source:sourceName(url),area:'Piemonte',date:new Intl.DateTimeFormat('it-IT',{day:'numeric',month:'short',year:'numeric'}).format(dateValue),publishedAt,title:metaValue(html,'og:title').replace(/\s*-\s*Notizie\s*[-|].*$/i,''),description:metaValue(html,'og:description'),image:metaValue(html,'og:image'),url};
     }catch{return null}

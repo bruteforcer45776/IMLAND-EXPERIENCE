@@ -8,7 +8,7 @@ navigation.href='navigation.css?v=9';
 document.head.append(navigation);
 const homeSections=document.createElement('link');
 homeSections.rel='stylesheet';
-homeSections.href='home-sections.css?v=4';
+homeSections.href='home-sections.css?v=5';
 document.head.append(homeSections);
 const reviewStyles=document.createElement('link');
 reviewStyles.rel='stylesheet';
@@ -120,6 +120,8 @@ const syncedTerritoryNews=(window.IMLAND_SYNC_DATA?.news||[]).map(item=>[
   item.source,item.area,item.date,item.title,item.description,item.image,item.url
 ]);
 const territoryNews=syncedTerritoryNews.length?syncedTerritoryNews:fallbackTerritoryNews;
+const distinctHomeNews=territoryNews.filter((item,index,array)=>array.findIndex(other=>other[0]===item[0])===index);
+const homeTerritoryNews=[...distinctHomeNews,...territoryNews.filter(item=>!distinctHomeNews.includes(item))].slice(0,3);
 const syncedEvents=window.IMLAND_SYNC_DATA?.events||[];
 const syncedMemberNews=window.IMLAND_SYNC_DATA?.memberNews||[];
 const memberNetwork=[
@@ -253,7 +255,7 @@ function hydrateSyncedContent(){
       card.href='podcast.html#programmi';
     });
     const newsList=document.querySelector('.home-news-list');
-    if(newsList&&territoryNews.length)newsList.innerHTML=territoryNews.slice(0,3).map(([source,place,date,title,,image,url])=>`<a href="${escapeSyncText(url)}" target="_blank" rel="noreferrer"><span>${escapeSyncText(place)} · ${escapeSyncText(date)}</span><h3>${escapeSyncText(title)}</h3><b aria-label="Leggi su ${escapeSyncText(source)}">↗</b></a>`).join('');
+    if(newsList&&homeTerritoryNews.length)newsList.innerHTML=homeTerritoryNews.map(([source,place,date,title,description,image,url])=>`<a href="${escapeSyncText(url)}" target="_blank" rel="noreferrer"><img src="${safeExternalUrl(image,'assets/logos/imland-news.png')}" alt="" loading="lazy"><span>${escapeSyncText(source)} · ${escapeSyncText(place)} · ${escapeSyncText(date)}</span><h3>${escapeSyncText(title)}</h3><p>${escapeSyncText(description||'Scopri questa storia dal territorio.')}</p><b aria-label="Leggi su ${escapeSyncText(source)}">Leggi ↗</b></a>`).join('');
     const eventSlot=document.querySelector('.home-events .event-empty');
     if(eventSlot&&syncedEvents.length)eventSlot.outerHTML=syncedEventsMarkup();
   }
