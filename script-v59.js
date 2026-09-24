@@ -36,7 +36,7 @@ auditFixes.href='audit-fixes.css?v=1';
 document.head.append(auditFixes);
 const layoutPolish=document.createElement('link');
 layoutPolish.rel='stylesheet';
-layoutPolish.href='layout-polish.css?v=4';
+layoutPolish.href='layout-polish.css?v=5';
 document.head.append(layoutPolish);
 const newsStyles=document.createElement('link');
 newsStyles.rel='stylesheet';

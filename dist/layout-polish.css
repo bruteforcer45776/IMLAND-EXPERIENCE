@@ -44,6 +44,7 @@ main>section:not(.hero):not(.page-hero):not(.partner-loop-section):not(.newslett
 }
 .section-surface+.section-surface{margin-top:0}
 .page-content>:not(.section-surface)+.section-surface{margin-top:var(--section-space-compact)}
+.section-surface+.approved-content{margin-top:var(--content-gap)}
 .section-surface.story-grid article,
 .section-surface.catalog article{padding-top:0}
 .section-surface.story-grid article:nth-child(n+3),
