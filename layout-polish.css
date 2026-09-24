@@ -64,6 +64,18 @@ main>section:not(.hero):not(.page-hero):not(.partner-loop-section):not(.newslett
   outline-color:var(--theme-ink,#fff);
 }
 
+/* Le superfici interne conservano il proprio contrasto anche dentro una banda colorata. */
+.section-surface-strong .imland-team-head h2,
+.section-surface-strong .imland-team-head h2 em{color:var(--theme-ink,#fff)}
+.section-surface-strong .imland-team-head p,
+.section-surface-strong .imland-team-head > span{color:var(--theme-muted,#e1e9ff)}
+.section-surface-strong .imland-team-card:not(.featured){color:#08090b}
+.section-surface-strong .imland-team-card:not(.featured) h3{color:#08090b}
+.section-surface-strong .imland-team-card:not(.featured) p{color:#575853}
+.section-surface-strong .imland-team-card:not(.featured) > div:last-child > span{color:#2457ff}
+.section-surface-strong .imland-team-card.featured :where(h3,span){color:#fff}
+.section-surface-strong .imland-team-card.featured p{color:#c7c9cc}
+
 .section-dark,.section-paper,.territory,.cta,.home-events,.home-news,
 .page-content{
   padding-top:var(--section-space);
