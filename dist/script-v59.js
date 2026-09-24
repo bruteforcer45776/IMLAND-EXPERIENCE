@@ -226,7 +226,7 @@ function applyPageSurfaceRhythm(){
 
 function setMobileHeroLines(){
   const lines={
-    home:['Dai voce al tuo','<em>territorio.</em>'],
+    home:['Dai voce al tuo','<em>territorio</em>'],
     progetto:['Un hub aperto,','radicato, <em>indipendente.</em>'],
     radio:['La radio che',"non <em>c\'era.</em>"],
     podcast:['Le storie dei protagonisti','del <em>territorio.</em>'],
