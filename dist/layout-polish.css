@@ -1,0 +1,176 @@
+:root{
+  --content-gutter:clamp(1.25rem,6vw,7rem);
+  --section-space:clamp(5.5rem,9vw,9rem);
+  --section-space-compact:clamp(3.5rem,6vw,6rem);
+  --content-gap:clamp(1.25rem,2.5vw,2.5rem);
+  --text-muted:#575853;
+  --text-muted-dark:#c7c9cc;
+  --surface:#f3f2ee;
+  --surface-raised:#fff;
+  --accent-text:#2457ff;
+}
+
+body[data-page="radio"]{--accent-text:#006b94}
+body[data-page="podcast"]{--accent-text:#2457ff}
+body[data-page="eventi"]{--accent-text:#0b7040}
+body[data-page="member"]{--accent-text:#765e00}
+body[data-page="news"]{--accent-text:#b8202d}
+
+/* Ritmo editoriale condiviso: stessi margini e respiro su ogni pagina. */
+main>section:not(.hero):not(.page-hero):not(.partner-loop-section):not(.newsletter-banner),
+.page-content{
+  scroll-margin-top:88px;
+}
+
+.section-dark,.section-paper,.territory,.cta,.home-events,.home-news,
+.page-content,.newsletter-banner{
+  padding-left:var(--content-gutter);
+  padding-right:var(--content-gutter);
+}
+
+.section-dark,.section-paper,.territory,.cta,.home-events,.home-news,
+.page-content{
+  padding-top:var(--section-space);
+  padding-bottom:var(--section-space);
+}
+
+.section-heading,.home-section-heading,.radio-programs-head,
+.imland-team-head{
+  row-gap:1.5rem;
+  margin-bottom:clamp(2.75rem,5vw,5rem);
+}
+
+.section-heading h2,.home-section-heading h2,.radio-programs-head h2,
+.story-grid h2,.catalog h2,.member-callout h2,.empty-editorial h2{
+  text-wrap:balance;
+}
+
+.section-heading p,.home-section-heading p,.story-grid p,.catalog p,
+.project-copy p,.compact-faq p,.feed-card p,.radio-program-card p{
+  color:var(--text-muted);
+  line-height:1.65;
+}
+
+:where(.section-index,.story-grid span,.catalog small,.feed-card small,
+.approved-kicker,.approved-card>span,.radio-programs-head .eyebrow){color:var(--accent-text)}
+
+.section-dark :where(.section-heading p,.radio-previews p,.signal-card small),
+.cta :where(p,small),footer :where(p,a),
+.my-podcast p,.member-callout p,.empty-editorial p{
+  color:var(--text-muted-dark);
+}
+
+/* Separazione chiara senza aggiungere nuove forme o contenitori. */
+.program-grid,.radio-previews,.podcast-previews,.feed-grid,
+.imland-team-grid,.review-bento,.news-grid{
+  gap:clamp(1rem,2vw,1.5rem);
+}
+
+.program small{opacity:.82}.program p{opacity:.86}
+.onair h2 span{color:#ffffff80}
+.signal-card{border-color:#ffffff40}
+.signal-card small,.radio-links p{color:#ffffffb8}
+.contact-field input,.contact-field select,.contact-field textarea{border-color:#ffffff70}
+.contact-field input::placeholder,.contact-field textarea::placeholder{color:#ffffffb8}
+.contact-field label{color:#ffffffbd}
+
+.story-grid article,.catalog article{
+  padding-top:clamp(2rem,4vw,3.5rem);
+  padding-bottom:clamp(3.5rem,6vw,6rem);
+}
+
+.my-podcast,.member-callout,.empty-editorial{
+  margin-top:var(--section-space-compact);
+  padding:clamp(2rem,5vw,5rem);
+}
+
+.content-extension,.compact-faq,.imland-team{
+  margin-top:var(--section-space);
+}
+
+.button,.contact-submit,.newsletter-field button{
+  min-height:52px;
+}
+
+:where(a,button,input,select,textarea,summary):focus-visible{
+  outline:3px solid var(--focus-color,#2367ff);
+  outline-offset:4px;
+}
+
+:where(.section-dark,.cta,footer,.contact-form-wrap,.player,.page-hero){--focus-color:#fff}
+:where(.territory,.home-events,.newsletter-banner){--focus-color:#08090b}
+
+.program:focus-within,.imland-team-card:focus-within,
+.feed-card:focus-within,.member-news-card:focus-within{
+  outline:3px solid var(--accent-text);
+  outline-offset:4px;
+}
+
+body:is([data-page="radio"],[data-page="eventi"],[data-page="member"])
+ :where(.button.primary,.contact-submit,.feed-open:hover,.feed-open:focus-visible,
+ .episode-row button:hover,.episode-row button[aria-current="true"]){color:#08090b}
+
+footer{
+  padding-left:var(--content-gutter);
+  padding-right:var(--content-gutter);
+  padding-top:clamp(4.5rem,7vw,7rem);
+  gap:clamp(2rem,4vw,4rem);
+}
+
+footer>div>a{color:#d2d4d7}
+.footer-brand p,footer p,.footer-bottom{color:#b8bbc0}
+
+@media(max-width:800px){
+  :root{
+    --content-gutter:clamp(1rem,5vw,1.5rem);
+    --section-space:clamp(4rem,14vw,6rem);
+    --section-space-compact:clamp(3rem,10vw,4.5rem);
+  }
+  .section-heading,.home-section-heading,.radio-programs-head,
+  .imland-team-head{margin-bottom:2.5rem}
+  .section-index{margin-bottom:2rem}
+  body:is([data-page="radio"],[data-page="podcast"],[data-page="eventi"],[data-page="member"],[data-page="news"]) .page-hero{
+    min-height:min(76svh,720px);
+    padding:7rem var(--content-gutter) 4.5rem;
+  }
+  body:is([data-page="radio"],[data-page="podcast"],[data-page="eventi"],[data-page="member"],[data-page="news"]) .page-hero-copy{
+    transform:none;
+  }
+  .program-grid,.radio-previews,.podcast-previews,.feed-grid,
+  .imland-team-grid{margin-top:2.5rem}
+  .story-grid article,.catalog article{
+    min-height:0;
+    padding-top:2rem;
+    padding-bottom:3rem;
+  }
+  .my-podcast,.member-callout,.empty-editorial{padding:2rem}
+  footer{padding-bottom:7.5rem}
+  .newsletter-banner{gap:2rem}
+  .dome-gallery{margin-inline:0;border-radius:20px}
+  body[data-page="member"] .reviews-bento{margin:var(--section-space-compact) 0 0;padding-inline:0}
+}
+
+@media(max-width:560px){
+  .feed-grid,.radio-previews,.podcast-previews,.approved-grid,
+  .imland-team-grid,.reviews-fan,.member-directory-grid{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr;gap:2rem;padding-bottom:calc(8rem + env(safe-area-inset-bottom))}
+  .footer-brand,.footer-bottom{grid-column:1}
+  .contact-direct,.company-data{min-height:auto;padding:1.5rem}
+}
+
+@media(max-width:480px){
+  .section-heading h2,.home-section-heading h2,.radio-programs-head h2{
+    overflow-wrap:anywhere;
+  }
+  .button{width:100%}
+  .local-tabs{gap:.45rem;overflow-x:auto;padding-bottom:.5rem}
+  .local-tabs a{flex:0 0 auto}
+  .newsletter-field{padding:.35rem}
+  .newsletter-field input,.newsletter-field button{min-height:50px}
+  .player{bottom:calc(.75rem + env(safe-area-inset-bottom))}
+}
+
+@media(prefers-contrast:more){
+  :root{--line:#9b9c97;--text-muted:#343531;--text-muted-dark:#eef0f2}
+  .button,.newsletter-field,.signal-card{border-width:2px}
+}
