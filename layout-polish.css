@@ -16,6 +16,13 @@ body[data-page="eventi"]{--accent-text:#0b7040}
 body[data-page="member"]{--accent-text:#765e00}
 body[data-page="news"]{--accent-text:#b8202d}
 
+body[data-page="radio"]{--theme-surface:#22b8ff;--theme-tint:#e2f7ff;--theme-ink:#07141a;--theme-muted:#173a48}
+body[data-page="podcast"],body[data-page="my-podcast"]{--theme-surface:#2457ff;--theme-tint:#e7edff;--theme-ink:#fff;--theme-muted:#e4e9ff}
+body[data-page="eventi"]{--theme-surface:#1faf66;--theme-tint:#e1f5e9;--theme-ink:#06130d;--theme-muted:#173c29}
+body[data-page="member"]{--theme-surface:#f2c300;--theme-tint:#fff4c2;--theme-ink:#171300;--theme-muted:#4b4008}
+body[data-page="news"]{--theme-surface:#c82e38;--theme-tint:#fde8e9;--theme-ink:#fff;--theme-muted:#ffe2e4}
+body[data-page="progetto"],body[data-page="faq"],body[data-page="contatti"]{--theme-surface:#2367ff;--theme-tint:#e7eeff;--theme-ink:#fff;--theme-muted:#e1e9ff}
+
 /* Ritmo editoriale condiviso: stessi margini e respiro su ogni pagina. */
 main>section:not(.hero):not(.page-hero):not(.partner-loop-section):not(.newsletter-banner),
 .page-content{
@@ -26,6 +33,35 @@ main>section:not(.hero):not(.page-hero):not(.partner-loop-section):not(.newslett
 .page-content,.newsletter-banner{
   padding-left:var(--content-gutter);
   padding-right:var(--content-gutter);
+}
+
+/* Alternanza di superficie per pagina: carta, tinta e colore identitario. */
+.section-surface{
+  margin-inline:calc(var(--content-gutter) * -1);
+  padding:var(--section-space-compact) var(--content-gutter);
+  border-top:1px solid #08090b1f;
+  border-bottom:1px solid #08090b1f;
+}
+.section-surface+.section-surface{margin-top:0}
+.section-surface-neutral{background:#fff}
+.section-surface-tint{background:var(--theme-tint,#e7eeff)}
+.section-surface-strong{
+  --accent-text:var(--theme-ink,#fff);
+  background:var(--theme-surface,#2367ff);
+  color:var(--theme-ink,#fff);
+  border-color:transparent;
+}
+.section-surface-strong :where(h2,h3,p,small,span,strong,a,summary){color:inherit}
+.section-surface-strong :where(p,small){color:var(--theme-muted,#e1e9ff)}
+.section-surface-strong :where(.story-grid,.catalog,.feed-grid,.faq-list){border-color:color-mix(in srgb,var(--theme-ink,#fff) 38%,transparent)}
+.section-surface-strong :where(article,details){border-color:color-mix(in srgb,var(--theme-ink,#fff) 30%,transparent)}
+.section-surface-strong .button.primary{
+  background:var(--theme-ink,#fff);
+  border-color:var(--theme-ink,#fff);
+  color:var(--theme-surface,#2367ff);
+}
+.section-surface-strong :where(a,button,input,select,textarea,summary):focus-visible{
+  outline-color:var(--theme-ink,#fff);
 }
 
 .section-dark,.section-paper,.territory,.cta,.home-events,.home-news,

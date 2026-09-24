@@ -209,9 +209,19 @@ if(page==='contatti'){
 if(page==='radio')refineRadioPage();
 if(page==='podcast')refinePodcastPage();
 if(page==='podcast')document.querySelectorAll('.page-hero-copy>p:not(.eyebrow)').forEach(item=>item.remove());
+applyPageSurfaceRhythm();
 if(page==='member')initMemberDome();
 if(page==='member')initOfficialMemberMap();
 hydrateSyncedContent();
+
+function applyPageSurfaceRhythm(){
+  const content=document.querySelector('.page-content');
+  if(!content)return;
+  const selector=':scope > .story-grid,:scope > .catalog,:scope > .radio-listen,:scope > .podcast-programs,:scope > .podcast-topics,:scope > .content-extension,:scope > .member-network,:scope > .member-directory,:scope > .official-map,:scope > .imland-team,:scope > .newsroom-section,:scope > .territory-news,:scope > .member-news,:scope > .faq-list,:scope > .contact-page,:scope > .feed-grid';
+  const modules=[...content.querySelectorAll(selector)].filter(module=>!module.matches('.member-callout,.empty-editorial,.reviews-bento'));
+  const sequence=['section-surface-neutral','section-surface-tint','section-surface-strong'];
+  modules.forEach((module,index)=>module.classList.add('section-surface',sequence[index%sequence.length]));
+}
 
 function hydrateSyncedContent(){
   if(page==='home'){
