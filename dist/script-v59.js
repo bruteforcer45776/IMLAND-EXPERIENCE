@@ -36,7 +36,7 @@ auditFixes.href='audit-fixes.css?v=1';
 document.head.append(auditFixes);
 const layoutPolish=document.createElement('link');
 layoutPolish.rel='stylesheet';
-layoutPolish.href='layout-polish.css?v=5';
+layoutPolish.href='layout-polish.css?v=7';
 document.head.append(layoutPolish);
 const newsStyles=document.createElement('link');
 newsStyles.rel='stylesheet';
@@ -209,6 +209,7 @@ if(page==='contatti'){
 if(page==='radio')refineRadioPage();
 if(page==='podcast')refinePodcastPage();
 if(page==='podcast')document.querySelectorAll('.page-hero-copy>p:not(.eyebrow)').forEach(item=>item.remove());
+setMobileHeroLines();
 applyPageSurfaceRhythm();
 if(page==='member')initMemberDome();
 if(page==='member')initOfficialMemberMap();
@@ -221,6 +222,24 @@ function applyPageSurfaceRhythm(){
   const modules=[...content.querySelectorAll(selector)].filter(module=>!module.matches('.member-callout,.empty-editorial,.reviews-bento'));
   const sequence=['section-surface-neutral','section-surface-tint','section-surface-strong'];
   modules.forEach((module,index)=>module.classList.add('section-surface',sequence[index%sequence.length]));
+}
+
+function setMobileHeroLines(){
+  const lines={
+    home:['Dai voce al tuo','<em>territorio.</em>'],
+    progetto:['Un hub aperto,','radicato, <em>indipendente.</em>'],
+    radio:['La radio che',"non <em>c\'era.</em>"],
+    podcast:['Le storie dei protagonisti','del <em>territorio.</em>'],
+    'my-podcast':['Progetti','<em>My Podcast</em>'],
+    member:['La rete che valorizza','la <em>conoscenza.</em>'],
+    news:['Le notizie che','raccontano <em>il territorio.</em>'],
+    contatti:['Mettiamoci','<em>in contatto.</em>'],
+    faq:['Tutto quello che','vuoi <em>sapere.</em>']
+  };
+  const title=document.querySelector('.hero h1,.page-hero h1');
+  if(!title||!lines[page])return;
+  title.classList.add('mobile-hero-title');
+  title.innerHTML=lines[page].map(line=>`<span class="hero-line">${line}</span>`).join('');
 }
 
 function hydrateSyncedContent(){

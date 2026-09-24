@@ -176,6 +176,8 @@ footer{
 footer>div>a{color:#d2d4d7}
 .footer-brand p,footer p,.footer-bottom{color:#b8bbc0}
 
+.mobile-hero-title .hero-line{display:inline}
+
 @media(max-width:800px){
   :root{
     --content-gutter:clamp(1rem,5vw,1.5rem);
@@ -192,6 +194,21 @@ footer>div>a{color:#d2d4d7}
   body:is([data-page="radio"],[data-page="podcast"],[data-page="eventi"],[data-page="member"],[data-page="news"]) .page-hero-copy{
     transform:none;
   }
+  .mobile-hero-title{
+    font-size:var(--mobile-hero-size,clamp(2.5rem,10vw,3.75rem))!important;
+    line-height:.92!important;
+    letter-spacing:-.04em!important;
+  }
+  .mobile-hero-title .hero-line{display:block;white-space:nowrap}
+  .mobile-hero-title .hero-line em{display:inline!important}
+  body[data-page="home"]{--mobile-hero-size:clamp(2.35rem,9.6vw,3.6rem)}
+  body[data-page="progetto"]{--mobile-hero-size:clamp(2.2rem,8.4vw,3.2rem)}
+  body[data-page="radio"]{--mobile-hero-size:clamp(2.8rem,12vw,4rem)}
+  body[data-page="podcast"]{--mobile-hero-size:clamp(1.9rem,7.3vw,2.8rem)}
+  body[data-page="my-podcast"]{--mobile-hero-size:clamp(2.7rem,11.5vw,3.9rem)}
+  body[data-page="member"]{--mobile-hero-size:clamp(2.05rem,8.2vw,3rem)}
+  body[data-page="news"]{--mobile-hero-size:clamp(2rem,7.9vw,2.9rem)}
+  body[data-page="contatti"],body[data-page="faq"]{--mobile-hero-size:clamp(2.55rem,10.5vw,3.8rem)}
   .program-grid,.radio-previews,.podcast-previews,.feed-grid,
   .imland-team-grid{margin-top:2.5rem}
   .story-grid article,.catalog article{
