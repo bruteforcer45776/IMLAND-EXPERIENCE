@@ -503,7 +503,7 @@ function mountHomeAdvBanners(){
 }
 const advStyles=document.createElement('link');advStyles.rel='stylesheet';advStyles.href='adv-banners.css?v=3';document.head.append(advStyles);
 const approvedContentScript=document.createElement('script');
-approvedContentScript.src='approved-content.js?v=9';
+approvedContentScript.src='approved-content.js?v=10';
 approvedContentScript.onload=mountHomeAdvBanners;
 document.body.append(approvedContentScript);
 initGlobalAbTest();
