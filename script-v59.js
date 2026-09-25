@@ -235,7 +235,7 @@ function setMobileHeroLines(){
     home:['Dai voce al tuo','<em>territorio</em>'],
     progetto:['Un hub aperto,','radicato, <em>indipendente.</em>'],
     radio:['La radio che',"non <em>c\'era.</em>"],
-    podcast:['Le storie dei protagonisti','del <em>territorio.</em>'],
+    podcast:['Le storie dei','protagonisti del <em>territorio.</em>'],
     'my-podcast':['Progetti','<em>My Podcast</em>'],
     member:['La rete che valorizza','la <em>conoscenza.</em>'],
     news:['Le notizie che','raccontano <em>il territorio.</em>'],
