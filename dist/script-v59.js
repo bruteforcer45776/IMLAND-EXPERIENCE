@@ -60,7 +60,7 @@ memberMapStyles.href='member-map.css?v=5';
 document.head.append(memberMapStyles);
 const tasteSystem=document.createElement('link');
 tasteSystem.rel='stylesheet';
-tasteSystem.href='taste-system.css?v=6';
+tasteSystem.href='taste-system.css?v=7';
 document.head.append(tasteSystem);
 const page=document.body.dataset.page;
 const abExperiment={id:'header_app_cta_v1',endpoint:'https://wfevttxbbhihapgmcbgh.supabase.co/functions/v1/imland-ab'};
