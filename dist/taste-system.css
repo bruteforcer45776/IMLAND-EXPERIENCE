@@ -57,8 +57,10 @@ body{padding-bottom:0}.page-content,main{scroll-padding-bottom:8rem}footer{paddi
     z-index:2;
     width:100%;
     max-width:720px;
+    justify-self:start;
+    text-align:left;
   }
-  body[data-page="home"] .hero .eyebrow{color:#3d434a}
+  body[data-page="home"] .hero .eyebrow{margin-inline:0;color:#3d434a}
   body[data-page="home"] .hero h1{
     max-width:8.6ch;
     color:#08090b;
@@ -66,7 +68,7 @@ body{padding-bottom:0}.page-content,main{scroll-padding-bottom:8rem}footer{paddi
     letter-spacing:-.04em;
   }
   body[data-page="home"] .hero h1 em{color:#168fd1}
-  body[data-page="home"] .hero .intro{color:#343940}
+  body[data-page="home"] .hero .intro{margin-inline:0;color:#343940}
   body[data-page="home"] .hero-image{display:none}
   body[data-page="home"] .hero-video-mobile{
     position:relative;
