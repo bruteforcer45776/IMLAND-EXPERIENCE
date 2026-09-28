@@ -24,7 +24,7 @@ contactStyles.href='contact.css';
 document.head.append(contactStyles);
 const floatingStyles=document.createElement('link');
 floatingStyles.rel='stylesheet';
-floatingStyles.href='floating-actions.css?v=3';
+floatingStyles.href='floating-actions.css?v=4';
 document.head.append(floatingStyles);
 const authStyles=document.createElement('link');
 authStyles.rel='stylesheet';
@@ -60,7 +60,7 @@ memberMapStyles.href='member-map.css?v=5';
 document.head.append(memberMapStyles);
 const tasteSystem=document.createElement('link');
 tasteSystem.rel='stylesheet';
-tasteSystem.href='taste-system.css?v=9';
+tasteSystem.href='taste-system.css?v=10';
 document.head.append(tasteSystem);
 const page=document.body.dataset.page;
 const abExperiment={id:'header_app_cta_v1',endpoint:'https://wfevttxbbhihapgmcbgh.supabase.co/functions/v1/imland-ab'};
@@ -312,7 +312,33 @@ function renderPage(name){
   const actionMarkup=heroActions[name]?`<div class="page-hero-actions">${heroActions[name]}</div>`:'';
   const imageMarkup=p.image?`<picture><source media="(max-width: 800px)" srcset="${p.mobile||p.image}"><img src="${p.image}" alt=""></picture>`:'';
   const introMarkup=p.intro?`<p>${p.intro}</p>`:'';
-  return `<section class="page-hero${p.image?'':' page-hero-editorial'}">${imageMarkup}<div class="page-hero-wash"></div><div class="page-hero-copy"><p class="eyebrow">${p.index} / ${p.label}</p>${p.title?`<h1>${p.title}</h1>`:''}${introMarkup}${actionMarkup}</div></section><section id="contenuti" class="page-content section-paper"><div id="${name==='radio'?'palinsesto':name==='podcast'||name==='my-podcast'?'programmi':name==='eventi'?'calendario':name==='member'?'rete-member':name==='news'?'notizie':name==='contatti'?'scrivici':name==='faq'?'domande':'pagina'}"></div>${p.body}${extras[name]||''}</section>`;
+  return `<section class="page-hero${p.image?'':' page-hero-editorial'}">${imageMarkup}<div class="page-hero-wash"></div><div class="page-hero-copy"><p class="eyebrow">${p.label}</p>${p.title?`<h1>${p.title}</h1>`:''}${introMarkup}${actionMarkup}</div></section><section id="contenuti" class="page-content section-paper"><div id="${name==='radio'?'palinsesto':name==='podcast'||name==='my-podcast'?'programmi':name==='eventi'?'calendario':name==='member'?'rete-member':name==='news'?'notizie':name==='contatti'?'scrivici':name==='faq'?'domande':'pagina'}"></div>${p.body}${extras[name]||''}</section>`;
+}
+
+function removeEditorialNumbers(root=document){
+  root.querySelectorAll('.section-index').forEach(item=>item.remove());
+  root.querySelectorAll('.story-grid article>span:first-child,.approved-card>span:first-child').forEach(item=>{
+    if(/^0\d$/.test(item.textContent.trim()))item.remove();
+  });
+}
+
+function renderCookieConsent(){
+  return `<aside class="cookie-consent" data-cookie-consent role="dialog" aria-modal="false" aria-labelledby="cookie-title"><div><strong id="cookie-title">La tua privacy su IMLAND</strong><p>Utilizziamo cookie tecnici necessari al funzionamento del sito. Con il tuo consenso possiamo memorizzare anche le preferenze facoltative. Puoi cambiare scelta in qualsiasi momento dalla <a href="cookie.html">Cookie Policy</a>.</p></div><div class="cookie-actions"><button type="button" class="cookie-secondary" data-cookie-choice="necessary">Solo necessari</button><button type="button" class="cookie-primary" data-cookie-choice="all">Accetta tutti</button></div></aside>`;
+}
+
+function initCookieConsent(){
+  const key='imland-cookie-consent';
+  let saved='';
+  try{saved=localStorage.getItem(key)||''}catch{}
+  if(/^(necessary|all)$/.test(saved))return;
+  document.body.insertAdjacentHTML('beforeend',renderCookieConsent());
+  const banner=document.querySelector('[data-cookie-consent]');
+  banner?.querySelectorAll('[data-cookie-choice]').forEach(button=>button.addEventListener('click',()=>{
+    const choice=button.dataset.cookieChoice;
+    try{localStorage.setItem(key,choice);document.cookie=`imland_cookie_consent=${choice}; Max-Age=31536000; Path=/; SameSite=Lax; Secure`}catch{}
+    banner.classList.add('is-closing');
+    banner.addEventListener('animationend',()=>banner.remove(),{once:true});
+  }));
 }
 
 function renderFooter(){return `<footer><div class="footer-brand"><span>IMLAND</span><b>EXPERIENCE</b><p>Dai voce al tuo territorio.</p></div><div><h3>Esplora</h3>${nav.map(([href,label])=>`<a href="${href}">${label}</a>${href==='podcast.html'?'<a href="my-podcast.html">My Podcast</a>':''}`).join('')}<a href="download.html">Scarica l’App</a></div><div><h3>Contatti</h3><a href="mailto:info@imlandradio.com">info@imlandradio.com</a><a href="tel:+393514323003">+39 351 432 3003</a><a href="https://www.instagram.com/imland_radio/">Instagram</a><a href="https://www.facebook.com/imlandradio">Facebook</a></div><div class="legal"><p>IMLAND EXPERIENCE SRL<br>P.IVA 02802650024</p><p>Licenza SIAE 202500000226<br>Licenza SCF 116/5/24</p><p><a href="privacy.html">Privacy</a><br><a href="cookie.html">Cookie</a><br><a href="termini.html">Termini e condizioni</a></p></div><div class="footer-bottom"><span>© 2026 IMLAND EXPERIENCE</span><span>Progetto web BIXONT.IT</span></div></footer>`}
@@ -476,14 +502,13 @@ function homeAdvMarkup(position){
     <div class="adv-viewport"><div class="adv-track">
       ${[1,2,3].map((slide)=>`<article class="adv-slide" aria-hidden="${slide===1?'false':'true'}">
         <div class="adv-signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <div><p>ADV · ${String(slide).padStart(2,'0')} / 03</p><h2>QUESTO SPAZIO PUÒ ESSERE <em>TUO.</em></h2><span>Porta la tua attività dentro IMLAND.</span></div>
+        <div><p>ADV</p><h2>QUESTO SPAZIO PUÒ ESSERE <em>TUO.</em></h2><span>Porta la tua attività dentro IMLAND.</span></div>
         <a href="contatti.html">CONTATTACI <b aria-hidden="true">↗</b></a>
       </article>`).join('')}
     </div></div>
     <div class="adv-controls">
       <button type="button" data-adv-prev aria-label="Slide precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
       <div role="tablist" aria-label="Seleziona slide">${[1,2,3].map((slide)=>`<button type="button" role="tab" data-adv-dot="${slide-1}" aria-label="Slide ${slide}" aria-selected="${slide===1?'true':'false'}"></button>`).join('')}</div>
-      <span><b data-adv-current>01</b> / 03</span>
       <button type="button" data-adv-next aria-label="Slide successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
     </div>
   </section>`;
@@ -498,9 +523,9 @@ function mountHomeAdvBanners(){
   document.querySelector('[data-adv-banner]')?.setAttribute('data-home-adv-mounted','');
   const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('[data-adv-banner]').forEach((banner)=>{
-    const track=banner.querySelector('.adv-track'),slides=[...banner.querySelectorAll('.adv-slide')],dots=[...banner.querySelectorAll('[data-adv-dot]')],current=banner.querySelector('[data-adv-current]');
+    const track=banner.querySelector('.adv-track'),slides=[...banner.querySelectorAll('.adv-slide')],dots=[...banner.querySelectorAll('[data-adv-dot]')];
     let index=0,timer;
-    const show=(next)=>{index=(next+slides.length)%slides.length;track.style.transform=`translateX(-${index*100}%)`;slides.forEach((slide,i)=>slide.setAttribute('aria-hidden',String(i!==index)));dots.forEach((dot,i)=>dot.setAttribute('aria-selected',String(i===index)));current.textContent=String(index+1).padStart(2,'0')};
+    const show=(next)=>{index=(next+slides.length)%slides.length;track.style.transform=`translateX(-${index*100}%)`;slides.forEach((slide,i)=>slide.setAttribute('aria-hidden',String(i!==index)));dots.forEach((dot,i)=>dot.setAttribute('aria-selected',String(i===index)))};
     const stop=()=>clearInterval(timer),start=()=>{if(!reduceMotion){stop();timer=setInterval(()=>show(index+1),5500)}};
     banner.querySelector('[data-adv-prev]').addEventListener('click',()=>{show(index-1);start()});
     banner.querySelector('[data-adv-next]').addEventListener('click',()=>{show(index+1);start()});
@@ -510,8 +535,10 @@ function mountHomeAdvBanners(){
 }
 const advStyles=document.createElement('link');advStyles.rel='stylesheet';advStyles.href='adv-banners.css?v=3';document.head.append(advStyles);
 const approvedContentScript=document.createElement('script');
-approvedContentScript.src='approved-content.js?v=10';
-approvedContentScript.onload=mountHomeAdvBanners;
+approvedContentScript.src='approved-content.js?v=11';
+approvedContentScript.onload=()=>{mountHomeAdvBanners();removeEditorialNumbers()};
 document.body.append(approvedContentScript);
+removeEditorialNumbers();
+initCookieConsent();
 initGlobalAbTest();
 

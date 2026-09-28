@@ -30,6 +30,13 @@ html{background:#f3f2ee}body{background:#f3f2ee;text-rendering:optimizeLegibilit
 /* Native form states informed by shadcn patterns */
 .contact-page{gap:1rem}.contact-form-wrap,.contact-direct,.company-data,.contact-social{border-radius:var(--im-feature);overflow:hidden}.contact-form-wrap{min-height:0}.contact-field{display:flex;flex-direction:column;gap:.5rem}.contact-field label,.newsletter-form>label:first-child{font-size:.72rem;font-weight:700;letter-spacing:.06em}.contact-field :where(input,select,textarea),.newsletter-field input{border-radius:12px;transition:border-color .18s ease,box-shadow .18s ease,background .18s ease}.contact-field :where(input,select,textarea):focus,.newsletter-field input:focus{outline:0;box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 28%,transparent)}.contact-submit,.newsletter-field button{border-radius:999px}.contact-submit:active,.newsletter-field button:active{transform:scale(.985)}
 
+/* Ritmo tipografico globale. */
+:where(.page-content,.approved-content,.content-extension,.legal-copy,.member-callout,.empty-editorial) :where(h1,h2,h3,p){text-wrap:pretty}
+:where(.page-content,.approved-content,.content-extension,.legal-copy,.member-callout,.empty-editorial) :where(h1,h2,h3)+p{margin-top:clamp(.85rem,1.5vw,1.25rem)}
+:where(.page-content,.approved-content,.content-extension,.legal-copy,.member-callout,.empty-editorial) p+p{margin-top:1rem}
+:where(.page-content,.approved-content,.content-extension) :where(h2,h3){margin-bottom:clamp(.7rem,1.2vw,1rem)}
+.radio-listen-icon{color:#fff}
+
 /* Footer and persistent controls */
 body{padding-bottom:0}.page-content,main{scroll-padding-bottom:8rem}footer{padding:clamp(4rem,7vw,7rem) var(--im-gutter) 8.5rem;grid-template-columns:minmax(220px,1.6fr) repeat(3,minmax(140px,1fr));gap:clamp(2rem,5vw,5rem);background:#0b0d11}.footer-brand span{font-size:clamp(2rem,3.5vw,3.7rem);letter-spacing:-.06em}footer>div>a{transition:color .18s ease,transform .18s ease}footer>div>a:hover{color:#fff;transform:translateX(3px)}.player{width:min(680px,calc(100% - 2rem))}.player-dock{border-radius:18px}
 
