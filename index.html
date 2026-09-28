@@ -2,10 +2,10 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="description" content="IMLAND Experience dà voce a imprese, persone ed eccellenze del territorio attraverso radio, podcast, eventi, news e una rete di Member.">
   <title>IMLAND Experience — Radio, podcast, eventi e territorio</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308090b'/%3E%3Cpath d='M12 39V25h7l5 8 5-8h7v14h-7v-7l-5 7-5-7v7z' fill='%23fff'/%3E%3Ccircle cx='47' cy='32' r='8' fill='%232367ff'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="assets/logos/pwa-icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
 <body data-page="home">
   <a class="skip" href="#main">Vai al contenuto</a>
   <header class="topbar">
-    <a class="brand brand-logo brand-experience" href="index.html" aria-label="IMLAND Experience home"><img src="assets/logos/imland-experience.png" alt="IMLAND Experience"></a>
+    <a class="brand brand-logo brand-experience" href="index.html" aria-label="IMLAND Experience home"><img src="assets/logos/imland-experience-full-color.png" alt="IMLAND Experience"></a>
     <nav id="site-menu" aria-label="Navigazione principale">
       <a href="index.html" aria-current="page">Home</a><a href="il-progetto.html">Il Progetto</a><a href="radio.html">Radio</a><span class="nav-parent"><a href="podcast.html">Podcast</a><button type="button" aria-label="Apri sottomenu Podcast" aria-expanded="false">⌄</button><span class="nav-sub"><a href="podcast.html">Podcast</a><a href="my-podcast.html">My Podcast</a></span></span><a href="eventi.html">Eventi</a><a href="member.html">Member</a><a href="news.html">News</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a>
     </nav>
@@ -56,7 +56,7 @@
       <div class="hero-wash"></div>
       <div class="hero-copy">
         <p class="eyebrow">Radio · Podcast · Eventi</p>
-        <h1>Dai voce<br>al tuo <em>territorio</em></h1>
+        <h1><span class="hero-line">Dai voce al</span> <span class="hero-line">tuo <em>territorio!</em></span></h1>
         <p class="intro">Storie e racconti di persone e aziende.<br>Vercelli · Novara · Biella · Verbano Cusio Ossola</p>
         <div class="hero-actions" aria-label="Azioni principali">
           <button class="button primary" type="button" data-play><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"></path></svg>Play Radio</button>
@@ -103,7 +103,7 @@
       </div>
       <div class="radio-previews">
         <a href="radio.html"><img src="assets/radio-programs/bar-in-onda.webp" alt="Bar in Onda" width="800" height="1000" loading="lazy" decoding="async"><span>LUNEDÌ · 18:00</span><h3>Bar in Onda</h3><p>Max Biasu, Maio &amp; Sellino</p></a>
-        <a href="radio.html"><img src="assets/radio-programs/schema-libero.webp" alt="Schema Libero" width="800" height="1000" loading="lazy" decoding="async"><span>MARTEDÌ · 18:00</span><h3>Schema Libero</h3><p>Il Pibe &amp; Paolino</p></a>
+        <a href="radio.html"><img src="assets/radio-programs/se-ci-sei-batti-un-colpo.webp" alt="Se ci sei batti un colpo" width="800" height="1000" loading="lazy" decoding="async"><span>GIOVEDÌ · 18:00</span><h3>Se ci sei batti un colpo</h3><p>Sellino &amp; Alberto Colpo</p></a>
         <a href="radio.html"><img src="assets/radio-programs/musical-box.webp" alt="Musical Box" width="800" height="1000" loading="lazy" decoding="async"><span>MERCOLEDÌ · 18:00</span><h3>Musical Box</h3><p>Celeste &amp; Dodi</p></a>
       </div>
     </section>
@@ -127,7 +127,11 @@
 
     <section class="home-events" id="eventi">
       <div class="home-section-heading"><div><span>EVENTI</span><h2>Le prossime<br><em>date.</em></h2></div><a href="eventi.html">Vedi Eventi →</a></div>
-      <div class="event-empty"><p>CALENDARIO IN AGGIORNAMENTO</p><h3>Appuntamenti presto in arrivo.</h3><p>Pubblicheremo qui soltanto eventi e date confermati.</p><a href="eventi.html">Scopri i format e proponi il tuo evento →</a></div>
+      <div class="event-cards" aria-label="Prossimi eventi in aggiornamento">
+        <article><img src="assets/logos/imland-eventi.svg" alt="" loading="lazy"><span>CALENDARIO IN AGGIORNAMENTO</span><h3>Appuntamenti presto in arrivo.</h3><p>Pubblicheremo qui soltanto eventi e date confermati.</p></article>
+        <article><img src="assets/logos/imland-eventi.svg" alt="" loading="lazy"><span>CALENDARIO IN AGGIORNAMENTO</span><h3>Appuntamenti presto in arrivo.</h3><p>Pubblicheremo qui soltanto eventi e date confermati.</p></article>
+        <article><img src="assets/logos/imland-eventi.svg" alt="" loading="lazy"><span>CALENDARIO IN AGGIORNAMENTO</span><h3>Appuntamenti presto in arrivo.</h3><p>Pubblicheremo qui soltanto eventi e date confermati.</p></article>
+      </div>
     </section>
 
     <section class="home-news" id="news">
@@ -152,7 +156,7 @@
   </section>
 
   <footer>
-    <div class="footer-brand"><span>IMLAND</span><b>EXPERIENCE</b><p>Dai voce al tuo territorio.</p></div>
+    <div class="footer-brand footer-brand-home"><a class="footer-brand-logo" href="index.html" aria-label="Torna alla Home"><img src="assets/logos/imland-experience-full-color.png" alt="IMLAND Experience"></a><p>Dai voce al tuo territorio.</p></div>
     <div><h3>Esplora</h3><a href="il-progetto.html">Il Progetto</a><a href="radio.html">Radio</a><a href="podcast.html">Podcast</a><a href="eventi.html">Eventi</a><a href="member.html">Member</a><a href="news.html">News</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></div>
     <div><h3>Contatti</h3><a href="mailto:info@imlandradio.com">info@imlandradio.com</a><a href="tel:+393514323003">+39 351 432 3003</a><a href="https://www.instagram.com/imland_radio/">Instagram</a><a href="https://www.facebook.com/imlandradio">Facebook</a></div>
     <div class="legal"><p>IMLAND EXPERIENCE SRL<br>P.IVA 02802650024</p><p>Licenza SIAE 202500000226<br>Licenza SCF 116/5/24</p></div>
@@ -165,7 +169,7 @@
     <div class="player-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <a href="https://tunein.com/radio/Imland-Radio-s357176/" target="_blank" rel="noreferrer">APRI ↗</a>
   </div>
-  <script src="podcast-episodes.js?v=2"></script><script src="content-sync.js?v=4"></script><script src="script-v59.js?v=49"></script>
+  <script src="podcast-episodes.js?v=2"></script><script src="content-sync.js?v=4"></script><script src="script-v59.js?v=74"></script>
 
 
 

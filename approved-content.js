@@ -1,5 +1,5 @@
 (()=>{
-const page=document.body.dataset.approvedPage||document.body.dataset.page||'home',css=document.createElement('link');css.rel='stylesheet';css.href='approved-content.css?v=6';document.head.append(css);
+const page=document.body.dataset.approvedPage||document.body.dataset.page||'home',css=document.createElement('link');css.rel='stylesheet';css.href='approved-content.css?v=7';document.head.append(css);
 const card=(t,p,m='',k='')=>`<article class="approved-card ${k}">${m?`<span>${m}</span>`:''}<div><h3>${t}</h3><p>${p}</p></div></article>`;
 const socialCard=(name,description,image,href)=>`<a class="approved-social-card" href="${href}" target="_blank" rel="noreferrer"><figure><img src="${image}" alt="Anteprima originale IMLAND su ${name}" loading="lazy"></figure><div><span>${name}</span><h3>${description}</h3><b>Apri ${name} ↗</b></div></a>`;
 const section=(id,k,t,i,b)=>`<section class="approved-content" id="${id}"><header class="approved-head"><div><p class="approved-kicker">${k}</p><h2>${t}</h2></div><p>${i}</p></header>${b}</section>`;

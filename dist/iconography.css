@@ -1,0 +1,13 @@
+/* Lucide topic icons: crisp white strokes inside the blue markers. */
+.podcast-topic-icon svg{
+  display:block!important;
+  width:1.45rem!important;
+  height:1.45rem!important;
+  overflow:visible;
+  fill:none!important;
+  stroke:#fff!important;
+  stroke-width:2!important;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.podcast-topic-icon svg :is(path,rect,circle,line,polyline){fill:none!important;stroke:#fff!important}

@@ -69,3 +69,22 @@
 .member-directory-copy address{font-size:.78rem;font-style:normal;line-height:1.4;overflow-wrap:anywhere}
 @media(max-width:1080px){.member-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.member-directory{padding:.75rem;border-radius:24px}.member-directory>header{grid-template-columns:1fr;padding:1.1rem .65rem 2rem}.member-directory>header h2{font-size:clamp(2.7rem,14vw,4.4rem)}.member-directory-grid{grid-template-columns:1fr}.member-directory-card{grid-template-columns:5.25rem minmax(0,1fr);min-height:16rem;padding:1rem;border-radius:20px}.member-directory-logo{width:5.25rem;height:5.25rem}}
+
+/* Schede Member: sommario compatto, approfondimento nativo e accessibile. */
+.member-directory-card{display:block;min-height:0;padding:0;overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.member-directory-card>summary{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:1.1rem;padding:1.35rem;cursor:pointer;list-style:none}
+.member-directory-card>summary::-webkit-details-marker{display:none}
+.member-directory-card>summary::marker{content:''}
+.member-directory-card[open]{border-color:#c89e00;background:#fff;box-shadow:0 16px 38px #08090b12}
+.member-directory-sector{display:block;margin:0 0 .45rem;color:#8b7000;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.member-directory-copy>p{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.member-directory-expand{display:inline-flex;align-items:center;justify-content:space-between;gap:.6rem;min-height:44px;margin-top:auto;padding-top:.85rem;color:#090909;font-size:.75rem;font-weight:800;letter-spacing:.04em}
+.member-directory-expand b{display:grid;width:28px;height:28px;place-items:center;border-radius:50%;background:#090909;color:#fff;font-size:1rem;transition:transform .2s ease}
+.member-directory-card[open] .member-directory-expand b{transform:rotate(45deg)}
+.member-directory-details{padding:0 1.35rem 1.35rem;margin-top:-.2rem;border-top:1px solid #09090918}
+.member-directory-details>p{margin:1rem 0;color:#4f514c;font-size:.9rem;line-height:1.55}
+.member-directory-details ul{display:grid;gap:.65rem;margin:0;padding:1rem 0 0;border-top:1px solid #09090918;list-style:none}
+.member-directory-details li span{display:block;margin-bottom:.18rem;color:#8b7000;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.member-directory-details address{font-size:.8rem;font-style:normal;line-height:1.45;overflow-wrap:anywhere}
+.member-directory-card:focus-within{outline:3px solid #f2c300;outline-offset:4px}
+@media(max-width:720px){.member-directory-card>summary{grid-template-columns:5.25rem minmax(0,1fr);gap:.9rem;padding:1rem}.member-directory-details{padding:0 1rem 1rem}}
