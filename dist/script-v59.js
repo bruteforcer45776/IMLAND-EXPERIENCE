@@ -56,7 +56,7 @@ memberDomeStyles.href='member-dome.css?v=4';
 document.head.append(memberDomeStyles);
 const memberMapStyles=document.createElement('link');
 memberMapStyles.rel='stylesheet';
-memberMapStyles.href='member-map.css?v=6';
+memberMapStyles.href='member-map.css?v=7';
 document.head.append(memberMapStyles);
 const tasteSystem=document.createElement('link');
 tasteSystem.rel='stylesheet';

@@ -74,8 +74,8 @@
 .member-directory-card>summary{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:1.1rem;padding:1.35rem;cursor:pointer;list-style:none}
 .member-directory-card>summary::-webkit-details-marker{display:none}
 .member-directory-card>summary::marker{content:''}
-.member-directory-card,.member-directory-card[open]{background:#fff}
-.member-directory-card[open]{border-color:#c89e00;box-shadow:0 16px 38px #08090b12}
+.member-directory-card,.member-directory-card[open]{background:#fff8df}
+.member-directory-card[open]{background:#fff2bd;border-color:#c89e00;box-shadow:0 16px 38px #08090b12}
 .member-directory-sector{display:block;margin:0 0 .45rem;color:#8b7000;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 .member-directory-copy>p{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
 .member-directory-expand{display:inline-flex;align-items:center;justify-content:space-between;gap:.6rem;min-height:44px;margin-top:auto;padding-top:.85rem;color:#090909;font-size:.75rem;font-weight:800;letter-spacing:.04em}
