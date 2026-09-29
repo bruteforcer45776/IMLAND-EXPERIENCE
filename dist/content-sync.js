@@ -12,34 +12,34 @@ window.IMLAND_SYNC_DATA={
       "url": "https://www.newsbiella.it/2026/09/28/leggi-notizia/argomenti/pallavolo/articolo/uyba-rimonta-su-brescia-e-terzo-posto-al-trofeo-citta-di-biella.html"
     },
     {
-      "source": "NewsBiella",
-      "area": "Biella",
+      "source": "Ossola News",
+      "area": "Verbano Cusio Ossola",
       "date": "27 set 2026",
-      "publishedAt": "2026-09-27T18:00:00+0200",
-      "title": "La Biellese vince a Sestri Levante: 2-1 con doppietta di Beltrame",
-      "description": "La Biellese espugna il campo del Sestri Levante nella quinta giornata di Serie D: Beltrame firma la vittoria con una doppietta.",
+      "publishedAt": "2026-09-27T17:07:00+0200",
+      "title": "Tre Gocce d’Oro, produttori ossolani premiati tra i migliori mieli italiani FOTO",
+      "description": "Tre produttori del territorio ossolano ricevono il riconoscimento nell’edizione 2026 del concorso dedicato ai migliori mieli italiani.",
       "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Alberto_Benettin_-_foto_Fassoletto.jpg",
-      "url": "https://www.newsbiella.it/2026/09/27/leggi-notizia/argomenti/calcio-4/articolo/la-biellese-vince-a-sestri-levante-2-1-con-doppietta-di-beltrame.html"
+      "url": "https://www.ossolanews.it/2026/09/27/tutte-le-notizie.html"
     },
     {
-      "source": "NewsBiella",
-      "area": "Cossato",
+      "source": "InfoVercelli24",
+      "area": "Vercelli",
       "date": "26 set 2026",
-      "publishedAt": "2026-09-26T13:00:00+0200",
-      "title": "Cossato, una nuova ambulanza per la Croce Rossa FOTO",
-      "description": "Un nuovo mezzo rafforza i trasporti ospedalieri urgenti e i servizi quotidiani della Croce Rossa sul territorio cossatese.",
+      "publishedAt": "2026-09-26T11:09:00+0200",
+      "title": "Giornate del Patrimonio: le iniziative a Vercelli",
+      "description": "Archivi e mostre della città aprono gratuitamente al pubblico per le Giornate Europee del Patrimonio.",
       "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Newsbiella.it___6__dogville_gardenville_20267_trgew.png",
-      "url": "https://www.newsbiella.it/2026/09/26/leggi-notizia/argomenti/cossato-e-cossatese/articolo/cossato-una-nuova-ambulanza-per-la-croce-rossa-foto.html"
+      "url": "https://www.infovercelli24.it/2026/09/26/mobile/leggi-notizia/argomenti/arte-e-cultura/articolo/giornate-del-patrimonio-le-iniziative-a-vercelli.html"
     },
     {
-      "source": "NewsBiella",
+      "source": "ANSA Piemonte",
       "area": "Piemonte",
       "date": "25 set 2026",
-      "publishedAt": "2026-09-25T16:00:00+0200",
-      "title": "Agroalimentare, nasce PiemonteIS: il marchio che identifica i prodotti delle imprese piemontesi FOTO",
-      "description": "Il nuovo marchio collettivo identifica e valorizza i prodotti agroalimentari delle imprese che producono sul territorio piemontese.",
+      "publishedAt": "2026-09-25T15:52:00+0200",
+      "title": "A Pancalieri con Viverbe protagonista la menta",
+      "description": "Migliaia di visitatori hanno partecipato alla 45ª edizione della manifestazione dedicata a menta piperita, erbe officinali e produzioni vivaistiche.",
       "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Shiftwork_Festival__3_.jpeg",
-      "url": "https://www.newsbiella.it/2026/09/25/leggi-notizia/argomenti/enogastronomia/articolo/agroalimentare-nasce-piemonteis-il-marchio-che-identifica-i-prodotti-delle-imprese-piemontesi-foto.html"
+      "url": "https://www.ansa.it/piemonte/notizie/2026/09/25/a-pancalieri-con-viverbe-protagonista-la-menta_f548c944-f85f-406c-b4be-d50f364b60e1.html"
     },
     {
       "source": "NewsBiella",
