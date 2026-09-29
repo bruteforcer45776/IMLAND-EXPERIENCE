@@ -1,6 +1,46 @@
 window.IMLAND_SYNC_DATA={
-  "generatedAt": "2026-09-24T14:07:02.362Z",
+  "generatedAt": "2026-09-29T00:00:00.000Z",
   "news": [
+    {
+      "source": "NewsBiella",
+      "area": "Biella",
+      "date": "28 set 2026",
+      "publishedAt": "2026-09-28T09:00:00+0200",
+      "title": "UYBA, rimonta su Brescia e terzo posto al Trofeo Città di Biella",
+      "description": "La Laica Cioccolato UYBA Busto Arsizio conquista il terzo posto al Trofeo Città di Biella, superando Brescia 3-1 in rimonta.",
+      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/spb_biella_si_presenta_2026__4_.jpg",
+      "url": "https://www.newsbiella.it/2026/09/28/leggi-notizia/argomenti/pallavolo/articolo/uyba-rimonta-su-brescia-e-terzo-posto-al-trofeo-citta-di-biella.html"
+    },
+    {
+      "source": "NewsBiella",
+      "area": "Biella",
+      "date": "27 set 2026",
+      "publishedAt": "2026-09-27T18:00:00+0200",
+      "title": "La Biellese vince a Sestri Levante: 2-1 con doppietta di Beltrame",
+      "description": "La Biellese espugna il campo del Sestri Levante nella quinta giornata di Serie D: Beltrame firma la vittoria con una doppietta.",
+      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Alberto_Benettin_-_foto_Fassoletto.jpg",
+      "url": "https://www.newsbiella.it/2026/09/27/leggi-notizia/argomenti/calcio-4/articolo/la-biellese-vince-a-sestri-levante-2-1-con-doppietta-di-beltrame.html"
+    },
+    {
+      "source": "NewsBiella",
+      "area": "Cossato",
+      "date": "26 set 2026",
+      "publishedAt": "2026-09-26T13:00:00+0200",
+      "title": "Cossato, una nuova ambulanza per la Croce Rossa FOTO",
+      "description": "Un nuovo mezzo rafforza i trasporti ospedalieri urgenti e i servizi quotidiani della Croce Rossa sul territorio cossatese.",
+      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Newsbiella.it___6__dogville_gardenville_20267_trgew.png",
+      "url": "https://www.newsbiella.it/2026/09/26/leggi-notizia/argomenti/cossato-e-cossatese/articolo/cossato-una-nuova-ambulanza-per-la-croce-rossa-foto.html"
+    },
+    {
+      "source": "NewsBiella",
+      "area": "Piemonte",
+      "date": "25 set 2026",
+      "publishedAt": "2026-09-25T16:00:00+0200",
+      "title": "Agroalimentare, nasce PiemonteIS: il marchio che identifica i prodotti delle imprese piemontesi FOTO",
+      "description": "Il nuovo marchio collettivo identifica e valorizza i prodotti agroalimentari delle imprese che producono sul territorio piemontese.",
+      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Shiftwork_Festival__3_.jpeg",
+      "url": "https://www.newsbiella.it/2026/09/25/leggi-notizia/argomenti/enogastronomia/articolo/agroalimentare-nasce-piemonteis-il-marchio-che-identifica-i-prodotti-delle-imprese-piemontesi-foto.html"
+    },
     {
       "source": "NewsBiella",
       "area": "Piemonte",
