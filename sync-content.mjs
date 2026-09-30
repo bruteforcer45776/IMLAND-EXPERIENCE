@@ -18,6 +18,17 @@ const negativeNews=/omicid|uccis|morto|morte|incidente|arrest|denunc|aggress|acc
 const positiveNews=/cultur|evento|festival|mostra|musica|teatro|libro|arte|premio|success|inaugur|ricerca|innovaz|impres|solidar|inclus|turismo|territorio|sport|scuol|universit|giovani|volontari|tradizion|enogastr|\bnatura\b|ambiente|restaur|progetto|eccellen|festa|benessere|comunit|shopping|muse/i;
 const isPositive=item=>{const text=`${item?.title||''} ${item?.description||''}`;return !negativeNews.test(text)&&positiveNews.test(text)};
 const sourceName=url=>{const host=new URL(url).hostname.replace(/^www\./,'');return ({'ansa.it':'ANSA Piemonte','videoembed.ansa.it':'ANSA Piemonte','newsbiella.it':'NewsBiella','infovercelli24.it':'InfoVercelli24','primanovara.it':'Prima Novara','lopinionista.it':"L'Opinionista"})[host]||host};
+const isArticleUrl=url=>{try{const path=new URL(url).pathname;return !/\/(?:tutte-le-notizie|attualita)\/?$/i.test(path)}catch{return false}};
+async function verifyArticleMetadata(item){
+  if(!item?.url||!isArticleUrl(item.url))return null;
+  try{
+    const html=await fetch(item.url,{headers:{accept:'text/html','user-agent':'IMLAND news verifier'},signal:AbortSignal.timeout(12000)}).then(response=>response.ok?response.text():'');
+    const image=metaValue(html,'og:image');
+    if(!image)return null;
+    const title=metaValue(html,'og:title').replace(/\s*-\s*Notizie\s*[-|].*$/i,'');
+    return {...item,title:title||item.title,description:metaValue(html,'og:description')||item.description,image:absolute(image)};
+  }catch{return null}
+}
 
 async function latestPositiveNews(){
   const recentDays=Array.from({length:4},(_,offset)=>{const date=new Date();date.setDate(date.getDate()-offset);const year=date.getFullYear(),month=String(date.getMonth()+1).padStart(2,'0'),day=String(date.getDate()).padStart(2,'0');return `${year}/${month}/${day}`});
@@ -116,7 +127,7 @@ let news=previous.news||[],events=previous.events||[],members=previous.memberNew
 const availability={news:'fallback',events:'fallback',memberNews:'fallback'};
 try{
   const html=await page('/news');
-  news=territoryNews(html).filter(isPositive).slice(0,18);
+  news=(await Promise.all(territoryNews(html).filter(isPositive).slice(0,18).map(verifyArticleMetadata))).filter(Boolean);
   members=memberNews(html).slice(0,12);
   availability.news=news.length?'live':'empty';
   availability.memberNews=members.length?'live':'empty';

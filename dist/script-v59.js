@@ -139,7 +139,10 @@ const fallbackTerritoryNews=[
   ['InfoVercelli24','Vercelli','19 set 2026','Torna il Fora Tut, festa dello shopping all’aperto','Commercio di prossimità, musica e socialità animano il centro storico di Vercelli.','https://www.infovercelli24.it/fileadmin/archivio/infovercelli24/notizie/2026/09/19/fora-tut.jpg','https://www.infovercelli24.it/2026/09/19/leggi-notizia/argomenti/attualita-7/articolo/torna-il-fora-tut-festa-dello-shopping-allaperto.html'],
   ['ANSA Piemonte','Torino','17 set 2026','Artissima, all’Oval Lingotto 183 gallerie da 35 Paesi','La fiera internazionale d’arte contemporanea torna a Torino dal 30 ottobre al 1° novembre.','https://www.ansa.it/webimages/news_base/2026/9/17/91913e1cd69a4bf469215e51a63f9d76.jpg','https://www.ansa.it/piemonte/notizie/2026/09/17/artissima-alloval-lingotto-dal-30-ottobre-all1-novembre-183-gallerie-da-35-paesi_80604737-142b-415d-8e9e-b616b6e59f99.html'],
 ];
-const syncedTerritoryNews=(window.IMLAND_SYNC_DATA?.news||[]).map(item=>[
+const syncedTerritoryNews=(window.IMLAND_SYNC_DATA?.news||[]).filter(item=>{
+  const image=String(item?.image||''),url=String(item?.url||'');
+  return !(/newsbiella\.it/i.test(image)&&!/(?:newsbiella\.it)/i.test(url))&&!/\/tutte-le-notizie\.html(?:$|\?)/i.test(url);
+}).map(item=>[
   item.source,item.area,item.date,item.title,item.description,item.image,item.url
 ]);
 const territoryNews=syncedTerritoryNews.length?syncedTerritoryNews:fallbackTerritoryNews;
