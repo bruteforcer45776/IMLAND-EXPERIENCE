@@ -110,9 +110,7 @@ const podcastFeeds=[
   ['Carta Canta','Il podcast che legge tra le righe.',21,'https://podcast.imlandradio.it/files/images/imland-cartacanta-1783004855.jpg','Dobbiamo per forza sapere dove stiamo andando?','https://dts.podtrac.com/redirect.mp3/podcast.imlandradio.it/channel-files/imland-cartacanta/imland-cartacanta_10-09-2026_00-00.mp3'],
   ['Casual Nerd Stories','Storie di persone raccontate attraverso i videogiochi.',1,'https://podcast.imlandradio.it/files/images/imland-Casualnerdstories-1788713184.png','Il primo seme','https://dts.podtrac.com/redirect.mp3/podcast.imlandradio.it/channel-files/imland-Casualnerdstories/imland-Casualnerdstories_07-09-2026_00-00.mp3'],
   ['Grigliata Mista','Storia, cultura, natura e appuntamenti del territorio.',4,'https://podcast.imlandradio.it/files/images/imland-grigliata-1783005012.jpg','R&S Eventi','https://dts.podtrac.com/redirect.mp3/podcast.imlandradio.it/channel-files/imland-grigliata/imland-grigliata_27-10-2025_18-00.mp3'],
-  ['IMWeekend','Il podcast che racconta la notte senza mappe né orologi.',2,'https://podcast.imlandradio.it/files/images/imland-imweekend-1759325946.jpg','Speciale IMParty','https://dts.podtrac.com/redirect.mp3/podcast.imlandradio.it/channel-files/imland-imweekend/imland-imweekend_02-11-2025_00-00.mp3'],
   ["Istruzioni per l’uso",'Professionisti e conoscenza al servizio della quotidianità.',17,'https://podcast.imlandradio.it/files/images/imland-istruzioni-1783005201.jpg','BGS — Antincendio','https://dts.podtrac.com/redirect.mp3/podcast.imlandradio.it/channel-files/imland-istruzioni/imland-istruzioni_24-08-2026_00-00.mp3'],
-  ['Schema Libero','Domande schiette e strumenti pratici per la vita reale.',1,'https://podcast.imlandradio.it/files/images/imland-schemalibero-1783005412.jpg','Sébastien Frey','https://dts.podtrac.com/redirect.mp3/podcast.imlandradio.it/channel-files/imland-schemalibero/imland-schemalibero_17-03-2025_09-00.mp3'],
   ['Stuzzicaziende','Storie autentiche di impresa, energia e territorio.',14,'https://podcast.imlandradio.it/files/images/imland-stuzzicaziende-1759327701.jpg','OSM Novara Vercelli','https://dts.podtrac.com/redirect.mp3/podcast.imlandradio.it/channel-files/imland-stuzzicaziende/imland-stuzzicaziende_29-04-2026_00-00.mp3'],
   ['Terra di Diamanti','I talenti e le eccellenze che danno lustro alla comunità.',12,'https://podcast.imlandradio.it/files/images/imland-diamanti-1759328186.jpg','Freeride Paradise Contest Alagna','https://dts.podtrac.com/redirect.mp3/podcast.imlandradio.it/channel-files/imland-diamanti/imland-diamanti_20-04-2026_00-00.mp3']
 ];
@@ -130,6 +128,7 @@ const syncedPodcastCatalog=typeof podcastEpisodeCatalog!=='undefined'?podcastEpi
 });
 const radioPrograms=[
   ['Bar in Onda','Lunedì','18:00–19:00','Max Biasu, Maio & Sellino','Talk · musica · sport · chiacchiere','assets/radio-programs/bar-in-onda.webp'],
+  ['Schema Libero','Martedì','18:00–19:00','Il Pibe & Paolino','Talk radio','assets/radio-programs/schema-libero.webp'],
   ['Musical Box','Mercoledì','18:00–19:00','Celeste & Dodi','Programma musicale','assets/radio-programs/musical-box.webp'],
   ['Se ci sei batti un colpo','Giovedì','18:00–19:00','Sellino & Alberto Colpo','Intrattenimento e musica','assets/radio-programs/se-ci-sei-batti-un-colpo.webp'],
   ['IMLAND Charts','Venerdì','18:00–19:00','David Deluxe','Classifica musicale','assets/radio-programs/imland-charts.webp']
@@ -238,7 +237,7 @@ if(page==='contatti'){
   if(hours)hours.innerHTML='<span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg></span><span>Orari di apertura dello studio</span><strong>Lunedì–Venerdì</strong><small>09:00–19:00 · Vercelli e provincia · Piemonte nord-orientale</small>';
 }
 if(page==='radio')refineRadioPage();
-if(page==='podcast'){refinePodcastPage();applyLucideTopicIcons()}
+if(page==='podcast'){refinePodcastPage();applyLucideTopicIcons();document.querySelectorAll('.podcast-suggestion').forEach(item=>{item.textContent=item.textContent.replace(' · IMWeekend','')})}
 function applyLucideTopicIcons(){
   const icon=(body)=>`<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
   const icons=[
