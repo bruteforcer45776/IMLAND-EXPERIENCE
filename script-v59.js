@@ -24,7 +24,7 @@ contactStyles.href='contact.css';
 document.head.append(contactStyles);
 const floatingStyles=document.createElement('link');
 floatingStyles.rel='stylesheet';
-floatingStyles.href='floating-actions.css?v=4';
+floatingStyles.href='floating-actions.css?v=5';
 document.head.append(floatingStyles);
 const authStyles=document.createElement('link');
 authStyles.rel='stylesheet';
@@ -241,6 +241,8 @@ if(page==='home')document.querySelector('.cta')?.insertAdjacentHTML('beforebegin
 if(page==='member')document.querySelector('.page-content')?.insertAdjacentHTML('beforeend',officialMemberMapMarkup()+reviewsBentoMarkup());
 if(page==='progetto'){const content=document.querySelector('.page-content'),legacyTeam=content?.querySelector(':scope>.member-callout:last-child');legacyTeam?.remove();content?.insertAdjacentHTML('beforeend',teamMarkup())}
 if(page!=='auth')document.body.insertAdjacentHTML('beforeend',renderFloatingActions());
+const floatingActions=document.querySelector('.floating-actions'),pageFooter=document.querySelector('footer');
+if(floatingActions&&pageFooter&&'IntersectionObserver'in window)new IntersectionObserver(([entry])=>floatingActions.classList.toggle('is-footer-near',entry.isIntersecting),{rootMargin:'0px 0px 132px',threshold:0}).observe(pageFooter);
 if(page==='contatti'){
   enhanceContactIcons();
   const hours=document.querySelector('.studio-hours');

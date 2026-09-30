@@ -1,5 +1,6 @@
 .floating-actions{position:fixed;z-index:70;inset:auto 0 7rem;display:flex;justify-content:space-between;padding:0 clamp(.8rem,2vw,1.5rem);pointer-events:none}
 .floating-action{pointer-events:auto;width:58px;height:58px;min-width:58px;min-height:58px;border:0;border-radius:50%;display:grid;place-items:center;padding:0;color:#fff;box-shadow:0 12px 32px #0003;cursor:pointer;transition:transform .2s ease,filter .2s ease}
+.floating-actions{transition:opacity .2s ease,transform .2s ease}.floating-actions.is-footer-near{opacity:0;pointer-events:none;transform:translateY(1rem)}
 .floating-action:hover{transform:translateY(-3px);filter:brightness(1.06)}.floating-action:focus-visible{outline:3px solid #fff;outline-offset:3px}.floating-action svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .chatbot-toggle{background:#08090b}.whatsapp-action{background:#18a957}
 .floating-action>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
