@@ -293,6 +293,10 @@ function setMobileHeroLines(){
 }
 
 function hydrateSyncedContent(){
+  if(page==='radio'){
+    const icons=['<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v10H5zM9 19h6M12 15v4"/><path d="m10 8 5 2.5-5 2.5V8Z"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 6h4M11 18h2"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h16M7 18v-5a5 5 0 0 1 10 0v5M9 21h6"/><path d="M12 3v3M7.5 5.5l2 2M16.5 5.5l-2 2"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15h16l-1.5-6H7.2L4 15Z"/><path d="M3 15v3h2M21 15v3h-2M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM17 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg>'];
+    document.querySelectorAll('.page-content>.story-grid:first-of-type>article').forEach((article,index)=>{if(!article.querySelector('.radio-listen-icon')&&icons[index])article.insertAdjacentHTML('afterbegin',`<span class="radio-listen-icon">${icons[index]}</span>`)});
+  }
   if(page==='home'){
     document.querySelectorAll('.podcast-previews>a').forEach((card,index)=>{
       const feed=podcastFeeds[index];
