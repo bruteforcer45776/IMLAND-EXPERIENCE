@@ -101,13 +101,16 @@ body[data-page="home"] .event-cards article{
   border-radius:18px;
   background:#fff;
 }
-body[data-page="home"] .event-cards img{
+body[data-page="home"] .event-card-day{
+  display:grid;
+  place-items:center;
   width:100%;
-  height:auto;
   aspect-ratio:16/9;
-  padding:clamp(2rem,4vw,3.25rem);
   background:#effaf3;
-  object-fit:contain;
+  color:#167846;
+  font:700 clamp(4rem,9vw,7.5rem)/1 Space Grotesk,sans-serif;
+  letter-spacing:-.08em;
+  font-variant-numeric:tabular-nums;
 }
 body[data-page="home"] .event-cards :is(span,h3,p){margin-inline:1.25rem}
 body[data-page="home"] .event-cards span{margin-top:1.15rem;color:#167846;font-size:.72rem;font-weight:700;letter-spacing:.08em}
