@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# IMLAND pubblica contenuti editoriali accessibili anche ai crawler AI.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
 Sitemap: https://www.imlandradio.it/sitemap.xml
