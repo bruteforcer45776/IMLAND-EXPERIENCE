@@ -15,7 +15,7 @@ window.IMLAND_MEMBER_DETAILS = {
     addresses: [{ label: "Sede", address: "Corso Vercelli 5, 13045 Gattinara (VC)", coordinates: [8.3710153, 45.6011478], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Cooperativa Alla Fonte": {
-    description: "Cooperativa sociale attiva nei servizi alla persona e alla comunità.",
+    description: "Cooperativa sociale, supermercato di prodotti territoriali specifici e ristorazione con prodotti freschi a km zero.",
     addresses: [{ label: "Sede verificata", address: "Via Privata La Granda 7, 28077 Prato Sesia (NO)" }],
   },
   "Immobiliare Ponti": {
@@ -36,7 +36,7 @@ window.IMLAND_MEMBER_DETAILS = {
   },
   "Class Luxury Beauty PMU": { description: "Centro beauty specializzato in trucco permanente e trattamenti estetici.", addresses: updating },
   "Andrea Todaro — Consulente": {
-    description: "Consulenza aziendale e supporto allo sviluppo organizzativo delle imprese.",
+    description: "Consulente finanziario per aziende e supporto organizzativo-finanziario per privati.",
     addresses: [{ label: "Sede", address: "Via Torino 10, 13868 Villa del Bosco (BI)", coordinates: [8.2848997, 45.6172541], coordinatePrecision: "civic", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Sesia Soft": {
@@ -48,7 +48,7 @@ window.IMLAND_MEMBER_DETAILS = {
     addresses: [{ label: "Sede", address: "Via Tosalli 56, 28073 Fara Novarese (NO)", coordinates: [8.4480089, 45.5652668], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Bo.S.Co Gattinara": {
-    description: "Attività di ristorazione e ospitalità a Gattinara.",
+    description: "Cancelli, zanzariere, serrande e lavorazioni in metallo per recinzioni.",
     addresses: [{ label: "Sede", address: "Via Giuseppe Verdi 17, 13045 Gattinara (VC)", coordinates: [8.3729606, 45.6084852], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Sais Compensati": {
@@ -56,11 +56,11 @@ window.IMLAND_MEMBER_DETAILS = {
     addresses: [{ label: "Sede", address: "Via Dante Alighieri 60, 13045 Gattinara (VC)", coordinates: [8.3758154, 45.6082088], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Barbi Green": {
-    description: "Soluzioni e servizi per il verde e la sostenibilità ambientale.",
+    description: "Installazione e progettazione di giardini con erba artificiale.",
     addresses: [{ label: "Sede", address: "Via Papa Giovanni XXIII 33, 28074 Ghemme (NO)", coordinates: [8.4137021, 45.6071143], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "BGS Srl": {
-    description: "Azienda di servizi per imprese e attività del territorio.",
+    description: "Sicurezza sul lavoro e antincendio per le aziende.",
     addresses: [{ label: "Sede", address: "Via Novara 506, 28078 Romagnano Sesia (NO)", coordinates: [8.3840785, 45.6332859], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Ai 3 Calici": {
@@ -74,7 +74,7 @@ window.IMLAND_MEMBER_DETAILS = {
       { label: "Sede legale", address: "Viale Carlo Fassò 3, 13011 Borgosesia (VC)", coordinates: [8.2781006, 45.7141404], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" },
     ],
   },
-  "L'Orizzo — SOS Genitori": { description: "Progetto educativo e di supporto rivolto a genitori e famiglie.", addresses: updating },
+  "CARLA LORIZZO": { description: "Progetto educativo e di supporto rivolto a genitori e famiglie.", addresses: updating },
   "Magnolia Ristorante Gattinara": {
     description: "Ristorante a Gattinara dedicato alla cucina e all’ospitalità.",
     addresses: [{ label: "Sede", address: "Corso Valsesia 116, 13045 Gattinara (VC)", coordinates: [8.3709967, 45.6164313], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
@@ -84,7 +84,7 @@ window.IMLAND_MEMBER_DETAILS = {
     addresses: [{ label: "Sede", address: "Via Novara 17, 28074 Ghemme (NO)", coordinates: [8.4236788, 45.5952294], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   Motorhouse: {
-    description: "Concessionaria e servizi dedicati al settore automobilistico.",
+    description: "Concessionaria e servizi dedicati al settore della revisione.",
     addresses: [{ label: "Sede", address: "SS Valsesia/SP594 n. 24, 13035 Lenta (VC)", coordinates: [8.3809812, 45.55223], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Monterosa Immobiliare": {
@@ -106,9 +106,9 @@ window.IMLAND_MEMBER_DETAILS = {
     description: "Realizzazione e manutenzione di tetti e coperture per l’edilizia.",
     addresses: [{ label: "Sede", address: "Via Galileo Ferraris 11, 13045 Gattinara (VC)", coordinates: [8.3728293, 45.6186124], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
-  "CP Studio Tecnico": { description: "Studio tecnico per progettazione e consulenza professionale.", addresses: updating },
-  "Crolla Telecom": {
-    description: "Sistemi di telecomunicazione e soluzioni tecnologiche per imprese.",
+  "CP Studio": { description: "Studio di progettazione e consulenza professionale.", addresses: updating },
+  "Crolla Sistemi": {
+    description: "Sistemi e soluzioni tecnologiche per imprese.",
     addresses: [{ label: "Sede", address: "Via Martiri delle Foibe 27, 28024 Gozzano (NO)", coordinates: [8.4370971, 45.7306222], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Parafarmacia San Rocco": {
@@ -119,7 +119,7 @@ window.IMLAND_MEMBER_DETAILS = {
     description: "Attività di servizi per imprese e clienti del territorio.",
     addresses: [{ label: "Sede", address: "Corso Vercelli 197, 13011 Borgosesia (VC)", coordinates: [8.288122, 45.7056248], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
-  "CIS Spare Parts": {
+  "CIS Spareparts": {
     description: "Fornitura di ricambi e componenti per applicazioni industriali.",
     addresses: [{ label: "Sede", address: "Via Don Signini 27/A, 28010 Briga Novarese (NO)", coordinates: [8.454088, 45.7172684], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
@@ -128,7 +128,7 @@ window.IMLAND_MEMBER_DETAILS = {
     addresses: [{ label: "Sede", address: "Viale Roma 15, 13045 Gattinara (VC)", coordinates: [8.3653804, 45.6134672], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   Modularee: {
-    description: "Progettazione di arredi e soluzioni modulari per gli spazi.",
+    description: "Progettazione e posa di parquet e mobili di altissimo livello.",
     addresses: [{ label: "Sede", address: "Via Roma 63, 28073 Fara Novarese (NO)", coordinates: [8.4423609, 45.5450378], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   Barberi: {
@@ -138,17 +138,17 @@ window.IMLAND_MEMBER_DETAILS = {
       { label: "Sede logistica", address: "Via Arturo Biella 15, 28075 Grignasco (NO)", coordinates: [8.3262122, 45.6857905], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" },
     ],
   },
-  "RS Eventi": { description: "Organizzazione e produzione di eventi.", addresses: updating },
+  "R&S Eventi": { description: "Organizzazione e produzione di eventi.", addresses: updating },
   Immobilsesia: {
     description: "Agenzia immobiliare attiva nella compravendita e locazione di immobili.",
     addresses: [{ label: "Sede", address: "Piazza Martiri 10, 13011 Borgosesia (VC)", coordinates: [8.2772936, 45.7165696], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
-  "Motel Piranha": {
+  "Motel HOTEL Piranha": {
     description: "Struttura ricettiva per soggiorni e ospitalità.",
     addresses: [{ label: "Sede", address: "SR11 Novara–Vercelli, 28060 Orfengo di Casalino (NO)", coordinates: [8.5112407, 45.3949541], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "Gozzi Arte": {
-    description: "Galleria e attività dedicata all’arte.",
+    description: "Negozio di oreficeria, orologeria e oggetti d’arte.",
     addresses: [{ label: "Sede", address: "Corso Garibaldi 82, 13045 Gattinara (VC)", coordinates: [8.3572837, 45.6138002], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
   },
   "AG Autotrasporti": {
@@ -159,10 +159,7 @@ window.IMLAND_MEMBER_DETAILS = {
     description: "Consulenza aziendale, organizzazione e sviluppo delle imprese.",
     addresses: [{ label: "Sede Novara e VCO", address: "Via Milano 84, 28041 Arona (NO)", coordinates: [8.5600511, 45.7517976], coordinatePrecision: "civic", coordinateSource: "OpenStreetMap Nominatim" }],
   },
-  "MGG — Magrega Padel": {
-    description: "Centro sportivo dedicato al padel.",
-    addresses: [{ label: "Sede", address: "Piazza Vittime di Bologna, angolo Via San Felice, 13030 Ghislarengo (VC)", coordinates: [8.3845807, 45.5294904], coordinatePrecision: "street", coordinateSource: "OpenStreetMap Nominatim" }],
-  },
-  "Agricola La Quercia": { description: "Azienda agricola e produzione del territorio.", addresses: updating },
+  "La Quercia": { description: "Azienda agricola e ristorante con prodotti tipici locali.", addresses: updating },
+  "STO.RE 17": { description: "Informazioni in aggiornamento.", addresses: updating },
 };
 
