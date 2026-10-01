@@ -1,4 +1,4 @@
-const CACHE_NAME = 'imland-static-v20';
+const CACHE_NAME = 'imland-static-v21';
 const PRECACHE = [
   '/',
   '/index.html',
@@ -40,6 +40,8 @@ const PRECACHE = [
   '/auth-client.js',
   '/assets/logos/imland-experience.png',
   '/assets/logos/pwa-icon.svg',
+  '/assets/logos/pwa-icon-192.png',
+  '/assets/logos/pwa-icon-512.png',
   '/manifest.webmanifest'
 ];
 

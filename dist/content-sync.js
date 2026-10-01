@@ -1,165 +1,105 @@
 window.IMLAND_SYNC_DATA={
-  "generatedAt": "2026-09-29T00:00:00.000Z",
+  "generatedAt": "2026-10-01T11:55:56.444Z",
   "news": [
     {
-      "source": "NewsBiella",
-      "area": "Biella",
-      "date": "28 set 2026",
-      "publishedAt": "2026-09-28T09:00:00+0200",
-      "title": "UYBA, rimonta su Brescia e terzo posto al Trofeo Città di Biella",
-      "description": "La Laica Cioccolato UYBA Busto Arsizio conquista il terzo posto al Trofeo Città di Biella, superando Brescia 3-1 in rimonta.",
-      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/spb_biella_si_presenta_2026__4_.jpg",
-      "url": "https://www.newsbiella.it/2026/09/28/leggi-notizia/argomenti/pallavolo/articolo/uyba-rimonta-su-brescia-e-terzo-posto-al-trofeo-citta-di-biella.html"
-    },
-    {
-      "source": "Ossola News",
-      "area": "Verbano Cusio Ossola",
-      "date": "27 set 2026",
-      "publishedAt": "2026-09-27T17:07:00+0200",
-      "title": "Tre Gocce d’Oro, produttori ossolani premiati tra i migliori mieli italiani FOTO",
-      "description": "Tre produttori del territorio ossolano ricevono il riconoscimento nell’edizione 2026 del concorso dedicato ai migliori mieli italiani.",
-      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Alberto_Benettin_-_foto_Fassoletto.jpg",
-      "url": "https://www.ossolanews.it/2026/09/27/tutte-le-notizie.html"
-    },
-    {
-      "source": "InfoVercelli24",
-      "area": "Vercelli",
-      "date": "26 set 2026",
-      "publishedAt": "2026-09-26T11:09:00+0200",
-      "title": "Giornate del Patrimonio: le iniziative a Vercelli",
-      "description": "Archivi e mostre della città aprono gratuitamente al pubblico per le Giornate Europee del Patrimonio.",
-      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Newsbiella.it___6__dogville_gardenville_20267_trgew.png",
-      "url": "https://www.infovercelli24.it/2026/09/26/mobile/leggi-notizia/argomenti/arte-e-cultura/articolo/giornate-del-patrimonio-le-iniziative-a-vercelli.html"
+      "source": "ANSA Piemonte",
+      "area": "Piemonte",
+      "date": "1 ott 2026",
+      "publishedAt": "2026-10-01T13:41:00+0200",
+      "title": "Da Spiderman a The Odissey, Hollywood a Torino per View Conference",
+      "description": "Il premio Oscar Andrew Jackson e il candidato all&#039;Oscar Jerome Chen che presentano, rispettivamente gli effetti visivi di &#039;The Odyssey&#039; di Christopher Nolan e di &#039;Spider-Man: Brand New Day&#039;, il regista e sceneggiatore vincitore di due Oscar Brad Bird, che ... (ANSA)",
+      "image": "https://www.ansa.it/webimages/img_1280x720/2026/10/1/8da2089d8eb5954453203131759b4852.jpg",
+      "url": "https://www.ansa.it/piemonte/notizie/2026/10/01/da-spiderman-a-the-odissey-hollywood-a-torino-per-view-conference_c1cd4ca8-2a7b-4228-b520-8a021c7190e5.html"
     },
     {
       "source": "ANSA Piemonte",
       "area": "Piemonte",
-      "date": "25 set 2026",
-      "publishedAt": "2026-09-25T15:52:00+0200",
-      "title": "A Pancalieri con Viverbe protagonista la menta",
-      "description": "Migliaia di visitatori hanno partecipato alla 45ª edizione della manifestazione dedicata a menta piperita, erbe officinali e produzioni vivaistiche.",
-      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Shiftwork_Festival__3_.jpeg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/25/a-pancalieri-con-viverbe-protagonista-la-menta_f548c944-f85f-406c-b4be-d50f364b60e1.html"
+      "date": "1 ott 2026",
+      "publishedAt": "2026-10-01T13:30:00+0200",
+      "title": "Altea Green Power, via libera dalla Regione Puglia per un progetto fotovoltaico",
+      "description": "Altea Green Power , azienda attiva nello sviluppo di progetti e nella realizzazione di impianti di &#034;green energy&#034;, ha ottenuto dalla Regione Puglia l&#039;autorizzazione al progetto di un impianto fotovoltaico a terra della potenza complessiva di circa 96,8 MW ... (ANSA)",
+      "image": "https://www.ansa.it/webimages/img_1280x720/2026/10/1/9e0dadae9401b2eb76148161a48c0514.jpg",
+      "url": "https://www.ansa.it/piemonte/notizie/2026/10/01/altea-green-power-via-libera-dalla-regione-puglia-per-un-progetto_6b128614-ae52-4bbb-b71f-da3dc062dbfc.html"
     },
     {
       "source": "NewsBiella",
       "area": "Piemonte",
-      "date": "24 set 2026",
-      "publishedAt": "2026-09-24T16:00:00+0200",
-      "title": "La Scuola Pallavolo Biellese presenta la nuova stagione: le parole dei protagonisti FOTO e VIDEO",
-      "description": "Tra i presenti figuravano giocatori, allenatori, dirigenti, genitori e alcune autorità del territorio.",
-      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/spb_biella_si_presenta_2026__4_.jpg",
-      "url": "https://www.newsbiella.it/2026/09/24/leggi-notizia/argomenti/pallavolo/articolo/la-scuola-pallavolo-biellese-presenta-la-nuova-stagione-le-parole-dei-protagonisti-foto-e-video.html"
-    },
-    {
-      "source": "ANSA Piemonte",
-      "area": "Piemonte",
-      "date": "24 set 2026",
-      "publishedAt": "2026-09-24T15:49:00+0200",
-      "title": "Mukiibi (Slow food international), cibo può essere forza di trasformazione",
-      "description": "&#034;Soprattutto siamo qui perché crediamo che il cibo possa essere una forza di trasformazione. Il cambiamento richiede fiducia e unità. Fiducia nelle nostre comunità. Unità oltre i confini. (ANSA)",
-      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/24/7ef90939b481a871d401c727f3467fcb.jpg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/24/mukiibi-slow-food-international-cibo-puo-essere-forza-di-trasformazione_671b46ca-1f12-4d1d-a5b9-08bd0170ab50.html"
+      "date": "1 ott 2026",
+      "publishedAt": "2026-10-01T12:40:00+0200",
+      "title": "Bike sharing a Biella, l’appello della Lega contro vandalismo e abusi: \"Si risalga ai responsabili tramite le app\"",
+      "description": "La Lega Biella interviene sui recenti casi di vandalismo e abusi dell'utilizzo delle bici del progetto di bike sharing inaugurato nel 2024, chiedendo che si risalga ai responsabili tramite l'app utilizzata per registrarsi e...",
+      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/10/bike_sharing_vandali_2206.jpeg",
+      "url": "https://www.newsbiella.it/2026/10/01/leggi-notizia/argomenti/cronaca-5/articolo/bike-sharing-a-biella-lappello-della-lega-contro-vandalismo-e-abusi-si-risalga-ai-responsabili.html"
     },
     {
       "source": "NewsBiella",
       "area": "Piemonte",
-      "date": "24 set 2026",
-      "publishedAt": "2026-09-24T15:47:00+0200",
-      "title": "Rugby, Coppa Italia 2026/2027: Biella debutta sabato alla Cittadella del Rugby contro Fiamme Oro",
-      "description": "È finalmente tempo di scendere in campo. Sabato prende ufficialmente il via la stagione sportiva 2026/2027 per Biella Rugby, che inaugura la nuova annata davanti al proprio pubblico, alla Cittadella del Rugby di...",
-      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Alberto_Benettin_-_foto_Fassoletto.jpg",
-      "url": "https://www.newsbiella.it/2026/09/24/leggi-notizia/argomenti/sport-6/articolo/rugby-coppa-italia-20262027-biella-debutta-sabato-alla-cittadella-del-rugby-contro-fiamme-oro.html"
+      "date": "1 ott 2026",
+      "publishedAt": "2026-10-01T09:43:00+0200",
+      "title": "Crono Trail Burcina, 3,8 km di corsa. La tua iscrizione è una donazione",
+      "description": "Torna la Crono Trail Burcina, alla terza edizione, un evento che unisce agonisti e non. Il percorso è di 3,8 km con un dislivello di 225 metri. Gli atleti partiranno singolarmente ogni 30 secondi. L'appuntamento è sabato 3...",
+      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2025/07/crono_trail_burcina_2025__15_.jpg",
+      "url": "https://www.newsbiella.it/2026/10/01/leggi-notizia/argomenti/sport-6/articolo/crono-trail-burcina-38-km-di-corsa-la-tua-iscrizione-e-una-donazione.html"
     },
     {
       "source": "ANSA Piemonte",
       "area": "Piemonte",
-      "date": "24 set 2026",
-      "publishedAt": "2026-09-24T13:06:00+0200",
-      "title": "Art Bonus, il Piemonte quarto in Italia: in dieci anni raccolti 157 milioni",
-      "description": "Il Piemonte è la quarta regione italiana per erogazioni liberali che usufruiscono dell&#039;Art Bonus, il credito d&#039;imposta introdotto per incentivare il sostegno al patrimonio culturale. (ANSA)",
-      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/24/2eeab4896abb2349cb45e3d3b6e6adf6.jpg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/24/art-bonus-il-piemonte-quarto-in-italia-in-dieci-anni-raccolti-157-milioni_8c9b68dd-42ca-4999-a803-004b6a2cf6ba.html"
+      "date": "30 set 2026",
+      "publishedAt": "2026-09-30T18:26:00+0200",
+      "title": "Benessere e welfare parte integrante della casa del futuro",
+      "description": "Design, qualità della vita e nuovi modelli abitativi: il benessere diventa parte integrante della casa del futuro, con spazi multifunzionali che integrano esigenze legate al lavoro e al tempo libero e una attenzione verso ambienti capaci di favorire uno st... (ANSA)",
+      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/30/becda62b278f49b3d55d6b2b0aefcab4.jpg",
+      "url": "https://www.ansa.it/piemonte/notizie/2026/09/30/benessere-e-welfare-parte-integrante-della-casa-del-futuro_07f87640-26d9-494b-aa01-92734fadd10f.html"
     },
     {
       "source": "NewsBiella",
       "area": "Piemonte",
-      "date": "23 set 2026",
-      "publishedAt": "2026-09-23T19:30:00+0200",
-      "title": "\"Dogville in Festa\", giochi e attività per cani e famiglie FOTO e VIDEO",
-      "description": "Domenica 27 settembre a GardenVille giochi, dimostrazioni e una sfilata aperta ai cani di ogni razza e taglia.",
-      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/Newsbiella.it___6__dogville_gardenville_20267_trgew.png",
-      "url": "https://www.newsbiella.it/2026/09/23/leggi-notizia/argomenti/animalerie/articolo/dogville-in-festa-giochi-e-attivita-per-cani-e-famiglie-foto-e-video.html"
+      "date": "30 set 2026",
+      "publishedAt": "2026-09-30T18:23:00+0200",
+      "title": "CNA Biella: \"Riformare la Legge quadro significa permettere all’artigianato di crescere e innovare\"",
+      "description": "Il Presidente Andrea Valentini: \"Le imprese artigiane di oggi non sono quelle del 1985. Nel nostro biellese abbiamo realtà che investono, innovano, lavorano all’interno di filiere complesse e competono su mercati sempre più ampi....",
+      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/Delmastro/cna_lavoro_artigianato.jpg",
+      "url": "https://www.newsbiella.it/2026/09/30/leggi-notizia/argomenti/economia-2/articolo/cna-biella-riformare-la-legge-quadro-significa-permettere-allartigianato-di-crescere-e-innovare.html"
     },
     {
       "source": "NewsBiella",
       "area": "Piemonte",
-      "date": "23 set 2026",
-      "publishedAt": "2026-09-23T19:00:00+0200",
-      "title": "La Rhythmic School a Loano al Torneo Riviera delle Palme",
-      "description": "Nella giornata di sabato scorso, ha avuto inizio il percorso agonistico nel secondo semestre 2026 delle atlete della scuola di Ginnastica Ritmica di Tatiana Shpilevaya. Quattro RSgirls: Martina Brocchi, Iris Marchesi, Ginevra...",
-      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/ginnastica_ritmica_23_09_2026.jpeg",
-      "url": "https://www.newsbiella.it/2026/09/23/leggi-notizia/argomenti/sport-6/articolo/la-rhythmic-school-a-loano-al-torneo-riviera-delle-palme.html"
+      "date": "30 set 2026",
+      "publishedAt": "2026-09-30T18:00:00+0200",
+      "title": "Musica e solidarietà protagoniste a Portula con il concerto di “Cantiamo per l’albero” FOTO",
+      "description": "Dopo la pausa estiva, è ripresa l’attività di canto corale che si richiama alle tradizioni popolari e dialettali. Presso la Chiesa Parrocchiale di Portula, infatti, sabato 26 settembre scorso, in un concerto denominato “Cantiamo...",
+      "image": "https://www.newsbiella.it/fileadmin/archivio/newsbiella/2026/09/concerto_portula_cori_2026_settembre__1_.jpg",
+      "url": "https://www.newsbiella.it/2026/09/30/leggi-notizia/argomenti/valli-mosso-e-sessera-2/articolo/musica-e-solidarieta-protagoniste-a-portula-con-il-concerto-di-cantiamo-per-lalbero-foto.html"
     },
     {
       "source": "ANSA Piemonte",
       "area": "Piemonte",
-      "date": "23 set 2026",
-      "publishedAt": "2026-09-23T16:39:00+0200",
-      "title": "Paratissima torna a Moncalieri con Foolish, oltre 400 artisti in mostra",
-      "description": "Paratissima torna per la Torino Art Week con la sua XXII edizione, in programma dal 30 ottobre al primo novembre al Real Collegio Carlo Alberto di Moncalieri. (ANSA)",
-      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/23/f93632516084cd7b3ae2638c481ae548.jpg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/23/paratissima-torna-a-moncalieri-con-foolish-oltre-400-artisti-in-mostra_9e3ffe56-086d-4bfa-8405-cafc2bf96e92.html"
+      "date": "30 set 2026",
+      "publishedAt": "2026-09-30T17:17:00+0200",
+      "title": "The Quantum Effect, quando l'arte incontra la teoria quantistica",
+      "description": "Dal 31 ottobre al 25 febbraio 2027, le Ogr Torino ospitano The Quantum Effect, mostra curata da Daniel Birnbaum e Jacqui Davies e dedicata al rapporto tra teoria quantistica, arte contemporanea e cultura visiva. (ANSA)",
+      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/30/f6e675751b31329e5d3be62c1e5db56b.jpg",
+      "url": "https://www.ansa.it/piemonte/notizie/2026/09/30/the-quantum-effect-quando-larte-incontra-la-teoria-quantistica_717714e9-3eee-405a-aab6-b0da161d61c2.html"
     },
     {
       "source": "ANSA Piemonte",
       "area": "Piemonte",
-      "date": "23 set 2026",
-      "publishedAt": "2026-09-23T13:26:00+0200",
-      "title": "Flashback Art Fair, a Torino l'arte entra 'In Time'",
-      "description": "Dal 29 ottobre al primo novembre torna a Torino Flashback Art Fair, giunta alla XIV edizione, negli spazi di Flashback Habitat, in corso Giovanni Lanza 75. (ANSA)",
-      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/23/a126b119136aea9d4406a8a1c18f0fd7.jpg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/23/flashback-art-fair-a-torino-larte-entra-in-time_ef4f54ac-7adf-47f3-9e27-7c50e77998b8.html"
+      "date": "29 set 2026",
+      "publishedAt": "2026-09-29T17:45:00+0200",
+      "title": "L'arte buddhista nei musei italiani, Torino protagonista di un nuovo racconto",
+      "description": "Un viaggio tra arte, storia e spiritualità per riscoprire il patrimonio buddhista conservato nei musei italiani. (ANSA)",
+      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/29/d7ecb8d8e451278e47c58351779171dd.jpg",
+      "url": "https://www.ansa.it/piemonte/notizie/2026/09/29/larte-buddhista-nei-musei-italiani-torino-protagonista-di-un-nuovo-racconto_2968a951-5392-45b9-9395-1c4085b23d7f.html"
     },
     {
       "source": "ANSA Piemonte",
       "area": "Piemonte",
-      "date": "22 set 2026",
-      "publishedAt": "2026-09-22T14:41:00+0200",
-      "title": "'Sotto lo stesso cielo. La musica che include', la terza edizione guarda all'infanzia",
-      "description": "La musica come strumento di inclusione, partecipazione e incontro. È questo il filo conduttore della terza edizione di &#034;Sotto lo stesso cielo. (ANSA)",
-      "image": "https://www.ansa.it/webimages/img_1280x720/2025/10/20/f50aaf06034b05495e393e5496191f6b.jpg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/22/sotto-lo-stesso-cielo.-la-musica-che-include-la-terza-edizione-guarda-allinfanzia_048f85aa-1aa8-4e84-aecc-3b064f84959b.html"
-    },
-    {
-      "source": "ANSA Piemonte",
-      "area": "Piemonte",
-      "date": "22 set 2026",
-      "publishedAt": "2026-09-22T14:33:00+0200",
-      "title": "Nuovo Cinema Paradiso in concerto con l'Orchestra Rai",
-      "description": "Una delle colonne sonore più amate della storia del cinema eseguita dal vivo da una grande orchestra sulla proiezione delle immagini di un film, capolavoro di Giuseppe Tornatore, vincitore di un Premio Oscar. (ANSA)",
-      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/22/d196a8643d0b7a79914bd629b4b3f6fe.jpg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/22/nuovo-cinema-paradiso-in-concerto-con-lorchestra-rai_2c780c74-30d2-41fe-8c10-ac34f2a1d500.html"
-    },
-    {
-      "source": "ANSA Piemonte",
-      "area": "Piemonte",
-      "date": "21 set 2026",
-      "publishedAt": "2026-09-21T17:23:00+0200",
-      "title": "Hey Man! Tour 2026, a Torino si parla di identità maschile e relazioni",
-      "description": "Prende il via da Torino il 27 settembre l&#039;Hey Man! Tour 2026, prima tournée nazionale del progetto nato dalla collaborazione tra Mica Macho e Osservatorio Maschile, realtà impegnate nella ricerca, divulgazione e formazione sui temi del maschile contemporaneo. (ANSA)",
-      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/21/1e772a5f4d60feab2fa7df1e75cc46e3.jpg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/21/hey-man-tour-2026-a-torino-si-parla-di-identita-maschile-e-relazioni_50fcf4f1-bc59-4ef7-83aa-fc485c1a5dd8.html"
-    },
-    {
-      "source": "ANSA Piemonte",
-      "area": "Piemonte",
-      "date": "21 set 2026",
-      "publishedAt": "2026-09-21T16:32:00+0200",
-      "title": "Ottobre Alessandrino alza il sipario, 130 eventi e 100 ospiti",
-      "description": "Alessandria torna protagonista della cultura con la terza edizione di Ottobre Alessandrino, in programma dal 26 settembre al 31 ottobre. (ANSA)",
-      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/21/7dc5404b599e918966f7fa421c4f5398.jpg",
-      "url": "https://www.ansa.it/piemonte/notizie/2026/09/21/ottobre-alessandrino-alza-il-sipario-130-eventi-e-100-ospiti_81cce828-5bb2-4042-a7c3-4beddf52aed9.html"
+      "date": "29 set 2026",
+      "publishedAt": "2026-09-29T17:15:00+0200",
+      "title": "A Torino la finale dell'Italian Master Startup Award, 19 startup deep tech in gara",
+      "description": "Il Premio Italian Master Startup Award (Imsa) torna a Torino l&#039;8 ottobre per la sua ventesima edizione, con 19 startup deep tech nate dalla ricerca delle università e degli enti pubblici di ricerca italiani. (ANSA)",
+      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/29/9d7df11d78f42fa9dbf3878def9581f9.jpg",
+      "url": "https://www.ansa.it/piemonte/notizie/2026/09/29/a-torino-la-finale-dellitalian-master-startup-award-19-startup-deep-tech-in-gara_a772ebf0-8c10-4132-8c88-771bfdd29bae.html"
     },
     {
       "source": "InfoVercelli24",
@@ -172,6 +112,16 @@ window.IMLAND_SYNC_DATA={
       "url": "https://www.infovercelli24.it/2026/09/19/leggi-notizia/argomenti/attualita-7/articolo/torna-il-fora-tut-festa-dello-shopping-allaperto.html"
     },
     {
+      "source": "ANSA Piemonte",
+      "area": "Piemonte",
+      "date": "18 set 2026",
+      "publishedAt": "2026-09-18T15:20:00+0200",
+      "title": "L'ambasciatrice d'Australia incontra le imprese piemontesi",
+      "description": "L&#039;Australia guarda con crescente interesse al Piemonte e alle sue imprese, in vista dell&#039;atteso accordo di libero scambio con l&#039;Unione Europea. (ANSA)",
+      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/18/4debb912d9e3e773a1e423b96255ec23.jpg",
+      "url": "https://videoembed.ansa.it/piemonte/notizie/2026/09/18/lambasciatrice-daustralia-incontra-le-imprese-piemontesi_4d5f1ddc-8ca9-4c8d-bc64-63e6a2d28279.html"
+    },
+    {
       "source": "L'Opinionista",
       "area": "Piemonte",
       "date": "18 set 2026",
@@ -180,6 +130,16 @@ window.IMLAND_SYNC_DATA={
       "description": "MILANO - Esce \"Con una penna in mano\" (Raffaello Cortina Editore), il libro di Nicola Gardini. La scrittura a mano è in crisi, e la scuola si sta",
       "image": "https://www.lopinionista.it/wp-content/uploads/2026/09/con-una-penna-in-mano-4828-e1789728556911.jpg",
       "url": "https://www.lopinionista.it/con-una-penna-in-mano-il-libro-di-nicola-gardini-229729.html"
+    },
+    {
+      "source": "ANSA Piemonte",
+      "area": "Piemonte",
+      "date": "18 set 2026",
+      "publishedAt": "2026-09-18T10:28:00+0200",
+      "title": "Cna Torino compie 80 anni, sabato 19 settembre festa al Sermig",
+      "description": "Era il 19 settembre 1946 quando, in via Bogino 8 a Torino, un mobiliere, un meccanico e un fotografo fondarono davanti al notaio Pietro Astore la Libera Associazione &#034;Artigianato di Torino e Provincia&#034;, antesignana della Cna. (ANSA)",
+      "image": "https://www.ansa.it/webimages/img_1280x720/2026/9/18/56427fb5c69598683a6c970354a61e31.jpg",
+      "url": "https://videoembed.ansa.it/piemonte/notizie/2026/09/18/cna-torino-compie-80-anni-sabato-18-settembre-festa-al-sermig_d1d605b9-dc00-4cbc-a0fd-902b28f0e112.html"
     },
     {
       "source": "NewsBiella",
@@ -215,10 +175,10 @@ window.IMLAND_SYNC_DATA={
   "events": [],
   "memberNews": [],
   "radio": {
-    "title": "ditonellapiaga",
-    "artist": "Miss Italia",
-    "listeners": 8,
-    "timestamp": 1790258616482
+    "title": "Eros Ramazzotti feat. Giorgia",
+    "artist": "Quanto amore sei",
+    "listeners": 5,
+    "timestamp": 1790855455590
   },
   "availability": {
     "news": "live",

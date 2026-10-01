@@ -219,6 +219,18 @@ body[data-page="home"] .podcast-previews>a>img{
 body[data-page="home"] .radio-previews>a>img{background:#11141a}
 body[data-page="home"] .podcast-previews>a>img{background:#f2f1ed}
 
+/* Home covers are framed and never cropped: each supplied artwork remains legible. */
+body[data-page="home"] :is(.radio-previews,.podcast-previews,.home-news-list)>a>img{
+  box-sizing:border-box;
+  padding:.3rem;
+  border:1px solid #08090b24;
+  border-radius:12px;
+  background:#fff;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+body[data-page="home"] .radio-previews>a>img{background:#11141a}
+
 @media(prefers-reduced-motion:reduce){
   body[data-page="home"] .hero-video-mobile{animation:none}
 }

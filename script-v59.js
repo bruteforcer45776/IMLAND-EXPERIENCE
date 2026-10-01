@@ -60,7 +60,7 @@ memberMapStyles.href='member-map.css?v=7';
 document.head.append(memberMapStyles);
 const tasteSystem=document.createElement('link');
 tasteSystem.rel='stylesheet';
-tasteSystem.href='taste-system.css?v=13';
+tasteSystem.href='taste-system.css?v=14';
 document.head.append(tasteSystem);
 const iconography=document.createElement('link');
 iconography.rel='stylesheet';
@@ -69,19 +69,20 @@ document.head.append(iconography);
 const page=document.body.dataset.page;
 function applySectionFavicon(){
   const icons={
-    home:'pwa-icon.svg',radio:'imland-radio.svg',podcast:'imland-podcast.svg','my-podcast':'imland-podcast.svg',
+    home:'pwa-icon-192.png',radio:'imland-radio.svg',podcast:'imland-podcast.svg','my-podcast':'imland-podcast.svg',
     eventi:'imland-eventi.svg',member:'imland-member.svg',news:'imland-news.png'
   };
   const icon=document.querySelector('link[rel~="icon"]')||document.head.appendChild(document.createElement('link'));
   icon.rel='icon';
-  icon.type='image/svg+xml';
-  icon.href=`assets/logos/${icons[page]||'pwa-icon.svg'}`;
+  const iconFile=icons[page]||'pwa-icon-192.png';
+  icon.type=iconFile.endsWith('.png')?'image/png':'image/svg+xml';
+  icon.href=`assets/logos/${iconFile}`;
 }
 applySectionFavicon();
 if(page==='home'){
   const homeLayout=document.createElement('link');
   homeLayout.rel='stylesheet';
-  homeLayout.href='home-layout-v167.css?v=24';
+  homeLayout.href='home-layout-v167.css?v=25';
   document.head.append(homeLayout);
 }
 const abExperiment={id:'header_app_cta_v1',endpoint:'https://wfevttxbbhihapgmcbgh.supabase.co/functions/v1/imland-ab'};
@@ -169,6 +170,9 @@ const additionalVerifiedColorLogos={
   'CIS Spareparts':'/logos/cis-spare-parts-originale.jpeg',
 };
 memberNetwork.forEach(member=>{if(additionalVerifiedColorLogos[member[0]])member[1]=additionalVerifiedColorLogos[member[0]]});
+const memberWebsites={
+  'Travaini Carpenterie':'https://travaini.it/','Arte Idea — Matteo Libanoro':'https://www.matteolibanoro.it/presentazione/','Cooperativa Alla Fonte':'https://www.cooperativallafonte.it/','Immobiliare Ponti':'https://www.immobiliareponti.it/','Guglielmi':'https://www.guglielmi.com/','Ali Lavoro':'https://alilavoro.it/','A2G Maglificio':'https://www.a2gmaglificio.it/','Sesia Soft':'https://sesiasoft.com/index.php','CSC Infissi':'https://www.cscinfissi.it/','Sais Compensati':'https://saiscompensati.com/','Barbi Green':'https://barbigreen.com/','BGS Srl':'https://www.bgssrl.com/','Officine Grafiche':'https://www.officinegrafiche-srl.it/','SOS Nepal':'https://www.sos-nepal.org/','Ottica Zonco':'https://otticazonco.it/','Cabboi':'https://www.cabboi.com/','Crolla Sistemi':'https://www.crollasistemi.it/','Parafarmacia San Rocco':'https://www.parafarmaciasanrocco.it/','Multone':'https://multone.it/','CIS Spareparts':'https://www.cis-spareparts.com/','Immobilsesia':'https://www.immobilsesia.it/','AG Autotrasporti':'https://agautotrasporti.it/','OSM Partner Novara':'https://osmpartnernovara.it/','La Quercia':'https://agricolalaquercia.com/'
+};
 
 function navMarkup(active){return nav.map(([href,label])=>href==='podcast.html'?`<span class="nav-parent"><a href="podcast.html" ${(active==='podcast.html'||active==='my-podcast.html')?'aria-current="page"':''}>Podcast</a><button type="button" aria-label="Apri sottomenu Podcast" aria-expanded="false">⌄</button><span class="nav-sub"><a href="podcast.html">Podcast</a><a href="my-podcast.html">My Podcast</a></span></span>`:`<a href="${href}" ${href===active?'aria-current="page"':''}>${label}</a>`).join('')}
 function brandDefinition(section){
@@ -217,7 +221,9 @@ function memberDirectoryMarkup(){
     if(!logo)return '';
     const addresses=(item.addresses||[]).map(location=>`<li><span>${escapeSyncText(location.label||'Sede')}</span><address>${escapeSyncText(location.address||'Indirizzo in aggiornamento')}</address></li>`).join('');
     const sector=mapCategory(name,item.description);
-    return `<details class="member-directory-card" id="${memberAnchor(name)}"><summary><div class="member-directory-logo"><img src="${escapeSyncText(logo)}" alt="Logo di ${escapeSyncText(name)}" loading="lazy"></div><div class="member-directory-copy"><span class="member-directory-sector">${escapeSyncText(sector)}</span><h3>${escapeSyncText(name)}</h3><p>${escapeSyncText(item.description||'')}</p><span class="member-directory-expand">Dati e sedi <b aria-hidden="true">+</b></span></div></summary><div class="member-directory-details"><p>${escapeSyncText(item.description||'')}</p><ul>${addresses}</ul></div></details>`;
+    const website=memberWebsites[name]||'';
+    const websiteMarkup=website?`<a class="member-directory-site" href="${escapeSyncText(website)}" target="_blank" rel="noreferrer">Visita il sito <b aria-hidden="true">↗</b></a>`:'<span class="member-directory-site unavailable">Sito web non comunicato</span>';
+    return `<details class="member-directory-card" id="${memberAnchor(name)}"><summary><div class="member-directory-logo"><img src="${escapeSyncText(logo)}" alt="Logo di ${escapeSyncText(name)}" loading="lazy"></div><div class="member-directory-copy"><span class="member-directory-sector">${escapeSyncText(sector)}</span><h3>${escapeSyncText(name)}</h3><p>${escapeSyncText(item.description||'')}</p><span class="member-directory-expand">Dati e sedi <b aria-hidden="true">+</b></span></div></summary><div class="member-directory-details"><p>${escapeSyncText(item.description||'')}</p><ul>${addresses}</ul>${websiteMarkup}</div></details>`;
   }).join('');
   return `<section class="member-directory" id="rete-member" aria-labelledby="member-directory-title"><header><div><p>MEMBER UFFICIALI</p><h2 id="member-directory-title">Le realtà della <em>rete.</em></h2></div><p>Imprese, professionisti e associazioni che fanno parte di IMLAND Experience. Dati e sedi sono riportati senza informazioni presunte.</p></header><div class="member-directory-grid">${cards}</div></section>`;
 }

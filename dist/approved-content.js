@@ -1,5 +1,5 @@
 (()=>{
-const page=document.body.dataset.approvedPage||document.body.dataset.page||'home',css=document.createElement('link');css.rel='stylesheet';css.href='approved-content.css?v=9';document.head.append(css);
+const page=document.body.dataset.approvedPage||document.body.dataset.page||'home',css=document.createElement('link');css.rel='stylesheet';css.href='approved-content.css?v=10';document.head.append(css);
 const card=(t,p,m='',k='')=>`<article class="approved-card ${k}">${m?`<span>${m}</span>`:''}<div><h3>${t}</h3><p>${p}</p></div></article>`;
 const section=(id,k,t,i,b)=>`<section class="approved-content" id="${id}"><header class="approved-head"><div><p class="approved-kicker">${k}</p><h2>${t}</h2></div><p>${i}</p></header>${b}</section>`;
 const faq=a=>`<div class="approved-faq">${a.map(x=>`<details><summary>${x[0]}</summary><p>${x[1]}</p></details>`).join('')}</div>`;
