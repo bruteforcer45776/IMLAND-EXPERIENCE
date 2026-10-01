@@ -585,11 +585,42 @@ function mountHomeAdvBanners(){
     banner.addEventListener('mouseenter',stop);banner.addEventListener('mouseleave',start);banner.addEventListener('focusin',stop);banner.addEventListener('focusout',start);start();
   });
 }
+function initHomePreviewRotation(){
+  if(document.body.dataset.page!=='home')return;
+  const groups=[
+    {
+      selector:'.radio-previews>a',
+      items:radioPrograms.map(([title,day,time,speakers,,image])=>({title,meta:`${day.toUpperCase()} · ${time.slice(0,5)}`,description:speakers,image,alt:`Copertina di ${title}`}))
+    },
+    {
+      selector:'.podcast-previews>a',
+      items:podcastFeeds.map(([title,description,episodes,image])=>({title,meta:`${episodes} ${episodes===1?'EPISODIO':'EPISODI'}`,description,image,alt:`Copertina ufficiale ${title}`}))
+    }
+  ].map(group=>({...group,cards:[...document.querySelectorAll(group.selector)]})).filter(group=>group.cards.length&&group.items.length);
+  if(!groups.length)return;
+  let offset=0;
+  const render=()=>groups.forEach(group=>group.cards.forEach((card,index)=>{
+    const item=group.items[(offset+index)%group.items.length];
+    const image=card.querySelector('img'),meta=card.querySelector('span'),title=card.querySelector('h3'),description=card.querySelector('p');
+    if(image&&image.getAttribute('src')!==item.image){
+      const pending=new Image();
+      pending.onload=()=>{image.src=item.image;image.alt=item.alt};
+      pending.onerror=()=>{image.src=item.image;image.alt=item.alt};
+      pending.src=item.image;
+    }
+    if(meta)meta.textContent=item.meta;
+    if(title)title.textContent=item.title;
+    if(description)description.textContent=item.description;
+  }));
+  render();
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)window.setInterval(()=>{offset=(offset+1)%Math.max(...groups.map(group=>group.items.length));render()},3000);
+}
 const advStyles=document.createElement('link');advStyles.rel='stylesheet';advStyles.href='adv-banners.css?v=3';document.head.append(advStyles);
 const approvedContentScript=document.createElement('script');
 approvedContentScript.src='approved-content.js?v=13';
 approvedContentScript.onload=()=>{mountHomeAdvBanners();removeEditorialNumbers()};
 document.body.append(approvedContentScript);
+initHomePreviewRotation();
 removeEditorialNumbers();
 initCookieConsent();
 initGlobalAbTest();
